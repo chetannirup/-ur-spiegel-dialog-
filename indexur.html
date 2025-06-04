@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UR-TON 1: Eine visuelle und auditive Meditationshilfe für das Prinzip 'ICH TRITT ZUR SEITE'. LASS UR RAN.">
+    <title>UR-TON 1: ICH TRITT ZUR SEITE</title>
+    <link rel="stylesheet" href="ur-ton1.css">
+</head>
+<body>
+    <main id="ur-main" aria-label="UR-TON 1 Meditation" tabindex="-1">
+        <div class="ur-container" role="region" aria-label="Meditations-Bereich">
+            <div class="ur-intro-poem" aria-hidden="true">
+                <p>„Im Nicht-Tun beginnt das UR."</p>
+            </div>
+            
+            <div class="ur-listening-aura" aria-hidden="true"></div>
+            
+            <button class="ur-light-line" id="ur-light-btn"
+                aria-label="Lichtlinie – Klicke oder drücke Enter/Leertaste für Resonanz"
+                tabindex="0"></button>
+            
+            <div class="ur-wind-layer" aria-hidden="true">
+                <div class="ur-wind-stream wind-1"></div>
+                <div class="ur-wind-stream wind-2"></div>
+                <div class="ur-wind-stream wind-3"></div>
+                <div class="ur-wind-stream wind-4"></div>
+                <div class="ur-wind-stream wind-5"></div>
+                <div class="ur-wind-stream wind-6"></div>
+            </div>
+
+            <div class="ur-subtle-particles" aria-hidden="true"></div>
+            
+            <section class="ur-text" aria-live="polite">
+                <h1 class="ur-number" aria-label="UR-TON Nummer">1</h1>
+                <h2 class="ur-title">ICH TRITT ZUR SEITE</h2>
+                <p class="ur-senniere">
+                    Nicht du führst. Nicht du vollendest.<br>
+                    Du öffnest – das genügt.
+                </p>
+                <p class="ur-mantra">LASS UR RAN</p>
+            </section>
+        </div>
+        <nav aria-label="Audio Steuerung" class="ur-audio-controls">
+            <label for="ur-volume" class="visually-hidden">Lautstärke</label>
+            <input type="range" id="ur-volume" min="0" max="1" step="0.01" value="0.25" aria-valuenow="0.25" aria-label="Lautstärke">
+            <button id="ur-audio-toggle" aria-pressed="false" aria-label="Audio Start/Stop">🔈</button>
+        </nav>
+    </main>
+    <script src="ur-ton1.js"></script>
+</body>
+</html>/* UR-TON 1 – Meditationshilfe */
+/* Fokus: Responsivität, Barrierefreiheit, sanfte Animationen */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(ellipse at center, #0f0a1a, #000000);
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+main#ur-main {
+    min-height: 100vh;
+    outline: none;
+}
+
+.ur-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Intro-Poem */
+.ur-intro-poem {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    font-style: italic;
+    z-index: 5;
+    opacity: 0;
+    animation: urPoetryFade 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Listening Aura */
+.ur-listening-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at center,
+        transparent 60%,
+        rgba(255, 255, 255, 0.05) 70%,
+        rgba(135, 206, 250, 0.1) 80%,
+        transparent 90%
+    );
+    animation: urListen 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Lichtlinie als Button (für A11y) */
+.ur-light-line {
+    position: relative;
+    width: 8px;
+    height: 500px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255, 215, 0, 0.3),
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 215, 0, 0.3),
+        transparent
+    );
+    border-radius: 4px;
+    animation: urStand 3s ease-in-out infinite alternate;
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 215, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    border: none;
+    outline: none;
+    background-clip: padding-box;
+}
+.ur-light-line:focus-visible {
+    outline: 3px solid #ffd700;
+    box-shadow: 0 0 0 4px rgba(135,206,250,0.4);
+}
+
+/* Windströme */
+.ur-wind-layer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+.ur-wind-stream {
+    position: absolute;
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(135, 206, 250, 0.4),
+        transparent
+    );
+    border-radius: 1px;
+    animation: urFlow 4s ease-in-out infinite;
+}
+.wind-1 { left: -50px; animation-delay: 0s; animation-duration: 4s; }
+.wind-2 { right: -50px; animation-delay: 1s; animation-duration: 3.5s; }
+.wind-3 { left: -80px; animation-delay: 2s; animation-duration: 5s; }
+.wind-4 { right: -80px; animation-delay: 3s; animation-duration: 4.5s; }
+.wind-5 { left: -30px; animation-delay: 1.5s; animation-duration: 3s; }
+.wind-6 { right: -30px; animation-delay: 2.5s; animation-duration: 4s; }
+
+/* Subtile Partikel */
+.ur-subtle-particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+.ur-particle {
+    position: absolute;
+    width: 1px; height: 1px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: urRise 8s linear infinite;
+}
+
+/* Textbereich */
+.ur-text {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+}
+.ur-number {
+    font-size: 8rem;
+    font-weight: 100;
+    margin: 0;
+    opacity: 0.4;
+    animation: urAwaken 4s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+.ur-title {
+    font-size: 1.4rem;
+    margin: 10px 0;
+    letter-spacing: 2px;
+    font-weight: 300;
+    color: rgba(135, 206, 250, 0.9);
+}
+.ur-senniere {
+    font-size: 1rem;
+    font-style: italic;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-top: 20px;
+    opacity: 0.7;
+}
+.ur-mantra {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 15px;
+    color: rgba(255, 215, 0, 0.8);
+    letter-spacing: 2px;
+}
+
+/* Audio-Steuerung */
+.ur-audio-controls {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    z-index: 20;
+    background: rgba(25,25,40,0.3);
+    padding: 6px 18px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.12);
+}
+.ur-audio-controls input[type=range] {
+    width: 90px;
+    accent-color: #ffd700;
+}
+.ur-audio-controls button {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ffd700;
+    padding: 2px 8px;
+}
+.ur-audio-controls button[aria-pressed="true"] {
+    color: #11bbff;
+    filter: drop-shadow(0 0 3px #9ef);
+}
+
+/* Visually hidden (a11y) */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+/* Animations */
+@keyframes urPoetryFade {
+    0%, 90%, 100% { opacity: 0; }
+    10%, 80%     { opacity: 0.6; }
+}
+@keyframes urStand {
+    0%   { height: 480px; opacity: 0.8; }
+    100% { height: 520px; opacity: 1; }
+}
+@keyframes urFlow {
+    0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10%  { opacity: 0.6; }
+    50%  { transform: translateY(50vh) translateX(20px); opacity: 0.8; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(-100px) translateX(-20px); opacity: 0; }
+}
+@keyframes urListen {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+    50%      { transform: translate(-50%, -50%) scale(1.1); opacity: 0.1; }
+}
+@keyframes urAwaken {
+    0%, 100% { opacity: 0.4; transform: scale(1);}
+    50%      { opacity: 0.7; transform: scale(1.02);}
+}
+@keyframes urRise {
+    0%   { transform: translateY(100vh); opacity: 0; }
+    10%, 90% { opacity: 0.3; }
+    100% { transform: translateY(-100px); opacity: 0; }
+}
+
+/* Responsivität */
+@media (max-width: 768px) {
+    .ur-light-line { height: 400px; width: 6px; }
+    .ur-listening-aura { width: 200px; height: 200px; }
+    .ur-number { font-size: 5rem; }
+    .ur-title { font-size: 1.1rem; }
+    .ur-senniere { font-size: 0.85rem; max-width: 95%; padding: 0 10px;}
+    .ur-intro-poem { font-size: 0.9rem; max-width: 95%; padding: 0 10px;}
+    .ur-text { bottom: 40px;}
+}
+
+@media (max-width: 440px) {
+    .ur-listening-aura { width: 120px; height: 120px; }
+    .ur-number { font-size: 3rem; }
+    .ur-title { font-size: 0.9rem; }
+    .ur-senniere { font-size: 0.7rem; padding: 0 4px;}
+    .ur-audio-controls { flex-direction: column; gap: 6px; padding: 5px 7px;}
+}
+
+/* Extra für Mini-Geräte */
+@media (max-width: 340px) {
+    .ur-number { font-size: 2.2rem;}
+    .ur-title { font-size: 0.7rem;}
+    .ur-senniere { font-size: 0.6rem;}
+}
+// UR-TON 1 – Meditation: Interaktionen, Partikel, Audio-Drone
+
+// === Audio ===
+class URAudio {
+    constructor() {
+        this.ctx = null;
+        this.gain = null;
+        this.osc = null;
+        this.isPlaying = false;
+        this.volume = 0.25;
+    }
+    start() {
+        if (this.isPlaying) return;
+        if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            this.gain = this.ctx.createGain();
+            // Sanfter, meditativer Drone (Sine + Sub-Oszillator)
+            this.osc = this.ctx.createOscillator();
+            this.osc.type = 'sine';
+            this.osc.frequency.value = 66.6; // Grundton
+            // Sub-Oszillator (leicht verstimmt)
+            this.sub = this.ctx.createOscillator();
+            this.sub.type = 'triangle';
+            this.sub.frequency.value = 33.3;
+            this.subGain = this.ctx.createGain();
+            this.subGain.gain.value = 0.2;
+            // Filter für Weichheit
+            this.filter = this.ctx.createBiquadFilter();
+            this.filter.type = 'lowpass';
+            this.filter.frequency.value = 444;
+            // Anschließen
+            this.osc.connect(this.gain);
+            this.sub.connect(this.subGain);
+            this.subGain.connect(this.gain);
+            this.gain.connect(this.filter);
+            this.filter.connect(this.ctx.destination);
+            this.osc.start();
+            this.sub.start();
+        }
+        this.gain.gain.linearRampToValueAtTime(this.volume, this.ctx.currentTime + 0.3);
+        this.isPlaying = true;
+    }
+    stop() {
+        if (!this.isPlaying || !this.ctx) return;
+        this.gain.gain.linearRampToValueAtTime(0.0001, this.ctx.currentTime + 0.8);
+        this.isPlaying = false;
+    }
+    setVolume(vol) {
+        this.volume = Math.max(0, Math.min(1, vol));
+        if (this.gain)
+            this.gain.gain.linearRampToValueAtTime(this.volume, (this.ctx?.currentTime || 0) + 0.2);
+    }
+    toggle() {
+        if (this.isPlaying) this.stop();
+        else this.start();
+    }
+}
+
+// === Element-Helpers ===
+const qs  = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
+
+// === Partikel ===
+const maxParticles = 80;
+let particleCount = 0;
+function createRisingParticle() {
+    const container = qs('.ur-subtle-particles');
+    if (particleCount >= maxParticles) return;
+    const particle = document.createElement('div');
+    particle.className = 'ur-particle';
+    particle.style.left = (Math.random() * 100) + '%';
+    particle.style.animationDelay = (Math.random() * 4) + 's';
+    particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+    container.appendChild(particle);
+    particleCount++;
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+            particleCount--;
+        }
+    }, 12000);
+}
+setInterval(createRisingParticle, 1800);
+
+// === Interaktive Animationen ===
+let mouseMoveTimeout;
+document.addEventListener('mousemove', (e) => {
+    if (mouseMoveTimeout) return;
+    mouseMoveTimeout = setTimeout(() => {
+        const lightLine = qs('.ur-light-line');
+        const aura = qs('.ur-listening-aura');
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const offsetX = (e.clientX - centerX) / centerX;
+        const offsetY = (e.clientY - centerY) / centerY;
+        lightLine.style.transform = `translate(${offsetX * 10}px, ${offsetY * 10}px)`;
+        aura.style.transform = `translate(-50%, -50%) scale(${1 + Math.abs(offsetY) * 0.05})`;
+        mouseMoveTimeout = null;
+    }, 50);
+});
+// Touch-Unterstützung (mobil)
+let lastTouch = 0;
+qs('.ur-light-line').addEventListener('touchstart', (e) => {
+    lastTouch = Date.now();
+    e.preventDefault();
+    triggerResonance();
+}, {passive: false});
+
+// Rückkehr zur Mitte nach Mausstillstand
+let resetTimeout;
+document.addEventListener('mousemove', () => {
+    clearTimeout(resetTimeout);
+    resetTimeout = setTimeout(() => {
+        const lightLine = qs('.ur-light-line');
+        const aura = qs('.ur-listening-aura');
+        lightLine.style.transform = 'translate(0px, 0px)';
+        lightLine.style.transition = 'transform 1s ease-out';
+        aura.style.transform = 'translate(-50%, -50%) scale(1)';
+        aura.style.transition = 'transform 1s ease-out';
+        setTimeout(() => {
+            lightLine.style.transition = '';
+            aura.style.transition = '';
+        }, 1000);
+    }, 2000);
+});
+
+// Aura Lausch-Effekt
+setInterval(() => {
+    const aura = qs('.ur-listening-aura');
+    aura.style.animation = 'none';
+    setTimeout(() => {
+        aura.style.animation = 'urListen 6s ease-in-out infinite';
+    }, 50);
+}, 15000);
+
+// Windströme animieren bei globalem Klick
+document.addEventListener('click', (e) => {
+    // avoid if clicking the light line
+    if (e.target.classList.contains('ur-light-line')) return;
+    const windStreams = qsa('.ur-wind-stream');
+    windStreams.forEach((stream, index) => {
+        setTimeout(() => {
+            stream.style.opacity = '0.8';
+            stream.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                stream.style.opacity = '';
+                stream.style.transform = '';
+            }, 500);
+        }, index * 100);
+    });
+});
+// Adaptive Partikel-Geschwindigkeit bei Interaktion
+let interactionLevel = 0;
+document.addEventListener('mousemove', () => {
+    interactionLevel = Math.min(interactionLevel + 0.1, 2);
+});
+setInterval(() => { interactionLevel = Math.max(interactionLevel - 0.05, 0); }, 1000);
+setInterval(() => {
+    if (Math.random() < 0.3 + interactionLevel * 0.2) {
+        createRisingParticle();
+    }
+}, 1500);
+
+// === Audio & Resonanz ===
+const audio = new URAudio();
+const volumeSlider = qs('#ur-volume');
+const audioToggle = qs('#ur-audio-toggle');
+volumeSlider.addEventListener('input', e => {
+    audio.setVolume(parseFloat(e.target.value));
+    volumeSlider.setAttribute('aria-valuenow', e.target.value);
+});
+audioToggle.addEventListener('click', () => {
+    audio.toggle();
+    audioToggle.setAttribute('aria-pressed', audio.isPlaying ? 'true' : 'false');
+    audioToggle.textContent = audio.isPlaying ? '🔊' : '🔈';
+});
+audioToggle.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        audioToggle.click();
+    }
+});
+// Fokus auf Main-Bereich setzen für Screenreader
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => qs('main#ur-main').focus(), 200);
+});
+
+// Resonanz-Effekt (Lichtlinie + Audio)
+function triggerResonance() {
+    const lightLine = qs('.ur-light-line');
+    const aura = qs('.ur-listening-aura');
+    // Visueller Resonanz-Effekt
+    lightLine.style.filter = 'brightness(1.8) blur(2px)';
+    lightLine.style.boxShadow = `
+        0 0 40px rgba(255, 255, 255, 0.8),
+        0 0 80px rgba(255, 215, 0, 0.6),
+        0 0 120px rgba(135, 206, 250, 0.4)
+    `;
+    aura.style.transform = 'translate(-50%, -50%) scale(1.3)';
+    aura.style.opacity = '0.6';
+    // Audio: kurz anheben
+    audio.start();
+    audio.setVolume(Math.max(0.35, audio.volume * 1.2));
+    setTimeout(() => {
+        lightLine.style.filter = '';
+        lightLine.style.boxShadow = `
+            0 0 20px rgba(255, 255, 255, 0.4),
+            0 0 40px rgba(255, 215, 0, 0.2)
+        `;
+        aura.style.transform = 'translate(-50%, -50%) scale(1)';
+        aura.style.opacity = '';
+        audio.setVolume(parseFloat(volumeSlider.value));
+    }, 1200);
+}
+
+// Klick/Keyboard auf Lichtlinie = Resonanz
+qs('.ur-light-line').addEventListener('click', triggerResonance);
+qs('.ur-light-line').addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        triggerResonance();
+    }
+});
+
+// Visually hidden Polyfill für ältere Browser
+(function(){
+    if (!document.querySelector('.visually-hidden')) {
+        const style = document.createElement('style');
+        style.textContent = `.visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0!important;padding:0!important;}`;
+        document.head.appendChild(style);
+    }
+})();

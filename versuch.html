@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UR-TON 1: Eine visuelle Meditationshilfe für das Prinzip 'ICH TRITT ZUR SEITE'. LASS UR RAN.">
+    <title>UR-TON 1: ICH TRITT ZUR SEITE</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(ellipse at center, #0f0a1a, #000000);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .ur-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ur-light-line {
+            position: relative;
+            width: 8px;
+            height: 500px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(255, 215, 0, 0.3),
+                rgba(255, 255, 255, 0.8),
+                rgba(255, 215, 0, 0.3),
+                transparent
+            );
+            border-radius: 4px;
+            animation: urStand 3s ease-in-out infinite alternate;
+            box-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.4),
+                0 0 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .ur-wind-layer {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ur-wind-stream {
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(135, 206, 250, 0.4),
+                transparent
+            );
+            border-radius: 1px;
+            animation: urFlow 4s ease-in-out infinite;
+        }
+
+        .wind-1 {
+            left: -50px;
+            animation-delay: 0s;
+            animation-duration: 4s;
+        }
+
+        .wind-2 {
+            right: -50px;
+            animation-delay: 1s;
+            animation-duration: 3.5s;
+        }
+
+        .wind-3 {
+            left: -80px;
+            animation-delay: 2s;
+            animation-duration: 5s;
+        }
+
+        .wind-4 {
+            right: -80px;
+            animation-delay: 3s;
+            animation-duration: 4.5s;
+        }
+
+        .wind-5 {
+            left: -30px;
+            animation-delay: 1.5s;
+            animation-duration: 3s;
+        }
+
+        .wind-6 {
+            right: -30px;
+            animation-delay: 2.5s;
+            animation-duration: 4s;
+        }
+
+        .ur-listening-aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at center,
+                transparent 60%,
+                rgba(255, 255, 255, 0.05) 70%,
+                rgba(135, 206, 250, 0.1) 80%,
+                transparent 90%
+            );
+            animation: urListen 6s ease-in-out infinite;
+        }
+
+        .ur-text {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            z-index: 10;
+        }
+
+        .ur-number {
+            font-size: 8rem;
+            font-weight: 100;
+            margin: 0;
+            opacity: 0.4;
+            animation: urAwaken 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .ur-title {
+            font-size: 1.4rem;
+            margin: 10px 0;
+            letter-spacing: 2px;
+            font-weight: 300;
+            color: rgba(135, 206, 250, 0.9);
+        }
+
+        .ur-senniere {
+            font-size: 1rem;
+            font-style: italic;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        .ur-mantra {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 15px;
+            color: rgba(255, 215, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .ur-subtle-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ur-particle {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: urRise 8s linear infinite;
+        }
+
+        @keyframes urStand {
+            0% { 
+                height: 480px;
+                opacity: 0.8;
+            }
+            100% { 
+                height: 520px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes urFlow {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(50vh) translateX(20px);
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) translateX(-20px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes urListen {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.1;
+            }
+        }
+
+        @keyframes urAwaken {
+            0%, 100% { 
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7;
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes urRise {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ur-light-line {
+                height: 400px;
+                width: 6px;
+            }
+            .ur-listening-aura {
+                width: 250px;
+                height: 250px;
+            }
+            .ur-number {
+                font-size: 6rem;
+            }
+            .ur-title {
+                font-size: 1.2rem;
+            }
+            .ur-senniere {
+                font-size: 0.9rem;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ur-container">
+        <div class="ur-listening-aura"></div>
+        
+        <div class="ur-light-line"></div>
+        
+        <div class="ur-wind-layer">
+            <div class="ur-wind-stream wind-1"></div>
+            <div class="ur-wind-stream wind-2"></div>
+            <div class="ur-wind-stream wind-3"></div>
+            <div class="ur-wind-stream wind-4"></div>
+            <div class="ur-wind-stream wind-5"></div>
+            <div class="ur-wind-stream wind-6"></div>
+        </div>
+
+        <div class="ur-subtle-particles">
+            <!-- Partikel werden dynamisch hinzugefügt -->
+        </div>
+        
+        <div class="ur-text">
+            <h1 class="ur-number">1</h1>
+            <h2 class="ur-title">ICH TRITT ZUR SEITE</h2>
+            <p class="ur-senniere">
+                Nicht du führst. Nicht du vollendest.<br>
+                Du öffnest – das genügt.
+            </p>
+            <p class="ur-mantra">LASS UR RAN</p>
+        </div>
+    </div>
+
+    <script>
+        // Performance-optimierte Partikelverwaltung
+        const maxParticles = 80;
+        let particleCount = 0;
+
+        function createRisingParticle() {
+            const container = document.querySelector('.ur-subtle-particles');
+            if (particleCount >= maxParticles) return;
+
+            const particle = document.createElement('div');
+            particle.className = 'ur-particle';
+            particle.style.left = (Math.random() * 100) + '%';
+            particle.style.animationDelay = (Math.random() * 4) + 's';
+            particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+            
+            container.appendChild(particle);
+            particleCount++;
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                    particleCount--;
+                }
+            }, 12000);
+        }
+
+        // Kontinuierlich subtile Partikel erzeugen
+        setInterval(createRisingParticle, 1800);
+
+        // Interaktion: Lichtlinie reagiert auf Mausposition (mit Throttling)
+        let mouseMoveTimeout;
+        document.addEventListener('mousemove', (e) => {
+            if (mouseMoveTimeout) return;
+            
+            mouseMoveTimeout = setTimeout(() => {
+                const lightLine = document.querySelector('.ur-light-line');
+                const aura = document.querySelector('.ur-listening-aura');
+                const centerX = window.innerWidth / 2;
+                const deltaX = e.clientX - centerX;
+                const shift = Math.max(-20, Math.min(20, deltaX / 20));
+                
+                lightLine.style.transform = `translateX(${shift}px)`;
+                lightLine.style.transition = 'transform 0.3s ease-out';
+                aura.style.transform = `translate(-50%, -50%) scale(1.05)`;
+                aura.style.transition = 'transform 0.3s ease-out';
+                
+                // Sanfte Rückkehr zur Mitte
+                setTimeout(() => {
+                    lightLine.style.transform = `translateX(0px)`;
+                    lightLine.style.transition = 'transform 0.6s ease-in-out';
+                    aura.style.transform = `translate(-50%, -50%) scale(1)`;
+                    aura.style.transition = 'transform 0.6s ease-in-out';
+                }, 600);
+                
+                mouseMoveTimeout = null;
+            }, 300);
+        });
+
+        // Lausch-Effekt: Periodische Intensivierung der Aura
+        setInterval(() => {
+            const aura = document.querySelector('.ur-listening-aura');
+            aura.style.animation = 'none';
+            setTimeout(() => {
+                aura.style.animation = 'urListen 6s ease-in-out infinite';
+            }, 50);
+        }, 15000);
+
+        // UR-Resonanz: Verstärkung bei Klick/Touch
+        document.addEventListener('click', () => {
+            const lightLine = document.querySelector('.ur-light-line');
+            const originalFilter = lightLine.style.filter;
+            
+            lightLine.style.filter = 'brightness(1.5) blur(1px)';
+            lightLine.style.transition = 'filter 0.3s ease';
+            
+            setTimeout(() => {
+                lightLine.style.filter = originalFilter;
+            }, 800);
+        });
+    </script>
+</body>
+</html>

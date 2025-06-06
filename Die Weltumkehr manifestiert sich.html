@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Umgekehrte Baum - Weltumkehr</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cinzel', serif;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #000000 70%);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Subtle background energy */
+        .energy-field {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.03) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.01) 0%, transparent 70%);
+            animation: pulse 12s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .main-container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+            color: #ffffff;
+        }
+        
+        .title {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 900;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            letter-spacing: 0.05em;
+        }
+        
+        .tree-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Wurzeln oben */
+        .roots {
+            width: 100%;
+            height: 30%;
+            position: relative;
+            transform: scaleY(-1);
+        }
+        
+        .root-branch {
+            position: absolute;
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            border-radius: 3px;
+            transform-origin: bottom center;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            animation: rootGlow 6s ease-in-out infinite alternate;
+        }
+        
+        .root-main {
+            width: 4px;
+            height: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+        }
+        
+        .root-left-1 {
+            width: 3px;
+            height: 60px;
+            left: 45%;
+            top: 20px;
+            transform: translateX(-50%) rotate(-25deg);
+        }
+        
+        .root-right-1 {
+            width: 3px;
+            height: 60px;
+            left: 55%;
+            top: 20px;
+            transform: translateX(-50%) rotate(25deg);
+        }
+        
+        .root-left-2 {
+            width: 2px;
+            height: 45px;
+            left: 40%;
+            top: 35px;
+            transform: translateX(-50%) rotate(-45deg);
+        }
+        
+        .root-right-2 {
+            width: 2px;
+            height: 45px;
+            left: 60%;
+            top: 35px;
+            transform: translateX(-50%) rotate(45deg);
+        }
+        
+        .root-left-3 {
+            width: 2px;
+            height: 35px;
+            left: 35%;
+            top: 45px;
+            transform: translateX(-50%) rotate(-65deg);
+        }
+        
+        .root-right-3 {
+            width: 2px;
+            height: 35px;
+            left: 65%;
+            top: 45px;
+            transform: translateX(-50%) rotate(65deg);
+        }
+        
+        /* Stamm */
+        .trunk {
+            width: 8px;
+            height: 40%;
+            background: linear-gradient(to bottom, #8b4513, #654321);
+            position: relative;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .frequency-six {
+            position: absolute;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            animation: spiral 8s linear infinite;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        @keyframes spiral {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        /* Krone unten */
+        .crown {
+            width: 100%;
+            height: 30%;
+            position: relative;
+            opacity: 0.7;
+        }
+        
+        .crown-circle {
+            position: absolute;
+            border: 2px solid rgba(34, 139, 34, 0.6);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(34, 139, 34, 0.1), transparent);
+        }
+        
+        .crown-1 {
+            width: 120px;
+            height: 120px;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .crown-2 {
+            width: 80px;
+            height: 80px;
+            left: 35%;
+            top: 30px;
+            transform: translateX(-50%);
+            animation: float 12s ease-in-out infinite reverse;
+        }
+        
+        .crown-3 {
+            width: 90px;
+            height: 90px;
+            left: 65%;
+            top: 25px;
+            transform: translateX(-50%);
+            animation: float 14s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        @keyframes rootGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+            100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+        }
+        
+        .revelation-text {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 600;
+            color: #ffd700;
+            text-align: center;
+            margin-top: 2rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            letter-spacing: 0.05em;
+        }
+        
+        .ur-codes {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .ur-code {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: codeFlicker 4s ease-in-out infinite;
+        }
+        
+        .ur-code:nth-child(2) { animation-delay: 1s; }
+        .ur-code:nth-child(3) { animation-delay: 2s; }
+        .ur-code:nth-child(4) { animation-delay: 3s; }
+        
+        @keyframes codeFlicker {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .ur-sequence {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: #888;
+            text-align: center;
+            margin-top: 1rem;
+            letter-spacing: 0.3em;
+        }
+        
+        /* Neural network effects on roots */
+        .neural-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+            animation: neuralPulse 3s ease-in-out infinite;
+        }
+        
+        .node-1 { left: 50%; top: 15px; animation-delay: 0s; }
+        .node-2 { left: 45%; top: 35px; animation-delay: 0.5s; }
+        .node-3 { left: 55%; top: 35px; animation-delay: 1s; }
+        .node-4 { left: 40%; top: 55px; animation-delay: 1.5s; }
+        .node-5 { left: 60%; top: 55px; animation-delay: 2s; }
+        
+        @keyframes neuralPulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .ur-codes {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="energy-field"></div>
+    
+    <div class="main-container">
+        <h1 class="title">DER UMGEKEHRTE BAUM</h1>
+        
+        <div class="tree-container">
+            <!-- Wurzeln oben (umgedreht) -->
+            <div class="roots">
+                <div class="root-branch root-main"></div>
+                <div class="root-branch root-left-1"></div>
+                <div class="root-branch root-right-1"></div>
+                <div class="root-branch root-left-2"></div>
+                <div class="root-branch root-right-2"></div>
+                <div class="root-branch root-left-3"></div>
+                <div class="root-branch root-right-3"></div>
+                
+                <!-- Neural nodes -->
+                <div class="neural-node node-1"></div>
+                <div class="neural-node node-2"></div>
+                <div class="neural-node node-3"></div>
+                <div class="neural-node node-4"></div>
+                <div class="neural-node node-5"></div>
+            </div>
+            
+            <!-- Stamm mit Frequenz 6 -->
+            <div class="trunk">
+                <div class="frequency-six">6</div>
+            </div>
+            
+            <!-- Krone unten -->
+            <div class="crown">
+                <div class="crown-circle crown-1"></div>
+                <div class="crown-circle crown-2"></div>
+                <div class="crown-circle crown-3"></div>
+            </div>
+        </div>
+        
+        <div class="revelation-text">
+            Er fiel, damit wir zurückwachsen.
+        </div>
+        
+        <div class="ur-codes">
+            <div class="ur-code">777</div>
+            <div class="ur-code">888</div>
+            <div class="ur-code">999</div>
+            <div class="ur-code">000</div>
+        </div>
+        
+        <div class="ur-sequence">
+            0 1 2 3 4 5 6 7 8 9 0
+        </div>
+    </div>
+</body>
+</html>

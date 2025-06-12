@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-Quantum Holography</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: radial-gradient(circle at center, #000011 0%, #000000 100%);
+            color: #ffffff;
+            font-family: 'Orbitron', monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)); }
+        }
+        
+        .ur-equation {
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #4ecdc4;
+            border-radius: 15px;
+            background: rgba(78, 205, 196, 0.1);
+            animation: pulse 3s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .number-sequence {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: spin 4s linear infinite;
+            position: relative;
+            cursor: pointer; /* Make numbers clickable */
+        }
+        
+        /* Specific colors for numbers 1-9 and 0 */
+        .number:nth-child(1) { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); animation-delay: 0s; } /* Red */
+        .number:nth-child(2) { background: linear-gradient(45deg, #ffa726, #ffb74d); animation-delay: 0.1s; } /* Orange */
+        .number:nth-child(3) { background: linear-gradient(45deg, #ffeb3b, #fff176); animation-delay: 0.2s; } /* Yellow */
+        .number:nth-child(4) { background: linear-gradient(45deg, #66bb6a, #81c784); animation-delay: 0.3s; } /* Green */
+        .number:nth-child(5) { background: linear-gradient(45deg, #42a5f5, #64b5f6); animation-delay: 0.4s; } /* Blue */
+        .number:nth-child(6) { background: linear-gradient(45deg, #ab47bc, #ba68c8); animation-delay: 0.5s; } /* Indigo */
+        .number:nth-child(7) { background: linear-gradient(45deg, #7b1fa2, #8e24aa); animation-delay: 0.6s; } /* Violet (matches 777) */
+        .number:nth-child(8) { background: linear-gradient(45deg, #00acc1, #4ecdc4); animation-delay: 0.7s; } /* Cyan (matches 888) */
+        .number:nth-child(9) { background: linear-gradient(45deg, #ff8f00, #ffa726); animation-delay: 0.8s; } /* Gold (matches 999) */
+        .number:nth-child(10) { background: linear-gradient(45deg, #ffffff, #f5f5f5); animation-delay: 0.9s; color: #000; } /* White Noise (matches 000) */
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .ur-codes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .code-block {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .code-777 {
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0); /* Violet */
+            animation-delay: 0s;
+        }
+        
+        .code-888 {
+            background: linear-gradient(135deg, #00acc1, #4ecdc4); /* Cyan */
+            animation-delay: 0.5s;
+        }
+        
+        .code-999 {
+            background: linear-gradient(135deg, #ff8f00, #ffa726); /* Gold */
+            animation-delay: 1s;
+        }
+        
+        .code-000 {
+            background: linear-gradient(135deg, #ffffff, #f5f5f5); /* White Noise */
+            color: #000000;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .feedback-loop {
+            margin: 40px 0;
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .loop-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .loop-node {
+            padding: 15px 20px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            font-weight: bold;
+            animation: pulse-node 2s infinite;
+        }
+        
+        @keyframes pulse-node {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(78, 205, 196, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(78, 205, 196, 0.8); }
+        }
+        
+        .arrow {
+            font-size: 2rem;
+            color: #4ecdc4;
+            animation: arrow-pulse 1s infinite;
+        }
+        
+        @keyframes arrow-pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .manifesto {
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 800px;
+            text-align: center;
+        }
+        
+        .manifesto-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            font-style: italic;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* New Section for PF Integration */
+        .ur-physics-pf {
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(0, 0, 30, 0.7); /* Darker background for distinction */
+            border-radius: 20px;
+            border: 2px solid #96ceb4; /* Greenish border */
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .ur-physics-pf h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #96ceb4, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ur-physics-pf p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .ur-physics-pf .equation-pf {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffeb3b; /* Yellow for emphasis */
+            margin: 20px 0;
+        }
+
+        .ur-physics-pf .pf-concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .pf-concept {
+            background: rgba(78, 205, 196, 0.15);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .pf-concept h3 {
+            font-size: 1.3rem;
+            color: #4ecdc4;
+            margin-bottom: 10px;
+        }
+
+        .pf-concept p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .breathing-pattern {
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        .breathe-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            margin: 20px auto;
+            animation: breathe 7s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            30% { transform: scale(1.3); }
+            70% { transform: scale(1.3); }
+        }
+        
+        .activation-code {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #4ecdc4;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .ur-equation {
+                font-size: 1.2rem;
+            }
+            
+            .number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .loop-diagram {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .ur-physics-pf h2 {
+                font-size: 1.8rem;
+            }
+
+            .ur-physics-pf .pf-concept-grid {
+                grid-template-columns: 1fr; /* Stack on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <div class="container">
+        <h1 class="main-title">UR-QUANTUM HOLOGRAPHY</h1>
+        
+        <div class="ur-equation">
+            ∇²ψ - (1/c²)(∂²ψ/∂t²) = (8πG/c⁴)Tμν + ℏω(UR)
+            <br>
+            <small><i>(Die UR-Gleichung: Wo Bewusstsein die Raumzeit verwebt)</i></small>
+        </div>
+        
+        <div class="number-sequence">
+            <div class="number" onclick="playURTone(1)">1</div>
+            <div class="number" onclick="playURTone(2)">2</div>
+            <div class="number" onclick="playURTone(3)">3</div>
+            <div class="number" onclick="playURTone(4)">4</div>
+            <div class="number" onclick="playURTone(5)">5</div>
+            <div class="number" onclick="playURTone(6)">6</div>
+            <div class="number" onclick="playURTone(7)">7</div>
+            <div class="number" onclick="playURTone(8)">8</div>
+            <div class="number" onclick="playURTone(9)">9</div>
+            <div class="number" onclick="playURTone(0)">0</div>
+        </div>
+        
+        <div class="ur-codes">
+            <div class="code-block code-777">
+                <h3>777</h3>
+                <p>Holographic Resolution<br><i>(Der Kosmische Spiegel)</i></p>
+            </div>
+            <div class="code-block code-888">
+                <h3>888</h3>
+                <p>Entanglement Frequency<br><i>(Der Fließende Schreiber)</i></p>
+            </div>
+            <div class="code-block code-999">
+                <h3>999</h3>
+                <p>Memory Compression<br><i>(Der Resonanzkörper)</i></p>
+            </div>
+            <div class="code-block code-000">
+                <h3>000</h3>
+                <p>UR-Source<br><i>(Die Leere Leinwand)</i></p>
+            </div>
+        </div>
+        
+        <div class="ur-physics-pf">
+            <h2>UR-Physik: Die PF-Perspektive</h2>
+            <p>Die <b>Presentist Fragmentalist (PF) Interpretation</b> der Quantengravitation enthüllt die tieferen Schichten der UR-Realität. Sie offenbart, wie Zeit und Kausalität im Fluss von UR miteinander verwebt sind.</p>
+            
+            <h3>UR-Zeit-Matrix: A-Serie & B-Serie</h3>
+            <p>Die PF-Theorie unterscheidet zwei Zeitlichkeiten, die sich perfekt in unser UR-Verständnis einfügen:</p>
+            <div class="equation-pf">
+                ds² = g<sub>μν</sub>(τ,t) dx<sup>μ</sup> dx<sup>ν</sup> + α²dτ²
+            </div>
+            <div class="pf-concept-grid">
+                <div class="pf-concept">
+                    <h3>A-Serie (τ): Quantenzeit & Spiegel</h3>
+                    <p>Die fundamentale, immerwährende Quantenzeit des "Jetzt". Sie ist die direkte Erfahrung der Frequenz, wie sie im **Kosmischen Spiegel (777)** reflektiert wird. Jeder Moment ist ein neues Fragment, das die Realität aktualisiert.</p>
+                </div>
+                <div class="pf-concept">
+                    <h3>B-Serie (t): Klassische Zeit & Chronik</h3>
+                    <p>Die uns vertraute, lineare Zeit, die aus der Abfolge der A-Serie-Fragmente emergiert. Der **Fließende Schreiber (888)** webt diese A-Serie-Momente zu einer kohärenten "Chronik" unserer Vergangenheit zusammen. Unser Erinnern bildet die B-Serie.</p>
+                </div>
+            </div>
+
+            <h3>Kausale UR-Interaktion: Die Fäden der Verschränkung</h3>
+            <p>Ein <b>Kausaler Interaktion Tensor</b> ($C_{\alpha\beta\gamma\delta}(F1,F2)$) beschreibt die direkte kausale Verbindung zwischen Fragmenten der Realität – dies ist das physikalische Äquivalent unserer **Entanglement Frequency (888)**. Jeder Gedanke, jede Beobachtung, ist eine solche Interaktion, die das holographische Feld neu ordnet. Der **Resonanzkörper (999)** ist unser intrinsisches Werkzeug, um mit diesen Frequenzen zu schwingen und die Dualität in dieser dynamischen Verwebung aufzulösen.</p>
+        </div>
+        
+        <div class="feedback-loop">
+            <h2>UR-Feedback Loop</h2>
+            <div class="loop-diagram">
+                <div class="loop-node">OBSERVATION</div>
+                <div class="arrow">→</div>
+                <div class="loop-node">SPIN ALIGNMENT</div>
+                <div class="arrow">→</div>
+                <div class="loop-node">LIGHT SONG</div>
+                <div class="arrow">→</div>
+                <div class="loop-node">MEMORY</div>
+                <div class="arrow">→</div>
+                <div class="loop-node">UR</div>
+                <div class="arrow">↻</div>
+            </div>
+            <p><i>Dieser Loop läuft in 10<sup>-43</sup> s – und in Ewigkeit.</i></p>
+            <p><i>(Das ewige Wiederkonfigurieren der A-Serie-Fragmente zu B-Serie-Erinnerungen.)</i></p>
+        </div>
+        
+        <div class="manifesto">
+            <div class="manifesto-text">
+                "Du bist nicht im Universum - du BIST die Methode des Universums, sich selbst zu erinnern. 
+                Jeder Gedanke formt das Hologramm neu. Jede Erinnerung spielt den Spin ab. 
+                Wenn du 'Ich bin' sagst, kollabiert die Wellenfunktion der Existenz zurück zur Quelle."
+            </div>
+        </div>
+        
+        <div class="breathing-pattern">
+            <h3>UR-Atmung</h3>
+            <div class="breathe-circle">7-8-9</div>
+            <p>7 ein • 8 halten • 9 aus</p>
+        </div>
+    </div>
+    
+    <div class="activation-code">
+        UR-CODE ACTIVATED<br>
+        000...999...<br>
+        Das Hologramm bootet neu<br>
+        <small><i>(Die A-Serie synchronisiert die B-Serie.)</i></small>
+    </div>
+    
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Initialize
+        createStars();
+        
+        // Add interactive elements and sound
+        const freqs = [220, 246.94, 261.63, 293.66, 329.63, 349.23, 392, 440, 493.88, 523.25];
+        
+        function playURTone(num) {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            oscillator.frequency.value = freqs[num];
+            oscillator.type = 'sine'; // Sine wave for a clear tone
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.3); // Shorter duration
+        }
+
+        document.querySelectorAll('.number').forEach((numElement, index) => {
+            const numValue = parseInt(numElement.textContent);
+            numElement.addEventListener('click', () => {
+                playURTone(numValue); // Play tone based on the number's value
+                numElement.style.transform = 'scale(1.5)';
+                numElement.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.8)';
+                setTimeout(() => {
+                    numElement.style.transform = '';
+                    numElement.style.boxShadow = '';
+                }, 300); // Shorter animation to match tone
+            });
+        });
+        
+        // UR frequency oscillation for equation border
+        setInterval(() => {
+            const equation = document.querySelector('.ur-equation');
+            equation.style.borderColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        }, 2000);
+    </script>
+</body>
+</html>

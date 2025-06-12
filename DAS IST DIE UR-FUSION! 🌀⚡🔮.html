@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-Quantum Observer Fusion v3.0</title>
+    <style>
+        :root {
+            --ur-primary: #4b0082;
+            --ur-secondary: #9370db;
+            --ur-accent: #00bfff;
+            --ur-dark: #000022;
+            --ur-light: #fffff0;
+            --ur-pink: #ff00ff;
+            --ur-cyan: #00ffff;
+            --ur-gold: #ffd700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--ur-dark), #000000);
+            color: var(--ur-light);
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            height: 100vh;
+            cursor: none;
+        }
+
+        .quantum-space {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        .singularity {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, var(--ur-light), var(--ur-cyan), var(--ur-pink));
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite ease-in-out;
+            z-index: 100;
+            box-shadow: 0 0 30px var(--ur-primary);
+            cursor: pointer;
+        }
+
+        .state-vector {
+            position: absolute;
+            width: 2px;
+            height: 150px;
+            background: linear-gradient(180deg, var(--ur-cyan), transparent);
+            transform-origin: bottom center;
+            animation: spin 8s infinite linear;
+            opacity: 0.7;
+        }
+
+        .probability-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 20%, rgba(255, 255, 0, 0.1) 0%, transparent 50%);
+            animation: drift 12s infinite ease-in-out alternate;
+        }
+
+        .observation-text {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.5em;
+            letter-spacing: 3px;
+            opacity: 0;
+            transition: all 1s ease;
+            color: var(--ur-cyan);
+            text-shadow: 0 0 10px var(--ur-cyan);
+            max-width: 80%;
+            line-height: 1.6;
+        }
+
+        .cat-states {
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 100px;
+            font-size: 4em;
+        }
+
+        .cat-state {
+            opacity: 0.3;
+            transition: all 0.5s ease;
+            animation: quantumFlicker 3s infinite ease-in-out;
+            text-shadow: 0 0 20px currentColor;
+            cursor: pointer;
+        }
+
+        .observer-cursor {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--ur-light);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 200;
+            transition: all 0.1s ease;
+            mix-blend-mode: screen;
+        }
+
+        .observer-cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 15px;
+            height: 15px;
+            background: var(--ur-light);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.8;
+        }
+
+        .quantum-text {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.2em;
+            opacity: 0;
+            max-width: 80%;
+            line-height: 1.8;
+            transition: opacity 2s ease;
+            color: var(--ur-pink);
+        }
+
+        .frequency-codes {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            opacity: 0;
+            transition: all 1s ease;
+            color: var(--ur-cyan);
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        .multiverse-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .alternative-self {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            animation: alternativeFlicker 2s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: var(--ur-gold);
+        }
+
+        .interference-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.03) 10px,
+                rgba(255, 255, 255, 0.03) 20px
+            ),
+            repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 15px,
+                rgba(255, 0, 255, 0.03) 15px,
+                rgba(255, 0, 255, 0.03) 30px
+            );
+            animation: interference 6s infinite linear;
+            pointer-events: none;
+        }
+
+        .ur-code {
+            position: absolute;
+            font-size: 0.7em;
+            color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .ur-memento {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--ur-pink);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 300;
+            cursor: pointer;
+        }
+
+        .ur-tattoo-display {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .ur-keywords {
+            font-size: 1.2em;
+            color: var(--ur-cyan);
+            text-align: center;
+        }
+
+        .collapse-animation {
+            animation: collapseEffect 0.5s ease-out;
+        }
+
+        .collapse-mode {
+            background: linear-gradient(45deg, var(--ur-gold), var(--ur-cyan));
+            animation: collapsePulse 1s infinite;
+        }
+
+        .entanglement-active {
+            border-color: var(--ur-gold) !important;
+            box-shadow: 0 0 40px var(--ur-gold) !important;
+            animation: entanglementPulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1); 
+                box-shadow: 0 0 30px var(--ur-light); 
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.5); 
+                box-shadow: 0 0 60px var(--ur-cyan), 0 0 90px var(--ur-pink); 
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); opacity: 0.7; }
+            50% { opacity: 0.3; }
+            100% { transform: rotate(360deg); opacity: 0.7; }
+        }
+
+        @keyframes drift {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        @keyframes quantumFlicker {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            25% { opacity: 0.8; transform: scale(1.1); }
+            50% { opacity: 0.1; transform: scale(0.9); }
+            75% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        @keyframes interference {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(20px); }
+        }
+
+        @keyframes alternativeFlicker {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        @keyframes collapseEffect {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 0.5; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
+
+        @keyframes collapsePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes entanglementPulse {
+            0%, 100% { 
+                border-color: var(--ur-gold);
+                box-shadow: 0 0 40px var(--ur-gold);
+            }
+            50% { 
+                border-color: var(--ur-cyan);
+                box-shadow: 0 0 60px var(--ur-cyan);
+            }
+        }
+
+        .collapsed {
+            opacity: 1 !important;
+            transform: scale(1.5);
+            text-shadow: 0 0 30px currentColor;
+        }
+
+        .active-observation {
+            opacity: 1;
+            color: var(--ur-cyan);
+            text-shadow: 0 0 20px var(--ur-cyan);
+        }
+
+        .entangled {
+            border-color: var(--ur-pink);
+            box-shadow: 0 0 30px var(--ur-pink);
+        }
+
+        .revealed {
+            opacity: 0.9 !important;
+        }
+
+        .ur-signature {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            font-size: 0.8em;
+            color: var(--ur-secondary);
+            opacity: 0.5;
+        }
+
+        .ur-status {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            font-size: 1em;
+            color: var(--ur-gold);
+            text-shadow: 0 0 10px var(--ur-gold);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-space">
+        <div class="interference-pattern"></div>
+        <div class="probability-field"></div>
+        
+        <div class="singularity" id="singularity"></div>
+        
+        <div class="observation-text" id="observationText">
+            BEWEGE DICH DURCH DEN UR-QUANTENRAUM...<br>
+            JEDER MOMENT GEBIRT EINE NEUE VERSION VON DIR
+        </div>
+        
+        <div class="frequency-codes" id="frequencyCodes">
+            ⟨777⟩ ERKENNTNIS-FREQUENZ<br>
+            ⟨888⟩ MANIFESTATIONS-PORTAL<br>
+            ⟨999⟩ TRANSFORMATIONS-SCHWELLE<br>
+            ⟨000⟩ UR-SINGULARITÄT
+        </div>
+        
+        <div class="ur-status" id="urStatus">
+            SYSTEM: SUPERPOSITION AKTIV<br>
+            MODUS: BEOBACHTUNG<br>
+            VERSCHRÄNKUNG: INAKTIV
+        </div>
+        
+        <div class="ur-memento" id="urMemento">
+            <div class="ur-tattoo-display">🔢</div>
+            <div class="ur-keywords">
+                ⟨88⟩³ → ⟨UR-memento⟩⟨99⟩ → ⟨000⟩²
+            </div>
+        </div>
+        
+        <div class="multiverse-overlay" id="multiverseOverlay">
+            <div class="alternative-self" style="top: 20%; left: 30%;">🌀</div>
+            <div class="alternative-self" style="top: 60%; left: 70%;">⚡</div>
+            <div class="alternative-self" style="top: 40%; left: 15%;">🔮</div>
+            <div class="alternative-self" style="top: 80%; left: 85%;">✨</div>
+        </div>
+        
+        <div class="cat-states">
+            <div class="cat-state" id="aliveCat">🐱</div>
+            <div class="cat-state" id="deadCat">💀</div>
+        </div>
+        
+        <div class="observer-cursor" id="cursor"></div>
+        
+        <div class="quantum-text" id="quantumText">
+            "DU BIST NICHT NUR BEOBACHTER - DU BIST DER QUANTENCODE SELBST.<br>
+            DEINE AUFMERKSAMKEIT SCHREIBT DIE MATRIX NEU.<br>
+            FRAGE NICHT, OB DIE KATZE LEBT ODER TOT IST.<br>
+            <strong>FRAGE: WELCHE VERSION VON UR HAT GERADE DIE REALITÄT GENERIERT?</strong>"
+        </div>
+
+        <div class="ur-signature">
+            UR-QUANTUM-OBSERVER FUSION v3.0 | 777-888-999-000
+        </div>
+    </div>
+
+    <script>
+        // Element-Selektoren
+        const cursor = document.getElementById('cursor');
+        const observationText = document.getElementById('observationText');
+        const aliveCat = document.getElementById('aliveCat');
+        const deadCat = document.getElementById('deadCat');
+        const quantumSpace = document.querySelector('.quantum-space');
+        const frequencyCodes = document.getElementById('frequencyCodes');
+        const multiverseOverlay = document.getElementById('multiverseOverlay');
+        const quantumText = document.getElementById('quantumText');
+        const urMemento = document.getElementById('urMemento');
+        const singularity = document.getElementById('singularity');
+        const urStatus = document.getElementById('urStatus');
+
+        // Zustandsvariablen - Fusion beider Systeme
+        let mouseX = 0;
+        let mouseY = 0;
+        let observationLevel = 0;
+        let lastObservationTime = 0;
+        let centerTime = 0;
+        let isInCenter = false;
+        let audioContext;
+        
+        // Neue Zustände aus dem erweiterten Modul
+        let catState = Math.random() < 0.5 ? 'alive' : 'dead';
+        let entangled = false;
+        let collapseMode = false;
+
+        // Original-Funktionen erweitert
+        function createStateVectors() {
+            for (let i = 0; i < 12; i++) {
+                const vector = document.createElement('div');
+                vector.className = 'state-vector';
+                vector.style.top = '50%';
+                vector.style.left = '50%';
+                vector.style.transform = `translate(-50%, -100%) rotate(${i * 30}deg)`;
+                vector.style.animationDelay = `${i * 0.2}s`;
+                
+                if (i % 3 === 0) {
+                    vector.style.background = `linear-gradient(180deg, var(--ur-cyan), transparent)`;
+                } else if (i % 3 === 1) {
+                    vector.style.background = `linear-gradient(180deg, var(--ur-pink), transparent)`;
+                } else {
+                    vector.style.background = `linear-gradient(180deg, var(--ur-secondary), transparent)`;
+                }
+                
+                quantumSpace.appendChild(vector);
+            }
+        }
+
+        function createURCodes() {
+            const codes = ['777', '888', '999', '000', 'UR', '01234567890'];
+            for (let i = 0; i < 20; i++) {
+                const code = document.createElement('div');
+                code.className = 'ur-code';
+                code.textContent = codes[Math.floor(Math.random() * codes.length)];
+                code.style.top = `${Math.random() * 100}%`;
+                code.style.left = `${Math.random() * 100}%`;
+                code.style.opacity = Math.random() * 0.1;
+                code.style.transform = `rotate(${Math.random() * 360}deg)`;
+                quantumSpace.appendChild(code);
+            }
+        }
+
+        // Neue Kollaps-Funktion (Fusion)
+        function collapseWaveFunction(triggerSource = 'unknown') {
+            collapseMode = true;
+            catState = Math.random() < 0.5 ? 'alive' : 'dead';
+            
+            // Visuelle Updates
+            aliveCat.textContent = catState === 'alive' ? '😺' : '👻';
+            deadCat.textContent = catState === 'dead' ? '💀' : '🌟';
+            
+            // Kollaps-Animation
+            aliveCat.classList.add('collapse-animation');
+            deadCat.classList.add('collapse-animation');
+            
+            setTimeout(() => {
+                aliveCat.classList.remove('collapse-animation');
+                deadCat.classList.remove('collapse-animation');
+            }, 500);
+
+            // Status-Update
+            updateURStatus();
+            
+            // Audio-Feedback
+            playQuantumTone(catState === 'alive' ? 440 : 220);
+            
+            // Entanglement-Logik
+            if (entangled) {
+                quantumText.innerHTML = `<strong>VERSCHRÄNKUNG AKTIV:</strong> Die Katze ist ${catState === 'alive' ? 'LEBENDIG' : 'TOT'} und mit dem Beobachter verbunden.<br>TRIGGER: ${triggerSource.toUpperCase()}`;
+            } else {
+                quantumText.innerHTML = `WELLENFUNKTION KOLLABIERT: Die Katze ist ${catState === 'alive' ? 'LEBENDIG' : 'TOT'}.<br>TRIGGER: ${triggerSource.toUpperCase()}`;
+            }
+            
+            // Frequenz-Code-Update
+            frequencyCodes.innerHTML = `
+                ⟨777⟩ QUANTUM LOCK AKTIV<br>
+                ⟨888⟩ ZUSTAND: ${catState.toUpperCase()}<br>
+                ⟨999⟩ KOLLAPS BESTÄTIGT<br>
+                ⟨000⟩ NEUE REALITÄT GENERIERT
+            `;
+            
+            setTimeout(() => {
+                collapseMode = false;
+                resetFrequencyCodes();
+            }, 3000);
+        }
+
+        function toggleEntanglement() {
+            entangled = !entangled;
+            
+            if (entangled) {
+                urMemento.classList.add('entanglement-active');
+                urStatus.style.color = 'var(--ur-gold)';
+                playQuantumTone(880);
+            } else {
+                urMemento.classList.remove('entanglement-active');
+                urStatus.style.color = 'var(--ur-cyan)';
+                playQuantumTone(330);
+            }
+            
+            updateURStatus();
+        }
+
+        function generateAlternativeSelf() {
+            const symbols = ['🌠', '⚡', '🔮', '✨', '🌀', '💫', '🎭', '🦋'];
+            const alternativeSelf = document.createElement('div');
+            alternativeSelf.className = 'alternative-self';
+            alternativeSelf.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            alternativeSelf.style.top = `${Math.random() * 80 + 10}%`;
+            alternativeSelf.style.left = `${Math.random() * 80 + 10}%`;
+            multiverseOverlay.appendChild(alternativeSelf);
+            
+            setTimeout(() => alternativeSelf.remove(), 2000);
+        }
+
+        function updateURStatus() {
+            urStatus.innerHTML = `
+                SYSTEM: ${collapseMode ? 'KOLLAPS AKTIV' : 'SUPERPOSITION'}<br>
+                MODUS: ${observationLevel > 0.5 ? 'INTENSIVE BEOBACHTUNG' : 'PASSIVE BEOBACHTUNG'}<br>
+                VERSCHRÄNKUNG: ${entangled ? 'AKTIV' : 'INAKTIV'}<br>
+                KATZE: ${catState ? catState.toUpperCase() : 'UNBESTIMMT'}
+            `;
+            urStatus.style.opacity = '1';
+        }
+
+        function resetFrequencyCodes() {
+            frequencyCodes.innerHTML = `
+                ⟨777⟩ ERKENNTNIS-FREQUENZ<br>
+                ⟨888⟩ MANIFESTATIONS-PORTAL<br>
+                ⟨999⟩ TRANSFORMATIONS-SCHWELLE<br>
+                ⟨000⟩ UR-SINGULARITÄT
+            `;
+        }
+
+        function playQuantumTone(frequency) {
+            if (audioContext) {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(frequency * 2, audioContext.currentTime + 0.1);
+                oscillator.frequency.exponentialRampToValueAtTime(frequency, audioContext.currentTime + 0.5);
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.5);
+            }
+        }
+
+        // Original Maus-Bewegung erweitert
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
+            
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const distanceFromCenter = Math.sqrt(
+                Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+            );
+            
+            observationLevel = 1 - Math.min(distanceFromCenter / (window.innerWidth / 2), 1);
+            updateQuantumState();
+        });
+
+        function updateQuantumState() {
+            const now = Date.now();
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const distanceFromCenter = Math.sqrt(
+                Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+            );
+            
+            const inCenterZone = distanceFromCenter < 150;
+            
+            if (inCenterZone && !isInCenter) {
+                isInCenter = true;
+                centerTime = now;
+                cursor.style.borderColor = 'var(--ur-accent)';
+                cursor.style.boxShadow = '0 0 20px var(--ur-accent)';
+                urMemento.style.opacity = '1';
+            } else if (!inCenterZone) {
+                isInCenter = false;
+                centerTime = 0;
+                cursor.style.borderColor = 'var(--ur-light)';
+                cursor.style.boxShadow = 'none';
+                urMemento.style.opacity = '0';
+            }
+            
+            if (isInCenter && (now - centerTime) > 2000) {
+                quantumText.classList.add('revealed');
+                frequencyCodes.classList.add('active');
+                urStatus.style.opacity = '1';
+            }
+            
+            // Beobachtungs-Updates
+            if (observationLevel > 0.8) {
+                observationText.innerHTML = "STARKER UR-EINFLUSS - WELLENFUNKTION KOLLABIERT...<br><em>KLICKE FÜR MANUELLE KONTROLLE</em>";
+                observationText.classList.add('active-observation');
+                cursor.classList.add('entangled');
+                multiverseOverlay.style.opacity = '1';
+            } else if (observationLevel > 0.5) {
+                observationText.innerHTML = "UR-VERSCHRÄNKUNG AKTIV - DU WIRST TEIL DES CODES...<br><em>BEWEGE DICH ZUM ZENTRUM</em>";
+                multiverseOverlay.style.opacity = '0.5';
+            } else {
+                observationText.innerHTML = "UR-SUPERPOSITION - ALLE MÖGLICHKEITEN EXISTIEREN...<br><em>ERKUNDE DEN QUANTENRAUM</em>";
+                multiverseOverlay.style.opacity = '0';
+            }
+            
+            updateURStatus();
+        }
+
+        // Event Listeners - Fusion aller Interaktionen
+        
+        // Klicks auf verschiedene Elemente
+        singularity.addEventListener('click', () => collapseWaveFunction('singularität'));
+        aliveCat.addEventListener('click', () => collapseWaveFunction('lebende-katze'));
+        deadCat.addEventListener('click', () => collapseWaveFunction('tote-katze'));
+        urMemento.addEventListener('click', toggleEntanglement);
+        
+        // Tastatur-Shortcuts
+        document.addEventListener('keydown', (e) => {
+            switch(e.code) {
+                case 'Space':
+                    e.preventDefault();
+                    collapseWaveFunction('tastatur');
+                    break;
+                case 'KeyE':
+                    toggleEntanglement();
+                    break;
+                case 'KeyR':
+                    // Reset
+                    catState = 'unknown';
+                    entangled = false;
+                    updateURStatus();
+                    break;
+            }
+        });
+
+        // Audio-Kontext initialisieren
+        document.addEventListener('click', () => {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                playQuantumTone(440);
+            }
+        });
+
+        // Initialisierung
+        createStateVectors();
+        createURCodes();
+        
+        setTimeout(() => {
+            observationText.style.opacity = '1';
+            updateURStatus();
+        }, 1000);
+
+        // Periodische Effekte
+        setInterval(() => {
+            if (observationLevel < 0.4) {
+                const vectors = document.querySelectorAll('.state-vector');
+                vectors.forEach((vector, index) => {
+                    const randomRotation = Math.random() * 360;
+                    vector.style.transform = `translate(-50%, -100%) rotate(${randomRotation}deg)`;
+                    
+                    if (index % 3 === 0) {
+                        vector.style.background = `linear-gradient(180deg, 
+                            hsl(${Math.random() * 60 + 180}, 100%, 50%), 
+                            transparent)`;
+                    }
+                });
+            }
+        }, 3000);
+
+        // Multiversum-Generator
+        setInterval(generateAlternativeSelf, 4000);
+
+        // Initialer Kollaps
+        setTimeout(() => collapseWaveFunction('initialisierung'), 2000);
+    </script>
+</body>
+</html>

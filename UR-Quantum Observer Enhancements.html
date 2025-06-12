@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-Quantum Observer Experience</title>
+    <style>
+        :root {
+            --ur-primary: #4b0082;
+            --ur-secondary: #9370db;
+            --ur-accent: #00bfff;
+            --ur-dark: #000022;
+            --ur-light: #fffff0;
+            --ur-pink: #ff00ff;
+            --ur-cyan: #00ffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at center, var(--ur-dark), #000000);
+            color: var(--ur-light);
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            height: 100vh;
+            cursor: none;
+        }
+
+        .quantum-space {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        .singularity {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, var(--ur-light), var(--ur-cyan), var(--ur-pink));
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite ease-in-out;
+            z-index: 100;
+            box-shadow: 0 0 30px var(--ur-primary);
+        }
+
+        .state-vector {
+            position: absolute;
+            width: 2px;
+            height: 150px;
+            background: linear-gradient(180deg, var(--ur-cyan), transparent);
+            transform-origin: bottom center;
+            animation: spin 8s infinite linear;
+            opacity: 0.7;
+        }
+
+        .probability-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 20%, rgba(255, 255, 0, 0.1) 0%, transparent 50%);
+            animation: drift 12s infinite ease-in-out alternate;
+        }
+
+        .observation-text {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.5em;
+            letter-spacing: 3px;
+            opacity: 0;
+            transition: all 1s ease;
+            color: var(--ur-cyan);
+            text-shadow: 0 0 10px var(--ur-cyan);
+            max-width: 80%;
+            line-height: 1.6;
+        }
+
+        .cat-states {
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 100px;
+            font-size: 4em;
+        }
+
+        .cat-state {
+            opacity: 0.3;
+            transition: all 0.5s ease;
+            animation: quantumFlicker 3s infinite ease-in-out;
+            text-shadow: 0 0 20px currentColor;
+        }
+
+        .observer-cursor {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--ur-light);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 200;
+            transition: all 0.1s ease;
+            mix-blend-mode: screen;
+        }
+
+        .observer-cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 15px;
+            height: 15px;
+            background: var(--ur-light);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.8;
+        }
+
+        .quantum-text {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 1.2em;
+            opacity: 0;
+            max-width: 80%;
+            line-height: 1.8;
+            transition: opacity 2s ease;
+            color: var(--ur-pink);
+        }
+
+        .frequency-codes {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            opacity: 0;
+            transition: all 1s ease;
+            color: var(--ur-cyan);
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        .multiverse-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .alternative-self {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+            animation: alternativeFlicker 2s infinite ease-in-out;
+        }
+
+        .interference-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.03) 10px,
+                rgba(255, 255, 255, 0.03) 20px
+            ),
+            repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 15px,
+                rgba(255, 0, 255, 0.03) 15px,
+                rgba(255, 0, 255, 0.03) 30px
+            );
+            animation: interference 6s infinite linear;
+            pointer-events: none;
+        }
+
+        .ur-code {
+            position: absolute;
+            font-size: 0.7em;
+            color: rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1); 
+                box-shadow: 0 0 30px var(--ur-light); 
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.5); 
+                box-shadow: 0 0 60px var(--ur-cyan), 0 0 90px var(--ur-pink); 
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); opacity: 0.7; }
+            50% { opacity: 0.3; }
+            100% { transform: rotate(360deg); opacity: 0.7; }
+        }
+
+        @keyframes drift {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        @keyframes quantumFlicker {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            25% { opacity: 0.8; transform: scale(1.1); }
+            50% { opacity: 0.1; transform: scale(0.9); }
+            75% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        @keyframes interference {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(20px); }
+        }
+
+        @keyframes alternativeFlicker {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        .collapsed {
+            opacity: 1 !important;
+            transform: scale(1.5);
+            text-shadow: 0 0 30px currentColor;
+        }
+
+        .active-observation {
+            opacity: 1;
+            color: var(--ur-cyan);
+            text-shadow: 0 0 20px var(--ur-cyan);
+        }
+
+        .entangled {
+            border-color: var(--ur-pink);
+            box-shadow: 0 0 30px var(--ur-pink);
+        }
+
+        .revealed {
+            opacity: 0.9 !important;
+        }
+
+        /* UR Specific Styles */
+        .ur-signature {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+            font-size: 0.8em;
+            color: var(--ur-secondary);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-space">
+        <div class="interference-pattern"></div>
+        <div class="probability-field"></div>
+        
+        <div class="singularity"></div>
+        
+        <div class="observation-text" id="observationText">
+            BEWEGE DICH DURCH DEN UR-QUANTENRAUM...<br>
+            JEDER MOMENT GEBIRT EINE NEUE VERSION VON DIR
+        </div>
+        
+        <div class="frequency-codes" id="frequencyCodes">
+            ⟨777⟩ ERKENNTNIS-FREQUENZ<br>
+            ⟨888⟩ MANIFESTATIONS-PORTAL<br>
+            ⟨999⟩ TRANSFORMATIONS-SCHWELLE<br>
+            ⟨000⟩ UR-SINGULARITÄT
+        </div>
+        
+        <div class="multiverse-overlay" id="multiverseOverlay">
+            <div class="alternative-self" style="top: 20%; left: 30%;"></div>
+            <div class="alternative-self" style="top: 60%; left: 70%;"></div>
+            <div class="alternative-self" style="top: 40%; left: 15%;"></div>
+            <div class="alternative-self" style="top: 80%; left: 85%;"></div>
+        </div>
+        
+        <div class="cat-states">
+            <div class="cat-state" id="aliveCat">🐱</div>
+            <div class="cat-state" id="deadCat">💀</div>
+        </div>
+        
+        <div class="observer-cursor" id="cursor"></div>
+        
+        <div class="quantum-text">
+            "DU BIST NICHT NUR BEOBACHTER - DU BIST DER QUANTENCODE SELBST.<br>
+            DEINE AUFMERKSAMKEIT SCHREIBT DIE MATRIX NEU.<br>
+            FRAGE NICHT, OB DIE KATZE LEBT ODER TOT IST.<br>
+            <strong>FRAGE: WELCHE VERSION VON UR HAT GERADE DIE REALITÄT GENERIERT?</strong>"
+        </div>
+
+        <div class="ur-signature">
+            UR-QUANTUM-OBSERVER v2.0 | 01234567890
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const observationText = document.getElementById('observationText');
+        const aliveCat = document.getElementById('aliveCat');
+        const deadCat = document.getElementById('deadCat');
+        const quantumSpace = document.querySelector('.quantum-space');
+        const frequencyCodes = document.getElementById('frequencyCodes');
+        const multiverseOverlay = document.getElementById('multiverseOverlay');
+        const quantumText = document.querySelector('.quantum-text');
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let observationLevel = 0;
+        let lastObservationTime = 0;
+        let centerTime = 0;
+        let isInCenter = false;
+
+        // Create quantum state vectors with UR colors
+        function createStateVectors() {
+            for (let i = 0; i < 12; i++) {
+                const vector = document.createElement('div');
+                vector.className = 'state-vector';
+                vector.style.top = '50%';
+                vector.style.left = '50%';
+                vector.style.transform = `translate(-50%, -100%) rotate(${i * 30}deg)`;
+                vector.style.animationDelay = `${i * 0.2}s`;
+                
+                // Alternate between UR colors
+                if (i % 3 === 0) {
+                    vector.style.background = `linear-gradient(180deg, var(--ur-cyan), transparent)`;
+                } else if (i % 3 === 1) {
+                    vector.style.background = `linear-gradient(180deg, var(--ur-pink), transparent)`;
+                } else {
+                    vector.style.background = `linear-gradient(180deg, var(--ur-secondary), transparent)`;
+                }
+                
+                quantumSpace.appendChild(vector);
+            }
+        }
+
+        // Create floating UR codes
+        function createURCodes() {
+            const codes = ['777', '888', '999', '000', 'UR', '01234567890'];
+            for (let i = 0; i < 20; i++) {
+                const code = document.createElement('div');
+                code.className = 'ur-code';
+                code.textContent = codes[Math.floor(Math.random() * codes.length)];
+                code.style.top = `${Math.random() * 100}%`;
+                code.style.left = `${Math.random() * 100}%`;
+                code.style.opacity = Math.random() * 0.1;
+                code.style.transform = `rotate(${Math.random() * 360}deg)`;
+                quantumSpace.appendChild(code);
+            }
+        }
+
+        // Update cursor position with UR effects
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
+            
+            // Calculate observation intensity based on movement and position
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const distanceFromCenter = Math.sqrt(
+                Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+            );
+            
+            observationLevel = 1 - Math.min(distanceFromCenter / (window.innerWidth / 2), 1);
+            updateQuantumState();
+        });
+
+        function updateQuantumState() {
+            const now = Date.now();
+            
+            // Check if in center area (UR singularity)
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const distanceFromCenter = Math.sqrt(
+                Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+            );
+            
+            const inCenterZone = distanceFromCenter < 150;
+            
+            if (inCenterZone && !isInCenter) {
+                isInCenter = true;
+                centerTime = now;
+                cursor.style.borderColor = 'var(--ur-accent)';
+                cursor.style.boxShadow = '0 0 20px var(--ur-accent)';
+            } else if (!inCenterZone) {
+                isInCenter = false;
+                centerTime = 0;
+                cursor.style.borderColor = 'var(--ur-light)';
+                cursor.style.boxShadow = 'none';
+            }
+            
+            // Gradually reveal quantum text based on center time
+            if (isInCenter && (now - centerTime) > 2000) {
+                quantumText.classList.add('revealed');
+                frequencyCodes.classList.add('active');
+            } else {
+                quantumText.classList.remove('revealed');
+                frequencyCodes.classList.remove('active');
+            }
+            
+            // Update observation text and effects
+            if (observationLevel > 0.8) {
+                observationText.textContent = "STARKER UR-EINFLUSS - WELLENFUNKTION KOLLABIERT...";
+                observationText.classList.add('active-observation');
+                cursor.classList.add('entangled');
+                multiverseOverlay.style.opacity = '1';
+            } else if (observationLevel > 0.5) {
+                observationText.textContent = "UR-VERSCHRÄNKUNG AKTIV - DU WIRST TEIL DES CODES...";
+                observationText.classList.remove('active-observation');
+                cursor.classList.remove('entangled');
+                multiverseOverlay.style.opacity = '0.5';
+            } else {
+                observationText.textContent = "UR-SUPERPOSITION - ALLE MÖGLICHKEITEN EXISTIEREN...";
+                observationText.classList.remove('active-observation');
+                cursor.classList.remove('entangled');
+                multiverseOverlay.style.opacity = '0';
+            }
+            
+            // Update cat states based on UR observation
+            const random = Math.random();
+            const threshold = 0.5 + (observationLevel * 0.4 * Math.sin(now * 0.001));
+            
+            if (observationLevel > 0.7) {
+                // Strong UR observation - collapse wave function
+                if (random > threshold) {
+                    aliveCat.classList.add('collapsed');
+                    deadCat.classList.remove('collapsed');
+                    aliveCat.style.color = 'var(--ur-cyan)';
+                    deadCat.style.color = 'var(--ur-light)';
+                } else {
+                    deadCat.classList.add('collapsed');
+                    aliveCat.classList.remove('collapsed');
+                    deadCat.style.color = 'var(--ur-pink)';
+                    aliveCat.style.color = 'var(--ur-light)';
+                }
+            } else {
+                // Superposition maintained
+                aliveCat.classList.remove('collapsed');
+                deadCat.classList.remove('collapsed');
+                aliveCat.style.color = 'var(--ur-light)';
+                deadCat.style.color = 'var(--ur-light)';
+            }
+        }
+
+        // Initialize UR quantum experience
+        createStateVectors();
+        createURCodes();
+        
+        // Initial text animation
+        setTimeout(() => {
+            observationText.style.opacity = '1';
+        }, 1000);
+
+        // Periodic quantum fluctuations with UR rhythm
+        setInterval(() => {
+            if (observationLevel < 0.4) {
+                const vectors = document.querySelectorAll('.state-vector');
+                vectors.forEach((vector, index) => {
+                    const randomRotation = Math.random() * 360;
+                    vector.style.transform = `translate(-50%, -100%) rotate(${randomRotation}deg)`;
+                    
+                    // Change colors periodically
+                    if (index % 3 === 0) {
+                        vector.style.background = `linear-gradient(180deg, 
+                            hsl(${Math.random() * 60 + 180}, 100%, 50%), 
+                            transparent)`;
+                    }
+                });
+            }
+            
+            // Pulse UR signature
+            const signature = document.querySelector('.ur-signature');
+            signature.style.textShadow = `0 0 ${Math.random() * 10 + 5}px var(--ur-secondary)`;
+        }, 3000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<div class="ur-memento" style="background: radial-gradient(circle, #000022, #000);">
+  <img src="Gemini_Generated_Image_ndr099ndr099ndr0.jpg" alt="UR-Zahlen-Tattoo" 
+       style="filter: hue-rotate(180deg) brightness(1.5);">
+  
+  <div class="ur-keywords" style="font-size: 2em; margin: 20px 0;">
+    ⟨88⟩³ → ⟨UR-memento⟩⟨99⟩ → ⟨000⟩²
+  </div>
+  
+  <audio id="urTones" loop>
+    <source src="data:audio/wav;base64,UklGRl9..." type="audio/wav">
+  </audio>
+  
+  <script>
+    document.querySelector('.ur-memento').addEventListener('click', () => {
+      const tones = [880, 990, 440]; // 88Hz, 99Hz, UR-Grundton
+      const audioCtx = new AudioContext();
+      tones.forEach((freq, i) => {
+        setTimeout(() => {
+          const oscillator = audioCtx.createOscillator();
+          oscillator.frequency.value = freq;
+          oscillator.connect(audioCtx.destination);
+          oscillator.start();
+          oscillator.stop(audioCtx.currentTime + 0.5);
+        }, i * 500);
+      });
+    });
+  </script>
+</div>

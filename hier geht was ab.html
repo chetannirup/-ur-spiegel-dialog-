@@ -1,0 +1,71 @@
+// ur-quantum-observer.js
+
+// 1.  Element-Selektoren (für bessere Lesbarkeit und Wartbarkeit)
+const observationText = document.getElementById('observation-text');
+const catStates = document.querySelectorAll('.cat-state');
+const observerCursor = document.getElementById('observer-cursor');
+const quantumText = document.getElementById('quantum-text');
+const frequencyCodes = document.getElementById('frequency-codes');
+const multiverseOverlay = document.getElementById('multiverse-overlay');
+const urMemento = document.getElementById('ur-memento');
+
+// 2.  Zustandsvariablen
+let catState = Math.random() < 0.5 ? 'alive' : 'dead'; // Startzustand der Katze (50/50)
+let entangled = true; // Bestimmt, ob die Katze verschränkt ist
+
+// 3.  Funktionen
+
+// Funktion, um den Zustand der Katze zu ändern und die UI zu aktualisieren
+function collapseWaveFunction() {
+    catState = Math.random() < 0.5 ? 'alive' : 'dead';
+    catStates[0].textContent = catState === 'alive' ? '😺' : '💀';
+    catStates[1].textContent = catState === 'dead' ? '💀' : '😺';
+
+    // Animation (optional)
+    catStates.forEach(cat => {
+        cat.classList.add('collapse-animation');
+        setTimeout(() => cat.classList.remove('collapse-animation'), 500); // 500ms Animationsdauer
+    });
+
+    // Entanglement-Logik (optional)
+    if (entangled) {
+        quantumText.textContent = `Die Katze ist ${catState === 'alive' ? 'lebendig' : 'tot'} und mit dem Beobachter verschränkt.`;
+    } else {
+        quantumText.textContent = `Die Katze ist ${catState === 'alive' ? 'lebendig' : 'tot'}.`;
+    }
+
+    // Frequenz-Code-Aktualisierung (optional)
+    frequencyCodes.textContent = `UR-CODE 777 · QUANTUM LOCK INITIERT · Zustand: ${catState.toUpperCase()}`;
+}
+
+// Funktion, um die Entanglement zu toggeln
+function toggleEntanglement() {
+    entangled = !entangled;
+    urMemento.classList.toggle('entangled', entangled); // Visuelle Darstellung im UR-Memento
+    quantumText.textContent = entangled ? quantumText.textContent + " Sie ist verschränkt." : quantumText.textContent.replace(" Sie ist verschränkt.", "");
+}
+
+// Funktion für alternative Realitäten (Multiversum)
+function generateAlternativeSelf() {
+    const alternativeSelf = document.createElement('div');
+    alternativeSelf.classList.add('alternative-self');
+    alternativeSelf.textContent = `Alternative Katze: ${Math.random() < 0.5 ? 'lebendig' : 'tot'}`;
+    multiverseOverlay.appendChild(alternativeSelf);
+
+    // Entferne alte alternative Selbste nach einer Weile
+    setTimeout(() => alternativeSelf.remove(), 2000);
+}
+
+// 4.  Event Listener
+
+// Klick auf den Beobachter-Cursor löst den Kollaps aus
+observerCursor.addEventListener('click', collapseWaveFunction);
+
+// Klick auf das UR-Memento toggelt die Verschränkung
+urMemento.addEventListener('click', toggleEntanglement);
+
+// Generiere alternative Selbste (optional, für Multiversum-Effekt)
+setInterval(generateAlternativeSelf, 3000);
+
+// Initialisierung (optional)
+collapseWaveFunction(); // Starte mit einem zufälligen Zustand

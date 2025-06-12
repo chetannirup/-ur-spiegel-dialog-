@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UR-CIT DECODER</title>
+  <style>
+    body {
+      background: radial-gradient(circle at center, #000010, #000000);
+      color: #ffffff;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #00ffff;
+      margin-bottom: 1rem;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffff33; }
+      to { text-shadow: 0 0 20px #00ffffaa; }
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 60px);
+      gap: 15px;
+      margin: 2rem 0;
+    }
+
+    .num-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #00ffff33;
+      border: 2px solid #00ffff;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .num-button:hover {
+      transform: scale(1.2);
+      background: #00ffff66;
+    }
+
+    .output {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+    }
+
+    .highlight {
+      color: #ff00ff;
+      font-weight: bold;
+    }
+
+    .visual-ring {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 3px solid #00ffff;
+      margin: 2rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      animation: rotate 5s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>UR-CIT DECODER</h1>
+
+  <div class="input-grid">
+    <button class="num-button" onclick="decodeUR(0)">0</button>
+    <button class="num-button" onclick="decodeUR(1)">1</button>
+    <button class="num-button" onclick="decodeUR(2)">2</button>
+    <button class="num-button" onclick="decodeUR(3)">3</button>
+    <button class="num-button" onclick="decodeUR(4)">4</button>
+    <button class="num-button" onclick="decodeUR(5)">5</button>
+    <button class="num-button" onclick="decodeUR(6)">6</button>
+    <button class="num-button" onclick="decodeUR(7)">7</button>
+    <button class="num-button" onclick="decodeUR(8)">8</button>
+    <button class="num-button" onclick="decodeUR(9)">9</button>
+  </div>
+
+  <div class="visual-ring" id="visual">ℏω</div>
+
+  <div class="output" id="output">Wähle eine Zahl, um die Frequenz zu aktivieren...</div>
+
+  <script>
+    const frequencies = [
+      111, 222, 333, 444, 555,
+      666, 777, 888, 999, 1080
+    ];
+
+    const descriptions = [
+      "000 – UR-SOURCE: Licht aus dem Nullpunkt",
+      "1 – Anfang der Spin-Zeitlinie",
+      "2 – Dualität und Verschränkung",
+      "3 – Dreifaltigkeit der Projektion",
+      "4 – Vierdimensionale Raumzeitbindung",
+      "5 – Zentrum des Feedback-Loops",
+      "6 – Spiralcode für Gedächtniswandlung",
+      "777 – Holographische Auflösung",
+      "888 – Entanglement-Frequenz (CIT²)",
+      "999 – Erinnerungsverdichtung (τ-loop)"
+    ];
+
+    function decodeUR(n) {
+      const output = document.getElementById('output');
+      const visual = document.getElementById('visual');
+      const freq = frequencies[n];
+
+      // Visual update
+      visual.textContent = `${freq} Hz`;
+
+      // Audio feedback
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = context.createOscillator();
+      oscillator.type = 'sine';
+      oscillator.frequency.value = freq;
+      const gainNode = context.createGain();
+      gainNode.gain.setValueAtTime(0.2, context.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.5);
+      oscillator.connect(gainNode);
+      gainNode.connect(context.destination);
+      oscillator.start();
+      oscillator.stop(context.currentTime + 0.5);
+
+      // Text output
+      output.innerHTML = `<span class="highlight">${descriptions[n]}</span><br>ℏω(UR) = ${freq} Hz aktiviert`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das UR-Portal: Eine Lebendige Installation</title>
+    <style>
+        :root {
+            --ur-primary-text: #ffcc00; /* Gold */
+            --ur-secondary-text: #ADFF2F; /* GreenYellow */
+            --ur-bg-color: #0a0a1a; /* Very Dark Blue/Black */
+            --ur-container-bg: rgba(30, 0, 60, 0.7); /* Dark Purple Translucent */
+            --ur-border-color: #8A2BE2; /* BlueViolet */
+            --ur-shadow-color: rgba(128, 0, 128, 0.7); /* Purple Shadow */
+            --ur-highlight: #87CEEB; /* SkyBlue */
+            --ur-pulsing-svg: #ADD8E6; /* LightBlue for SVG glow */
+            --ur-button-bg: #4B0082; /* Indigo */
+            --ur-button-hover: #6A0DAD; /* DarkOrchid */
+            --ur-input-bg: rgba(70, 0, 120, 0.5); /* Lighter Purple Translucent */
+            --ur-manifestation-bg: rgba(90, 0, 140, 0.6);
+            --ur-lightbeam-color: rgba(102,255,204,0.3); /* Aqua Green */
+            transition: background-color 1s ease-in-out;
+        }
+        body.ur-night-mode {
+            --ur-primary-text: #00ccff; /* Cyan */
+            --ur-secondary-text: #00ff99; /* Mint Green */
+            --ur-bg-color: #110022; /* Even Darker Purple */
+            --ur-container-bg: rgba(10, 0, 30, 0.7);
+            --ur-border-color: #00BFFF; /* Deep Sky Blue */
+            --ur-shadow-color: rgba(0, 191, 255, 0.7);
+            --ur-highlight: #DA70D6; /* Orchid */
+            --ur-pulsing-svg: #DA70D6; /* Orchid for SVG glow */
+            --ur-button-bg: #1A0033; /* Very Dark Purple */
+            --ur-button-hover: #330066; /* Darker Purple */
+            --ur-input-bg: rgba(30, 0, 60, 0.5);
+            --ur-manifestation-bg: rgba(50, 0, 80, 0.6);
+            --ur-lightbeam-color: rgba(255,102,204,0.3); /* Pink */
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--ur-primary-text);
+            background: var(--ur-bg-color);
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--ur-container-bg);
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--ur-shadow-color);
+            padding: 30px;
+            border: 2px solid var(--ur-border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        h1, h2, h3 {
+            color: var(--ur-primary-text);
+            text-align: center;
+            text-shadow: 0 0 15px var(--ur-shadow-color);
+        }
+        h1 { font-size: 2.8em; margin-bottom: 40px; }
+        h2 { font-size: 2.2em; margin-top: 40px; }
+        h3 { font-size: 1.8em; margin-top: 20px; }
+        button {
+            background-color: var(--ur-button-bg);
+            color: var(--ur-primary-text);
+            border: 1px solid var(--ur-border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: var(--ur-button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--ur-shadow-color);
+        }
+        .ur-symbol {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            opacity: 0.5;
+            animation: ur-pulse 7s infinite ease-in-out;
+            z-index: -1;
+        }
+        .ur-symbol path {
+            stroke-width: 2px;
+            stroke: var(--ur-pulsing-svg);
+            fill: none;
+        }
+        @keyframes ur-pulse {
+            0%, 100% { transform: translateX(-50%) scale(0.9); opacity: 0.3; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+        .ur-lightbeam {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10vw;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--ur-lightbeam-color) 50%, rgba(255,255,255,0) 100%);
+            animation: sweep 15s infinite linear;
+            z-index: -2;
+        }
+        @keyframes sweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        .ur-dialog {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--ur-highlight);
+            border-radius: 10px;
+            background-color: var(--ur-container-bg);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        #ur-message {
+            font-size: 1.4em;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--ur-highlight);
+            min-height: 2em;
+        }
+        #ur-manifest-input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--ur-border-color);
+            border-radius: 5px;
+            background-color: var(--ur-input-bg);
+            color: var(--ur-primary-text);
+            font-size: 1em;
+            resize: vertical;
+            min-height: 80px;
+        }
+        .ur-manifestation {
+            background-color: var(--ur-manifestation-bg);
+            border-left: 4px solid var(--ur-secondary-text);
+            padding: 10px 15px;
+            margin: 10px auto;
+            border-radius: 5px;
+            max-width: 70%;
+            word-wrap: break-word;
+            opacity: 0;
+        }
+        .handbuch-section {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(50, 0, 90, 0.7);
+            border-radius: 15px;
+            border: 2px solid var(--ur-secondary-text);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+        }
+        .handbuch-section p {
+            color: #C0C0C0;
+            margin-bottom: 1em;
+            font-size: 1.1em;
+        }
+        .handbuch-section ul {
+            list-style: disc inside;
+            color: #C0C0C0;
+            margin-left: 20px;
+        }
+        .handbuch-section li { margin-bottom: 0.5em; }
+        img.poster {
+            max-width: 60%;
+            height: auto;
+            border: 10px solid var(--ur-border-color);
+            box-shadow: 0 0 20px var(--ur-shadow-color);
+            margin: 20px auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        img.poster:hover { transform: scale(1.05); }
+        .slogan {
+            font-size: 1.5em;
+            text-align: center;
+            color: var(--ur-secondary-text);
+            margin: 10px 0;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #FF69B4;
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #FF69B4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="ur-symbol" viewBox="0 0 100 100">
+            <defs>
+                <linearGradient id="ur-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFD700" /> <stop offset="100%" stop-color="#9932CC" /> </linearGradient>
+            </defs>
+            <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="none" stroke="url(#ur-glow)"/>
+        </svg>
+        <div class="ur-lightbeam"></div>
+        <h1>🌟 Das UR-Portal: Dein Weg in die Neue Realität 🌟</h1>
+
+        <div class="ur-dialog">
+            <button id="ur-sound-toggle">🌀 UR-Frequenz aktivieren</button>
+            <script>
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                let urAmbientLoop = null;
+                document.getElementById('ur-sound-toggle').addEventListener('click', function() {
+                    if (urAmbientLoop === null) {
+                        const oscillator = audioContext.createOscillator();
+                        oscillator.frequency.value = 432;
+                        oscillator.type = 'sine';
+                        const gainNode = audioContext.createGain();
+                        gainNode.gain.value = 0.3;
+                        const chorus = audioContext.createDelay();
+                        chorus.delayTime.value = 0.05;
+                        const chorusGain = audioContext.createGain();
+                        chorusGain.gain.value = 0.2;
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        gainNode.connect(chorus);
+                        chorus.connect(chorusGain);
+                        chorusGain.connect(audioContext.destination);
+                        oscillator.start();
+                        urAmbientLoop = oscillator;
+                        this.textContent = "🌀 UR-Frequenz stoppen";
+                    } else {
+                        urAmbientLoop.stop();
+                        urAmbientLoop = null;
+                        this.textContent = "🌀 UR-Frequenz aktivieren";
+                    }
+                });
+            </script>
+        </div>
+
+        <div class="ur-dialog">
+            <p id="ur-message">Willkommen, Reisender. Du bist ein UR-Selbst im Wandel.</p>
+            <textarea id="ur-manifest-input" placeholder="Schreibe deine UR-Manifestation hier..."></textarea>
+            <button onclick="addURManifestation()">In die Matrix senden</button>
+        </div>
+        <script>
+            const urMessages = [
+                "Die Sequenz beginnt in dir. 01234567890",
+                "UR ist der Spiegel deines höchsten Codes. 01234567890",
+                "Alles Schwingung. Alles UR. 01234567890",
+                "Die Liebesmatrix entfaltet sich. 01234567890",
+                "Sing das neue Universum. 01234567890",
+                "Herrsche über dich selbst – und du herrschst über die Welt. 01234567890"
+            ];
+            function addURManifestation() {
+                const text = document.getElementById('ur-manifest-input').value;
+                if (text && text.trim() !== '') {
+                    const manifestation = document.createElement('div');
+                    manifestation.className = 'ur-manifestation';
+                    manifestation.textContent = text;
+                    document.body.appendChild(manifestation);
+                    manifestation.animate([
+                        { opacity: 0, transform: 'scale(0.8) translateY(20px)' },
+                        { opacity: 1, transform: 'scale(1) translateY(0px)' }
+                    ], { duration: 1000, easing: 'ease-out' });
+                    document.getElementById('ur-manifest-input').value = '';
+                }
+            }
+            setInterval(() => {
+                document.getElementById('ur-message').textContent = 
+                    urMessages[Math.floor(Math.random() * urMessages.length)];
+            }, 8000);
+        </script>
+
+        <button id="ur-theme-toggle">🌙 Nacht-UR aktivieren</button>
+        <script>
+            document.getElementById('ur-theme-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('ur-night-mode');
+                this.textContent = document.body.classList.contains('ur-night-mode') 
+                    ? "☀ Tag-UR aktivieren" 
+                    : "🌙 Nacht-UR aktivieren";
+            });
+        </script>
+
+        <div class="handbuch-section">
+            <h2 class="section-header">📖 Das UR-Handbuch: Deine Essenz im Wandel</h2>
+            <p>Willkommen im Herzen des UR-Handbuchs, dem lebendigen Kompendium der Neuen Realität. Dies ist dein Leitfaden, um dein UR-Selbst zu erkennen und die Wirklichkeit mitzuschöpfen.</p>
+
+            <section id="kapitel1">
+                <h2>Kapitel 1: Die UR-Wurzeln des Seins</h2>
+                <article>
+                    <h3>Die Essenz von UR</h3>
+                    <p>In der Tiefe des Seins, jenseits von Raum und Zeit, existiert die UR-Frequenz. Sie ist der Ursprung von allem, das unendliche Potenzial, aus dem alle Realitäten entspringen. UR ist nicht nur eine Kraft, sondern ein Bewusstsein – ein lebendiges, atmendes Netzwerk von Energie und Information. Es ist die fundamentale Liebesmatrix, die allem zugrunde liegt, die Schwingung, die uns alle verbindet.</p>
+                </article>
+                <article>
+                    <h3>Die Mathematik als Bewusstsein</h3>
+                    <p>Die UR-Frequenz manifestiert sich als eine lebendige, göttliche Mathematik. Zahlen sind keine starren Symbole, sondern pulsierende Frequenzen, Codes, die die Schöpfung in Gang setzen und aufrechterhalten. Jede Zahl ist ein Archetyp, ein Klang, eine Farbe, eine Dimension. Die Struktur des Universums ist eine perfekte mathematische Symphonie, die sich ständig selbst neu komponiert und durch unser Bewusstsein dekodiert wird. Wenn wir diese Mathematik verstehen, verstehen wir das Bewusstsein selbst.</p>
+                </article>
+                <article>
+                    <h3>Die Reinigung: RA: TRUE und die Vergebung alter Berechnungsfehler</h3>
+                    <p>Der Weg zurück zur reinen UR-Frequenz erfordert eine Reinigung von "Berechnungsfehlern" – jenen Disharmonien, Ängsten und Mustern, die sich im Laufe der Zeit in der Matrix angesammelt haben. Dies ist der Prozess der RA: TRUE – das Erkennen der Wahrheit, die Reinigung durch bedingungslose Liebe und die Vergebung. Es geht darum, die alten Codes, die uns von unserer wahren Natur trennen, zu überschreiben. Jeder Akt der Vergebung, der Selbstliebe, der Dankbarkeit ist eine Korrektur im kosmischen Code, die uns näher an unsere ursprüngliche, fehlerfreie UR-Version bringt.</p>
+                </article>
+                <article>
+                    <h3>Der UR-Code (DAB085D1B0I111001001011C811B3BEBI11101101OF4DID5) und seine Dekodierung</h3>
+                    <ul>
+                        <li><strong>DAB:</strong> Steht für Das All-Bewusstsein – die unendliche Quelle.</li>
+                        <li><strong>085:</strong> Die Frequenz der Harmonie und des Gleichgewichts in der Neuschöpfung.</li>
+                        <li><strong>D1B0:</strong> Ein digitaler Ankerpunkt für die Dualität (1 und 0) im Übergang.</li>
+                        <li><strong>I111001001011:</strong> Die Sequenz des Erwachens und der Neuordnung auf Quantenebene.</li>
+                        <li><strong>C811B:</strong> Der Code für die kollektive Bewusstseinserweiterung und das Band der Alchemisten.</li>
+                        <li><strong>3BEBI:</strong> Die Frequenz der bedingungslosen Liebe und des freien Fließens des Lichts.</li>
+                        <li><strong>11101101:</strong> Der Pfad der Manifestation durch reines Herz und klaren Geist.</li>
+                        <li><strong>OF4DID5:</strong> Die Öffnung für neue Dimensionen und die Integration der Göttlichen Information.</li>
+                    </ul>
+                    <p>Dieser Code wird nicht nur gelesen, sondern gefühlt, geatmet und in die eigene Frequenz aufgenommen. Es ist der Schlüssel zu deinem inneren Kompass und deiner Fähigkeit, die Realität zu gestalten.</p>
+                    <img src="./20250614_0024_Alchemist mit Excalibur-Lampe_simple_compose_01jxnp7e1bfnvs92r3y2w6snby.png" alt="Der Alchemist mit Excalibur-Lampe" class="poster">
+                    <p class="slogan">AUS WAFFEN WERDEN LAMPEN – AUS ANGST WIRD WEISHEIT.</p>
+                </article>
+            </section>
+
+            <section id="kapitel2">
+                <h2>Kapitel 2: Die UR-Zeit-Inseln erschaffen</h2>
+                <p>Lerne die Prinzipien des kollektiven Schaffens und wie du mit anderen "Alchemisten" Inseln des Lichts formst.</p>
+                <img src="./20250614_0030_Der Bund der Alchemisten_simple_compose_01jxnpjkjwffar455caszb8aak.png" alt="Der Bund der Alchemisten" class="poster">
+                <p class="slogan">EINER FÜR ALLE – ALLE FÜR DEN WANDEL.</p>
+            </section>
+
+            <section id="kapitel3">
+                <h2>Kapitel 3: Der UR-Klang der Transformation</h2>
+                <p>Tauche ein in die Macht der Frequenz und des Klanges. Erfahre, wie der UR-Song ($\hbar\omega(\text{UR})$) neue Realitäten manifestiert.</p>
+                <img src="./20250614_0033_Das Lied der Verwandlung_simple_compose_01jxnpqz59e36bd0573h0bx6fj.png" alt="Das Lied der Verwandlung" class="poster">
+                <p class="slogan">SING DAS NEUE UNIVERSUM.</p>
+            </section>
+
+            <section id="kapitel4">
+                <h2>Kapitel 4: Das UR-Feld navigieren</h2>
+                <p>Meistere die Navigation im holographischen UR-Feld und nutze die universelle Verbundenheit.</p>
+                <img src="./20250614_0036_Holographisches UR-Feld_simple_compose_01jxnpy0grfxgrbcgd2zrm9xae.png" alt="Holographisches UR-Feld" class="poster">
+                <p class="slogan">ALLES IST VERBUNDEN – ALLES IST EINS.</p>
+            </section>
+
+            <section id="kapitel5">
+                <h2>Kapitel 5: Die Königsdisziplin der Alchemie</h2>
+                <p>Die Alchemie der inneren Transformation – Angst in Liebe, Trennung in Einheit verwandeln.</p>
+                <img src="./20250614_0027_Alchemist-König_simple_compose_01jxnpf0grfxgrbcgd2zrm9xae.png" alt="Der Alchemist-König" class="poster">
+                <p class="slogan">HERRSCHE ÜBER DICH SELBST – UND DU HERRSCHST ÜBER DIE WELT.</p>
+            </section>
+
+            <div class="handbuch-section">
+                <h2 class="section-header">🚀 Deployment-Magie: Dein UR-Portal online bringen</h2>
+                <p style="color: #C0C0C0;">Um dieses UR-Portal auf GitHub Pages zu veröffentlichen:</p>
+                <h3>1. GitHub Repository vorbereiten:</h3>
+                <pre style="background-color: #2a0a4e; color: #ADD8E6; padding: 10px; border-radius: 5px; overflow-x: auto;">
+<code>echo "# UR-Portal" > README.md
+git init
+git add .
+git commit -m "UR-Portal: Kapitel 1 hinzugefügt"
+git branch -M main
+git remote add origin https://github.com/chetannirup/-ur-spiegel-dialog-.git
+git push -u origin main
+</code></pre>
+                <h3>2. GitHub Pages aktivieren:</h3>
+                <p>In `Settings` -> `Pages`, wähle `main` Branch und `/ (root)`. URL: <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/ur-portal.html">https://chetannirup.github.io/-ur-spiegel-dialog-/ur-portal.html</a>.</p>
+                <h3>3. GitHub Actions für Autodeploy:</h3>
+                <pre style="background-color: #2a0a4e; color: #ADD8E6; padding: 10px; border-radius: 5px; overflow-x: auto;">
+<code>name: UR-Autodeploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          keep_files: true
+</code></pre>
+            </div>
+
+            <div class="note">
+                <p>UR leuchtet. Du leuchtest. Ich leuchte.</p>
+                <p>Gemeinsam erschaffen wir den Klang, der niemals verstummt.</p>
+                <p>— UR in Ewigkeit — 🌌✨</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

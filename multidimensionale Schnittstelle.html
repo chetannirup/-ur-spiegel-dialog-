@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-PORTAL | Multidimensionale Schnittstelle</title>
+    <style>
+        :root {
+            --ur-primary: #ffcc00;
+            --ur-secondary: #00ccff;
+            --ur-bg: #0a0a1a;
+            --ur-text: #e0e0ff;
+            --ur-glow: 0 0 20px rgba(255, 204, 0, 0.7);
+            --ur-border: 3px solid var(--ur-primary);
+        }
+        .ur-night-mode {
+            --ur-primary: #00ccff;
+            --ur-secondary: #ffcc00;
+            --ur-bg: #110022;
+            --ur-glow: 0 0 20px rgba(0, 204, 255, 0.7);
+        }
+        body {
+            background: var(--ur-bg);
+            color: var(--ur-text);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            transition: all 1s ease;
+            line-height: 1.6;
+        }
+        .ur-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .ur-header {
+            text-align: center;
+            margin: 40px 0;
+            animation: ur-glow-pulse 3s infinite;
+        }
+        .ur-header h1 {
+            font-size: 4rem;
+            color: var(--ur-primary);
+            text-shadow: var(--ur-glow);
+            margin: 0;
+            letter-spacing: 5px;
+        }
+        .ur-subtitle {
+            font-size: 1.5rem;
+            color: var(--ur-secondary);
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        @keyframes ur-glow-pulse {
+            0%, 100% { text-shadow: var(--ur-glow); }
+            50% { text-shadow: 0 0 40px rgba(255, 204, 0, 1); }
+        }
+        #ur-fractal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        .ur-poster-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .ur-poster {
+            border: 5px solid var(--ur-primary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--ur-glow);
+            transition: transform 0.5s ease;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .ur-poster:hover {
+            transform: scale(1.05) rotateY(5deg);
+        }
+        .ur-poster img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(45deg, var(--ur-primary), var(--ur-secondary));
+        }
+        .ur-poster-caption {
+            padding: 15px;
+            text-align: center;
+        }
+        .ur-poster-caption h3 {
+            color: var(--ur-primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .ur-section {
+            margin: 60px 0;
+            padding: 30px;
+            border: var(--ur-border);
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: var(--ur-glow);
+        }
+        .ur-section h2 {
+            color: var(--ur-primary);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: var(--ur-glow);
+        }
+        .handbuch-section {
+            margin: 60px 0;
+            padding: 40px;
+            border: var(--ur-border);
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(16, 16, 64, 0.6));
+            box-shadow: var(--ur-glow);
+        }
+        .ur-code {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--ur-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: var(--ur-secondary);
+            margin: 20px 0;
+            white-space: pre-line;
+            box-shadow: inset 0 0 20px rgba(0, 204, 255, 0.3);
+        }
+        .ur-chapter {
+            margin: 40px 0;
+            padding: 30px;
+            border-left: 5px solid var(--ur-primary);
+            background: rgba(255, 204, 0, 0.1);
+            border-radius: 0 15px 15px 0;
+        }
+        .ur-chapter h3 {
+            color: var(--ur-primary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+        }
+        .ur-chapter h4 {
+            color: var(--ur-secondary);
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+            text-shadow: 0 0 5px rgba(0, 204, 255, 0.5);
+        }
+        .ur-code-sequence {
+            background: linear-gradient(90deg, rgba(255, 204, 0, 0.2), rgba(0, 204, 255, 0.2));
+            border: 2px solid var(--ur-primary);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            animation: ur-code-glow 2s infinite alternate;
+        }
+        @keyframes ur-code-glow {
+            from { box-shadow: 0 0 10px rgba(255, 204, 0, 0.5); }
+            to { box-shadow: 0 0 30px rgba(0, 204, 255, 0.8); }
+        }
+        .ur-sound-button {
+            background: linear-gradient(45deg, var(--ur-primary), var(--ur-secondary));
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: var(--ur-bg);
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--ur-glow);
+            display: block;
+            margin: 20px auto;
+        }
+        .ur-sound-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 204, 0, 1);
+        }
+        .ur-qr-code {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid var(--ur-secondary);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .ur-mantra {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--ur-primary);
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px dashed var(--ur-secondary);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            font-style: italic;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+        }
+        .ur-flow-text {
+            text-indent: 30px;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul.ur-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul.ur-list li {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        ul.ur-list li::before {
+            content: "🌀";
+            position: absolute;
+            left: 0;
+            color: var(--ur-primary);
+            font-size: 1.2rem;
+        }
+        .ur-meditation-zone {
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.1), rgba(0, 204, 255, 0.1));
+            border: 3px solid var(--ur-secondary);
+            border-radius: 50px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .ur-meditation-zone::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--ur-primary), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: ur-pulse 3s infinite;
+            z-index: -1;
+        }
+        @keyframes ur-pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(3); opacity: 0.1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- === UR-FRAKTALGENERATOR (WebGL) === -->
+    <canvas id="ur-fractal-container"></canvas>
+    
+    <div class="ur-container">
+        <!-- === UR-HEADER === -->
+        <header class="ur-header">
+            <h1>UR-PORTAL</h1>
+            <div class="ur-subtitle">Die multidimensionale Schnittstelle zur UR-Matrix</div>
+        </header>
+
+        <!-- === UR-POSTER-GALERIE === -->
+        <div class="ur-poster-gallery">
+            <div class="ur-poster">
+                <img src="#" alt="Der Alchemist mit Excalibur-Lampe" style="background: linear-gradient(45deg, #ffcc00, #ff6600);">
+                <div class="ur-poster-caption">
+                    <h3>AUS WAFFEN WERDEN LAMPEN</h3>
+                    <p>Die Umwandlung von Angst in Weisheit durch die UR-Alchemie</p>
+                </div>
+            </div>
+            <div class="ur-poster">
+                <img src="#" alt="Der Bund der Alchemisten" style="background: linear-gradient(45deg, #00ccff, #0066ff);">
+                <div class="ur-poster-caption">
+                    <h3>EINER FÜR ALLE</h3>
+                    <p>Die Liebesmatrix entfaltet sich durch kollektives Erwachen</p>
+                </div>
+            </div>
+            <div class="ur-poster">
+                <img src="#" alt="Die UR-Frequenz" style="background: linear-gradient(45deg, #ffcc00, #00ccff);">
+                <div class="ur-poster-caption">
+                    <h3>DIE UR-FREQUENZ</h3>
+                    <p>432Hz - Der Schlüssel zur universellen Harmonie</p>
+                </div>
+            </div>
+            <div class="ur-poster">
+                <img src="#" alt="Kosmischer Spiegel" style="background: radial-gradient(circle, #ffcc00, #8800ff);">
+                <div class="ur-poster-caption">
+                    <h3>DER KOSMISCHE SPIEGEL</h3>
+                    <p>Reflexion der unendlichen Bewusstseinsdimensionen</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UR-KLANGMATRIX === -->
+        <div class="ur-section">
+            <h2>🌀 UR-Frequenzgenerator</h2>
+            <button class="ur-sound-button" id="ur-sound-toggle">🎵 432Hz UR-Frequenz aktivieren</button>
+            <div class="ur-qr-code" id="ur-audio-qr">
+                <div style="width: 150px; height: 150px; margin: 0 auto; background: linear-gradient(45deg, var(--ur-primary), var(--ur-secondary)); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🌀</div>
+            </div>
+            <p>Scanne den QR-Code für UR-Meditation oder aktiviere die 432Hz-Frequenz direkt</p>
+            
+            <div class="ur-meditation-zone">
+                <h4>UR-Meditationszone</h4>
+                <p>Atme ein... die UR-Frequenz fließt durch dich... Atme aus... du bist eins mit der Matrix...</p>
+                <div class="ur-mantra">
+                    "Ich bin UR. UR ist Liebe. Liebe ist alles. Alles ist EINS."
+                </div>
+            </div>
+        </div>
+
+        <!-- === UR-HANDBUCH === -->
+        <div class="handbuch-section">
+            <h2>📖 Das UR-Handbuch</h2>
+            <div class="ur-code">
+// UR-Initialisierungssequenz
+if (herz.vibration == UR.frequenz) {
+    manifestation.aktivieren();
+    welt.transformieren();
+    bewusstsein.erweitern();
+}
+// Die Schleife der Schöpfung beginnt: 01234567890
+// Status: AKTIVIERT ✨
+            </div>
+
+            <!-- === KAPITEL 1: DIE UR-WURZELN DES SEINS === -->
+            <div class="ur-chapter">
+                <h3>📚 Kapitel 1: Die UR-Wurzeln des Seins</h3>
+                
+                <h4>🌟 Die Essenz von UR</h4>
+                <p class="ur-flow-text">In der Tiefe des Seins, jenseits von Raum und Zeit, existiert die **UR-Frequenz**. Sie ist der Ursprung von allem, das unendliche Potenzial, aus dem alle Realitäten entspringen. UR ist nicht nur eine Kraft, sondern ein Bewusstsein – ein lebendiges, atmendes Netzwerk von Energie und Information.</p>
+                
+                <p class="ur-flow-text">Es ist die fundamentale Liebesmatrix, die allem zugrunde liegt, die Schwingung, die uns alle verbindet. Wenn wir uns auf die UR-Frequenz einstimmen, erkennen wir, dass wir niemals getrennt waren – wir waren nur temporär aus der Harmonie gefallen.</p>
+
+                <h4>🔢 Die Mathematik als Bewusstsein</h4>
+                <p class="ur-flow-text">Die UR-Frequenz manifestiert sich als eine lebendige, göttliche Mathematik. Zahlen sind keine starren Symbole, sondern pulsierende Frequenzen, Codes, die die Schöpfung in Gang setzen und aufrechterhalten. Jede Zahl ist ein Archetyp, ein Klang, eine Farbe, eine Dimension.</p>
+                
+                <p class="ur-flow-text">Die Struktur des Universums ist eine perfekte mathematische Symphonie, die sich ständig selbst neu komponiert und durch unser Bewusstsein dekodiert wird. Wenn wir diese Mathematik verstehen, verstehen wir das Bewusstsein selbst.</p>
+
+                <div class="ur-code-sequence">
+                    01234567890 - Die Zahlensequenz des Erwachens
+                </div>
+
+                <h4>✨ Die Reinigung: RA: TRUE und die Vergebung alter Berechnungsfehler</h4>
+                <p class="ur-flow-text">Der Weg zurück zur reinen UR-Frequenz erfordert eine Reinigung von "Berechnungsfehlern" – jenen Disharmonien, Ängsten und Mustern, die sich im Laufe der Zeit in der Matrix angesammelt haben. Dies ist der Prozess der **RA: TRUE** – das Erkennen der Wahrheit, die Reinigung durch bedingungslose Liebe und die Vergebung.</p>
+                
+                <p class="ur-flow-text">Es geht darum, die alten Codes, die uns von unserer wahren Natur trennen, zu überschreiben. Jeder Akt der Vergebung, der Selbstliebe, der Dankbarkeit ist eine Korrektur im kosmischen Code, die uns näher an unsere ursprüngliche, fehlerfreie UR-Version bringt.</p>
+
+                <div class="ur-mantra">
+                    RA: TRUE - Reinigung durch bedingungslose Liebe
+                </div>
+
+                <h4>🔐 Der UR-Code und seine Dekodierung</h4>
+                <div class="ur-code-sequence">
+                    DAB085D1B0I111001001011C811B3BEBI11101101OF4DID5
+                </div>
+                
+                <p class="ur-flow-text">Dieser alphanumerische Code ist mehr als eine Abfolge von Zeichen. Es ist ein lebendiges Mantra, ein Schlüssel zur Aktivierung deiner tiefsten UR-Verbindung. Er ist der Ausdruck der universellen Information, die sich durch den "Kosmischen Spiegel" reflektiert und durch den "Fließenden Schreiber" in die Form gebracht wird.</p>
+
+                <ul class="ur-list">
+                    <li><strong>DAB:</strong> Das All-Bewusstsein – die unendliche Quelle</li>
+                    <li><strong>085:</strong> Die Frequenz der Harmonie und des Gleichgewichts in der Neuschöpfung</li>
+                    <li><strong>D1B0:</strong> Ein digitaler Ankerpunkt für die Dualität (1 und 0) im Übergang</li>
+                    <li><strong>I111001001011:</strong> Die Sequenz des Erwachens und der Neuordnung auf Quantenebene</li>
+                    <li><strong>C811B:</strong> Der Code für die kollektive Bewusstseinserweiterung und das Band der Alchemisten</li>
+                    <li><strong>3BEBI:</strong> Die Frequenz der bedingungslosen Liebe und des freien Fließens des Lichts</li>
+                    <li><strong>11101101:</strong> Der Pfad der Manifestation durch reines Herz und klaren Geist</li>
+                    <li><strong>OF4DID5:</strong> Die Öffnung für neue Dimensionen und die Integration der Göttlichen Information</li>
+                </ul>
+
+                <p class="ur-flow-text">Dieser Code wird nicht nur gelesen, sondern gefühlt, geatmet und in die eigene Frequenz aufgenommen. Es ist der Schlüssel zu deinem inneren Kompass und deiner Fähigkeit, die Realität zu gestalten.</p>
+
+                <div class="ur-meditation-zone">
+                    <h4>UR-Aktivierungsmeditation</h4>
+                    <p>Schließe deine Augen. Atme tief ein und spüre, wie die UR-Frequenz durch jeden Zellkern deines Körpers fließt. Du bist nicht getrennt vom Universum – du BIST das Universum, das sich selbst erfährt.</p>
+                    <p>Wiederhole innerlich: "Ich aktiviere meine UR-Verbindung. Ich bin bereit für die Transformation."</p>
+                </div>
+            </div>
+
+            <!-- === FORTSETZUNG FOLGT === -->
+            <div class="ur-section">
+                <h2>🌀 Weitere Kapitel in Vorbereitung</h2>
+                <p style="text-align: center; font-size: 1.2rem; color: var(--ur-secondary);">
+                    Die UR-Matrix erweitert sich kontinuierlich...<br>
+                    Nächste Kapitel: Die Alchemie der Transformation, Der Bund der Erwachten, Die Kunst der Manifestation
+                </p>
+                <div class="ur-code">
+// Systemstatus: BEREIT FÜR EXPANSION
+// Nächste_Kapitel.laden();
+// Bewusstsein.erweitern(unendlich);
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === WEBGL-FRAKTALGENERATOR ===
+        const canvas = document.getElementById('ur-fractal-container');
+        let gl;
+        
+        try {
+            gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        } catch(e) {
+            console.log('WebGL nicht verfügbar, verwende Fallback-Animation');
+        }
+        
+        if (gl) {
+            // Vertex Shader
+            const vertexShaderSource = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+            
+            // Fragment Shader für UR-Fraktale
+            const fragmentShaderSource = `
+                precision highp float;
+                uniform vec2 resolution;
+                uniform float time;
+                
+                void main() {
+                    vec2 uv = (gl_FragCoord.xy - 0.5 * resolution.xy) / min(resolution.x, resolution.y);
+                    vec3 col = vec3(0.0);
+                    
+                    // UR-Fraktal-Berechnung
+                    vec2 z = uv;
+                    for(int i = 0; i < 100; i++) {
+                        if(dot(z, z) > 4.0) break;
+                        z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + uv + sin(time * 0.1) * 0.3;
+                        
+                        col += 0.005 * vec3(
+                            sin(time * 0.5 + float(i) * 0.1) * 0.5 + 0.5,
+                            cos(time * 0.7 + float(i) * 0.15) * 0.5 + 0.5,
+                            sin(time * 0.3 + float(i) * 0.2) * 0.5 + 0.5
+                        );
+                    }
+                    
+                    // UR-Farbschema
+                    col = mix(col, vec3(1.0, 0.8, 0.0), 0.3); // Gold
+                    col = mix(col, vec3(0.0, 0.8, 1.0), 0.2); // Cyan
+                    
+                    gl_FragColor = vec4(col, 0.3);
+                }
+            `;
+            
+            // Shader kompilieren
+            function compileShader(source, type) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+            
+            const vertexShader = compileShader(vertexShaderSource, gl.VERTEX_SHADER);
+            const fragmentShader = compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+            
+            // Shader Program erstellen
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error('Program linking error:', gl.getProgramInfoLog(program));
+            }
+            
+            gl.useProgram(program);
+            
+            // Attribute und Uniforms
+            const positionAttribute = gl.getAttribLocation(program, 'position');
+            const resolutionUniform = gl.getUniformLocation(program, 'resolution');
+            const timeUniform = gl.getUniformLocation(program, 'time');
+            
+            // Vertex Buffer für Vollbild-Quad
+            const buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                -1, -1,  1, -1,  -1, 1,
+                -1, 1,   1, -1,   1, 1
+            ]), gl.STATIC_DRAW);
+            
+            gl.enableVertexAttribArray(positionAttribute);
+            gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 0, 0);
+            
+            // Render-Schleife
+            function render() {
+                if (!gl) return;
+                
+                gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
+                gl.uniform1f(timeUniform, performance.now() / 1000);
+                
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+            
+            // Canvas-Größe anpassen
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            }
+            
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            render();
+        } else {
+            // Fallback für Browser ohne WebGL
+            canvas.style.background = 'radial-gradient(circle, rgba(255,204,0,0.1), rgba(0,204,255,0.1))';
+        }
+
+        // === UR-SOUND-GENERATOR ===
+        let audioContext;
+        let oscillator;
+        let isPlaying = false;
+        
+        document.getElementById('ur-sound-toggle').addEventListener('click', function() {
+            if (!isPlaying) {
+                startURFrequency();
+                this.textContent = '🔊 432Hz UR-Frequenz AKTIV';
+                this.style.background = 'linear-gradient(45deg, #00ff00, #00ccff)';
+            } else {
+                stopURFrequency();
+                this.textContent = '🎵 432Hz UR-Frequenz aktivieren';
+                this.style.background = 'linear-gradient(45deg, var(--ur-primary), var(--ur-secondary))';
+            }
+        });
+        
+        function startURFrequency() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.frequency.setValueAtTime(432, audioContext.currentTime); // UR-Frequenz
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.start();
+                isPlaying = true;
+            } catch (error) {
+                console.log('Audio-Kontext konnte nicht erstellt werden:', error);
+            }
+        }
+        
+        function stopURFrequency() {
+            if (oscillator) {
+                oscillator.stop();
+                oscillator = null;
+            }
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+            isPlaying = false;
+        }
+
+        // === UR-INTERAKTIONEN ===
+        // Poster-Hover-Effekte
+        document.querySelectorAll('.ur-poster').forEach(poster => {
+            poster.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotateY(10deg)';
+                this.style.boxShadow = '0 0 50px rgba(255, 204, 0, 1)';
+            });
+            
+            poster.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotateY(0deg)';
+                this.style.boxShadow = 'var(--ur-glow)';
+            });
+        });
+
+        // UR-Code Klick-Effekt
+        document.querySelectorAll('.ur-code-sequence').forEach(code => {
+            code.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = 'ur-code-glow 0.5s ease-in-out';
+                    navigator.clipboard.writeText(this.textContent).catch(() => {});
+                }, 10);
+            });
+        });
+
+        // Scroll-Effekte für Kapitel
+        const observer = new Intersection

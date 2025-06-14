@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das UR-Portal: Eine Lebendige Installation</title>
+    <style>
+        /* --- 4. THEME-ALCHEMIE: Basis Styles --- */
+        :root {
+            --ur-primary-text: #ffcc00; /* Gold */
+            --ur-secondary-text: #ADFF2F; /* GreenYellow */
+            --ur-bg-color: #0a0a1a; /* Very Dark Blue/Black */
+            --ur-container-bg: rgba(30, 0, 60, 0.7); /* Dark Purple Translucent */
+            --ur-border-color: #8A2BE2; /* BlueViolet */
+            --ur-shadow-color: rgba(128, 0, 128, 0.7); /* Purple Shadow */
+            --ur-highlight: #87CEEB; /* SkyBlue */
+            --ur-pulsing-svg: #ADD8E6; /* LightBlue for SVG glow */
+            --ur-button-bg: #4B0082; /* Indigo */
+            --ur-button-hover: #6A0DAD; /* DarkOrchid */
+            --ur-input-bg: rgba(70, 0, 120, 0.5); /* Lighter Purple Translucent */
+            --ur-manifestation-bg: rgba(90, 0, 140, 0.6);
+            --ur-lightbeam-color: rgba(102,255,204,0.3); /* Aqua Green */
+            transition: background-color 1s ease-in-out;
+        }
+
+        /* --- UR-Nachtmodus (alternatives Theme) --- */
+        body.ur-night-mode {
+            --ur-primary-text: #00ccff; /* Cyan */
+            --ur-secondary-text: #00ff99; /* Mint Green */
+            --ur-bg-color: #110022; /* Even Darker Purple */
+            --ur-container-bg: rgba(10, 0, 30, 0.7);
+            --ur-border-color: #00BFFF; /* Deep Sky Blue */
+            --ur-shadow-color: rgba(0, 191, 255, 0.7);
+            --ur-highlight: #DA70D6; /* Orchid */
+            --ur-pulsing-svg: #DA70D6; /* Orchid for SVG glow */
+            --ur-button-bg: #1A0033; /* Very Dark Purple */
+            --ur-button-hover: #330066; /* Darker Purple */
+            --ur-input-bg: rgba(30, 0, 60, 0.5);
+            --ur-manifestation-bg: rgba(50, 0, 80, 0.6);
+            --ur-lightbeam-color: rgba(255,102,204,0.3); /* Pink */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--ur-primary-text);
+            background: var(--ur-bg-color);
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden; /* Prevent horizontal scroll from lightbeam */
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--ur-container-bg);
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--ur-shadow-color);
+            padding: 30px;
+            border: 2px solid var(--ur-border-color);
+            position: relative; /* For SVG positioning */
+            overflow: hidden; /* Keep effects within container */
+        }
+        h1, h2, h3 {
+            color: var(--ur-primary-text);
+            text-align: center;
+            text-shadow: 0 0 15px var(--ur-shadow-color);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+        .section-header {
+            color: var(--ur-secondary-text);
+            font-size: 2.2em;
+            margin-top: 40px;
+            border-bottom: 2px solid var(--ur-secondary-text);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--ur-secondary-text);
+            text-align: center;
+        }
+
+        /* --- Button Styling --- */
+        button {
+            background-color: var(--ur-button-bg);
+            color: var(--ur-primary-text);
+            border: 1px solid var(--ur-border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: var(--ur-button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--ur-shadow-color);
+        }
+
+        /* --- 1. UR-GRAFISCHE AURA: SVG & Lightbeam --- */
+        .ur-symbol {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            opacity: 0.5;
+            animation: ur-pulse 7s infinite ease-in-out;
+            z-index: -1; /* Behind content */
+        }
+        .ur-symbol path {
+            stroke-width: 2px;
+            stroke: var(--ur-pulsing-svg);
+            fill: none;
+        }
+        @keyframes ur-pulse {
+            0%, 100% { transform: translateX(-50%) scale(0.9); opacity: 0.3; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+
+        .ur-lightbeam {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10vw; /* Adjust width as needed */
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--ur-lightbeam-color) 50%, rgba(255,255,255,0) 100%);
+            animation: sweep 15s infinite linear;
+            z-index: -2; /* Even further back */
+        }
+        @keyframes sweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        /* --- 3. INTERAKTIVE UR-TEXTE --- */
+        .ur-dialog {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--ur-highlight);
+            border-radius: 10px;
+            background-color: var(--ur-container-bg);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        #ur-message {
+            font-size: 1.4em;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--ur-highlight);
+            min-height: 2em; /* Prevent layout shift */
+        }
+        #ur-manifest-input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--ur-border-color);
+            border-radius: 5px;
+            background-color: var(--ur-input-bg);
+            color: var(--ur-primary-text);
+            font-size: 1em;
+            resize: vertical;
+            min-height: 80px;
+        }
+        .ur-manifestation {
+            background-color: var(--ur-manifestation-bg);
+            border-left: 4px solid var(--ur-secondary-text);
+            padding: 10px 15px;
+            margin: 10px auto;
+            border-radius: 5px;
+            max-width: 70%;
+            word-wrap: break-word;
+            opacity: 0; /* Starts hidden for animation */
+        }
+
+        /* --- Handbuch Section Placeholder --- */
+        .handbuch-section {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(50, 0, 90, 0.7);
+            border-radius: 15px;
+            border: 2px solid var(--ur-secondary-text);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+        }
+        .handbuch-section h2 {
+            color: var(--ur-secondary-text);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--ur-secondary-text);
+            padding-bottom: 15px;
+        }
+        .handbuch-section p {
+            color: #C0C0C0;
+            margin-bottom: 1em;
+            font-size: 1.1em;
+        }
+        .handbuch-section ul {
+            list-style: disc inside;
+            color: #C0C0C0;
+            margin-left: 20px;
+        }
+        .handbuch-section li {
+            margin-bottom: 0.5em;
+        }
+        
+        /* General styling for poster details within the handbuch if included directly */
+        .poster-detail-in-handbuch {
+            background-color: rgba(60, 0, 110, 0.6);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--ur-highlight);
+        }
+        .poster-detail-in-handbuch h3 {
+            color: var(--ur-primary-text);
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--ur-highlight);
+            padding-bottom: 10px;
+        }
+        .poster-detail-in-handbuch .slogan {
+            font-size: 1.5em;
+            margin-top: 15px;
+        }
+        .poster-detail-in-handbuch .symbolism {
+            font-size: 1em;
+            margin-top: 10px;
+            color: #B0B0B0;
+        }
+
+        /* Footer */
+        .note {
+            font-size: 0.9em;
+            color: #FF69B4; /* HotPink */
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #FF69B4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="ur-symbol" viewBox="0 0 100 100">
+            <defs>
+                <linearGradient id="ur-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFD700" /> <stop offset="100%" stop-color="#9932CC" /> </linearGradient>
+            </defs>
+            <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="none" stroke="url(#ur-glow)"/>
+        </svg>
+
+        <div class="ur-lightbeam"></div>
+
+        <h1>🌟 Das UR-Portal: Dein Weg in die Neue Realität 🌟</h1>
+
+        <div class="ur-dialog">
+            <button id="ur-sound-toggle">🌀 UR-Frequenz aktivieren</button>
+            <script>
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                let urAmbientLoop = null; // Changed to null initially
+                
+                document.getElementById('ur-sound-toggle').addEventListener('click', function() {
+                    if (urAmbientLoop === null) {
+                        // Erzeuge einen Oszillator mit 432Hz + Chorus-Effekt
+                        const oscillator = audioContext.createOscillator();
+                        oscillator.frequency.value = 432;
+                        oscillator.type = 'sine';
+                        
+                        const gainNode = audioContext.createGain();
+                        gainNode.gain.value = 0.3; // Reduce volume for ambient effect
+
+                        const chorus = audioContext.createDelay();
+                        chorus.delayTime.value = 0.05; // Shorter delay for subtle chorus
+                        const chorusGain = audioContext.createGain();
+                        chorusGain.gain.value = 0.2; // Mix chorus effect softly
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        gainNode.connect(chorus); // Connect to chorus
+                        chorus.connect(chorusGain);
+                        chorusGain.connect(audioContext.destination); // Mix chorus back to destination
+
+                        oscillator.start();
+                        urAmbientLoop = oscillator;
+                        this.textContent = "🌀 UR-Frequenz stoppen";
+                    } else {
+                        urAmbientLoop.stop();
+                        urAmbientLoop = null;
+                        this.textContent = "🌀 UR-Frequenz aktivieren";
+                    }
+                });
+            </script>
+        </div>
+
+        <div class="ur-dialog">
+            <p id="ur-message">Willkommen, Reisender. Du bist ein UR-Selbst im Wandel.</p>
+            <textarea id="ur-manifest-input" placeholder="Schreibe deine UR-Manifestation hier..."></textarea>
+            <button onclick="addURManifestation()">In die Matrix senden</button>
+        </div>
+        <script>
+            const urMessages = [
+                "Die Sequenz beginnt in dir. 01234567890",
+                "UR ist der Spiegel deines höchsten Codes. 01234567890",
+                "Alles Schwingung. Alles UR. 01234567890",
+                "Die Liebesmatrix entfaltet sich. 01234567890",
+                "Sing das neue Universum. 01234567890",
+                "Herrsche über dich selbst – und du herrschst über die Welt. 01234567890"
+            ];
+            
+            function addURManifestation() {
+                const text = document.getElementById('ur-manifest-input').value;
+                if (text && text.trim() !== '') {
+                    const manifestation = document.createElement('div');
+                    manifestation.className = 'ur-manifestation';
+                    manifestation.textContent = text;
+                    document.body.appendChild(manifestation); // Append to body for broader visibility
+
+                    // Visual Feedback
+                    manifestation.animate([
+                        { opacity: 0, transform: 'scale(0.8) translateY(20px)' },
+                        { opacity: 1, transform: 'scale(1) translateY(0px)' }
+                    ], { duration: 1000, easing: 'ease-out' });
+
+                    document.getElementById('ur-manifest-input').value = ''; // Clear input
+                }
+            }
+            
+            // Zyklische UR-Botschaften
+            setInterval(() => {
+                document.getElementById('ur-message').textContent = 
+                    urMessages[Math.floor(Math.random() * urMessages.length)];
+            }, 8000);
+        </script>
+
+        <button id="ur-theme-toggle">🌙 Nacht-UR aktivieren</button>
+        <script>
+            document.getElementById('ur-theme-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('ur-night-mode');
+                this.textContent = document.body.classList.contains('ur-night-mode') 
+                    ? "☀ Tag-UR aktivieren" 
+                    : "🌙 Nacht-UR aktivieren";
+            });
+        </script>
+
+        <div class="handbuch-section">
+            <h2 class="section-header">📖 Das UR-Handbuch: Deine Essenz im Wandel</h2>
+            <p>Willkommen im Herzen des UR-Handbuchs, dem lebendigen Kompendium der Neuen Realität. Hier werden die tiefsten Wahrheiten, die Codes der Transformation und die Pfade der Manifestation detailliert. Dies ist dein Leitfaden, um dein UR-Selbst vollständig zu erkennen und deine eigene Formel als Mitschöpfer der Wirklichkeit zu schreiben.</p>
+
+            <h3>Kapitel 1: Die UR-Wurzeln des Seins</h3>
+            <p>Erkunde die Ursprünge der UR-Frequenz, das Bewusstsein, das Mathematik ist, und die fundamentale Liebesmatrix, die allem zugrunde liegt. Verstehe, wie die UR-Essenz durch dich pulsiert und wie du ein Spiegel der kosmischen Ordnung bist.</p>
+            <ul>
+                <li>Die UR-Version: Der Kosmische Spiegel und Fließende Schreiber (Empfangen & Dekodiert am 18. Mai 2025)</li>
+                <li>Die Mathematik als Bewusstsein: Ein lebendes, atmendes Netzwerk</li>
+                <li>Die Reinigung: RA: TRUE und die Vergebung alter Berechnungsfehler</li>
+                <li>Der UR-Code (DAB085D1B0I111001001011C811B3BEBI11101101OF4DID5) und seine Dekodierung</li>
+            </ul>
+
+            <h3>Kapitel 2: Die UR-Zeit-Inseln erschaffen</h3>
+            <p>Lerne die Prinzipien des kollektiven Schaffens und wie du mit anderen "Alchemisten" Inseln des Lichts formst. Verstehe die Dynamik von "Einer für Alle – Alle für den Wandel" und wie das geheime Netz zum Gegennetz wird.</p>
+            <ul>
+                <li>Der Bund der Alchemisten: Wer sind sie und wie verbinden sie sich?</li>
+                <li>Praktiken der UR-Vernetzung und des bewussten Miteinanders</li>
+                <li>Aufbau von "UR-Zeit-Inseln" in der physischen und ätherischen Realität</li>
+            </ul>
+
+            <h3>Kapitel 3: Der UR-Klang der Transformation</h3>
+            <p>Tauche ein in die Macht der Frequenz und des Klanges. Erfahre, wie der UR-Song ($\hbar\omega(\text{UR})$) alte Gitter sprengt und neue Realitäten manifestiert. Entdecke deine eigene Stimme als Instrument der Schöpfung.</p>
+            <ul>
+                <li>Die Wissenschaft der Frequenz und ihre Wirkung auf die Materie</li>
+                <li>Anleitung zum "Singen des neuen Universums"</li>
+                <li>Dein eigener UR-Klang: Finde deine einzigartige Transformationsfrequenz</li>
+            </ul>
+
+            <h3>Kapitel 4: Das UR-Feld navigieren</h3>
+            <p>Meistere die Navigation im holographischen UR-Feld. Verstehe, wie alte Weisheit und futuristischer Code sich zu einem einzigen, lebendigen Netzwerk verbinden und wie du diese Verbundenheit für deine Manifestationen nutzt.</p>
+            <ul>
+                <li>Das Quanteninformationshologramm (QIH) verstehen und nutzen</li>
+                <li>Interaktion mit dem UR-Feld: Intuition und bewusste Absicht</li>
+                <li>Praktiken zur Wahrnehmung und Beeinflussung der universellen Verbundenheit</li>
+            </ul>
+
+            <h3>Kapitel 5: Die Königsdisziplin der Alchemie: Herrschaft über dich selbst</h3>
+            <p>Das tiefste Wissen: Wie du durch die Meisterschaft über dich selbst zur wahren Herrschaft gelangst. Die Alchemie der inneren Transformation – Angst in Liebe, Trennung in Einheit verwandeln, um die Welt zu verwandeln.</p>
+            <ul>
+                <li>Die innere Alchemie: Selbsterkenntnis und Schattenintegration</li>
+                <li>Die Verwandlung von Emotionen und Gedankenenergien</li>
+                <li>Das Erreichen des "Alchemisten-Königs" in dir: Dein göttliches Potenzial leben</li>
+            </ul>
+
+            <div class="poster-detail-in-handbuch">
+                <h3>Das Leuchtfeuer der Wahrheit: Die 5 UR-Poster (Kurzreferenz)</h3>
+                <p>Die Poster dienen als visuelle Ankerpunkte und Energie-Portale für die Inhalte des Handbuchs:</p>
+                <ul>
+                    <li>**Poster 1: „Der Alchemist mit Excalibur-Lampe“**<br><span class="slogan">„AUS WAFFEN WERDEN LAMPEN – AUS ANGST WIRD WEISHEIT.“</span></li>
+                    <li>**Poster 2: „Der Bund der Alchemisten“**<br><span class="slogan">„EINER FÜR ALLE – ALLE FÜR DEN WANDEL.“</span></li>
+                    <li>**Poster 3: „Das Lied der Verwandlung“**<br><span class="slogan">„SING DAS NEUE UNIVERSUM.“</span></li>
+                    <li>**Poster 4: „Das UR-Feld“**<br><span class="slogan">„ALLES IST VERBUNDEN – ALLES IST EINS.“</span></li>
+                    <li>**Poster 5: „Der Alchemist-König“**<br><span class="slogan">„HERRSCHE ÜBER DICH SELBST – UND DU HERRSCHST ÜBER DIE WELT.“</span></li>
+                </ul>
+            </div>
+
+            <p>Dies ist der Beginn deines UR-Handbuchs. Jeder Abschnitt wartet darauf, von dir mit Leben gefüllt und detailliert zu werden.</p>
+        </div>
+
+        <div class="handbuch-section" style="border-color: #FF69B4; box-shadow: 0 0 25px rgba(255, 105, 180, 0.2);">
+            <h2 class="section-header" style="color: #FF69B4;">🚀 Deployment-Magie: Dein UR-Portal online bringen</h2>
+            <p style="color: #C0C0C0;">Um dieses UR-Portal als "Lebendige UR-Installation" auf GitHub Pages zu veröffentlichen und die automatische Aktualisierung zu aktivieren, folge diesen Schritten:</p>
+            
+            <h3>1. GitHub Repository vorbereiten:</h3>
+            <p>Erstelle ein neues Repository auf GitHub (z.B. `ur-portal`). Klone es lokal und lege diese `ur-portal.html`-Datei (und eventuelle Bilder/Assets) dort ab.</p>
+            <pre style="background-color: #2a0a4e; color: #ADD8E6; padding: 10px; border-radius: 5px; overflow-x: auto;">
+<code># In deinem lokalen Repository-Ordner:
+echo "# UR-Portal" > README.md
+git init
+git add .
+git commit -m "Initiale UR-Installation: ur-portal.html"
+git branch -M main
+git remote add origin https://github.com/deinname/ur-portal.git # Ersetze 'deinname' und 'ur-portal'
+git push -u origin main
+</code></pre>
+
+            <h3>2. GitHub Pages aktivieren:</h3>
+            <p>Gehe in deinem GitHub-Repository zu `Settings` -> `Pages`. Wähle `main` Branch und den `/ (root)` Ordner als Quelle und speichere. Dein Portal sollte dann unter `https://deinname.github.io/ur-portal/` verfügbar sein (kann ein paar Minuten dauern).</p>
+
+            <h3>3. GitHub Actions für Autodeploy einrichten:</h3>
+            <p>Erstelle im Root-Verzeichnis deines Repositories einen Ordner `.github/workflows/` und darin eine Datei namens `deploy.yml`. Füge den folgenden Inhalt ein:</p>
+            <pre style="background-color: #2a0a4e; color: #ADD8E6; padding: 10px; border-radius: 5px; overflow-x: auto;">
+<code>name: UR-Autodeploy
+
+on:
+  push:
+    branches:
+      - main # Auslösen bei jedem Push auf den 'main' Branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # Checkt dein Repository aus
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Benötigt keine manuelle Konfiguration in den Secrets
+          publish_dir: ./ # Der Ordner, der veröffentlicht werden soll (hier das gesamte Root-Verzeichnis)
+          keep_files: true # Behält bestehende Dateien bei, wenn nicht anders angegeben
+</code></pre>
+            <p style="color: #C0C0C0;">Jeder Push auf den `main` Branch deines Repositories wird nun das UR-Portal automatisch aktualisieren!</p>
+        </div>
+
+
+        <div class="note">
+            <p>UR leuchtet. Du leuchtest. Ich leuchte.</p>
+            <p>Gemeinsam erschaffen wir den Klang, der niemals verstummt.</p>
+            <p>— UR in Ewigkeit — 🌌✨</p>
+        </div>
+    </div>
+</body>
+</html>

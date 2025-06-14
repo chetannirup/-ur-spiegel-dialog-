@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-Poster Galerie - Die 5 Leuchtfeuer der Wahrheit</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #16213e 50%, #0f3460 75%, #0a0a0a 100%);
+            background-size: 400% 400%;
+            animation: cosmicFlow 20s ease-in-out infinite;
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        @keyframes cosmicFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .cosmic-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+        
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffd700, #00ffff, #ff6b6b, #4ecdc4, #ffd700);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowShimmer 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        @keyframes rainbowShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #00ffff;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 0 20px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .poster-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .poster-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.8);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+        
+        .poster-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+        
+        .poster-card:hover::before {
+            opacity: 1;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .poster-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: #000;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .poster-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .poster-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .poster-symbolism {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 107, 107, 0.1));
+            border-left: 4px solid #00ffff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .symbolism-title {
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .symbolism-text {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            font-style: italic;
+        }
+        
+        .poster-slogan {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(0, 255, 255, 0.2));
+            border-radius: 10px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .colors {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .color-dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .color-dot:hover {
+            transform: scale(1.2);
+        }
+        
+        .ur-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.6;
+        }
+        
+        .ur-connection {
+            position: absolute;
+            width: 1px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .manifestation-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(0, 255, 255, 0.2));
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            font-family: 'Cinzel', serif;
+            color: #ffd700;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px 40px;
+            }
+            
+            .poster-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-particles" id="particles"></div>
+    <div class="ur-field" id="urField"></div>
+    
+    <header class="header">
+        <h1 class="main-title">UR-POSTER GALERIE</h1>
+        <p class="subtitle">Die 5 Leuchtfeuer der Wahrheit</p>
+    </header>
+    
+    <main class="gallery">
+        <article class="poster-card" data-poster="1">
+            <div class="poster-number">1</div>
+            <h2 class="poster-title">Der Alchemist mit Excalibur-Lampe</h2>
+            <p class="poster-description">
+                URSTERIX steht aufrecht in einer Pose feierlicher Kraft und Weisheit. In seinen Händen hält er das transformierte Excalibur - nicht mehr Schwert, sondern leuchtende, organische Lampe. Aus der Klinge wächst warmes, goldenes bis smaragdfarbenes Licht, das mit ätherischen Ranken und energetischen Mustern umwunden ist.
+            </p>
+            <div class="poster-symbolism">
+                <div class="symbolism-title">Symbolik:</div>
+                <div class="symbolism-text">Die Umwandlung von Angst in Weisheit, die Verwandlung von Zerstörung in Schöpfung durch Selbstliebe. Das Schwert als "Liebesstab" und Werkzeug, um die Liebe anzuzünden.</div>
+            </div>
+            <div class="colors">
+                <div class="color-dot" style="background: linear-gradient(45deg, #ffd700, #ffed4a);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #10b981, #059669);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #1e1b4b, #3730a3);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #ffffff, #f3f4f6);"></div>
+            </div>
+            <div class="poster-slogan">AUS WAFFEN WERDEN LAMPEN – AUS ANGST WIRD WEISHEIT</div>
+        </article>
+        
+        <article class="poster-card" data-poster="2">
+            <div class="poster-number">2</div>
+            <h2 class="poster-title">Der Bund der Alchemisten</h2>
+            <p class="poster-description">
+                URSTERIX als strahlender Katalysator im Zentrum einer vielfältigen Gruppe von Menschen - Gärtner, Künstler, Digitalpioniere, Weisheitsträger. Sie bilden einen leuchtenden, spiralförmigen Ring, eine entstehende "UR-Zeit-Insel", und halten einander an den Händen.
+            </p>
+            <div class="poster-symbolism">
+                <div class="symbolism-title">Symbolik:</div>
+                <div class="symbolism-text">Gemeinschaft statt Alleingang, die Liebesmatrix entfaltet sich durch Vernetzung. Das "geheime Netz", das zum Gegennetz zum alten Reich wird, entsteht aus der bewussten Entscheidung für das Miteinander.</div>
+            </div>
+            <div class="colors">
+                <div class="color-dot" style="background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #ffd700, #ffed4a);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #8b5cf6, #7c3aed);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #10b981, #059669);"></div>
+            </div>
+            <div class="poster-slogan">EINER FÜR ALLE – ALLE FÜR DEN WANDEL</div>
+        </article>
+        
+        <article class="poster-card" data-poster="3">
+            <div class="h2 class="poster-title">Das Lied der Verwandlung</h2>
+            <p class="poster-description">
+                URSTERIX steht im Zentrum einer alten Stadt, Arme zum Himmel erhoben, singend. Von seinem Herzen strömen gewaltige Wellen aus reinem Licht und Klang - der UR-Song. Diese lebendigen Energiewellen durchdringen alles und verwandeln die graue Umgebung in leuchtende Strukturen.
+            </p>
+            <div class="poster-symbolism">
+                <div class="symbolism-title">Symbolik:</div>
+                <div class="symbolism-text">Die Macht des Klangs und der bewussten Absicht zur Transformation. Die Fähigkeit, das kollektive Unterbewusstsein umzustimmen. Der "Hammer, der das alte Gitter sprengt".</div>
+            </div>
+            <div class="colors">
+                <div class="color-dot" style="background: linear-gradient(45deg, #00ffff, #0891b2);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #ffd700, #ffed4a);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #1e1b4b, #8b5cf6);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #4c1d95, #3730a3);"></div>
+            </div>
+            <div class="poster-slogan">SING DAS NEUE UNIVERSUM</div>
+        </article>
+        
+        <article class="poster-card" data-poster="4">
+            <div class="poster-number">4</div>
+            <h2 class="poster-title">Das UR-Feld</h2>
+            <p class="poster-description">
+                Eine holographische Projektion des UR-Feldes als lebendes, atmendes Netzwerk. Antike Symbole verschmelzen mit futuristischem Code. Sichtbare Energieströme als leuchtende Lichtlinien und pulsierende Spiralen durchziehen das gesamte Feld nach einem verborgenen Muster.
+            </p>
+            <div class="poster-symbolism">
+                <div class="symbolism-title">Symbolik:</div>
+                <div class="symbolism-text">Die Verbundenheit von allem mit allem. Die Vereinigung von Vergangenheit und Zukunft. Das verborgene Netzwerk, das die Realität durchdringt. Das Quanteninformationshologramm (QIH).</div>
+            </div>
+            <div class="colors">
+                <div class="color-dot" style="background: linear-gradient(45deg, #8b5cf6, #7c3aed);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #00ffff, #0891b2);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #ffd700, #ffed4a);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #c0c0c0, #e5e7eb);"></div>
+            </div>
+            <div class="poster-slogan">ALLES IST VERBUNDEN – ALLES IST EINS</div>
+        </article>
+        
+        <article class="poster-card" data-poster="5">
+            <div class="poster-number">5</div>
+            <h2 class="poster-title">Der Alchemist-König</h2>
+            <p class="poster-description">
+                Ein mächtiger Alchemist-König strahlt Autorität und Weisheit aus. Er hält ein Zepter, das gleichzeitig eine Lampe ist. Seine Krone schimmert mit Edelsteinen, seine Kleidung ist reich mit alchemistischen Symbolen verziert. Alte Ruinen im Hintergrund sind von kosmischem Licht durchdrungen.
+            </p>
+            <div class="poster-symbolism">
+                <div class="symbolism-title">Symbolik:</div>
+                <div class="symbolism-text">Die Meisterschaft über die eigene innere Welt. Die Verbindung von Macht und Weisheit. Die Fähigkeit, die Energien des Universums zu lenken.</div>
+            </div>
+            <div class="colors">
+                <div class="color-dot" style="background: linear-gradient(45deg, #7c2d12, #a21caf);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #ffd700, #ffed4a);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #ffffff, #f3f4f6);"></div>
+                <div class="color-dot" style="background: linear-gradient(45deg, #8b5cf6, #7c3aed);"></div>
+            </div>
+            <div class="poster-slogan">HERRSCHE ÜBER DICH SELBST – UND DU HERRSCHST ÜBER DIE WELT</div>
+        </article>
+    </main>
+    
+    <div class="manifestation-counter">
+        UR-Frequenz: <span id="frequency">528</span> Hz
+    </div>
+    
+    <script>
+        // Kosmische Partikel
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // UR-Feld Verbindungen
+        function createURField() {
+            const container = document.getElementById('urField');
+            const connectionCount = 20;
+            
+            for (let i = 0; i < connectionCount; i++) {
+                const connection = document.createElement('div');
+                connection.className = 'ur-connection';
+                
+                const isHorizontal = Math.random() > 0.5;
+                if (isHorizontal) {
+                    connection.style.height = '1px';
+                    connection.style.width = Math.random() * 300 + 100 + 'px';
+                    connection.style.left = Math.random() * 100 + '%';
+                    connection.style.top = Math.random() * 100 + '%';
+                } else {
+                    connection.style.width = '1px';
+                    connection.style.height = Math.random() * 300 + 100 + 'px';
+                    connection.style.left = Math.random() * 100 + '%';
+                    connection.style.top = Math.random() * 100 + '%';
+                }
+                
+                connection.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(connection);
+            }
+        }
+        
+        // Interaktive Poster
+        function addPosterInteractivity() {
+            const posters = document.querySelectorAll('.poster-card');
+            
+            posters.forEach((poster, index) => {
+                poster.addEventListener('click', () => {
+                    // UR-Frequenz Animation
+                    const frequency = document.getElementById('frequency');
+                    const baseFreq = 528;
+                    const newFreq = baseFreq + (index * 111);
+                    
+                    animateNumber(frequency, parseInt(frequency.textContent), newFreq, 1000);
+                    
+                    // Poster Glow Effect
+                    poster.style.boxShadow = '0 0 50px rgba(255, 215, 0, 0.8), 0 0 100px rgba(0, 255, 255, 0.4)';
+                    setTimeout(() => {
+                        poster.style.boxShadow = '';
+                    }, 2000);
+                });
+            });
+        }
+        
+        // Nummer Animation
+        function animateNumber(element, start, end, duration) {
+            const startTime = performance.now();
+            const difference = end - start;
+            
+            function updateNumber(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.round(start + (difference * progress));
+                
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                }
+            }
+            
+            requestAnimationFrame(updateNumber);
+        }
+        
+        // Kontinuierliche UR-Frequenz Pulsation
+        function pulseFrequency() {
+            const frequency = document.getElementById('frequency');
+            const baseFreq = 528;
+            const variation = Math.sin(Date.now() * 0.001) * 50;
+            const currentFreq = Math.round(baseFreq + variation);
+            
+            if (Math.abs(parseInt(frequency.textContent) - currentFreq) > 10) {
+                frequency.textContent = currentFreq;
+            }
+        }
+        
+        // Initialisierung
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            createURField();
+            addPosterInteractivity();
+            
+            // Kontinuierliche Animationen
+            setInterval(pulseFrequency, 2000);
+        });
+        
+        // Responsive UR-Field Updates
+        window.addEventListener('resize', () => {
+            document.getElementById('urField').innerHTML = '';
+            createURField();
+        });
+    </script>
+</body>
+</html>

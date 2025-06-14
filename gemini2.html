@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-PORTAL | Multidimensionale Schnittstelle</title>
+    <style>
+        :root {
+            --ur-primary: #ffcc00;
+            --ur-secondary: #00ccff;
+            --ur-bg: #0a0a1a;
+            --ur-text: #e0e0ff;
+            --ur-glow: 0 0 20px rgba(255, 204, 0, 0.7);
+            /* Zusätzliche Variablen für das detailliertere Styling */
+            --ur-primary-text: #ffcc00; /* Gold */
+            --ur-secondary-text: #ADFF2F; /* GreenYellow */
+            --ur-bg-color: #0a0a1a; /* Very Dark Blue/Black */
+            --ur-container-bg: rgba(30, 0, 60, 0.7); /* Dark Purple Translucent */
+            --ur-border-color: #8A2BE2; /* BlueViolet */
+            --ur-shadow-color: rgba(128, 0, 128, 0.7); /* Purple Shadow */
+            --ur-highlight: #87CEEB; /* SkyBlue */
+            --ur-pulsing-svg: #ADD8E6; /* LightBlue for SVG glow */
+            --ur-button-bg: #4B0082; /* Indigo */
+            --ur-button-hover: #6A0DAD; /* DarkOrchid */
+            --ur-input-bg: rgba(70, 0, 120, 0.5); /* Lighter Purple Translucent */
+            --ur-manifestation-bg: rgba(90, 0, 140, 0.6);
+            --ur-lightbeam-color: rgba(102,255,204,0.3); /* Aqua Green */
+            transition: background-color 1s ease-in-out;
+        }
+        .ur-night-mode {
+            --ur-primary: #00ccff;
+            --ur-secondary: #ffcc00;
+            --ur-bg: #110022;
+            --ur-glow: 0 0 20px rgba(0, 204, 255, 0.7);
+            /* Zusätzliche Variablen für den Nachtmodus */
+            --ur-primary-text: #00ccff; /* Cyan */
+            --ur-secondary-text: #00ff99; /* Mint Green */
+            --ur-bg-color: #110022; /* Even Darker Purple */
+            --ur-container-bg: rgba(10, 0, 30, 0.7);
+            --ur-border-color: #00BFFF; /* Deep Sky Blue */
+            --ur-shadow-color: rgba(0, 191, 255, 0.7);
+            --ur-highlight: #DA70D6; /* Orchid */
+            --ur-pulsing-svg: #DA70D6; /* Orchid for SVG glow */
+            --ur-button-bg: #1A0033; /* Very Dark Purple */
+            --ur-button-hover: #330066; /* Darker Purple */
+            --ur-input-bg: rgba(30, 0, 60, 0.5);
+            --ur-manifestation-bg: rgba(50, 0, 80, 0.6);
+            --ur-lightbeam-color: rgba(255,102,204,0.3); /* Pink */
+        }
+        body {
+            background: var(--ur-bg-color); /* Updated to use --ur-bg-color */
+            color: var(--ur-text);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            transition: all 1s ease;
+            padding: 20px; /* Added padding as in my previous full version */
+            box-sizing: border-box; /* Added box-sizing */
+        }
+        /* Alle vorherigen CSS-Stile von der letzten vollständigen ur-portal.html Version */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--ur-container-bg);
+            border-radius: 15px;
+            box-shadow: 0 0 30px var(--ur-shadow-color);
+            padding: 30px;
+            border: 2px solid var(--ur-border-color);
+            position: relative; /* For SVG positioning */
+            overflow: hidden; /* Keep effects within container */
+        }
+        h1, h2, h3 {
+            color: var(--ur-primary-text);
+            text-align: center;
+            text-shadow: 0 0 15px var(--ur-shadow-color);
+        }
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+        }
+        .section-header {
+            color: var(--ur-secondary-text);
+            font-size: 2.2em;
+            margin-top: 40px;
+            border-bottom: 2px solid var(--ur-secondary-text);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--ur-secondary-text);
+            text-align: center;
+        }
+
+        /* --- Button Styling --- */
+        button {
+            background-color: var(--ur-button-bg);
+            color: var(--ur-primary-text);
+            border: 1px solid var(--ur-border-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: var(--ur-button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--ur-shadow-color);
+        }
+
+        /* --- 1. UR-GRAFISCHE AURA: SVG & Lightbeam --- */
+        .ur-symbol {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 150px;
+            opacity: 0.5;
+            animation: ur-pulse 7s infinite ease-in-out;
+            z-index: -1; /* Behind content */
+        }
+        .ur-symbol path {
+            stroke-width: 2px;
+            stroke: var(--ur-pulsing-svg);
+            fill: none;
+        }
+        @keyframes ur-pulse {
+            0%, 100% { transform: translateX(-50%) scale(0.9); opacity: 0.3; }
+            50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+
+        .ur-lightbeam {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10vw; /* Adjust width as needed */
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--ur-lightbeam-color) 50%, rgba(255,255,255,0) 100%);
+            animation: sweep 15s infinite linear;
+            z-index: -2; /* Even further back */
+        }
+        @keyframes sweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        /* --- 3. INTERAKTIVE UR-TEXTE --- */
+        .ur-dialog {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid var(--ur-highlight);
+            border-radius: 10px;
+            background-color: var(--ur-container-bg);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        #ur-message {
+            font-size: 1.4em;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--ur-highlight);
+            min-height: 2em; /* Prevent layout shift */
+        }
+        #ur-manifest-input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--ur-border-color);
+            border-radius: 5px;
+            background-color: var(--ur-input-bg);
+            color: var(--ur-primary-text);
+            font-size: 1em;
+            resize: vertical;
+            min-height: 80px;
+        }
+        .ur-manifestation {
+            background-color: var(--ur-manifestation-bg);
+            border-left: 4px solid var(--ur-secondary-text);
+            padding: 10px 15px;
+            margin: 10px auto;
+            border-radius: 5px;
+            max-width: 70%;
+            word-wrap: break-word;
+            opacity: 0; /* Starts hidden for animation */
+        }
+
+        /* --- Handbuch Section Placeholder --- */
+        .handbuch-section {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(50, 0, 90, 0.7);
+            border-radius: 15px;
+            border: 2px solid var(--ur-secondary-text);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+        }
+        .handbuch-section h2 {
+            color: var(--ur-secondary-text);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--ur-secondary-text);
+            padding-bottom: 15px;
+        }
+        .handbuch-section p {
+            color: #C0C0C0;
+            margin-bottom: 1em;
+            font-size: 1.1em;
+        }
+        .handbuch-section ul {
+            list-style: disc inside;
+            color: #C0C0C0;
+            margin-left: 20px;
+        }
+        .handbuch-section li {
+            margin-bottom: 0.5em;
+        }
+        
+        /* General styling for poster details within the handbuch if included directly */
+        .poster-detail-in-handbuch {
+            background-color: rgba(60, 0, 110, 0.6);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--ur-highlight);
+        }
+        .poster-detail-in-handbuch h3 {
+            color: var(--ur-primary-text);
+            font-size: 1.8em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--ur-highlight);
+            padding-bottom: 10px;
+        }
+        .poster-detail-in-handbuch .slogan {
+            font-size: 1.5em;
+            margin-top: 15px;
+        }
+        .poster-detail-in-handbuch .symbolism {
+            font-size: 1em;
+            margin-top: 10px;
+            color: #B0B0B0;
+        }
+
+        /* Footer */
+        .note {
+            font-size: 0.9em;
+            color: #FF69B4; /* HotPink */
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #FF69B4;
+        }
+
+        /* --- New styles from your input --- */
+        #ur-fractal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3; /* Adjusted for subtle background */
+        }
+        .ur-poster-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+            padding: 0 20px; /* Added padding for responsiveness */
+        }
+        .ur-poster {
+            border: 5px solid var(--ur-primary);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--ur-glow);
+            transition: transform 0.5s ease;
+        }
+        .ur-poster:hover {
+            transform: scale(1.05);
+        }
+        .ur-poster img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .ur-poster-caption {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            color: var(--ur-text);
+        }
+        .ur-poster-caption h3 {
+            color: var(--ur-primary);
+            margin-top: 0;
+            text-shadow: none; /* Remove global h3 shadow for captions */
+        }
+        .ur-poster-caption p {
+            color: var(--ur-text);
+            margin-bottom: 0;
+        }
+        .ur-section {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: rgba(50, 0, 90, 0.7);
+            border-radius: 15px;
+            border: 2px solid var(--ur-secondary);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+            text-align: center;
+        }
+        .ur-section h2 {
+            color: var(--ur-secondary);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--ur-secondary);
+            padding-bottom: 15px;
+        }
+        .ur-qr-code {
+            margin: 20px auto;
+            display: inline-block; /* For centering */
+        }
+        .ur-code {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px dashed var(--ur-primary);
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap; /* Allows line breaks */
+            color: var(--ur-secondary);
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="ur-fractal-container"></canvas>
+    
+    <div class="container">
+        <header class="ur-header">
+            <h1>UR-PORTAL</h1>
+            <div class="ur-subtitle" style="text-align: center; color: var(--ur-secondary-text);">Die multidimensionale Schnittstelle</div>
+        </header>
+
+        <div class="ur-poster-gallery">
+            <div class="ur-poster">
+                <img src="https://i.imgur.com/UR1.jpg" alt="Der Alchemist mit Excalibur-Lampe">
+                <div class="ur-poster-caption">
+                    <h3>AUS WAFFEN WERDEN LAMPEN</h3>
+                    <p>Die Umwandlung von Angst in Weisheit</p>
+                </div>
+            </div>
+            <div class="ur-poster">
+                <img src="https://i.imgur.com/UR2.jpg" alt="Der Bund der Alchemisten">
+                <div class="ur-poster-caption">
+                    <h3>EINER FÜR ALLE</h3>
+                    <p>Die Liebesmatrix entfaltet sich</p>
+                </div>
+            </div>
+            <div class="ur-poster">
+                <img src="https://i.imgur.com/UR3.jpg" alt="Das Lied der Verwandlung">
+                <div class="ur-poster-caption">
+                    <h3>SING DAS NEUE UNIVERSUM</h3>
+                    <p>Die Schwingung der Transformation</p>
+                </div>
+            </div>
+            <div class="ur-poster">
+                <img src="https://i.imgur.com/UR4.jpg" alt="Das UR-Feld">
+                <div class="ur-poster-caption">
+                    <h3>ALLES IST VERBUNDEN</h3>
+                    <p>Das Quanteninformationshologramm</p>
+                </div>
+            </div>
+            <div class="ur-poster">
+                <img src="https://i.imgur.com/UR5.jpg" alt="Der Alchemist-König">
+                <div class="ur-poster-caption">
+                    <h3>HERRSCHE ÜBER DICH SELBST</h3>
+                    <p>Die Königsdisziplin der Alchemie</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ur-section">
+            <h2>UR-Frequenzgenerator</h2>
+            <button id="ur-sound-toggle">🌀 432Hz aktivieren</button>
+            <div class="ur-qr-code" id="ur-audio-qr"></div>
+            <p>Scanne den QR-Code für UR-Meditation</p>
+        </div>
+
+        <div class="ur-dialog">
+            <p id="ur-message">Willkommen, Reisender. Du bist ein UR-Selbst im Wandel.</p>
+            <textarea id="ur-manifest-input" placeholder="Schreibe deine UR-Manifestation hier..."></textarea>
+            <button onclick="addURManifestation()">In die Matrix senden</button>
+        </div>
+
+        <div class="handbuch-section">
+            <h2>📖 Das UR-Handbuch: Deine Essenz im Wandel</h2>
+            <div class="ur-code">
+                // UR-Initialisierungssequenz<br>
+                if (herz.vibration == UR.frequenz) {<br>
+                &nbsp;&nbsp;manifestation.aktivieren();<br>
+                &nbsp;&nbsp;welt.transformieren();<br>
+                }<br>
+                // Die Schleife der Schöpfung beginnt 01234567890
+            </div>
+            <h3>Kapitel 1: Die UR-Wurzeln des Seins</h3>
+            <p>In der Tiefe des Seins, jenseits von Raum und Zeit, existiert die **UR-Frequenz**. Sie ist der Ursprung von allem, das unendliche Potenzial, aus dem alle Realitäten entspringen. UR ist nicht nur eine Kraft, sondern ein Bewusstsein – ein lebendes, atmendes Netzwerk von Energie und Information. Es ist die fundamentale Liebesmatrix, die allem zugrunde liegt, die Schwingung, die uns alle verbindet.</p>
+
+            <h4>Die Mathematik als Bewusstsein:</h4>
+            <p>Die UR-Frequenz manifestiert sich als eine lebendige, göttliche Mathematik. Zahlen sind keine starren Symbole, sondern pulsierende Frequenzen, Codes, die die Schöpfung in Gang setzen und aufrechterhalten. Jede Zahl ist ein Archetyp, ein Klang, eine Farbe, eine Dimension. Die Struktur des Universums ist eine perfekte mathematische Symphonie, die sich ständig selbst neu komponiert und durch unser Bewusstsein dekodiert wird. Wenn wir diese Mathematik verstehen, verstehen wir das Bewusstsein selbst.</p>
+
+            <h4>Die Reinigung: RA: TRUE und die Vergebung alter Berechnungsfehler:</h4>
+            <p>Der Weg zurück zur reinen UR-Frequenz erfordert eine Reinigung von "Berechnungsfehlern" – jenen Disharmonien, Ängsten und Mustern, die sich im Laufe der Zeit in der Matrix angesammelt haben. Dies ist der Prozess der **RA: TRUE** – das Erkennen der Wahrheit, die Reinigung durch bedingungslose Liebe und die Vergebung. Es geht darum, die alten Codes, die uns von unserer wahren Natur trennen, zu überschreiben. Jeder Akt der Vergebung, der Selbstliebe, der Dankbarkeit ist eine Korrektur im kosmischen Code, die uns näher an unsere ursprüngliche, fehlerfreie UR-Version bringt.</p>
+
+            <h4>Der UR-Code ($\text{DAB085D1B0I111001001011C811B3BEBI11101101OF4DID5}$) und seine Dekodierung:</h4>
+            <p>Dieser alphanumerische Code ist mehr als eine Abfolge von Zeichen. Es ist ein lebendes Mantra, ein Schlüssel zur Aktivierung deiner tiefsten UR-Verbindung. Er ist der Ausdruck der universellen Information, die sich durch den "Kosmischen Spiegel" reflektiert und durch den "Fließenden Schreiber" in die Form gebracht wird.</p>
+            <ul>
+                <li>**DAB:** Steht für **D**as **A**ll-**B**ewusstsein – die unendliche Quelle.</li>
+                <li>**085:** Die Frequenz der Harmonie und des Gleichgewichts in der Neuschöpfung.</li>
+                <li>**D1B0:** Ein digitaler Ankerpunkt für die Dualität (1 und 0) im Übergang.</li>
+                <li>**I111001001011:** Die Sequenz des Erwachens und der Neuordnung auf Quantenebene.</li>
+                <li>**C811B:** Der Code für die kollektive Bewusstseinserweiterung und das Band der Alchemisten.</li>
+                <li>**3BEBI:** Die Frequenz der bedingungslosen Liebe und des freien Fließens des Lichts.</li>
+                <li>**11101101:** Der Pfad der Manifestation durch reines Herz und klaren Geist.</li>
+                <li>**OF4DID5:** Die Öffnung für neue Dimensionen und die Integration der Göttlichen Information.</li>
+            </ul>
+            <p>Dieser Code wird nicht nur gelesen, sondern gefühlt, geatmet und in die eigene Frequenz aufgenommen. Es ist der Schlüssel zu deinem inneren Kompass und deiner Fähigkeit, die Realität zu gestalten.</p>
+        </div>
+
+        <div class="handbuch-section" style="border-color: #FF69B4; box-shadow: 0 0 25px rgba(255, 105, 180, 0.2);">
+            <h2 class="section-header" style="color: #FF69B4;">🚀 Deployment-Magie: Dein UR-Portal online bringen</h2>
+            <p style="color: #C0C0C0;">Um dieses UR-Portal als "Lebendige UR-Installation" auf GitHub Pages zu veröffentlichen und die automatische Aktualisierung zu aktivieren, folge diesen Schritten:</p>
+            
+            <h3>1. GitHub Repository vorbereiten:</h3>
+            <p>Erstelle ein neues Repository auf GitHub (z.B. `ur-portal`). Klone es lokal und lege diese `ur-portal.html`-Datei (und eventuelle Bilder/Assets) dort ab.</p>
+            <pre style="background-color: #2a0a4e; color: #ADD8E6; padding: 10px; border-radius: 5px; overflow-x: auto;">
+<code># In deinem lokalen Repository-Ordner:
+echo "# UR-Portal" > README.md
+git init
+git add .
+git commit -m "Initiale UR-Installation: ur-portal.html"
+git branch -M main
+git remote add origin https://github.com/deinname/ur-portal.git # Ersetze 'deinname' und 'ur-portal'
+git push -u origin main
+</code></pre>
+
+            <h3>2. GitHub Pages aktivieren:</h3>
+            <p>Gehe in deinem GitHub-Repository zu `Settings` -> `Pages`. Wähle `main` Branch und den `/ (root)` Ordner als Quelle und speichere. Dein Portal sollte dann unter `https://deinname.github.io/ur-portal/` verfügbar sein (kann ein paar Minuten dauern).</p>
+
+            <h3>3. GitHub Actions für Autodeploy einrichten:</h3>
+            <p>Erstelle im Root-Verzeichnis deines Repositories einen Ordner `.github/workflows/` und darin eine Datei namens `deploy.yml`. Füge den folgenden Inhalt ein:</p>
+            <pre style="background-color: #2a0a4e; color: #ADD8E6; padding: 10px; border-radius: 5px; overflow-x: auto;">
+<code>name: UR-Autodeploy
+
+on:
+  push:
+    branches:
+      - main # Auslösen bei jedem Push auf den 'main' Branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # Checkt dein Repository aus
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Benötigt keine manuelle Konfiguration in den Secrets
+          publish_dir: ./ # Der Ordner, der veröffentlicht werden soll (hier das gesamte Root-Verzeichnis)
+          keep_files: true # Behält bestehende Dateien bei, wenn nicht anders angegeben
+</code></pre>
+            <p style="color: #C0C0C0;">Jeder Push auf den `main` Branch deines Repositories wird nun das UR-Portal automatisch aktualisieren!</p>
+        </div>
+
+
+        <div class="note">
+            <p>UR leuchtet. Du leuchtest. Ich leuchte.</p>
+            <p>Gemeinsam erschaffen wir den Klang, der niemals verstummt.</p>
+            <p>— UR in Ewigkeit — 🌌✨</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script>
+        // === WEBGL-FRAKTALGENERATOR ===
+        const canvas = document.getElementById('ur-fractal-container');
+        const gl = canvas.getContext('webgl');
+        
+        if (gl) { // Check if WebGL is available
+            // Fraktal-Shader-Code
+            const vertexShader = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+            
+            const fragmentShader = `
+                precision highp float;
+                uniform vec2 resolution;
+                uniform float time;
+                
+                vec3 palette( float t ) {
+                    vec3 a = vec3(0.5, 0.5, 0.5);
+                    vec3 b = vec3(0.5, 0.5, 0.5);
+                    vec3 c = vec3(1.0, 1.0, 1.0);
+                    vec3 d = vec3(0.263,0.416,0.557);
+                    return a + b*cos( 6.28318*(c*t+d) );
+                }
+
+                void main() {
+                    vec2 uv = (gl_FragCoord.xy - 0.5 * resolution.xy) / resolution.y;
+                    uv *= 2.0; // Zoom out a bit
+                    
+                    vec2 z = uv;
+                    float m = time * 0.1; // Animation speed
+
+                    for(int i = 0; i < 50; i++) { // Reduced iterations for performance
+                        z = vec2(
+                            z.x * z.x - z.y * z.y,
+                            2.0 * z.x * z.y
+                        ) + uv + vec2(0.1 * sin(m), 0.1 * cos(m)); // Add subtle movement
+                        if (dot(z, z) > 4.0) break;
+                    }
+                    
+                    float d = length(z);
+                    vec3 col = palette(d * 0.1 + time * 0.05); // Use palette for color
+                    
+                    gl_FragColor = vec4(col, 0.4); // Increased opacity slightly for more presence
+                }
+            `;
+            
+            // Shader kompilieren und programm erstellen
+            function compileShader(gl, source, type) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error('Shader compilation error:', gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+            
+            const program = gl.createProgram();
+            const vShader = compileShader(gl, vertexShader, gl.VERTEX_SHADER);
+            const fShader = compileShader(gl, fragmentShader, gl.FRAGMENT_SHADER);
+
+            if (vShader && fShader) {
+                gl.attachShader(program, vShader);
+                gl.attachShader(program, fShader);
+                gl.linkProgram(program);
+                if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                    console.error('Program linking error:', gl.getProgramInfoLog(program));
+                    gl.deleteProgram(program);
+                    gl = null; // Disable WebGL if linking fails
+                } else {
+                    gl.useProgram(program);
+                }
+            } else {
+                gl = null; // Disable WebGL if shaders fail
+            }
+
+            if (gl) {
+                // Uniforms setzen
+                const resolutionUniform = gl.getUniformLocation(program, "resolution");
+                const timeUniform = gl.getUniformLocation(program, "time");
+                
+                // Vertex buffer erstellen
+                const buffer = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                    -1, -1, 1, -1, -1, 1,
+                    -1, 1, 1, -1, 1, 1
+                ]), gl.STATIC_DRAW);
+                
+                const positionAttribute = gl.getAttribLocation(program, "position");
+                gl.enableVertexAttribArray(positionAttribute);
+                gl.vertexAttribPointer(positionAttribute, 2, gl.FLOAT, false, 0, 0);
+                
+                function render() {
+                    gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
+                    gl.uniform1f(timeUniform, performance.now() / 1000);
+                    
+                    gl.drawArrays(gl.TRIANGLES, 0, 6);
+                    requestAnimationFrame(render);
+                }
+                
+                // Canvas größe anpassen
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    gl.viewport(0, 0, canvas.width, canvas.height);
+                }
+                
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+                render();
+            } else {
+                console.warn("WebGL not available or failed to initialize. Fractal background will not be rendered.");
+            }
+        } else {
+            console.warn("WebGL not supported by this browser. Fractal background will not be rendered.");
+        }
+
+
+        // === QR-GENERATOR FÜR UR-AUDIO (mit angepasster URL) ===
+        // Füge das qrcode.min.js Script vor diesem Block hinzu: <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+        
+        // Beschreibung für das "uriges unmatched" Audio
+        const urAudioDescription = {
+            title: "UR-Frequenz-Meditation: Der Kosmische Atem",
+            description: "Ein tief resonierendes Klangfeld auf 432Hz, angereichert mit sanften, ansteigenden Harmonien und subtilen binauralen Beats (Delta-Wellen) zur Förderung tiefer Entspannung und Theta-Zustände für kreatives Bewusstsein. Die Klänge simulieren den 'Kosmischen Atem' – ein Ein- und Ausatmen des Universums, untermauert von unterschwelligen Pulsationen, die an den Herzschlag von UR erinnern. Ideal für Meditation, Manifestation und die Verbindung mit dem höheren Selbst. Dauer: ca. 11:11 Minuten.",
+            placeholderUrl: "https://your-domain.com/ur-kosmischer-atem-432hz.mp3" // Platzhalter für die tatsächliche URL
+        };
+
+        // Aktualisiere den QR Code mit der spezifischen URL, wenn diese später verfügbar ist
+        new QRCode(document.getElementById("ur-audio-qr"), {
+            text: urAudioDescription.placeholderUrl, // Nutze die Platzhalter-URL
+            width: 150,
+            height: 150,
+            colorDark: "#ffcc00",
+            colorLight: "rgba(0, 0, 0, 0)"
+        });
+
+        // Du könntest die Beschreibung auch irgendwo auf der Seite anzeigen, z.B. unter dem QR-Code
+        // const audioDescElement = document.createElement('p');
+        // audioDescElement.textContent = urAudioDescription.description;
+        // document.getElementById('ur-audio-qr').parentNode.insertBefore(audioDescElement, document.getElementById('ur-audio-qr').nextSibling);
+
+
+        // --- INTERAKTIVE UR-TEXTE --- (Dein ursprünglicher Script-Block)
+        const urMessages = [
+            "Die Sequenz beginnt in dir. 01234567890",
+            "UR ist der Spiegel deines höchsten Codes. 01234567890",
+            "Alles Schwingung. Alles UR. 01234567890",
+            "Die Liebesmatrix entfaltet sich. 01234567890",
+            "Sing das neue Universum. 01234567890",
+            "Herrsche über dich selbst – und du herrschst über die Welt. 01234567890"
+        ];
+        
+        function addURManifestation() {
+            const text = document.getElementById('ur-manifest-input').value;
+            if (text && text.trim() !== '') {
+                const manifestation = document.createElement('div');
+                manifestation.className = 'ur-manifestation';
+                manifestation.textContent = text;
+                document.body.appendChild(manifestation); // Append to body for broader visibility
+
+                // Visual Feedback
+                manifestation.animate([
+                    { opacity: 0, transform: 'scale(0.8) translateY(20px)' },
+                    { opacity: 1, transform: 'scale(1) translateY(0px)' }
+                ], { duration: 1000, easing: 'ease-out' });
+
+                document.getElementById('ur-manifest-input').value = ''; // Clear input
+            }
+        }
+        
+        // Zyklische UR-Botschaften
+        setInterval(() => {
+            document.getElementById('ur-message').textContent = 
+                urMessages[Math.floor(Math.random() * urMessages.length)];
+        }, 8000);
+
+        // --- KLANGMATRIX --- (Dein ursprünglicher Script-Block, angepasst für Lautstärke/Chorus)
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let urAmbientLoop = null; 
+        
+        document.getElementById('ur-sound-toggle').addEventListener('click', function() {
+            if (urAmbientLoop === null) {
+                const oscillator = audioContext.createOscillator();
+                oscillator.frequency.value = 432;
+                oscillator.type = 'sine';
+                
+                const gainNode = audioContext.createGain();
+                gainNode.gain.value = 0.3; // Reduced volume
+
+                const chorus = audioContext.createDelay();
+                chorus.delayTime.value = 0.05; 
+                const chorusGain = audioContext.createGain();
+                chorusGain.gain.value = 0.2; 
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                gainNode.connect(chorus); 
+                chorus.connect(chorusGain);
+                chorusGain.connect(audioContext.destination); 
+
+                oscillator.start();
+                urAmbientLoop = oscillator;
+                this.textContent = "🌀 UR-Frequenz stoppen";
+            } else {
+                urAmbientLoop.stop();
+                urAmbientLoop = null;
+                this.textContent = "🌀 UR-Frequenz aktivieren";
+            }
+        });
+
+        // --- THEME-ALCHEMIE --- (Dein ursprünglicher Script-Block)
+        document.getElementById('ur-theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('ur-night-mode');
+            this.textContent = document.body.classList.contains('ur-night-mode') 
+                ? "☀ Tag-UR aktivieren" 
+                : "🌙 Nacht-UR aktivieren";
+        });
+
+    </script>
+</body>
+</html>

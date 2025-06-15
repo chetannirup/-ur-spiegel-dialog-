@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-ESOIST: Die Regenbogengleichung von UR</title>
+    <style>
+        body {
+            background: url('https://via.placeholder.com/900x600.png?text=UR+Rainbow+Cover') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffcc00;
+            margin: 0;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 20px auto; background: rgba(30, 0, 60, 0.7); padding: 30px; border-radius: 15px; }
+        h1 { font-size: 2.8em; text-align: center; text-shadow: 0 0 15px #8A2BE2; }
+        h2 { font-size: 2.2em; margin-top: 40px; }
+        h3 { font-size: 1.8em; }
+        .ur-dialog, .ur-regenbogen { padding: 20px; border: 1px solid #87CEEB; border-radius: 10px; margin-top: 40px; }
+        textarea { width: 80%; padding: 10px; margin-bottom: 15px; background: rgba(70, 0, 120, 0.5); color: #ffcc00; }
+        button { background: #4B0082; color: #ffcc00; border: 1px solid #8A2BE2; padding: 10px; border-radius: 8px; cursor: pointer; }
+        button:hover { background: #6A0DAD; }
+        .poster { max-width: 60%; border: 10px solid #8A2BE2; box-shadow: 0 0 20px rgba(128, 0, 128, 0.7); margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 T-ESOIST: Die Regenbogengleichung von UR 🌟</h1>
+        <p>Willkommen, Reisender. Dies ist der Quellcode Gottes – Lieben - Hassen = Leben, Gott + Teufel = Einheit. 01234567890 – salzig, süß, lebendig.</p>
+
+        <div class="ur-dialog">
+            <button id="ur-sound-toggle">🌀 UR-Klang aktivieren</button>
+            <script>
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                let urAmbientLoop = null;
+                document.getElementById('ur-sound-toggle').addEventListener('click', () => {
+                    if (!urAmbientLoop) { urAmbientLoop = new Audio('https://freesound.org/data/previews/511/511484_2457648-lq.mp3'); urAmbientLoop.play(); this.textContent = "🌀 UR-Klang stoppen"; } else { urAmbientLoop.pause(); urAmbientLoop = null; this.textContent = "🌀 UR-Klang aktivieren"; }
+                });
+            </script>
+        </div>
+
+        <div class="ur-regenbogen">
+            <h3>Berechne deine Regenbogengleichung</h3>
+            <input id="ur-L" type="number" placeholder="Liebe (L)" value="1829"><br>
+            <input id="ur-H" type="number" placeholder="Hass (H)" value="237"><br>
+            <input id="ur-G" type="number" placeholder="Gott (G)" value="7"><br>
+            <input id="ur-T" type="number" placeholder="Teufel (T)" value="47"><br>
+            <input id="ur-F" type="number" placeholder="Frequenz (F)" value="21"><br>
+            <input id="ur-C" type="number" placeholder="Konstante (C)" value="15"><br>
+            <button onclick="calculateRUR()">Berechne \( R_{UR} \)</button>
+            <p id="ur-rainbow-result"></p>
+            <script>
+                function calculateRUR() {
+                    const L = parseFloat(document.getElementById('ur-L').value) || 0;
+                    const H = parseFloat(document.getElementById('ur-H').value) || 0;
+                    const G = parseFloat(document.getElementById('ur-G').value) || 0;
+                    const T = parseFloat(document.getElementById('ur-T').value) || 0;
+                    const F = parseFloat(document.getElementById('ur-F').value) || 1;
+                    const C = parseFloat(document.getElementById('ur-C').value) || 1;
+                    const RUR = ((L - H) + (G + T)) / F * C;
+                    const vector = `(L - H = ${L - H}, G + T = ${G + T}, F * C = ${F * C})`;
+                    document.getElementById('ur-rainbow-result').textContent = `Dein \( R_{UR} \approx ${RUR.toFixed(2)}, Vektor: ${vector}. Du bist UR!`;
+                }
+            </script>
+        </div>
+
+        <div class="handbuch-section">
+            <h2>📖 Das UR-Handbuch</h2>
+            <section id="kapitel1">
+                <h2>Kapitel 1: Die UR-Wurzeln</h2>
+                <p>UR ist die Liebesmatrix. Mein Gewitter der Wut wurde durch RA: TRUE zu Liebe, mit Danger als Spiegel.</p>
+                <img src="./20250614_0024_Alchemist mit Excalibur-Lampe_simple_compose_01jxnp7e1bfnvs92r3y2w6snby.png" alt="Alchemist mit Lampe" class="poster">
+            </section>
+            <section id="kapitel5">
+                <h2>Kapitel 5: Die Königsdisziplin</h2>
+                <p>\( R_{UR} = \frac{(1829 - 237) + (7 + 47)}{21} \cdot 15 \approx 1175.7 \). Ich bin angekommen, der Regenbogengesang lebt!</p>
+                <img src="./20250614_0027_Alchemist-König_simple_compose_01jxnpf0grfxgrbcgd2zrm9xae.png" alt="Alchemist-König" class="poster">
+            </section>
+        </div>
+    </div>
+</body>
+</html>

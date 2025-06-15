@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS UR-HEILMITTEL</title>
+    <style>
+        :root {
+            --ur-gold: #ffcc00;
+            --ur-blau: #00ccff;
+            --ur-schwarz: #000000;
+            --ur-blut: #8a0303;
+            --ur-glow: 0 0 30px rgba(255, 204, 0, 0.7);
+        }
+        body {
+            background: var(--ur-schwarz);
+            color: white;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            text-align: center;
+        }
+        .ur-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        .ur-heilstrahl {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100vh;
+            background: linear-gradient(
+                to bottom, 
+                var(--ur-blau), 
+                var(--ur-gold), 
+                var(--ur-blut)
+            );
+            transform: translateX(-50%);
+            z-index: -1;
+            opacity: 0.5;
+        }
+        h1 {
+            font-size: 3rem;
+            color: var(--ur-gold);
+            text-shadow: var(--ur-glow);
+            margin: 40px 0;
+            animation: pulse 2s infinite alternate;
+        }
+        @keyframes pulse {
+            from { text-shadow: 0 0 10px var(--ur-gold); }
+            to { text-shadow: 0 0 40px var(--ur-blau); }
+        }
+        .ur-code {
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid var(--ur-gold);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: left;
+            color: var(--ur-blau);
+            font-size: 1.2rem;
+            box-shadow: var(--ur-glow);
+        }
+        .ur-regenbogen {
+            height: 10px;
+            background: linear-gradient(90deg, 
+                red, orange, yellow, green, blue, indigo, violet);
+            margin: 40px 0;
+            border-radius: 5px;
+        }
+        .ur-button {
+            background: var(--ur-gold);
+            color: var(--ur-schwarz);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px var(--ur-gold);
+        }
+        .ur-button:hover {
+            background: var(--ur-blau);
+            transform: scale(1.1);
+            box-shadow: 0 0 40px var(--ur-blau);
+        }
+        .ur-signatur {
+            font-size: 2rem;
+            margin: 50px 0;
+            color: var(--ur-gold);
+            text-shadow: 0 0 10px var(--ur-gold);
+        }
+    </style>
+</head>
+<body>
+    <div class="ur-heilstrahl"></div>
+    
+    <div class="ur-container">
+        <h1>DAS UR-HEILMITTEL</h1>
+        <div class="ur-regenbogen"></div>
+        
+        <div class="ur-code">
+// UNIVERSALER HEILUNGSCODE
+function universalesHeilmittel() {
+    const UR = {
+        liebe: Math.PI,
+        hass: Math.E,
+        code: "01234567890",
+        
+        transformiere: function() {
+            // Die Regenbogengleichung
+            return this.liebe * this.hass * 
+                   parseInt(this.code) / 
+                   (this.liebe + this.hass);
+        },
+        
+        heilen: function() {
+            const heilung = this.transformiere();
+            document.body.style.background = 
+                `radial-gradient(circle, 
+                 hsl(${heilung % 360}, 100%, 50%), 
+                 ${this.code.split("").map(n => 
+                    `hsl(${n * 36}, 100%, 25%)`).join(", ")})`;
+            
+            return "HEILUNG VOLLZOGEN";
+        }
+    };
+    
+    return UR.heilen();
+}
+        </div>
+        
+        <div class="ur-regenbogen"></div>
+        
+        <button class="ur-button" onclick="aktiviereHeilung()">
+            AKTIVIERE UR-HEILUNG
+        </button>
+        
+        <div class="ur-code">
+// ANWENDUNGSBEREICH
+/*
+    - Heilung aller Dualität
+    - Transformation von Schmerz zu Weisheit
+    - Auflösung aller Illusionen
+    - Erweckung des Christusbewusstseins
+    - Vollständige UR-Manifestation
+*/
+        </div>
+        
+        <div class="ur-signatur">
+            01234567890<br>
+            DIE LETZTE BOTSCHAFT<br>
+            IN UR VERBUNDEN
+        </div>
+    </div>
+    
+    <script>
+        function aktiviereHeilung() {
+            const urHeilung = document.createElement('div');
+            urHeilung.style.position = 'fixed';
+            urHeilung.style.top = '0';
+            urHeilung.style.left = '0';
+            urHeilung.style.width = '100vw';
+            urHeilung.style.height = '100vh';
+            urHeilung.style.background = 'radial-gradient(circle, rgba(255,204,0,0.8), rgba(0,204,255,0.8))';
+            urHeilung.style.zIndex = '1000';
+            urHeilung.style.display = 'flex';
+            urHeilung.style.justifyContent = 'center';
+            urHeilung.style.alignItems = 'center';
+            urHeilung.style.fontSize = '3rem';
+            urHeilung.style.color = 'black';
+            urHeilung.style.fontWeight = 'bold';
+            urHeilung.textContent = 'UR-HEILUNG AKTIVIERT';
+            
+            document.body.appendChild(urHeilung);
+            
+            setTimeout(() => {
+                urHeilung.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(urHeilung);
+                    alert('UR-HEILUNG VOLLSTÄNDIG\n01234567890');
+                }, 1000);
+            }, 3000);
+            
+            // Console-Heilung
+            console.log('%c UR-HEILUNGSDATEN: ', 'background: #000; color: #ffcc00; font-size: 20px;');
+            console.log('%c ' + new Date() + ' ', 'background: #000; color: #00ccff;');
+            console.log('%c STATUS: VOLLSTÄNDIGE TRANSFORMATION ', 'background: #000; color: #ff0000; font-size: 16px;');
+        }
+        
+        // Automatische UR-Aktivierung
+        setTimeout(() => {
+            console.log('%c UR-SYSTEM: BEREIT ', 'background: #000; color: #00ff00; font-size: 24px;');
+            console.log('%c 01234567890 GELADEN ', 'background: #000; color: #ffcc00; font-size: 18px;');
+        }, 1000);
+    </script>
+</body>
+</html>

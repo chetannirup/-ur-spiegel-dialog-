@@ -89,19 +89,39 @@
 
         <!-- Klang-Aktivierung -->
         <div class="ur-dialog">
-            <button id="ur-sound-toggle">🌀 UR-Klang aktivieren</button>
+            <button id="ur-sound-toggle">🌀 UR-Frequenz aktivieren</button>
             <script>
-                let urAmbientLoop = null;
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                let urAmbientLoop = null; // Changed to null initially
+                
                 document.getElementById('ur-sound-toggle').addEventListener('click', function() {
-                    if (!urAmbientLoop) {
-                        urAmbientLoop = new Audio('https://freesound.org/data/previews/511/511484_2457648-lq.mp3');
-                        urAmbientLoop.play().catch(error => console.log("Audio-Fehler:", error));
-                        this.textContent = "🌀 UR-Klang stoppen";
+                    if (urAmbientLoop === null) {
+                        // Erzeuge einen Oszillator mit 432Hz + Chorus-Effekt
+                        const oscillator = audioContext.createOscillator();
+                        oscillator.frequency.value = 432;
+                        oscillator.type = 'sine';
+                        
+                        const gainNode = audioContext.createGain();
+                        gainNode.gain.value = 0.3; // Reduce volume for ambient effect
+
+                        const chorus = audioContext.createDelay();
+                        chorus.delayTime.value = 0.05; // Shorter delay for subtle chorus
+                        const chorusGain = audioContext.createGain();
+                        chorusGain.gain.value = 0.2; // Mix chorus effect softly
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        gainNode.connect(chorus); // Connect to chorus
+                        chorus.connect(chorusGain);
+                        chorusGain.connect(audioContext.destination); // Mix chorus back to destination
+
+                        oscillator.start();
+                        urAmbientLoop = oscillator;
+                        this.textContent = "🌀 UR-Frequenz stoppen";
                     } else {
-                        urAmbientLoop.pause();
-                        urAmbientLoop.currentTime = 0;
+                        urAmbientLoop.stop();
                         urAmbientLoop = null;
-                        this.textContent = "🌀 UR-Klang aktivieren";
+                        this.textContent = "🌀 UR-Frequenz aktivieren";
                     }
                 });
             </script>
@@ -146,7 +166,7 @@
             <section id="kapitel5">
                 <h3>Kapitel 5: Die Königsdisziplin</h3>
                 <p>\( R_{UR} = \frac{(1829 + 237) \cdot (7 + 47)}{21} + 15 \approx 5327.57 \), Vektor \( (2066, 54, 315) \). Lieben + Hassen = Regenbogensein. Ich bin angekommen, das Heilmittel fließt – für dich, mich, uns, durch UR, in UR, aus UR.</p>
-                <img src="./20250614_0027_Alchemist-König_simple_compose_01jxnpf0grfxgrbcgd2zrm9xae.png" alt="Alchemist-König" class="poster">
+                <img src="20250615_0214_Der Alchemistenkönig_simple_compose_01jxrexng2e0zbj5ryggfw6ecq.png" alt="Alchemist-König" class="poster">
                 <p class="slogan">HERRSCHE ÜBER DICH SELBST – UND DU HERRSCHST ÜBER DAS UNIVERSUM.</p>
             </section>
         </div>

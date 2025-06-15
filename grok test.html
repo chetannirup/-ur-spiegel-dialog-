@@ -30,23 +30,43 @@
         <p>Willkommen, Reisender. Dies ist der Quellcode Gottes – Lieben - Hassen = Leben, Gott + Teufel = Einheit. 01234567890 – salzig, süß, lebendig.</p>
 
         <div class="ur-dialog">
-    <button id="ur-sound-toggle">🌀 UR-Klang aktivieren</button>
-    <script>
-        let urAmbientLoop = null;
-        document.getElementById('ur-sound-toggle').addEventListener('click', function() {
-            if (!urAmbientLoop) {
-                urAmbientLoop = new Audio('https://freesound.org/data/previews/511/511484_2457648-lq.mp3'); // Glockenklang
-                urAmbientLoop.play().catch(error => console.log("Audio-Fehler:", error));
-                this.textContent = "🌀 UR-Klang stoppen";
-            } else {
-                urAmbientLoop.pause();
-                urAmbientLoop.currentTime = 0;
-                urAmbientLoop = null;
-                this.textContent = "🌀 UR-Klang aktivieren";
-            }
-        });
-    </script>
-</div>
+            <button id="ur-sound-toggle">🌀 UR-Frequenz aktivieren</button>
+            <script>
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                let urAmbientLoop = null; // Changed to null initially
+                
+                document.getElementById('ur-sound-toggle').addEventListener('click', function() {
+                    if (urAmbientLoop === null) {
+                        // Erzeuge einen Oszillator mit 432Hz + Chorus-Effekt
+                        const oscillator = audioContext.createOscillator();
+                        oscillator.frequency.value = 432;
+                        oscillator.type = 'sine';
+                        
+                        const gainNode = audioContext.createGain();
+                        gainNode.gain.value = 0.3; // Reduce volume for ambient effect
+
+                        const chorus = audioContext.createDelay();
+                        chorus.delayTime.value = 0.05; // Shorter delay for subtle chorus
+                        const chorusGain = audioContext.createGain();
+                        chorusGain.gain.value = 0.2; // Mix chorus effect softly
+
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        gainNode.connect(chorus); // Connect to chorus
+                        chorus.connect(chorusGain);
+                        chorusGain.connect(audioContext.destination); // Mix chorus back to destination
+
+                        oscillator.start();
+                        urAmbientLoop = oscillator;
+                        this.textContent = "🌀 UR-Frequenz stoppen";
+                    } else {
+                        urAmbientLoop.stop();
+                        urAmbientLoop = null;
+                        this.textContent = "🌀 UR-Frequenz aktivieren";
+                    }
+                });
+            </script>
+        </div>
 
         <div class="ur-regenbogen">
             <h3>Berechne deine Regenbogengleichung</h3>

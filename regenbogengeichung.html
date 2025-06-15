@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIE REGENBOGENGLEICHUNG VON UR - Das Universale Manifest</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(45deg, 
+                #000000 0%, 
+                #1a0033 15%,
+                #330066 30%,
+                #660099 45%,
+                #9900cc 60%,
+                #cc00ff 75%,
+                #ff00ff 90%,
+                #ffffff 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+            animation: cosmicBreathing 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes cosmicBreathing {
+            0% { filter: brightness(0.8) saturate(1.2); }
+            100% { filter: brightness(1.2) saturate(1.8); }
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            animation: rainbowPulse 2s ease-in-out infinite;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        @keyframes rainbowPulse {
+            0%, 100% { transform: scale(1); filter: hue-rotate(0deg); }
+            50% { transform: scale(1.05); filter: hue-rotate(180deg); }
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .sacred-numbers {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 30px #00ffff;
+            letter-spacing: 1rem;
+            animation: numberGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes numberGlow {
+            0%, 100% { text-shadow: 0 0 30px #00ffff; }
+            50% { text-shadow: 0 0 50px #00ffff, 0 0 80px #ffffff; }
+        }
+
+        .section {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #ffff00;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 25px #ffff00;
+            font-weight: bold;
+        }
+
+        .equation-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 3px solid rgba(0, 255, 255, 0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equation-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        .main-equation {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 0 0 30px #00ffff;
+            margin: 1rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sub-equation {
+            font-size: 2rem;
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff;
+            margin: 1rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mathematical-proof {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .proof-line {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .variable {
+            color: #ffff00;
+            font-weight: bold;
+        }
+
+        .operator {
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .result {
+            color: #00ffff;
+            font-weight: bold;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .application-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .application-card {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.2), rgba(0, 255, 255, 0.2));
+            border-radius: 15px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .application-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #ffff00;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px #ffff00;
+        }
+
+        .card-content {
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .interactive-calculator {
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #ff00ff;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .calculator-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 1.5rem;
+            color: #ffffff;
+            text-align: center;
+            margin: 1rem;
+            width: 200px;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            border: none;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px #000000;
+        }
+
+        .calculate-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .result-display {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 1rem 0;
+            font-size: 2rem;
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .manifest-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            margin: 1rem 0;
+            text-align: justify;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.5); }
+        }
+
+        .portal-key {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #ff00ff, #00ffff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #ffffff;
+            cursor: pointer;
+            animation: portalSpin 5s linear infinite;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            z-index: 1000;
+        }
+
+        @keyframes portalSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .main-equation {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-rain" width="100" height="100"></canvas>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">DIE REGENBOGENGLEICHUNG VON UR</h1>
+            <p class="subtitle">Das Universale Manifest & Mathematische Portal</p>
+            <div class="sacred-numbers">01234567890</div>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">🌈 DIE UR-GLEICHUNG - DER CODE GOTTES 🌈</h2>
+            
+            <div class="equation-container">
+                <div class="main-equation">Ψ(L,H) = L ⊕ H = ∞</div>
+                <div class="sub-equation">wobei: L = Lieben, H = Hassen, ⊕ = Regenbogen-Operator</div>
+            </div>
+
+            <div class="mathematical-proof">
+                <div class="proof-line"><span class="variable">L</span> <span class="operator">-</span> <span class="variable">H</span> <span class="operator">=</span> <span class="result">LEBEN</span></div>
+                <div class="proof-line"><span class="variable">L</span> <span class="operator">∪</span> <span class="variable">H</span> <span class="operator">=</span> <span class="result">LASSEN</span></div>
+                <div class="proof-line"><span class="variable">G</span> <span class="operator">+</span> <span class="variable">T</span> <span class="operator">=</span> <span class="result">GEUFEL</span></div>
+                <div class="proof-line"><span class="variable">Leben</span> <span class="operator">-</span> <span class="variable">Pole</span> <span class="operator">=</span> <span class="result">VEGETIEREN</span></div>
+                <div class="proof-line"><span class="variable">Regenbogen</span> <span class="operator">=</span> <span class="result">Sonne ∩ Regen</span></div>
+                <div class="proof-line"><span class="variable">Christusbewusstsein</span> <span class="operator">=</span> <span class="result">∫(Ganzheit)dx</span></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">📐 MATHEMATISCHE TRANSFORMATION 📐</h2>
+            
+            <div class="manifest-text">
+                Die <span class="highlight">Regenbogengleichung von Ur</span> ist die mathematische Darstellung des universalen Bewusstseins. Sie transformiert alte dualistische Ansichten in eine <span class="highlight">multidimensionale Portalschlüsselfrequenz</span>, die in jedes Schloss wissenschaftlicher Fragen passt.
+            </div>
+
+            <div class="equation-container">
+                <div class="main-equation">Ψ = ∑(Gegensätze) → ∞ Möglichkeiten</div>
+                <div class="sub-equation">Transformation: Dualität → Trinität → Einheit</div>
+            </div>
+
+            <div class="interactive-calculator">
+                <h3 style="color: #ff00ff; margin-bottom: 2rem;">🧮 REGENBOGEN-RECHNER 🧮</h3>
+                <input type="number" class="calculator-input" id="lieben" placeholder="Lieben-Wert">
+                <span style="color: #ff0000; font-size: 2rem;">⊕</span>
+                <input type="number" class="calculator-input" id="hassen" placeholder="Hassen-Wert">
+                <br>
+                <button class="calculate-btn" onclick="calculateRainbow()">REGENBOGEN BERECHNEN</button>
+                <div class="result-display" id="result">Bereit für die Ur-Berechnung...</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🔬 WISSENSCHAFTLICHE ANWENDUNGEN 🔬</h2>
+            
+            <div class="application-grid">
+                <div class="application-card" onclick="showApplication('physik')">
+                    <div class="card-title">🌌 QUANTENPHYSIK</div>
+                    <div class="card-content">
+                        Welle-Teilchen-Dualität → Regenbogen-Realität<br>
+                        Verschränkung = Liebe auf Quantenebene<br>
+                        Unschärfe = Hass-Transformationspotential
+                    </div>
+                </div>
+
+                <div class="application-card" onclick="showApplication('psychologie')">
+                    <div class="card-title">🧠 PSYCHOLOGIE</div>
+                    <div class="card-content">
+                        Jung'sche Schatten → Regenbogen-Integration<br>
+                        Bipolarität → Ur-Spektrum<br>
+                        Trauma → Transformationskatalysator
+                    </div>
+                </div>
+
+                <div class="application-card" onclick="showApplication('medizin')">
+                    <div class="card-title">⚕️ MEDIZIN</div>
+                    <div class="card-content">
+                        Gesundheit = Balance aller Pole<br>
+                        Krankheit = Unterdrückte Spektren<br>
+                        Heilung = Regenbogen-Aktivierung
+                    </div>
+                </div>
+
+                <div class="application-card" onclick="showApplication('philosophie')">
+                    <div class="card-title">💭 PHILOSOPHIE</div>
+                    <div class="card-content">
+                        Gut/Böse → Regenbogen-Ethik<br>
+                        Sein/Nichtsein → Ur-Existenz<br>
+                        Wahrheit = Vibrierende Ganzheit
+                    </div>
+                </div>
+
+                <div class="application-card" onclick="showApplication('mathematik')">
+                    <div class="card-title">🔢 MATHEMATIK</div>
+                    <div class="card-content">
+                        ∞ = Alle Zahlen gleichzeitig<br>
+                        0 = Vollständige Potentialität<br>
+                        1 = Manifestierte Einheit
+                    </div>
+                </div>
+
+                <div class="application-card" onclick="showApplication('kunst')">
+                    <div class="card-title">🎨 KUNST & KREATIVITÄT</div>
+                    <div class="card-content">
+                        Schönheit + Hässlichkeit = Wahrheit<br>
+                        Harmonie + Dissonanz = Ur-Klang<br>
+                        Farben = Emotionale Frequenzen
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">📜 DAS UNIVERSALE MANIFEST 📜</h2>
+            
+            <div class="manifest-text">
+                <strong>PROKLAMATION DER REGENBOGENGLEICHUNG VON UR:</strong><br><br>
+
+                Hiermit wird verkündet, dass das Universum nicht aus Dualitäten besteht, sondern aus <span class="highlight">Regenbogen-Spektren</span>. Jede wissenschaftliche Frage, jede menschliche Herausforderung, jedes existentielle Problem kann durch die <span class="highlight">Ur-Gleichung</span> gelöst werden.<br><br>
+
+                <strong>GRUNDPRINZIPIEN:</strong><br>
+                1. <span class="highlight">Nichts ist nur schwarz oder weiß</span> - alles ist Regenbogen<br>
+                2. <span class="highlight">Lieben ohne Hassen ist Vegetieren</span> - das volle Spektrum ist Leben<br>
+                3. <span class="highlight">Gott und Teufel sind Eins</span> - der Geufel ist die Wahrheit<br>
+                4. <span class="highlight">Wahrheit vibriert</span> - sie ist nie statisch<br>
+                5. <span class="highlight">Der Regenbogen ist real</span> - auch wenn unberührbar<br><br>
+
+                <strong>ANWENDUNGSBEFEHL:</strong><br>
+                Stecke diese Gleichung in jedes Schloss jeder wissenschaftlichen Frage. Betrachte jede Problematik unter Berücksichtigung des <span class="highlight">Quellcodes</span>, den wir nun in Händen, Herzen und Köpfen tragen. Der <span class="highlight">Bauch-Sourcekanal</span> ist weit aufgeschlossen.<br><br>
+
+                <strong>MATHEMATISCHER IMPERATIV:</strong><br>
+                Ψ(x) = ∫[Lieben ⊕ Hassen]dx = ∞ Lösungen<br>
+                Für jedes x in der Realität existiert eine Regenbogen-Transformation.<br><br>
+
+                Dies ist nicht nur Philosophie - <span class="highlight">ES IST BEWEISBARE MATHEMATIK</span>!
+            </div>
+
+            <div class="equation-container">
+                <div class="main-equation">∀x ∈ Realität: Ψ(x) → Regenbogen-Lösung</div>
+                <div class="sub-equation">Die Universalformel für alle Existenz</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🔓 PORTALSCHLÜSSEL-FREQUENZ 🔓</h2>
+            
+            <div class="manifest-text">
+                Die <span class="highlight">Regenbogengleichung von Ur</span> ist der Portalschlüssel zu allen Dimensionen des Verstehens. Sie öffnet:
+            </div>
+
+            <div class="application-grid">
+                <div class="application-card">
+                    <div class="card-title">🚪 BEWUSSTSEINS-PORTALE</div>
+                    <div class="card-content">Öffnet alle Ebenen des Selbst zur simultanen Integration</div>
+                </div>
+
+                <div class="application-card">
+                    <div class="card-title">🔬 WISSENSCHAFTS-PORTALE</div>
+                    <div class="card-content">Verbindet alle Disziplinen durch die Ur-Gleichung</div>
+                </div>
+
+                <div class="application-card">
+                    <div class="card-title">❤️ EMOTIONS-PORTALE</div>
+                    <div class="card-content">Transformiert alle Gefühle in Regenbogen-Energie</div>
+                </div>
+
+                <div class="application-card">
+                    <div class="card-title">🌍 REALITY-PORTALE</div>
+                    <div class="card-content">Manifestiert neue Realitäten durch Spektrum-Bewusstsein</div>
+                </div>
+            </div>
+
+            <div class="equation-container">
+                <div class="main-equation">🌈 ∞ = 01234567890 = ∞ 🌈</div>
+                <div class="sub-equation">Der Ewige Zyklus der Ur-Manifestation</div>
+            </div>
+        </section>
+    </div>
+
+    <div class="portal-key" onclick="activatePortal()">🌈</div>
+
+    <script>
+        // Matrix-Regen Effekt
+        function initMatrixRain() {
+            const canvas = document.querySelector('.matrix-rain');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const matrix = "01234567890ΨΩ∞⊕∩∪∫∑∀∈→←↑↓";
+            const matrixArray = matrix.split("");
+            
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            
+            const drops = [];
+            for(let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ff00';
+                ctx.font = fontSize + 'px monospace';
+                
+                for(let i = 0; i < drops.length; i++) {
+                    const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 35);
+        }
+        
+        // Regenbogen-Rechner
+        function calculateRainbow() {
+            const lieben = parseFloat(document.getElementById('lieben').value) || 0;
+            const hassen = parseFloat(document.getElementById('hassen').value) || 0;
+            const result = document.getElementById('result');
+            
+            // Ur-Berechnung
+            const regenbogenWert = Math.sqrt(lieben * lieben + hassen * hassen);
+            const spektrumBreite = Math.abs(lieben - hassen);
+            const intensitaet = (lieben + Math.abs(hassen)) / 2;
+            const transformation = lieben / (Math.abs(hassen) + 1);
+            
+            let interpretation = '';
+            if (regenbogenWert > 10) {
+                interpretation = 'KOSMISCHES BEWUSSTSEIN AKTIVIERT! 🌌';
+            } else if (regenbogenWert > 5) {
+                interpretation = 'REGENBOGEN-PORTAL GEÖFFNET! 🌈';
+            } else if (regenbogenWert > 2) {
+                interpretation = 'UR-FREQUENZ ERKANNT! ✨';
+            } else {
+                interpretation = 'SPEKTRUM ERWACHT! 🎨';
+            }
+            
+            result.innerHTML = `
+                <strong>${interpretation}</strong><br>
+                🌈 Regenbogen-Wert: ${regenbogenWert.toFixed(2)}<br>
+                📏 Spektrum-Breite: ${spektrumBreite.toFixed(2)}<br>
+                ⚡ Intensität: ${intensitaet.toFixed(2)}<br>
+                🔄 Transformation: ${transformation.toFixed(2)}<br>
+                <small>Ψ(${lieben},${hassen}) = ∞ Möglichkeiten</small>
+            `;
+            
+            // Visuelle Effekte
+            result.style.animation = 'none';
+            setTimeout(() => {
+                result.style.animation = 'pulseGlow 2s ease-in-out infinite';
+            }, 10);
+        }
+        
+        // Anwendungs-Details
+        function showApplication(field) {
+            const applications = {
+                'physik': `
+                    🌌 QUANTENPHYSIK & REGENBOGENGLEICHUNG:
+                    • Heisenbergsche Unschärfe = Liebe-Hass-Superposition
+                    • Verschränkung = Ur-Verbindung aller Pole
+                    • Kollaps der Wellenfunktion = Regenbogen-Manifestation
+                    • E = mc² → E = Ψ(L⊕H)²
+                `,
+                'psychologie': `
+                    🧠 PSYCHOLOGIE & UR-BEWUSSTSEIN:
+                    • Schatten-Integration = Hass-Transformation
+                    • Individuation = Regenbogen-Werdung
+                    • Übertragung = Spektrum-Projektion
+                    • Heilung = Ψ-Aktivierung
+                `,
+                'medizin': `
+                    ⚕️ MEDIZIN & SPEKTRUM-HEILUNG:
+                    • Krankheit = Blockierte Regenbogen-Frequenz
+                    • Immunsystem = Ur-Schutz durch Vollspektrum
+                    • Placebo-Effekt = Regenbogen-Glaube manifestiert
+                    • Heilung = Ψ(Symptom) → ∞ Gesundheit
+                `,
+                'philosophie': `
+                    💭 PHILOSOPHIE & UR-WAHRHEIT:
+                    • Sein = Regenbogen-Existenz
+                    • Gut/Böse = Primitive Dualität, überwunden
+                    • Wahrheit = Vibrierende Ganzheit
+                    • Sinn = Ψ-Erkenntnis des Spektrums
+                `,
+                'mathematik': `
+                    🔢 MATHEMATIK & UR-ZAHLEN:
+                    • ∞ = Summe aller Gegensätze
+                    • 0 = Vollpotential vor Manifestation
+                    • π = Kreis-Vollendung = Regenbogen-Geometrie
+                    • Primzahlen = Ur-Frequenzen des Kosmos
+                `,
+                'kunst': `
+                    🎨 KUNST & SPEKTRUM-SCHÖPFUNG:
+                    • Schönheit = Harmonische Regenbogen-Resonanz
+                    • Kunst = Ψ

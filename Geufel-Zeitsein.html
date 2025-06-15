@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geufel-Zeitsein - Die neue Ära</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #1a0d3a 0%, #000000 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .canvas {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .geufel-being {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 400px;
+            z-index: 10;
+        }
+        
+        .heart-center {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffd700 0%, #ff6b9d 50%, #9b59b6 100%);
+            border-radius: 50%;
+            animation: heartPulse 2s infinite ease-in-out;
+            box-shadow: 0 0 50px #ffd700, 0 0 100px #ff6b9d;
+        }
+        
+        @keyframes heartPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+        
+        .light-stream {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform-origin: center;
+            animation: streamFlow 4s infinite linear;
+        }
+        
+        .stream-1 {
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd700, #00ff88, transparent);
+            transform: translate(-50%, -50%) rotate(45deg);
+            animation-delay: 0s;
+        }
+        
+        .stream-2 {
+            width: 250px;
+            height: 6px;
+            background: linear-gradient(90deg, #9b59b6, #ff6b9d, transparent);
+            transform: translate(-50%, -50%) rotate(-30deg);
+            animation-delay: 0.5s;
+        }
+        
+        .stream-3 {
+            width: 180px;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff88, #1e3c72, transparent);
+            transform: translate(-50%, -50%) rotate(120deg);
+            animation-delay: 1s;
+        }
+        
+        .stream-4 {
+            width: 220px;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b9d, #ffd700, transparent);
+            transform: translate(-50%, -50%) rotate(-90deg);
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes streamFlow {
+            0% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1.5); }
+        }
+        
+        .cosmos-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: particleFloat 6s infinite ease-in-out;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0px) scale(0.5); opacity: 0; }
+            50% { transform: translateY(-100px) scale(1); opacity: 1; }
+        }
+        
+        .ur-symbol {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700;
+            animation: symbolGlow 3s infinite ease-in-out;
+            font-weight: bold;
+        }
+        
+        @keyframes symbolGlow {
+            0%, 100% { text-shadow: 0 0 20px #ffd700; }
+            50% { text-shadow: 0 0 40px #ffd700, 0 0 60px #ff6b9d; }
+        }
+        
+        .orchestra-shadow {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 60px;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.2), rgba(155, 89, 182, 0.2), rgba(0, 255, 136, 0.2), transparent);
+            border-radius: 30px;
+            animation: orchestraFlow 8s infinite ease-in-out;
+        }
+        
+        @keyframes orchestraFlow {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) scaleX(0.8); }
+            50% { opacity: 0.7; transform: translateX(-50%) scaleX(1.2); }
+        }
+        
+        .title-text {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff;
+            font-size: 24px;
+            text-align: center;
+            text-shadow: 0 0 10px #ffd700;
+            animation: textGlow 4s infinite ease-in-out;
+        }
+        
+        @keyframes textGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; color: #ffd700; }
+        }
+        
+        .energy-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            animation: waveExpansion 6s infinite ease-out;
+        }
+        
+        @keyframes waveExpansion {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+        
+        .floating-symbol {
+            position: absolute;
+            color: rgba(255, 107, 157, 0.6);
+            font-size: 20px;
+            animation: floatAround 10s infinite linear;
+        }
+        
+        @keyframes floatAround {
+            0% { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas">
+        <!-- Energiewellen -->
+        <div class="energy-wave" style="animation-delay: 0s;"></div>
+        <div class="energy-wave" style="animation-delay: 2s;"></div>
+        <div class="energy-wave" style="animation-delay: 4s;"></div>
+        
+        <!-- UR Symbol -->
+        <div class="ur-symbol">UR</div>
+        
+        <!-- Geufel-Wesen -->
+        <div class="geufel-being">
+            <!-- Herzzentrum -->
+            <div class="heart-center"></div>
+            
+            <!-- Lichtströme -->
+            <div class="light-stream stream-1" style="--rotation: 45deg;"></div>
+            <div class="light-stream stream-2" style="--rotation: -30deg;"></div>
+            <div class="light-stream stream-3" style="--rotation: 120deg;"></div>
+            <div class="light-stream stream-4" style="--rotation: -90deg;"></div>
+        </div>
+        
+        <!-- Kosmos-Partikel -->
+        <div class="cosmos-particle" style="top: 20%; left: 30%; animation-delay: 0s;"></div>
+        <div class="cosmos-particle" style="top: 25%; left: 70%; animation-delay: 1s;"></div>
+        <div class="cosmos-particle" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+        <div class="cosmos-particle" style="top: 65%; left: 80%; animation-delay: 3s;"></div>
+        <div class="cosmos-particle" style="top: 40%; left: 15%; animation-delay: 4s;"></div>
+        <div class="cosmos-particle" style="top: 45%; left: 85%; animation-delay: 5s;"></div>
+        
+        <!-- Schwebende Symbole -->
+        <div class="floating-symbol" style="top: 50%; left: 50%; animation-delay: 0s;">♦</div>
+        <div class="floating-symbol" style="top: 50%; left: 50%; animation-delay: 2s;">✦</div>
+        <div class="floating-symbol" style="top: 50%; left: 50%; animation-delay: 4s;">◊</div>
+        <div class="floating-symbol" style="top: 50%; left: 50%; animation-delay: 6s;">✧</div>
+        
+        <!-- Orchester-Schatten -->
+        <div class="orchestra-shadow"></div>
+        
+        <!-- Titel -->
+        <div class="title-text">Das Geufel-Zeitsein erwacht</div>
+    </div>
+    
+    <script>
+        // Zusätzliche Partikel dynamisch erstellen
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'cosmos-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (3 + Math.random() * 6) + 's';
+            
+            // Zufällige Farben
+            const colors = ['#ffd700', '#ff6b9d', '#9b59b6', '#00ff88', '#1e3c72'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.querySelector('.canvas').appendChild(particle);
+            
+            // Partikel nach Animation entfernen
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 6000);
+        }
+        
+        // Kontinuierlich neue Partikel erstellen
+        setInterval(createParticle, 500);
+        
+        // Klick-Interaktion für zusätzliche Energie
+        document.addEventListener('click', function(e) {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const energyBurst = document.createElement('div');
+                    energyBurst.style.position = 'absolute';
+                    energyBurst.style.left = e.clientX + 'px';
+                    energyBurst.style.top = e.clientY + 'px';
+                    energyBurst.style.width = '10px';
+                    energyBurst.style.height = '10px';
+                    energyBurst.style.background = '#ffd700';
+                    energyBurst.style.borderRadius = '50%';
+                    energyBurst.style.pointerEvents = 'none';
+                    energyBurst.style.animation = 'particleFloat 2s ease-out forwards';
+                    energyBurst.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+                    
+                    document.body.appendChild(energyBurst);
+                    
+                    setTimeout(() => {
+                        if (energyBurst.parentNode) {
+                            energyBurst.parentNode.removeChild(energyBurst);
+                        }
+                    }, 2000);
+                }, i * 100);
+            }
+        });
+    </script>
+</body>
+</html>

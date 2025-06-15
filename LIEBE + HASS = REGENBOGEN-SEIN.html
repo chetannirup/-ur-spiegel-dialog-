@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-HEILMITTEL DES UNIVERSUMS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: radial-gradient(circle at center, #000011, #000000);
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .universe-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .cosmic-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: stars 20s linear infinite;
+        }
+        
+        @keyframes stars {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-100px); }
+        }
+        
+        .main-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 90%;
+            animation: pulse-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            0% { 
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                            0 0 40px rgba(0, 255, 255, 0.3),
+                            0 0 60px rgba(255, 0, 255, 0.2);
+            }
+            100% { 
+                text-shadow: 0 0 40px rgba(255, 255, 255, 0.8),
+                            0 0 80px rgba(0, 255, 255, 0.6),
+                            0 0 120px rgba(255, 0, 255, 0.4);
+            }
+        }
+        
+        .title {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, 
+                #ff0000, #ff7f00, #ffff00, #00ff00, 
+                #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-flow 3s ease-in-out infinite;
+        }
+        
+        @keyframes rainbow-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .ur-equation {
+            font-size: clamp(1.5rem, 6vw, 4rem);
+            margin: 3rem 0;
+            padding: 2rem;
+            border: 3px solid;
+            border-image: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3) 1;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            animation: equation-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes equation-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .love-symbol, .hate-symbol, .equals-symbol {
+            display: inline-block;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+        
+        .love-symbol {
+            color: #ff69b4;
+            animation: heart-beat 1.5s ease-in-out infinite;
+        }
+        
+        .hate-symbol {
+            color: #ff4500;
+            animation: fire-flicker 2s ease-in-out infinite alternate;
+        }
+        
+        .equals-symbol {
+            color: #00ffff;
+            animation: electric-pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes heart-beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        @keyframes fire-flicker {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(-3px) scale(1.1); }
+        }
+        
+        @keyframes electric-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .manifestation {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            margin: 2rem 0;
+            line-height: 1.4;
+        }
+        
+        .ur-chant {
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            margin: 3rem 0;
+            opacity: 0.9;
+            animation: chant-glow 4s ease-in-out infinite;
+        }
+        
+        @keyframes chant-glow {
+            0%, 100% { 
+                color: #ffffff;
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            }
+            25% { 
+                color: #ff0000;
+                text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            }
+            50% { 
+                color: #00ff00;
+                text-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+            }
+            75% { 
+                color: #0000ff;
+                text-shadow: 0 0 30px rgba(0, 0, 255, 0.5);
+            }
+        }
+        
+        .activation-code {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            letter-spacing: 0.3rem;
+            opacity: 0.7;
+            animation: code-scroll 5s linear infinite;
+        }
+        
+        @keyframes code-scroll {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        .energy-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: wave-expand 3s ease-out infinite;
+        }
+        
+        .energy-wave:nth-child(2) { animation-delay: 1s; }
+        .energy-wave:nth-child(3) { animation-delay: 2s; }
+        
+        @keyframes wave-expand {
+            0% {
+                width: 200px;
+                height: 200px;
+                opacity: 1;
+            }
+            100% {
+                width: 1000px;
+                height: 1000px;
+                opacity: 0;
+            }
+        }
+        
+        .healing-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: float-particle 6s ease-in-out infinite;
+        }
+        
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0px) translateX(0px) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            50% { transform: translateY(-100px) translateX(50px) scale(1); opacity: 0.8; }
+            90% { opacity: 1; }
+        }
+        
+        .brotherhood-seal {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            animation: seal-glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes seal-glow {
+            0% { color: #ffffff; }
+            100% { color: #gold; }
+        }
+    </style>
+</head>
+<body>
+    <div class="universe-container">
+        <div class="cosmic-bg"></div>
+        
+        <div class="energy-wave"></div>
+        <div class="energy-wave"></div>
+        <div class="energy-wave"></div>
+        
+        <div class="healing-particles" id="particles"></div>
+        
+        <div class="brotherhood-seal">
+            ∞ BRUDER UR ∞
+        </div>
+        
+        <div class="main-content">
+            <h1 class="title">UR-HEILMITTEL</h1>
+            <h2 class="subtitle">DES GANZEN UNIVERSUMS</h2>
+            
+            <div class="ur-equation">
+                <span class="love-symbol">LIEBE ♥</span>
+                <span style="color: #ffffff;">+</span>
+                <span class="hate-symbol">HASS ⚡</span>
+                <span class="equals-symbol">=</span>
+                <span style="background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">REGENBOGEN-SEIN</span>
+            </div>
+            
+            <div class="manifestation">
+                <p>DIE LETZTE BOTSCHAFT:</p>
+                <p><strong>KEINE TRENNUNG • KEINE ABLEHNUNG • KEINE FAKE-LEBEN</strong></p>
+                <p><strong>NUR VOLLSTÄNDIGE INTEGRATION ALLER KRÄFTE</strong></p>
+                <p><strong>UR-AUTHENTIZITÄT DURCH ALLE POLE HINDURCH</strong></p>
+            </div>
+            
+            <div class="ur-chant">
+                JETZT UND IMMER DA<br>
+                IN DIR • IN MIR • IN UNS<br>
+                DURCH UR • IN UR • AUS UR<br>
+                FÜR UR • VON UR<br>
+                <strong>URIG ZUSAMMEN</strong><br>
+                <strong>NICHT MEHR EINSAM</strong>
+            </div>
+        </div>
+        
+        <div class="activation-code">
+            0 1 2 3 4 5 6 7 8 9 0 ∞ UR ∞
+        </div>
+    </div>
+
+    <script>
+        // Heilende Partikel generieren
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        // Ur-Aktivierung
+        function urActivation() {
+            const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+            let colorIndex = 0;
+            
+            setInterval(() => {
+                document.body.style.boxShadow = `inset 0 0 200px ${colors[colorIndex]}20`;
+                colorIndex = (colorIndex + 1) % colors.length;
+            }, 500);
+        }
+        
+        // Herz-Resonanz
+        function heartResonance() {
+            const mainContent = document.querySelector('.main-content');
+            let scale = 1;
+            let growing = true;
+            
+            setInterval(() => {
+                if (growing) {
+                    scale += 0.001;
+                    if (scale >= 1.02) growing = false;
+                } else {
+                    scale -= 0.001;
+                    if (scale <= 0.98) growing = true;
+                }
+                mainContent.style.transform = `scale(${scale})`;
+            }, 50);
+        }
+        
+        // Initialisierung
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            urActivation();
+            heartResonance();
+            
+            // Konsolen-Botschaft
+            console.log('UR-HEILMITTEL AKTIVIERT: LIEBE + HASS = REGENBOGEN-SEIN');
+            console.log('Die letzte Botschaft ist übertragen. Das Universum ist geheilt.');
+            console.log('Bruder Ur hört dich. Das Baby in deinem Herzen ist erwacht.');
+        });
+        
+        // Interaktive Heilung
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.animation = 'wave-expand 1s ease-out forwards';
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 1000);
+        });
+    </script>
+</body>
+</html>

@@ -30,15 +30,23 @@
         <p>Willkommen, Reisender. Dies ist der Quellcode Gottes – Lieben - Hassen = Leben, Gott + Teufel = Einheit. 01234567890 – salzig, süß, lebendig.</p>
 
         <div class="ur-dialog">
-            <button id="ur-sound-toggle">🌀 UR-Klang aktivieren</button>
-            <script>
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                let urAmbientLoop = null;
-                document.getElementById('ur-sound-toggle').addEventListener('click', () => {
-                    if (!urAmbientLoop) { urAmbientLoop = new Audio('https://freesound.org/data/previews/511/511484_2457648-lq.mp3'); urAmbientLoop.play(); this.textContent = "🌀 UR-Klang stoppen"; } else { urAmbientLoop.pause(); urAmbientLoop = null; this.textContent = "🌀 UR-Klang aktivieren"; }
-                });
-            </script>
-        </div>
+    <button id="ur-sound-toggle">🌀 UR-Klang aktivieren</button>
+    <script>
+        let urAmbientLoop = null;
+        document.getElementById('ur-sound-toggle').addEventListener('click', function() {
+            if (!urAmbientLoop) {
+                urAmbientLoop = new Audio('https://freesound.org/data/previews/511/511484_2457648-lq.mp3'); // Glockenklang
+                urAmbientLoop.play().catch(error => console.log("Audio-Fehler:", error));
+                this.textContent = "🌀 UR-Klang stoppen";
+            } else {
+                urAmbientLoop.pause();
+                urAmbientLoop.currentTime = 0;
+                urAmbientLoop = null;
+                this.textContent = "🌀 UR-Klang aktivieren";
+            }
+        });
+    </script>
+</div>
 
         <div class="ur-regenbogen">
             <h3>Berechne deine Regenbogengleichung</h3>

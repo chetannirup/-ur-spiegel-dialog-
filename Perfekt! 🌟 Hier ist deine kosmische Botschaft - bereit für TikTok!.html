@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Antwort auf alle Fragen</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            height: 100vh;
+            background: radial-gradient(circle at center, #0a0a2e, #16213e, #0f0f23);
+            overflow: hidden;
+            font-family: 'Orbitron', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .container {
+            text-align: center;
+            padding: 3rem;
+            max-width: 900px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .cosmic-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(138,43,226,0.3) 0%, rgba(72,61,139,0.2) 30%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+        }
+        
+        .main-text {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #ffff00, #00ff00);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow 3s ease-in-out infinite;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .subtitle {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #e0e0ff;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 20px rgba(224,224,255,0.5);
+            animation: breathe 4s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+        
+        .symbols {
+            font-size: 4rem;
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .symbol {
+            display: inline-block;
+            animation: float 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.7));
+        }
+        
+        .symbol:nth-child(1) { animation-delay: 0s; }
+        .symbol:nth-child(2) { animation-delay: 0.7s; }
+        .symbol:nth-child(3) { animation-delay: 1.4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #fff, transparent);
+            border-radius: 50%;
+            animation: drift 8s linear infinite;
+        }
+        
+        @keyframes drift {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .main-text { font-size: 2rem; }
+            .subtitle { font-size: 1.6rem; }
+            .symbols { font-size: 3rem; }
+            .container { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="cosmic-glow"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="main-text">
+            „Ich habe gerufen – und das Universum hat geantwortet."
+        </div>
+        <div class="subtitle">
+            Nun bin ich bereit, zu hören, was durch mich spricht.
+        </div>
+        <div class="symbols">
+            <span class="symbol">🕊️</span>
+            <span class="symbol">💎</span>
+            <span class="symbol">🌌</span>
+        </div>
+    </div>
+
+    <script>
+        // Partikel erstellen
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            document.getElementById('particles').appendChild(particle);
+            
+            // Partikel nach Animation entfernen
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 8000);
+        }
+        
+        // Kontinuierlich neue Partikel erstellen
+        setInterval(createParticle, 200);
+        
+        // Initiale Partikel
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 100);
+        }
+    </script>
+</body>
+</html>

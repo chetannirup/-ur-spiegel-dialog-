@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-TEMPEL • Lebende Spiritualität</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .ur-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header mit pulsierendem UR-Symbol */
+        .ur-header {
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .ur-symbol {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: pulse-ur 3s infinite;
+        }
+        
+        .ur-circle {
+            position: absolute;
+            border: 2px solid;
+            border-radius: 50%;
+            animation: rotate-ur 10s linear infinite;
+        }
+        
+        .circle-1 { 
+            width: 200px; 
+            height: 200px; 
+            border-color: #ff6b6b; 
+            top: 0; 
+            left: 0;
+        }
+        
+        .circle-2 { 
+            width: 150px; 
+            height: 150px; 
+            border-color: #4ecdc4; 
+            top: 25px; 
+            left: 25px;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+        
+        .circle-3 { 
+            width: 100px; 
+            height: 100px; 
+            border-color: #45b7d1; 
+            top: 50px; 
+            left: 50px;
+            animation-duration: 8s;
+        }
+        
+        .ur-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            animation: glow-ur 2s infinite alternate;
+        }
+        
+        @keyframes pulse-ur {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes rotate-ur {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes glow-ur {
+            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(69, 183, 209, 0.8); }
+        }
+        
+        .ur-title {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .ur-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+        
+        /* Navigation */
+        .ur-nav {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-dot.active,
+        .nav-dot:hover {
+            background: #4ecdc4;
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.8);
+        }
+        
+        /* Sections */
+        .ur-section {
+            padding: 100px 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .ur-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            animation: pulse-line 2s infinite;
+        }
+        
+        @keyframes pulse-line {
+            0%, 100% { width: 100px; opacity: 1; }
+            50% { width: 150px; opacity: 0.7; }
+        }
+        
+        /* Trinity Cards */
+        .trinity-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 80px 0;
+        }
+        
+        .trinity-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trinity-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .trinity-card:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+        
+        .trinity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .trinity-symbol {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .symbol-1 { color: #ff6b6b; }
+        .symbol-0 { color: #4ecdc4; }
+        .symbol-inf { color: #45b7d1; }
+        
+        /* UR Codes */
+        .ur-codes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .ur-code {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(78, 205, 196, 0.2));
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .ur-code:hover {
+            transform: scale(1.05);
+            border-color: #4ecdc4;
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+        }
+        
+        .code-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .code-meaning {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Interactive Meditation */
+        .meditation-zone {
+            background: radial-gradient(circle, rgba(69, 183, 209, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+            border-radius: 30px;
+            padding: 80px;
+            text-align: center;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .meditation-circle {
+            width: 300px;
+            height: 300px;
+            border: 3px solid #4ecdc4;
+            border-radius: 50%;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: breathe 4s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); border-color: #4ecdc4; }
+            50% { transform: scale(1.1); border-color: #45b7d1; }
+        }
+        
+        .meditation-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+        
+        .meditation-instructions {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Sacred Formulas */
+        .formula-container {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .formula-text {
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: formula-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes formula-glow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ur-title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .trinity-container { grid-template-columns: 1fr; }
+            .ur-codes { grid-template-columns: repeat(2, 1fr); }
+            .meditation-zone { padding: 40px 20px; }
+            .meditation-circle { width: 200px; height: 200px; }
+        }
+        
+        /* Scroll effects */
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+        }
+        
+        /* Additional animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg" id="cosmic-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="ur-nav" id="ur-nav">
+        <div class="nav-dot active" data-section="0"></div>
+        <div class="nav-dot" data-section="1"></div>
+        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot" data-section="3"></div>
+        <div class="nav-dot" data-section="4"></div>
+        <div class="nav-dot" data-section="5"></div>
+    </nav>
+    
+    <!-- Header -->
+    <header class="ur-header" id="section-0">
+        <div class="ur-container">
+            <div class="ur-symbol">
+                <div class="ur-circle circle-1"></div>
+                <div class="ur-circle circle-2"></div>
+                <div class="ur-circle circle-3"></div>
+                <div class="ur-center">UR</div>
+            </div>
+            <h1 class="ur-title">UR-TEMPEL</h1>
+            <p class="ur-subtitle">Ein lebendiges Kompendium der spirituellen Erweckung</p>
+        </div>
+    </header>
+    
+    <!-- Trinity Section -->
+    <section class="ur-section" id="section-1">
+        <div class="ur-container">
+            <h2 class="section-title">Die Heilige Trinität</h2>
+            <div class="trinity-container">
+                <div class="trinity-card">
+                    <div class="trinity-symbol symbol-1">1</div>
+                    <h3>Das Bewusste Ich</h3>
+                    <p>Die Einheit, das Erkennende, das Ganze. Du bist die Erfahrung, die sich selbst erfährt.</p>
+                </div>
+                <div class="trinity-card">
+                    <div class="trinity-symbol symbol-0">0</div>
+                    <h3>Das Loslassen</h3>
+                    <p>Die Leere, das Nicht-Ich, die Stille. Du bist der Raum, in dem alles entstehen kann.</p>
+                </div>
+                <div class="trinity-card">
+                    <div class="trinity-symbol symbol-inf">∞</div>
+                    <h3>Das Kosmische Wesen</h3>
+                    <p>Die Grenzenlosigkeit, die Unendlichkeit. Du bist das Bewusstsein ohne Grenzen.</p>
+                </div>
+            </div>
+            <div class="formula-container">
+                <div class="formula-text">"Du bist gleichzeitig ganz (1), leer (0) und unendlich (∞)"</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- UR Codes Section -->
+    <section class="ur-section" id="section-2">
+        <div class="ur-container">
+            <h2 class="section-title">Die UR-Codes</h2>
+            <div class="ur-codes">
+                <div class="ur-code">
+                    <div class="code-number">777</div>
+                    <div class="code-meaning">Ich bin</div>
+                </div>
+                <div class="ur-code">
+                    <div class="code-number">888</div>
+                    <div class="code-meaning">Ich bin leer</div>
+                </div>
+                <div class="ur-code">
+                    <div class="code-number">999</div>
+                    <div class="code-meaning">Ich bin unendlich</div>
+                </div>
+                <div class="ur-code">
+                    <div class="code-number">000</div>
+                    <div class="code-meaning">Ich bin in UR</div>
+                </div>
+            </div>
+            <div class="formula-container">
+                <div class="formula-text">"Jede Zahl ist eine Frequenz, jede Frequenz ist ein Gedanke Gottes"</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Meditation Section -->
+    <section class="ur-section" id="section-3">
+        <div class="ur-container">
+            <h2 class="section-title">Interaktive UR-Meditation</h2>
+            <div class="meditation-zone">
+                <div class="meditation-circle" id="meditationCircle">
+                    <div class="meditation-text">Atme mit UR</div>
+                </div>
+                <div class="meditation-instructions">
+                    Klicke auf den Kreis und atme mit der Bewegung. Lass dich von der Frequenz tragen und spüre die Verbindung zum UR-Feld.
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Consciousness Philosophy -->
+    <section class="ur-section" id="section-4">
+        <div class="ur-container">
+            <h2 class="section-title">Bewusstseinsphilosophie</h2>
+            <div class="trinity-container">
+                <div class="trinity-card">
+                    <div class="trinity-symbol">🌊</div>
+                    <h3>Die Seele als Welle</h3>
+                    <p>Jede Seele ist eine Welle, die sich an sich selbst erinnert. Pure Frequenz, reines Bewusstsein.</p>
+                </div>
+                <div class="trinity-card">
+                    <div class="trinity-symbol">🕸️</div>
+                    <h3>Das Bewusstseinsnetz</h3>
+                    <p>Alle Seelen bilden ein interagierendes Netzwerk - den "Garden of Light".</p>
+                </div>
+                <div class="trinity-card">
+                    <div class="trinity-symbol">✨</div>
+                    <h3>Kollektive Projektion</h3>
+                    <p>Die materielle Welt entsteht als gemeinsame Frequenzprojektion aller Bewusstseine.</p>
+                </div>
+            </div>
+            <div class="formula-container">
+                <div class="formula-text">"Ich bin eine Welle, die sich an sich selbst erinnert"</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sacred Formulas -->
+    <section class="ur-section" id="section-5">
+        <div class="ur-container">
+            <h2 class="section-title">Heilige Formeln</h2>
+            <div class="formula-container">
+                <div class="formula-text">"Ich wähle den Weg, den UR mir zeigt, und ich zeige UR meine Freude an dem Weg, den ich gehe"</div>
+            </div>
+            <div class="formula-container">
+                <div class="formula-text">"Ich bin zurück - in das, was nie gegangen ist"</div>
+            </div>
+            <div class="formula-container">
+                <div class="formula-text">"UR erkennt dich, weil du UR erkennst"</div>
+            </div>
+            <div class="formula-container">
+                <div class="formula-text">"Ich denke nicht - ich bin gedacht. Ich gehe nicht - ich werde getragen."</div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Cosmic background stars
+        function createStars() {
+            const cosmicBg = document.getElementById('cosmic-bg');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                cosmicBg.appendChild(star);
+            }
+        }
+        
+        // Scroll animation
+        function handleScroll() {
+            const sections = document.querySelectorAll('.ur-section');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.3;
+                
+                if (isVisible) {
+                    section.classList.add('visible');
+                    navDots.forEach(dot => dot.classList.remove('active'));
+                    if (navDots[index]) navDots[index].classList.add('active');
+                }
+            });
+            
+            // Parallax effect
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        }
+        
+        // Navigation
+        function setupNavigation() {
+            const navDots = document.querySelectorAll('.nav-dot');
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const section = document.getElementById(`section-${index}`);
+                    section.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+        
+        // Interactive meditation
+        function setupMeditation() {
+            const meditationCircle = document.getElementById('meditationCircle');
+            let isActive = false;
+            
+            meditationCircle.addEventListener('click', () => {
+                isActive = !isActive;
+                if (isActive) {
+                    meditationCircle.style.animation = 'breathe 2s ease-in-out infinite';
+                    meditationCircle.querySelector('.meditation-text').textContent = 'Du atmest mit UR...';
+                } else {
+                    meditationCircle.style.animation = 'breathe 4s ease-in-out infinite';
+                    meditationCircle.querySelector('.meditation-text').textContent = 'Atme mit UR';
+                }
+            });
+        }
+        
+        // Trinity card interactions
+        function setupTrinityCards() {
+            const trinityCards = document.querySelectorAll('.trinity-card');
+            trinityCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.background = 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))';
+                });
+            });
+        }
+        
+        // UR Code interactions
+        function setupUrCodes() {
+            const urCodes = document.querySelectorAll('.ur-code');
+            urCodes.forEach(code => {
+                code.addEventListener('click', () => {
+                    const number = code.querySelector('.code-number').textContent;
+                    const meaning = code.querySelector('.code-meaning').textContent;
+                    
+                    // Visual feedback
+                    code.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        code.style.transform = 'scale(1.05)';
+                    }, 200);
+                    
+                    // Sound could be added here
+                    console.log(`UR-Code aktiviert: ${number} - ${meaning}`);
+                });
+            });
+        }
+        
+        // Initialize everything
+        function init() {
+            createStars();
+            setupNavigation();
+            setupMeditation();
+            setupTrinityCards();
+            setupUrCodes();
+            
+            // Initial scroll check
+            handleScroll();
+            
+            // Add scroll listener
+            window.addEventListener('scroll', handleScroll);
+            
+            // Add resize listener
+            window.addEventListener('resize', handleScroll);
+        }
+        
+        // Start when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

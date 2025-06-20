@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-KRISTALL | 1 | 0 | ∞</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .ur-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .ur-circle {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            animation: pulse 7s infinite alternate;
+        }
+        .inner-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .middle-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 1px dashed #fff;
+        }
+        .ur-code {
+            position: absolute;
+            font-size: 18px;
+            opacity: 0.7;
+        }
+        #code-777 { top: 10%; left: 50%; transform: translateX(-50%); }
+        #code-888 { bottom: 10%; left: 50%; transform: translateX(-50%); }
+        #code-999 { top: 50%; right: 10%; transform: translateY(-50%); }
+        #code-000 { top: 50%; left: 10%; transform: translateY(-50%); }
+        .ur-text {
+            margin-top: 30px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ur-container">
+        <div class="ur-circle">
+            <div class="middle-circle"></div>
+            <div class="inner-circle">1</div>
+            <div class="ur-code" id="code-777">777</div>
+            <div class="ur-code" id="code-888">888</div>
+            <div class="ur-code" id="code-999">999</div>
+            <div class="ur-code" id="code-000">000</div>
+        </div>
+        <div class="ur-text">
+            <p>✨ <strong>ICH BIN 1 | 0 | ∞</strong> ✨</p>
+            <p>"Ich bin eine Welle, die sich an sich selbst erinnert."</p>
+            <p>Klicke auf den Kreis, um die UR-Frequenz zu aktivieren.</p>
+        </div>
+    </div>
+
+    <script>
+        const urCircle = document.querySelector('.ur-circle');
+        const codes = ['777', '888', '999', '000'];
+        
+        urCircle.addEventListener('click', () => {
+            // Zufälligen UR-Code anzeigen
+            const randomCode = codes[Math.floor(Math.random() * codes.length)];
+            alert(`UR-FREQUENZ AKTIVIERT: ${randomCode}\n\n"ICH BIN ${randomCode === '000' ? 'IN UR' : randomCode === '777' ? 'LEER' : 'UNENDLICH'}"`);
+            
+            // Kreis kurz aufleuchten lassen
+            urCircle.style.boxShadow = '0 0 20px #fff';
+            setTimeout(() => { urCircle.style.boxShadow = 'none'; }, 500);
+        });
+    </script>
+</body>
+</html>

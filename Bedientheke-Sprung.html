@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Sprung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 400px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .title {
+            font-size: 2.2em;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        
+        .circle {
+            width: 120px;
+            height: 120px;
+            border: 3px solid #ecf0f1;
+            border-radius: 50%;
+            margin: 30px auto;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .circle:hover {
+            transform: scale(1.05);
+            border-color: #3498db;
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
+        }
+        
+        .center-point {
+            width: 8px;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
+        }
+        
+        .main-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 30px 0;
+            font-weight: 300;
+        }
+        
+        .highlight {
+            font-weight: 600;
+            font-size: 1.2em;
+            display: block;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .bottom-text {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 30px;
+            font-style: italic;
+        }
+        
+        .hidden-message {
+            opacity: 0;
+            transition: opacity 2s ease;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #3498db;
+        }
+        
+        .container:hover .hidden-message {
+            opacity: 1;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+                padding: 30px 20px;
+            }
+            .title {
+                font-size: 1.8em;
+            }
+            .circle {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Der Sprung</h1>
+        
+        <div class="circle" onclick="jump()">
+            <div class="center-point"></div>
+        </div>
+        
+        <div class="main-text">
+            Ich falle – und es beginnt, mich zu gehen.<br>
+            Ich bin nicht mehr Bewegung –<br>
+            <span class="highlight">ich bin bewegt.</span>
+        </div>
+        
+        <div class="bottom-text">
+            Du rennst am Rand im Kreis?<br>
+            Die Mitte wartet. Still. Tragend.
+        </div>
+        
+        <div class="hidden-message" id="hiddenMsg">
+            Der Erlebniseinkauf beginnt jetzt.
+        </div>
+    </div>
+
+    <script>
+        function jump() {
+            const circle = document.querySelector('.circle');
+            const point = document.querySelector('.center-point');
+            
+            // Kleiner "Sprung" Effekt
+            circle.style.transform = 'scale(0.95)';
+            point.style.animation = 'none';
+            
+            setTimeout(() => {
+                circle.style.transform = 'scale(1.1)';
+                point.style.background = '#3498db';
+                point.style.boxShadow = '0 0 20px rgba(52, 152, 219, 0.8)';
+            }, 100);
+            
+            setTimeout(() => {
+                circle.style.transform = 'scale(1)';
+                point.style.animation = 'pulse 3s infinite ease-in-out';
+                point.style.background = '#ecf0f1';
+                point.style.boxShadow = 'none';
+            }, 300);
+            
+            // Versteckte Nachricht kurz einblenden
+            const msg = document.getElementById('hiddenMsg');
+            msg.style.opacity = '1';
+            setTimeout(() => {
+                msg.style.opacity = '0';
+            }, 3000);
+        }
+        
+        // Easter Egg: Bei langem Berühren des Kreises
+        let touchTimer;
+        const circle = document.querySelector('.circle');
+        
+        circle.addEventListener('mousedown', startTouch);
+        circle.addEventListener('touchstart', startTouch);
+        circle.addEventListener('mouseup', endTouch);
+        circle.addEventListener('touchend', endTouch);
+        
+        function startTouch() {
+            touchTimer = setTimeout(() => {
+                document.body.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)';
+                document.querySelector('.main-text').innerHTML = 
+                    'Du bist angekommen.<br>Nicht mehr unterwegs.<br><span class="highlight">Du bist Zuhause.</span>';
+            }, 2000);
+        }
+        
+        function endTouch() {
+            clearTimeout(touchTimer);
+        }
+    </script>
+</body>
+</html>

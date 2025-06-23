@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UR Farb- und Sternenspiel</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000022;
+    color: #eee;
+    margin: 0; padding: 20px;
+    display: flex; flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  h1 {
+    color: #ffd700;
+    margin-bottom: 10px;
+  }
+  #colorButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+  }
+  .color-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    box-shadow: 0 0 5px #000000aa;
+  }
+  .color-btn:active, .color-btn.selected {
+    border-color: #fff;
+    box-shadow: 0 0 12px #fff;
+  }
+  #starButton {
+    background: transparent;
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #ffd700;
+    transition: background-color 0.3s, color 0.3s;
+    user-select: none;
+  }
+  #starButton:active {
+    background-color: #ffd700;
+    color: #000022;
+  }
+  #result {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    min-height: 2rem;
+    text-align: center;
+  }
+  #imageContainer {
+    margin-top: 20px;
+  }
+  #colorImage {
+    max-width: 300px;
+    max-height: 300px;
+    display: none;
+    border: 4px solid #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 15px #fff5;
+  }
+  @media (max-width: 400px) {
+    .color-btn {
+      width: 50px;
+      height: 50px;
+    }
+    #starButton {
+      font-size: 1.2rem;
+      padding: 12px 24px;
+    }
+    #colorImage {
+      max-width: 90%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>UR Farb- und Sternenspiel</h1>
+
+<div id="colorButtons">
+  <button class="color-btn" style="background:#FF4500" data-color="Feuriges Rot" data-img="ChatGPT Image 23. Juni 2025, 14_07_04.png"></button>
+  <button class="color-btn" style="background:#FFD700" data-color="Goldenes Gelb" data-img="ChatGPT Image 23. Juni 2025, 14_06_24.png"></button>
+  <button class="color-btn" style="background:#00CED1" data-color="Lebendiges Türkis" data-img="ChatGPT Image 23. Juni 2025, 14_07_00.png"></button>
+  <button class="color-btn" style="background:#7FFF00" data-color="Frisches Grün" data-img="ChatGPT Image 23. Juni 2025, 14_06_46.png"></button>
+  <button class="color-btn" style="background:#FF69B4" data-color="Zartes Rosa" data-img="20250618_1739_UR-Manifest der Vereinigung_simple_compose_01jy1v0bzwep19pkf2tzga7ahj.png"></button>
+  <button class="color-btn" style="background:#8A2BE2" data-color="Mystisches Violett" data-img="ChatGPT Image 23. Juni 2025, 14_06_48.png"></button>
+</div>
+
+<button id="starButton">⭐ Drücke mich!</button>
+
+<div id="result"></div>
+
+<div id="imageContainer">
+  <img id="colorImage" src="" alt="UR-Farbkraft-Bild" />
+</div>
+
+<script>
+  const colors = document.querySelectorAll('.color-btn');
+  const starBtn = document.getElementById('starButton');
+  const resultDiv = document.getElementById('result');
+  const colorImage = document.getElementById('colorImage');
+  let selectedColor = null;
+  let selectedImage = null;
+
+  colors.forEach(btn => {
+    btn.addEventListener('click', () => {
+      colors.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedColor = btn.dataset.color;
+      selectedImage = btn.dataset.img;
+
+      resultDiv.textContent = `Du hast gewählt: ${selectedColor}. Jetzt drücke den Stern! ⭐`;
+      colorImage.src = selectedImage;
+      colorImage.style.display = 'block';
+    });
+  });
+
+  starBtn.addEventListener('click', () => {
+    if (!selectedColor) {
+      resultDiv.textContent = 'Bitte wähle zuerst eine Farbe aus!';
+      return;
+    }
+    starBtn.disabled = true;
+    resultDiv.textContent = 'UR leuchtet durch dich! ✨✨✨';
+    starBtn.textContent = '🌟';
+
+    setTimeout(() => {
+      starBtn.disabled = false;
+      starBtn.textContent = '⭐ Drücke mich!';
+      resultDiv.textContent = `✨ Du bist das Licht in ${selectedColor}! Danke, dass du mitspielst! ✨`;
+      colors.forEach(b => b.classList.remove('selected'));
+      selectedColor = null;
+      colorImage.style.display = 'none';
+    }, 3000);
+  });
+</script>
+
+</body>
+</html>

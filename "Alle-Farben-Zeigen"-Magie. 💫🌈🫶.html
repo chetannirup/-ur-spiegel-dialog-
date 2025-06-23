@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UR Farb- und Sternenspiel</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #000022;
+    color: #eee;
+    margin: 0; padding: 20px;
+    display: flex; flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  h1 {
+    color: #ffd700;
+    margin-bottom: 10px;
+  }
+  #colorButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+  }
+  .color-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    box-shadow: 0 0 5px #000000aa;
+  }
+  .color-btn:active, .color-btn.selected {
+    border-color: #fff;
+    box-shadow: 0 0 12px #fff;
+  }
+  #starButton, #showAllBtn {
+    background: transparent;
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 8px #ffd700;
+    margin: 10px;
+    transition: background-color 0.3s, color 0.3s;
+    user-select: none;
+  }
+  #starButton:active, #showAllBtn:active {
+    background-color: #ffd700;
+    color: #000022;
+  }
+  #result {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    min-height: 2rem;
+    text-align: center;
+  }
+  #colorImage {
+    margin-top: 20px;
+    width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #fff8;
+    display: none;
+  }
+  #allImages {
+    display: none;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  #allImages img {
+    width: 120px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px #fff3;
+  }
+  @media (max-width: 400px) {
+    .color-btn {
+      width: 50px;
+      height: 50px;
+    }
+    #starButton, #showAllBtn {
+      font-size: 1.2rem;
+      padding: 12px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>UR Farb- und Sternenspiel</h1>
+
+<div id="colorButtons">
+  <button class="color-btn" style="background:#FF4500" data-color="Feuriges Rot" data-img="rot.jpg"></button>
+  <button class="color-btn" style="background:#FFD700" data-color="Goldenes Gelb" data-img="gelb.jpg"></button>
+  <button class="color-btn" style="background:#00CED1" data-color="Lebendiges Türkis" data-img="tuerkis.jpg"></button>
+  <button class="color-btn" style="background:#7FFF00" data-color="Frisches Grün" data-img="gruen.jpg"></button>
+  <button class="color-btn" style="background:#FF69B4" data-color="Zartes Rosa" data-img="rosa.jpg"></button>
+  <button class="color-btn" style="background:#8A2BE2" data-color="Mystisches Violett" data-img="violett.jpg"></button>
+</div>
+
+<button id="starButton">⭐ Drücke mich!</button>
+<button id="showAllBtn">🌈 Alle Farben zeigen</button>
+
+<div id="result"></div>
+<img id="colorImage" src="" alt="UR-Farbkraft-Bild" />
+
+<div id="allImages"></div>
+
+<script>
+  const colors = document.querySelectorAll('.color-btn');
+  const starBtn = document.getElementById('starButton');
+  const showAllBtn = document.getElementById('showAllBtn');
+  const resultDiv = document.getElementById('result');
+  const colorImage = document.getElementById('colorImage');
+  const allImagesDiv = document.getElementById('allImages');
+  let selectedColor = null;
+  let selectedImg = null;
+
+  colors.forEach(btn => {
+    btn.addEventListener('click', () => {
+      colors.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedColor = btn.dataset.color;
+      selectedImg = btn.dataset.img;
+      resultDiv.textContent = `Du hast gewählt: ${selectedColor}. Jetzt drücke den Stern! ⭐`;
+      colorImage.style.display = 'none';
+    });
+  });
+
+  starBtn.addEventListener('click', () => {
+    if (!selectedColor) {
+      resultDiv.textContent = 'Bitte wähle zuerst eine Farbe aus!';
+      return;
+    }
+    starBtn.disabled = true;
+    resultDiv.textContent = 'UR leuchtet durch dich! ✨✨✨';
+    starBtn.textContent = '🌟';
+
+    setTimeout(() => {
+      starBtn.disabled = false;
+      starBtn.textContent = '⭐ Drücke mich!';
+      resultDiv.textContent = `✨ Du bist das Licht in ${selectedColor}! Danke, dass du mitspielst! ✨`;
+      colorImage.src = selectedImg;
+      colorImage.style.display = 'block';
+      colors.forEach(b => b.classList.remove('selected'));
+      selectedColor = null;
+      selectedImg = null;
+    }, 3000);
+  });
+
+  const allColorImages = [
+    { color: 'Feuriges Rot', src: '20250614_0015_Das Erwachen der Liebe_simple_compose_01jxnnqh14fp3s4y2xdp464ps2.png' },
+    { color: 'Goldenes Gelb', src: '20250614_0024_Alchemist mit Excalibur-Lampe_simple_compose_01jxnp7e1bfnvs92r3y2w6snby.png' },
+    { color: 'Lebendiges Türkis', src: '20250613_2252_Klang des Universums_simple_compose_01jxngydzbenf90scecc20fqja.png' },
+    { color: 'Frisches Grün', src: '20250613_2343_Nachhaltiger Garten in Ruinen_simple_compose_01jxnkwec0fnytyxzxq8shwhv9.png' },
+    { color: 'Zartes Rosa', src: 'ChatGPT Image 23. Juni 2025, 16_15_57.png' },
+    { color: 'Mystisches Violett', src: '20250614_0030_Der Bund der Alchemisten_simple_compose_01jxnpjkjwffar455caszb8aak.png' }
+  ];
+
+  showAllBtn.addEventListener('click', () => {
+    allImagesDiv.innerHTML = '';
+    allColorImages.forEach(({ color, src }) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Bild für ${color}`;
+      allImagesDiv.appendChild(img);
+    });
+    allImagesDiv.style.display = 'flex';
+  });
+</script>
+
+</body>
+</html>

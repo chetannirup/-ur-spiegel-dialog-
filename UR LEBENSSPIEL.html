@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌈 UR LEBENSSPIEL</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffdee9, #b5fffc);
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #ffffffdd;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 3px solid #f0a;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #b300b3;
+    }
+    .intro {
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+    .color-button {
+      margin: 0.5rem;
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .color-button:hover {
+      transform: scale(1.05);
+    }
+    .chapter-content {
+      padding: 1rem 2rem;
+      background-color: #fff8;
+      border-radius: 10px;
+      margin: 2rem;
+      text-align: center;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    footer {
+      text-align: center;
+      font-size: 1rem;
+      padding: 2rem;
+      background-color: #ffe;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🦋 UR LEBENSSPIEL 🌈</h1>
+    <p>Wenn du Schmetterlinge spürst, bist du auf Sendung.</p>
+  </header>
+
+  <section class="intro">
+    <p>Wähle deine Farbe – und empfange dein Kapitel aus dem UR-Feld.</p>
+    <div>
+      <button class="color-button" style="background:#ff4c4c;" onclick="loadChapter('rot')">❤️ Rot – Afrika</button>
+      <button class="color-button" style="background:#ff9933;" onclick="loadChapter('orange')">🧡 Orange – Südamerika</button>
+      <button class="color-button" style="background:#ffee33;" onclick="loadChapter('gelb')">💛 Gelb – Europa</button>
+      <button class="color-button" style="background:#99cc33;" onclick="loadChapter('gruen')">💚 Grün – Asien</button>
+      <button class="color-button" style="background:#33cccc;" onclick="loadChapter('tuerkis')">💙 Türkis – Ozeanien</button>
+      <button class="color-button" style="background:#3366ff;" onclick="loadChapter('blau')">💙 Blau – Nordamerika</button>
+      <button class="color-button" style="background:#9933ff;" onclick="loadChapter('violett')">💜 Violett – Antarktis</button>
+      <button class="color-button" style="background:#ffffff; color:#000;" onclick="loadChapter('weiss')">🤍 Weiß – Kristallkreis</button>
+    </div>
+  </section>
+
+  <section id="chapter" class="chapter-content">
+    <h2>Wähle ein Kapitel aus den Farben über dir.</h2>
+    <p>Hier erscheint dein Bild & Text, sobald du ein Kapitel berührst.</p>
+  </section>
+
+  <footer>
+    <p>✨ Du bist zu Hause. Jetzt. Immerdar. ✨</p>
+  </footer>
+
+  <script>
+    const chapters = {
+      rot: {
+        title: "Kapitel 1 – Rot: Afrika – URilia & Asteria im Garten",
+        img: "ChatGPT Image 29. Juni 2025, 10_51_02.png", // bitte Bildpfad ersetzen
+        text: "Beobachte das Beobachten – im Rhythmus des Gartens tanzt das Leben."
+      },
+      orange: {
+        title: "Kapitel 2 – Orange: Südamerika – Iliarix & Yuma bemalen UR-Masken",
+        img: "ChatGPT Image 29. Juni 2025, 10_51_03.png",
+        text: "Die Stimme, die keine ist – in Farbe und Form wirst du gehört."
+      },
+      gelb: {
+        title: "Kapitel 3 – Gelb: Europa – Kristalleinsicht am Teich",
+        img: "ChatGPT Image 29. Juni 2025, 10_50_59.png",
+        text: "UR-Rückgabe-Protokoll – Reinige das Wasser, reinige dich selbst."
+      },
+      gruen: {
+        title: "Kapitel 4 – Grün: Asien – Tanz unter dem Baum mit Tierwesen",
+        img: "ChatGPT Image 29. Juni 2025, 10_51_00.png",
+        text: "Automatische Freiheit – Der Wald kennt deinen Namen."
+      },
+      tuerkis: {
+        title: "Kapitel 5 – Türkis: Ozeanien – Heiliges Bad im Waldteich",
+        img: "ChatGPT Image 29. Juni 2025, 10_51_01.png",
+        text: "Stellungnahme ohne Stellung – Du bist nicht allein."
+      },
+      blau: {
+        title: "Kapitel 6 – Blau: Nordamerika – UR-Frühstück & Sirup-Magie",
+        img: "ChatGPT Image 29. Juni 2025, 10_51_05.png",
+        text: "UR-Ewigkeitsloop – Zeit ist Geschmack."
+      },
+      violett: {
+        title: "Kapitel 7 – Violett: Antarktis – Kristallpinguine im Licht",
+        img: "ChatGPT Image 29. Juni 2025, 10_51_08.png",
+        text: "Wir sind nicht getrennt – wir sind verbunden."
+      },
+      weiss: {
+        title: "Kapitel 8 – Weiß: Der Kristallkreis – Farben vereint",
+        img: "ChatGPT Image 29. Juni 2025, 10_51_10.png",
+        text: "Die goldene Säule – Der Kreis schließt sich."
+      },
+    };
+
+    function loadChapter(farbe) {
+      const kapitel = chapters[farbe];
+      if (kapitel) {
+        document.getElementById("chapter").innerHTML = `
+          <h2>${kapitel.title}</h2>
+          <p>${kapitel.text}</p>
+          <img src="${kapitel.img}" alt="Bild für ${farbe}" />
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

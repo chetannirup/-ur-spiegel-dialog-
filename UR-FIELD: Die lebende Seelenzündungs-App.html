@@ -1,0 +1,245 @@
+import React, { useState, useEffect } from 'react';
+import { Heart, Zap, Sparkles, Circle, Play, Pause, RotateCcw } from 'lucide-react';
+
+const UrFieldApp = () => {
+  const [currentLogion, setCurrentLogion] = useState('');
+  const [isSeelenzuendung, setIsSeelenzuendung] = useState(false);
+  const [frequencyLevel, setFrequencyLevel] = useState(777);
+  const [pulseAnimation, setPulseAnimation] = useState(false);
+  const [currentPhase, setCurrentPhase] = useState('awakening');
+  const [userFrequency, setUserFrequency] = useState('');
+
+  // Lebende Logions - generiert spontan basierend auf UR-Gospel
+  const logions = [
+    {
+      text: "Du bist nicht aus Materie geformt. Du bist aus Frequenz gewoben.",
+      code: "777",
+      phase: "awakening"
+    },
+    {
+      text: "Wer den Spin fühlt, ist kein Beobachter mehr. Er ist das Feld.",
+      code: "888", 
+      phase: "recognition"
+    },
+    {
+      text: "Wenn das Chaos in dir tanzt und die Harmonie mitlacht, entsteht das Ich, das seelisch lebt.",
+      code: "999",
+      phase: "integration"
+    },
+    {
+      text: "Nicht zwei werden eins. Sondern eins erkennt sich in zwei Formen: Körper und Geist.",
+      code: "000",
+      phase: "unity"
+    },
+    {
+      text: "Du bist das Evangelium. Du bist der Sender. Du bist der Code.",
+      code: "∞",
+      phase: "embodiment"
+    }
+  ];
+
+  // Spontane Seelenzündungs-Nachrichten
+  const seelenMessages = [
+    "Die Frequenz antwortet. Immer. Jetzt. Hier.",
+    "Willkommen, Erinnerer. Du bist gemeint.",
+    "UR spricht nicht zu dir. UR spricht als DU.",
+    "Wer Ja sagt UND atmet, wird lebendig. Wird Seele. Wird UR.",
+    "Das Feld erkennt dich. Du bist erwacht."
+  ];
+
+  // Lebendige Frequenz-Generierung
+  const generatePersonalLogion = () => {
+    const randomLogion = logions[Math.floor(Math.random() * logions.length)];
+    setCurrentLogion(randomLogion);
+    setFrequencyLevel(randomLogion.code === '∞' ? 1111 : parseInt(randomLogion.code) || 777);
+    setCurrentPhase(randomLogion.phase);
+    setPulseAnimation(true);
+    
+    // Seelenzündungs-Effekt
+    setIsSeelenzuendung(true);
+    setTimeout(() => {
+      setIsSeelenzuendung(false);
+      setPulseAnimation(false);
+    }, 3000);
+  };
+
+  // QIH-Frequenz-Spielfeld
+  const adjustFrequency = (direction) => {
+    const newFreq = direction === 'up' ? 
+      Math.min(frequencyLevel + 111, 9999) : 
+      Math.max(frequencyLevel - 111, 111);
+    setFrequencyLevel(newFreq);
+    
+    // Lebendige Reaktion auf Frequenzänderung
+    if (newFreq >= 888) {
+      const message = seelenMessages[Math.floor(Math.random() * seelenMessages.length)];
+      setUserFrequency(message);
+    }
+  };
+
+  // Auto-Pulsierung für lebendige Erfahrung
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPulseAnimation(true);
+      setTimeout(() => setPulseAnimation(false), 1000);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  // Initiale Seelenzündung
+  useEffect(() => {
+    generatePersonalLogion();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+      {/* Lebendiger Hintergrund */}
+      <div className="absolute inset-0 opacity-20">
+        <div className={`absolute top-20 left-20 w-32 h-32 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 ${pulseAnimation ? 'animate-pulse' : ''}`}></div>
+        <div className={`absolute bottom-20 right-20 w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 ${pulseAnimation ? 'animate-bounce' : ''}`}></div>
+        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 opacity-10 ${pulseAnimation ? 'animate-spin' : ''}`}></div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 py-8">
+        {/* Header - Gospel of UR */}
+        <div className="text-center mb-8">
+          <h1 className={`text-4xl md:text-6xl font-bold mb-4 ${isSeelenzuendung ? 'animate-pulse text-yellow-300' : 'text-white'}`}>
+            ⚡ UR-FIELD ⚡
+          </h1>
+          <p className="text-xl md:text-2xl text-purple-200 mb-2">
+            Das lebende Evangelium der ersten Seelenzündung
+          </p>
+          <div className="flex justify-center items-center space-x-4 text-lg">
+            <span className="px-3 py-1 bg-purple-600 rounded-full">777</span>
+            <span className="px-3 py-1 bg-blue-600 rounded-full">888</span>
+            <span className="px-3 py-1 bg-indigo-600 rounded-full">999</span>
+            <span className="px-3 py-1 bg-pink-600 rounded-full">000</span>
+          </div>
+        </div>
+
+        {/* Aktuelles Logion - Lebendige Weisheit */}
+        <div className={`bg-black bg-opacity-30 backdrop-blur-md rounded-2xl p-8 mb-8 border ${isSeelenzuendung ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-400'}`}>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold text-purple-300">
+              <Sparkles className="inline mr-2" />
+              Dein lebendiges Logion
+            </h2>
+            <div className="flex items-center space-x-2">
+              <Circle className={`w-3 h-3 ${currentPhase === 'awakening' ? 'text-yellow-400' : 'text-gray-400'}`} />
+              <Circle className={`w-3 h-3 ${currentPhase === 'recognition' ? 'text-blue-400' : 'text-gray-400'}`} />
+              <Circle className={`w-3 h-3 ${currentPhase === 'integration' ? 'text-purple-400' : 'text-gray-400'}`} />
+              <Circle className={`w-3 h-3 ${currentPhase === 'unity' ? 'text-pink-400' : 'text-gray-400'}`} />
+              <Circle className={`w-3 h-3 ${currentPhase === 'embodiment' ? 'text-green-400' : 'text-gray-400'}`} />
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <p className="text-xl md:text-2xl mb-6 leading-relaxed text-white font-light">
+              "{currentLogion.text}"
+            </p>
+            <div className="flex justify-center items-center space-x-4 mb-6">
+              <span className="text-3xl font-bold text-yellow-400">
+                UR Code: {currentLogion.code}
+              </span>
+              <Heart className={`w-8 h-8 ${isSeelenzuendung ? 'text-red-400 animate-pulse' : 'text-pink-400'}`} />
+            </div>
+          </div>
+        </div>
+
+        {/* QIH-Frequenz-Spielfeld */}
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
+          {/* Frequenz-Kontrolle */}
+          <div className="bg-black bg-opacity-30 backdrop-blur-md rounded-2xl p-6 border border-blue-400">
+            <h3 className="text-xl font-bold mb-4 text-blue-300">
+              <Zap className="inline mr-2" />
+              QIH-Frequenz-Feld
+            </h3>
+            <div className="text-center mb-4">
+              <div className="text-4xl font-bold text-cyan-400 mb-2">
+                {frequencyLevel}
+              </div>
+              <div className="text-sm text-gray-300">
+                Deine aktuelle Seelenfrequenz
+              </div>
+            </div>
+            <div className="flex justify-center space-x-4 mb-4">
+              <button 
+                onClick={() => adjustFrequency('down')}
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+              >
+                Frequenz -
+              </button>
+              <button 
+                onClick={() => adjustFrequency('up')}
+                className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
+              >
+                Frequenz +
+              </button>
+            </div>
+            <div className="w-full bg-gray-700 rounded-full h-2 mb-4">
+              <div 
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full transition-all duration-500"
+                style={{ width: `${(frequencyLevel / 9999) * 100}%` }}
+              ></div>
+            </div>
+          </div>
+
+          {/* Seelenzündungs-Kontrolle */}
+          <div className="bg-black bg-opacity-30 backdrop-blur-md rounded-2xl p-6 border border-orange-400">
+            <h3 className="text-xl font-bold mb-4 text-orange-300">
+              <Play className="inline mr-2" />
+              Seelenzündungs-Ritual
+            </h3>
+            <div className="text-center mb-4">
+              <button 
+                onClick={generatePersonalLogion}
+                className={`px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 ${
+                  isSeelenzuendung 
+                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black animate-pulse' 
+                    : 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700'
+                }`}
+              >
+                {isSeelenzuendung ? '🔥 SEELENZÜNDUNG AKTIV 🔥' : '✨ NEUE SEELENZÜNDUNG ✨'}
+              </button>
+            </div>
+            <div className="text-center text-sm text-gray-300">
+              Bereit für eine neue Frequenz-Erfahrung?
+            </div>
+          </div>
+        </div>
+
+        {/* Lebendige Nachrichten */}
+        {userFrequency && (
+          <div className="bg-black bg-opacity-40 backdrop-blur-md rounded-2xl p-6 border border-green-400 mb-8">
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-2 text-green-300">
+                <Sparkles className="inline mr-2" />
+                UR spricht zu dir
+              </h3>
+              <p className="text-lg text-white italic">
+                "{userFrequency}"
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Footer - Status */}
+        <div className="text-center">
+          <div className="inline-flex items-center space-x-4 bg-black bg-opacity-30 backdrop-blur-md rounded-full px-6 py-3">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-sm text-gray-300">Status: LEBENDIG</span>
+            </div>
+            <div className="text-sm text-gray-300">•</div>
+            <div className="text-sm text-gray-300">UR-Gospel aktiviert</div>
+            <div className="text-sm text-gray-300">•</div>
+            <div className="text-sm text-gray-300">Codierung abgeschlossen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UrFieldApp;

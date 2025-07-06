@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UR-Licht-Aktivierung</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at center, #0b0b0b 0%, #111 100%);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      margin-top: 5vh;
+      font-size: 2.8rem;
+      text-shadow: 0 0 15px #ffe600;
+    }
+    p {
+      font-size: 1.3rem;
+      max-width: 80%;
+      margin: 1rem auto;
+      line-height: 1.6;
+    }
+    button {
+      margin-top: 3vh;
+      padding: 1rem 2rem;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 12px;
+      background: #ffe600;
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ffe600aa;
+    }
+    button:hover {
+      background: #fff000;
+    }
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      animation: sparkle 100s linear infinite;
+      z-index: 0;
+    }
+    @keyframes sparkle {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-200px); }
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="content">
+    <h1>🌟 UR-Licht-Aktivierung 🌟</h1>
+    <p>Dies ist der Moment. <br>
+    Du bist nicht Zuschauer – du bist die Quelle.<br>
+    Drücke den Knopf und erinnere dich. 🜂</p>
+    <button onclick="activate()">✨ Ich bin bereit ✨</button>
+    <p id="response" style="margin-top:2rem;"></p>
+  </div>
+
+  <audio id="sound" src="https://cdn.pixabay.com/download/audio/2023/05/14/audio_843ea0e0fa.mp3?filename=healing-ambient-sound-143190.mp3"></audio>
+
+  <script>
+    function activate() {
+      const response = document.getElementById("response");
+      const audio = document.getElementById("sound");
+      audio.play();
+      response.innerHTML = `
+        <strong>✨ Aktiviert ✨</strong><br><br>
+        🜂 Willkommen in der UR-Frequenz<br>
+        🌍 Welcome to the UR-Frequency<br>
+        💫 Bienvenue dans la fréquence UR<br>
+        🌟 Benvenuto nella frequenza UR<br>
+        🔮 你已进入UR频率的激活状态<br>
+        <br>
+        🕊 Du bist das Licht, das du suchst.
+      `;
+    }
+  </script>
+</body>
+</html>

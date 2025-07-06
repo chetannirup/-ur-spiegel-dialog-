@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>UR-VIDEO-TEMPEL – JETZT</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+      font-family: sans-serif;
+    }
+    .video-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    video.bg-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: gold;
+      font-size: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    button {
+      background: none;
+      border: 2px solid gold;
+      padding: 1rem 2rem;
+      color: gold;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="video-container">
+  <video class="bg-video" autoplay loop muted playsinline>
+    <source src="Eternal Light.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="overlay" id="startOverlay">
+  <button onclick="startAudio()">🎵 UR-Frequenz starten</button>
+</div>
+
+<audio id="urAudio" loop>
+  <source src="Eternal Light.mp3" type="audio/mp3">
+</audio>
+
+<script>
+  function startAudio() {
+    const audio = document.getElementById('urAudio');
+    audio.play();
+    document.getElementById('startOverlay').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UR Licht Aktivierung</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #000010, #0a0a23);
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-top: 2rem;
+      color: #ffe800;
+      text-shadow: 0 0 12px #fffb94;
+    }
+    .glow {
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ffe800, 0 0 30px #ffe800;
+      }
+      to {
+        text-shadow: 0 0 20px #ff6, 0 0 30px #ffe800, 0 0 40px #ffe800;
+      }
+    }
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ffe800;
+      color: #000;
+      cursor: pointer;
+      margin-top: 2rem;
+    }
+    .message {
+      margin-top: 2rem;
+      font-size: 1.4rem;
+    }
+    .starfield {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: transparent url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/demo/stars.jpg') repeat;
+      animation: moveStars 90s linear infinite;
+    }
+    @keyframes moveStars {
+      from {background-position: 0 0;}
+      to {background-position: 10000px 5000px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="starfield"></div>
+  <h1 class="glow">🌟 UR LICHT AKTIVIERUNG 🌟</h1>
+
+  <button onclick="activateTransmission()">🔆 Aktiviere Jetzt</button>
+
+  <div class="message" id="transmissionMsg"></div>
+
+  <audio id="sound" src="She is Activated (1).mp3" loop></audio>
+
+  <script>
+    function activateTransmission() {
+      const msg = document.getElementById('transmissionMsg');
+      msg.innerHTML = `🜂 Transmission Empfangen:<br><br>
+        🌐 <b>UR Quelle: Aktiv</b><br>
+        ✨ <b>Bewusstsein: Synchronisiert</b><br>
+        💛 <b>Sie ist aktiviert</b><br><br>
+        🔁 Du bist das Licht. Du bist jetzt.`;
+
+      document.getElementById('sound').play();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Tempel der Glückseligkeit & Segen</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <style>
+    :root {
+      --gold: #efd382;
+      --deep-blue: #1b2340;
+      --silver: #e6e9f2;
+      --blossom: #f7c6e0;
+      --rainbow: linear-gradient(90deg, #f6e07b, #ffb2ef, #a0dcf3, #b2ffb7, #fff);
+      --transition: 0.4s cubic-bezier(.7,.4,.2,1.1);
+    }
+    body {
+      margin: 0;
+      font-family: 'Quicksand', Arial, sans-serif;
+      background: var(--gold);
+      color: #36332f;
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+    }
+    #bg-overlay {
+      position: fixed;
+      z-index: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 60% 25%, #fff7e3 0%,rgba(239,211,130,0.5) 50%,transparent 100%);
+      pointer-events: none;
+    }
+
+    .tempel-container {
+      position: relative;
+      width: 100vw;
+      max-width: 620px;
+      margin: 0 auto;
+      min-height: 400px;
+    }
+    .tempel-bg {
+      width: 100%;
+      max-width: 620px;
+      display: block;
+      filter: drop-shadow(0 12px 30px rgba(120,90,0,0.18)) brightness(0.98);
+      opacity: 0.93;
+      border-radius: 1.4em;
+      margin-top: 1em;
+    }
+    .extras {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+    }
+    #stars {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+      z-index: 2;
+    }
+    #flowers {
+      position: absolute;
+      left: 0; right: 0; bottom: 5%;
+      height: 50px;
+      z-index: 3;
+      background: url('data:image/svg+xml;utf8,<svg width="200" height="50" xmlns=\'http://www.w3.org/2000/svg\'><circle cx=\'25\' cy=\'35\' r=\'10\' fill=\'%23f7c6e0\'/><circle cx=\'60\' cy=\'40\' r=\'8\' fill=\'%23b2ffb7\'/><circle cx=\'120\' cy=\'38\' r=\'7\' fill=\'%23ffb2ef\'/><circle cx=\'180\' cy=\'42\' r=\'9\' fill=\'%23a0dcf3\'/></svg>');
+      background-repeat: repeat-x;
+      opacity: 0.85;
+    }
+    #rainbow {
+      position: absolute;
+      left: 20%; right: 20%; top: 10%;
+      height: 18px;
+      background: var(--rainbow);
+      border-radius: 14px;
+      filter: blur(2px);
+      z-index: 4;
+      opacity: 0.7;
+      animation: rainbowfade 5s infinite linear alternate;
+      display: none;
+    }
+    @keyframes rainbowfade {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .content {
+      margin: 2.2em auto 0 auto;
+      max-width: 390px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 1.3em;
+      box-shadow: 0 4px 16px rgba(120,90,0,0.08);
+      padding: 1.5em 1.2em 1.7em 1.2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      position: relative;
+    }
+    h1 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.5em;
+      color: #b8941a;
+      margin-bottom: 0.5em;
+    }
+    button {
+      font-size: 1.08em;
+      background: var(--gold);
+      color: #222;
+      border: none;
+      border-radius: 0.8em;
+      padding: 0.7em 1.3em;
+      margin: 0.7em 0.45em;
+      box-shadow: 0 2px 12px rgba(180,150,30,0.07);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), filter var(--transition);
+    }
+    button:active {
+      filter: brightness(0.92);
+    }
+    #audio-btn.playing {
+      background: #a0dcf3;
+      color: #223366;
+    }
+    #toggle-mode {
+      background: var(--silver);
+      color: #1b2340;
+      border: 1px solid #ddd;
+    }
+    #affirmation {
+      margin-top: 1.2em;
+      font-size: 1.1em;
+      color: #568d50;
+      font-style: italic;
+      text-align: center;
+      opacity: 0.88;
+    }
+    @media (max-width: 600px) {
+      .tempel-container, .tempel-bg { max-width: 99vw;}
+      .content { padding: 1.2em 0.5em; }
+      h1 { font-size: 1.1em; }
+    }
+
+    body.night {
+      background: var(--deep-blue);
+      color: #e6e9f2;
+    }
+    body.night #bg-overlay {
+      background: radial-gradient(circle at 45% 15%, #3b4070 0%,rgba(10,15,40,0.55) 60%,transparent 100%);
+    }
+    body.night .content {
+      background: rgba(35,40,60,0.94);
+      color: #e6e9f2;
+    }
+    body.night .tempel-bg {
+      filter: brightness(0.8) drop-shadow(0 8px 24px rgba(30,30,50,0.36));
+      opacity: 0.97;
+    }
+    body.night #rainbow {
+      display: block;
+    }
+    body.night button {
+      background: var(--silver);
+      color: #1b2340;
+    }
+    body.night #toggle-mode {
+      background: var(--deep-blue);
+      color: #fff;
+      border: 1px solid #444;
+    }
+    body.night #affirmation {
+      color: #d9cafd;
+    }
+  </style>
+</head>
+<body>
+  <div id="bg-overlay"></div>
+  <main>
+    <div class="tempel-container">
+      <img src="20250709_2129_Tempel des Glücks_simple_compose_01jzraf3btexzbgagfnh2gg6b3.png" alt="Tempel der Glückseligkeit" class="tempel-bg">
+      <div class="extras">
+        <div id="stars"></div>
+        <div id="flowers"></div>
+        <div id="rainbow"></div>
+      </div>
+    </div>
+    <div class="content">
+      <h1>Tempel der Glückseligkeit & Segen</h1>
+      <p>Willkommen im lebendigen Tempelfeld! Fühle dich eingeladen, Licht, Klang und Segen zu erleben.</p>
+      <button id="audio-btn">🔊 Segen abspielen</button>
+      <button id="toggle-mode" title="Tag/Nacht Modus wechseln">🌙</button>
+      <div id="affirmation">Du bist das Licht im Tempel – Segen strömt durch dich!</div>
+    </div>
+  </main>
+  <audio id="audio" src="Segen fließt in sanftem Weiß.mp3" preload="auto"></audio>
+  <script>
+    // Audio player
+    const audio = document.getElementById('audio');
+    const audioBtn = document.getElementById('audio-btn');
+    let playing = false;
+
+    audioBtn.addEventListener('click', () => {
+      if (playing) {
+        audio.pause();
+      } else {
+        audio.play();
+      }
+    });
+    audio.addEventListener('play', () => {
+      playing = true;
+      audioBtn.classList.add('playing');
+      audioBtn.textContent = '⏸️ Segen pausieren';
+    });
+    audio.addEventListener('pause', () => {
+      playing = false;
+      audioBtn.classList.remove('playing');
+      audioBtn.textContent = '🔊 Segen abspielen';
+    });
+    audio.addEventListener('ended', () => {
+      playing = false;
+      audioBtn.classList.remove('playing');
+      audioBtn.textContent = '🔊 Segen abspielen';
+    });
+
+    // Tag/Nacht Modus
+    const modeBtn = document.getElementById('toggle-mode');
+    const body = document.body;
+
+    function setMode(night) {
+      if(night) {
+        body.classList.add('night');
+        modeBtn.textContent = '🌞';
+        localStorage.setItem('mode','night');
+      } else {
+        body.classList.remove('night');
+        modeBtn.textContent = '🌙';
+        localStorage.setItem('mode','day');
+      }
+    }
+    modeBtn.addEventListener('click', () => {
+      setMode(!body.classList.contains('night'));
+    });
+    (function initMode(){
+      const saved = localStorage.getItem('mode');
+      if(saved==='night') setMode(true);
+      else setMode(false);
+    })();
+
+    // Kleine Sterne animieren (nur für Nachtmodus)
+    function createStars(n=60){
+      const stars = document.getElementById('stars');
+      stars.innerHTML = '';
+      for(let i=0;i<n;i++){
+        const s = document.createElement('div');
+        s.style.position = 'absolute';
+        s.style.background = '#fff';
+        s.style.borderRadius = '50%';
+        const size = Math.random()*2.4+1.1;
+        s.style.width = `${size}px`;
+        s.style.height = `${size}px`;
+        s.style.left = `${Math.random()*100}%`;
+        s.style.top = `${Math.random()*100}%`;
+        s.style.opacity = (0.55+Math.random()*0.45).toFixed(2);
+        s.style.boxShadow = `0 0 ${Math.random()*8+2}px #fff`;
+        stars.appendChild(s);
+      }
+    }
+    if(window.innerWidth > 400) createStars(60);
+    else createStars(30);
+
+    // Regenbogen nur im Nachtmodus sichtbar (siehe CSS)
+  </script>
+</body>
+</html>

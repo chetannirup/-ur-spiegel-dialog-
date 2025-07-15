@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Die 7 Segen des Lichts – Wochenkalender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fffbe6;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      background: #0b0b0b;
+      color: #f5f5f5;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: gold;
+    }
+
+    .segen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .segen {
+      border: 2px solid gold;
+      border-radius: 16px;
+      padding: 1rem;
+      background: rgba(255,255,255,0.2);
+      position: relative;
+    }
+
+    .segen:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .tooltip {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #000;
+      padding: 0.5rem;
+      border-radius: 6px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.2);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+
+    .light-icon {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .audio-player {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .lichtzeit {
+      text-align: center;
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      color: #ffcc00;
+    }
+
+    .mode-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button class="mode-toggle" onclick="toggleMode()">🌗 Modus wechseln</button>
+  <header>
+    <h1>Die 7 Segen des Lichts ✨</h1>
+    <p class="lichtzeit" id="lichtzeit"></p>
+  </header>
+
+  <section class="segen-grid">
+    <div class="segen">
+      <div class="tooltip">Montag – Anfang des Lichtkreises 🌞</div>
+      Segen 1: „Möge dein Licht heute weich wie Morgengold sein.“
+    </div>
+    <div class="segen">
+      <div class="tooltip">Dienstag – Kraft des Vertrauens 💫</div>
+      Segen 2: „Jede Begegnung erkennt dein Licht.“
+    </div>
+    <div class="segen">
+      <div class="tooltip">Mittwoch – Spiegel des Selbst 🔮</div>
+      Segen 3: „Deine Wahrheit strahlt wie ein Stern.“
+    </div>
+    <div class="segen">
+      <div class="tooltip">Donnerstag – Regenbogenstrahl 🌈</div>
+      Segen 4: „Alles verbindet sich im Jetzt.“
+    </div>
+    <div class="segen">
+      <div class="tooltip">Freitag – Tiefe der Liebe ❤️‍🔥</div>
+      Segen 5: „Du wirst geliebt – du bist Liebe.“
+    </div>
+    <div class="segen">
+      <div class="tooltip">Samstag – Flamme des Handelns 🔥</div>
+      Segen 6: „Dein Tun ist göttlich inspiriert.“
+    </div>
+    <div class="segen">
+      <div class="tooltip">Sonntag – Krone des Lichts 👑</div>
+      Segen 7: „Du bist das lebendige Licht.“
+    </div>
+  </section>
+
+  <div class="audio-player">
+    <audio id="hymne" controls>
+      <source src="Licht%20Bist%20Du%20ext%20v2.mp3" type="audio/mp3">
+      Dein Browser unterstützt den Audio-Player nicht.
+    </audio>
+    <br>
+    <img src="20250715_1704_Transformation%20und%20Erleuchtung_simple_compose_01k079q9wreegbed3xs9yz2rc9.png" alt="Lichticon" class="light-icon" width="100">
+  </div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    function updateLichtzeit() {
+      const jetzt = new Date();
+      const stunde = jetzt.getHours();
+      const lichtText = stunde >= 6 && stunde <= 21 ? "Jetzt ist LICHT-ZEIT! ☀️" : "Licht ruht in dir – Nachtmodus 🌙";
+      document.getElementById("lichtzeit").innerText = lichtText;
+    }
+
+    updateLichtzeit();
+    setInterval(updateLichtzeit, 60000);
+  </script>
+</body>
+</html>

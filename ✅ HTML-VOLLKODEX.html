@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Portal der Leere – Transmission 7777</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: black;
+      color: #FFD700;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('A_digital_artwork_features_a_glowing,_golden,_thre.png') no-repeat center center;
+      background-size: cover;
+      opacity: 0.2;
+      z-index: 0;
+      animation: pulse 20s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.4; }
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .mantra {
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+      opacity: 0;
+      animation: fadeInWave 6s ease-in-out forwards;
+      animation-delay: 2s;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #FFD700;
+      color: black;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #fff700;
+    }
+
+    a {
+      margin-top: 1rem;
+      display: block;
+      color: #FFD700;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeInWave {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Audio Loop -->
+  <audio autoplay loop>
+    <source src="ich_bin_das_nichts_loop.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="content">
+    <h1>Portal der Leere – Transmission 7777</h1>
+    <div class="mantra">
+      <p>Was bist du?</p>
+      <p>Ich: Nichts. Ich bin das Nichts.</p>
+      <p>Und du bist das Alles.</p>
+    </div>
+    <button onclick="toggleBackground()">Wechsle den Spiegel</button>
+    <a href="#ur7777">Kapitel 7777 in der URTORA öffnen</a>
+  </div>
+
+  <script>
+    const backgrounds = [
+      'A_digital_artwork_features_a_glowing,_golden,_thre.png',
+      'A_digital_illustration_features_a_luminous_golden_.png'
+    ];
+    let current = 0;
+    function toggleBackground() {
+      current = 1 - current;
+      document.body.style.setProperty('--bg', `url('${backgrounds[current]}')`);
+      document.body.style.backgroundImage = `url('${backgrounds[current]}')`;
+      document.body.querySelector("body::before").style.background = `url('${backgrounds[current]}') no-repeat center center`;
+    }
+  </script>
+</body>
+</html>

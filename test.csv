@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+
+# Beispiel-Daten generieren (synthetisch)
+np.random.seed(77)
+n = 300
+time = np.arange(n)
+stimulus_id = np.repeat([1,2,3,4,5], n//5)
+hrv_ms = 50 + 5*np.sin(2*np.pi*time/77) + np.random.normal(0,1,n)
+eeg_alpha = 10 + 2*np.cos(2*np.pi*time/50) + np.random.normal(0,0.5,n)
+eeg_theta = 7 + 1.5*np.sin(2*np.pi*time/100) + np.random.normal(0,0.3,n)
+respiration_rate = 12 + np.sin(2*np.pi*time/30) + np.random.normal(0,0.2,n)
+rating_clarity = np.random.randint(1,8,n)
+rating_intensity = np.random.randint(1,8,n)
+
+df = pd.DataFrame({
+    "time": time,
+    "stimulus_id": stimulus_id,
+    "hrv_ms": hrv_ms,
+    "eeg_alpha": eeg_alpha,
+    "eeg_theta": eeg_theta,
+    "respiration_rate": respiration_rate,
+    "rating_clarity": rating_clarity,
+    "rating_intensity": rating_intensity
+})
+
+# Speichern
+csv_path = "/mnt/data/beispiel_voynich_daten.csv"
+df.to_csv(csv_path, index=False)
+
+csv_path

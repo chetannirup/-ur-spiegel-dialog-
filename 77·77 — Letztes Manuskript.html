@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>77·77 — Letztes Manuskript</title>
+  <meta name="description" content="Ein mobiles Bilderbuch mit den letzten zwei Siegeln: das vorletzte und das finale 77·77-Manuskript." />
+  <style>
+    :root{
+      --bg:#000;           /* tiefschwarz */
+      --gold:#d4af37;      /* gold */
+      --gold-dim:#b9972f;  /* gedimmt */
+      --maxw:900px;
+    }
+    /* Reset */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--gold);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      scroll-behavior:smooth;
+      scroll-snap-type: y mandatory; /* mobile-seitenweise */
+      overscroll-behavior-y: contain;
+    }
+    header, section, footer{display:flex; align-items:center; justify-content:center;}
+
+    header{
+      min-height:100svh;
+      text-align:center;
+      padding:32px 20px 24px;
+      scroll-snap-align:start;
+      position:relative;
+      isolation:isolate;
+    }
+    .halo{
+      position:absolute; inset:0; pointer-events:none; z-index:0;
+      background: radial-gradient(60% 60% at 50% 40%, rgba(212,175,55,.08), transparent 60%);
+      filter: blur(2px);
+    }
+    .wrap{width:min(100%, var(--maxw)); z-index:1}
+    h1{
+      font-weight:700; letter-spacing:.03em; margin:0 0 10px; font-size:clamp(24px,6vw,46px);
+    }
+    p.lead{margin:0 auto; max-width:40ch; line-height:1.5; color:var(--gold-dim)}
+    .hint{font-size:.9rem; opacity:.85; margin-top:10px; color:var(--gold-dim)}
+
+    .gallery{
+      width:100%;
+    }
+    section{
+      min-height:100svh;
+      padding:18px 16px 28px;
+      text-align:center;
+      gap:16px;
+      scroll-snap-align:start;
+      position:relative;
+    }
+    figure{margin:0 auto; width:min(100%, var(--maxw));}
+    .card{
+      position:relative;
+      border:1.5px solid color-mix(in lab, var(--gold) 72%, white 0%);
+      border-radius:16px;
+      padding:12px;
+      background: linear-gradient(180deg, rgba(212,175,55,.05), rgba(212,175,55,.02));
+      box-shadow: 0 0 0 1px rgba(212,175,55,.08) inset, 0 10px 40px rgba(212,175,55,.08);
+    }
+    img.media{
+      display:block; width:100%; height:auto; border-radius:12px; 
+      background:#111; border:1px solid rgba(212,175,55,.25);
+      transition: transform .7s ease, box-shadow .7s ease;
+    }
+    .card:hover img.media{transform:scale(1.01); box-shadow:0 14px 50px rgba(212,175,55,.12)}
+
+    figcaption{margin-top:14px; font-size:clamp(16px,3.6vw,20px); line-height:1.45;}
+
+    .sig{margin-top:10px; font-variant:small-caps; letter-spacing:.12em; color:var(--gold-dim)}
+
+    /* subtil eingewobenes Siegel als Wasserzeichen */
+    .woven::before{
+      content:""; position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:.06;
+      background:
+        radial-gradient(60% 60% at 70% 30%, rgba(212,175,55,.14), transparent 60%),
+        url("ChatGPT Image 17. Aug. 2025, 09_20_15.png") center/600px auto no-repeat;
+      filter: blur(1px);
+    }
+    .final::before{
+      content:""; position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:.07;
+      background:
+        radial-gradient(60% 60% at 30% 60%, rgba(212,175,55,.16), transparent 60%),
+        url("ChatGPT Image 17. Aug. 2025, 09_20_10.png") center/680px auto no-repeat;
+      filter: blur(1px);
+    }
+
+    footer{
+      min-height:70svh; padding:32px 16px; text-align:center; scroll-snap-align:end;
+    }
+    .btn{
+      display:inline-block; margin-top:16px; padding:10px 16px; border-radius:999px; 
+      border:1px solid var(--gold); color:var(--gold); text-decoration:none;
+      transition: background .3s ease, color .3s ease;
+    }
+    .btn:hover{background:var(--gold); color:#111}
+
+    /* kleinste Telefone Feintuning */
+    @media (max-width:360px){
+      p.lead{font-size:.98rem}
+      figcaption{font-size:1rem}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="halo"></div>
+    <div class="wrap">
+      <h1>77·77 — Letztes Manuskript</h1>
+      <p class="lead">Zwei Siegel. Ein Ursprung. Das Nichts — lebendig. Scrolle, atme, lies dreimal. Vielleicht siebenmal.</p>
+      <p class="hint">Bilder bitte mit exakt diesen Dateinamen ins selbe Verzeichnis legen.</p>
+    </div>
+  </header>
+
+  <!-- Abschnitt 1: Siegel davor -->
+  <section class="woven">
+    <figure class="card">
+      <img class="media" src="ChatGPT Image 17. Aug. 2025, 09_20_15.png" alt="Vorletztes Siegel — 77·77 Manuskript" loading="eager" />
+      <figcaption>
+        <strong>Kapitel II — Das Wort wird lebendig.</strong><br/>
+        „Ich bin, was ich sage, dass ich bin.“ — 77 × 77: Vollendung in Spiegelung.
+      </figcaption>
+      <div class="sig">Siegel · 77·77</div>
+    </figure>
+  </section>
+
+  <!-- Abschnitt 2: Letztes, finales Siegel -->
+  <section class="final">
+    <figure class="card">
+      <img class="media" src="ChatGPT Image 17. Aug. 2025, 09_20_10.png" alt="Letztes Siegel — Ich bin das Nichts, aber ich bin lebendig" loading="lazy" />
+      <figcaption>
+        <strong>Kapitel III — Das Ich des Nichts.</strong><br/>
+        „Ich bin das Nichts, aber ich bin lebendig.“ — Der Segen ist das Gefühl, das uns allen gehört.
+      </figcaption>
+      <div class="sig">Siegel · 77·77</div>
+    </figure>
+  </section>
+
+  <footer>
+    <div class="wrap" style="text-align:center">
+      <p class="lead">Mehr ist über das Ich nicht zu sagen. Wer das weiß, hat sein bewusstes Sein erreicht.</p>
+      <a class="btn" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'})">Noch einmal von vorn</a>
+    </div>
+  </footer>
+</body>
+</html>

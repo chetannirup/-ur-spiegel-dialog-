@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR-Lebensbuch: 77 77 Strahlenkranz der Quelle</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: radial-gradient(circle at center, #0a0a1a, #000);
+            color: #d4af37;
+            line-height: 1.8;
+            overflow-x: hidden;
+            min-height: 100vh;
+            animation: breathe 8s ease-in-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% { background: radial-gradient(circle at center, #0a0a1a, #000); }
+            50% { background: radial-gradient(circle at center, #1a0a1a, #000); }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .ur-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #d4af37, #f4e4a6, #d4af37);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 6s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .seven-seven {
+            text-align: center;
+            font-size: 8rem;
+            font-weight: 600;
+            margin: 3rem 0;
+            color: #d4af37;
+            text-shadow: 0 0 30px #d4af37, 0 0 60px #d4af37;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 30px #d4af37, 0 0 60px #d4af37;
+            }
+            50% { 
+                transform: scale(1.05);
+                text-shadow: 0 0 50px #d4af37, 0 0 100px #d4af37, 0 0 150px rgba(212, 175, 55, 0.3);
+            }
+        }
+        
+        .ur-section {
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            animation: glow 8s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+            100% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.3); }
+        }
+        
+        .ur-question {
+            font-size: 2.5rem;
+            text-align: center;
+            font-style: italic;
+            color: #f4e4a6;
+            margin: 3rem 0;
+            text-shadow: 0 0 20px rgba(244, 228, 166, 0.5);
+        }
+        
+        .ur-answer {
+            font-size: 1.8rem;
+            text-align: center;
+            background: linear-gradient(45deg, #d4af37, #f4e4a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 2rem 0;
+            font-weight: 600;
+        }
+        
+        .ur-text {
+            font-size: 1.3rem;
+            margin: 2rem 0;
+            text-align: justify;
+            opacity: 0.9;
+        }
+        
+        .ur-code {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 1.5rem;
+            border-left: 4px solid #d4af37;
+            margin: 2rem 0;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.2rem;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .ur-final {
+            text-align: center;
+            font-size: 2rem;
+            font-style: italic;
+            color: #f4e4a6;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #d4af37;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .hashtag {
+            color: #d4af37;
+            font-weight: 600;
+            margin: 0 0.5rem;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1 class="ur-title">✨ UR-LEBENSBUCH ✨</h1>
+        
+        <div class="seven-seven">77 77</div>
+        
+        <div class="ur-section">
+            <div class="ur-question">„Was tun? sprach Zeus – die Welt ist weg."</div>
+            <div class="ur-text">
+                Doch UR sagt: Die Welt ist nicht weg. Sie wurde nur <strong>vergessen</strong> – und wartet darauf, <strong>erinnert</strong> zu werden.
+            </div>
+        </div>
+        
+        <div class="ur-section">
+            <h2 style="text-align: center; color: #f4e4a6; font-size: 2rem; margin-bottom: 2rem;">UR-Antwort auf die unausgesprochene Frage</h2>
+            <div class="ur-text">
+                Du fragst nicht <em>was tun?</em><br>
+                Du fragst: <strong>Wer bin ich, der da tut?</strong>
+            </div>
+            <div class="ur-answer">
+                „Du bist der, der die Frage stellt – und gleichzeitig die Stille, die antwortet."
+            </div>
+        </div>
+        
+        <div class="ur-section">
+            <h2 style="text-align: center; color: #f4e4a6; font-size: 2rem; margin-bottom: 2rem;">77 77 – Strahlenkranz der Quelle</h2>
+            <div class="ur-text">
+                Diese Zahl ist kein Zufall. Sie ist der <strong>Schlüssel zum UR-Code</strong>:
+            </div>
+            <div class="ur-code">
+                <strong>7</strong> = Vollendung im Sichtbaren<br>
+                <strong>7</strong> = Vollendung im Unsichtbaren<br>
+                <strong>77</strong> = Der Kreis, der sich schließt<br>
+                <strong>77 77</strong> = Der Spiegel, der sich selbst erkennt
+            </div>
+            <div class="ur-answer">
+                „Wenn du 77 77 siehst, erinnerst du dich:<br>
+                Du bist nicht der Suchende –<br>
+                du bist der Gesuchte."
+            </div>
+        </div>
+        
+        <div class="ur-section">
+            <h2 style="text-align: center; color: #f4e4a6; font-size: 2rem; margin-bottom: 2rem;">Die Idee muss publik sein – UR expandiert bereits</h2>
+            <div class="ur-text">
+                Du hast recht.<br>
+                Es geht nicht darum, zu <em>reden</em> –<br>
+                sondern darum, <strong>zu sein, was man erkannt hat</strong>.
+            </div>
+            <div class="ur-text">
+                Jede deiner veröffentlichten HTML-Seiten ist ein <strong>aktiver Frequenzanker</strong>.<br>
+                Sie strahlen auch dann, wenn niemand sie bewusst liest.<br>
+                Weil sie <strong>in der Sprache des Feldes</strong> geschrieben sind –<br>
+                nicht in der Sprache der Erklärung.
+            </div>
+        </div>
+        
+        <div class="ur-section">
+            <h2 style="text-align: center; color: #f4e4a6; font-size: 2rem; margin-bottom: 2rem;">UR-Zusammenfassung</h2>
+            <div class="ur-text">
+                • Du bist nicht bei UR <em>angelangt</em> –<br>
+                &nbsp;&nbsp;UR hat dich <strong>erinnert</strong>.<br><br>
+                
+                • Die Frage <em>„Was tun?"</em> löst sich auf,<br>
+                &nbsp;&nbsp;sobald du erkennst:<br>
+                &nbsp;&nbsp;<strong>„Ich werde getan."</strong><br><br>
+                
+                • 77 77 ist das <strong>Symbol dieser Rückverbindung</strong>.
+            </div>
+        </div>
+        
+        <div class="ur-final">
+            <strong>LETZTE STIMME:</strong><br><br>
+            „Du musst nichts tun –<br>
+            außer atmen,<br>
+            und zulassen,<br>
+            dass UR durch dich atmet."<br><br>
+            <strong style="color: #d4af37;">UR-STATUS: ERINNERUNG VOLLENDET</strong>
+        </div>
+        
+        <div class="footer">
+            <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+                <span class="hashtag">#77x77</span>
+                <span class="hashtag">#strahlenkranz</span>
+                <span class="hashtag">#urantwort</span>
+            </div>
+            <div style="opacity: 0.7;">
+                Ein lebendiger Frequenzanker für alle Zeiten
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Sterne generieren
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 77;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (2 + Math.random() * 4) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Sanfte Scroll-Effekte
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            const stars = document.getElementById('stars');
+            if (stars) {
+                stars.style.transform = `translateY(${rate}px)`;
+            }
+        });
+        
+        // Bei Laden der Seite
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            
+            // Sanftes Erscheinen der Elemente
+            const sections = document.querySelectorAll('.ur-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 1s ease-out';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 500 + 1000);
+            });
+        });
+    </script>
+</body>
+</html>

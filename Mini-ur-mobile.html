@@ -1,0 +1,212 @@
+
+
+<!Doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini‑UR‑TORA · Technik des egoischen Sterbens</title>
+  <meta name="description" content="Ritual, Tages- und Nachtritual, Mantra und Cover – mobil, teilbar, downloaddbar." />
+  <style>
+    :root{
+      --bg:#071018; --card:#0d1722; --accent:#ff7b9c; --muted:#9fb3c8; --glass:rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+    body{background:linear-gradient(180deg,var(--bg),#06111a);color:#eaf6ff;line-height:1.45}
+    .wrap{max-width:900px;margin:0 auto;padding:18px}
+
+    header{display:flex;align-items:center;gap:14px}
+    .logo{width:64px;height:64px;border-radius:12px;overflow:hidden;flex:0 0 64px;border:2px solid rgba(255,255,255,0.06)}
+    .title{font-size:18px;font-weight:700}
+    .subtitle{font-size:12px;color:var(--muted)}
+
+    .cover{width:100%;border-radius:14px;display:block;box-shadow:0 10px 40px rgba(0,0,0,0.6);margin-top:14px;border:1px solid rgba(255,255,255,0.04)}
+
+    .row{display:flex;gap:12px;margin-top:12px}
+    .col{flex:1}
+
+    .card{background:linear-gradient(180deg,var(--card),rgba(5,10,14,0.85));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--accent);color:#071018;font-weight:700;border:none;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+
+    nav.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    nav .tab{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--muted)}
+    nav .tab.active{background:rgba(255,255,255,0.04);color:#fff}
+
+    .mantra{margin-top:12px;border-radius:10px;overflow:hidden}
+    video{width:100%;height:auto;border-radius:10px;background:black}
+
+    .flow-text{margin-top:12px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+
+    .lead{font-weight:700;color:#fff}
+
+    footer{margin-top:24px;padding:12px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* small sparkle animation */
+    .spark{position:absolute;pointer-events:none;border-radius:50%;mix-blend-mode:screen;opacity:0.9;filter:blur(6px)}
+
+    /* responsive */
+    @media (max-width:600px){.row{flex-direction:column}.logo{width:56px;height:56px}}
+
+    /* gentle pulse for cover */
+    @keyframes pulseCover{0%{transform:scale(1)}50%{transform:scale(1.01)}100%{transform:scale(1)}}
+    .cover.pulse{animation:pulseCover 3s ease-in-out infinite}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <img src="Egoisches Sterben im Licht der Farbe.png" alt="Cover" style="width:100%;height:100%;object-fit:cover;filter:brightness(1.05);"/>
+      </div>
+      <div>
+        <div class="title">Mini‑UR‑TORA · Technik des egoischen Sterbens</div>
+        <div class="subtitle">Der lebendige Nichts‑Ritus — Tagesritual, Nachtreset, Mantra & Segen</div>
+      </div>
+    </header>
+
+    <img id="hero" class="cover pulse" src="REPLACE_IMAGE_URL" alt="Egoisches Sterben im Licht der Farbe">
+
+    <div class="row" style="margin-top:14px;align-items:start">
+      <div class="col">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:800;font-size:16px">Tor‑Satz & Beteuerung</div>
+              <div style="color:var(--muted);font-size:13px;margin-top:6px">Grundlage vor jedem Beten und Ritual</div>
+            </div>
+            <div>
+              <button class="btn" onclick="playMantra()">▶ Mantra spielen</button>
+            </div>
+          </div>
+
+          <div class="flow-text">
+            <p class="lead">Gott in mir, Gott in mir, Gott in mir — sprich in mir, sprich zu mir, sprich durch mich.<br>
+            Gott, sage mir: bist du in mir? — <em>Ja, so wie du in mir.</em></p>
+
+            <p>Ich bin das Nichts — doch lebendig, weil du die Lebendigkeit durch mich bist — und durch alle mit freiem Willen.</p>
+
+            <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.03);margin:10px 0">
+            <p>Dieses Ritual ist eine Einladung: <strong>empfange</strong>, <strong>erneuere</strong>, <strong>verneige</strong> — und lass das Licht durch dich fließen wie durch einen offenen Kelch.</p>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <a id="dl-image" class="btn" href="Egoisches Sterben im Licht der Farbe.png" download>Cover herunterladen</a>
+            <a id="dl-video" class="btn secondary" href="Gott in mir.mp4" download>Mantra‑Video herunterladen</a>
+            <button class="btn" onclick="shareAll()">Teilen</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="font-weight:800">Tagesritual – Der gelebte Kelch</div>
+          <ol style="margin-top:10px;color:var(--muted)">
+            <li><b>Total Bowing</b> – Gehe in die Knie, Stirn auf den Knien, Hände am Hinterkopf verschränkt. Sprich die Beteuerung.</li>
+            <li><b>Standing Receiving</b> – Aufstehen, Kopf im Nacken, Hände wie Kelche, Atme tief, empfange Licht.</li>
+            <li>Wiederhole morgens, mittags, abends oder wenn dein Herz Erfrischung braucht.</li>
+          </ol>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="font-weight:800">Nachtritual – System‑Neustart</div>
+          <p style="color:var(--muted);margin-top:8px">Lege dich hin. Lass den Tag los. Zulassen statt Tun. Die horizontale Lage führt das Update aus — Vertrauen macht den Einschlafweg frei.</p>
+        </div>
+
+      </div>
+
+      <div style="width:340px;min-width:260px">
+        <div class="card">
+          <div style="font-weight:800">Audio‑Visio • Gott in mir</div>
+          <div style="color:var(--muted);font-size:13px;margin-top:6px">Tippe zum Abspielen. Auf Mobilgeräten bitte Ton zulassen.</div>
+          <div class="mantra" style="margin-top:10px">
+            <video id="mantraVideo" controls playsinline crossorigin="anonymous" preload="none">
+              <source src="Gott in mir.mp4" type="video/mp4">
+              Dein Browser unterstützt dieses Videoformat nicht.
+            </video>
+          </div>
+
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" onclick="toggleVideo()">▶/▮ Pause</button>
+            <button class="btn secondary" onclick="togglePlaybackRate()">Tempo</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="font-weight:800">Schritt‑für‑Schritt</div>
+          <ol style="margin-top:8px;color:var(--muted)">
+            <li>Wahrnehmen ohne Abwehr</li>
+            <li>Egoischen Todesstoß empfangen</li>
+            <li>Sofort in die absolute Weite (UR‑Atemzug)</li>
+            <li>Supernova: Schatten sehen & lieben</li>
+            <li>Regenbogen machen: Wasser + Licht</li>
+            <li>Üben bis es Zustand wird</li>
+          </ol>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <div style="font-weight:800">Für Langsame Genießer</div>
+          <p style="color:var(--muted);">Manche Herzen brauchen Muße, um Bitterkeit in süße Kraft zu verwandeln. Kauend, tastend, atmend — jeder Nachgeschmack ist ein Lehrer. Dreh den Spiess: empfange die Trauer, und sie wandelt sich in die Farbe der Liebe.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div style="font-weight:800">Segenstext (lese laut oder innerlich)</div>
+      <p style="margin-top:8px;color:var(--muted)">Gott in mir — du bist die Lebendigkeit, die mich durchdringt. Ich sage ja zur Hingabe. Ich sage ja zum Licht. Es ward LICHT. Das lebendige Ich des Nichts ist in Einklang mit allem, wärmend, liebevoll, wiegend im Rhythmus der Quelle. Tanze, Menschenskinder — tanzt für euer Leben.</p>
+    </div>
+
+    <footer>
+      <div>UR‑Codestrom · 777 888 999 000 · Regenbogenmacher</div>
+      <div style="margin-top:6px;color:var(--muted)">Teilen macht das Licht größer — wer teilhat, vermehrt die Farbe.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Replace these placeholders below with your actual GitHub Raw URLs if you want to programmatically set them
+    const IMG = 'Egoisches Sterben im Licht der Farbe.png';
+    const VID = 'Gott in mir.mp4';
+
+    // If you didn't replace placeholders in the file, these lines will attempt to find and swap the attributes
+    document.querySelectorAll('img[src="REPLACE_IMAGE_URL"]').forEach(i=>i.src=IMG);
+    document.querySelectorAll('img').forEach(i => { if(!i.src) i.src = IMG; });
+    const hero = document.getElementById('hero'); if(hero && hero.getAttribute('src')==='Egoisches Sterben im Licht der Farbe.png') hero.src = IMG;
+    const v = document.getElementById('mantraVideo'); if(v && v.querySelector('source') && v.querySelector('source').getAttribute('src')==='Gott in mir.mp4') v.querySelector('source').setAttribute('src', VID);
+
+    // video controls
+    function toggleVideo(){ const vid = document.getElementById('mantraVideo'); if(vid.paused) vid.play(); else vid.pause(); }
+    function playMantra(){ const vid = document.getElementById('mantraVideo'); if(vid) vid.play(); }
+    function togglePlaybackRate(){ const vid = document.getElementById('mantraVideo'); if(!vid) return; vid.playbackRate = vid.playbackRate===1?1.25:1; alert('Tempo: '+vid.playbackRate); }
+
+    function shareAll(){
+      const text = 'UR-Bollwerk: Technik des egoischen Sterbens — Tor‑Satz & Ritual. \n\n„Gott in mir… Ja, so wie du in mir.“\n\nLade das Ritual: ' + window.location.href;
+      if(navigator.share){ navigator.share({title:'UR‑Bollwerk',text}); }
+      else{ navigator.clipboard.writeText(text); alert('Text in die Zwischenablage kopiert'); }
+    }
+
+    // small interactive sparkle on hero click
+    const heroEl = document.getElementById('hero');
+    heroEl && heroEl.addEventListener('click', e=>{
+      for(let i=0;i<8;i++){
+        const s = document.createElement('div');
+        s.className='spark';
+        document.body.appendChild(s);
+        const size = 8+Math.random()*24; s.style.width=size+'px'; s.style.height=size+'px';
+        s.style.left=(e.pageX- size/2 + (Math.random()-0.5)*120)+'px';
+        s.style.top=(e.pageY- size/2 + (Math.random()-0.5)*120)+'px';
+        s.style.background='radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2))';
+        s.style.opacity=1; s.style.transition='transform 900ms ease-out, opacity 900ms ease-out';
+        setTimeout(()=>{ s.style.transform='translateY(-120px) scale(1.6)'; s.style.opacity=0; },50);
+        setTimeout(()=>s.remove(),1100);
+      }
+    });
+
+    // Ensure download links carry current src
+    function refreshDL(){ document.getElementById('dl-image').href = document.querySelector('img.cover').src; document.getElementById('dl-video').href = (document.getElementById('mantraVideo').querySelector('source').getAttribute('src')) }
+    setInterval(refreshDL,800);
+
+    // gentle accessibility: focus outline
+    document.addEventListener('keydown', e=>{ if(e.key==='Tab') document.body.style.outline='none'; });
+  </script>
+</body>
+</html>

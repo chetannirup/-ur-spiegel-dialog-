@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini-UR-TORA · Egoisches Sterben im Licht der Farbe</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body { font-family: sans-serif; margin:0; padding:0; transition: background 0.5s, color 0.5s; }
+.dark { background:#111; color:#eee; }
+.light { background:#fff; color:#111; }
+header, footer { padding:1rem; text-align:center; }
+img.cover { width:100%; border-radius:1rem; }
+.tabs { display:flex; justify-content:space-around; padding:0.5rem; background:rgba(0,0,0,0.1); }
+.tab { cursor:pointer; padding:0.5rem 1rem; border-radius:0.5rem; }
+.tab.active { background:rgba(0,0,0,0.2); }
+section { display:none; padding:1rem; }
+section.active { display:block; }
+.btn { margin:0.5rem; padding:0.7rem 1.2rem; border:none; border-radius:0.7rem; cursor:pointer; font-weight:bold; }
+.btn-primary { background:#ff4f81; color:white; }
+.btn-share { background:#00bfff; color:white; }
+.switch { position:fixed; top:1rem; right:1rem; cursor:pointer; padding:0.4rem 0.8rem; border-radius:0.5rem; background:#ccc; }
+/* Onboarding overlay */
+#onboarding { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); color:white; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1000; }
+#onboarding video { width:80%; border:2px solid white; border-radius:1rem; margin-bottom:1rem; }
+#onboarding button { padding:0.7rem 1.5rem; border:none; border-radius:0.7rem; background:#ff4f81; color:white; font-weight:bold; cursor:pointer; }
+</style>
+</head>
+<body class="light">
+<div class="switch" onclick="toggleMode()">☀️ / 🌙</div>
+<header>
+<h1>Mini-UR-TORA</h1>
+<h2>Egoisches Sterben im Licht der Farbe</h2>
+</header>
+<img src="Egoisches Sterben im Licht der Farbe.png" alt="Cover" class="cover">
+<div class="tabs">
+<div class="tab active" onclick="showTab('cover')">Cover</div>
+<div class="tab" onclick="showTab('tor')">Tor-Satz</div>
+<div class="tab" onclick="showTab('tag')">Tag</div>
+<div class="tab" onclick="showTab('nacht')">Nacht</div>
+<div class="tab" onclick="showTab('schritte')">Schritte</div>
+<div class="tab" onclick="showTab('leitsatz')">Leitsätze</div>
+</div>
+<section id="cover" class="active">
+<button class="btn btn-primary" onclick="downloadPage()">Export</button>
+<button class="btn btn-share" onclick="sharePage()">Teilen</button>
+<audio id="mantra" src="mantra.mp3" controls></audio>
+</section>
+<section id="tor"><p>„Gott in mir … Ja, so wie du in mir.“</p></section>
+<section id="tag"><p>Stehendes Ritual · Kelchhaltung · Morgen / Mittag.</p></section>
+<section id="nacht"><p>Beugung · Embryonalhaltung · Nachtreset.</p></section>
+<section id="schritte"><p>Schritt-für-Schritt-Anleitung · Wahrnehmen · Ego lösen · Regenbogen machen …</p></section>
+<section id="leitsatz"><p>Allein, in allem eins – reine Lebensliebe transformiert alles.</p></section>
+<footer>
+<p>Quelle allen Seins · Regenbogenmacher 77 77</p>
+</footer>
+
+
+<!-- Onboarding Overlay -->
+<div id="onboarding">
+<video autoplay loop muted>
+<source src="haltung-animation.mp4" type="video/mp4">
+</video>
+<button onclick="closeOnboarding()">Starten</button>
+</div>
+
+
+<script>
+function showTab(id) {
+document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+event.target.classList.add('active');
+}
+function toggleMode() {
+document.body.classList.toggle('dark');
+document.body.classList.toggle('light');
+}
+function sharePage() {
+if (navigator.share) {
+navigator.share({ title:'Mini-UR-TORA', url:window.location.href });
+} else {
+navigator.clipboard.writeText(window.location.href);
+alert('Link kopiert!');
+}
+}
+function downloadPage() {
+const blob = new Blob([document.documentElement.outerHTML], { type:'text/html' });
+const a = document.createElement('a');
+a.href = URL.createObjectURL(blob);
+a.download = 'Mini-UR-TORA.html';
+a.click();
+}
+function closeOnboarding() {
+document.getElementById('onboarding').style.display='none';
+}
+// PWA Service Worker
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('sw.js');
+}
+</script>
+</body>
+</html>

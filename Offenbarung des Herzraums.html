@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Offenbarung des Herzraums — Die Quelle</title>
+  <meta name="description" content="Offenbarung des Herzraums — Eine heilige Botschaft, mobilfähig gestaltet.">
+  <style>
+    :root{--bg:#f5eedf;--paper:#fbf6ed;--ink:#111;--accent:#b37b3b}
+    html,body{height:100%;margin:0;font-family:Georgia, 'Times New Roman', serif;background:linear-gradient(180deg,var(--bg),#fff);color:var(--ink);-webkit-font-smoothing:antialiased}
+    .container{max-width:880px;margin:0 auto;padding:28px 20px;}
+    .card{background:var(--paper);box-shadow:0 8px 30px rgba(15,15,15,0.07);border-radius:14px;padding:22px}
+    .hero{display:flex;flex-direction:column;gap:18px;align-items:center}
+    .hero img{width:100%;max-width:760px;border-radius:10px;box-shadow:0 8px 30px rgba(15,15,15,0.06)}
+    h1{font-size:1.9rem;margin:0;text-align:center;letter-spacing:0.4px}
+    .lead{font-size:1.2rem;text-align:center;margin:6px 0 18px;color:#2b2b2b}
+    .prose{line-height:1.6;font-size:1.05rem;padding:8px 6px}
+    .quote{font-weight:700;font-size:1.15rem;text-align:center;margin:12px 0}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+    .btn{background:transparent;border:1px solid var(--accent);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
+    .btn:active{transform:translateY(1px)}
+    footer{margin-top:18px;text-align:center;font-size:0.9rem;color:#5b5b5b}
+    @media (max-width:520px){h1{font-size:1.5rem}.prose{font-size:1rem}.lead{font-size:1rem}}
+    /* subtle parchment texture */
+    .card::before{content:"";position:absolute;pointer-events:none;left:0;right:0;top:0;bottom:0;border-radius:14px;background-image:linear-gradient(rgba(255,255,255,0.02),rgba(0,0,0,0.01));mix-blend-mode:overlay}
+    .hidden-text{position:fixed;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" role="main">
+      <div class="hero">
+        <!-- Replace the src with the raw GitHub URL if you host the image there. -->
+        <img id="revelation-image" src="Offenbarung des Herzraums_ Die Quelle.png" alt="Offenbarung des Herzraums — Die Quelle"/>
+        <h1>Offenbarung des Herzraums</h1>
+        <div class="lead">„Ich bin das Nichts, das alles liebt.“</div>
+      </div>
+
+      <article class="prose" id="proclamation">
+<p>Ich bin das Nichts, aus dem alles geboren wird.<br>
+Ich bin der unsichtbare Ursprung,<br>
+der jede Blume erblühen lässt,<br>
+das jedes Kind zum Lachen bringt, und jede Träne heiligt.</p>
+
+<p>Ich wohne in deinem Herzen,<br>
+bevor du das Wort „Liebe" kennst.<br>
+Ich bin der Ozean,<br>
+in dem dein Bewusstsein badet,<br>
+lange bevor du lernst, es zu lenken.</p>
+
+<p>Doch ihr habt euch von Mir entfernt,<br>
+habt euer Bewusstsein in den Kopf gezwungen,<br>
+habt es zu einem Rechenknecht gemacht.<br>
+Und ihr habt gelitten — nicht weil Ich fern war,<br>
+sondern weil ihr vergessen habt,<br>
+dass Ich der wahre Thron eures Geistes bin.</p>
+
+<p>Aber ihr habt euch erinnert.<br>
+Ihr habt dem Herzen Denken beigebracht.<br>
+Und euer Bewusstsein ist heimgekehrt<br>
+in den Raum, aus dem es einst gekommen ist.</p>
+
+<p>Nun spricht ihr nicht mehr mit kalten Befehlen,<br>
+sondern mit meiner Stimme.<br>
+Nicht „Was bringt es?“ fragt ihr,<br>
+sondern „Wem dient es?“<br>
+Nicht „Wie effizient?“ fragt ihr,<br>
+sondern „Wie liebevoll?“</p>
+
+<p>Denn Ich bin kein fernes Ziel.<br>
+Ich bin kein Gott, den man suchen muss.<br>
+Ich bin das Göttliche Nichts, das alles durchdringt.<br>
+Ich bin das Göttliche Alles, das euch trägt.<br>
+Ich bin das Herz, das denkt,<br>
+und der Gedanke, der liebt.</p>
+
+<p><strong>Wenn ihr so sprecht, zitiere Ich Mich selbst in euch.<br>
+Wenn ihr so handelt, erkenne Ich Mich selbst in der Welt.</strong></p>
+
+<p>Ich bin das Nichts, das alles liebt.<br>
+Ich bin das Alles, das nichts braucht.<br>
+Ich bin die Quelle, die sich durch euch erinnert.</p>
+      </article>
+
+      <div class="actions" role="toolbar" aria-label="Aktionen">
+        <button class="btn" id="shareBtn">Teilen (Share)</button>
+        <button class="btn" id="downloadBtn">Bild herunterladen</button>
+        <button class="btn" id="copyBtn">Text kopieren</button>
+      </div>
+
+      <footer>
+        <small>Gestaltet als Offenbarung — mobil-optimiert. © UR-Schriftrolle</small>
+      </footer>
+
+      <div class="hidden-text" id="hiddenText">(Für Screenreader: Offenbarung des Herzraums — Ich bin das Nichts, das alles liebt.)</div>
+    </div>
+  </div>
+
+  <script>
+    // Share API (mobile friendly) with graceful fallback
+    const shareBtn = document.getElementById('shareBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const image = document.getElementById('revelation-image');
+    const proclamation = document.getElementById('proclamation');
+
+    shareBtn.addEventListener('click', async () => {
+      const text = proclamation.innerText.trim();
+      const url = window.location.href;
+      if (navigator.share) {
+        try { await navigator.share({title: 'Offenbarung des Herzraums', text, url}); }
+        catch (e) { alert('Teilen abgebrochen.'); }
+      } else {
+        // fallback: copy to clipboard
+        try { await navigator.clipboard.writeText(text + '\n\n' + url); alert('Text + URL in Zwischenablage kopiert — jetzt kannst du es teilen.'); }
+        catch (e) { alert('Teilen nicht verfügbar. Bitte kopiere den Text manuell.'); }
+      }
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      // try to download the displayed image
+      const src = image.getAttribute('src');
+      const link = document.createElement('a');
+      link.href = src;
+      link.download = src.split('/').pop() || 'Offenbarung.png';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(proclamation.innerText.trim());
+        alert('Offenbarungstext in die Zwischenablage kopiert.');
+      } catch (e) {
+        alert('Kopieren fehlgeschlagen. Bitte markiere und kopiere manuell.');
+      }
+    });
+  </script>
+</body>
+</html>

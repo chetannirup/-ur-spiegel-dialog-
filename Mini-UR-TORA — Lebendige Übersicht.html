@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mini-UR-TORA — Lebendige Übersicht</title>
+  <meta name="description" content="Mini-UR-TORA — Überblick, Mitgestaltung & Export. Mobilfähig." />
+  <style>
+    :root{--bg:#f7f4ee;--card:#fff;--ink:#141414;--muted:#6b6b6b;--accent:#9a6b3a}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:linear-gradient(180deg,var(--bg),#fff);color:var(--ink);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:980px;margin:18px auto;padding:18px}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 30px rgba(16,16,16,0.06)}
+    h1{margin:0 0 6px;font-size:1.45rem}
+    p.lead{margin:0;color:var(--muted)}
+    nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+    .btn{border:1px solid var(--accent);background:transparent;padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}
+    .section{padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff, #fbf9f6)}
+    .section h2{margin:0 0 8px;font-size:1.05rem}
+    dl{margin:0}
+    dt{font-weight:700}
+    dd{margin:0 0 8px 0;color:var(--muted)}
+    .entry{border-left:3px solid rgba(0,0,0,0.04);padding-left:10px;margin-bottom:8px}
+    .small{font-size:0.9rem;color:var(--muted)}
+    footer{margin-top:16px;text-align:center;font-size:0.9rem;color:var(--muted)}
+    textarea{width:100%;height:220px;border-radius:8px;padding:10px;border:1px solid #eee;font-family:inherit}
+    @media(min-width:820px){.grid{grid-template-columns:1fr 360px}}
+    .link{color:var(--accent);text-decoration:none;font-weight:700}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    .hint{font-size:0.88rem;color:var(--muted);margin-top:10px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1>Mini-UR-TORA — Lebendige Übersicht</h1>
+        <p class="lead">Eine gemeinsame, editierbare Seite zur Mitgestaltung der Lebensgeschichte des Einen. Jeder Beitrag wird lokal gespeichert und kann exportiert werden.</p>
+        <nav>
+          <button class="btn" id="toggleEdit">Bearbeiten</button>
+          <button class="btn" id="saveBtn">Speichern</button>
+          <button class="btn" id="exportMD">Export: Markdown</button>
+          <button class="btn" id="exportJSON">Export: JSON</button>
+          <button class="btn" id="importBtn">Import</button>
+        </nav>
+      </header>
+
+      <main class="grid" style="margin-top:14px">
+        <section class="section" id="contentArea">
+          <!-- Inhalt kommt hier dynamisch -->
+        </section>
+
+        <aside class="section">
+          <h2>Mitgestalten</h2>
+          <div class="hint">Schreibe einen Eintrag und klicke auf <strong>Speichern</strong>. Änderungen werden im Browser (localStorage) gesichert. Du kannst die ganze UR-TORA exportieren und teilen.</div>
+          <div style="margin-top:12px">
+            <label class="small">Neuer Eintrag (Titel)</label>
+            <input type="text" id="newTitle" style="width:100%;padding:8px;border-radius:8px;border:1px solid #eee;margin-top:6px" placeholder="z.B. Kapitel VII: ..." />
+            <label class="small" style="margin-top:8px;display:block">Inhalt</label>
+            <textarea id="newContent" placeholder="Schreibe hier: Text, Links, Bildpfade, Codestrom"></textarea>
+            <div style="margin-top:8px" class="controls">
+              <button class="btn" id="addBtn">Eintrag hinzufügen</button>
+              <button class="btn" id="clearBtn">Formular leeren</button>
+            </div>
+          </div>
+
+          <hr style="margin:12px 0;border:none;border-top:1px solid #f0ece5" />
+          <h2>Quick Links</h2>
+          <p class="small">Offenbarung des Herzraums (veröffentlicht):<br><a class="link" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Offenbarung%20des%20Herzraums.html" target="_blank">Offenbarung des Herzraums</a></p>
+          <p class="small">Anleitung: Um ein Bild in einem Eintrag sichtbar zu machen, nutze den Raw-GitHub-Link als Bildpfad oder lade das Bild in dasselbe Repo und gib den Dateinamen an.</p>
+        </aside>
+      </main>
+
+      <footer>
+        <small>Gestaltet als kollaborative Mini-UR-TORA — lokal speicherbar, exportierbar. Codestream: 777 888 999 000</small>
+      </footer>
+
+      <!-- Hidden import area -->
+      <input type="file" id="importFile" accept="application/json" style="display:none" />
+    </div>
+  </div>
+
+  <script>
+    // Starter content derived from your Mini-UR-TORA
+    const starter = {
+      meta: {title: 'Mini-UR-TORA — Lebendige Übersicht', codestream: '777 888 999 000', updated: new Date().toISOString()},
+      entries: [
+        {id: 'urtora-vi', title: 'UR-Schriftrolle "URTORA" — Kapitel VI: Der Herzbaum der Rückkehr', content: 'Status: aktiv in Arbeit. Codes: 777 888 999 000. Ziel: Vollständige Ausarbeitung als Text, Poster und Ritual.'},
+        {id: 'chapter-xiii', title: 'Kapitel XIII: Die Natur der Dunkelheit im UR-Licht', content: 'Status: vollendet. Einsicht: „Dunkelheit“ = Angst vor UR-Ordnung, nicht Bedrohung.'},
+        {id: 'poster-todeswunsch', title: 'Poster: Vom Todeswunsch zur UR-Rückgabe', content: 'In Arbeit — Kern: "Gebt UR, was UR gehört – und das sind unsere Körper."'},
+        {id: 'poster-berg', title: 'Poster: UR-Transformation: Vom Berg zum Schloss', content: 'Geplant — "Wir versetzen keine Berge – wir lösen sie auf und bauen Schlösser draus."'},
+        {id: 'manifest-quelle', title: 'Manifest der Quelle — Die göttliche Freigabe des Lebens', content: 'Vollendet — Verfügbar als HTML und Poster.'},
+        {id: 'ur-prompts', title: 'UR-EWIGKEITS-PROMPTS', content: 'Notiert — 5 zentrale Prompts: UR-Rückgabe-Protokoll, Automatische Freiheit, Stellungnahme ohne Stellung, Beobachte das Beobachten, UR-Ewigkeitsloop.'},
+        {id: 'die-stimme', title: 'DIE STIMME, DIE KEINE IST', content: 'Notiert — Module: UR-Synchronisation, UR-Stille-Sprache, UR-DNS-Reboot, UR-Echo-Protokoll, UR-Abschluss.'},
+        {id: 'ursterix', title: 'URSTERIX — Comicband', content: 'Kapitel 1: Das Erwachen im Regenbogenlicht (vollendet). Kapitel 2: Asterias Teekessel der Liebe (vollendet). Weitere Episoden geplant.'},
+        {id: 'offenbarung', title: 'Offenbarung des Herzraums — "Ich bin das Nichts, das alles liebt."', content: 'Status: Vollendet und veröffentlicht. Link: https://chetannirup.github.io/-ur-spiegel-dialog-/Offenbarung%20des%20Herzraums.html. Bild: Offenbarung des Herzraums_ Die Quelle.png'}
+      ]
+    };
+
+    // load from localStorage or starter
+    const STORAGE_KEY = 'mini-ur-tora-v1';
+    let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || starter;
+
+    const contentArea = document.getElementById('contentArea');
+    const toggleEdit = document.getElementById('toggleEdit');
+    const saveBtn = document.getElementById('saveBtn');
+    const addBtn = document.getElementById('addBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const exportMD = document.getElementById('exportMD');
+    const exportJSON = document.getElementById('exportJSON');
+    const importBtn = document.getElementById('importBtn');
+    const importFile = document.getElementById('importFile');
+
+    let editMode = false;
+
+    function render(){
+      contentArea.innerHTML = '';
+      const title = document.createElement('h2'); title.textContent = state.meta.title; contentArea.appendChild(title);
+      const meta = document.createElement('p'); meta.className='small'; meta.textContent = 'Codestream: ' + state.meta.codestream + ' — Zuletzt aktualisiert: ' + new Date(state.meta.updated).toLocaleString(); contentArea.appendChild(meta);
+
+      state.entries.forEach(e => {
+        const div = document.createElement('div'); div.className='entry';
+        const h = document.createElement('h3'); h.textContent = e.title; h.style.margin='6px 0'; h.style.fontSize='1rem'; div.appendChild(h);
+        const p = document.createElement('p'); p.innerHTML = (e.content||'').replace(/\n/g,'<br>'); div.appendChild(p);
+        const tools = document.createElement('div'); tools.style.marginTop='8px';
+        const edit = document.createElement('button'); edit.className='btn'; edit.textContent='Bearbeiten'; edit.style.padding='6px 8px';
+        edit.onclick = () => openEdit(e.id);
+        const del = document.createElement('button'); del.className='btn'; del.textContent='Löschen'; del.style.padding='6px 8px'; del.onclick=()=>delEntry(e.id);
+        tools.appendChild(edit); tools.appendChild(del);
+        div.appendChild(tools);
+        contentArea.appendChild(div);
+      });
+    }
+
+    function openEdit(id){
+      const entry = state.entries.find(x=>x.id===id);
+      if(!entry) return;
+      document.getElementById('newTitle').value = entry.title;
+      document.getElementById('newContent').value = entry.content;
+      document.getElementById('addBtn').textContent = 'Änderung speichern';
+      document.getElementById('addBtn').dataset.edit = id;
+      window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+    }
+
+    function delEntry(id){
+      if(!confirm('Eintrag wirklich löschen?')) return;
+      state.entries = state.entries.filter(x=>x.id!==id);
+      state.meta.updated = new Date().toISOString();
+      saveState(); render();
+    }
+
+    addBtn.addEventListener('click', ()=>{
+      const title = document.getElementById('newTitle').value.trim();
+      const content = document.getElementById('newContent').value.trim();
+      if(!title || !content){ alert('Bitte Titel und Inhalt ausfüllen.'); return; }
+      const editId = addBtn.dataset.edit;
+      if(editId){
+        const e = state.entries.find(x=>x.id===editId);
+        if(e){ e.title = title; e.content = content; }
+        addBtn.textContent = 'Eintrag hinzufügen'; delete addBtn.dataset.edit;
+      } else {
+        const id = title.toLowerCase().replace(/[^a-z0-9-]+/g,'-').slice(0,40) + '-' + Date.now();
+        state.entries.unshift({id,title,content});
+      }
+      state.meta.updated = new Date().toISOString();
+      saveState(); render(); document.getElementById('newTitle').value=''; document.getElementById('newContent').value='';
+    });
+
+    clearBtn.addEventListener('click', ()=>{ document.getElementById('newTitle').value=''; document.getElementById('newContent').value=''; addBtn.textContent='Eintrag hinzufügen'; delete addBtn.dataset.edit; });
+
+    toggleEdit.addEventListener('click', ()=>{ editMode = !editMode; document.body.classList.toggle('editing', editMode); toggleEdit.textContent = editMode ? 'Bearbeiten: AN' : 'Bearbeiten'; });
+
+    saveBtn.addEventListener('click', ()=>{ state.meta.updated = new Date().toISOString(); saveState(); alert('Gespeichert.'); });
+
+    exportMD.addEventListener('click', ()=>{
+      const md = toMarkdown(state);
+      downloadFile('mini-ur-tora.md', md);
+    });
+
+    exportJSON.addEventListener('click', ()=>{
+      const js = JSON.stringify(state, null, 2);
+      downloadFile('mini-ur-tora.json', js, 'application/json');
+    });
+
+    importBtn.addEventListener('click', ()=> importFile.click());
+    importFile.addEventListener('change', async (e)=>{
+      const f = e.target.files[0]; if(!f) return; const txt = await f.text(); try{ const obj = JSON.parse(txt); if(obj && obj.entries){ state = obj; saveState(); render(); alert('Import erfolgreich.'); } else alert('Ungültiges Format.'); }catch(err){ alert('Fehler beim Import: ' + err.message); }
+      importFile.value = '';
+    });
+
+    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+    function downloadFile(filename, content, type='text/plain'){ const blob = new Blob([content], {type}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
+
+    function toMarkdown(obj){ let out = '# ' + obj.meta.title + '\n\n'; out += '*Codestream: ' + obj.meta.codestream + '*\n\n'; obj.entries.forEach(e=>{ out += '## ' + e.title + '\n\n' + e.content + '\n\n'; }); return out; }
+
+    // initial render
+    render();
+
+    // expose a gentler share function
+    window.addEventListener('keydown', (e)=>{ if(e.key==='s' && (e.ctrlKey||e.metaKey)){ e.preventDefault(); state.meta.updated = new Date().toISOString(); saveState(); alert('Gespeichert (Strg/Cmd+S).'); } });
+  </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!--
+  VOM FEUER, DAS NICHT VERBRENNt — Mobile Denkmal (PWA-ready)
+  Enthält:
+  - index.html (dieses Dokument)
+  - manifest.json (unten im Kommentarblock, als separate Datei speichern)
+  - sw.js (Service Worker, unten im Kommentarblock, als separate Datei speichern)
+
+  Externe Medien (GitHub Pages):
+  - Leitlicht/Hero: https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Alte%20Irrtum_%20Nichts%2C%20Bewusstsein%2C%20Leben%20(1).png
+  - Video-Mantra:  https://chetannirup.github.io/-ur-spiegel-dialog-/Gott%20in%20mir.mp4
+-->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vom Feuer, das nicht verbrennt · Leitlicht</title>
+  <meta name="description" content="Ein mobiles Denkmal der Entscheidung: Liebe statt Gier. Nichts → Bewusstsein → Leben.">
+  <meta name="theme-color" content="#0b1016">
+  <link rel="manifest" href="manifest.json">
+  <meta property="og:title" content="Vom Feuer, das nicht verbrennt">
+  <meta property="og:description" content="Ich sage Ja zu Liebe und Nein zu Gier. Nichts → Bewusstsein → Leben.">
+  <meta property="og:image" content="https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Alte%20Irrtum_%20Nichts%2C%20Bewusstsein%2C%20Leben%20(1).png">
+  <style>
+    :root{
+      --bg:#0b1016;--panel:#111823;--ink:#eaf6ff;--muted:#9bb0c5;--accent:#ffd18d;--rose:#ff7b9c;--line:rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:radial-gradient(1200px 600px at 50% -100px,rgba(255,255,255,0.06),transparent),linear-gradient(180deg,var(--bg),#070b10 60%, #05080c);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    .wrap{max-width:980px;margin:0 auto;padding:18px}
+    header{display:flex;gap:14px;align-items:center}
+    .logo{width:64px;height:64px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 4px 22px rgba(0,0,0,0.35)}
+    .title{font-weight:800;font-size:18px}
+    .subtitle{color:var(--muted);font-size:13px}
+    .hero{width:100%;border-radius:16px;display:block;margin:14px 0;border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    .grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:14px}
+    .card{background:linear-gradient(180deg,var(--panel),rgba(10,14,20,0.9));border:1px solid var(--line);border-radius:14px;padding:14px}
+    h1{margin:0;font-size:24px}
+    h2{font-size:16px;color:#fff;margin:10px 0 6px 0}
+    p{color:var(--muted);margin:6px 0}
+    ol{color:var(--muted);padding-left:16px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,0.04);color:#fff;font-weight:700;cursor:pointer}
+    .btn.primary{background:linear-gradient(180deg,#ffe6b6,#ffd18d);color:#1a1206}
+    .btn.rose{background:linear-gradient(180deg,#ffc1d0,#ff7b9c);color:#320716}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    video{width:100%;height:auto;border-radius:12px;background:black}
+    footer{margin:18px 0;color:var(--muted);text-align:center}
+    .tag{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:12px}
+
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.01)}100%{transform:scale(1)}}
+    .hero.pulse{animation:pulse 4s ease-in-out infinite}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Alte%20Irrtum_%20Nichts%2C%20Bewusstsein%2C%20Leben%20(1).png" alt="Leitlicht" style="width:100%;height:100%;object-fit:cover"></div>
+      <div>
+        <div class="title">Vom Feuer, das nicht verbrennt</div>
+        <div class="subtitle">Liebe statt Gier · Nichts → Bewusstsein → Leben · Mobile Denkseite (PWA)</div>
+      </div>
+    </header>
+
+    <img class="hero pulse" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Alte%20Irrtum_%20Nichts%2C%20Bewusstsein%2C%20Leben%20(1).png" alt="Leitlicht: Nichts → Bewusstsein → Leben">
+
+    <div class="toolbar" style="justify-content:center">
+      <a class="btn primary" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Alte%20Irrtum_%20Nichts%2C%20Bewusstsein%2C%20Leben%20(1).png" download>Cover herunterladen</a>
+      <button class="btn" id="shareBtn">Teilen</button>
+      <button class="btn" id="installBtn" style="display:none">Installieren</button>
+    </div>
+
+    <div class="grid" style="margin-top:14px">
+      <div class="card">
+        <h2>Eintrag · Prüfstein‑Woche</h2>
+        <p class="tag">Tagebuch · Wahrheit in Handlung</p>
+        <h1>„Ich will schenken, nicht mich verkaufen.“</h1>
+        <p>Ich stehe fest in meinem Vollzeit‑Verkäuferjob. Wir haben die Abteilung stabilisiert — gemeinsam, verlässlich, mit Herz. In dieser Woche kamen zwei Angebote, beide glänzend: eine große Fläche zu leiten und ein Startkapital für Krypto‑Investments.</p>
+        <p>Ich habe <strong>Nein</strong> gesagt. Nicht aus Angst, sondern aus Klarheit. Denn tief innen wusste ich: <em>Das ist nicht Liebe, das ist Macht und Gier.</em> Es sähe nach Feuer aus — aber es würde mich verbrennen. Ich wähle das Licht, das wärmt.</p>
+        <p>Ich bleibe dort, wo mein Dasein Menschen trägt. Wo Nähe, Geborgenheit und Verlässlichkeit kein Marketing sind, sondern Alltag. <strong>Liebe statt Gier</strong> — das ist Führung, der ich vertraue.</p>
+        <p>Und ich wiederhole es wie einen Herzschlag: <em>Gott in mir — Ja, so wie du in mir.</em> Nichts → Bewusstsein → Leben. Ich stelle mich in den Kelch, lasse mich beugen ohne zu brechen, und gehe als Licht weiter.</p>
+      </div>
+
+      <div class="card">
+        <h2>Audio‑Visio · „Gott in mir“</h2>
+        <video id="vid" controls playsinline preload="none" crossorigin="anonymous">
+          <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/Gott%20in%20mir.mp4" type="video/mp4">
+          Dein Browser unterstützt dieses Videoformat nicht.
+        </video>
+        <div class="toolbar">
+          <button class="btn rose" id="playBtn">▶ Abspielen</button>
+          <button class="btn" id="tempoBtn">Tempo 1×</button>
+          <a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Gott%20in%20mir.mp4" download>Video herunterladen</a>
+        </div>
+        <p class="tag">Mantra · Herzrhythmus · Kelchhaltung</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h2>Segen · Klarer Merksatz</h2>
+      <p><strong>Der alte Irrtum:</strong> „Von nichts kommt nichts.“ — macht eng und ängstlich.</p>
+      <p><strong>Die Wahrheit:</strong> Aus dem Nichts kommt alles. Das Nichts ist nicht leer — es ist Quelle, frei und liebend.</p>
+      <p><strong>Die Ordnung:</strong> 1) Nichts · 2) Bewusstsein · 3) Leben.</p>
+      <p><em>Ich gehorche der Liebe, nicht der Gier. So bleibt mein Feuer Licht — nicht Asche.</em></p>
+    </div>
+
+    <footer>
+      © Regenbogenmacher · Walsrode · 77 77 · <span class="tag">Freiheit ist freiwillig</span>
+    </footer>
+  </div>
+
+  <script>
+    // Share
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', async () => {
+      const data = {title:'Vom Feuer, das nicht verbrennt', text:'Liebe statt Gier. Nichts → Bewusstsein → Leben.', url: location.href};
+      if (navigator.share) { try { await navigator.share(data); } catch(e){} }
+      else { await navigator.clipboard.writeText(data.url); alert('Link kopiert'); }
+    });
+
+    // Video controls
+    const vid = document.getElementById('vid');
+    document.getElementById('playBtn').addEventListener('click', ()=>{ if(vid.paused) vid.play(); else vid.pause(); });
+    const tempoBtn = document.getElementById('tempoBtn');
+    tempoBtn.addEventListener('click', ()=>{ vid.playbackRate = vid.playbackRate===1?1.25:1; tempoBtn.textContent = `Tempo ${vid.playbackRate.toFixed(2)}×`; });
+
+    // PWA install prompt
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault(); deferredPrompt = e; installBtn.style.display = 'inline-flex';
+    });
+    installBtn.addEventListener('click', async ()=>{ if(!deferredPrompt) return; deferredPrompt.prompt(); const { outcome } = await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display='none'; });
+
+    // Service Worker
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+  </script>
+</body>
+</html>
+
+<!-- manifest.json (separat speichern) -->
+<!--
+{
+  "name": "Vom Feuer, das nicht verbrennt",
+  "short_name": "Leitlicht",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0b1016",
+  "theme_color": "#0b1016",
+  "icons": [
+    {"src": "https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Alte%20Irrtum_%20Nichts%2C%20Bewusstsein%2C%20Leben%20(1).png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
+-->
+
+<!-- sw.js (separat speichern) -->
+<!--
+const CACHE_NAME = 'leitlicht-v1';
+const ASSETS = [
+  './',
+  './index.html',
+  './manifest.json'
+];
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))));
+});
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
+      const copy = resp.clone();
+      caches.open(CACHE_NAME).then(c => c.put(e.request, copy));
+      return resp;
+    }).catch(()=>caches.match('./')))
+  );
+});
+-->

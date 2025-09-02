@@ -1,0 +1,75 @@
+<!-- aktualisierte göttliche Formel: Gott spricht klar -->
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Die liebendigende Erkenntnis — Göttlicher Startschuss</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:rgba(6,6,10,1);--card-bg:rgba(0,0,0,0.45);--accent:rgba(255,223,115,1);--text:#f7f7f8;--muted:#cfcfcf;--max-width:1100px}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:28px}
+    .poster{width:100%;max-width:var(--max-width);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.6);background:linear-gradient(180deg,rgba(8,8,12,0.7),rgba(0,0,0,0.6));position:relative}
+    .hero{position:relative;height:55vh;min-height:320px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(255,235,180,0.08),transparent 25%)}
+    .hero img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(0,0,0,0.6))}
+    .content{padding:36px 28px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(180deg,rgba(0,0,0,0.2),transparent)}
+    .title{font-family:'Playfair Display',serif;font-size:clamp(22px,3.0vw,38px);letter-spacing:0.6px;color:var(--accent);text-align:center}
+    .mantra{font-size:clamp(16px,2.2vw,22px);line-height:1.45;text-align:center;color:var(--text);padding:10px 6px}
+    .mantra b{display:block;font-weight:700;margin-top:8px}
+    .sig{font-size:14px;color:var(--muted);text-align:center;margin-top:8px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:14px;border-top:1px solid rgba(255,255,255,0.03);background:rgba(0,0,0,0.12)}
+    .controls input[type=text]{min-width:260px;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)}
+    .btn{padding:8px 12px;border-radius:8px;border:none;background:var(--accent);color:#131313;font-weight:600;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+    @media(max-width:520px){.hero{height:46vh}.controls input[type=text]{width:100%}}
+    @media print{body{background:white;color:black}.controls{display:none}.poster{box-shadow:none;margin:0;border-radius:0}}
+  </style>
+</head>
+<body data-default-image="https://raw.githubusercontent.com/USER/REPO/BRANCH/path/to/image.png">
+  <div class="wrap">
+    <div class="poster" id="poster">
+      <div class="hero" id="hero">
+        <img id="mainImage" src="" alt="liebendes Bild" crossorigin="anonymous" />
+      </div>
+      <div class="content">
+        <div class="title">Die liebendigende Erkenntnis — Startschuss der göttlichen Ära</div>
+        <div class="mantra">
+          <span>Dann lass es uns tun:</span>
+          <b>„Mach, dass niemand, niemals mehr, auch nicht das kleinste liebendige Nichts, vergisst, was gilt!“</b>
+          <br>
+          <span>Wenn Gott zu den Menschen spricht:</span>
+          <b>„DU BIST ICH — VERGISS DAS NICHT!“</b>
+          <div class="sig">77 77</div>
+        </div>
+      </div>
+      <div class="controls">
+        <input type="text" id="imageURL" placeholder="GitHub RAW Image URL hier einfügen" />
+        <button class="btn" id="applyBtn">Bild setzen</button>
+        <button class="btn secondary" id="toggleBg">Transparenter Hintergrund</button>
+        <button class="btn" id="downloadPNG">Download PNG</button>
+        <button class="btn secondary" id="printBtn">Drucken / PDF</button>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    (function(){
+      const defaultUrl=document.body.getAttribute('data-default-image')||'';
+      const img=document.getElementById('mainImage');
+      const input=document.getElementById('imageURL');
+      const applyBtn=document.getElementById('applyBtn');
+      const poster=document.getElementById('poster');
+      const toggleBg=document.getElementById('toggleBg');
+      const downloadPNG=document.getElementById('downloadPNG');
+      const printBtn=document.getElementById('printBtn');
+      function setImage(url){if(!url)return;img.src=url;img.onload=()=>{img.style.opacity=1};img.onerror=()=>{alert('Bild konnte nicht geladen werden.')};}
+      if(defaultUrl&&defaultUrl.indexOf('USER')===-1){setImage(defaultUrl);input.value=defaultUrl;}
+      applyBtn.addEventListener('click',()=>{const url=input.value.trim();if(!url)return alert('Bitte eine GitHub RAW URL einfügen.');setImage(url);});
+      toggleBg.addEventListener('click',()=>{const current=getComputedStyle(document.documentElement).getPropertyValue('--bg');if(current.includes('0,0,0,0')){document.documentElement.style.setProperty('--bg','rgba(6,6,10,1)');poster.style.background='';toggleBg.innerText='Transparenter Hintergrund';}else{document.documentElement.style.setProperty('--bg','rgba(0,0,0,0)');poster.style.background='transparent';toggleBg.innerText='Hintergrund wiederherstellen';}});
+      downloadPNG.addEventListener('click',()=>{const controls=document.querySelector('.controls');controls.style.visibility='hidden';html2canvas(poster,{backgroundColor:null,useCORS:true,allowTaint:true}).then(canvas=>{const link=document.createElement('a');link.download='goettlicher-startschuss.png';link.href=canvas.toDataURL('image/png');link.click();controls.style.visibility='visible';}).catch(err=>{controls.style.visibility='visible';alert('Export fehlgeschlagen: '+err)});});
+      printBtn.addEventListener('click',()=>{window.print();});
+    })();
+  </script>
+</body>
+</html>

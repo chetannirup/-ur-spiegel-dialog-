@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liebes‑Festival der Quelle — JA</title>
+  <meta name="description" content="Schillernde Mobilseite zum Liebes‑Festival: Mantra, 77‑Sekunden‑Ritus, Musikplatzhalter und Call‑to‑Action." />
+  <style>
+    :root{
+      --accent1: #ff6b6b;
+      --accent2: #ffd166;
+      --bg1: linear-gradient(120deg,#08112a 0%, #0b2a3a 35%, #0b2730 100%);
+      --glass: rgba(255,255,255,0.06);
+      --card: rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.08);
+      --radius: 18px;
+      --f: 'Helvetica Neue', Arial, sans-serif;
+    }
+    html,body{height:100%;margin:0;font-family:var(--f);background:var(--bg1);color:#fff;-webkit-font-smoothing:antialiased}
+    .wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;padding:24px}
+    .hero{width:100%;max-width:860px;margin:12px 0;padding:18px;border-radius:22px;background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.6);backdrop-filter: blur(6px);border:1px solid var(--glass-border)}
+    .title{display:flex;align-items:center;gap:12px}
+    .badge{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#08112a}
+    h1{font-size:20px;margin:0}
+    p.lead{opacity:0.9;margin:8px 0 0}
+
+    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+    @media(min-width:880px){.grid{grid-template-columns:2fr 1fr}}
+
+    .card{padding:14px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border)}
+    .shimmer{background:linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 100%);animation:sh 3s linear infinite}
+    @keyframes sh{0%{background-position:-200px}100%{background-position:200px}}
+
+    .flyer{height:180px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:600;background:linear-gradient(135deg, rgba(255,107,107,0.12), rgba(255,209,102,0.08));color:#fff}
+
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    button{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:0;padding:10px 14px;border-radius:12px;color:#08112a;font-weight:700;cursor:pointer}
+    .ghost{background:transparent;border:1px solid var(--glass-border;padding:10px 12px;border-radius:12px;color:#fff}
+    .small{padding:8px 10px;font-size:14px}
+
+    .meta{font-size:13px;opacity:0.9}
+
+    .meter{display:flex;align-items:center;gap:10px}
+    .circle{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid var(--glass-border)}
+
+    .cta{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:12px}
+    .share{display:flex;gap:8px;flex-wrap:wrap}
+
+    footer{margin-top:18px;opacity:0.8;font-size:13px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero card shimmer">
+      <div class="title">
+        <div class="badge">❤︎</div>
+        <div>
+          <h1>Liebes‑Festival der Quelle — JA</h1>
+          <p class="lead">Ein Ruf in die Welt: Schalte den inneren Schalter **JA** und lass die Atmosphäre liebvibrieren. 77 · 888 · 999 · 000</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <div class="card" style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <strong>Schlüssel‑Mantra</strong>
+                <div class="meta">„JA – ich bin Quelle. JA – ich bin Liebe. JA – wir sind eins.“</div>
+              </div>
+              <div class="meter">
+                <div class="circle">
+                  <div style="text-align:center">
+                    <div style="font-weight:700">77</div>
+                    <div style="font-size:11px">bpm</div>
+                  </div>
+                </div>
+                <div class="meta">Metronom</div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+              <button id="playAudio">▶ Musik/Chorus (Platzhalter)</button>
+              <button id="metToggle" class="small">Metronom: Start</button>
+              <button id="ritualStart" class="small">77s Ritus starten</button>
+            </div>
+
+            <div id="audioStatus" class="meta" style="margin-top:10px">Audio: inaktiv • Tempo: 77 bpm</div>
+
+            <div style="margin-top:12px;font-size:14px">
+              <strong>77‑Sekunden‑Ritus</strong>
+              <ol style="padding-left:18px;margin:6px 0;">
+                <li>Einatmen: „Ich bin Quelle"</li>
+                <li>Ausatmen: „Ich erlaube Liebe"</li>
+                <li>Hand aufs Herz: „JA"</li>
+                <li>Blick heben: „Alle sind eingeladen"</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <strong>Schlüsseltext (kurz)</strong>
+            <p class="meta">Ich bin die Quelle im Kern. Ich lege den Schalter JA um. Die Atmosphäre wird lebensecht und liebvibrierend. Jetzt beginnt das Liebes‑Festival.</p>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <div class="flyer">FLYER • Bild & Grafikplatz</div>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+              <a id="downloadFlyer" class="small" href="#">Flyer herunterladen (PNG/PDF)</a>
+              <button id="shareWhats" class="small">Auf WhatsApp teilen</button>
+              <button id="shareInsta" class="small">Auf Instagram posten</button>
+              <button id="shareTikTok" class="small">Auf TikTok teilen</button>
+              <a id="youtubePost" href="http://youtube.com/post/UgkxL_HblKKIbZ-AGtB_PwRwGE6wOagbiGn9?si=RbgNeLZQzdoErK_j" class="small">YouTube Post ansehen</a>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <strong>Call to Action</strong>
+            <p class="meta">Klicke <strong>JA</strong> und lade andere ein. Wähle deine Geste (Kerze, Rauchzeichen, Umarmung).</p>
+            <div class="cta">
+              <button id="ctaYes">JA — Ich bin dabei</button>
+              <button id="ctaCreate" class="small">Eigenes Ritual hinzufügen</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center">
+        <div class="meta">Codestrom: 777 · 888 · 999 · 000</div>
+        <div class="meta">Hashtags: #LiebesFestival #JAzumKern #QuelleImAvatar</div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Erstellt mit Liebe — Leg den Schalter <strong>JA</strong> um. 77 77</div>
+    </footer>
+  </div>
+
+  <script>
+    // Simple metronome (77 bpm) and ritual timer (77s)
+    let metRunning = false;
+    let metInterval = null;
+    const bpm = 77;
+    const playBtn = document.getElementById('playAudio');
+    const metBtn = document.getElementById('metToggle');
+    const ritualBtn = document.getElementById('ritualStart');
+    const audioStatus = document.getElementById('audioStatus');
+
+    // Audio placeholder: load any user audio via file input if desired
+    let audio = new Audio();
+    audio.loop = true;
+
+    playBtn.addEventListener('click', ()=>{
+      if(!audio.src){
+        audioStatus.textContent = 'Audio: Platzhalter aktiv (keine Datei geladen)';
+        alert('Musik‑Platzhalter: Bitte lade eine Audio‑Datei in der finalen Version.');
+        return;
+      }
+      if(audio.paused){ audio.play(); playBtn.textContent='⏸ Musik pausieren'; }
+      else { audio.pause(); playBtn.textContent='▶ Musik/Chorus (Platzhalter)'; }
+    });
+
+    metBtn.addEventListener('click', ()=>{
+      if(!metRunning){
+        const ms = 60000 / bpm;
+        metInterval = setInterval(()=>{ tick(); }, ms);
+        metRunning = true; metBtn.textContent='Metronom: Stop';
+      } else {
+        clearInterval(metInterval); metInterval=null; metRunning=false; metBtn.textContent='Metronom: Start';
+      }
+    });
+
+    function tick(){
+      // subtle visual pulse
+      document.body.style.transform = 'scale(0.999)';
+      setTimeout(()=>document.body.style.transform='scale(1)',80);
+      // tiny sound if allowed (disabled here for privacy)
+    }
+
+    ritualBtn.addEventListener('click', ()=>{
+      startRitual(77);
+    });
+
+    function startRitual(seconds){
+      let s = seconds; ritualBtn.disabled=true; ritualBtn.textContent='Ritus läuft...';
+      const orig = ritualBtn.textContent;
+      const iv = setInterval(()=>{
+        ritualBtn.textContent = 'Ritus: ' + s + 's';
+        if(s<=0){ clearInterval(iv); ritualBtn.textContent='77s Ritus starten'; ritualBtn.disabled=false; alert('Ritus beendet — JA.'); }
+        s--; }, 1000);
+    }
+
+    // share buttons (simple placeholders)
+    document.getElementById('shareWhats').addEventListener('click', ()=>{ window.open('https://wa.me/?text=' + encodeURIComponent('Liebes‑Festival: Leg den Schalter JA um!')); });
+    document.getElementById('shareInsta').addEventListener('click', ()=>{ alert('Instagram: Bitte teile das Bild/Video in der App.'); });
+    document.getElementById('shareTikTok').addEventListener('click', ()=>{ alert('TikTok: Öffne TikTok und erstelle ein neues Video mit dem Mantra.'); });
+
+    document.getElementById('ctaYes').addEventListener('click', ()=>{
+      alert('Danke — Du hast JA gewählt. Teile die Seite und lade andere ein.');
+    });
+
+    document.getElementById('downloadFlyer').addEventListener('click', (e)=>{
+      e.preventDefault(); alert('Flyer‑Download: Bitte lade die finale Grafikdatei in die Projektmappe hoch, dann wird der Download aktiviert.');
+    });
+  </script>
+</body>
+</html>

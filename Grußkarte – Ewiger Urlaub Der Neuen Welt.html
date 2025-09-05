@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Grußkarte — Ewiger Urlaub der Neuen Welt</title>
+<meta name="description" content="Die erste Grußkarte aus dem ewigen Urlaub der neuen Welt — mit Bild, Musik, Mitmach‑Knopf und 77‑Sekunden‑Ritus." />
+<style>
+  :root{--bg1:linear-gradient(135deg,#fff7fb,#e8fbff);--accent:#ff66aa;--accent2:#7c4dff}
+  html,body{height:100%;margin:0;font-family:Inter,Helvetica,Arial,sans-serif;background:var(--bg1);color:#102;display:flex;align-items:center;justify-content:center;padding:18px}
+  .card{width:100%;max-width:800px;background:rgba(255,255,255,0.92);border-radius:18px;padding:18px;box-shadow:0 18px 50px rgba(6,10,30,0.12)}
+  .head{display:flex;gap:12px;align-items:center}
+  .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-weight:900}
+  h1{margin:0;font-size:20px}
+  p.lead{margin:6px 0 0;color:#334}
+  .visual{margin-top:14px}
+  img.main{width:100%;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.12)}
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:12px}
+  .meta .code{font-weight:800;color:#083}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  button{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:white;padding:10px 12px;border-radius:12px;font-weight:800;cursor:pointer}
+  .small{padding:8px 10px;font-size:14px}
+  .ritus{margin-top:12px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.8));padding:12px;border-radius:12px}
+  .gallery{display:flex;gap:8px;margin-top:10px}
+  .gallery img{width:80px;border-radius:10px;cursor:pointer}
+  footer{margin-top:14px;text-align:center;color:#445;font-size:14px}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="head">
+      <div class="logo">❤︎</div>
+      <div>
+        <h1>Grußkarte — Ewiger Urlaub der Neuen Welt</h1>
+        <p class="lead">Die erste Grußkarte mit Mitmach‑Lust: Bild, Musik, Ritus. Versende Liebe — sie kommt zurück. 77 77</p>
+      </div>
+    </div>
+
+    <div class="visual">
+      <!-- HIER Bild‑URL einfach austauschen -->
+      <img id="mainImg" class="main" src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/Ich%20erlaube%20Liebe.png" alt="Ich erlaube Liebe">
+    </div>
+
+    <div class="meta">
+      <div class="code">Codestrom: 777 · 888 · 999 · 000</div>
+      <div class="meta-right">Share: #LiebesFestival</div>
+    </div>
+
+    <div style="margin-top:12px">
+      <audio id="audioPlayer" controls style="width:100%">
+        <!-- ersetze die URL mit deiner Musikdatei (.mp3 oder .mp4) -->
+        <source id="audioSrc" src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/Liebesfestival%20(1).mp4" type="video/mp4">
+        Dein Browser unterstützt Audio nicht.
+      </audio>
+    </div>
+
+    <div class="controls">
+      <button onclick="playRitus()">▶ Mitmach‑Ritus (77s)</button>
+      <button onclick="copyText()" class="small">Mantra kopieren</button>
+      <button onclick="downloadImage()" class="small">Bild herunterladen</button>
+      <button onclick="openShare()" class="small">Teilen</button>
+    </div>
+
+    <div class="ritus">
+      <strong>Mitmach‑Ritus (Kurzform)</strong>
+      <ol style="margin:8px 0 0 18px;padding:0">
+        <li>Einatmen: „Ich bin Quelle“</li>
+        <li>Ausatmen: „Ich erlaube Liebe“</li>
+        <li>Hand aufs Herz: „JA“</li>
+        <li>Blick heben: Einladung an alle — Ende nach 77s</li>
+      </ol>
+    </div>
+
+    <div class="gallery">
+      <img src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/20250904_1623_Zwillingsoffenbarung_simple_compose_01k4ahm9k7ep1r0gxv2zv2d23d%20(1).png" alt="Zusatz 1" onclick="viewBig(this.src)">
+      <img src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/20250904_1623_Zwillingsoffenbarung_simple_compose_01k4ahm9k8fwq8zsqfmaw4y6f2.png" alt="Zusatz 2" onclick="viewBig(this.src)">
+    </div>
+
+    <footer>
+      <div style="font-weight:700">Grüße aus dem Ewigen Urlaub der Neuen Welt — mit Mitmach‑Lust</div>
+      <div style="margin-top:6px">Höflichkeit ist das neue Normal — Liebe folgt auf dem Fuß. 77 77</div>
+    </footer>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="big" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);align-items:center;justify-content:center;z-index:999">
+    <img id="bigImg" src="" style="max-width:92%;max-height:92%;border-radius:12px">
+  </div>
+
+<script>
+  const mantra = 'JA – ich bin Quelle. JA – ich bin Liebe. JA – wir sind eins.';
+  function copyText(){navigator.clipboard.writeText(mantra);alert('Mantra kopiert — teile es mit Liebe!')}
+  function downloadImage(){const url=document.getElementById('mainImg').src;window.open(url,'_blank')}
+  function openShare(){const text='Liebes‑Festival: Schalte den JA‑Schalter um — https://chetannirup.github.io/-ur-spiegel-dialog-/schillernder%20flyer%20vollpaket.html';window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank')}
+  function viewBig(src){document.getElementById('bigImg').src=src;document.getElementById('big').style.display='flex'}
+  document.getElementById('big').addEventListener('click',()=>{document.getElementById('big').style.display='none'})
+
+  function playRitus(){let s=77;const audio=document.getElementById('audioPlayer');if(audio.paused)audio.play();const start=Date.now();const iv=setInterval(()=>{if(Date.now()-start>=77000){clearInterval(iv);alert('Ritus beendet — JA.');}},500)}
+
+  // Helper: update URLs live (falls du später Musik oder Bild tauschst)
+  window.updateCard = function(imgUrl,audioUrl){document.getElementById('mainImg').src=imgUrl;document.getElementById('audioSrc').src=audioUrl;document.getElementById('audioPlayer').load();}
+</script>
+</body>
+</html>

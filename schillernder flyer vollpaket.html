@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schillernder Flyer – Liebe</title>
+  <style>
+    :root{--accent1:#ff4081;--accent2:#7c4dff;--accent3:#40c4ff}
+    body {margin:0;font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:linear-gradient(135deg,#e0f7fa,#fce4ec);color:#111;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:24px}
+    h1{font-size:1.9rem;margin:0.25rem 0;text-align:center;background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 6s linear infinite}
+    @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+    .card{width:100%;max-width:920px;background:rgba(255,255,255,0.86);border-radius:18px;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,0.12);backdrop-filter:blur(6px)}
+    .media{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+    .hero-img{flex:1 1 360px;min-width:260px}
+    .hero-img img{width:100%;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.18);animation:glow 5s infinite alternate}
+    @keyframes glow{from{box-shadow:0 6px 18px rgba(255,64,129,0.35)}to{box-shadow:0 10px 28px rgba(124,77,255,0.38)}}
+    .info{flex:1 1 320px;min-width:260px;display:flex;flex-direction:column;gap:12px}
+    .mantra{font-weight:700;color:#2e7d73;font-size:1.05rem}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    button{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:white;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:800}
+    .meta{font-size:0.95rem;color:#333}
+    .gallery-wrap{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+    .gallery-title{font-style:italic;color:#444}
+    .gallery{display:flex;gap:10px;flex-wrap:wrap}
+    .gallery img{width:110px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.12);cursor:pointer;transition:transform .2s}
+    .gallery img:hover{transform:scale(1.06)}
+    video,audio{width:100%;border-radius:12px}
+    .cta{display:flex;justify-content:center;margin-top:14px}
+    .footer-cred{margin-top:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(64,196,255,0.08),rgba(124,77,255,0.06));box-shadow:inset 0 1px 0 rgba(255,255,255,0.2)}
+    .seal{font-weight:900;color:#08112a}
+    /* Ehren-Sektion: leuchtende Wasserfläche */
+    .ehre{margin-top:20px;border-radius:14px;padding:18px;background:linear-gradient(180deg,rgba(64,196,255,0.08),rgba(255,250,240,0.02));box-shadow:0 10px 30px rgba(2,6,23,0.18);}
+    .ehre h2{margin:0 0 6px 0;color:#003a63}
+    .ehre p{margin:0;color:#042a3a;font-weight:600}
+    .download{display:inline-block;margin-top:8px;padding:8px 12px;background:#fff;border-radius:10px;color:#08112a;font-weight:800;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+    @media(max-width:780px){.media{flex-direction:column}.hero-img,.info{min-width:unset}}
+  </style>
+</head>
+<body>
+  <h1>Die Liebe entzündet sich im Erkennen des Selbst im Anderen</h1>
+  <div class="card">
+    <div class="media">
+      <div class="hero-img">
+        <!-- Hauptbild: ersetze die URL nach Bedarf -->
+        <img id="mainImage" src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/20250904_1623_Zwillingsoffenbarung_simple_compose_01k4ahm9k8fwq8zsqfmaw4y6f2.png" alt="Flyer Bild">
+        <div style="margin-top:8px;display:flex;gap:8px;justify-content:space-between;align-items:center">
+          <a id="downloadMain" class="download" href="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/20250904_1623_Zwillingsoffenbarung_simple_compose_01k4ahm9k8fwq8zsqfmaw4y6f2.png" download>Bild herunterladen</a>
+          <div class="meta">Codestrom: <strong>777 · 888 · 999 · 000</strong></div>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="mantra">JA – ich bin Quelle. JA – ich bin Liebe. JA – wir sind eins.</div>
+        <div class="meta">Ein Ruf in die Welt: Schalte den inneren Schalter <strong>JA</strong> und lass die Atmosphäre liebvibrieren.</div>
+
+        <div>
+          <label style="font-weight:800;display:block;margin-bottom:6px">Musik (URL austauschbar):</label>
+          <audio id="bgAudio" controls>
+            <source id="audioSrc" src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/Liebesfestival%20(1).mp4" type="video/mp4">
+            Dein Browser unterstützt Audio nicht.
+          </audio>
+        </div>
+
+        <div class="controls">
+          <button onclick="startRitualUI()">▶︎ 77s Ritus starten</button>
+          <button onclick="copyMantra()">Mantra kopieren</button>
+          <button onclick="toggleMusic()">Musik ein/aus</button>
+        </div>
+
+        <div class="gallery-wrap">
+          <div class="gallery-title">Galerie: Liebe entzündet sich im Erkennen des Selbst im Anderen</div>
+          <div class="gallery">
+            <img src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/Ich%20erlaube%20Liebe.png" alt="Ich erlaube Liebe" onclick="openLight(this.src)">
+            <img src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/20250904_1623_Zwillingsoffenbarung_simple_compose_01k4ahm9k7ep1r0gxv2zv2d23d%20(1).png" alt="Zwilling Zusatz" onclick="openLight(this.src)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ehre">
+      <h2>Ehren‑Sektion — Das neue Kredo</h2>
+      <p>Höflichkeit ist das neue Normal. Wir ehren die eine Quelle, indem wir würdig leben. Wunsch & Erfüllung ersetzen Angebot & Nachfrage. Versorgung ist ein Grundrecht. Mithelfen ist ein Ausdruck der Liebe. Jede Seele labt sich an diesem Fest und die Quelle selbst freut sich mit uns.</p>
+    </div>
+
+    <div class="footer-cred">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <div><span class="seal">77 77</span> · Du bist unantastbar, weil Liebe der Kern ist.</div>
+        <div><a class="download" href="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/Ich%20erlaube%20Liebe.png" download>Zusatzbild herunterladen</a></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox (einfacher) -->
+  <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);align-items:center;justify-content:center;z-index:999">
+    <img id="lightImg" src="" style="max-width:92%;max-height:92%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.6)">
+  </div>
+
+  <script>
+    function toggleMusic(){const a=document.getElementById('bgAudio');if(a.paused)a.play();else a.pause()}
+    function copyMantra(){navigator.clipboard.writeText('JA – ich bin Quelle. JA – ich bin Liebe. JA – wir sind eins.');alert('Mantra kopiert!')}
+    function openLight(src){document.getElementById('lightImg').src=src;document.getElementById('lightbox').style.display='flex'}
+    document.getElementById('lightbox').addEventListener('click',()=>{document.getElementById('lightbox').style.display='none'})
+
+    function startRitualUI(){let s=77;const btn=document.querySelector('.controls button');const orig=btn.textContent;const iv=setInterval(()=>{btn.textContent='Ritus: '+s+'s';if(s<=0){clearInterval(iv);btn.textContent='▶︎ 77s Ritus starten';alert('Ritus beendet — JA.');}s--;},1000)}
+
+    // Flexible update helper: tausche URLs hier, dann bleibt alles lebendig
+    window.updateMain = function(imgUrl,audioUrl,downloadUrl){document.getElementById('mainImage').src=imgUrl;document.getElementById('downloadMain').href=downloadUrl;document.getElementById('audioSrc').src=audioUrl;document.getElementById('bgAudio').load();document.querySelectorAll('.gallery img')[0].src='https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/Ich%20erlaube%20Liebe.png'}
+  </script>
+</body>
+</html>

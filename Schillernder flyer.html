@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schillernder Flyer – Liebe</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 2em;
+      text-align: center;
+      margin: 0.5em;
+      background: linear-gradient(90deg, #ff4081, #7c4dff, #40c4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 6s infinite linear;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 0% 50%; }
+      to { background-position: 100% 50%; }
+    }
+
+    .flyer {
+      max-width: 90%;
+      text-align: center;
+      margin-top: 1em;
+    }
+
+    .flyer img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 1.5em;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: glow 5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 20px rgba(255, 64, 129, 0.6); }
+      to { box-shadow: 0 0 40px rgba(124, 77, 255, 0.8); }
+    }
+
+    .gallery-title {
+      margin-top: 1em;
+      font-size: 1.2em;
+      font-style: italic;
+      color: #444;
+    }
+
+    .gallery {
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5em;
+    }
+
+    .gallery img {
+      width: 120px;
+      height: auto;
+      border-radius: 0.8em;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.08);
+    }
+
+    .music-control {
+      margin-top: 1em;
+    }
+
+    button {
+      background: linear-gradient(90deg, #ff4081, #7c4dff);
+      border: none;
+      color: white;
+      padding: 0.8em 1.2em;
+      font-size: 1em;
+      border-radius: 1em;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Die Liebe entzündet sich im Erkennen des Selbst im Anderen</h1>
+
+  <div class="flyer">
+    <!-- Hauptbild (einfach URL austauschen) -->
+    <img src="20250904_1623_Zwillingsoffenbarung_simple_compose_01k4ahm9k8fwq8zsqfmaw4y6f2.png" alt="Flyer-Bild">
+  </div>
+
+  <div class="gallery-title">Galerie: Liebe entzündet sich im Erkennen des Selbst im Anderen</div>
+  <div class="gallery">
+    <img src="https://raw.githubusercontent.com/chetannirup/-ur-spiegel-dialog-/main/Ich%20erlaube%20Liebe.png" alt="Ich erlaube Liebe">
+  </div>
+
+  <div class="music-control">
+    <audio id="bg-music" loop>
+      <source src="https://example.com/deine-musik.mp3" type="audio/mpeg">
+      Dein Browser unterstützt kein Audio.
+    </audio>
+    <button onclick="toggleMusic()">❤️ Musik starten / stoppen</button>
+  </div>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
+</body>
+</html>

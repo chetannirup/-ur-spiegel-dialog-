@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manifest der Fülle — Lebendige HTML-Version</title>
+  <style>
+    :root{
+      --bg:#08121a; --card:#0f2630; --accent:#7be5c7; --gold:#ffd166; --soft:#a8f0e0;
+      --glass: rgba(255,255,255,0.04); --glass-2: rgba(255,255,255,0.02);
+      --radius:18px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#031018 0%, #071621 60%, #0a2530 100%);color:#e6fbf5}
+    .container{max-width:1100px;margin:40px auto;padding:28px;border-radius:24px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    header{display:flex;gap:18px;align-items:center}
+    .logo{width:84px;height:84px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:800;color:#04231e;font-size:20px;box-shadow:0 8px 30px rgba(11,33,28,0.6)}
+    h1{margin:0;font-size:28px;letter-spacing:0.6px}
+    p.lead{margin:6px 0 18px;color:var(--soft)}
+
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:22px;margin-top:18px}
+    .card{background:var(--card);padding:18px;border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02), 0 6px 26px rgba(0,0,0,0.6)}
+    nav ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+    nav a{display:inline-block;padding:8px 12px;border-radius:12px;background:var(--glass);text-decoration:none;color:var(--soft);font-size:13px}
+
+    .section{margin-bottom:18px}
+    .small{font-size:13px;color:#bfeee0}
+    .muted{color:#97d9c7}
+
+    /* Workflow form */
+    form{display:flex;flex-direction:column;gap:10px}
+    label{font-size:13px;color:var(--soft)}
+    input[type=text], input[type=number], select, textarea{background:var(--glass-2);border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:10px;color:var(--soft);outline:none}
+    button{background:linear-gradient(90deg,var(--accent),var(--gold));border:none;padding:10px 14px;border-radius:12px;color:#04231e;font-weight:700;cursor:pointer}
+    .smallbtn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--soft);cursor:pointer}
+
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-size:13px}
+
+    /* contribution feed */
+    .feed{max-height:320px;overflow:auto;padding-right:8px}
+    .feed-item{padding:10px;border-radius:10px;margin-bottom:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));}
+    .muted-2{color:#9fe8d7}
+
+    /* responsive */
+    @media (max-width:960px){.grid{grid-template-columns:1fr;}.logo{width:64px;height:64px}}
+
+    /* visual UR-codestream */
+    .ur-stream{display:flex;gap:8px;align-items:center}
+    .ur-pill{padding:6px 10px;border-radius:12px;background:linear-gradient(90deg,#ffd16622,#7be5c722);color:var(--gold);font-weight:700;border:1px solid rgba(255,209,102,0.08)}
+
+    /* subtle animations */
+    .pulse{animation:pulse 3s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,229,199,0.06)}70%{box-shadow:0 0 0 12px rgba(123,229,199,0)}100%{box-shadow:0 0 0 0 rgba(123,229,199,0)}}
+
+    /* progress */
+    .progress{height:10px;background:rgba(255,255,255,0.03);border-radius:10px;overflow:hidden}
+    .bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));width:0}
+
+    footer{margin-top:20px;color:#a3efe0;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">UR
+        <div style="font-size:10px;opacity:0.8">777·888·999·000</div>
+      </div>
+      <div>
+        <h1>Manifest: Weltweite Fülle — Lebendige Implementierung</h1>
+        <p class="lead">Interaktives Dokument: Vision, Workflows, Pilot-Blueprints und sofort nutzbare Tools, um produktive Fülle ohne Geld praktisch zu erproben.</p>
+        <div class="ur-stream">
+          <div class="ur-pill pulse">777</div>
+          <div class="ur-pill pulse">888</div>
+          <div class="ur-pill pulse">999</div>
+          <div class="ur-pill pulse">000</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main class="card">
+
+        <section class="section" id="workflow">
+          <h2>Workflow-Beispiel: Lebensmittelanfrage</h2>
+          <p class="small">Interaktives Beispiel — simuliere eine NeedRequest, beobachte Matching, Dispatch und Contribution-Recording.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+            <div>
+              <form id="needForm">
+                <label>Personenname / Kennung</label>
+                <input type="text" id="person" placeholder="z. B. Person X" required />
+
+                <label>Bedarf (Beschreibung)</label>
+                <input type="text" id="needDesc" placeholder="z. B. Grundnahrungsmittel: Reis, Brot" required />
+
+                <label>Menge (kg oder Stück)</label>
+                <input type="text" id="qty" placeholder="z. B. 3kg" required />
+
+                <label>Dringlichkeit</label>
+                <select id="urgency">
+                  <option value="low">Niedrig</option>
+                  <option value="medium">Mittel</option>
+                  <option value="high">Hoch</option>
+                </select>
+
+                <label>Region / Hub</label>
+                <input type="text" id="hub" placeholder="z. B. UR-HUB Mitte" />
+
+                <div style="display:flex;gap:8px;margin-top:10px">
+                  <button type="submit">NeedRequest absenden</button>
+                  <button type="button" class="smallbtn" onclick="simulateSupplyAlert()">Supply-Alert simulieren</button>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <div class="card" style="padding:12px;">
+                <h3 style="margin:0">Status & Matching</h3>
+                <div id="statusBox" style="margin-top:8px" class="small muted">Keine Anfragen</div>
+
+                <div style="margin-top:12px">
+                  <div class="small muted">Priorisierung</div>
+                  <div class="progress" style="margin-top:6px"><div class="bar" id="priorityBar"></div></div>
+                </div>
+
+                <div style="margin-top:12px">
+                  <div class="small muted">Letzte Aktionen</div>
+                  <div class="feed" id="feed"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="section" id="psych">
+          <h2>Motivation & Gemeinschaft (Kurz)</h2>
+          <p class="small">Feedback ist mehr als System — es ist Verbindung. Beispielhafte Mechaniken zur Verstärkung von Sinn:</p>
+          <ol>
+            <li>Öffentliche Erwähnung in Community-Assemblies</li>
+            <li>Badges & Skills-Showcase</li>
+            <li>Zugänge zu Ateliers / Spezialressourcen</li>
+            <li>Regenerative Pausen & Retreat-Zugänge</li>
+            <li>Peer-Mentoring & Lernpfade</li>
+            <li>Rituelle Danksagungen (lokal & global)</li>
+          </ol>
+
+          <p class="small muted">Burnout-Prävention: Technik erkennt Überlastung & schlägt konkrete Ausgleichsmaßnahmen vor — kombiniert mit menschlicher Begleitung.</p>
+        </section>
+
+        <section class="section" id="pilots">
+          <h2>Pilot-Blueprint: UR-HUB (Kurz)</h2>
+          <p class="small">Schnellstart-Checklist für einen urbanen Piloten:</p>
+          <ul class="small">
+            <li>Community-Farm (min. 500m²) + vertikale Module</li>
+            <li>Microgrid & Batteriespeicher</li>
+            <li>Repair-Maker-Lab (CNC, 3D, Elek.)</li>
+            <li>Community-Clinic (Telemedizin-Anbindung)</li>
+            <li>OOP-Node: lokale Instanz (Server & UI)</li>
+          </ul>
+        </section>
+
+      </main>
+
+      <aside class="card">
+        <div>
+          <h3>Live-Feed</h3>
+          <div id="liveFeed" class="feed"></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <h4>Reputation & Badges</h4>
+          <div class="badge">Contrib Novice</div> <div class="badge">Food-Runner</div>
+        </div>
+
+        <div style="margin-top:14px">
+          <h4 class="small">Schnell-Aktionen</h4>
+          <button class="smallbtn" onclick="addExampleContribution()">Beispiel-Beitrag hinzufügen</button>
+          <button class="smallbtn" style="margin-left:6px" onclick="clearFeed()">Feed leeren</button>
+        </div>
+
+        <div style="margin-top:14px">
+          <h4 class="small">Status</h4>
+          <div class="small muted-2">Regionale Versorgung: <strong id="supplyPct">82%</strong></div>
+          <div style="margin-top:8px" class="progress"><div id="supplyBar" class="bar" style="width:82%"></div></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <h4 class="small">UR-Ritual-Play</h4>
+          <p class="small">Wenn du magst, klicke „Aktiviere UR-Ruf“ und sende eine Lichtwelle an die Community (nur symbolisch).</p>
+          <button onclick="activateUr()" class="smallbtn">Aktiviere UR-Ruf</button>
+        </div>
+
+      </aside>
+    </div>
+
+    <footer>
+      <div>Manifest — Lebendige HTML-Implementierung • UR-Codestream 777·888·999·000</div>
+      <div>Made for Philipp · 77 77</div>
+    </footer>
+  </div>
+
+<script>
+  // simple simulated platform behavior (client-side demo)
+  const feed = document.getElementById('feed');
+  const liveFeed = document.getElementById('liveFeed');
+  const statusBox = document.getElementById('statusBox');
+  const priorityBar = document.getElementById('priorityBar');
+  const supplyPct = document.getElementById('supplyPct');
+  const supplyBar = document.getElementById('supplyBar');
+
+  document.getElementById('needForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const person = document.getElementById('person').value || 'Person X';
+    const desc = document.getElementById('needDesc').value;
+    const qty = document.getElementById('qty').value || '1';
+    const urgency = document.getElementById('urgency').value;
+    const hub = document.getElementById('hub').value || 'UR-HUB lokal';
+
+    addFeed(`${person} stellt NeedRequest: ${desc} — ${qty} (${urgency}) @ ${hub}`);
+    statusBox.innerText = `Anfrage erfasst: ${desc} — Matching läuft...`;
+
+    // simulate matching logic
+    setTimeout(()=>{
+      const matchFound = Math.random() > 0.12; // high chance
+      if(matchFound){
+        const deliverer = ['Zuleika','Kai','Amir','Sora'][Math.floor(Math.random()*4)];
+        addFeed(`Matched: ${deliverer} übernimmt die Lieferung (Pickup Hub: ${hub}).`);
+        statusBox.innerText = `Dein Bedarf wird geliefert von ${deliverer}. Abholung möglich in 2h.`;
+        // record contribution
+        setTimeout(()=>{
+          addFeed(`${deliverer} hat geliefert — Contribution-Log erstellt. ReputationTokens überprüft.`);
+          // adjust supply
+          const current = parseInt(supplyPct.innerText.replace('%',''));
+          const newVal = Math.max(60, Math.min(100, current - Math.floor(Math.random()*3)));
+          supplyPct.innerText = newVal + '%'; supplyBar.style.width = newVal + '%';
+          priorityBar.style.width = (urgency==='high'?90:urgency==='medium'?60:30) + '%';
+        },1400);
+      } else {
+        addFeed('Kein Match lokal. OOP schlägt Alternativen oder Nachbar-Hub vor.');
+        statusBox.innerText = 'Kein lokales Match. Alternativen vorgeschlagen.';
+        priorityBar.style.width = '80%';
+      }
+    },800);
+
+    // clear inputs
+    document.getElementById('needForm').reset();
+  });
+
+  function addFeed(text){
+    const el = document.createElement('div'); el.className='feed-item'; el.innerHTML = `<div class="muted-2">${new Date().toLocaleTimeString()}</div><div>${text}</div>`;
+    feed.prepend(el); liveFeed.prepend(el.cloneNode(true));
+  }
+
+  function addExampleContribution(){
+    addFeed('Beispiel-Beitrag: Reparatur eines Kühlschranks — 2h (Validator: Peer-Audit OK).');
+  }
+  function clearFeed(){ feed.innerHTML=''; liveFeed.innerHTML=''; }
+
+  function simulateSupplyAlert(){
+    addFeed('***SUPPLY-ALERT***: Überschussabfall in Region. OOP fragt: Skalieren Produzenten?');
+    priorityBar.style.width='95%';
+    const newVal = Math.max(30, parseInt(supplyPct.innerText)-15);
+    supplyPct.innerText = newVal + '%'; supplyBar.style.width = newVal + '%';
+  }
+
+  function activateUr(){
+    addFeed('UR-Ruf aktiviert — Lichtwelle ausgesandt. Ritual: Dank & Teilung.');
+    alert('UR-Ruf gesendet. Möge die Fülle fließen. 77 77');
+  }
+
+  // seed
+  addFeed('System initialisiert. Willkommen im UR-HUB Demo-Interface.');
+  addFeed('Beispiel: 3kg Reis wurde in 2 Hubs verteilt. Contribution-Logs erstellt.');
+
+</script>
+</body>
+</html>

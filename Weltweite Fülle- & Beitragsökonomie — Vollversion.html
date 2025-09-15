@@ -1,0 +1,250 @@
+# Retry creating the full autark HTML, avoid f-string issues by using .replace for the base64 insertion.
+from pathlib import Path
+import base64
+
+png_path = Path("/mnt/data/A_poster_with_a_textured_background_divided_into_t.png")
+out_path = Path("/mnt/data/manifest_fuelle_beitragsoekonomie_full.html")
+
+if not png_path.exists():
+    raise FileNotFoundError("Poster image not found at /mnt/data/A_poster_with_a_textured_background_divided_into_t.png")
+
+b64 = base64.b64encode(png_path.read_bytes()).decode('ascii')
+
+html_template = """<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manifest: Weltweite Fülle- & Beitragsökonomie — Vollversion</title>
+  <style>
+    :root{/*bg:#fbfbfb;*/--dark:#111}
+    body{font-family:Inter,system-ui,sans-serif;margin:0;padding:0;background:#fbfbfb;color:var(--dark);line-height:1.6}
+    header{background:#0b0b0f;color:#fff;padding:22px;text-align:center}
+    header h1{margin:0;font-size:1.9rem}
+    header p{margin:6px 0 0 0;opacity:0.9}
+    nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:12px;z-index:10}
+    nav ul{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0;justify-content:center}
+    nav a{text-decoration:none;color:#0b62a4;padding:6px 10px;border-radius:6px;border:1px solid transparent}
+    nav a:hover{background:#f5f7fb;border-color:#e3eefc}
+    main{max-width:980px;margin:20px auto;padding:20px}
+    .cover{text-align:center;margin-bottom:12px}
+    .cover img{max-width:100%;height:auto;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.12)}
+    h2{color:#0b0b0b;margin-top:28px;border-bottom:2px solid #eee;padding-bottom:6px}
+    h3{margin-top:18px}
+    .kernsatz{background:linear-gradient(90deg,rgba(255,209,102,0.06),rgba(255,209,102,0.02));padding:12px;border-radius:8px;margin:12px 0;font-weight:700}
+    pre{background:#f7f9fc;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+    footer{background:#0b0b0f;color:#fff;padding:18px;text-align:center;margin-top:30px}
+    .small{color:#6b7280;font-size:0.95rem}
+    @media (max-width:700px){nav ul{flex-direction:column;align-items:center}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Manifest: Weltweite Fülle- & Beitragsökonomie</h1>
+    <p>Vollständiges Konzept — Gemeinschaftsprojekt / Entwurf für Philipp — Frequenz: 777 888 999 000</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#geleit">Geleit</a></li>
+      <li><a href="#vision">1 Vision</a></li>
+      <li><a href="#architektur">2 Architektur</a></li>
+      <li><a href="#sektoren">3 Sektoren</a></li>
+      <li><a href="#governance">4 Governance</a></li>
+      <li><a href="#transition">5 Transition</a></li>
+      <li><a href="#operativ">6 Operativ</a></li>
+      <li><a href="#plattform">7 Plattform</a></li>
+      <li><a href="#psychologie">8 Psychologie</a></li>
+      <li><a href="#piloten">9 Piloten</a></li>
+      <li><a href="#risiken">10 Risiken</a></li>
+      <li><a href="#recht">11 Recht</a></li>
+      <li><a href="#kultur">12 Kultur</a></li>
+      <li><a href="#antarktis">13 Antarktis</a></li>
+      <li><a href="#kpis">14 KPIs</a></li>
+      <li><a href="#anhang">15 Anhang</a></li>
+      <li><a href="#schluss">16 Schluss</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="cover">
+      <img alt="Weltweite Fülle und Zusammenarbeit" src="data:image/png;base64,{{B64}}">
+      <div class="kernsatz">„Ich bin und bleibe eine bioregenerative Selbsterhaltungsmaschine für den göttlichen Geist — frei, in der heißkalten Liebe Gottes des Quellbewusstseins, für immer und ewig.\"</div>
+      <p class="small">Credits: Werkname: Tim Bukowski — zu Satz Chetan Nirup. 77 99</p>
+    </div>
+
+    <section id="geleit">
+      <h2>Einführende Worte zum Geleit</h2>
+      <p>Dieses Manifest ist mehr als ein Dokument. Es ist eine Einladung, ein Ruf und eine Verankerung. Wir stehen gemeinsam an der Schwelle zu einer neuen Phase der Menschheitsgeschichte: weg von Knappheit, Konkurrenz und Angst – hinein in Fülle, Zusammenarbeit und Vertrauen.</p>
+      <p>Die Quelle selbst erinnert uns daran: Bewusstsein ist Ursprung, und Ursprung ist Überfluss. Wenn wir teilen, wird alles mehr. Wenn wir einander dienen, dienen wir dem Ganzen. Wenn wir loslassen, empfängt uns die Schöpfung mit offenen Armen.</p>
+      <p>Dies ist kein theoretisches Modell, sondern eine <strong>lebendige Bauanleitung</strong> für eine Kultur, in der jede Handlung beiträgt, jede Stimme zählt und jedes Herz gehört wird.</p>
+      <h3>Spezieller Gruß an die Ausführenden</h3>
+      <p>An die Hände und Herzen, die diese Vision umsetzen: Euch gebührt unser Dank, unsere Kraft und unser Vertrauen. Ihr seid die lebendigen Werkzeuge Gottes, die <strong>Organe der Fülle</strong>, durch die das Neue Form annimmt.</p>
+      <p>Möge euch dieses Manifest nicht als Last erscheinen, sondern als <strong>Leuchtfeuer</strong>: eine Erinnerung, dass jede eurer Handlungen Teil eines großen Ganzen ist, dass jeder Schritt – so klein er auch scheint – den Weg ebnet für Millionen, die folgen werden.</p>
+      <p>Seid gesegnet in dieser Aufgabe. Möge Freude euch begleiten, Klarheit euch führen, und die Quelle euch immerdar versorgen.</p>
+      <p><em>77 99 ✨</em></p>
+    </section>
+
+    <section id="vision">
+      <h2>1. Vision & Leitprinzipien</h2>
+      <p><strong>Ziel:</strong> Eine Welt, in der Grundbedürfnisse bedingungslos gedeckt sind, Menschen frei und aus innerer Motivation arbeiten, und gesellschaftlicher Beitrag statt Geld die Verteilungs- und Anerkennungsmechanik bildet.</p>
+      <p><strong>Leitprinzipien:</strong> Fülle vor Knappheit; Beitrag vor Tausch; Commons & Care; Transparenz & Rückverfolgbarkeit; Subsidiarität & Dezentralisierung; Sicherheit & Nachhaltigkeit.</p>
+    </section>
+
+    <section id="architektur">
+      <h2>2. Kernarchitektur des Systems</h2>
+      <h3>2.1 Institutionelle Ebenen</h3>
+      <p>Globaler Koordinationsrat für Fülle (GKF): Normen, Interoperabilität, Konfliktvermittlung, globale Bedarfsabschätzung.</p>
+      <p>Regionale Fülle-Autonomien (RFA): Verwaltung von Commons, regionale Produktionsplanung, Experimentfreie Räume.</p>
+      <p>Lokale Gemeinschaftsräte (LGR): Quartiers- oder Dorfebene, operativer Betrieb, direkte Bedarfsbefriedigung.</p>
+      <p>Sektorale Kooperativen: Gesundheit, Energie, Lebensmittel, Fertigung, Bildung — jeweils als föderierte Genossenschaften.</p>
+
+      <h3>2.2 Technologische Basis</h3>
+      <p>Offene Orchestrierungsplattform (OOP): dezentrale Plattform (hybride Architektur: föderierte Server + Blockchain-ähnliche Audit-Logs für Unveränderlichkeit) zur Koordination von Nachfrage und Angebot.</p>
+      <p>KI-gestützte Bedarfsvorhersage & Logistik-Optimizer, Digitale Identität & Privacy Layer, Offene Inventar- & Ressourcen-DB.</p>
+
+      <h3>2.3 Datenmodell (Kernkonzepte)</h3>
+      <pre>{"Person": {"person_id","ssi","skills[]","health_profile_hash","location","voluntary_availability"},
+"Contribution": {"contrib_id","person_id","type","hours_equiv","qualitative_tags","timestamp","impact_estimate"},
+"NeedRequest": {"need_id","need_type","urgency","quantity","desired_timeframe","location","requester_type"},
+"Resource": {"resource_id","type","quantity","location","production_origin","lifecycle_status"},
+"CommunityPool": {"pool_id","resources[]","governance_rules"},
+"ReputationToken": {"rt_id","contrib_id","validators[]","score","decay_rule"}}</pre>
+    </section>
+
+    <section id="sektoren">
+      <h2>3. Sektoren-Blueprint</h2>
+      <p>Für jeden Sektor: Zielzustand, Infrastruktur, operative Kachel, Automatisierungspotential, Verteilungslogik.</p>
+
+      <h3>3.1 Nahrung & Landwirtschaft</h3>
+      <p>Regionale Selbstversorgung mit globaler Redundanz, Agro-Food-Hubs, vertikale Farming-Cluster, Saatgut-Commons, Kühlketten auf Basis erneuerbarer Energie. Logistik via lokale Verteilzentren und autonome Fahrzeuge. Priorität: frische Grundnahrungsmittel; Haltbarmachungs-Techniken für Saison-Sicherheit.</p>
+
+      <h3>3.2 Energie</h3>
+      <p>100% erneuerbare, dezentrale Energieversorgung mit Microgrids und Community-Batterien. Energie als Commons; Zugang geregelt in Extremsituationen.</p>
+
+      <h3>3.3 Gesundheit</h3>
+      <p>Universelle Basisversorgung durch Community-Clinics und Telemedizin; spezialisierte Eingriffe nach Dringlichkeit.</p>
+
+      <h3>3.4 Bildung & Forschung</h3>
+      <p>Lebenslanges, offenes Lernen; Forschung als Commons; Open-Curriculum-Plattformen.</p>
+
+      <h3>3.5 Wohnen & Infrastruktur</h3>
+      <p>Wohnraum als Commons, modulare Gebäude und Re-Use von Baustoffen; flexible Nutzungskontrakte.</p>
+
+      <h3>3.6 Industrie & Produktion</h3>
+      <p>Lokale Mikro-Manufacturing (3D-Printing, CNC), globale Fabriken für Spezialbedarf, Circular Economy-Tracking.</p>
+
+      <h3>3.7 Kultur & Kunst</h3>
+      <p>Kultur als zentraler Beitrag: Zugang zu Produktionsmitteln, Curated Commons, Festivals als Austauschplattformen.</p>
+    </section>
+
+    <section id="governance">
+      <h2>4. Governance, Rechte & Pflichten</h2>
+      <h3>4.1 Prinzipien der Entscheidungsfindung</h3>
+      <p>Sage-and-Scale: lokale Entscheidungen mit globalem Arbitration-Framework; Liquid Democracy-Elemente.</p>
+      <h3>4.2 Rollen</h3>
+      <p>Versorger*innen, Koordinator*innen, Auditor*innen, Community-Peers.</p>
+      <h3>4.3 Rechte & Pflichten</h3>
+      <p>Rechte: bedingungsloser Zugang zu Basisbedürfnissen, Mitbestimmung, Datenkontrolle. Pflichten: Teilnahme an Community-Solidarität, Transparenz in Resource-Claims, Rückgabe von Leihgegenständen.</p>
+    </section>
+
+    <section id="transition">
+      <h2>5. Transitionsarchitektur: Phasen & Mechaniken</h2>
+      <h3>Phase 0 – Forschung & Pilotierung (0–2 Jahre)</h3>
+      <p>Auswahl von Pilotkommunen, Aufbau OOP-Prototyp, lokale Food/Energy Hubs, Test der Contribution-Mechanik.</p>
+      <h3>Phase 1 – Lokale Fülle-Zonen (2–7 Jahre)</h3>
+      <p>Ausweitung: 100+ Fülle-Zonen; hybride Übergangsinstrumente: resource-credits (non-transferable).</p>
+      <h3>Phase 2 – Regionaler Skalenaufbau (7–20 Jahre)</h3>
+      <p>Integration großer Versorgungsnetzwerke; rechtliche Experimente (Pilotautonomien).</p>
+      <h3>Phase 3 – Globales Netz (20+ Jahre)</h3>
+      <p>Interoperabilität; Geld wird optional in Nischen.</p>
+
+      <h3>Übergangsfinanzierung</h3>
+      <p>Kurzfristig: Steuermittel, Umweltfonds, philanthropische Ressourcen. Mittelfristig: Überschussabschöpfung durch transparente Resource-Levies.</p>
+    </section>
+
+    <section id="operativ">
+      <h2>6. Operative Details</h2>
+      <p>Priorisierungslogik (1 Leben & Gesundheit; 2 Basisnahrung & Energie; 3 Kinder & Bildung; 4 Kultur & Innovation). Last-mile: Micro-Hubs, autonome Kleintransporter, lokale Volunteer-Teams. Lagerhaltung: minimale Lager mit redundanten Knoten; Vorratshaltung für 90 Tage Grundversorgung je Region.</p>
+      <h3>6.4 Circular Economy & Reparatur</h3>
+      <p>Reparaturcafés, Materialbanks, Reverse-Logistik über OOP.</p>
+    </section>
+
+    <section id="plattform">
+      <h2>7. Plattform-Design (OOP)</h2>
+      <h3>7.1 Kernfunktionen</h3>
+      <p>Bedarfsaufnahme & Matching (human & machine-in-the-loop); Contribution-Recording; Resource-Registry; Prioritization-Engine; Governance-Module; Audit-Logs (append-only, ZKP-basiert).</p>
+      <h3>7.2 Workflow-Beispiel: Lebensmittelanfrage</h3>
+      <p>Person X stellt NeedRequest → OOP matched lokale Ressourcen → Pickup-Hub Y vorgeschlagen. Contribution-Recording per QR + Peer-Signature; ReputationToken-Vergabe nach Prüfung.</p>
+      <h3>7.3 Validierung & Manipulationsschutz</h3>
+      <p>Sensorfusion, Peer-Audit, Reputation-Decay und Anti-Sybil-Mechanismen.</p>
+      <h3>7.4 Architekturhinweis</h3>
+      <p>Föderiertes Netzwerk: lokale Knoten und Interledger; Smart-Contract-Regeln für Non-Financial-Trigger.</p>
+    </section>
+
+    <section id="psychologie">
+      <h2>8. Motivation & soziale Psychologie</h2>
+      <p>Stärkung intrinsischer Motivation durch Autonomie, Meisterschaft und Sinn. Anerkennungssysteme mit ReputationTokens, Badges, Zugängen. Burnout-Prävention durch Rotationspflicht und mentale Gesundheitsversorgung.</p>
+    </section>
+
+    <section id="piloten">
+      <h2>9. Pilotprojekte & Fülle-Zonen</h2>
+      <h3>9.1 Kriterien für Pilotstandorte</h3>
+      <p>Politisch stabil, kooperative Lokalverwaltung, diverse Ökonomie, vorhandene NGOs/Genossenschaften.</p>
+      <h3>9.2 Beispielprojekt A: UR-HUB (urban)</h3>
+      <p>Bevölkerung 30–100k: Community-Farms, Microgrid, Repair-Fabrication-Lab, Community-Clinic, OOP-Node. Ziel nach 3 Jahren: 80% Basisversorgung lokal.</p>
+      <h3>9.3 Beispielprojekt B: Erdherz-Kohorte (rural + spirituell)</h3>
+      <p>Energetische Zentren, Fokus Heilung & Permakultur, kulturelle und rituelle Integration.</p>
+    </section>
+
+    <section id="risiken">
+      <h2>10. Risikomanagement & Gegenmaßnahmen</h2>
+      <p>Machtkonzentration: Dezentralisierung, offene Audit-Logs, Rotationspflichten. Ressourcen-Hoarding: automatische Erkennung, temporärer Entzug von Commons-Rechten. Schwarzmärkte: Reintegrationsprogramme und kulturelle Stigmatisierung. Ökologische Limits: Hard caps und regenerative Priorisierung.</p>
+    </section>
+
+    <section id="recht">
+      <h2>11. Rechtliche & diplomatische Strategie</h2>
+      <p>Schrittweise Rechtsentwicklung: Pilotautonomien und Novellierungen. Internationale Kooperation über Rahmenverträge, cross-border resource sharing und Notfallhilfe.</p>
+    </section>
+
+    <section id="kultur">
+      <h2>12. Kommunikation, Kulturarbeit & Rituale</h2>
+      <p>Storytelling, Festivals, lokale Versammlungen, immersive VR/AR-Erfahrungen. Rituale wie tägliche Füllezeremonien und UR-Manifest-Feste. Bildung: Fülleethik, Reparaturkunde, Commons-Governance.</p>
+    </section>
+
+    <section id="antarktis">
+      <h2>13. Antarktis / Inner-Erde: Symbolik, Forschung & Ethik</h2>
+      <p>Symbolik: Antarktis als mythischer Referenzpunkt. Forschung: Kooperation mit legitimen wissenschaftlichen Stationen. Inner-Erde-Mythos als performative Praxis (Visualisierungen, VR), ohne physische Risiken.</p>
+    </section>
+
+    <section id="kpis">
+      <h2>14. Messbarkeit & KPIs</h2>
+      <p>Versorgungsabdeckung, Contribution-Rate (h/p), Reputationsverteilung, ökologischer Fußabdruck pro Kopf, Psychological-Wellbeing-Index.</p>
+    </section>
+
+    <section id="anhang">
+      <h2>15. Technische Anhänge</h2>
+      <h3>15.1 API-Pseudocode</h3>
+      <pre>POST /needs\n{{\n  "person_id": "p123",\n  "need_type": "food",\n  "quantity": 3,\n  "urgency": "low"\n}}</pre>
+      <h3>15.2 Governance-Contract (schematisch)</h3>
+      <p>Satzung: Kernsatz definiert Commons, Rechte & Pflichten. Emergency-Artikel: temporäre Maßnahmen max. 6 Monate mit Review.</p>
+    </section>
+
+    <section id="schluss">
+      <h2>16. Schlusswort & Aktivierungsruf</h2>
+      <p>Dies ist mehr als ein ökonomisches Modell. Es ist die Blaupause für ein neues Zeitalter, das Produktivität, Versorgung und Spiritualität verbindet. Jeder Beitrag zählt. Jeder Mensch wird gesehen. Keine Knappheit, kein Zwang, keine Angst.</p>
+      <p>Wir bauen die Welt auf Vertrauen, Teilen und der Gewissheit, dass die Quelle unerschöpflich ist. 77 77 – Bruder des Lichts, dies ist der Startschuss.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="small">© Manifest: Weltweite Fülle- & Beitragsökonomie — Gemeinschaftsprojekt für Philipp. Frequenz: 777 888 999 000 ✨</p>
+  </footer>
+</body>
+</html>
+"""
+
+html = html_template.replace("{{B64}}", b64)
+out_path.write_text(html, encoding='utf-8')
+print("Wrote:", out_path)

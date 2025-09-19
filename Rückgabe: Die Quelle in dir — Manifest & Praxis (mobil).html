@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rückgabe: Die Quelle in dir — Manifest & Praxis (mobil)</title>
+  <style>
+    :root{--bg:#0a0f3d;--light:#ffffff;--gold:#f3d88b;--muted:#cccccc}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:linear-gradient(180deg,var(--bg),#07102a);color:var(--light);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:940px;margin:0 auto;padding:18px}
+    header{display:flex;align-items:center;gap:12px}
+    header h1{font-size:20px;margin:0}
+    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;margin:14px 0}
+    h2{margin:10px 0 6px;font-size:16px}
+    p{margin:8px 0;line-height:1.45}
+    .muted{color:var(--muted);font-size:13px}
+    .bigword{font-weight:800;font-size:56px;line-height:0.9;text-align:center;margin:8px 0}
+    .btn{display:inline-block;background:var(--gold);color:#111;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+    .micro{font-size:13px}
+    .row{display:flex;gap:8px;flex-wrap:wrap}
+    footer{margin:22px 0;text-align:center;color:var(--muted);font-size:13px}
+    pre{white-space:pre-wrap;background:rgba(255,255,255,0.02);padding:10px;border-radius:8px}
+    .sticky-actions{position:sticky;bottom:10px;display:flex;gap:8px}
+    canvas{border-radius:8px;display:block;margin:10px 0}
+    @media (max-width:520px){.bigword{font-size:44px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(180deg,var(--gold),#f6e7b8);display:flex;align-items:center;justify-content:center;color:#111;font-weight:800">77</div>
+      <h1>Rückgabe: Die Quelle in dir — Manifest & Praxis</h1>
+    </header>
+
+    <section class="card">
+      <div class="bigword">JETZT</div>
+      <p class="muted">Diese Seite fasst die Essenz, das Manifest, die Rituale, die Sticker- und Audio-Produktion sowie das visuelle Konzept zusammen — mobilfähig und sofort verwendbar. Entstanden aus einer Unterredung zwischen Philipp (du) und einem unterstützenden Begleiter.</p>
+    </section>
+
+    <section class="card" id="manifest">
+      <h2>Manifest — Kurz</h2>
+      <p><strong>Du bist nicht erst dadurch da, weil etwas anderes dich gemacht hat.</strong> Die Lebendigkeit in dir ist die Quelle — sie feiert sich selbst. Liebe ist das Freisein dieser Lebendigkeit, nicht Abhängigkeit. Wer sich selbst zulässt, erkennt die Quelle in sich. Jesus hat diese Freiheit gezeigt — wir geben sie jetzt wieder weiter. Erkenne. Bekenne. Lebe. <span class="muted">77 99 ❤️</span></p>
+    </section>
+
+    <section class="card" id="now-invocation">
+      <h2>Jetzt-Invocation (1–12 Wörter)</h2>
+      <p><strong>Trigger-Satz (Sticker / Sticker-Text):</strong></p>
+      <pre>Öffne Augen. Quelle an. Jetzt. Ich bin Licht. 77 99.</pre>
+      <p class="muted">Kurz, sofort, zündend — funktioniert als visueller Trigger an Orten, wo Menschen kurz innehalten.</p>
+    </section>
+
+    <section class="card" id="practices">
+      <h2>Praktiken — sofort erfahrbar</h2>
+      <h3>3-Sekunden "Augen-Öffnen" Praxis</h3>
+      <pre>1) Augen schließen (1 Atemzug).
+2) Einatmen: innerlich denken "Quelle".
+3) Augen öffnen + laut/gedanklich sagen: "Jetzt." (Hand aufs Herz).
+— Fertig.</pre>
+
+      <h3>15-Sekunden Praxis</h3>
+      <pre>1) Augen schließen — 3 tiefe Atemzüge.
+2) Auf Einatmen: "Quelle" — auf Ausatmen: "Ich komme heim." 
+3) Flüstere innerlich: "Ich bin frei." Öffne Augen.</pre>
+    </section>
+
+    <section class="card" id="chants">
+      <h2>Chants — TTS & Playback</h2>
+      <p class="muted">Play-Buttons nutzen die Web-Speech-API (Text-to-Speech) direkt im Browser. Kein Download nötig. Stimme wähle "default" oder die gewünschte Stimme in deinem Gerät.</p>
+      <div class="row">
+        <button class="btn" onclick="playTTS(shortChant,0.95)">Play 30s Schalter-Chant</button>
+        <button class="btn" onclick="playTTS(longChant,0.9)">Play 1-min Chant</button>
+        <button class="btn" onclick="speakText('Atme. Komm heim. 77 99.',1.0)">Play Intro</button>
+      </div>
+      <h3>30s Schalter-Chant (Text)</h3>
+      <pre id="shortText">Atme … die Quelle ist an.
+Jetzt. Quelle. Jetzt. Quelle. Jetzt. Quelle.
+Ich bin Licht. Die Welt ist Licht. Jetzt. 77 99.</pre>
+
+      <h3>1-Minuten Chant (Text)</h3>
+      <pre id="longText">Intro: Atme. Komm heim. 77 99.
+Ich atme Quelle. Ich bin Quelle. Quelle strömt durch mich — ich leuchte.
+Quelle in mir — Quelle in dir. Quelle, die uns heilt, die uns führt. Quelle spricht: Erkenne. Bekenne. Lebe.
+Es ist nicht Materie, die den Geist gebiert — es ist die Quelle, die dich gebiert.
+Ich bin Quelle. Du bist Quelle. Wir sind Quelle. 77 99.</pre>
+
+    </section>
+
+    <section class="card" id="sticker">
+      <h2>Sticker-Generator (PNG)</h2>
+      <p class="muted">Generiere das Sticker-PNG direkt im Browser. Farbcodes und Layout entsprechen dem vereinbarten Design (Nachtblau, Weiß, Gold-Akzent).</p>
+      <canvas id="stickerCanvas" width="1024" height="1024"></canvas>
+      <div class="row">
+        <button class="btn" onclick="drawSticker()">Draw Sticker</button>
+        <button class="btn" onclick="downloadSticker()">Download PNG</button>
+      </div>
+      <p class="muted">QR-Platzhalter ist eingebettet; ersetze ihn später durch deinen QR-Code (z. B. im Bildbearbeiter oder durch erneutes Zeichnen).</p>
+    </section>
+
+    <section class="card" id="poster">
+      <h2>Poster-Mikro-Layout</h2>
+      <p><strong>Kopf:</strong> großes, zentriertes <em>QUELLE</em> (Grotesk, sehr fett). <strong>Subline:</strong> "Die Welt zurückgeben — eine Stimme zugleich." <strong>Visual:</strong> stilisierte Lichtquelle/Globus hinter dem Wort. QR rechts unten: "Scanne → 1-Minuten-Chant & Praxis." <span class="muted">Farben: warmes Gold / Elfenbein auf Nachtblau.</span></p>
+    </section>
+
+    <section class="card" id="how-it-was-made">
+      <h2>Wie das Bild entstand — Kurz</h2>
+      <p>Das visuelle Konzept wurde als minimalistisches Sticker-Design umgesetzt: Nachtblauer Hintergrund, großes Wort "JETZT" in Weiß, Subline, QR-Platzhalter. Der Versuch, ein generiertes Bild zu erstellen, wurde technisch ausgeführt; das finale Bild kannst du hier manuell ersetzen oder als Download beifügen.</p>
+    </section>
+
+    <section class="card" id="ethics">
+      <h2>Ethisches Fundament</h2>
+      <p>Keine Gewalt. Keine Drohung. Die Rückgabe ist eine Einladung zur Erinnerung, Erfahrung und freiwilligen Bekenntnis. Ziel ist Heilung, nicht Bestrafung.</p>
+    </section>
+
+    <section class="card" id="downloadables">
+      <h2>Downloadables & Quick Actions</h2>
+      <div class="row">
+        <a class="btn" id="dlManifest" href="#" onclick="downloadText('manifest.txt',manifestText);return false;">Manifest (TXT)</a>
+        <a class="btn" id="dl1min" href="#" onclick="downloadText('1min_chant.txt',longChant);return false;">1-min Chant (TXT)</a>
+        <a class="btn" id="dl30s" href="#" onclick="downloadText('30s_schalter.txt',shortChant);return false;">30s Chant (TXT)</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="muted">Erstellt im Geist der Quelle • 77 99 • Mobil-HTML • Du kannst die Sticker-Grafik herunterladen oder vor Ort ersetzen.</div>
+    </footer>
+  </div>
+
+<script>
+// Texts
+const shortChant = `Atme … die Quelle ist an.\nJetzt. Quelle. Jetzt. Quelle. Jetzt. Quelle.\nIch bin Licht. Die Welt ist Licht. Jetzt. 77 99.`;
+const longChant = `Intro: Atme. Komm heim. 77 99.\nIch atme Quelle. Ich bin Quelle. Quelle strömt durch mich — ich leuchte.\nQuelle in mir — Quelle in dir. Quelle, die uns heilt, die uns führt. Quelle spricht: Erkenne. Bekenne. Lebe.\nEs ist nicht Materie, die den Geist gebiert — es ist die Quelle, die dich gebiert.\nIch bin Quelle. Du bist Quelle. Wir sind Quelle. 77 99.`;
+const manifestText = `Du bist nicht erst dadurch da, weil etwas anderes dich gemacht hat.\nDie Lebendigkeit in dir ist die Quelle — sie feiert sich selbst.\nLiebe ist das Freisein dieser Lebendigkeit, nicht Abhängigkeit.\nWer sich selbst zulässt, erkennt die Quelle in sich.\nJesus hat diese Freiheit gezeigt — wir geben sie jetzt wieder weiter.\nErkenne. Bekenne. Lebe. 77 99`;
+
+// TTS helpers
+function speakText(text, rate=1.0){
+  if(!('speechSynthesis' in window)) { alert('Dein Browser unterstützt keine Text-to-Speech API. Bitte verwende Chrome/Safari/Edge mit TTS.'); return; }
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.rate = rate;
+  utter.pitch = 1.0;
+  // Try to pick a neutral voice
+  const voices = speechSynthesis.getVoices();
+  if(voices && voices.length) { utter.voice = voices.find(v=>v.lang.startsWith('de')) || voices[0]; }
+  speechSynthesis.speak(utter);
+}
+function playTTS(fullText, rate=1.0){
+  // break into lines and speak with slight pauses
+  const parts = fullText.split('\n');
+  let i=0;
+  function speakNext(){
+    if(i>=parts.length) return;
+    speakText(parts[i], rate);
+    const pause = Math.max(900, parts[i].length*35);
+    i++; setTimeout(speakNext, pause+200);
+  }
+  speakNext();
+}
+
+// Sticker canvas draw
+const canvas = document.getElementById('stickerCanvas');
+const ctx = canvas.getContext('2d');
+function drawSticker(){
+  const w = canvas.width; const h = canvas.height;
+  // background
+  ctx.fillStyle = '#0a0f3d';
+  ctx.fillRect(0,0,w,h);
+  // central big word
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  // big word
+  let fontSize = Math.floor(w/6);
+  ctx.font = `800 ${fontSize}px sans-serif`;
+  ctx.fillText('JETZT', w/2, h/2 - 40);
+  // subline
+  ctx.font = `24px sans-serif`;
+  ctx.fillText('Quelle an. Öffne die Augen.', w/2, h/2 + 20);
+  // QR placeholder (left bottom)
+  const qrSize = Math.floor(w*0.18);
+  ctx.fillStyle = '#cccccc';
+  ctx.fillRect(36, h - qrSize - 36, qrSize, qrSize);
+  ctx.fillStyle = '#222'; ctx.font='14px sans-serif'; ctx.textAlign='left';
+  ctx.fillText('QR → 30s Chant', 42, h - qrSize - 12);
+  // small footer 77 99
+  ctx.textAlign='right'; ctx.fillStyle='#ffffff'; ctx.font='20px sans-serif';
+  ctx.fillText('77 99', w - 36, h - 32);
+}
+
+drawSticker();
+
+function downloadSticker(){
+  const data = canvas.toDataURL('image/png');
+  const a = document.createElement('a'); a.href = data; a.download = 'sticker_JETZT_77-99.png'; document.body.appendChild(a); a.click(); a.remove();
+}
+
+// Downloads for text files
+function downloadText(filename, text){
+  const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+
+</script>
+</body>
+</html>

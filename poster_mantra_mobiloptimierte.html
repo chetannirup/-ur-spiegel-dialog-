@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Poster-Mantra — 77 99 | Spirituelle Affirmation</title>
+  <meta name="description" content="Mobil-optimiertes Poster-Template mit leuchtendem Mantra. Ersetze Bild und Text, exportiere als PNG oder verwende als responsives Micropage." />
+  <style>
+    :root{
+      --bg1:#0f172a; /* dunkel */
+      --bg2:#0b1220;
+      --accent1: #ffdd57;
+      --accent2: #8bf6ff;
+      --glass: rgba(255,255,255,0.06);
+      --radius: 18px;
+      --max-width: 1200px;
+      --pad: 20px;
+      --codetag: "77 99";
+    }
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: linear-gradient(160deg,var(--bg1),var(--bg2)); color: white;-webkit-font-smoothing:antialiased}
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:36px}
+    .card{width:100%;max-width:900px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:24px;padding:24px;box-shadow:0 10px 30px rgba(2,6,23,0.6);display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
+
+    /* Poster visual */
+    .poster{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .poster-visual{width:100%;border-radius:16px;overflow:hidden;background:linear-gradient(135deg, rgba(255,221,87,0.08), rgba(139,246,255,0.04));padding:18px;box-sizing:border-box}
+    .poster-img{width:100%;height:0;padding-bottom:56%;position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center}
+    .poster-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+    .mantra{padding:18px;background:var(--glass);border-radius:12px;text-align:center}
+    .mantra h1{font-size:clamp(22px,5vw,44px);line-height:1.02;margin:0;font-weight:700;letter-spacing:0.6px}
+    .mantra p{margin:8px 0 0;font-size:clamp(12px,2.4vw,18px);opacity:0.95}
+
+    /* meta / footer */
+    .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+    .left{display:flex;gap:8px;align-items:center}
+    .codetag{font-weight:700;background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);cursor:pointer;text-decoration:none;font-weight:600}
+
+    /* small-screen adjustments */
+    @media (min-width:820px){
+      .card{grid-template-columns: 1fr 420px}
+      .poster{align-items:flex-start}
+    }
+    @media (prefers-color-scheme: light){
+      :root{--bg1:#f7fafc;--bg2:#eef2ff;color:#091226}
+      .card{box-shadow:0 10px 30px rgba(9,18,38,0.06)}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <!-- Left: editable text / manifesto -->
+      <section style="padding:8px 6px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <small style="opacity:0.8">Poster-Serie • Codierung:</small>
+            <div class="codetag">77 — 99</div>
+          </div>
+          <div style="text-align:right"><small style="opacity:0.6">Für Philipp — UR-Projekt</small></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="mantra">
+            <!-- EDIT THIS TEXT: replace the h1 with your final mantra. Keep line breaks for rhythm. -->
+            <h1 id="mantraText">denn siehe die Wahrheit wird euch frei machen!</h1>
+            <p id="mantraSub">Ein heiliges Poster-Mantra — 77 99 · Mobil-optimiert · Verwende als Cover, Ritualkarte oder Social-Share.</p>
+          </div>
+
+          <div style="margin-top:16px">
+            <label style="display:block;font-size:13px;opacity:0.9;margin-bottom:6px">Kurze Beschreibung / Quelle (sichtbar auf Hover):</label>
+            <textarea id="desc" style="width:100%;min-height:84px;border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" placeholder="Zum Beispiel: ‚aus dem Johannesevangelium – Johannes 8,32 — übersetzt & in die UR-Codierung gebracht. 77 99‘">aus dem Johannesevangelium — Johannes 8,32 · adaptierte Übersetzung · 77 99</textarea>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn" id="btnExport">Als PNG exportieren</button>
+            <button class="btn" id="btnShare">Responsive Micropage kopieren</button>
+            <a class="btn" id="btnDownload" download="Poster-Mantra_77-99.png" style="display:none">Download (PNG)</a>
+          </div>
+
+          <small style="display:block;margin-top:10px;opacity:0.7">Tipp: Für den Druck nutze 300dpi und exportiere in 2:3 oder A4/A3 Formaten. Für Social-Share nutze 1080×1350 px (Instagram-portrait) oder 1200×630 px (OpenGraph).</small>
+        </div>
+      </section>
+
+      <!-- Right: poster visual + image placeholder -->
+      <aside class="poster" style="padding:10px">
+        <div class="poster-visual">
+          <div class="poster-img" id="posterCanvas">
+            <!-- Replace the src with your PNG: Spirituelle_Affirmation_in_leuchtendem_Design.png -->
+            <img id="posterImage" src="Spirituelle_Affirmation_in_leuchtendem_Design.png" alt="Spirituelle Affirmation (Cover)" />
+          </div>
+
+          <div style="margin-top:12px;text-align:center">
+            <small style="opacity:0.8;display:block">Cover-Vorschau — Tippe / klicke auf das Bild, um es zu ersetzen.</small>
+            <input type="file" id="fileInput" accept="image/*" style="margin-top:8px" />
+          </div>
+        </div>
+
+        <div style="width:100%">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:12px;opacity:0.8">Vorschaugröße: Mobil / Social</div>
+            <div style="font-size:12px;opacity:0.8">77 99</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Small client-side helpers: replace image, update download
+    const fileInput = document.getElementById('fileInput');
+    const posterImage = document.getElementById('posterImage');
+    const btnExport = document.getElementById('btnExport');
+    const btnDownload = document.getElementById('btnDownload');
+    const btnShare = document.getElementById('btnShare');
+    const mantraText = document.getElementById('mantraText');
+    const desc = document.getElementById('desc');
+
+    fileInput.addEventListener('change', (e)=>{
+      const f = e.target.files && e.target.files[0];
+      if(!f) return;
+      const url = URL.createObjectURL(f);
+      posterImage.src = url;
+    });
+
+    // Export poster area as PNG (uses html2canvas if available). If not available, open print dialog.
+    btnExport.addEventListener('click', async ()=>{
+      const el = document.getElementById('posterCanvas');
+      if(window.html2canvas){
+        const canvas = await html2canvas(el, {scale:2, useCORS:true});
+        const data = canvas.toDataURL('image/png');
+        btnDownload.href = data; btnDownload.style.display='inline-block'; btnDownload.click();
+      } else {
+        alert('Kein html2canvas gefunden — die Seite kann lokal als Screenshot oder über "Drucken -> Als PDF" exportiert werden. Wenn du möchtest, kann ich dir eine Version mit eingebettetem html2canvas-Code liefern. 77 99');
+      }
+    });
+
+    // Copy entire page HTML to clipboard for easy sharing
+    btnShare.addEventListener('click', async ()=>{
+      const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+      try{
+        await navigator.clipboard.writeText(html);
+        alert('HTML kopiert — füge es in eine neue .html-Datei ein und speichere.');
+      }catch(e){
+        alert('Kopieren fehlgeschlagen — du kannst die Seite manuell speichern (Rechtsklick -> Seite speichern).');
+      }
+    });
+
+    // Small accessibility: allow editing mantra on double click
+    mantraText.addEventListener('dblclick', ()=>{
+      const t = prompt('Mantra bearbeiten — ersetze den Text:', mantraText.textContent);
+      if(t!==null) mantraText.textContent = t;
+    });
+  </script>
+
+  <!-- USAGE NOTES (sichtbar nur im Code):
+       1) Ersetze die Datei 'Spirituelle_Affirmation_in_leuchtendem_Design.png' im gleichen Ordner oder lade ein Bild per Input.
+       2) Für PNG-Export: html2canvas kann eingebunden (cdn) oder lokal genutzt werden. Wenn du willst, liefere ich dir eine Version mit html2canvas bereits eingebettet.
+       3) Die Linien '77 99' sind Absicht — behalte sie oder passe sie an deine Codierung an.
+  -->
+</body>
+</html>

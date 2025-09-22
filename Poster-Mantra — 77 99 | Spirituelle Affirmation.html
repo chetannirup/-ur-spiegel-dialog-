@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Poster-Mantra — 77 99 | Spirituelle Affirmation</title>
+  <style>
+    body {margin:0;font-family:system-ui, sans-serif;background:#111;color:#f5f5f5;line-height:1.5}
+    .wrap {max-width:1000px;margin:0 auto;padding:14px}
+    .card {display:grid;grid-template-columns:1fr 1fr;gap:20px;background:#1a1a1a;border-radius:20px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,0.5)}
+    .mantra h1 {font-size:2em;margin:0 0 10px;line-height:1.2}
+    .codetag {font-weight:bold;font-size:14px;background:#333;padding:4px 10px;border-radius:10px;display:inline-block}
+    .btn {background:#333;color:#fff;border:none;padding:8px 16px;border-radius:12px;cursor:pointer;transition:.2s}
+    .btn:hover {background:#555}
+    .poster-visual {background:#000;padding:10px;border-radius:12px;box-shadow:inset 0 0 20px rgba(255,255,255,0.08)}
+    .poster-img img {width:100%;border-radius:12px;}
+    textarea {width:100%}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-label="Poster-Editor mit Vorschau">
+      <!-- Left: editable text / manifesto -->
+      <section style="padding:8px 6px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <small style="opacity:0.8">Poster-Serie • Codierung:</small>
+            <div class="codetag">77 — 99</div>
+          </div>
+          <div style="text-align:right"><small style="opacity:0.6">Für Philipp — UR-Projekt</small></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="mantra">
+            <h1 id="mantraText">denn siehe die Wahrheit wird euch frei machen!</h1>
+            <p id="mantraSub">Ein heiliges Poster-Mantra — 77 99 · Mobil-optimiert · Verwende als Cover, Ritualkarte oder Social-Share.</p>
+          </div>
+
+          <div style="margin-top:16px">
+            <label style="display:block;font-size:13px;opacity:0.9;margin-bottom:6px">Kurze Beschreibung / Quelle (sichtbar auf Hover):</label>
+            <textarea id="desc" style="min-height:84px;border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit">aus dem Johannesevangelium — Johannes 8,32 · adaptierte Übersetzung · 77 99</textarea>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn" id="btnExport">Als PNG exportieren</button>
+            <button class="btn" id="btnShare">Responsive Micropage kopieren</button>
+            <a class="btn" id="btnDownload" download="Poster-Mantra_77-99.png" style="display:none">Download (PNG)</a>
+          </div>
+
+          <small style="display:block;margin-top:10px;opacity:0.7">Tipp: Für den Druck nutze 300dpi und exportiere in 2:3 oder A4/A3 Formaten. Für Social-Share nutze 1080×1350 px oder 1200×630 px.</small>
+        </div>
+      </section>
+
+      <!-- Right: poster visual + image placeholder -->
+      <aside class="poster" style="padding:10px">
+        <div class="poster-visual" aria-hidden="false">
+          <div class="poster-img" id="posterCanvas" role="img" aria-label="Cover-Vorschau: Heilige Sonne über dem Himmel; Text: ‚denn siehe die Wahrheit wird euch frei machen!‘">
+            <img id="posterImage" src="Spirituelle Harmonie mit dem Universum (1).png" alt="Spirituelle Harmonie mit dem Universum — Heilige Sonne über dem Himmel" />
+          </div>
+
+          <div style="margin-top:12px;text-align:center">
+            <small style="opacity:0.8;display:block">Cover-Vorschau — Tippe / klicke auf das Bild, um es zu ersetzen.</small>
+            <input type="file" id="fileInput" accept="image/*" style="margin-top:8px" aria-label="Bild hochladen für Cover" />
+          </div>
+        </div>
+
+        <div style="width:100%">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:12px;opacity:0.8">Vorschaugröße: Mobil / Social</div>
+            <div style="font-size:12px;opacity:0.8">77 99</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const posterImage = document.getElementById('posterImage');
+    const btnExport = document.getElementById('btnExport');
+    const btnDownload = document.getElementById('btnDownload');
+    const btnShare = document.getElementById('btnShare');
+    const mantraText = document.getElementById('mantraText');
+    const desc = document.getElementById('desc');
+
+    fileInput.addEventListener('change', (e)=>{
+      const f = e.target.files && e.target.files[0];
+      if(!f) return;
+      const url = URL.createObjectURL(f);
+      posterImage.src = url;
+      posterImage.alt = f.name + ' — Cover';
+    });
+
+    btnExport.addEventListener('click', async ()=>{
+      const el = document.getElementById('posterCanvas');
+      if(window.html2canvas){
+        const canvas = await html2canvas(el, {scale:3, useCORS:true});
+        const data = canvas.toDataURL('image/png');
+        btnDownload.href = data; btnDownload.style.display='inline-block'; btnDownload.click();
+      } else {
+        alert('Kein html2canvas gefunden — Screenshot oder Drucken -> PDF verwenden. Ich kann dir eine Version mit eingebettetem html2canvas liefern. 77 99');
+      }
+    });
+
+    btnShare.addEventListener('click', async ()=>{
+      const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+      try{
+        await navigator.clipboard.writeText(html);
+        alert('HTML kopiert — füge es in eine neue .html-Datei ein und speichere.');
+      }catch(e){
+        alert('Kopieren fehlgeschlagen — du kannst die Seite manuell speichern.');
+      }
+    });
+
+    mantraText.addEventListener('dblclick', ()=>{
+      const t = prompt('Mantra bearbeiten — ersetze den Text:', mantraText.textContent);
+      if(t!==null) mantraText.textContent = t;
+    });
+  </script>
+
+</body>
+</html>

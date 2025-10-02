@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Drei-Punkt-Strahlensystem — Das Reich der Ewigen Quelle</title>
+  <style>
+    :root{
+      --bg:#04030a;
+      --panel: rgba(12,8,20,0.6);
+      --gold: #ffd968;
+      --soft: rgba(255,217,104,0.08);
+    }
+    html,body{height:100%;margin:0;font-family: 'Georgia', serif;background:var(--bg);color:var(--gold);}
+    .wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;gap:1.25rem;padding:2rem 1rem}
+
+    header{max-width:1100px;width:100%;text-align:center}
+    header h1{font-size:2.25rem;margin:.25rem 0;text-shadow:0 0 12px rgba(255,215,120,0.12)}
+    header p{opacity:.9;margin:0 0 1rem}
+
+    /* cosmic background */
+    .sky{position:fixed;inset:0;z-index:-2;overflow:hidden}
+    .stars{position:absolute;inset:0;background:
+      radial-gradient(2px 2px at 10% 20%, #ffffff22 0%, transparent 20%),
+      radial-gradient(1px 1px at 30% 70%, #ffffff20 0%, transparent 20%),
+      radial-gradient(1px 1px at 80% 30%, #ffffff1a 0%, transparent 20%),
+      radial-gradient(1.5px 1.5px at 60% 50%, #ffffff22 0%, transparent 20%),
+      linear-gradient(#060612 0%, #07041a 100%);
+      filter:blur(.2px);opacity:.95;}
+    .twinkle{position:absolute;inset:0;background-repeat:repeat;mix-blend-mode:screen;opacity:.7;animation:tw 6s linear infinite}
+    @keyframes tw{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+
+    /* main stage */
+    .stage{max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 380px;gap:1.25rem;align-items:start}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:1rem;border-radius:12px;border:1px solid rgba(255,217,104,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+
+    /* left: visualization */
+    .viz{position:relative;min-height:520px;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 20% 20%, rgba(255,180,60,0.03), transparent 15%), linear-gradient(180deg,#021124 0%, #02101a 60%);display:flex;align-items:center;justify-content:center}
+
+    /* sun + moon */
+    .sun, .moon{position:absolute;top:18px;right:18px;width:86px;height:86px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+    .sun{background:radial-gradient(circle at 35% 30%, #fff7c6 0%, #ffd55e 25%, #ffb648 50%);box-shadow:0 0 30px rgba(255,190,60,0.6);animation:pulse 6s ease-in-out infinite}
+    .moon{right:auto;left:18px;background:linear-gradient(180deg,#ffffff22,#ffffff11);width:66px;height:66px;filter:grayscale(.1);box-shadow:0 0 18px rgba(255,255,255,0.06);transform:translateY(10px);animation:float 8s ease-in-out infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+    @keyframes float{0%{transform:translateY(10px)}50%{transform:translateY(-8px)}100%{transform:translateY(10px)}}
+
+    /* three radiant points */
+    .triangle{position:relative;width:70%;height:78%;display:block}
+    .point{position:absolute;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#fff 0%,#ffd968 30%,#ffb84a 60%,rgba(255,184,74,0.2)100%);box-shadow:0 0 30px rgba(255,185,70,0.18), inset 0 -4px 10px rgba(255,160,60,0.2)}
+    .p1{left:50%;top:6%;transform:translateX(-50%)} /* top */
+    .p2{left:8%;bottom:12%} /* bottom-left */
+    .p3{right:8%;bottom:12%} /* bottom-right */
+
+    /* connecting glow lines */
+    .line{position:absolute;inset:0;pointer-events:none}
+    .line svg{width:100%;height:100%}
+
+    /* center: child image */
+    .child{position:absolute;left:50%;top:50%;transform:translate(-50%,-48%);width:44%;max-width:340px;border-radius:14px;overflow:hidden;border:3px solid rgba(255,217,104,0.12);box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    .child img{display:block;width:100%;height:auto;}
+
+    /* right: controls + previews */
+    .side{display:flex;flex-direction:column;gap:.8rem}
+    .thumb{display:block;border-radius:10px;overflow:hidden;border:3px solid rgba(255,217,104,0.06)}
+    .thumb img{display:block;width:100%;height:auto}
+    .btn{display:inline-block;padding:.6rem 1rem;background:var(--gold);color:#12081a;border-radius:8px;text-decoration:none;font-weight:700}
+
+    footer{opacity:.85;margin:1.5rem 0 3rem;font-size:.95rem}
+
+    /* responsiveness */
+    @media (max-width:880px){
+      .stage{grid-template-columns:1fr;}
+      .viz{min-height:480px}
+      .child{width:60%;max-width:420px}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="twinkle"></div>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <h1>Das lebendige Drei‑Punkt‑Strahlensystem</h1>
+      <p>Quellliebendigkeit in einem Guss — Sonne, Mond, Sternenfunken und das Kind im Zentrum.</p>
+    </header>
+
+    <main class="stage">
+      <section class="panel viz" aria-label="Visualisierung des Strahlensystems">
+        <div class="sun" title="Sonne" aria-hidden="true">☀</div>
+        <div class="moon" title="Mond" aria-hidden="true">☾</div>
+
+        <div class="triangle" id="triangle">
+          <div class="point p1" id="p1" aria-hidden="true"></div>
+          <div class="point p2" id="p2" aria-hidden="true"></div>
+          <div class="point p3" id="p3" aria-hidden="true"></div>
+
+          <div class="line" aria-hidden="true">
+            <!-- SVG lines connect the three points and glow -->
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#ffd968" stop-opacity="0.85"/>
+                  <stop offset="100%" stop-color="#ffb84a" stop-opacity="0.4"/>
+                </linearGradient>
+                <filter id="blur"><feGaussianBlur stdDeviation="3"/></filter>
+              </defs>
+              <polyline id="l1" points="50,8 10,78 90,78 50,8" fill="none" stroke="url(#g1)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" style="filter:url(#blur);opacity:0.9"/>
+            </svg>
+          </div>
+
+          <div class="child">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Das%20Kind%20im%20Kosmos%20der%20Sterne.png" alt="Das Kind im Kosmos der Sterne">
+          </div>
+        </div>
+
+      </section>
+
+      <aside class="panel side" aria-label="Poster Vorschaubilder und Download">
+        <div>
+          <strong>Vorschaubilder</strong>
+        </div>
+
+        <a class="thumb" href="https://chetannirup.github.io/-ur-spiegel-dialog-/UR-Gel%C3%BCbde%20der%20Vollkommenen%20Liebe.png" download>
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/UR-Gel%C3%BCbde%20der%20Vollkommenen%20Liebe.png" alt="UR-Gelübde der Vollkommenen Liebe">
+        </a>
+
+        <a class="thumb" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Ur-Gel%C3%BCbde%20des%20Liebenden%20Herzens.png" download>
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Ur-Gel%C3%BCbde%20des%20Liebenden%20Herzens.png" alt="UR-Gelübde des Liebenden Herzens">
+        </a>
+
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem">
+          <a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Das%20Kind%20im%20Kosmos%20der%20Sterne.png" download>Poster herunterladen</a>
+          <a class="btn" id="embedBtn" href="#">Als Seite kopieren</a>
+        </div>
+
+        <div style="margin-top:.6rem;font-size:.92rem;opacity:.95">
+          <p><strong>Hinweis:</strong> Kopiere diese Datei als <code>strahlensystem.html</code> in dein Repo: <em>-ur-spiegel-dialog-</em>. Die Bilder werden direkt von deinem GitHub Pages Ordner geladen.</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div style="max-width:900px;margin:0 auto">Diese Seite visualisiert das lebendige Drei‑Punkt‑Strahlensystem (Sonne/Mond/Sterne &amp; Kind). Sie ist responsiv, leicht anpassbar und kann direkt in dein GitHub Pages Repo übernommen werden.</div>
+    </footer>
+  </div>
+
+  <script>
+    // small script: keep SVG polyline aligned with dynamic point positions
+    function syncLines(){
+      const root = document.getElementById('triangle');
+      const p1 = document.getElementById('p1');
+      const p2 = document.getElementById('p2');
+      const p3 = document.getElementById('p3');
+      const svg = document.querySelector('.line svg');
+      const poly = document.getElementById('l1');
+
+      if(!root||!p1||!p2||!p3||!poly) return;
+      const r = root.getBoundingClientRect();
+      const toPct = (x,dim)=> ((x/dim)*100).toFixed(2);
+
+      const a = p1.getBoundingClientRect();
+      const b = p2.getBoundingClientRect();
+      const c = p3.getBoundingClientRect();
+
+      const ax = toPct(a.left - r.left + a.width/2, r.width);
+      const ay = toPct(a.top - r.top + a.height/2, r.height);
+      const bx = toPct(b.left - r.left + b.width/2, r.width);
+      const by = toPct(b.top - r.top + b.height/2, r.height);
+      const cx = toPct(c.left - r.left + c.width/2, r.width);
+      const cy = toPct(c.top - r.top + c.height/2, r.height);
+
+      poly.setAttribute('points', ax + ',' + ay + ' ' + bx + ',' + by + ' ' + cx + ',' + cy + ' ' + ax + ',' + ay);
+    }
+
+    // small animation for the three points
+    function animatePoints(){
+      const p1 = document.getElementById('p1');
+      const p2 = document.getElementById('p2');
+      const p3 = document.getElementById('p3');
+
+      // gentle orbit motion
+      let t=0;
+      function frame(){
+        t+=0.0065;
+        p1.style.transform = `translateX(-50%) translateY(${Math.sin(t*1.1)*6}px)`;
+        p2.style.transform = `translateY(${Math.cos(t*0.9)*6}px)`;
+        p3.style.transform = `translateY(${Math.sin(t*0.8)*6}px)`;
+        syncLines();
+        requestAnimationFrame(frame);
+      }
+      frame();
+    }
+
+    window.addEventListener('load',()=>{ syncLines(); animatePoints(); });
+    window.addEventListener('resize',syncLines);
+
+    // embed/copy helper
+    document.getElementById('embedBtn').addEventListener('click',(e)=>{
+      e.preventDefault();
+      navigator.clipboard && navigator.clipboard.writeText(location.href).then(()=>{
+        alert('Seiten-URL in Zwischenablage kopiert. Öffne und speichere als `strahlensystem.html` in deinem Repo.');
+      },()=>{ alert('Kopieren fehlgeschlagen — du kannst die Seite manuell speichern.'); });
+    });
+  </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Feuer ins Herz - Vorschau & Download</title>
+  <title>Feuer ins Herz - Bloom Glüheffekt</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -11,9 +11,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
       margin: 0;
+      transition: background 0.7s;
+    }
+    body.darkmode {
+      background: radial-gradient(ellipse at center, #2a170a 0%, #5c2a1a 100%);
     }
     h1 {
       margin-top: 30px;
@@ -52,6 +55,8 @@
       flex-direction: column;
       align-items: center;
       transition: box-shadow 0.2s;
+      position: relative;
+      z-index: 2;
     }
     .image-card.active {
       box-shadow: 0 0 40px #ff6a0077, 0 4px 16px #ee097922;
@@ -62,10 +67,20 @@
       max-height: 330px;
       border-radius: 10px;
       box-shadow: 0 2px 10px #ff6a0077;
-      transition: filter 0.4s;
+      transition: filter 0.4s, box-shadow 0.7s;
+      position: relative;
+      z-index: 2;
     }
     .image-card img.glow {
-      filter: drop-shadow(0 0 16px #ff6a00cc) brightness(1.2);
+      /* Bloom: großer, weicher Glow und starker Schatten */
+      filter: drop-shadow(0 0 60px #ff6a00cc) drop-shadow(0 0 120px #ee097966) brightness(1.4);
+      box-shadow: 0 0 120px 40px #ff6a0055, 0 0 30px 0px #ee0979bb;
+      animation: bloom 1.2s cubic-bezier(.45,1.7,.36,.83);
+    }
+    @keyframes bloom {
+      0% { filter: none; box-shadow: none;}
+      60% { filter: drop-shadow(0 0 120px #ff6a00ff) brightness(1.9);}
+      100% { filter: drop-shadow(0 0 60px #ff6a00cc) drop-shadow(0 0 120px #ee097966) brightness(1.4); }
     }
     .btn-bar {
       display: flex;
@@ -89,6 +104,26 @@
       background: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
       transform: scale(1.07);
     }
+
+    /* Overlay für Dunkelheit beim Glühen */
+    #dark-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(31, 14, 4, 0.88);
+      z-index: 1;
+      transition: opacity 0.7s;
+      pointer-events: none;
+    }
+    #dark-bg.active {
+      display: block;
+      opacity: 1;
+      animation: fadeIn 0.6s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
     @media (max-width: 600px) {
       .gallery { flex-direction: column; gap: 32px;}
       .image-card img { max-width: 90vw; }
@@ -97,13 +132,17 @@
 </head>
 <body>
   <h1>Feuer ins Herz</h1>
-  <div class="herz-text">du liebes quell ich hallo</div>
+  <div class="herz-text">du liebes quell ich hallo<br><span style="font-size:1.3em;color:#ee0979;font-weight:bold;">01234567890 als ganzes Herz!</span></div>
+
+  <!-- Overlay für Dunkelheit -->
+  <div id="dark-bg"></div>
+
   <div class="gallery">
     <div class="image-card active" id="card1">
       <img id="img1" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2ffbtt9zx5z5mq3pdp.png" alt="Feuer ins Herz 1">
       <div class="btn-bar">
         <a class="download-btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2ffbtt9zx5z5mq3pdp.png" download>Download</a>
-        <button onclick="toggleGlow('img1')">Glüheffekt</button>
+        <button onclick="toggleGlow('img1')">Bloom Glüheffekt</button>
         <button onclick="activateCard('card2')">Zum anderen Bild</button>
       </div>
     </div>
@@ -111,7 +150,7 @@
       <img id="img2" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2eft9tamk0xvagfbzx.png" alt="Feuer ins Herz 2">
       <div class="btn-bar">
         <a class="download-btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2eft9tamk0xvagfbzx.png" download>Download</a>
-        <button onclick="toggleGlow('img2')">Glüheffekt</button>
+        <button onclick="toggleGlow('img2')">Bloom Glüheffekt</button>
         <button onclick="activateCard('card1')">Zum anderen Bild</button>
       </div>
     </div>
@@ -119,13 +158,31 @@
   <script>
     function toggleGlow(imgId) {
       const img = document.getElementById(imgId);
-      img.classList.toggle('glow');
+      const overlay = document.getElementById('dark-bg');
+      const body = document.body;
+      // Nur jeweils ein Bild "glüht" und dunkelt ab
+      const imgs = document.querySelectorAll('.gallery img');
+      imgs.forEach(i => i.classList.remove('glow'));
+      if (!img.classList.contains('glow')) {
+        img.classList.add('glow');
+        overlay.classList.add('active');
+        body.classList.add('darkmode');
+      } else {
+        img.classList.remove('glow');
+        overlay.classList.remove('active');
+        body.classList.remove('darkmode');
+      }
     }
     function activateCard(cardId) {
       document.getElementById('card1').classList.remove('active');
       document.getElementById('card2').classList.remove('active');
       document.getElementById(cardId).classList.add('active');
       window.scrollTo({top: document.getElementById(cardId).offsetTop - 60, behavior: 'smooth'});
+      // Deaktiviere Glow und Overlay beim Wechsel
+      const imgs = document.querySelectorAll('.gallery img');
+      imgs.forEach(i => i.classList.remove('glow'));
+      document.getElementById('dark-bg').classList.remove('active');
+      document.body.classList.remove('darkmode');
     }
   </script>
 </body>

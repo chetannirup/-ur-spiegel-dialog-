@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Feuer ins Herz - Vorschau & Download</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: linear-gradient(120deg, #ffecd2 0%, #fcb69f 100%);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-top: 30px;
+      font-size: 2.2em;
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 10px #fcb69f77;
+    }
+    .herz-text {
+      margin: 16px 0 32px 0;
+      font-size: 1.4em;
+      color: #ff6a00;
+      background: rgba(255,235,200,0.7);
+      border-radius: 12px;
+      padding: 12px 28px;
+      box-shadow: 0 2px 8px #ee097944;
+      font-style: italic;
+      text-align: center;
+    }
+    .gallery {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .image-card {
+      background: #fff8f5ee;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px #ee097922;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s;
+    }
+    .image-card.active {
+      box-shadow: 0 0 40px #ff6a0077, 0 4px 16px #ee097922;
+      transform: scale(1.05);
+    }
+    .image-card img {
+      max-width: 280px;
+      max-height: 330px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px #ff6a0077;
+      transition: filter 0.4s;
+    }
+    .image-card img.glow {
+      filter: drop-shadow(0 0 16px #ff6a00cc) brightness(1.2);
+    }
+    .btn-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    button, a.download-btn {
+      background: linear-gradient(90deg, #ff6a00 40%, #ee0979 100%);
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 2px 10px #ee097944;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    button:hover, a.download-btn:hover {
+      background: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+      transform: scale(1.07);
+    }
+    @media (max-width: 600px) {
+      .gallery { flex-direction: column; gap: 32px;}
+      .image-card img { max-width: 90vw; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Feuer ins Herz</h1>
+  <div class="herz-text">du liebes quell ich hallo</div>
+  <div class="gallery">
+    <div class="image-card active" id="card1">
+      <img id="img1" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2ffbtt9zx5z5mq3pdp.png" alt="Feuer ins Herz 1">
+      <div class="btn-bar">
+        <a class="download-btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2ffbtt9zx5z5mq3pdp.png" download>Download</a>
+        <button onclick="toggleGlow('img1')">Glüheffekt</button>
+        <button onclick="activateCard('card2')">Zum anderen Bild</button>
+      </div>
+    </div>
+    <div class="image-card" id="card2">
+      <img id="img2" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2eft9tamk0xvagfbzx.png" alt="Feuer ins Herz 2">
+      <div class="btn-bar">
+        <a class="download-btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251002_2152_Feuer%20ins%20Herz_simple_compose_01k6k7jj2eft9tamk0xvagfbzx.png" download>Download</a>
+        <button onclick="toggleGlow('img2')">Glüheffekt</button>
+        <button onclick="activateCard('card1')">Zum anderen Bild</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    function toggleGlow(imgId) {
+      const img = document.getElementById(imgId);
+      img.classList.toggle('glow');
+    }
+    function activateCard(cardId) {
+      document.getElementById('card1').classList.remove('active');
+      document.getElementById('card2').classList.remove('active');
+      document.getElementById(cardId).classList.add('active');
+      window.scrollTo({top: document.getElementById(cardId).offsetTop - 60, behavior: 'smooth'});
+    }
+  </script>
+</body>
+</html>

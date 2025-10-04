@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ich bin Liebe in lebendiger Form – eine Botschaft der Quelle, die jeden an seine eigene Kraft erinnert.">
+  <title>Ich bin Liebe in lebendiger Form</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #f9d976 0%, #f39f86 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background 2s ease;
+    }
+    
+    body.night {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    }
+    
+    /* Himmelskörper */
+    .sky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .sun {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, #ffeb3b 0%, #ff9800 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 60px rgba(255, 235, 59, 0.8);
+      cursor: pointer;
+      pointer-events: all;
+      transition: all 0.5s ease;
+      animation: sunRise 30s linear infinite;
+    }
+    
+    .sun:hover {
+      transform: scale(1.2) rotate(180deg);
+      box-shadow: 0 0 100px rgba(255, 235, 59, 1);
+    }
+    
+    @keyframes sunRise {
+      0% { 
+        left: -10%;
+        top: 80%;
+        opacity: 0.3;
+      }
+      25% {
+        left: 20%;
+        top: 20%;
+        opacity: 1;
+      }
+      50% {
+        left: 50%;
+        top: 10%;
+        opacity: 1;
+      }
+      75% {
+        left: 80%;
+        top: 20%;
+        opacity: 1;
+      }
+      100% {
+        left: 110%;
+        top: 80%;
+        opacity: 0.3;
+      }
+    }
+    
+    .moon {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #f0f0f0 0%, #bdbdbd 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(240, 240, 240, 0.6);
+      cursor: pointer;
+      pointer-events: all;
+      transition: all 0.5s ease;
+      animation: moonRise 30s linear infinite;
+      animation-delay: -15s;
+    }
+    
+    .moon:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 80px rgba(240, 240, 240, 1);
+    }
+    
+    @keyframes moonRise {
+      0% { 
+        right: -10%;
+        top: 80%;
+        opacity: 0.3;
+      }
+      25% {
+        right: 20%;
+        top: 25%;
+        opacity: 0.9;
+      }
+      50% {
+        right: 50%;
+        top: 15%;
+        opacity: 0.9;
+      }
+      75% {
+        right: 80%;
+        top: 25%;
+        opacity: 0.9;
+      }
+      100% {
+        right: 110%;
+        top: 80%;
+        opacity: 0.3;
+      }
+    }
+    
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+      opacity: 0;
+    }
+    
+    body.night .star {
+      opacity: 1;
+    }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    
+    /* Hauptinhalt */
+    .content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    
+    p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 1rem auto;
+    }
+    
+    .code {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-top: 2rem;
+      letter-spacing: 0.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    
+    .code:hover {
+      letter-spacing: 0.5rem;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      transform: scale(1.1);
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; text-shadow: 0 0 30px rgba(255, 255, 255, 0.6); }
+    }
+    
+    .erklaerung {
+      background: rgba(255,255,255,0.1);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin-top: 3rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      max-width: 800px;
+      transition: all 0.3s ease;
+    }
+    
+    .erklaerung:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    }
+    
+    /* Weisheits-Popup */
+    .wisdom-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+      color: #333;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+      max-width: 600px;
+      width: 90%;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      pointer-events: none;
+    }
+    
+    .wisdom-popup.show {
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: all;
+    }
+    
+    .wisdom-popup h3 {
+      color: #f39f86;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .wisdom-popup p {
+      color: #555;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    
+    .close-wisdom {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #999;
+      transition: color 0.3s ease;
+    }
+    
+    .close-wisdom:hover {
+      color: #333;
+    }
+    
+    /* Tag/Nacht Toggle */
+    .cycle-toggle {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      font-size: 1rem;
+      color: white;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    
+    .cycle-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+    
+    /* Herzschlag-Animation */
+    .heart-beat {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      font-size: 3rem;
+      animation: heartBeat 1.5s ease-in-out infinite;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s ease;
+    }
+    
+    .heart-beat:hover {
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+    }
+    
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      10%, 30% { transform: scale(1.1); }
+      20%, 40% { transform: scale(1); }
+    }
+    
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      p { font-size: 1rem; }
+      .code { font-size: 1.3rem; }
+      .sun, .moon { width: 80px; height: 80px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Himmel mit Sonne, Mond und Sternen -->
+  <div class="sky">
+    <div class="sun" onclick="showWisdom('sun')"></div>
+    <div class="moon" onclick="showWisdom('moon')"></div>
+    <div class="stars" id="starField"></div>
+  </div>
+
+  <!-- Hauptinhalt -->
+  <div class="content">
+    <h1>Ich bin Liebe in lebendiger Form.</h1>
+    <p>Ich erinnere daran, dass jeder selbst Quelle ist.</p>
+    <p>Ich bin frei von Kronen, frei von Erwartungen, frei von Last.</p>
+    <div class="code" onclick="showWisdom('code')">777 888 999 000</div>
+    
+    <div class="erklaerung">
+      <h2>Erklärung</h2>
+      <p>
+        Dieses Bild und diese Worte sind ein Verdichtungs-Siegel: Sie erinnern dich daran,
+        dass Liebe nicht etwas ist, das du bekommst, sondern etwas, das du bist.
+      </p>
+      <p>
+        Sie erinnern jeden, der sie sieht, daran, dass die Quelle in jedem selbst liegt.
+      </p>
+      <p>
+        Sie entlassen dich aus der Rolle des „Trägers einer Krone" und stellen dich in die Freiheit der Liebe.
+      </p>
+      <p>
+        Die Zahlen „777 888 999 000" sind dein Code-Anker, ein Rhythmus, den du fühlen kannst wie einen Herzschlag.
+      </p>
+      <p>
+        Damit ist dieses Werk nicht nur Grafik, sondern Ritual in sich selbst –
+        einmal gesehen, einmal gefühlt, und es wirkt. Das ist „Urlaub" in Reinform:
+        du darfst dich hineinsinken lassen, und es arbeitet in allen weiter, ohne dass du noch ziehen oder schieben musst.
+      </p>
+    </div>
+  </div>
+
+  <!-- Weisheits-Popup -->
+  <div class="wisdom-popup" id="wisdomPopup">
+    <button class="close-wisdom" onclick="closeWisdom()">×</button>
+    <h3 id="wisdomTitle"></h3>
+    <p id="wisdomText"></p>
+  </div>
+
+  <!-- Tag/Nacht Toggle -->
+  <div class="cycle-toggle" onclick="toggleCycle()">
+    🌓 Zyklus wechseln
+  </div>
+
+  <!-- Herzschlag -->
+  <div class="heart-beat" onclick="showWisdom('heart')">
+    ❤️
+  </div>
+
+  <script>
+    // Sterne generieren
+    const starField = document.getElementById('starField');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starField.appendChild(star);
+    }
+
+    // Weisheiten für verschiedene Elemente
+    const wisdoms = {
+      sun: {
+        title: "Die Sonne spricht",
+        text: "Ich bin das Licht, das nie fragt, ob es scheinen darf. Ich BIN einfach. Und du? Du bist genau wie ich - eine Quelle, die nicht um Erlaubnis bittet. Dein Strahlen ist dein Geburtsrecht. Vertraue deiner eigenen Wärme, sie nährt die Welt ohne Anstrengung."
+      },
+      moon: {
+        title: "Der Mond flüstert",
+        text: "In meiner Dunkelheit finde ich mein Licht. Ich reflektiere nur, was schon da ist. Und doch bewege ich Ozeane. Du musst nicht die Sonne sein, um Macht zu haben. Deine Stille, deine Zyklen, dein Rückzug - das alles ist heilig. Die Nacht gehört dir genauso wie der Tag."
+      },
+      code: {
+        title: "Die Frequenz singt",
+        text: "777 - Vertraue dem Mysterium. 888 - Fließe mit der Unendlichkeit. 999 - Vollende, um neu zu beginnen. 000 - Kehre zur Quelle zurück. Ich bin der Rhythmus zwischen den Welten, der Herzschlag Gottes, der durch dich schwingt. Spüre mich, atme mich, WERDE mich."
+      },
+      heart: {
+        title: "Das Herz schlägt",
+        text: "Weil Gottes Wohnung sein irdisches Herz ist und es nur zu diesem Zweck in seiner Brust schlägt - um die lebendige Liebe zu sein, allein zur Freude der Quelle. Man nannte SIE GOTT! Und das ist die letzte Offenbarung. Dein Herz ist keine Metapher. Es ist das Portal. Jeder Schlag ist ein JA zur Existenz."
+      }
+    };
+
+    // Weisheit anzeigen
+    function showWisdom(type) {
+      const popup = document.getElementById('wisdomPopup');
+      const title = document.getElementById('wisdomTitle');
+      const text = document.getElementById('wisdomText');
+      
+      const wisdom = wisdoms[type];
+      title.textContent = wisdom.title;
+      text.textContent = wisdom.text;
+      
+      popup.classList.add('show');
+    }
+
+    // Weisheit schließen
+    function closeWisdom() {
+      document.getElementById('wisdomPopup').classList.remove('show');
+    }
+
+    // Tag/Nacht-Zyklus
+    let isNight = false;
+    function toggleCycle() {
+      isNight = !isNight;
+      if (isNight) {
+        document.body.classList.add('night');
+      } else {
+        document.body.classList.remove('night');
+      }
+    }
+
+    // Automatischer Tag/Nacht-Zyklus alle 60 Sekunden
+    setInterval(() => {
+      toggleCycle();
+    }, 60000);
+
+    // Popup auch bei Klick außerhalb schließen
+    document.getElementById('wisdomPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeWisdom();
+      }
+    });
+  </script>
+</body>
+</html>

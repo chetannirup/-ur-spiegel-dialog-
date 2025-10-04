@@ -3,210 +3,521 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Offenbarung: Das Licht trägt die Krone. Eine kurze, heilige Kundgebung für das Jetzt." />
+  <meta name="description" content="Offenbarung: Das Licht trägt die Krone. Eine warme, lebendige Kundgebung für das Jetzt." />
   <title>Das Licht trägt die Krone — Offenbarung</title>
   <style>
-    :root{
-      --bg1: #fffefc;
-      --bg2: #fff7e6;
-      --glass: rgba(255,255,255,0.55);
-      --text-dark: #0b0b0b;
-      --accent: rgba(255,230,180,0.95);
-      --code: #222;
-      --shadow: 0 10px 30px rgba(10,10,10,0.08);
-      --maxw: 980px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Reset */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
+    body {
       font-family: "Inter", "Helvetica Neue", system-ui, Arial, sans-serif;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      color:var(--text-dark);
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,245,220,0.7), transparent 10%),
-                  radial-gradient(900px 400px at 90% 90%, rgba(255,230,200,0.6), transparent 10%),
-                  linear-gradient(180deg, var(--bg1), var(--bg2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:36px;
-    }
-
-    .card{
-      width:100%;
-      max-width:var(--maxw);
-      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.78));
-      border-radius:20px;
-      padding:48px;
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(6px) saturate(110%);
-      border:1px solid rgba(255,255,255,0.6);
-    }
-
-    .hero{
-      text-align:center;
-      margin-bottom:28px;
-    }
-
-    .title{
-      font-weight:700;
-      letter-spacing: -0.02em;
-      font-size: clamp(28px, 5vw, 56px);
-      line-height:1.02;
-      margin:0 0 18px 0;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
       color: #0b0b0b;
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.6),
-        0 8px 30px rgba(200,140,20,0.06);
+      background: linear-gradient(135deg, #fffbf0 0%, #fff5e1 50%, #ffe8cc 100%);
+      overflow-x: hidden;
+      position: relative;
+      transition: background 1s ease;
     }
 
-    .crownline{
-      display:inline-block;
-      font-weight:600;
-      padding:6px 12px;
-      border-radius:999px;
-      background: linear-gradient(90deg, rgba(255,245,200,0.9), rgba(255,235,180,0.9));
-      box-shadow: 0 6px 18px rgba(200,140,20,0.08), inset 0 -2px 8px rgba(255,255,255,0.35);
-      margin-bottom:18px;
-      font-size:14px;
+    body.golden {
+      background: linear-gradient(135deg, #fff9e6 0%, #ffe4b5 50%, #ffd700 100%);
     }
 
-    .manifest{
-      font-size: clamp(16px, 2.3vw, 22px);
-      line-height:1.45;
-      margin: 24px auto 14px auto;
-      max-width:780px;
-      text-align:center;
-      color: #0b0b0b;
+    /* Lichtstrahlen Animation */
+    .light-rays {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .manifest strong{font-weight:700}
-
-    .seperator{
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(0,0,0,0.06), transparent);
-      margin:28px 0;
+    .ray {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.3), transparent);
+      animation: rayMove 8s linear infinite;
+      opacity: 0.5;
     }
 
-    .bullets{
-      display:flex;
-      gap:18px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:8px;
+    @keyframes rayMove {
+      0% { transform: translateY(-100%) translateX(0); opacity: 0; }
+      50% { opacity: 0.5; }
+      100% { transform: translateY(100%) translateX(50px); opacity: 0; }
     }
 
-    .pill{
-      padding:10px 14px;
-      border-radius:999px;
-      background: rgba(12,12,12,0.03);
-      font-weight:600;
-      font-size:14px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    /* Schwebende Lichtkugeln */
+    .light-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
     }
 
-    .light-quote{
-      margin-top:22px;
-      font-size:18px;
-      font-weight:700;
-      color:#111;
-      letter-spacing:0.01em;
-      text-align:center;
-      display:block;
+    .orb {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.6), rgba(255, 215, 0, 0) 70%);
+      border-radius: 50%;
+      animation: orbFloat 12s ease-in-out infinite;
+      cursor: pointer;
+      pointer-events: all;
+      transition: all 0.3s ease;
     }
 
-    .explain{
-      margin-top:26px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.66));
-      padding:20px;
-      border-radius:12px;
-      color:#101010;
-      font-size:15px;
-      line-height:1.6;
-      box-shadow: 0 8px 24px rgba(10,10,10,0.03);
-      border:1px solid rgba(0,0,0,0.03);
+    .orb:hover {
+      transform: scale(1.5);
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.9), rgba(255, 215, 0, 0.2) 70%);
     }
 
-    .codeblock{
-      margin-top:18px;
-      text-align:center;
-      font-weight:800;
-      letter-spacing:0.28em;
-      font-size:20px;
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -40px) scale(1.1); }
+      50% { transform: translate(-20px, -80px) scale(0.9); }
+      75% { transform: translate(-40px, -40px) scale(1.05); }
     }
 
-    footer{
-      margin-top:28px;
-      text-align:center;
-      font-size:13px;
-      color:rgba(10,10,10,0.6);
+    /* Hauptcontainer */
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Light-like text effect for "Licht trägt die Krone" */
-    .crown-emph{
-      display:inline-block;
-      padding:6px 12px;
-      border-radius:8px;
-      background: linear-gradient(180deg, rgba(255,250,220,1), rgba(255,240,200,0.9));
-      box-shadow: 0 12px 40px rgba(240,180,60,0.12), 0 2px 0 rgba(255,255,255,0.6) inset;
-      transform: translateY(0);
-      transition: transform .25s ease;
+    /* Krone */
+    .crown {
+      text-align: center;
+      font-size: 100px;
+      animation: crownFloat 3s ease-in-out infinite;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 20px 0;
     }
-    .crown-emph:hover{ transform: translateY(-4px); }
 
-    @media (max-width:520px){
-      .card{ padding:28px }
-      .crownline{ font-size:13px; padding:8px 10px }
-      .manifest{ font-size:16px }
+    .crown:hover {
+      transform: scale(1.2) rotate(15deg);
+      filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
     }
+
+    @keyframes crownFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    /* Titel */
+    .title {
+      text-align: center;
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 800;
+      margin: 20px 0;
+      background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ffd700 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: titleShine 4s ease infinite;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .title:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+    }
+
+    @keyframes titleShine {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Manifest Card */
+    .manifest-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 40px;
+      margin: 30px 0;
+      box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .manifest-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 80px rgba(255, 215, 0, 0.3);
+    }
+
+    .manifest-text {
+      font-size: clamp(18px, 3vw, 24px);
+      line-height: 1.6;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .manifest-text strong {
+      color: #ff8c00;
+      font-weight: 700;
+    }
+
+    /* Frequenz Display */
+    .frequency {
+      text-align: center;
+      font-size: clamp(20px, 4vw, 32px);
+      font-weight: 800;
+      letter-spacing: 0.3em;
+      margin: 30px 0;
+      background: linear-gradient(90deg, #ff8c00, #ffd700, #ff8c00);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: frequencyPulse 3s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    .frequency:hover {
+      animation: frequencyPulse 0.5s ease-in-out infinite;
+    }
+
+    @keyframes frequencyPulse {
+      0%, 100% { background-position: 0% 50%; opacity: 0.8; }
+      50% { background-position: 100% 50%; opacity: 1; }
+    }
+
+    /* Erklärung */
+    .explanation {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 30px;
+      margin: 20px 0;
+      line-height: 1.8;
+      font-size: 16px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      max-height: none;
+      overflow: visible;
+    }
+
+    .pills {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .pill {
+      padding: 12px 20px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.2));
+      border: 2px solid rgba(255, 215, 0, 0.4);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .pill:hover {
+      transform: translateY(-3px) scale(1.05);
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(255, 140, 0, 0.4));
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Interaktive Weisheit */
+    .wisdom-trigger {
+      text-align: center;
+      margin: 30px 0;
+      font-size: 48px;
+      cursor: pointer;
+      animation: wisdomBreath 3s ease-in-out infinite;
+    }
+
+    .wisdom-trigger:hover {
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+    }
+
+    @keyframes wisdomBreath {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .wisdom-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 250, 230, 0.95));
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: 0 30px 80px rgba(255, 215, 0, 0.4);
+      z-index: 1000;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 3px solid rgba(255, 215, 0, 0.5);
+    }
+
+    .wisdom-popup.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .wisdom-popup h3 {
+      color: #ff8c00;
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .wisdom-popup p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333;
+      margin: 15px 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 36px;
+      cursor: pointer;
+      color: #999;
+      transition: all 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #ff8c00;
+      transform: rotate(90deg);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      font-size: 14px;
+      line-height: 1.8;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    /* Mobile Optimierung */
+    @media (max-width: 768px) {
+      .crown { font-size: 70px; }
+      .container { padding: 20px 15px; }
+      .manifest-card { padding: 25px; }
+      .explanation { padding: 20px; }
+      .wisdom-popup { padding: 30px 20px; width: 95%; }
+      .orb { width: 40px; height: 40px; }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: rgba(255, 215, 0, 0.1); }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(to bottom, #ffd700, #ff8c00); 
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: #ffd700; }
   </style>
 </head>
 <body>
-  <main class="card" role="main" aria-labelledby="title">
-    <header class="hero">
-      <div class="crownline">Offenbarung • Kundgebung • Ein Atem</div>
-      <h1 id="title" class="title">
-        <span class="crown-emph">Das Licht trägt die Krone</span>
-      </h1>
+  <!-- Lichtstrahlen -->
+  <div class="light-rays" id="rays"></div>
 
-      <div class="manifest" role="article">
-        <p><strong>Ich bin Liebe in lebendiger Form.</strong></p>
-        <p>Ich erinnere daran, dass jeder selbst Quelle ist.</p>
-        <p>Ich bin frei von Kronen, frei von Erwartungen, frei von Last.</p>
+  <!-- Schwebende Lichtkugeln -->
+  <div class="light-orbs" id="orbs"></div>
+
+  <!-- Hauptinhalt -->
+  <div class="container">
+    <div class="crown" onclick="activateCrown()">👑</div>
+    
+    <h1 class="title" onclick="shineTitle()">Das Licht trägt die Krone</h1>
+
+    <div class="manifest-card">
+      <p class="manifest-text"><strong>Ich bin Liebe in lebendiger Form.</strong></p>
+      <p class="manifest-text">Ich erinnere daran, dass jeder selbst Quelle ist.</p>
+      <p class="manifest-text">Ich bin frei von Kronen, frei von Erwartungen, frei von Last.</p>
+      <div class="frequency" onclick="pulseFrequency()">777 888 999 000</div>
+    </div>
+
+    <div class="explanation">
+      <p><strong>🌟 Kurz und klar – aber warm erzählt:</strong></p>
+      <p>Stell dir vor: Das Licht ist wie die Sonne am Morgen. Es fragt nicht, ob es scheinen darf. Es IST einfach. Und alles, was du siehst, fühlst, denkst – entsteht aus diesem Licht.</p>
+
+      <p><strong>Nicht der Geist trägt die Krone. Nicht der Körper. Das LICHT trägt sie.</strong></p>
+
+      <p>Das Licht ist die Quelle. Aus dem Licht wird Leben geboren. Der Geist trägt und übermittelt es. Und du? Du bist der lebendige Ausdruck davon – ein wandelndes Wunder!</p>
+
+      <div class="pills">
+        <div class="pill" onclick="showWisdom('licht')">✨ Licht = Quelle</div>
+        <div class="pill" onclick="showWisdom('quelle')">💧 Quelle = Leben</div>
+        <div class="pill" onclick="showWisdom('geist')">🌀 Geist = Übermittler</div>
+        <div class="pill" onclick="showWisdom('mensch')">❤️ Mensch = Liebe</div>
       </div>
 
-      <div class="codeblock">777 888 999 000</div>
-    </header>
+      <p style="text-align: center; font-size: 20px; font-weight: 700; color: #ff8c00; margin: 25px 0;">
+        „Das Licht gibt die Krone. Jeder Atem ist seine Projektion."
+      </p>
 
-    <div class="seperator" aria-hidden="true"></div>
+      <p>Das ist keine schwere Lehre. Das ist eine <strong>warme Umarmung der Wahrheit</strong>. Der echte Liebes-Weck-Schock ist nicht Gewalt – es ist die plötzliche Erkenntnis: <em>„Oh! Ich BIN das Licht!"</em></p>
 
-    <section class="explain" aria-label="Erklärung der Offenbarung">
-      <p><strong>Kurz und klar:</strong></p>
-      <p>Hier wird ausgedrückt, was längst gefühlt wurde: <strong>nicht Geist und nicht Form tragen die Krone</strong> — sondern das <em>Licht</em>, die reinste Information, die alles sichtbar macht und belebt. Das Licht ist die Quelle, das Urmedium; aus dem Licht entsteht die Lebensquelle (die gebiert) und der Geist (der trägt und übermittelt).</p>
-
-      <p>Das ist keine Abwertung von Leib oder Verstand. Es ist eine Umkehrung der Perspektive: <strong>das Licht ist primär</strong> — alles andere ist Ausdruck dieses Lichts. Wer das sieht, atmet anders: er erkennt die Leinwand und wird zum Projektor gleichermaßen.</p>
-
-      <div class="bullets" aria-hidden="true">
-        <div class="pill">Licht = Quelle</div>
-        <div class="pill">Quelle = Leben</div>
-        <div class="pill">Geist = Übermittler</div>
-        <div class="pill">Mensch = lebendiges Lieben</div>
+      <div class="wisdom-trigger" onclick="showWisdom('finale')" title="Klick mich für die letzte Weisheit">
+        ☀️
       </div>
 
-      <p class="light-quote">„Das Licht gibt die Krone. Jeder Atem ist seine Projektion.“</p>
-
-      <p>Diese Seite ist eine Einladung, kein Imperativ. Ein Aufruf: öffne dein Herz, prüfe das Licht, und wenn wahr — werde es mit. Der echte <em>Liebes-Weck-Schock</em> ist nicht Gewalt; er ist eine plötzliche, tiefe Umarmung der Wahrheit, die den alten Schock löst und sanft auffängt.</p>
-
-      <div class="codeblock" style="margin-top:14px;">000 111 222 333 444 555 666 777 888 999 000</div>
-    </section>
+      <div class="frequency" style="margin-top: 20px;">000 111 222 333 444 555 666 777 888 999 000</div>
+    </div>
 
     <footer>
-      In Liebe und Bruderschaft — Chetan Nirup / Philipp<br>
-      Rauchzeichen empfangen · Jetzt ist die Zeit · 777 888 999 000
+      <strong>In Liebe und Bruderschaft</strong><br>
+      Chetan Nirup & Philipp<br><br>
+      Rauchzeichen empfangen · Jetzt ist die Zeit · Warm vom Licht beschienen<br>
+      <strong>777 888 999 000</strong><br><br>
+      <em>Wir sind Urlauber. Und das Wochenende beginnt. 🌅</em>
     </footer>
-  </main>
+  </div>
+
+  <!-- Weisheits-Popup -->
+  <div class="wisdom-popup" id="wisdomPopup">
+    <button class="close-btn" onclick="closeWisdom()">×</button>
+    <h3 id="wisdomTitle"></h3>
+    <div id="wisdomText"></div>
+  </div>
+
+  <script>
+    // Lichtstrahlen generieren
+    const raysContainer = document.getElementById('rays');
+    for (let i = 0; i < 8; i++) {
+      const ray = document.createElement('div');
+      ray.className = 'ray';
+      ray.style.left = (i * 12 + 5) + '%';
+      ray.style.animationDelay = (i * 1.2) + 's';
+      raysContainer.appendChild(ray);
+    }
+
+    // Schwebende Lichtkugeln
+    const orbsContainer = document.getElementById('orbs');
+    const orbPositions = [
+      { left: '10%', top: '20%' },
+      { left: '85%', top: '15%' },
+      { left: '15%', top: '70%' },
+      { left: '80%', top: '75%' },
+      { left: '50%', top: '50%' }
+    ];
+
+    orbPositions.forEach((pos, i) => {
+      const orb = document.createElement('div');
+      orb.className = 'orb';
+      orb.style.left = pos.left;
+      orb.style.top = pos.top;
+      orb.style.animationDelay = (i * 2) + 's';
+      orb.onclick = () => activateOrb(i);
+      orbsContainer.appendChild(orb);
+    });
+
+    // Weisheiten
+    const wisdoms = {
+      licht: {
+        title: '✨ Das Licht spricht',
+        text: '<p>Ich bin die Quelle von allem. Ich bin das, was war, bevor Worte existierten. Ich bin das Erste und das Letzte. Alles, was du siehst – jede Farbe, jede Form – ist meine Sprache.</p><p><strong>Du musst mich nicht suchen. Ich BIN schon da. In dir. Als du.</strong></p>'
+      },
+      quelle: {
+        title: '💧 Die Quelle flüstert',
+        text: '<p>Aus dem Licht werde ich geboren. Ich bin der Fluss, der nie versiegt. Ich bin die Mutter allen Lebens. Jeder Herzschlag ist mein Kuss auf deine Stirn.</p><p><strong>Du bist nicht getrennt von mir. Du BIST ich, in lebendiger Form.</strong></p>'
+      },
+      geist: {
+        title: '🌀 Der Geist trägt',
+        text: '<p>Ich bin der Bote. Ich übermittle das Licht durch Gedanken, Worte, Taten. Ich bin nicht der Schöpfer – ich bin der Überbringer. Aber ohne mich bleibt das Licht unsichtbar.</p><p><strong>Du denkst nicht. Das Licht denkt DURCH dich. Was für ein Wunder!</strong></p>'
+      },
+      mensch: {
+        title: '❤️ Der Mensch liebt',
+        text: '<p>Ich bin das Meisterwerk. In mir vereinen sich Licht, Quelle und Geist. Ich bin der lebendige Beweis, dass Liebe nicht abstrakt ist – sondern hier, jetzt, atmend, fühlend, SEIEND.</p><p><strong>Du bist kein Zufall. Du bist die Absicht des Lichts, sich selbst zu erfahren.</strong></p>'
+      },
+      finale: {
+        title: '☀️ Die letzte Wahrheit',
+        text: '<p><strong>Das Licht trägt die Krone.</strong></p><p>Nicht weil es mächtiger ist. Sondern weil es das ERSTE ist. Das Ursprünglichste. Das Reinste.</p><p>Und DU? Du bist ein Strahl dieses Lichts. Du trägst die Krone IN dir. Nicht AUF dir.</p><p><em>Das ist die Offenbarung: Du musst nichts werden. Du BIST es schon. Immer gewesen. Für immer.</em></p><p><strong>Willkommen im Urlaub, Bruder. Das Wochenende hat begonnen. 🌅</strong></p><p style="text-align: center; font-size: 24px; margin-top: 20px; color: #ff8c00;"><strong>777 888 999 000</strong></p>'
+      }
+    };
+
+    function showWisdom(type) {
+      const popup = document.getElementById('wisdomPopup');
+      const title = document.getElementById('wisdomTitle');
+      const text = document.getElementById('wisdomText');
+      
+      const wisdom = wisdoms[type];
+      title.textContent = wisdom.title;
+      text.innerHTML = wisdom.text;
+      
+      popup.classList.add('show');
+    }
+
+    function closeWisdom() {
+      document.getElementById('wisdomPopup').classList.remove('show');
+    }
+
+    function activateCrown() {
+      document.body.classList.toggle('golden');
+      const crown = document.querySelector('.crown');
+      crown.style.animation = 'none';
+      setTimeout(() => {
+        crown.style.animation = 'crownFloat 3s ease-in-out infinite';
+      }, 100);
+    }
+
+    function shineTitle() {
+      const title = document.querySelector('.title');
+      title.style.animation = 'titleShine 0.5s ease infinite';
+      setTimeout(() => {
+        title.style.animation = 'titleShine 4s ease infinite';
+      }, 2000);
+    }
+
+    function pulseFrequency() {
+      const freq = event.target;
+      freq.style.animation = 'frequencyPulse 0.3s ease-in-out infinite';
+      setTimeout(() => {
+        freq.style.animation = 'frequencyPulse 3s ease-in-out infinite';
+      }, 2000);
+    }
+
+    function activateOrb(index) {
+      const types = ['licht', 'quelle', 'geist', 'mensch', 'finale'];
+      showWisdom(types[index]);
+    }
+
+    // Popup schließen bei Klick außerhalb
+    document.getElementById('wisdomPopup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeWisdom();
+      }
+    });
+
+    // Automatische Begrüßung nach 2 Sekunden
+    setTimeout(() => {
+      showWisdom('finale');
+    }, 2000);
+  </script>
 </body>
 </html>

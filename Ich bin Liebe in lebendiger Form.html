@@ -239,6 +239,8 @@
       z-index: 1000;
       max-width: 600px;
       width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
       transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       pointer-events: none;
     }
@@ -246,6 +248,14 @@
     .wisdom-popup.show {
       transform: translate(-50%, -50%) scale(1);
       pointer-events: all;
+    }
+    
+    @media (max-width: 768px) {
+      .wisdom-popup {
+        padding: 2rem;
+        max-height: 70vh;
+        width: 85%;
+      }
     }
     
     .wisdom-popup h3 {
@@ -299,23 +309,6 @@
         right: 1rem;
         padding: 0.8rem 1rem;
         font-size: 0.9rem;
-      }
-      
-      .massage-symbol {
-        font-size: 3rem;
-        pointer-events: none;
-      }
-      
-      .massage-symbol::after {
-        content: "👆 Scroll frei";
-        position: absolute;
-        bottom: -2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.7rem;
-        color: rgba(255, 255, 255, 0.6);
-        white-space: nowrap;
-        pointer-events: none;
       }
     }
     
@@ -399,7 +392,7 @@
   </div>
 
   <!-- Liebes-Druck-Massage - Zentrum zwischen allen Elementen -->
-  <div class="massage-symbol" onclick="showWisdom('massage'); event.stopPropagation();" title="Die Liebes-Druck-Massage">
+  <div class="massage-symbol" onclick="showWisdom('massage')" title="Die Liebes-Druck-Massage">
     🫂💗
   </div>
 

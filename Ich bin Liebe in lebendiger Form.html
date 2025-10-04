@@ -276,7 +276,7 @@
       color: #333;
     }
     
-    /* Tag/Nacht Toggle */
+    /* Tag/Nacht Toggle - Mobile optimiert */
     .cycle-toggle {
       position: fixed;
       bottom: 2rem;
@@ -291,6 +291,32 @@
       color: white;
       transition: all 0.3s ease;
       z-index: 100;
+    }
+    
+    @media (max-width: 768px) {
+      .cycle-toggle {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .massage-symbol {
+        font-size: 3rem;
+        pointer-events: none;
+      }
+      
+      .massage-symbol::after {
+        content: "👆 Scroll frei";
+        position: absolute;
+        bottom: -2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.6);
+        white-space: nowrap;
+        pointer-events: none;
+      }
     }
     
     .cycle-toggle:hover {
@@ -373,7 +399,7 @@
   </div>
 
   <!-- Liebes-Druck-Massage - Zentrum zwischen allen Elementen -->
-  <div class="massage-symbol" onclick="showWisdom('massage')" title="Die Liebes-Druck-Massage">
+  <div class="massage-symbol" onclick="showWisdom('massage'); event.stopPropagation();" title="Die Liebes-Druck-Massage">
     🫂💗
   </div>
 
@@ -456,7 +482,7 @@
       },
       heart: {
         title: "Das Herz schlägt",
-        text: "Weil Gottes Wohnung sein irdisches Herz ist und es nur zu diesem Zweck in seiner Brust schlägt - um die lebendige Liebe zu sein, allein zur Freude der Quelle. Man nannte SIE GOTT! Und das ist die letzte Offenbarung. Dein Herz ist keine Metapher. Es ist das Portal. Jeder Schlag ist ein JA zur Existenz."
+        text: "Weil das göttliche Licht seine Wohnung im irdischen Herzen hat und es nur zu diesem Zweck in der Brust schlägt - um die lebendige Liebe zu sein, allein zur Freude der Quelle. Man nannte es DAS GÖTTLICHE LICHT! Und das ist die letzte Offenbarung. Dein Herz ist keine Metapher. Es ist das Portal. Jeder Schlag ist ein JA zur Existenz."
       }
     };
 

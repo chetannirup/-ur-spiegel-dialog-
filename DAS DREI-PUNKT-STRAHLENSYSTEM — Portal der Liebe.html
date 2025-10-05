@@ -33,26 +33,34 @@
 
   /* center sigil focus */
   .center-sigil{margin:28px auto 10px;display:grid;place-items:center}
-  .center-sigil .ring{width:220px;height:220px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(from 200deg, rgba(255,217,102,0.06), rgba(255,217,102,0.01));box-shadow:0 30px 80px rgba(0,0,0,.7)}
+  .center-sigil .ring{width:220px;height:220px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(from 200deg, rgba(255,217,102,0.06), rgba(255,217,102,0.01));box-shadow:0 30px 80px rgba(0,0,0,.7);transition: transform 0.3s ease;}
+  .center-sigil .ring.active{transform: scale(1.05);box-shadow:0 30px 100px rgba(255,217,102,.3)}
   .center-sigil svg{width:120px;height:120px;filter:drop-shadow(0 8px 22px rgba(255,213,80,.08))}
 
   /* Footer / controls */
   footer{margin-top:26px;display:flex;justify-content:space-between;align-items:center;gap:12px}
   .controls{display:flex;gap:10px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:40px;background:linear-gradient(90deg,var(--gold),#ffb84d);color:#000;text-decoration:none;font-weight:700;box-shadow:0 8px 20px rgba(255,184,77,.12)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:40px;background:linear-gradient(90deg,var(--gold),#ffb84d);color:#000;text-decoration:none;font-weight:700;box-shadow:0 8px 20px rgba(255,184,77,.12);transition: all 0.3s ease;}
+  .btn:hover{transform: translateY(-2px);box-shadow:0 12px 28px rgba(255,184,77,.18)}
   .btn[aria-pressed="true"]{transform:scale(0.98)}
-  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 12px;border-radius:10px}
+  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 12px;border-radius:10px;transition: all 0.3s ease;cursor:pointer;}
+  .ghost:hover{border-color: rgba(255,217,102,0.3);background:rgba(255,217,102,0.05)}
+  .ghost.active{border-color: var(--gold);background:rgba(255,217,102,0.12);color:var(--gold)}
 
   /* lightbox small preview */
   .preview{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.86);z-index:9999}
   .preview img{max-width:92%;max-height:92%;border-radius:12px;border:4px solid rgba(255,217,102,0.08)}
-  .preview .close{position:absolute;top:18px;right:18px;background:rgba(0,0,0,.6);color:var(--gold);border-radius:8px;padding:8px}
+  .preview .close{position:absolute;top:18px;right:18px;background:rgba(0,0,0,.6);color:var(--gold);border-radius:8px;padding:8px;cursor:pointer}
 
   /* small helpers */
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
   /* inactivity toast */
   .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:32px;background:linear-gradient(90deg,var(--gold),#ffb84d);color:#000;padding:12px 18px;border-radius:999px;display:none;box-shadow:0 12px 40px rgba(255,184,77,.12);z-index:12000}
+
+  /* Audio indicator */
+  .audio-indicator{position:fixed;top:20px;right:20px;padding:8px 12px;background:rgba(255,217,102,0.1);border:1px solid rgba(255,217,102,0.3);border-radius:8px;color:var(--gold);font-size:12px;opacity:0;transition:opacity 0.3s ease;z-index:10000;pointer-events:none}
+  .audio-indicator.show{opacity:1}
 
   @media (max-width:640px){header{flex-direction:column;align-items:flex-start} .center-sigil{display:none} footer{flex-direction:column;align-items:flex-start;gap:6px}}
 </style>
@@ -61,7 +69,6 @@
   <main class="wrap" role="main">
     <header aria-label="Portalkopf">
       <div class="sigil" aria-hidden="true">
-        <!-- UR-Sigil: three overlapping circles + center star -->
         <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
           <defs>
             <radialGradient id="g1" cx="50%" cy="40%">
@@ -84,7 +91,7 @@
     </header>
 
     <div class="center-sigil" aria-hidden="true">
-      <div class="ring" role="img" aria-label="UR-Sigil">
+      <div class="ring" id="centerRing" role="img" aria-label="UR-Sigil">
         <svg viewBox="0 0 200 200">
           <g fill="none" stroke="url(#lg)" stroke-width="2">
             <defs>
@@ -93,7 +100,6 @@
             <circle cx="100" cy="100" r="44" stroke-opacity="0.22"/>
             <circle cx="100" cy="100" r="68" stroke-opacity="0.14"/>
             <circle cx="100" cy="100" r="92" stroke-opacity="0.08"/>
-            <!-- inner three points -->
             <circle cx="80" cy="86" r="8" fill="#ffd966"/>
             <circle cx="120" cy="86" r="8" fill="#ffd966"/>
             <circle cx="100" cy="120" r="8" fill="#ffd966"/>
@@ -154,7 +160,6 @@
 
   </main>
 
-  <!-- preview lightbox -->
   <div class="preview" id="preview" role="dialog" aria-hidden="true">
     <button class="close" id="closePreview" aria-label="Schließen">✕</button>
     <img id="previewImg" src="" alt="Vorschau">
@@ -162,8 +167,9 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite">Ruhe dich aus, Herz. Du bist schon zu Hause.</div>
 
+  <div class="audio-indicator" id="audioIndicator">🎵 Herzfrequenz aktiv</div>
+
 <script>
-  // navigation tiles open target in new tab with light transition
   const tiles = document.querySelectorAll('.tile');
   tiles.forEach(tile => {
     tile.addEventListener('click', () => openTarget(tile.dataset.href));
@@ -173,7 +179,6 @@
   });
 
   function openTarget(url){
-    // small visual pulse before navigation
     document.body.style.transition = 'opacity .28s ease';
     document.body.style.opacity = '0.12';
     setTimeout(()=>{
@@ -182,66 +187,138 @@
     },300);
   }
 
-  // print CTA
   document.getElementById('printBtn').addEventListener('click', e=>{
     e.preventDefault();
-    // open a printable version in new window (simple approach)
     const printUrl = 'https://chetannirup.github.io/-ur-spiegel-dialog-/LIEBESBOMBE%20%E2%80%94%20Neue%20Goldw%C3%A4hrung%20des%20Lebens.html';
     window.open(printUrl, '_blank');
   });
 
-  // audio toggle (optional ambience)
+  // VEREDELTES AUDIO SYSTEM - 432Hz Herzfrequenz
   let audioOn = false;
   const audioToggle = document.getElementById('audioToggle');
-  const audio = new Audio();
-  // small embedded base64 silent loop replaced by remote if desired - left silent to avoid autoplay issues
-  audio.loop = true;
-  audio.preload = 'none';
+  const audioIndicator = document.getElementById('audioIndicator');
+  const centerRing = document.getElementById('centerRing');
+  let ctx, osc, gain, lfo, lfoGain;
+
   audioToggle.addEventListener('click', ()=>{
-    audioOn = !audioOn; audioToggle.setAttribute('aria-pressed', String(audioOn));
+    audioOn = !audioOn; 
+    audioToggle.setAttribute('aria-pressed', String(audioOn));
+    audioToggle.classList.toggle('active', audioOn);
+    
     if(audioOn){
-      // for now, try to play a very soft bell tone generated with WebAudio if allowed
-      try{ startTone(); }catch(err){ console.warn(err); }
-    } else { stopTone(); }
+      startHeartTone();
+      audioIndicator.classList.add('show');
+      if(centerRing) centerRing.classList.add('active');
+      setTimeout(() => audioIndicator.classList.remove('show'), 3000);
+    } else { 
+      stopHeartTone(); 
+      if(centerRing) centerRing.classList.remove('active');
+    }
   });
 
-  // simple WebAudio tone (432Hz-ish pad)
-  let ctx, osc, gain;
-  function startTone(){
-    if(!ctx){ ctx = new (window.AudioContext || window.webkitAudioContext)(); }
-    osc = ctx.createOscillator(); gain = ctx.createGain();
-    osc.type = 'sine'; osc.frequency.value = 110; // low base
-    gain.gain.value = 0.0008; // very low
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.start();
+  // Veredelter 432Hz Herzton mit sanftem LFO
+  function startHeartTone(){
+    try {
+      if(!ctx){ 
+        ctx = new (window.AudioContext || window.webkitAudioContext)(); 
+      }
+      
+      // Hauptoszillator - 432Hz (A4 in alternativer Stimmung)
+      osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = 432;
+      
+      // Gain für Hauptton
+      gain = ctx.createGain();
+      gain.gain.value = 0.08; // Hörbar aber sanft
+      
+      // LFO für sanftes Pulsieren (Herzschlag-Effekt)
+      lfo = ctx.createOscillator();
+      lfo.frequency.value = 1.2; // 1.2Hz = ~72 BPM Herzschlag
+      
+      lfoGain = ctx.createGain();
+      lfoGain.gain.value = 0.03; // Subtile Modulation
+      
+      // Verbindungen
+      lfo.connect(lfoGain);
+      lfoGain.connect(gain.gain);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      // Start
+      osc.start();
+      lfo.start();
+      
+      console.log('🎵 Herzfrequenz aktiv: 432Hz mit 72 BPM Pulsierung');
+    } catch(err) { 
+      console.warn('Audio konnte nicht gestartet werden:', err); 
+    }
   }
-  function stopTone(){ if(osc){ osc.stop(); osc.disconnect(); osc=null; } if(gain){ gain.disconnect(); gain=null; } }
 
-  // preview (used if you want to preview posters quickly)
-  const preview = document.getElementById('preview'); const previewImg = document.getElementById('previewImg'); const closePreview = document.getElementById('closePreview');
+  function stopHeartTone(){ 
+    if(osc){ osc.stop(); osc.disconnect(); osc=null; }
+    if(lfo){ lfo.stop(); lfo.disconnect(); lfo=null; }
+    if(gain){ gain.disconnect(); gain=null; }
+    if(lfoGain){ lfoGain.disconnect(); lfoGain=null; }
+    console.log('🎵 Herzfrequenz gestoppt');
+  }
+
+  // Preview
+  const preview = document.getElementById('preview'); 
+  const previewImg = document.getElementById('previewImg'); 
+  const closePreview = document.getElementById('closePreview');
+  
   document.querySelectorAll('.tile').forEach(t=>{
     t.addEventListener('contextmenu', e=>{
-      e.preventDefault(); previewImg.src = t.dataset.href.replace(/\.html$/, '.png'); preview.style.display='flex'; preview.setAttribute('aria-hidden','false');
+      e.preventDefault(); 
+      previewImg.src = t.dataset.href.replace(/\.html$/, '.png'); 
+      preview.style.display='flex'; 
+      preview.setAttribute('aria-hidden','false');
     });
   });
-  closePreview.addEventListener('click', ()=>{ preview.style.display='none'; preview.setAttribute('aria-hidden','true'); });
-  preview.addEventListener('click', e=>{ if(e.target===preview) { preview.style.display='none'; preview.setAttribute('aria-hidden','true'); } });
+  
+  closePreview.addEventListener('click', ()=>{ 
+    preview.style.display='none'; 
+    preview.setAttribute('aria-hidden','true'); 
+  });
+  
+  preview.addEventListener('click', e=>{ 
+    if(e.target===preview) { 
+      preview.style.display='none'; 
+      preview.setAttribute('aria-hidden','true'); 
+    } 
+  });
 
-  // inactivity toast
-  let idle=0; let idleInterval = setInterval(timerIncrement,1000);
+  // Inactivity toast
+  let idle=0; 
+  let idleInterval = setInterval(timerIncrement,1000);
   document.onclick = document.onmousemove = document.onkeypress = ()=> idle=0;
   function timerIncrement(){ idle++; if(idle>77){ showToast(); idle=0; } }
-  function showToast(){ const t = document.getElementById('toast'); t.style.display='block'; setTimeout(()=> t.style.display='none',6200); }
+  function showToast(){ 
+    const t = document.getElementById('toast'); 
+    t.style.display='block'; 
+    setTimeout(()=> t.style.display='none',6200); 
+  }
 
-  // small sparkle overlay as playful UR touch
+  // Sparkle overlay
   const sparkle = document.createElement('div');
-  sparkle.style.pointerEvents='none'; sparkle.style.position='fixed'; sparkle.style.inset='0'; sparkle.style.background='radial-gradient(circle at 15% 20%, rgba(255,217,102,0.03), transparent 8%), radial-gradient(circle at 70% 80%, rgba(255,217,102,0.02), transparent 10%)'; document.body.appendChild(sparkle);
+  sparkle.style.pointerEvents='none'; 
+  sparkle.style.position='fixed'; 
+  sparkle.style.inset='0'; 
+  sparkle.style.background='radial-gradient(circle at 15% 20%, rgba(255,217,102,0.03), transparent 8%), radial-gradient(circle at 70% 80%, rgba(255,217,102,0.02), transparent 10%)'; 
+  document.body.appendChild(sparkle);
 
-  // accessibility: focus styles
-  document.addEventListener('keydown', e=>{ if(e.key==='Tab'){ document.documentElement.style.scrollBehavior='auto'; setTimeout(()=>document.documentElement.style.scrollBehavior='smooth',1000);} });
+  // Accessibility
+  document.addEventListener('keydown', e=>{ 
+    if(e.key==='Tab'){ 
+      document.documentElement.style.scrollBehavior='auto'; 
+      setTimeout(()=>document.documentElement.style.scrollBehavior='smooth',1000);
+    } 
+  });
 
-  // ready
-  console.log('Portal der Liebe bereit — UR 777 888 999 000');
+  console.log('✨ Portal der Liebe bereit — UR 777 888 999 000');
+  console.log('🎵 Audio-System: 432Hz Herzfrequenz mit 72 BPM Pulsierung');
 </script>
 </body>
 </html>

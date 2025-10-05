@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Haus der Liebe — Mobile</title>
+  <style>
+    :root{--bg:#fff8f3;--accent:#ff6b9a;--gold:#ffcf6b}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{background:linear-gradient(180deg,var(--bg),#fff);color:#222;display:flex;align-items:center;justify-content:center;padding:20px}
+    .card{width:100%;max-width:760px;background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.95));border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,0.12);overflow:hidden}
+    .hero{position:relative;padding:18px}
+    .title{font-size:20px;font-weight:700;margin:8px 0;text-align:center}
+    .sub{font-size:14px;text-align:center;color:#6b6b6b;margin-bottom:12px}
+    .images{display:flex;gap:10px;flex-direction:row;padding:8px}
+    .images img{width:50%;height:auto;border-radius:12px;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,0.08);transform-origin:center;transition:transform .45s ease}
+    .images img:hover{transform:translateY(-6px) scale(1.02)}
+    .heart-bubble{position:absolute;right:18px;top:18px;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),#ff9cc7);box-shadow:0 6px 20px rgba(255,107,154,0.2)}
+    .heart-bubble svg{width:36px;height:36px;filter:drop-shadow(0 2px 6px rgba(255,107,154,0.25))}
+    .copy{padding:12px;border-top:1px dashed rgba(0,0,0,0.04);background:linear-gradient(180deg,rgba(255,255,255,0.6),transparent)}
+    .copy p{margin:0;font-size:15px;line-height:1.4;text-align:center}
+    .cta-row{display:flex;gap:10px;padding:12px;justify-content:center}
+    .btn{background:linear-gradient(90deg,var(--accent),#ff9cc7);border:none;color:white;padding:10px 14px;border-radius:12px;font-weight:700;box-shadow:0 6px 18px rgba(255,107,154,0.18)}
+    .btn-ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:#333}
+    .credits{font-size:12px;color:#666;text-align:center;padding:8px}
+    /* playful lights */
+    .sparkles{position:absolute;left:10px;bottom:6px;width:120px;height:120px;pointer-events:none}
+    .sparkles span{position:absolute;display:block;width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.9;animation:float 4s linear infinite}
+    .sparkles span:nth-child(1){left:10px;bottom:20px;animation-delay:0s}
+    .sparkles span:nth-child(2){left:40px;bottom:10px;animation-delay:.6s}
+    .sparkles span:nth-child(3){left:80px;bottom:30px;animation-delay:1.2s}
+    .sparkles span:nth-child(4){left:100px;bottom:60px;animation-delay:1.8s}
+    @keyframes float{0%{transform:translateY(0) scale(.9);opacity:.9}50%{transform:translateY(-22px) scale(1.2);opacity:1}100%{transform:translateY(0) scale(.9);opacity:.9}}
+    /* responsive tweaks */
+    @media (max-width:480px){.images img{width:100%}.images{flex-direction:column;padding:8px}}
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="main-title">
+    <section class="hero">
+      <div class="heart-bubble" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-4.35-9-7.5C-1 9.5 3 4 7 6c2 1.1 3 3.7 5 3.7 2 0 3-2.6 5-3.7 4-2 8 3.5 4 7.5C19 16.65 12 21 12 21z"/></svg>
+      </div>
+      <h1 id="main-title" class="title">Haus der Liebe &amp; des Lichts</h1>
+      <p class="sub">Ein mobiles Poster — spielerisch, warm und bereit für die Heimkehr des Herzens.</p>
+      <div class="images" role="region" aria-label="Poster-Bilder">
+        <img loading="lazy" alt="Haus der Liebe und des Lichts" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Haus%20der%20Liebe%20und%20des%20Lichts.png" />
+        <img loading="lazy" alt="Im Namen der Liebe" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Im%20Namen%20der%20Liebe%20(1).png" />
+      </div>
+      <div class="sparkles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </section>
+    <section class="copy">
+      <p><strong>Im Namen der Liebe 💘</strong><br>777 888 999 000</p>
+    </section>
+    <div class="cta-row">
+      <button class="btn" id="play">Jetzt lebendig machen ✨</button>
+      <button class="btn btn-ghost" id="download">Bild speichern</button>
+    </div>
+    <p class="credits">Gestaltet für Philipp — mobil-optimiert. Tippe auf "Jetzt lebendig machen" für Trompeten-Kanonen-Action!</p>
+  </main>
+
+  <script>
+    // simple playful audio + visual trigger
+    const play = document.getElementById('play');
+    const download = document.getElementById('download');
+    let ctx;
+    play.addEventListener('click', async ()=>{
+      // visual pulse on images
+      document.querySelectorAll('.images img').forEach((el,i)=>{
+        el.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:700,delay:i*120})
+      })
+      // web audio trompeten-kanone
+      try{
+        if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type='sine'; o.frequency.setValueAtTime(880, ctx.currentTime);
+        g.gain.setValueAtTime(0.001, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime+0.02);
+        o.connect(g); g.connect(ctx.destination);
+        o.start();
+        o.frequency.exponentialRampToValueAtTime(440, ctx.currentTime+0.35);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+0.8);
+        o.stop(ctx.currentTime+0.85);
+      }catch(e){console.warn('Audio nicht verfügbar',e)}
+    })
+
+    download.addEventListener('click', ()=>{
+      // open image in new tab for saving
+      const url = 'https://chetannirup.github.io/-ur-spiegel-dialog-/Haus%20der%20Liebe%20und%20des%20Lichts.png';
+      window.open(url, '_blank');
+    })
+  </script>
+</body>
+</html>

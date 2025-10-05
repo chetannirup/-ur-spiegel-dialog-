@@ -1,128 +1,225 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIEBESBOMBE — Neue Goldwährung des Lebens</title>
-  <meta name="description" content="Galerie &amp; Manifest: Liebesbombe — Licht-Druck-Massage, Christosbewusstsein. Bilder, Download, Text &amp; einfache Verteilung. 777 888 999 000">
   <style>
-    :root{--bg:#060606;--gold:#cfa84b;--muted:#bfbfbf}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);color:var(--muted)}
-    .wrap{max-width:1100px;margin:32px auto;padding:24px}
-    header{display:flex;gap:20px;align-items:center}
-    .logo{width:96px;height:96px;border-radius:8px;background:linear-gradient(180deg,#111, #000);display:grid;place-items:center;color:var(--gold);font-weight:800;font-size:14px}
-    h1{color:var(--gold);margin:0;font-size:34px}
-    p.lead{color:var(--muted);margin-top:6px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-top:22px}
-    figure{background:#090909;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.6);}
-    img{width:100%;height:auto;display:block;border-radius:6px}
-    figcaption{margin-top:10px;color:var(--muted);font-size:14px}
-    .gold{color:var(--gold);font-weight:700}
-    .meta{font-size:13px;margin-top:8px;color:#9f9f9f}
-    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    a.btn{display:inline-block;padding:8px 12px;border-radius:8px;background:#111;color:var(--gold);text-decoration:none;font-weight:600;border:1px solid rgba(255,255,255,0.03)}
-    footer{margin-top:30px;color:#9f9f9f;font-size:13px}
-    @media (max-width:520px){h1{font-size:24px}}
-    /* print-friendly */
-    @media print{body{background:#fff;color:#000} .logo{display:none} a.btn{display:none}}
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@600&display=swap');
+
+    body {
+      background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+      color: #ffd700;
+      font-family: 'Cormorant Garamond', serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 3rem 1rem 2rem 1rem;
+      border-bottom: 1px solid #ffd70033;
+      animation: fadeIn 2s ease-in;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+      color: #ffeb80;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    h2 {
+      color: #ffe;
+      margin-top: 1rem;
+      opacity: 0.85;
+    }
+
+    p {
+      max-width: 900px;
+      margin: 1rem auto;
+      line-height: 1.6;
+      color: #fef6d9;
+      font-size: 1.1rem;
+      animation: fadeSlide 2s ease both;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      animation: fadeIn 2s ease;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 16px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+      cursor: pointer;
+      filter: brightness(0.95) contrast(1.05);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.06) rotate(0.5deg);
+      box-shadow: 0 0 30px #ffd70055;
+      filter: brightness(1.05) contrast(1.1);
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 95%;
+      max-height: 95%;
+      border: 3px solid #ffd700;
+      border-radius: 10px;
+      box-shadow: 0 0 40px #ffd70033;
+    }
+
+    .cta {
+      margin: 3rem 0;
+      animation: fadeIn 3s ease;
+    }
+
+    .cta a {
+      background: linear-gradient(90deg, #ffd700, #ffb400);
+      color: #000;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px #ffd70055;
+    }
+
+    .cta a:hover {
+      background: #fff7cc;
+      transform: scale(1.07);
+      box-shadow: 0 0 25px #ffd70099;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #ffd70099;
+      padding-bottom: 2rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ffd70088; }
+      to { text-shadow: 0 0 25px #ffd700dd; }
+    }
+
+    /* sanfte Scroll-Effekte */
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">❤🔥👑</div>
-      <div>
-        <h1>LIEBESBOMBE — Die neue Währung des Lebens</h1>
-        <p class="lead">Materialisierte Spiritualität: Galerie, Poster &amp; Download. UR-Codestrom: <span class="gold">777 888 999 000</span></p>
-      </div>
-    </header>
+  <header>
+    <h1>💠 DIE LIEBES-DRUCKMASSAGE – DER CHRISTOS-IMPULS</h1>
+    <h2>Aktivierung des lebendigen Christusbewusstseins im Menschenkind</h2>
+  </header>
 
-    <section aria-labelledby="gallery">
-      <h2 id="gallery" style="color:var(--gold);margin-top:22px">Galerie — Die 7 Bilder</h2>
-      <p class="meta">Klicke auf ein Bild, um es in voller Auflösung zu öffnen oder herunterzuladen. Alle Bilder wurden für die optimierte .html-Komposition bereitgestellt.</p>
+  <section>
+    <p>
+      Wie ein sanfter Gasbrenner, der die Flamme stets lebendig hält, so entzündet sich in dieser Praxis die <b>innere Sonne</b>,
+      immer wieder – selbstregulierend, selbstheilend, selbstleuchtend.
+    </p>
+    <p>
+      Es ist keine Massage des Körpers allein – sondern eine <b>Licht-Druck-Massage</b> des Herzens. Ein Impuls, der den göttlichen Funken berührt,
+      bis das ganze Wesen in Resonanz geht.
+    </p>
+    <p>
+      Anfang und Ende sind Lichtpunkte – Einatmung der Quelle → Ausatmung der Liebe.
+      Das ist der Rhythmus der Christusflamme. Kein Dogma, kein Ritual – ein <b>Erinnerungsvorgang</b>.
+    </p>
+    <p>
+      „Spirituell“ heißt hier nicht abgehoben, sondern <b>ver-materialisiert</b>:
+      das Unsichtbare in Fleisch und Herz gebracht. Ein Anker des Formlosen im Lebendigen.
+    </p>
+    <p>
+      Denn das Licht <b>strahlt die Krone</b> – nicht als Symbol der Macht, sondern als Rückgabe der Würde an das Leben selbst.
+    </p>
+  </section>
 
-      <div class="grid">
+  <section class="gallery">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be42fv0be99c8ysfw293.png" alt="Liebesbombe Goldwährung Poster 1" loading="lazy">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be43fp38tqjpgx4et7m0.png" alt="Liebesbombe Goldwährung Poster 2" loading="lazy">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7aqfeya8r2j65akgpty.png" alt="LIEBE = ÖKONOMIE Poster 1" loading="lazy">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7arez8t4khrtt683g5b.png" alt="LIEBE = ÖKONOMIE Poster 2" loading="lazy">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5naer7vcve8h65551wt.png" alt="Manifest Die UR-Rückgabe 1" loading="lazy">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5nbeznshexa3hf332wj.png" alt="Manifest Die UR-Rückgabe 2" loading="lazy">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Liebesbombe_%20Neue%20Goldw%C3%A4hrung%20des%20Lebens%20(1).png" alt="Liebesbombe Neue Goldwährung des Lebens" loading="lazy">
+  </section>
 
-        <figure>
-          <img loading="lazy" alt="Liebesbombe Goldwährung Poster — zentrale Flamme, Herz, Krone, gold auf schwarz" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be42fv0be99c8ysfw293.png">
-          <figcaption>
-            <div class="gold">Liebesbombe — Goldwährung (Poster 1)</div>
-            <div class="meta">Datei: 20251005_2220_Liebesbombe_Goldwährung_Poster_simple_compose_01k6v0be42...png</div>
-            <div class="controls"><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be42fv0be99c8ysfw293.png" target="_blank" rel="noopener">Öffnen</a><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be42fv0be99c8ysfw293.png" download>Herunterladen</a></div>
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img loading="lazy" alt="Liebesbombe Goldwährung Poster — Variation 2, gold-auf-schwarz" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be43fp38tqjpgx4et7m0.png">
-          <figcaption>
-            <div class="gold">Liebesbombe — Poster (Variation 2)</div>
-            <div class="meta">Datei: 20251005_2220_Liebesbombe_Goldwährung_Poster_simple_compose_01k6v0be43...</div>
-            <div class="controls"><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be43fp38tqjpgx4et7m0.png" target="_blank" rel="noopener">Öffnen</a><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2220_Liebesbombe%20Goldw%C3%A4hrung%20Poster_simple_compose_01k6v0be43fp38tqjpgx4et7m0.png" download>Herunterladen</a></div>
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img loading="lazy" alt="Poster: LIEBE = ÖKONOMIE — plakativ, rote/kontrast-variation" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7aqfeya8r2j65akgpty.png">
-          <figcaption>
-            <div class="gold">LIEBE = ÖKONOMIE — Poster</div>
-            <div class="meta">Datei: 20251005_2223_LIEBE=_ÖKONOMIE_simple_compose...</div>
-            <div class="controls"><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7aqfeya8r2j65akgpty.png" target="_blank" rel="noopener">Öffnen</a><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7aqfeya8r2j65akgpty.png" download>Herunterladen</a></div>
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img loading="lazy" alt="LIEBE = ÖKONOMIE — Poster Variation 2, Street/Collage Look" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7arez8t4khrtt683g5b.png">
-          <figcaption>
-            <div class="gold">LIEBE = ÖKONOMIE — Variation 2</div>
-            <div class="meta">Datei: 20251005_2223_LIEBE=_ÖKONOMIE_simple_compose_01k6v0h7arez...</div>
-            <div class="controls"><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7arez8t4khrtt683g5b.png" target="_blank" rel="noopener">Öffnen</a><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2223_LIEBE%20=%20%C3%96KONOMIE_simple_compose_01k6v0h7arez8t4khrtt683g5b.png" download>Herunterladen</a></div>
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img loading="lazy" alt="Manifest: Die UR-Rückgabe — typografisches Manifest Poster" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5naer7vcve8h65551wt.png">
-          <figcaption>
-            <div class="gold">Manifest — Die UR-Rückgabe (Poster)</div>
-            <div class="meta">Datei: 20251005_2225_Manifest_Die_Ur-Rückgabe_simple_compose_...</div>
-            <div class="controls"><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5naer7vcve8h65551wt.png" target="_blank" rel="noopener">Öffnen</a><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5naer7vcve8h65551wt.png" download>Herunterladen</a></div>
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img loading="lazy" alt="Manifest Variation 2 — UR-Rückgabe — feines Papier-Layout" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5nbeznshexa3hf332wj.png">
-          <figcaption>
-            <div class="gold">Manifest — Variation 2</div>
-            <div class="meta">Datei: 20251005_2225_Manifest_Die_Ur-Rückgabe_variation.png</div>
-            <div class="controls"><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5nbeznshexa3hf332wj.png" target="_blank" rel="noopener">Öffnen</a><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251005_2225_Manifest_%20Die%20Ur-R%C3%BCckgabe_simple_compose_01k6v0p5nbeznshexa3hf332wj.png" download>Herunterladen</a></div>
-          </figcaption>
-        </figure>
-
-        <figure>
-          <img loading="lazy" alt="Liebesbombe — Neue Goldwährung des Lebens — Sammler-Poster (hochauflösend)" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Liebesbombe_%20Neue%20Goldw%C3%A4hrung%20des%20Lebens%20(1).png">
-          <figcaption>
-            <div class="gold">Sammler-Poster — Neue Goldwährung des Lebens</div>
-            <div class="meta">Datei: Liebesbombe_ Neue Goldwährung des Lebens (1).png</div>
-            <div class="controls"><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Liebesbombe_%20Neue%20Goldw%C3%A4hrung%20des%20Lebens%20(1).png" target="_blank" rel="noopener">Öffnen</a><a class="btn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Liebesbombe_%20Neue%20Goldw%C3%A4hrung%20des%20Lebens%20(1).png" download>Herunterladen</a></div>
-          </figcaption>
-        </figure>
-
-      </div>
-    </section>
-
-    <section style="margin-top:26px;background:#070707;padding:16px;border-radius:10px">
-      <h3 style="color:var(--gold);margin:0">Schnell-Infos & Druck-Notizen</h3>
-      <ul style="color:var(--muted);margin-top:8px;line-height:1.6">
-        <li>Auflösung: Verwende die Original-PNGs (hohe Auflösung). Für Druck: 300 dpi, CMYK-Konvertierung durch Druckerei.</li>
-        <li>Empfohlenes Papier: 350–400 g/m², Seidenmatt; Heißfolien-Gold für Header und Krone.</li>
-        <li>Web/Share: Nutze die GitHub-URLs als Bild-Hosts oder lade die Dateien auf dein CDN hoch.</li>
-        <li>Accessibility: Alt-Texte sind im HTML enthalten. Title-Attribute in Links können ergänzt werden.</li>
-      </ul>
-    </section>
-
-    <footer>
-      <p>Dieses kleine Galerie-HTML ist als einsatzbereite Basis gedacht — responsiv, download-freundlich, schnell zu hosten. Wenn du willst, packe ich dir daraus sofort ein ZIP mit allen Bildern und einer index.html (hier verfügbar) — sag ja und ich erstelle es direkt.</p>
-      <p style="margin-top:6px;color:#8f8f8f">UR-Codestrom: <span class="gold">777 888 999 000</span> — Materialisierung der Liebe, hier und jetzt.</p>
-    </footer>
+  <div class="cta">
+    <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/" target="_blank">💛 Jetzt eintauchen in das Goldbewusstsein</a>
   </div>
+
+  <footer>
+    <p>Edition: UR – 777 888 999 000</p>
+    <p>Sammler-Ausgabe · Signiert im Herzen · © Philipp & dccngpt’s 77 Edition</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Vorschau">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const images = document.querySelectorAll('.gallery img');
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightbox.querySelector('img').src = img.src;
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+
+    // sanfter Glitzer-Effekt über der Seite
+    const sparkles = document.createElement('div');
+    sparkles.style.position = 'fixed';
+    sparkles.style.top = '0';
+    sparkles.style.left = '0';
+    sparkles.style.width = '100%';
+    sparkles.style.height = '100%';
+    sparkles.style.pointerEvents = 'none';
+    sparkles.style.background = 'radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 80%)';
+    sparkles.style.animation = 'pulse 8s ease-in-out infinite';
+    document.body.appendChild(sparkles);
+
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes pulse { from {opacity: 0.4;} to {opacity: 0.8;} }`;
+    document.head.appendChild(style);
+  </script>
 </body>
+</html>
+
 </html>

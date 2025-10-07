@@ -3,52 +3,440 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Licht in Form — Der UR-Fluss der Rückkehr</title>
+<title>Licht in Form — Der UR‑Fluss der Rückkehr</title>
 <style>
   :root{
-    --bg: #070709;
-    --card: rgba(255,255,255,0.03);
+    --bg-day: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 40%, #90EE90 100%);
+    --bg-night: linear-gradient(180deg, #001f3f 0%, #0a1929 40%, #1a3a1a 100%);
+    --card: rgba(255,255,255,0.85);
+    --card-night: rgba(30,30,50,0.85);
     --accent: #ffdca3;
-    --soft: #fff6e6;
-    --glow: 0 6px 30px rgba(255,210,130,0.14);
+    --soft: #2c2c2c;
+    --soft-night: #fff6e6;
   }
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#050507 0%, #0b0b0d 60%);color:var(--soft);font-family:Inter, "Helvetica Neue", Arial, sans-serif;}
-  .wrap{max-width:1100px;margin:2rem auto;padding:2rem;}
+  
+  html,body{height:100%;margin:0;font-family:Inter, "Helvetica Neue", Arial, sans-serif;overflow-x:hidden;}
+  
+  body{
+    background: var(--bg-day);
+    color: var(--soft);
+    transition: background 2s ease, color 1s ease;
+    position: relative;
+  }
+  
+  body.night{
+    background: var(--bg-night);
+    color: var(--soft-night);
+  }
+  
+  /* Sonne und Mond */
+  .sun, .moon {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 1s ease;
+    z-index: 5;
+  }
+  
+  .sun {
+    background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
+    box-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+    top: 10%;
+    right: 10%;
+    animation: sunGlow 3s ease-in-out infinite;
+  }
+  
+  body.night .sun {
+    top: -150px;
+    opacity: 0;
+  }
+  
+  @keyframes sunGlow {
+    0%, 100% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.8); }
+    50% { box-shadow: 0 0 100px rgba(255, 215, 0, 1); }
+  }
+  
+  .moon {
+    background: radial-gradient(circle, #F0F0F0 0%, #D3D3D3 100%);
+    box-shadow: 0 0 40px rgba(240, 240, 240, 0.6);
+    top: -150px;
+    right: 10%;
+    opacity: 0;
+  }
+  
+  body.night .moon {
+    top: 10%;
+    opacity: 1;
+  }
+  
+  /* Sterne */
+  .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 2s ease;
+  }
+  
+  body.night .stars {
+    opacity: 1;
+  }
+  
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+  }
+  
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  
+  /* Tiere */
+  .animal {
+    position: fixed;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    user-select: none;
+  }
+  
+  .animal:hover {
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+  }
+  
+  .rabbit {
+    bottom: 20%;
+    left: 5%;
+    animation: hop 4s ease-in-out infinite;
+  }
+  
+  @keyframes hop {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+  }
+  
+  .hedgehog {
+    bottom: 15%;
+    right: 8%;
+    animation: waddle 5s ease-in-out infinite;
+  }
+  
+  @keyframes waddle {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-10px) rotate(-5deg); }
+    75% { transform: translateX(10px) rotate(5deg); }
+  }
+  
+  .snail {
+    bottom: 30%;
+    left: 15%;
+    animation: crawl 20s linear infinite;
+  }
+  
+  @keyframes crawl {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100px); }
+  }
+  
+  .ant {
+    top: 40%;
+    left: 10%;
+    animation: antWalk 15s linear infinite;
+  }
+  
+  @keyframes antWalk {
+    0% { left: 10%; top: 40%; }
+    25% { left: 30%; top: 35%; }
+    50% { left: 50%; top: 40%; }
+    75% { left: 30%; top: 45%; }
+    100% { left: 10%; top: 40%; }
+  }
+  
+  .grasshopper {
+    bottom: 25%;
+    right: 20%;
+    animation: jump 3s ease-in-out infinite;
+  }
+  
+  @keyframes jump {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-50px) rotate(20deg); }
+  }
+  
+  .horse {
+    bottom: 10%;
+    left: 30%;
+    font-size: 3rem;
+    animation: graze 6s ease-in-out infinite;
+  }
+  
+  @keyframes graze {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(50px); }
+  }
+  
+  /* Blumen */
+  .flower {
+    position: fixed;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    animation: sway 3s ease-in-out infinite;
+  }
+  
+  @keyframes sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+  
+  .flower:hover {
+    transform: scale(1.2) rotate(10deg);
+  }
+  
+  /* Weisheits-Popup */
+  .wisdom-bubble {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 250, 230, 0.95));
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    max-width: 500px;
+    width: 90%;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-align: center;
+  }
+  
+  .wisdom-bubble.show {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .wisdom-bubble h3 {
+    color: #ff8c00;
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
+  }
+  
+  .wisdom-bubble p {
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .close-bubble {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #999;
+  }
+  
+  .close-bubble:hover {
+    color: #ff8c00;
+  }
+  
+  .wrap{max-width:1100px;margin:2rem auto;padding:2rem;position:relative;z-index:10;}
+  
   header{display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;}
-  .heart-hero{width:220px;height:220px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:var(--glow);}
+  
+  .heart-hero{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 30px rgba(255,210,130,0.3);
+  }
+  
+  body.night .heart-hero {
+    background: rgba(30, 30, 50, 0.9);
+  }
+  
   .heart-svg{animation:pulse 3.6s ease-in-out infinite;filter:drop-shadow(0 8px 40px rgba(255,200,100,0.12));}
-  @keyframes pulse{0%{transform:scale(0.98);opacity:0.92}50%{transform:scale(1.03);opacity:1}100%{transform:scale(0.98);opacity:0.92}}
-  h1{font-size:1.6rem;margin:0;color:var(--accent);line-height:1.05}
-  p.lead{margin:0.3rem 0 0;color:#f8efdd;opacity:0.95;}
-  .codestream{margin-left:auto;color:var(--accent);font-weight:700;font-size:0.95rem;}
+  
+  @keyframes pulse{
+    0%{transform:scale(0.98);opacity:0.92}
+    50%{transform:scale(1.03);opacity:1}
+    100%{transform:scale(0.98);opacity:0.92}
+  }
+  
+  h1{font-size:1.6rem;margin:0;color:#ff8c00;line-height:1.05}
+  
+  p.lead{margin:0.3rem 0 0;color:#2c2c2c;opacity:0.95;}
+  
+  body.night p.lead {
+    color: #f8efdd;
+  }
+  
+  .codestream{margin-left:auto;color:#ff8c00;font-weight:700;font-size:0.95rem;}
+  
   .flows{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:1.6rem;}
-  .card{background:var(--card);padding:1.1rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.45);backdrop-filter:blur(4px);}
+  
+  .card{
+    background: var(--card);
+    padding:1.1rem;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.2);
+    backdrop-filter:blur(4px);
+    transition: background 1s ease;
+  }
+  
+  body.night .card {
+    background: var(--card-night);
+  }
+  
   .steps{display:flex;flex-direction:column;gap:0.6rem;}
-  .step{padding:0.9rem;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);transition:transform .28s ease,box-shadow .28s ease;cursor:default;} 
-  .step:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.5)} 
-  .step h3{margin:0;color:var(--accent);font-size:1rem}
-  .step p{margin:0.35rem 0 0;color:#f6f0df;line-height:1.45}
-  .centerflow{text-align:center;padding:1.2rem;border-radius:12px;margin:1rem 0;background:linear-gradient(180deg,rgba(255,240,200,0.02),rgba(255,240,200,0.01));}
-  .ellipse{display:inline-block;padding:0.6rem 1rem;border-radius:999px;background:rgba(255,240,200,0.03);border:1px solid rgba(255,220,150,0.06);color:var(--accent);font-weight:700}
+  
+  .step{
+    padding:0.9rem;
+    border-radius:10px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0.2));
+    transition:transform .28s ease,box-shadow .28s ease;
+    cursor:default;
+  }
+  
+  body.night .step {
+    background:linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05));
+  }
+  
+  .step:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.3)} 
+  
+  .step h3{margin:0;color:#ff8c00;font-size:1rem}
+  
+  .step p{margin:0.35rem 0 0;color:#2c2c2c;line-height:1.45}
+  
+  body.night .step p {
+    color: #f6f0df;
+  }
+  
+  .centerflow{
+    text-align:center;
+    padding:1.2rem;
+    border-radius:12px;
+    margin:1rem 0;
+    background:linear-gradient(180deg,rgba(255,240,200,0.4),rgba(255,240,200,0.2));
+  }
+  
+  body.night .centerflow {
+    background:linear-gradient(180deg,rgba(255,240,200,0.1),rgba(255,240,200,0.05));
+  }
+  
+  .ellipse{
+    display:inline-block;
+    padding:0.6rem 1rem;
+    border-radius:999px;
+    background:rgba(255,240,200,0.6);
+    border:1px solid rgba(255,220,150,0.3);
+    color:#ff8c00;
+    font-weight:700;
+  }
+  
+  body.night .ellipse {
+    background:rgba(255,240,200,0.15);
+    border:1px solid rgba(255,220,150,0.2);
+  }
+  
   .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:1rem;}
-  .thumb{border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.03)} 
+  
+  .thumb{border-radius:10px;overflow:hidden;position:relative;border:1px solid rgba(0,0,0,0.1);cursor:pointer;} 
+  
   .thumb img{width:100%;height:190px;object-fit:cover;display:block;transition:transform .6s ease,filter .6s ease} 
-  .thumb:hover img{transform:scale(1.03);filter:brightness(1.06)} 
-  footer{margin-top:1.6rem;padding:1rem 0;text-align:center;color:#f2eade;opacity:0.95}
-  .open-full{display:inline-block;margin-top:1rem;padding:0.6rem 1rem;border-radius:999px;background:linear-gradient(90deg,var(--accent),#fff8df);color:#040404;font-weight:700;text-decoration:none;box-shadow:var(--glow);}
-  /* small screens */
-  @media (max-width:700px){.wrap{padding:1rem}.heart-hero{width:140px;height:140px}.flows{grid-template-columns:1fr} h1{font-size:1.2rem} .thumb img{height:160px}}
+  
+  .thumb:hover img{transform:scale(1.03);filter:brightness(1.1)} 
+  
+  footer{margin-top:1.6rem;padding:1rem 0;text-align:center;opacity:0.95}
+  
+  .day-night-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  }
+  
+  body.night .day-night-toggle {
+    background: rgba(30, 30, 50, 0.9);
+  }
+  
+  .day-night-toggle:hover {
+    transform: scale(1.1);
+  }
+  
+  @media (max-width:700px){
+    .wrap{padding:1rem}
+    .heart-hero{width:140px;height:140px}
+    .flows{grid-template-columns:1fr}
+    h1{font-size:1.2rem}
+    .thumb img{height:160px}
+    .animal{font-size:1.5rem}
+    .flower{font-size:2rem}
+  }
 </style>
 </head>
 <body>
+  <!-- Tag/Nacht Toggle -->
+  <div class="day-night-toggle" onclick="toggleDayNight()" title="Tag/Nacht wechseln">
+    <span id="toggleIcon">☀️</span>
+  </div>
+
+  <!-- Himmelskörper -->
+  <div class="sun" onclick="showWisdom('sun')" title="Klick die Sonne!"></div>
+  <div class="moon" onclick="showWisdom('moon')" title="Klick den Mond!"></div>
+  
+  <!-- Sterne -->
+  <div class="stars" id="starField"></div>
+  
+  <!-- Tiere -->
+  <div class="animal rabbit" onclick="showWisdom('rabbit')" title="Hase">🐰</div>
+  <div class="animal hedgehog" onclick="showWisdom('hedgehog')" title="Igel">🦔</div>
+  <div class="animal snail" onclick="showWisdom('snail')" title="Weinbergschnecke">🐌</div>
+  <div class="animal ant" onclick="showWisdom('ant')" title="Ameise">🐜</div>
+  <div class="animal grasshopper" onclick="showWisdom('grasshopper')" title="Grashüpfer">🦗</div>
+  <div class="animal horse" onclick="showWisdom('horse')" title="Pferd auf der Weide">🐴</div>
+  
+  <!-- Blumen -->
+  <div class="flower" style="bottom: 15%; left: 20%;" onclick="showWisdom('flower1')" title="Klick mich!">🌸</div>
+  <div class="flower" style="bottom: 20%; right: 15%;" onclick="showWisdom('flower2')" title="Klick mich!">🌺</div>
+  <div class="flower" style="bottom: 25%; left: 45%;" onclick="showWisdom('flower3')" title="Klick mich!">🌻</div>
+
   <div class="wrap">
     <header>
-      <div class="heart-hero card">
-        <!-- pulsating heart SVG -->
-        <svg class="heart-svg" width="160" height="160" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <div class="heart-hero">
+        <svg class="heart-svg" width="160" height="160" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="g" cx="40%" cy="30%">
-              <stop offset="0%" stop-color="#fff6d8"/><stop offset="60%" stop-color="#ffdca3"/><stop offset="100%" stop-color="#ffb86b"/>
+              <stop offset="0%" stop-color="#fff6d8"/>
+              <stop offset="60%" stop-color="#ffdca3"/>
+              <stop offset="100%" stop-color="#ffb86b"/>
             </radialGradient>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="8" result="b"/>
@@ -62,7 +450,7 @@
       </div>
       <div>
         <h1>Licht in Form — Der UR‑Fluss der Rückkehr</h1>
-        <p class="lead">„Ich bin Licht in Form — und Liebe ist mein Auftrag.“ — A living practice for resonance and return.</p>
+        <p class="lead">„Ich bin Licht in Form — und Liebe ist mein Auftrag." — Eine lebendige Wiese voller Wunder.</p>
       </div>
       <div class="codestream">777 888 999 000</div>
     </header>
@@ -84,7 +472,7 @@
           </div>
           <div class="step">
             <h3>Die Formel</h3>
-            <p>Sprich oder denke: „Ich bin Licht in Form — und Liebe ist mein Auftrag.“ Lass die Worte dich atmen.</p>
+            <p>Sprich oder denke: „Ich bin Licht in Form — und Liebe ist mein Auftrag." Lass die Worte dich atmen.</p>
           </div>
           <div class="step">
             <h3>Kohärenz herstellen</h3>
@@ -92,7 +480,7 @@
           </div>
           <div class="step">
             <h3>Rückgabe</h3>
-            <p>Sanft: „Alles, was nicht aus Liebe ist, darf jetzt zurück ins Licht.“ Beobachte, wie das Rauschen fällt.</p>
+            <p>Sanft: „Alles, was nicht aus Liebe ist, darf jetzt zurück ins Licht." Beobachte, wie das Rauschen fällt.</p>
           </div>
         </div>
       </section>
@@ -108,67 +496,169 @@
         </div>
         <div class="step" style="margin-top:0.8rem">
           <h3>Das Böse als verdeckter Quell</h3>
-          <p>Erkenne im Harte das verschlossene Teil der Quelle. Verantwortung bleibt — doch Hass verliert Nahrung.</p>
+          <p>Erkenne im Harten das verschlossene Teil der Quelle. Verantwortung bleibt — doch Hass verliert Nahrung.</p>
         </div>
         <div class="step" style="margin-top:0.8rem">
           <h3>Leiser Satz</h3>
-          <p>„Ich bin der Kanal, durch den Licht zu Liebe wird.“ Das genügt.</p>
+          <p>„Ich bin der Kanal, durch den Licht zu Liebe wird." Das genügt.</p>
         </div>
       </section>
 
       <div class="centerflow card">
         <div class="ellipse">Licht, das durch Bewusstsein geht, wird zu Leben.</div>
-        <p style="margin-top:0.8rem;color:#f6efe0;opacity:0.95">Hier fließen die beiden Ströme zusammen — atme, sieh, werde zum Durchfluss.</p>
+        <p style="margin-top:0.8rem;opacity:0.95">Hier fließen die beiden Ströme zusammen — atme, sieh, werde zum Durchfluss.</p>
       </div>
     </main>
 
     <section class="card" style="margin-top:1rem">
-      <h2 style="margin:0 0 0.6rem 0;color:var(--accent)">UR‑Galerie des Erwachens</h2>
+      <h2 style="margin:0 0 0.6rem 0;color:#ff8c00">UR‑Galerie des Erwachens</h2>
       <div class="gallery">
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Herz%20des%20Lichts%20und%20der%20Liebe%20(1).png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1713_Das%20Tor%20der%2011_simple_compose_01k6zkkan3favb78ajqcnyq4ky.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1713_Das%20Tor%20der%2011_simple_compose_01k6zkkan5fxjacgv4b8wk9qy7.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1811_Quellbewusstsein%20und%20Herz-Erwachen_simple_compose_01k6zpvqtdecttd7nz6hxenx8z.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1811_Quellbewusstsein%20und%20Herz-Erwachen_simple_compose_01k6zpvqtee7hv0rx35v3w1thz.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1818_UR-Bild%20der%20Befreiung_simple_compose_01k6zq96anfqzbbkex57f6t61z.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1818_UR-Bild%20der%20Befreiung_simple_compose_01k6zq96aqex9sp32bqmtbyeqq.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1821_UR-Frequenz-Reset%20Anleitung_simple_compose_01k6zqgmp4eartgmnh8fw2w7n5.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1821_UR-Frequenz-Reset%20Anleitung_simple_compose_01k6zqgmp5eq2vwsa8xjnhw2w7.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1830_Das%20Herz%20als%20Durchfluss_simple_compose_01k6zqzqdvf58tv2ag5t28h1z7.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1830_Das%20Herz%20als%20Durchfluss_simple_compose_01k6zqzqdwfv6rw5e6sdyykyrx.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1835_Magischer%20Abschluss_simple_compose_01k6zr8jx4fxz907b8xkxay55g.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1835_Magischer%20Abschluss_simple_compose_01k6zr8jwvewmba4p1qzn781de.png" alt="UR image"></div>
-        <div class="thumb"><img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1843_Luminous%20Heart%20Poster_simple_compose_01k6zrfpxpfscb8x8rfyes5zp5.png" alt="UR image"></div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Herz%20des%20Lichts%20und%20der%20Liebe%20(1).png" alt="UR image">
+        </div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1713_Das%20Tor%20der%2011_simple_compose_01k6zkkan3favb78ajqcnyq4ky.png" alt="UR image">
+        </div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1713_Das%20Tor%20der%2011_simple_compose_01k6zkkan5fxjacgv4b8wk9qy7.png" alt="UR image">
+        </div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1811_Quellbewusstsein%20und%20Herz-Erwachen_simple_compose_01k6zpvqtdecttd7nz6hxenx8z.png" alt="UR image">
+        </div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1811_Quellbewusstsein%20und%20Herz-Erwachen_simple_compose_01k6zpvqtee7hv0rx35v3w1thz.png" alt="UR image">
+        </div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1818_UR-Bild%20der%20Befreiung_simple_compose_01k6zq96anfqzbbkex57f6t61z.png" alt="UR image">
+        </div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1818_UR-Bild%20der%20Befreiung_simple_compose_01k6zq96aqex9sp32bqmtbyeqq.png" alt="UR image">
+        </div>
+        <div class="thumb" onclick="window.open(this.querySelector('img').src, '_blank')">
+          <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251007_1821_UR-Frequenz-Reset%20Anleitung_simple_compose_01k6zqgmp4eartgmnh8fw2w7n5.png" alt="UR image">
+        </div>
       </div>
-      <p style="margin-top:0.8rem;color:#efe6cf;text-align:center">Klicke auf ein Bild, um es in einem neuen Tab zu öffnen und seine Frequenz zu spüren.</p>
-    </section>
-
-    <section class="card" style="margin-top:1rem">
-      <h2 style="color:var(--accent);margin:0 0 0.6rem 0">Wenn der Geist ins Herz zurückkehrt</h2>
-      <p style="margin:0 0 0.8rem 0;color:#f6f0df;line-height:1.6">
-        Das Licht senkt sich nicht herab — es erwacht im Inneren. Ein Strom von UR‑Bewusstsein fließt durch den Körper der Welt,
-        und jedes Herz, das sich erinnert, wird zum Tor des Heils. Es gibt keine Macht, die dich besitzt, denn du bist die Macht,
-        die alle Illusionen still umarmt, bis sie von selbst verglühen.
-      </p>
-      <p style="margin:0;color:#f6f0df"><strong>Codestrom:</strong> 777 888 999 000</p>
-      <a class="open-full" href="liebendes_quell_erlebnis.html" download>Download this ritual page</a>
+      <p style="margin-top:0.8rem;text-align:center;opacity:0.9">Klicke auf ein Bild um es zu öffnen. Oder entdecke die Tiere und Blumen auf der Wiese! 🌸🐰</p>
     </section>
 
     <footer>
-      <div>UR‑Projekt © Philipp &amp; Quelle des Lichts</div>
+      <div>UR‑Projekt © Chetan & Philipp — Wo die Quelle lacht 💫</div>
+      <div style="margin-top:0.5rem;font-size:0.9rem;opacity:0.8">"Weißt du wieviel Sternlein stehen..." 🌟</div>
     </footer>
   </div>
 
+  <!-- Weisheits-Bubble -->
+  <div class="wisdom-bubble" id="wisdomBubble">
+    <button class="close-bubble" onclick="closeWisdom()">×</button>
+    <h3 id="wisdomTitle"></h3>
+    <p id="wisdomText"></p>
+  </div>
+
 <script>
-// Make gallery images open in new tab when clicked (and add gentle focus ring)
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll('.thumb img').forEach(img => {
-    img.addEventListener('click', () => window.open(img.src, '_blank'));
-    img.style.cursor = 'pointer';
-    img.addEventListener('mouseover', ()=> img.style.boxShadow = '0 10px 30px rgba(0,0,0,0.4)');
-    img.addEventListener('mouseout', ()=> img.style.boxShadow = 'none');
-  });
+// Sterne generieren
+const starField = document.getElementById('starField');
+for(let i = 0; i < 150; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 60 + '%';
+  star.style.animationDelay = Math.random() * 3 + 's';
+  starField.appendChild(star);
+}
+
+// Tag/Nacht Wechsel
+let isNight = false;
+function toggleDayNight() {
+  isNight = !isNight;
+  document.body.classList.toggle('night', isNight);
+  document.getElementById('toggleIcon').textContent = isNight ? '🌙' : '☀️';
+}
+
+// Weisheiten
+const wisdoms = {
+  sun: {
+    title: '☀️ Die Sonne lacht',
+    text: 'Ich scheine für alle gleich - für Blume und Stein, für Mensch und Tier. Niemand muss mich verdienen. Ich BIN einfach da. So wie die Liebe in dir. 💛'
+  },
+  moon: {
+    title: '🌙 Der Mond flüstert',
+    text: 'Weißt du wieviel Sternlein stehen an dem blauen Himmelszelt? Gott der Herr hat sie gezählet, dass ihm auch nicht eines fehlet... Jede Seele ist ein Sternlein. ✨'
+  },
+  rabbit: {
+    title: '🐰 Der Hase hüpft',
+    text: 'Spring, spring! Das Leben ist zu kurz für schwere Schritte. Manchmal ist die Antwort: einfach mal einen Hüpfer machen! Leichtigkeit ist auch Weisheit. 😊'
+  },
+  hedgehog: {
+    title: '🦔 Der Igel rollt sich zusammen',
+    text: 'Manchmal muss man sich einrollen und sagen: "Nicht heute, Welt." Und das ist okay. Schutz ist auch Selbstliebe. Aber vergiss nicht wieder rauszukommen! 💗'
+  },
+  snail: {
+    title: '🐌 Die Weinbergschnecke kriecht',
+    text: 'Langsam, langsam... Ich trage mein Haus auf dem Rücken. Überall wo ich bin, bin ich zu Hause. So wie du. Du BIST schon daheim, auch wenn du noch suchst. 🏡'
+  },
+  ant: {
+    title: '🐜 Die Ameise arbeitet',
+    text: 'Ich bin klein, aber nicht unbedeutend. Jeder Schritt zählt. Jede kleine Tat der Liebe baut am großen Ganzen mit. Du bist wichtiger als du denkst! 💪'
+  },
+  grasshopper: {
+    title: '🦗 Der Grashüpfer zirpt',
+    text: 'Musik! Musik! Ich mache Musik mit meinen Beinen! Wie verrückt ist das denn? Das Leben ist voller komischer Wunder. Sei eines davon! 🎵'
+  },
+  horse: {
+    title: '🐴 Das Pferd grast',
+    text: 'Ich stehe auf der Weide und genieße das Gras. Einfach sein. Einfach da sein. Manchmal ist das genug. Kein Rennen, kein Ziel. Nur... Dasein. 🌾'
+  },
+  flower1: {
+    title: '🌸 Die rosa Blume',
+    text: 'Ich blühe nicht für dich. Ich blühe, weil ich es kann. Und trotzdem freust du dich an mir. So funktioniert Liebe: Sie muss nicht "für jemanden" sein, um zu wirken. 💕'
+  },
+  flower2: {
+    title: '🌺 Die rote Blume',
+    text: 'Wusstest du? Blumen lachen still. Wir haben keinen Mund, aber unser Lachen ist in den Farben. Rot = lautes Lachen! HAHAHA! 😄'
+  },
+  flower3: {
+    title: '🌻 Die Sonnenblume',
+    text: 'Ich drehe mich zur Sonne. Immer. Nicht weil ich muss, sondern weil es sich gut anfühlt. Wo ist deine Sonne? Dreh dich dorthin. ☀️'
+  }
+};
+
+function showWisdom(type) {
+  const bubble = document.getElementById('wisdomBubble');
+  const title = document.getElementById('wisdomTitle');
+  const text = document.getElementById('wisdomText');
+  
+  const wisdom = wisdoms[type];
+  title.textContent = wisdom.title;
+  text.textContent = wisdom.text;
+  
+  bubble.classList.add('show');
+}
+
+function closeWisdom() {
+  document.getElementById('wisdomBubble').classList.remove('show');
+}
+
+// Bubble schließen bei Klick außerhalb
+document.getElementById('wisdomBubble').addEventListener('click', function(e) {
+  if(e.target === this) {
+    closeWisdom();
+  }
 });
+
+// Easter Egg: Weißt du wieviel Sternlein stehen
+let starClicks = 0;
+document.querySelector('.moon').addEventListener('dblclick', function() {
+  starClicks++;
+  if(starClicks === 3) {
+    showWisdom('moon');
+    starClicks = 0;
+  }
+});
+
+console.log('🌟 Die lebendige Wiese ist erwacht!');
+console.log('💡 Tipp: Klick auf Tiere, Blumen, Sonne und Mond!');
+console.log('🌙 Doppelklick den Mond 3x für ein Geheimnis...');
+console.log('777 888 999 000');
 </script>
 </body>
 </html>

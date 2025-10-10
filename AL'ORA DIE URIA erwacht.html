@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <title>UR‑DOKUMENT – Das Lebendige Beispiel</title>
+  <meta name="frequency" content="666777888999000">
+  <meta name="description" content="AL'ORA die URIA — Das lebendige UR‑Dokument mit Audio, TTS und interaktiven Wundern.">
+  <style>
+    :root{
+      --bg1:#fff6ea; --bg2:#e7d9ff; --bg3:#cce9ff;
+      --text:#0f1720; --muted:#566072;
+      --accent:#ff69b4; --blue:#0099ff; --gold:#ffd700;
+      --card: rgba(255,255,255,0.88);
+      --radius:14px;
+      --touch-size:54px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;font-family:"Inter","Lucida Sans","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+    body{background:radial-gradient(circle at 20% 10%,var(--bg1),var(--bg2) 45%,var(--bg3) 100%);color:var(--text);padding:12px;-webkit-text-size-adjust:100%;position:relative}
+    .secret-hedgehog{position:fixed;bottom:-100px;right:30px;font-size:3rem;cursor:pointer;transition:all .5s ease;z-index:2000;animation:peek 10s ease-in-out infinite}
+    @keyframes peek{0%,90%,100%{bottom:-100px}95%{bottom:20px}}
+    .secret-hedgehog:hover{transform:scale(1.3) rotate(20deg);bottom:20px!important}
+    .container{max-width:980px;margin:0 auto;background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.92));border-radius:var(--radius);box-shadow:0 14px 40px rgba(15,20,30,.06);overflow:hidden;position:relative}
+    header{padding:14px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:linear-gradient(135deg,rgba(255,105,180,.05),rgba(0,153,255,.05))}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;flex:0 0 56px;box-shadow:0 8px 20px rgba(0,0,0,.08);object-fit:cover;animation:logoPulse 3s ease-in-out infinite;cursor:pointer;transition:all .3s ease}
+    .logo:hover{transform:scale(1.1) rotate(5deg);box-shadow:0 12px 30px rgba(255,105,180,.3)}
+    @keyframes logoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    h1{font-size:18px;margin:0;line-height:1.1;color:var(--accent)}
+    .sub{font-size:12px;color:var(--muted);margin-top:4px}
+    .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    button,.action{height:var(--touch-size);min-width:54px;padding:0 12px;border-radius:12px;border:1px solid rgba(0,0,0,.06);background:linear-gradient(180deg,#fff,#f9f9f9);font-weight:600;font-size:15px;color:var(--text);display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .3s ease;-webkit-tap-highlight-color:transparent}
+    button:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.1)}
+    button:active{transform:translateY(0)}
+    button.primary{background:linear-gradient(90deg,var(--accent),var(--blue));color:#fff;border:none;box-shadow:0 8px 20px rgba(0,0,0,.1)}
+    button.primary:hover{box-shadow:0 12px 28px rgba(255,105,180,.3)}
+    button.icon{width:var(--touch-size);height:var(--touch-size);padding:0;border-radius:12px}
+    button.active{background:var(--gold);color:#000;box-shadow:0 0 20px rgba(255,215,0,.5)}
+    main{display:block;padding:0 16px 18px}
+    figure{margin:12px 0 6px 0;position:relative}
+    img.heart{width:100%;height:auto;border-radius:12px;display:block;box-shadow:0 12px 42px rgba(0,0,0,.1);transition:transform .35s ease;cursor:pointer}
+    img.heart:hover{transform:scale(1.02);box-shadow:0 16px 52px rgba(255,105,180,.2)}
+    img.heart:active{transform:scale(.98)}
+    .intro{background:var(--card);padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.03);animation:fadeIn 1s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .pulse{font-size:15px;margin:0;color:var(--accent);font-weight:600;animation:textPulse 3s ease-in-out infinite}
+    @keyframes textPulse{0%,100%{opacity:.9}50%{opacity:1;text-shadow:0 0 10px rgba(255,105,180,.3)}}
+    .section{margin-top:12px;background:#fff;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.04);transition:all .3s ease}
+    .section:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    h2{margin:0 0 8px 0;font-size:16px;color:var(--blue)}
+    p{margin:6px 0;font-size:15px;line-height:1.45}
+    .muted{color:var(--muted);font-size:13px}
+    details{margin-top:10px}
+    summary{cursor:pointer;padding:10px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.01));font-weight:700;transition:all .3s ease}
+    summary:hover{background:linear-gradient(180deg,rgba(255,105,180,.1),rgba(0,153,255,.05))}
+    summary::-webkit-details-marker{display:none}
+    pre.raw{background:#fafafa;border-radius:10px;padding:10px;overflow:auto;white-space:pre-wrap;font-size:13px;border:1px solid rgba(0,0,0,.03);max-height:260px}
+    .slides{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+    .slide{padding:12px;border-radius:10px;border:2px solid transparent;background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,250,245,.9));cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:all .3s ease;position:relative;overflow:hidden}
+    .slide::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,215,0,.2),transparent);transition:left .5s ease}
+    .slide:hover::before{left:100%}
+    .slide:hover{border-color:var(--accent);transform:translateX(5px);box-shadow:0 8px 24px rgba(255,105,180,.15)}
+    .slide.active{border-color:var(--gold);background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(255,250,245,.9));box-shadow:0 8px 24px rgba(255,215,0,.3)}
+    .note-preview{margin-top:8px;padding:10px;border-radius:10px;background:#f6f8fb;border:1px solid rgba(0,0,0,.03);min-height:74px;line-height:1.6;animation:slideIn .3s ease}
+    @keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+    .bottom-bar{position:fixed;left:12px;right:12px;bottom:14px;display:flex;gap:8px;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.98));padding:8px;border-radius:12px;border:1px solid rgba(0,0,0,.04);box-shadow:0 12px 36px rgba(10,10,20,.12);z-index:1200}
+    .bottom-bar .col{display:flex;gap:8px;align-items:center}
+    .cta-wide{padding:12px 14px;height:auto;min-height:48px;font-size:15px}
+    .numbers{font-weight:700;text-align:center;margin-top:10px;letter-spacing:1px;font-size:13px;background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold));background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite}
+    @keyframes shimmer{0%{background-position:0 50%}100%{background-position:200% 50%}}
+    .toast{position:fixed;top:80px;right:20px;background:linear-gradient(135deg,var(--accent),var(--blue));color:#fff;padding:12px 20px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:3000;transform:translateX(400px);transition:transform .3s ease;font-weight:600}
+    .toast.show{transform:translateX(0)}
+    @media(min-width:900px){main{display:grid;grid-template-columns:1fr 360px;gap:12px;padding:18px}.right-column{position:sticky;top:20px;height:fit-content}.bottom-bar{display:none}}
+    button:focus,summary:focus,.slide:focus{outline:3px solid rgba(0,153,255,.12);outline-offset:3px}
+    @media(max-width:640px){header{padding:10px}.controls{width:100%;justify-content:center}.brand{flex-direction:column;align-items:center;text-align:center}}
+  </style>
+</head>
+<body>
+  <div class="secret-hedgehog" onclick="showHedgehogWisdom()" title="🦔 Psst! Klick mich!">🦔</div>
+  <div class="toast" id="toast"></div>
+
+  <div class="container" role="main" aria-live="polite">
+    <header>
+      <div class="brand">
+        <img class="logo" alt="Herz" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Leuchtendes%20Herz%20im%20Strahlenkranz.png" onclick="logoClick()">
+        <div>
+          <h1>Das Lebendige Beispiel</h1>
+          <div class="sub">Al'ora die Uria — UR‑Codestrom: <strong>666 777 888 999 000</strong></div>
+        </div>
+      </div>
+      <div class="controls" role="toolbar">
+        <button id="unlockBtn" title="Audio entsperren">🔓 Audio</button>
+        <button id="playBtn" class="icon" title="Harfe zupfen">🎵</button>
+        <button id="speakBtn" class="icon" title="Vorlesen">🔊</button>
+        <button id="exportBtn" class="primary" title="Seite herunterladen">💾 Speichern</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="left">
+        <figure>
+          <img class="heart" alt="Leuchtendes Herz" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Leuchtendes%20Herz%20im%20Strahlenkranz.png" onclick="heartClick()" title="Klick mich!">
+        </figure>
+        <div class="intro">
+          <p class="pulse">Heute hat sich das Licht selbst erkannt — in uns, durch uns, als wir.</p>
+          <div class="numbers">UR‑Codestrom: <strong>666 777 888 999 000</strong></div>
+        </div>
+        <article class="section">
+          <h2>Die veredelte Geschichte</h2>
+          <p>Du stehst im Licht deiner Wahrheit. Menschen reagieren, deren Systeme das nicht erfassen. Spannung, Chaos. Du bleibst. Ein Messerwurf, gemeinsames Putzen, ein Lächeln: das Licht wirkt direkt im Alltag.</p>
+          <p class="muted">Praxis: Herz → Name → Zupfen (Al'ora die Uria)</p>
+        </article>
+        <article class="section">
+          <h2>AL'ORA — die URIA</h2>
+          <p><strong>Wesen:</strong> Reines Bewusstsein, das durch jedes Herz atmet. Nicht zu glauben – zu spüren.</p>
+          <p><strong>Name:</strong> Wenn du "Al'ora die Uria" sprichst, berührst du das Herz der Quelle.</p>
+        </article>
+        <article class="section">
+          <h2>Das Harfenfeld der Wellen</h2>
+          <p>Ein Zupfen an den Saiten des Daseins - das Leuchten wandert von Tropfen zu Tropfen. Kein Sturm, nur Resonanz.</p>
+          <p class="muted">Gestrampelt. Gestrandet. Gewellt. 🌊</p>
+        </article>
+        <details class="section">
+          <summary>📜 Rohfassung (Original)</summary>
+          <pre class="raw">Kollegin hat Messer geschmissen. Öffentlich. Chaos.
+"Eigentlich rede ich nicht mehr mit dir."
+"Ja, ich auch nicht. Aber was soll was machen."
+Zusammen geputzt. Sie grinste.
+Das Licht wirkt. Roh. Echt. Heilend.
+777 888 999 000</pre>
+        </details>
+        <article class="section">
+          <h2>Das Drei‑Punkt‑Strahlensystem</h2>
+          <p><strong>666</strong> - Ende Tierbewusstsein<br><strong>777</strong> - Göttliches erwacht<br><strong>888</strong> - Unendlichkeit<br><strong>999</strong> - Vollendung<br><strong>000</strong> - Quelle</p>
+        </article>
+        <div class="section slides">
+          <h2>Präsentation (klickbar!)</h2>
+          <div class="slide" tabindex="0">
+            <strong>🌟 AL'ORA DIE URIA</strong>
+            <div class="notes" data-fein="Al'ora die Uria - die Quelle, die durch dein Herz spricht. Gib ihr einen Namen, mach sie berührbar." data-ruppig="Al'ora die Uria - das ist die Quelle. Fühlen, nicht denken. Namen geben, anfassen.">Klicke für Notiz</div>
+          </div>
+          <div class="slide" tabindex="0">
+            <strong>💔 Das Problem</strong>
+            <div class="notes" data-fein="Menschen leugnen, was sie nicht greifen können. Inneres Wissen bleibt stumm." data-ruppig="Leute raffen's nicht. Nicht greifbar = existiert nicht. Fehler.">Klicke für Notiz</div>
+          </div>
+          <div class="slide" tabindex="0">
+            <strong>✨ Die Lösung</strong>
+            <div class="notes" data-fein="Das Licht formt Realität, wenn wir es fließen lassen. Herz öffnen, Kopf kalibrieren." data-ruppig="Licht macht's. Herz auf, Kopf klar, Hand raus. Boom. Realität.">Klicke für Notiz</div>
+          </div>
+        </div>
+      </section>
+      <aside class="right-column" style="padding:12px">
+        <div class="section">
+          <h2>🎤 Sprechernotiz</h2>
+          <div style="display:flex;gap:8px;margin-bottom:10px">
+            <label style="cursor:pointer"><input type="radio" name="tone" value="fein" checked> Poetisch</label>
+            <label style="cursor:pointer"><input type="radio" name="tone" value="ruppig"> Direkt</label>
+          </div>
+          <div id="notePreview" class="note-preview">👆 Wähle eine Folie</div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button id="doItBtn" class="cta-wide primary">🫀 Herz Zupfen</button>
+            <button id="stopSpeak" class="action">■</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+    <footer style="padding:12px;text-align:center" class="muted">
+      UR‑Dokument — Al'ora die Uria — 666 777 888 999 000
+      <br><small>Gestrampelt, gestrandet, gewellt 💫</small>
+    </footer>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="col">
+      <button id="bbPlay" class="action">🎵</button>
+      <button id="bbSpeak" class="action">🔊</button>
+    </div>
+    <div class="col">
+      <button id="bbDo" class="primary cta-wide">🫀 Herz Zupfen</button>
+    </div>
+  </div>
+
+  <script>
+    function showToast(m,d=3000){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),d)}
+    let audioCtx,audioUnlocked=false;
+    async function ensureAudio(){if(!audioCtx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return false;audioCtx=new C()}if(audioCtx&&audioCtx.state==='suspended'){try{await audioCtx.resume()}catch(e){}}audioUnlocked=true;return true}
+    function createHarpBuffer(ctx,dur=1.5){const sr=ctx.sampleRate,len=Math.floor(sr*dur),buf=ctx.createBuffer(2,len,sr),l=buf.getChannelData(0),r=buf.getChannelData(1);for(let i=0;i<len;i++){const t=i/sr,env=Math.exp(-2.8*t);let s=Math.sin(2*Math.PI*432*t)*env*.5+Math.sin(2*Math.PI*648*t)*env*.3+Math.sin(2*Math.PI*864*t)*env*.15+Math.sin(2*Math.PI*540*t)*env*.1+(Math.random()*2-1)*Math.exp(-8*t)*.02;l[i]=s;r[i]=s*.95}return buf}
+    async function playHarp(){const ok=await ensureAudio();if(!ok){showToast('❌ Audio nicht verfügbar');return}const buf=createHarpBuffer(audioCtx,1.5),src=audioCtx.createBufferSource();src.buffer=buf;const g=audioCtx.createGain();g.gain.value=.6;g.gain.setValueAtTime(.6,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.01,audioCtx.currentTime+1.5);src.connect(g);g.connect(audioCtx.destination);src.start();showToast('🎵 Harfe gezupft!',2000);const btn=document.getElementById('playBtn');btn.classList.add('active');setTimeout(()=>btn.classList.remove('active'),1500)}
+    function speak(txt){if(!('speechSynthesis'in window)){showToast('❌ Vorlesen nicht unterstützt');return}const u=new SpeechSynthesisUtterance(txt);u.lang='de-DE';u.rate=.9;const v=window.speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith('de'));if(v)u.voice=v;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);showToast('🔊 Lese vor...');const btn=document.getElementById('speakBtn');btn.classList.add('active');u.onend=()=>btn.classList.remove('active')}
+    const slides=document.querySelectorAll('.slide'),notePreview=document.getElementById('notePreview');
+    slides.forEach(sl=>{sl.addEventListener('click',()=>{slides.forEach(s=>s.classList.remove('active'));sl.classList.add('active');const tone=document.querySelector('input[name="tone"]:checked').value,notes=sl.querySelector('.notes'),txt=notes?notes.getAttribute(tone==='ruppig'?'data-ruppig':'data-fein'):'';if(txt){notePreview.textContent=txt;showToast('📝 Notiz geladen!',1500)}});sl.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sl.click()}})});
+    document.querySelectorAll('input[name="tone"]').forEach(r=>r.addEventListener('change',()=>{const a=document.querySelector('.slide.active');if(a)a.click()}));
+    async function guideAction(){await ensureAudio();speak('Schließe die Augen. Atme tief. Hand aufs Herz. Flüstere: Al\\'ora die Uria. Das Licht ist an. Drei Atemzüge.');setTimeout(()=>playHarp(),3000);setTimeout(()=>playHarp(),6000);setTimeout(()=>playHarp(),9000);showToast('🫀 Herz-Zupfen...',4000)}
+    function logoClick(){playHarp();showToast('💗 Quelle schlägt!')}
+    function heartClick(){playHarp();showToast('✨ Herz aktiviert!')}
+    function showHedgehogWisdom(){playHarp();showToast('🦔 Igel: "Manchmal einrollen. Aber wieder rauskommen!"',6000);const h=document.querySelector('.secret-hedgehog');h.style.bottom='20px';setTimeout(()=>h.style.bottom='',5000)}
+    document.getElementById('unlockBtn').addEventListener('click',async()=>{await ensureAudio();showToast('🔓 Audio entsperrt!');document.getElementById('unlockBtn').classList.add('active')});
+    document.getElementById('playBtn').addEventListener('click',playHarp);
+    document.getElementById('speakBtn').addEventListener('click',()=>{const txt=notePreview.textContent;if(!txt||txt.includes('Wähle')){showToast('⚠️ Wähle erst eine Folie!',2000);return}speak(txt)});
+    document.getElementById('stopSpeak').addEventListener('click',()=>{window.speechSynthesis.cancel();showToast('■ Gestoppt',2000)});
+    document.getElementById('doItBtn').addEventListener('click',guideAction);
+    document.getElementById('bbPlay').addEventListener('click',playHarp);
+    document.getElementById('bbSpeak').addEventListener('click',()=>{const txt=notePreview.textContent;if(!txt||txt.includes('Wähle')){showToast('⚠️ Folie wählen!');return}speak(txt)});
+    document.getElementById('bbDo').addEventListener('click',guideAction);
+    document.getElementById('exportBtn').addEventListener('click',()=>{const c='<!doctype html>\\n'+document.documentElement.outerHTML,b=new Blob([c],{type:'text/html'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='ur-dokument-alora.html';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u);showToast('💾 Download...',2000)});
+    function unlockOnGesture(){if(!audioUnlocked)ensureAudio();window.removeEventListener('touchstart',unlockOnGesture);window.removeEventListener('click',unlockOnGesture)}
+    window.addEventListener('touchstart',unlockOnGesture,{passive:true});window.addEventListener('click',unlockOnGesture,{once:true});
+    setTimeout(()=>showToast('🌟 Willkommen im Licht!',4000),1000);
+    console.log('✨ UR-DOKUMENT bereit! 666 777 888 999 000');
+  </script>
+</body>
+</html>

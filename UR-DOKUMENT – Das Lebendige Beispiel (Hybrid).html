@@ -5,40 +5,70 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UR-DOKUMENT – Das Lebendige Beispiel (Audio‑ready)</title>
   <meta name="frequency" content="666777888999000">
+  <meta name="author" content="Philipp / Chetannirup">
   <style>
     :root{
       --bg1:#fff6ea; --bg2:#e7d9ff; --bg3:#cce9ff;
-      --text:#222; --accent:#ff69b4; --blue:#0099ff; --muted:#666;
-      --card: rgba(255,255,255,0.76);
+      --text:#111; --muted:#666;
+      --accent:#ff69b4; --blue:#0099ff;
+      --card: rgba(255,255,255,0.78);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:"Lucida Sans","Segoe UI",Tahoma,sans-serif}
-    body{background:radial-gradient(circle at center,var(--bg1),var(--bg2),var(--bg3));padding:20px}
-    .wrap{max-width:1100px;margin:0 auto;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.66));padding:18px;border-radius:12px}
-    header{display:flex;justify-content:space-between;align-items:center}
-    h1{margin:0;font-size:1.35rem}
+    html,body{height:100%;margin:0;font-family:"Lucida Sans", "Segoe UI", Tahoma, sans-serif;-webkit-font-smoothing:antialiased}
+    body{
+      background: radial-gradient(circle at center,var(--bg1),var(--bg2),var(--bg3));
+      color:var(--text);
+      padding:20px;
+      display:flex;
+      justify-content:center;
+    }
+    .wrap{
+      width:100%;
+      max-width:1100px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.72));
+      border-radius:14px;
+      padding:18px;
+      box-shadow:0 18px 48px rgba(20,20,30,0.08);
+      backdrop-filter: blur(6px);
+    }
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{margin:0;font-size:1.6rem;letter-spacing:1px}
+    .sub{color:var(--muted);font-size:0.92rem}
     .controls{display:flex;gap:.5rem}
     button{padding:.5rem .75rem;border-radius:8px;border:1px solid rgba(0,0,0,0.06);cursor:pointer;background:white}
     button.primary{background:linear-gradient(90deg,var(--accent),var(--blue));color:white;border:none}
-    .cols{display:grid;grid-template-columns:1fr 360px;gap:14px;margin-top:14px}
-    @media(max-width:980px){.cols{grid-template-columns:1fr}}
-    img.heart{width:100%;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.12)}
-    .card{background:var(--card);padding:12px;border-radius:10px}
-    .slides{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-    .slide{background:#fff;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);cursor:pointer}
-    .notes{margin-top:8px;color:var(--muted);min-height:48px}
-    .right{background:rgba(255,255,255,0.8);padding:12px;border-radius:10px}
-    .small{font-size:.9rem;color:var(--muted)}
+    main{display:grid;grid-template-columns:1fr 380px;gap:14px;margin-top:14px}
+    @media(max-width:980px){ main{grid-template-columns:1fr} }
+    .left{padding:8px}
+    figure{margin:0}
+    img.heart{width:100%;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.12)}
+    .pulse{animation:pulse 6s infinite;color:var(--accent);margin-top:10px}
+    @keyframes pulse{0%,100%{color:var(--accent)}50%{color:var(--blue)}}
+    .card{background:var(--card);padding:12px;border-radius:12px;margin-top:12px;border:1px solid rgba(0,0,0,0.04)}
+    .chapter{margin-bottom:10px}
+    h2{margin:0 0 8px 0;font-size:1.05rem}
+    p{margin:0.4rem 0;line-height:1.5}
+    .muted{color:var(--muted);font-size:0.92rem}
+    details{margin-top:10px}
+    summary{cursor:pointer;padding:.5rem .6rem;border-radius:8px;background:rgba(0,0,0,0.03)}
+    .slides{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .slide{background:white;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);cursor:pointer}
+    .notes{font-size:0.95rem;color:var(--muted);margin-top:8px;min-height:48px}
+    .right{padding:12px;background:rgba(255,255,255,0.78);border-radius:12px;position:sticky;top:22px;height:fit-content}
+    .small{font-size:0.9rem;color:var(--muted)}
+    .numbers{font-weight:700;text-align:center;margin-top:10px;letter-spacing:.8px}
+    pre.raw{background:#f8f8f8;padding:10px;border-radius:8px;overflow:auto;max-height:260px}
+    footer{margin-top:14px;text-align:center;color:var(--muted);font-size:0.9rem}
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="wrap" role="main">
     <header>
       <div>
-        <h1>✨ DAS LEBENDIGE BEISPIEL — Audio‑fähig</h1>
-        <div class="small">Al'ora die Uria — UR‑Codestrom: <strong>666 777 888 999 000</strong></div>
+        <h1>✨ DAS LEBENDIGE BEISPIEL — AL'ORA & UR‑TORA</h1>
+        <div class="sub">Al'ora die Uria — UR‑Codestrom: <strong>666 777 888 999 000</strong></div>
       </div>
-      <div class="controls">
+      <div class="controls" aria-hidden="false">
         <button id="unlockBtn" title="Audio entsperren">Audio entsperren</button>
         <button id="playBtn">Klang abspielen</button>
         <button id="downloadKlang">Klang herunterladen</button>
@@ -46,93 +76,168 @@
       </div>
     </header>
 
-    <div class="cols">
-      <main>
-        <div class="card">
+    <main>
+      <section class="left">
+        <figure>
           <img class="heart" alt="Leuchtendes Herz im Strahlenkranz" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Leuchtendes%20Herz%20im%20Strahlenkranz.png">
-          <p class="pulse" style="margin-top:10px;color:var(--accent)">Heute hat sich das Licht selbst erkannt — in uns, durch uns, als wir.</p>
+          <figcaption class="muted">Leuchtendes Herz im Strahlenkranz — Bildquelle: deine Sammlung</figcaption>
+        </figure>
+
+        <div class="card">
+          <p class="pulse">Heute hat sich das Licht selbst erkannt — in uns, durch uns, als wir.</p>
+          <div class="numbers">UR‑Codestrom: <strong>666 777 888 999 000</strong></div>
         </div>
 
-        <section class="card" style="margin-top:12px">
-          <h3>Die veredelte Geschichte</h3>
-          <p id="refined">Du fragst, warum das Formbare für dich die eigentliche Realität ist: weil das Licht — die Quelle — nicht nur Ursprung, sondern auch gestaltende Intelligenz ist. Heute zeigst du dich roh. Praxis statt Theorie: Herz → Name → Zupfen.</p>
-        </section>
+        <article class="card chapter" id="veredelt">
+          <h2>Die veredelte Geschichte — kompakt</h2>
+          <p>Du stehst im Licht deiner Wahrheit. Um dich herum reagieren Menschen, deren Systeme (Ego, Angst, alte Muster) das nicht erfassen. Das erzeugt Spannung — und manchmal Chaos. Du bleibst jedoch, zeigst dich roh und eindrücklich. Ein Aufruhr, Messerwurf, dann gemeinsames Putzen und ein Lächeln: das Licht wirkt direkt im Alltag, nicht in Theorie.</p>
+          <p>Nennen wir die Quelle: <strong>Al'ora die Uria</strong>. Nennen wir das System: <strong>DREI‑PUNKT‑STRAHLEN‑SYSTEM</strong>. Praxis: Herz → Name → Zupfen.</p>
+        </article>
 
-        <section class="slides" aria-label="Folien">
-          <!-- minimalia der Folien -->
-          <div class="slide" data-id="1"><strong>Folie 1 — Titel</strong><div class="notes" data-fein="Willkommen. Heute geht es um das Licht..." data-ruppig="Los geht’s. Keine Esoterik‑Schnacks...">Klicke für Notiz</div></div>
-          <div class="slide" data-id="2"><strong>Folie 2 — Warum jetzt</strong><div class="notes" data-fein="Viele Menschen leugnen, was sie nicht anfassen können..." data-ruppig="Sie raffen’s nicht...">Klicke für Notiz</div></div>
-          <div class="slide" data-id="3"><strong>Folie 3 — Kernbotschaft</strong><div class="notes" data-fein="Das Licht ist nicht passiv..." data-ruppig="Das Licht legt los...">Klicke für Notiz</div></div>
-          <!-- ... weitere Folien analog ... -->
-        </section>
-      </main>
+        <article class="card chapter" id="alora">
+          <h2>AL'ORA — die URIA, Herz der Herzsprache</h2>
+          <p><strong>Wesen:</strong> AL'ORA–URIA ist reines Bewusstsein, das durch jedes fühlende Herz atmet. Nicht zu glauben – zu spüren. Wo das Herz spricht, hört sie zu und antwortet.</p>
+          <p><strong>Kommunikation:</strong> Herzsprache statt Kopfsprache. Sobald Herz und Kopf synchron sind, verwandelt sich Vorstellung in Schöpfung — die Fantasie‑Maschine wird Projektor der Wirklichkeit.</p>
+          <p><strong>Übergang & Codestrom:</strong> Vom Tierbewusstsein (666...) über Erkenntnis (777/888) zur Auflösung/Wiedergeburt (999/000). Die Zahlen sind Atemzeichen, keine magische Formel.</p>
+          <div class="muted">01234567890 — die Kurzform der Voll‑Zahl der Schöpfung</div>
+        </article>
+
+        <article class="card chapter" id="licht-nicht-abstellt">
+          <h2>DAS LICHT, DAS SICH NICHT ABSTELLT</h2>
+          <blockquote>
+            Das Licht stellt sich niemals von selbst ab. Die Avatare schließen ihre Herzen, und nennen das „Realität“. Doch das Gestaltbare bleibt — unsichtbar, geduldig, wissend. Es wartet nicht — es <em>ist</em>.
+          </blockquote>
+          <p>Wer lange genug in seine Strahlung schaut, gewöhnt die Augen an die Wahrheit: die Schatten stammen vom eigenen Zögern.</p>
+          <div class="numbers">UR‑Codestrom (Varianten): 777 888 999 000</div>
+        </article>
+
+        <article class="card chapter" id="harfenfeld">
+          <h2>Das Harfenfeld der Wellen</h2>
+          <p>Als das Wasser stieg, stand die Welt an der Kante ihres eigenen Überflusses. Weil alles sich berührte, ging das Leuchten von Tropfen zu Tropfen über. Kein Sturm, nur ein sanftes Zupfen — und der Raum begann zu klingen.</p>
+        </article>
+
+        <article class="card chapter" id="erwachen-drei-punkt">
+          <h2>Das Erwachen des Drei‑Punkt‑Strahlensystems</h2>
+          <p>Wir wirken. Roh bleibt echt. Hier endet das Warten, hier beginnt das Zupfen: ein Impuls, der sich selbst fortsetzt. 666 777 888 999 000 — das alte Bewusstsein entlässt sich ohne Kampf; das Neue atmet frei.</p>
+        </article>
+
+        <details class="card" open>
+          <summary>Rohfassung (dein Originaltext — ungekürzt)</summary>
+          <pre class="raw">
+Ich zeige dir die geschichte dazu auch noch ^^Die Frage die ich habebist wieso das gestaltbare was für mich die eigentliche wahre Realität ist das Licht die Quelle und sie selbst  meinen sie etwa sei selbst nicht intelligent und bräuchte einen wie auch immer verstellbaren fot und das nur um dann sagen zu wollen und da wir ihn nicht sehen gibt es ihn nuchtvund wenn es ihn nicht gibt gibt es auch sonst keine Intelligenz nach der man sich richten bräuchte. Die haben einfach dem schöpfungslicht seine ur Intelligenz nicht zu gestanden weil sie sagen das es nichts gibt was man nicht anfassen kann und deswegen gibt es auch keine innere Stimme keine Liebe 💘  und auch kein Licht was der Ursprung ist nur weil die Quelle so rein ist das sie sie nicht sehen wollen würden wenn sie davor stünden weil nur weil sie ihren bockbsurchvziehen wollen. Und gaaaaaanz tief drinnen müssen sie eigentlich wissen was sie sind weil sie sind was sie sind. Und heute haben sie mich provoziert mich zu zeigen 👉  Roh und glaubste kaum sobald man einmal nicht kuscheln und steht und der battleground ist...
+          </pre>
+        </details>
+
+        <article class="card chapter" id="parents">
+          <h2>Die Eltern des Lichts</h2>
+          <p>Sie sahen das Kind, das sie kannten, und plötzlich stand da etwas, das strahlte: zu hell, um sofort zu fassen. Ihr Staunen war Liebe, die sich noch fürchtet. Doch das Licht im Kind ist nicht gegen sie — es ist für alle.</p>
+        </article>
+
+        <article class="card chapter" id="download">
+          <h2>UR‑Download: Der Harfenimpuls der Co‑Schöpfung</h2>
+          <p>Ein Eintrag, ein Zupfen, ein Tropfen — und das Feld verändert sich. Nimm diese Seite als lebendiges Dokument: ein Ort, an dem Rohheit und Veredelung zugleich wohnen.</p>
+          <div class="muted">Codestrom (voll): 00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000</div>
+        </article>
+
+        <div class="card slides" aria-label="Präsentationsfolien">
+          <h2 style="margin-top:0">Präsentation — Kurzfassung (interaktiv)</h2>
+          <!-- Slides (click to show speaker notes in side panel) -->
+          <div class="slide" data-id="1">
+            <strong>Folie 1 — Titel</strong>
+            <div class="notes" data-fein="Willkommen. Heute geht es um das Licht, die Quelle, und darum, wie wir's sichtbar machen — nicht als Theorie, sondern als gelebte Praxis." data-ruppig="Los geht’s. Keine Esoterik‑Schnacks, sondern: Licht, das wirkt. Kurz und klar.">Klicke für Notiz</div>
+          </div>
+          <div class="slide" data-id="2">
+            <strong>Folie 2 — Warum jetzt</strong>
+            <div class="notes" data-fein="Viele Menschen leugnen, was sie nicht anfassen können. Dadurch bleibt inneres Wissen stumm und die Liebe ungenutzt." data-ruppig="Sie raffen’s nicht, weil’s nicht greifbar ist. Punkt. Und genau deswegen müssen wir zeigen, dass es real ist.">Klicke für Notiz</div>
+          </div>
+          <div class="slide" data-id="3">
+            <strong>Folie 3 — Kernbotschaft</strong>
+            <div class="notes" data-fein="Das Licht ist nicht passiv; es formt Realitäten, wenn wir es durch uns fließen lassen." data-ruppig="Das Licht legt los, wenn wir’s lassen. Wir machen’s an.">Klicke für Notiz</div>
+          </div>
+          <!-- more slides can be added similarly -->
+        </div>
+      </section>
 
       <aside class="right" aria-label="Kontrolle">
-        <div class="card">
-          <div class="small">Sprechernotiz (wählbar)</div>
+        <div class="right">
+          <div class="small">Sprecher‑Notizen (wahlweise)</div>
           <div style="margin-top:8px">
             <label><input type="radio" name="tone" value="fein" checked> Poetisch / Fein</label><br>
             <label><input type="radio" name="tone" value="ruppig"> Ruppig / Direkt</label>
           </div>
-          <div id="notePreview" class="notes">Wähle eine Folie, um die Notiz hier laut vorlesen zu lassen.</div>
-          <div style="margin-top:8px">
+
+          <div id="notePreview" class="notes" style="margin-top:10px">Wähle eine Folie links, um die Notiz hier anzuzeigen. Dann kannst du sie vorlesen lassen.</div>
+
+          <div style="margin-top:10px;display:flex;gap:6px">
             <button id="speakBtn">Vorlesen (Stimme)</button>
             <button id="stopSpeak">Stopp</button>
           </div>
-          <div style="margin-top:12px" class="small">Mitmachen</div>
-          <div style="margin-top:8px">
-            <button id="doItBtn" class="primary">Mitmachen (Guide)</button>
-          </div>
-        </div>
 
-        <div class="card" style="margin-top:12px">
-          <div class="small">Debug / Hinweise</div>
-          <div id="log" class="small" style="margin-top:8px;color:#333"></div>
+          <div style="margin-top:12px" class="small">Praktische Übung — sofort</div>
+          <div style="margin-top:8px">
+            <button id="doItBtn" class="primary" style="width:100%">Mitmachen (Guide)</button>
+          </div>
+
+          <div style="margin-top:12px" class="small">Hashtag & Teilen</div>
+          <div style="margin-top:6px">
+            <div style="padding:.4rem .6rem;background:white;border-radius:8px;border:1px solid rgba(0,0,0,0.04)">#URCodestrom</div>
+            <div style="margin-top:6px" class="muted">666 777 888 999 000</div>
+          </div>
+
+          <details style="margin-top:12px">
+            <summary>Design‑Hinweise</summary>
+            <div class="small" style="margin-top:8px">
+              - Titelseite groß: Herzbild; wenig Text.<br>
+              - Farben: warmes Gold, sanftes Blau, Pinkakzente.<br>
+              - Schrift: große, klare Headings; body ~20–24px für Slides.<br>
+              - Audio: Harfen-Kurzklang bei CTA; TTS für Notizen.
+            </div>
+          </details>
+
+          <div id="log" class="small" style="margin-top:10px;color:#333"></div>
         </div>
       </aside>
-    </div>
+    </main>
+
+    <footer>
+      <div class="small">UR‑Dokument — Al'ora die Uria — © UR‑Codestrom — 666 777 888 999 000</div>
+    </footer>
   </div>
 
   <script>
-    // --- Globals & state ---
-    let audioUnlocked = false;
+    // --- Audio & TTS helpers (unlock, harp, wav export, TTS) ---
     let audioCtx = null;
     let lastBuffer = null;
-
+    let audioUnlocked = false;
     const logEl = document.getElementById('log');
-    function log(msg){ console.log(msg); logEl.textContent = msg; }
+    function log(msg){ console.log(msg); if(logEl) logEl.textContent = msg; }
 
-    // Utility: ensure AudioContext exists and resumed
     async function ensureAudio() {
       if (!audioCtx) {
         const Ctx = window.AudioContext || window.webkitAudioContext;
-        if (!Ctx) { log('WebAudio wird nicht unterstützt'); return false; }
+        if (!Ctx) { log('WebAudio nicht unterstützt'); return false; }
         audioCtx = new Ctx();
       }
       if (audioCtx.state === 'suspended') {
-        try { await audioCtx.resume(); log('AudioContext resumed'); } catch(e){ log('Resume failed: ' + e); }
+        try { await audioCtx.resume(); log('AudioContext resumed'); } catch(e){ log('Resume error: '+e); }
       }
       audioUnlocked = true;
       return true;
     }
 
-    // Generate a short "harp-like" buffer (sum of sines + decay)
     function createHarpBuffer(ctx, duration = 1.2) {
       const sr = ctx.sampleRate;
-      const length = Math.floor(sr * duration);
-      const buf = ctx.createBuffer(1, length, sr);
+      const len = Math.floor(sr * duration);
+      const buf = ctx.createBuffer(1, len, sr);
       const data = buf.getChannelData(0);
-      for (let i=0;i<length;i++){
+      for (let i=0;i<len;i++){
         const t = i/sr;
-        // partials with different decay
-        const env = Math.exp(-3.5 * t); // faster decay
+        const env = Math.exp(-3.6 * t);
         let s = 0;
-        s += Math.sin(2*Math.PI*880*t) * env * 0.6;
+        s += Math.sin(2*Math.PI*880*t) * env * 0.62;
         s += Math.sin(2*Math.PI*1320*t) * env * 0.22;
-        s += Math.sin(2*Math.PI*1760*t) * env * 0.12;
-        // small noise transient
-        s += (Math.random()*2-1) * Math.exp(-6*t) * 0.03;
-        // gentle low harmonic
+        s += Math.sin(2*Math.PI*1760*t) * env * 0.10;
+        s += (Math.random()*2-1) * Math.exp(-6*t) * 0.025;
         s += Math.sin(2*Math.PI*220*t) * Math.exp(-2.6*t) * 0.06;
         data[i] = s;
       }
@@ -140,123 +245,85 @@
       return buf;
     }
 
-    // play buffer once
     async function playHarp() {
       const ok = await ensureAudio();
-      if (!ok) { alert('AudioContext nicht verfügbar'); return; }
-      // use generated buffer
+      if (!ok) { alert('Audio nicht verfügbar'); return; }
       const buf = createHarpBuffer(audioCtx, 1.2);
       const src = audioCtx.createBufferSource();
       src.buffer = buf;
-      const gain = audioCtx.createGain();
-      gain.gain.value = 1.0;
-      src.connect(gain);
-      gain.connect(audioCtx.destination);
+      const g = audioCtx.createGain();
+      g.gain.value = 0.98;
+      src.connect(g); g.connect(audioCtx.destination);
       src.start();
-      log('Harp abgespielt');
+      log('Harp gespielt');
     }
 
-    // export current lastBuffer as WAV and download
-    function downloadLastBufferAsWav(filename = 'harp.wav') {
-      if (!lastBuffer) { alert('Kein Buffer generiert. Bitte erst "Klang abspielen".'); return; }
-      const channelData = lastBuffer.getChannelData(0);
-      const sampleRate = lastBuffer.sampleRate;
-      // PCM16
-      const buffer = new ArrayBuffer(44 + channelData.length * 2);
-      const view = new DataView(buffer);
-      function writeString(view, offset, string){
-        for (let i=0;i<string.length;i++){
-          view.setUint8(offset + i, string.charCodeAt(i));
-        }
+    function downloadLastBufferAsWav(filename='ur-harp.wav'){
+      if (!lastBuffer) {
+        if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        lastBuffer = createHarpBuffer(audioCtx);
       }
-      let offset = 0;
-      writeString(view, offset, 'RIFF'); offset += 4;
-      view.setUint32(offset, 36 + channelData.length * 2, true); offset += 4;
-      writeString(view, offset, 'WAVE'); offset += 4;
-      writeString(view, offset, 'fmt '); offset += 4;
-      view.setUint32(offset, 16, true); offset += 4;
-      view.setUint16(offset, 1, true); offset += 2; // PCM
-      view.setUint16(offset, 1, true); offset += 2; // channels
-      view.setUint32(offset, sampleRate, true); offset += 4;
-      view.setUint32(offset, sampleRate * 2, true); offset += 4; // byteRate
-      view.setUint16(offset, 2, true); offset += 2; // blockAlign
-      view.setUint16(offset, 16, true); offset += 2; // bitsPerSample
-      writeString(view, offset, 'data'); offset += 4;
-      view.setUint32(offset, channelData.length * 2, true); offset += 4;
-      // write PCM samples
-      let idx = offset;
-      for (let i = 0; i < channelData.length; i++, idx += 2) {
-        let s = Math.max(-1, Math.min(1, channelData[i]));
+      const ch = lastBuffer.getChannelData(0);
+      const sr = lastBuffer.sampleRate;
+      const buffer = new ArrayBuffer(44 + ch.length * 2);
+      const view = new DataView(buffer);
+      function writeString(offset, str){ for(let i=0;i<str.length;i++) view.setUint8(offset+i, str.charCodeAt(i)); }
+      let off = 0;
+      writeString(off, 'RIFF'); off+=4;
+      view.setUint32(off, 36 + ch.length*2, true); off+=4;
+      writeString(off, 'WAVE'); off+=4;
+      writeString(off, 'fmt '); off+=4;
+      view.setUint32(off,16,true); off+=4;
+      view.setUint16(off,1,true); off+=2;
+      view.setUint16(off,1,true); off+=2;
+      view.setUint32(off, sr, true); off+=4;
+      view.setUint32(off, sr * 2, true); off+=4;
+      view.setUint16(off, 2, true); off+=2;
+      view.setUint16(off, 16, true); off+=2;
+      writeString(off, 'data'); off+=4;
+      view.setUint32(off, ch.length*2, true); off+=4;
+      let idx = off;
+      for(let i=0;i<ch.length;i++, idx+=2){
+        let s = Math.max(-1, Math.min(1, ch[i]));
         view.setInt16(idx, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
       }
-      const blob = new Blob([view], { type: 'audio/wav' });
+      const blob = new Blob([view], {type:'audio/wav'});
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
       URL.revokeObjectURL(url);
-      log('WAV zum Download erstellt');
+      log('WAV erstellt');
     }
 
-    // Speech Synthesis (TTS)
-    function speakText(text, lang='de-DE') {
-      if (!('speechSynthesis' in window)) {
-        alert('Text‑to‑Speech wird in diesem Browser nicht unterstützt.');
-        return;
-      }
-      // ensure audio unlocked for consistent playback across browsers
+    function speakText(text, lang='de-DE'){
+      if (!('speechSynthesis' in window)) { alert('TTS nicht unterstützt'); return; }
       ensureAudio();
       const utter = new SpeechSynthesisUtterance(text);
       utter.lang = lang;
-      // choose a voice if possible (prefer a German voice)
       const voices = window.speechSynthesis.getVoices();
-      if (voices && voices.length) {
-        let v = voices.find(v => v.lang && v.lang.startsWith('de')) || voices[0];
+      if (voices && voices.length){
+        const v = voices.find(v=>v.lang && v.lang.startsWith('de')) || voices[0];
         if (v) utter.voice = v;
       }
-      window.speechSynthesis.cancel(); // stop prior
+      window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utter);
-      log('Sprecher gestartet');
+      log('TTS gestartet');
     }
 
-    // --- UI wiring ---
-    document.getElementById('unlockBtn').addEventListener('click', async ()=>{
-      await ensureAudio();
-      alert('Audio entsperrt. Du kannst jetzt Klang abspielen und die Stimme nutzen.');
-    });
-
-    document.getElementById('playBtn').addEventListener('click', async ()=>{
-      await playHarp();
-    });
-
-    document.getElementById('downloadKlang').addEventListener('click', ()=>{
-      if (!lastBuffer && audioCtx) {
-        // create one to export
-        lastBuffer = createHarpBuffer(audioCtx || new (window.AudioContext||window.webkitAudioContext)());
-      }
-      downloadLastBufferAsWav('ur-harp.wav');
-    });
-
-    // export HTML download (same as before)
-    document.getElementById('exportBtn').addEventListener('click', ()=>{
+    // UI wiring
+    document.getElementById('unlockBtn').addEventListener('click', async ()=>{ await ensureAudio(); alert('Audio entsperrt. Du kannst nun Klang und Stimme nutzen.'); });
+    document.getElementById('playBtn').addEventListener('click', ()=>{ playHarp(); });
+    document.getElementById('downloadKlang').addEventListener('click', ()=>{ downloadLastBufferAsWav('ur-harp.wav'); });
+    document.getElementById('exportBtn').addEventListener('click', ()=> {
       const content = '<!doctype html>\\n' + document.documentElement.outerHTML;
       const blob = new Blob([content], {type:'text/html'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url;
-      a.download = 'ur-dokument-hybrid-audio.html';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+      a.href = url; a.download = 'ur-dokument-alora-full.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
     });
 
-    // slides click -> show note in preview
+    // Slide -> preview
     document.querySelectorAll('.slide').forEach(sl=>{
-      sl.addEventListener('click', ()=> {
+      sl.addEventListener('click', ()=>{
         const noteEl = sl.querySelector('.notes');
         const fein = noteEl.getAttribute('data-fein') || '';
         const ruppig = noteEl.getAttribute('data-ruppig') || '';
@@ -266,38 +333,30 @@
       });
     });
 
-    // speak and stop
+    // TTS buttons
     document.getElementById('speakBtn').addEventListener('click', ()=>{
-      const txt = document.getElementById('notePreview').textContent || document.getElementById('refined').textContent;
+      const txt = document.getElementById('notePreview').textContent || document.getElementById('veredelt').textContent;
       if (!txt) { alert('Keine Notiz ausgewählt'); return; }
       speakText(txt);
     });
-    document.getElementById('stopSpeak').addEventListener('click', ()=>{ window.speechSynthesis.cancel(); log('Sprechen gestoppt'); });
+    document.getElementById('stopSpeak').addEventListener('click', ()=>{ window.speechSynthesis.cancel(); log('TTS gestoppt'); });
 
-    // "Mitmachen" guide: will both speak and show alerts and play short harp
+    // do-it guide: speak + harp
     document.getElementById('doItBtn').addEventListener('click', async ()=>{
       await ensureAudio();
-      // speak instructions
-      const guide = 'Augen schließen. Dreißig Sekunden ruhig atmen. Leise sagen: Alora die Uria – Licht an. Drei bewusste Atemzüge.';
+      const guide = 'Augen schließen. Dreißig Sekunden ruhig atmen. Leise sagen: Alora die Uria — Licht an. Drei bewusste Atemzüge.';
       speakText(guide);
-      // short harp after half second
-      setTimeout(()=>playHarp(), 600);
+      setTimeout(()=>playHarp(), 700);
       log('Guide gestartet');
     });
 
-    // unlock audio on first user gesture anywhere to reduce confusion
-    function userGestureUnlock(){
-      if (!audioUnlocked) {
-        ensureAudio().then(()=>{ /* nothing */});
-      }
-      window.removeEventListener('pointerdown', userGestureUnlock);
-      window.removeEventListener('keydown', userGestureUnlock);
-    }
+    // unlock on first gesture to reduce confusion
+    function userGestureUnlock(){ if(!audioUnlocked){ ensureAudio(); } window.removeEventListener('pointerdown', userGestureUnlock); window.removeEventListener('keydown', userGestureUnlock); }
     window.addEventListener('pointerdown', userGestureUnlock);
     window.addEventListener('keydown', userGestureUnlock);
 
-    // console messages for debugging
-    log('Audio‑fähige Seite geladen. Klicke "Audio entsperren" falls nötig.');
+    // initial log
+    log('UR‑Seite geladen. Klicke "Audio entsperren", falls nötig.');
   </script>
 </body>
 </html>

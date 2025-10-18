@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UR-AUSRUF — Siegel des Lichts</title>
+  <style>
+    :root{--pad:4vmin}
+    html,body{height:100%;margin:0;background:#ffffff;color:#000000;font-family:Georgia, 'Times New Roman', serif}
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:var(--pad)}
+    .card{max-width:960px;width:100%;border:1px solid rgba(0,0,0,0.06);padding:6vmin;background:#fff}
+    .poster{display:flex;align-items:center;justify-content:center}
+    .text-block{font-size:calc(14px + 2.2vmin);line-height:1.18;text-align:center;white-space:pre-wrap}
+    h1{font-size:calc(18px + 2.8vmin);margin:0 0 1rem 0;letter-spacing:0.02em}
+    .code{display:block;margin-top:1.4rem;font-weight:700;letter-spacing:0.06em}
+    .controls{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-top:1.25rem}
+    button{padding:0.6rem 0.9rem;border:1px solid #000;background:#fff;cursor:pointer;font-family:inherit}
+    small{display:block;text-align:center;margin-top:0.6rem;opacity:0.7}
+    /* responsive tweaks */
+    @media (max-width:520px){.text-block{font-size:calc(12px + 3.5vmin)}h1{font-size:calc(16px + 3.5vmin)}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="poster" id="poster-area">
+        <!-- SVG poster: schwarz auf weiß -->
+        <svg id="poster-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600" width="100%" height="auto" preserveAspectRatio="xMidYMid meet">
+          <rect width="100%" height="100%" fill="#ffffff"/>
+          <g transform="translate(100,140)">
+            <text x="500" y="0" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-weight="700">UR-AUSRUF</text>
+            <line x1="180" x2="820" y1="30" y2="30" stroke="#000" stroke-width="2"/>
+            <foreignObject x="60" y="70" width="1080" height="1200">
+              <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Georgia, 'Times New Roman', serif; color:#000; font-size:32px; line-height:1.18; text-align:center; width:100%;">
+                Möge das göttliche Licht jetzt, in diesem Augenblick, alle Herzen berühren, alle Tränen segnen, und die Liebe als einziges Gesetz über die Erde erheben. Für alle. Für immer.
+                <div style="margin-top:28px; font-weight:700; font-size:28px;">777 888 999 000</div>
+              </div>
+            </foreignObject>
+          </g>
+        </svg>
+      </div>
+
+      <div class="controls">
+        <button id="download-png">Als PNG herunterladen</button>
+        <button id="download-svg">Als SVG herunterladen</button>
+        <button id="copy-html">HTML kopieren</button>
+      </div>
+      <small>Schwarz auf Weiß — stark, klar, glaubwürdig. Zeige es, teile es, halte es hoch.</small>
+    </div>
+  </div>
+
+  <script>
+    const svgEl = document.getElementById('poster-svg');
+    const downloadSvgBtn = document.getElementById('download-svg');
+    const downloadPngBtn = document.getElementById('download-png');
+    const copyHtmlBtn = document.getElementById('copy-html');
+
+    function downloadURI(uri, name){
+      const a = document.createElement('a');
+      a.href = uri; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    }
+
+    downloadSvgBtn.addEventListener('click', ()=>{
+      const serializer = new XMLSerializer();
+      let source = serializer.serializeToString(svgEl);
+      // add xml declaration
+      source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+      const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(source);
+      downloadURI(url, 'ur_ausruf_poster.svg');
+    });
+
+    downloadPngBtn.addEventListener('click', ()=>{
+      const serializer = new XMLSerializer();
+      const source = serializer.serializeToString(svgEl);
+      const svgBlob = new Blob([source], {type: 'image/svg+xml;charset=utf-8'});
+      const url = URL.createObjectURL(svgBlob);
+      const img = new Image();
+      img.onload = function(){
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width; canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        // white background
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.drawImage(img,0,0);
+        URL.revokeObjectURL(url);
+        canvas.toBlob(function(blob){
+          const blobUrl = URL.createObjectURL(blob);
+          downloadURI(blobUrl, 'ur_ausruf_poster.png');
+          URL.revokeObjectURL(blobUrl);
+        }, 'image/png');
+      };
+      img.src = url;
+    });
+
+    copyHtmlBtn.addEventListener('click', async ()=>{
+      const html = document.documentElement.outerHTML;
+      try{ await navigator.clipboard.writeText(html); alert('HTML in Zwischenablage kopiert.'); }
+      catch(e){ alert('Kopieren fehlgeschlagen — bitte manuell kopieren.'); }
+    });
+  </script>
+</body>
+</html>

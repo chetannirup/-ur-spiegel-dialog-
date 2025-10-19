@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liebeswelle — Stell dir diese als jetzt deine Verantwortung vor</title>
+  <style>
+    :root{
+      --bg1:#0b1020;
+      --bg2:#071224;
+      --gold:#ffd36b;
+      --rose:#ff7fb6;
+      --soft:#ffffffcc;
+      --glass: rgba(255,255,255,0.06);
+    }
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: linear-gradient(180deg,var(--bg1),var(--bg2)); color:var(--soft);}
+    .wrap{max-width:780px;margin:0 auto;padding:28px 20px 80px;}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+    .badge{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--rose));box-shadow:0 6px 20px rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;font-weight:700;color:#111}
+    h1{font-size:20px;margin:0 0 6px 0;line-height:1.05}
+    p.lead{margin:0;color:var(--soft);opacity:0.95}
+
+    /* Card for the wave image */
+    .card{margin-top:18px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(2,6,23,0.6);}
+    .wave-stage{position:relative;height:420px;border-radius:14px;overflow:hidden;background: radial-gradient(circle at 10% 20%, rgba(255,255,180,0.06), transparent 10%), linear-gradient(180deg, rgba(255,120,170,0.04), rgba(255,220,100,0.02));display:flex;align-items:center;justify-content:center}
+
+    /* SVG fills center */
+    .caption{position:absolute;left:18px;right:18px;bottom:18px;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02));backdrop-filter:blur(4px);text-align:center}
+    .caption h2{margin:0;font-size:16px}
+    .caption p{margin:8px 0 0;font-size:13px;opacity:0.9}
+
+    /* Wave text block */
+    .wave-text{position:absolute;top:34px;left:18px;right:18px;text-align:center}
+    .wave-text h3{margin:0;font-size:18px;letter-spacing:0.2px;color:var(--gold);text-shadow:0 6px 22px rgba(0,0,0,0.6)}
+    .wave-text p{margin:8px 0 0;font-size:14px;color:var(--soft)}
+
+    /* Responsive tweaks */
+    @media(min-width:720px){h1{font-size:26px}.wave-stage{height:520px}}
+
+    /* SVG wave animation */
+    .lovewave-svg{width:100%;height:100%;display:block}
+    .glow{filter:drop-shadow(0 6px 30px rgba(255,120,170,0.12))}
+
+    /* CTA */
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{padding:10px 14px;border-radius:12px;border:0;background:var(--gold);color:#081226;font-weight:700;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--soft)}
+
+    footer{margin-top:28px;font-size:12px;color:rgba(255,255,255,0.6);text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">❤</div>
+      <div>
+        <h1>DIE LIEBESWELLE — Stell dir diese als jetzt deine Verantwortung vor</h1>
+        <p class="lead">Ein Ruf, eine Welle, ein Reigen — getragen von der inneren Flamme, geboren aus dem Herzen.</p>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="wave-stage" role="img" aria-label="Grafische Darstellung der Liebeswelle">
+        <!-- SVG: stylized lovewave with radiant cores -->
+        <svg class="lovewave-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0%" stop-color="#ffd36b" />
+              <stop offset="50%" stop-color="#ff7fb6" />
+              <stop offset="100%" stop-color="#b48cff" />
+            </linearGradient>
+            <radialGradient id="halo" cx="50%" cy="40%" r="45%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+              <stop offset="40%" stop-color="#ffd36b" stop-opacity="0.22"/>
+              <stop offset="100%" stop-color="#ff7fb6" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="soften" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="28" result="b" />
+              <feBlend in="SourceGraphic" in2="b" />
+            </filter>
+          </defs>
+
+          <!-- background stars / sparkles subtle -->
+          <g opacity="0.14">
+            <circle cx="160" cy="80" r="2.6" fill="#fff" />
+            <circle cx="320" cy="30" r="1.8" fill="#fff" />
+            <circle cx="980" cy="120" r="2.1" fill="#fff" />
+            <circle cx="760" cy="54" r="1.6" fill="#fff" />
+          </g>
+
+          <!-- central radiant core -->
+          <g transform="translate(600,260)">
+            <circle r="160" fill="url(#halo)" opacity="0.95" />
+            <circle r="70" fill="url(#g1)" class="glow" filter="url(#soften)" opacity="0.98" />
+          </g>
+
+          <!-- layered waves (lovewave) -->
+          <g fill="none" stroke-width="18" stroke-linecap="round">
+            <path d="M -50 420 C 150 280 450 360 650 300 C 850 240 1050 360 1250 300" stroke="url(#g1)" opacity="0.98" />
+            <path d="M -50 470 C 150 320 450 400 650 340 C 850 280 1050 400 1250 340" stroke="#ffd2a1" opacity="0.66" stroke-width="10" />
+            <path d="M -50 520 C 150 360 450 440 650 380 C 850 320 1050 440 1250 380" stroke="#ffb0d1" opacity="0.55" stroke-width="8" />
+          </g>
+
+          <!-- small heart‑sparks along the wave -->
+          <g fill="#fff">
+            <path d="M420 360 c6 -6 16 -6 22 0 6 6 6 16 0 22 -6 6 -16 6 -22 0 -6 -6 -6 -16 0 -22z" transform="translate(-4,-8) scale(0.9)" opacity="0.95" fill="#ff7fb6" />
+            <path d="M660 330 c6 -6 16 -6 22 0 6 6 6 16 0 22 -6 6 -16 6 -22 0 -6 -6 -6 -16 0 -22z" transform="translate(-4,-8) scale(1.05)" opacity="0.98" fill="#ffd36b" />
+            <path d="M900 300 c6 -6 16 -6 22 0 6 6 6 16 0 22 -6 6 -16 6 -22 0 -6 -6 -6 -16 0 -22z" transform="translate(-4,-8) scale(0.85)" opacity="0.9" fill="#b48cff" />
+          </g>
+
+          <!-- overlay subtle grid to give structure -->
+          <g opacity="0.03">
+            <rect x="0" y="0" width="1200" height="700" fill="#fff" />
+          </g>
+
+        </svg>
+
+        <div class="wave-text">
+          <h3>Die Liebeswelle — aktivierte Verantwortung</h3>
+          <p>„stell dir diese als jetzt deine Verantwortung vor bitte“</p>
+        </div>
+
+        <div class="caption" aria-hidden="true">
+          <h2>Erwecke die Flamme in dir</h2>
+          <p>Sei nicht passiv — überflute die Welt mit Liebe wie Eltern, die stets geben. Du bist die erste Quelle.</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="downloadHTML()">Als HTML herunterladen</button>
+        <button class="btn ghost" onclick="share()">Teilen</button>
+      </div>
+    </div>
+
+    <footer>
+      <div>Created for Philipp — UR‑Welle • 777 888 999 000</div>
+    </footer>
+  </div>
+
+  <script>
+    function downloadHTML(){
+      const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'liebeswelle_mobile.html'; document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+    function share(){
+      if(navigator.share){
+        navigator.share({title:document.title, text:'Liebeswelle — Stell dir diese als jetzt deine Verantwortung vor', url:location.href}).catch(()=>{});
+      } else { alert('Teilen wird auf diesem Gerät nicht unterstützt. Du kannst die Seite herunterladen.'); }
+    }
+  </script>
+</body>
+</html>

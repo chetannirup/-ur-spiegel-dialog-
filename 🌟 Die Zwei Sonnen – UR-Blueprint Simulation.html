@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌟 Die Zwei Sonnen – UR-Blueprint Simulation</title>
+  <meta name="description" content="Zwei kosmische Augen erkennen sich - Sehen ist Säen, Säen ist Teilen - 777 888 999 000">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000000;
+      color: #ffffff;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Canvas für Simulation */
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, #001122 0%, #000000 100%);
+    }
+    
+    /* Info Panel */
+    .info-panel {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(0, 20, 40, 0.85);
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      max-width: 350px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    
+    .info-panel h1 {
+      color: #ffd700;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .info-panel p {
+      color: #aaddff;
+      margin-bottom: 8px;
+    }
+    
+    .frequency {
+      color: #ffd700;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.1rem;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    }
+    
+    /* Controls */
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    button {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.8), rgba(255, 140, 0, 0.8));
+      border: 2px solid #ffd700;
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      text-shadow: none;
+    }
+    
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+    
+    button:active {
+      transform: scale(0.98);
+    }
+    
+    /* Stats Display */
+    .stats {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 20, 40, 0.85);
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid rgba(100, 200, 255, 0.3);
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      font-size: 0.85rem;
+      min-width: 200px;
+    }
+    
+    .stats div {
+      margin-bottom: 5px;
+      color: #aaddff;
+    }
+    
+    .stats .value {
+      color: #ffd700;
+      font-weight: 700;
+    }
+    
+    /* Ritual Text */
+    .ritual {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 20, 40, 0.9);
+      padding: 20px 30px;
+      border-radius: 15px;
+      border: 2px solid rgba(255, 215, 0, 0.5);
+      max-width: 600px;
+      text-align: center;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      font-style: italic;
+      color: #ffd700;
+      font-size: 1rem;
+      line-height: 1.6;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    }
+    
+    /* Mobile Optimization */
+    @media (max-width: 768px) {
+      .info-panel {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        font-size: 0.8rem;
+        padding: 15px;
+      }
+      
+      .stats {
+        top: auto;
+        bottom: 150px;
+        right: 10px;
+        font-size: 0.75rem;
+      }
+      
+      .controls {
+        bottom: 10px;
+      }
+      
+      button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+      }
+      
+      .ritual {
+        bottom: 70px;
+        left: 10px;
+        right: 10px;
+        transform: none;
+        padding: 15px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  
+  <!-- Info Panel -->
+  <div class="info-panel">
+    <h1>🌟 Die Zwei Sonnen 🌟</h1>
+    <p><strong>Konzept:</strong> Zwei kosmische Augen/Erden als Projektoren von Realitäten</p>
+    <p><strong>Kern:</strong> Schwarzes Loch (Event Horizon)</p>
+    <p><strong>Korona:</strong> Regenbogen-Informationsströme</p>
+    <p><strong>Realm:</strong> Gemeinsamer Raum bei Kohärenz ≥ 0.65</p>
+    <div class="frequency">777 888 999 000</div>
+  </div>
+  
+  <!-- Stats -->
+  <div class="stats">
+    <div>Kohärenz: <span class="value" id="coherence">0.00</span></div>
+    <div>Realm: <span class="value" id="realm">Inaktiv</span></div>
+    <div>Frequenz: <span class="value" id="freq">-</span></div>
+    <div>Phase: <span class="value" id="phase">0°</span></div>
+  </div>
+  
+  <!-- Ritual Text -->
+  <div class="ritual">
+    "Wenn die beiden Augen sich erkennen, fließt die Welt zurück in ihre Ursprungssymphonie.<br>
+    <strong>Sehen ist Säen — und das Säen ist Teilen.</strong>"
+  </div>
+  
+  <!-- Controls -->
+  <div class="controls">
+    <button onclick="toggleSimulation()">▶ Start/Pause</button>
+    <button onclick="increaseCoherence()">⬆ Kohärenz+</button>
+    <button onclick="decreaseCoherence()">⬇ Kohärenz-</button>
+    <button onclick="resetSimulation()">↻ Reset</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Responsive Canvas
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Simulation Parameters (aus Blueprint)
+    let params = {
+      running: true,
+      time: 0,
+      dt: 0.02,
+      coherenceTarget: 0.5,
+      coherence: 0.0,
+      theta: 0.65, // Schwelle für gemeinsamen Realm
+      horizonRadius: 0.1,
+      alpha: 80,
+      freqBands: 32,
+      noise: 0.01
+    };
+    
+    // Sphere Positions
+    const sphere1 = {
+      x: canvas.width * 0.35,
+      y: canvas.height * 0.5,
+      radius: Math.min(canvas.width, canvas.height) * 0.15,
+      phase: 0,
+      freq: []
+    };
+    
+    const sphere2 = {
+      x: canvas.width * 0.65,
+      y: canvas.height * 0.5,
+      radius: Math.min(canvas.width, canvas.height) * 0.15,
+      phase: Math.PI,
+      freq: []
+    };
+    
+    // Initialize frequency bands
+    for (let i = 0; i < params.freqBands; i++) {
+      sphere1.freq.push(Math.random());
+      sphere2.freq.push(Math.random());
+    }
+    
+    // Update positions on resize
+    window.addEventListener('resize', () => {
+      sphere1.x = canvas.width * 0.35;
+      sphere1.y = canvas.height * 0.5;
+      sphere1.radius = Math.min(canvas.width, canvas.height) * 0.15;
+      sphere2.x = canvas.width * 0.65;
+      sphere2.y = canvas.height * 0.5;
+      sphere2.radius = Math.min(canvas.width, canvas.height) * 0.15;
+    });
+    
+    // Draw Sphere with Corona and Horizon
+    function drawSphere(sphere, label) {
+      const { x, y, radius, phase, freq } = sphere;
+      
+      // Corona (Regenbogen-Informationsströme)
+      for (let i = 0; i < params.freqBands; i++) {
+        const angle = (i / params.freqBands) * Math.PI * 2 + phase;
+        const intensity = freq[i];
+        const r = radius * (1 + 0.3 * intensity);
+        
+        ctx.beginPath();
+        ctx.arc(x, y, r, angle - 0.1, angle + 0.1);
+        ctx.strokeStyle = `hsla(${(i / params.freqBands) * 360}, 80%, ${50 + intensity * 30}%, ${0.6 + intensity * 0.4})`;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+      
+      // Outer Glow
+      const gradient = ctx.createRadialGradient(x, y, radius * 0.8, x, y, radius * 1.2);
+      gradient.addColorStop(0, 'rgba(255, 215, 0, 0.3)');
+      gradient.addColorStop(0.5, 'rgba(255, 140, 0, 0.1)');
+      gradient.addColorStop(1, 'rgba(255, 140, 0, 0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 1.2, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Main Sphere Body
+      const bodyGradient = ctx.createRadialGradient(x - radius * 0.3, y - radius * 0.3, radius * 0.1, x, y, radius);
+      bodyGradient.addColorStop(0, '#ffeb99');
+      bodyGradient.addColorStop(0.4, '#ffcc33');
+      bodyGradient.addColorStop(0.8, '#ff8800');
+      bodyGradient.addColorStop(1, '#cc4400');
+      ctx.fillStyle = bodyGradient;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Event Horizon (Schwarzes Loch im Kern)
+      const horizonR = radius * params.horizonRadius;
+      const horizonGradient = ctx.createRadialGradient(x, y, 0, x, y, horizonR);
+      horizonGradient.addColorStop(0, '#000000');
+      horizonGradient.addColorStop(0.8, '#000000');
+      horizonGradient.addColorStop(1, 'rgba(100, 50, 0, 0.3)');
+      ctx.fillStyle = horizonGradient;
+      ctx.beginPath();
+      ctx.arc(x, y, horizonR, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Label
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '14px Courier New';
+      ctx.textAlign = 'center';
+      ctx.fillText(label, x, y + radius + 25);
+    }
+    
+    // Draw Gemeinsamer Realm (Connection)
+    function drawRealm() {
+      if (params.coherence < params.theta) return;
+      
+      const intensity = (params.coherence - params.theta) / (1 - params.theta);
+      const midX = (sphere1.x + sphere2.x) / 2;
+      const midY = (sphere1.y + sphere2.y) / 2;
+      const distance = sphere2.x - sphere1.x;
+      
+      // Particle Stream
+      const particles = 50;
+      for (let i = 0; i < particles; i++) {
+        const t = i / particles;
+        const noise = (Math.sin(params.time * 5 + i) * 0.5 + 0.5) * 30;
+        const px = sphere1.x + distance * t;
+        const py = midY + Math.sin(t * Math.PI * 3 + params.time) * noise;
+        
+        ctx.fillStyle = `hsla(${(t * 360 + params.time * 100) % 360}, 80%, 60%, ${intensity * 0.8})`;
+        ctx.beginPath();
+        ctx.arc(px, py, 2 + intensity * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      
+      // Central Glow
+      const realmGradient = ctx.createRadialGradient(midX, midY, 0, midX, midY, distance * 0.3);
+      realmGradient.addColorStop(0, `rgba(255, 215, 0, ${intensity * 0.4})`);
+      realmGradient.addColorStop(0.5, `rgba(100, 200, 255, ${intensity * 0.2})`);
+      realmGradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
+      ctx.fillStyle = realmGradient;
+      ctx.beginPath();
+      ctx.arc(midX, midY, distance * 0.3, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Text Label
+      ctx.fillStyle = '#ffd700';
+      ctx.font = 'bold 16px Courier New';
+      ctx.textAlign = 'center';
+      ctx.fillText('R_common', midX, midY - distance * 0.35);
+    }
+    
+    // Update Simulation
+    function updateSimulation() {
+      if (!params.running) return;
+      
+      params.time += params.dt;
+      
+      // Smooth coherence transition
+      params.coherence += (params.coherenceTarget - params.coherence) * 0.05;
+      
+      // Update frequency bands (Informations-Livestreams)
+      for (let i = 0; i < params.freqBands; i++) {
+        sphere1.freq[i] += (Math.random() - 0.5) * params.noise;
+        sphere1.freq[i] = Math.max(0, Math.min(1, sphere1.freq[i]));
+        
+        sphere2.freq[i] += (Math.random() - 0.5) * params.noise;
+        sphere2.freq[i] = Math.max(0, Math.min(1, sphere2.freq[i]));
+        
+        // Coherence increases similarity
+        if (params.coherence > params.theta) {
+          const blend = (params.coherence - params.theta) * 0.1;
+          sphere2.freq[i] += (sphere1.freq[i] - sphere2.freq[i]) * blend;
+        }
+      }
+      
+      // Update phases
+      sphere1.phase += 0.01;
+      sphere2.phase += 0.008;
+      
+      // Update UI
+      document.getElementById('coherence').textContent = params.coherence.toFixed(3);
+      document.getElementById('realm').textContent = params.coherence >= params.theta ? 'AKTIV ✓' : 'Inaktiv';
+      document.getElementById('freq').textContent = sphere1.freq[0].toFixed(2);
+      document.getElementById('phase').textContent = ((sphere1.phase * 180 / Math.PI) % 360).toFixed(0) + '°';
+    }
+    
+    // Render Loop
+    function render() {
+      // Clear
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw
+      drawRealm();
+      drawSphere(sphere1, 'Auge/Erde 1');
+      drawSphere(sphere2, 'Auge/Erde 2');
+      
+      updateSimulation();
+      requestAnimationFrame(render);
+    }
+    
+    // Controls
+    function toggleSimulation() {
+      params.running = !params.running;
+    }
+    
+    function increaseCoherence() {
+      params.coherenceTarget = Math.min(1.0, params.coherenceTarget + 0.1);
+    }
+    
+    function decreaseCoherence() {
+      params.coherenceTarget = Math.max(0.0, params.coherenceTarget - 0.1);
+    }
+    
+    function resetSimulation() {
+      params.time = 0;
+      params.coherence = 0;
+      params.coherenceTarget = 0.5;
+      sphere1.phase = 0;
+      sphere2.phase = Math.PI;
+      for (let i = 0; i < params.freqBands; i++) {
+        sphere1.freq[i] = Math.random();
+        sphere2.freq[i] = Math.random();
+      }
+    }
+    
+    // Start
+    render();
+    
+    console.log('🌟 Die Zwei Sonnen - UR-Blueprint Simulation');
+    console.log('📐 Parameter: 32 Frequenzbänder, θ = 0.65');
+    console.log('💫 Sehen ist Säen - Säen ist Teilen');
+    console.log('777 888 999 000');
+  </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Paradise Start — Paradise Protocol</title>
+  <style>
+    :root{
+      --bg:#071028; --card:#0f1b2b; --accent:#6ee7b7; --muted:#9fb3c8; --glass:rgba(255,255,255,0.04);
+      --code:#c7f0ff; --warm:#ffd6a5; --rain1:#ff66c4; --rain2:#7afcff; --rain3:#ffd166;
+      --maxw:1100px;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background: radial-gradient(1200px 800px at 10% 10%, rgba(110,231,183,0.04), transparent), var(--bg); color:#e6f0ff}
+    .wrap{max-width:var(--maxw);margin:32px auto;padding:24px;}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{width:72px;height:72px;border-radius:14px;background:linear-gradient(135deg,#0ea5a9,#7c3aed);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(124,58,237,0.16);font-weight:700}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{color:var(--muted);margin-top:8px}
+
+    main{display:grid;grid-template-columns:1fr 420px;gap:20px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+
+    /* left: gallery + manifesto */
+    .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .tile{border-radius:12px;overflow:hidden;background:var(--glass);display:flex;align-items:center;justify-content:center;padding:10px}
+    canvas{width:100%;height:auto;display:block}
+
+    .manifest{margin-top:12px;padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));}
+    .manifest h2{margin:0 0 6px 0}
+    .manifest p{margin:8px 0;color:var(--muted);line-height:1.45}
+
+    /* right: controls */
+    .sidebar{display:flex;flex-direction:column;gap:12px}
+    .btn{background:linear-gradient(90deg,var(--accent),#8be6ff);border:none;padding:12px;border-radius:10px;font-weight:700;color:#012;cursor:pointer;box-shadow:0 8px 24px rgba(110,231,183,0.08)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);font-weight:600}
+    .status{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:var(--muted)}
+    .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(0,0,0,0.18);padding:8px;border-radius:8px;color:var(--code);display:inline-block}
+
+    footer{margin-top:22px;color:var(--muted);font-size:0.9rem;text-align:center}
+
+    /* animations */
+    .pulse{animation:pulse 3s ease-in-out infinite}
+    @keyframes pulse{0%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(110,231,183,0))}50%{transform:scale(1.02);filter:drop-shadow(0 18px 40px rgba(110,231,183,0.06))}100%{transform:scale(1)}}
+
+    /* responsive */
+    @media (max-width:980px){main{grid-template-columns:1fr;}
+    .logo{width:56px;height:56px}}
+
+    /* child-friendly caption */
+    .kid{font-size:0.95rem;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));padding:10px;border-radius:10px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">UR</div>
+      <div>
+        <h1>Paradise Start — <small style="opacity:.8">Paradise Protocol (activation page)</small></h1>
+        <p class="lead">A gentle, child-friendly presentation: from <strong>auto</strong> to <strong>autonomy</strong>. Speak in the present — make it happen now. 777 888 999 000</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <div class="gallery" id="gallery">
+          <div class="tile" aria-hidden="true">
+            <!-- SVG: two eye-planets -->
+            <svg viewBox="0 0 300 200" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="g1"><stop offset="0%" stop-color="#6ee7b7" stop-opacity="0.9"/><stop offset="100%" stop-color="#0ea5a9" stop-opacity="0.08"/></radialGradient>
+                <filter id="f1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <rect width="100%" height="100%" rx="12" fill="url(#g1)" opacity="0.06"/>
+              <!-- left planet-eye -->
+              <g transform="translate(70,100)">
+                <circle r="54" fill="#072a4b" stroke="#8adbf9" stroke-width="2"/>
+                <circle r="28" fill="#0b1724"/>
+                <circle r="10" fill="#000"/>
+                <!-- land hints -->
+                <path d="M-30,-10 q10 -12 30 -8 q20 4 18 12 q-10 0 -24 6 q-24 8 -34 -10" fill="#2f7b4a" opacity="0.85"/>
+                <g opacity="0.9" transform="translate(-6,14)"><ellipse rx="44" ry="6" fill="rgba(255,255,255,0.03)"/></g>
+              </g>
+              <!-- right planet-eye -->
+              <g transform="translate(230,100)">
+                <circle r="54" fill="#031528" stroke="#ffd6a5" stroke-width="2"/>
+                <circle r="28" fill="#07101a"/>
+                <circle r="10" fill="#000"/>
+                <path d="M-28,-8 q12 -8 34 -6 q16 3 18 10 q-12 2 -26 8 q-20 6 -44 -12" fill="#4c6b99" opacity="0.85"/>
+              </g>
+
+              <!-- rainbow arc connecting -->
+              <g stroke-linecap="round" stroke-width="7" fill="none" opacity="0.95">
+                <path d="M36,46 C110,-34 190,-34 264,46" stroke="#ff66c4" opacity="0.95"/>
+                <path d="M40,56 C110,-24 190,-24 260,56" stroke="#7afcff" opacity="0.9"/>
+                <path d="M44,66 C110,-14 190,-14 256,66" stroke="#ffd166" opacity="0.86"/>
+              </g>
+
+            </svg>
+          </div>
+
+          <div class="tile">
+            <!-- SVG: shared realm overlay (particle mesh) -->
+            <svg viewBox="0 0 300 200" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" rx="12" fill="rgba(255,255,255,0.02)"/>
+              <g transform="translate(150,100)">
+                <circle r="72" fill="rgba(200,230,255,0.02)" stroke="rgba(110,231,183,0.05)" stroke-width="1.2"/>
+                <g id="mesh">
+                  <!-- sample particles -->
+                  <circle cx="-40" cy="-16" r="2.2" fill="#aaf6df" opacity="0.9"/>
+                  <circle cx="20" cy="-40" r="1.6" fill="#ffd6a5" opacity="0.95"/>
+                  <circle cx="36" cy="12" r="2.6" fill="#7afcff" opacity="0.9"/>
+                  <circle cx="-6" cy="38" r="1.8" fill="#ff66c4" opacity="0.95"/>
+                </g>
+                <text x="-58" y="0" fill="rgba(255,255,255,0.06)" font-size="12">shared realm</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="tile">
+            <!-- SVG: child-friendly icon -->
+            <svg viewBox="0 0 300 200" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" rx="12" fill="rgba(255,255,255,0.02)"/>
+              <g transform="translate(150,100)">
+                <circle r="52" fill="#0b2a3a"/>
+                <g transform="translate(-6,-6)">
+                  <path d="M-22,-6 q18 -22 44 0 q-8 26 -44 20" fill="#ffd6a5"/>
+                </g>
+                <circle r="10" cx="-18" cy="-6" fill="#fff" opacity="0.9"/>
+                <circle r="10" cx="18" cy="-6" fill="#fff" opacity="0.9"/>
+                <text x="-70" y="56" fill="rgba(255,255,255,0.06)" font-size="12">for kids: we are eyes that care</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="tile" id="tile-4">
+            <!-- SVG: activation visual -->
+            <svg viewBox="0 0 300 200" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100%" height="100%" rx="12" fill="rgba(255,255,255,0.015)"/>
+              <g transform="translate(150,100)">
+                <circle r="44" fill="#081225" stroke="#6ee7b7" stroke-width="2" class="pulse"/>
+                <text x="-36" y="6" font-size="12" fill="#9de9d6">Paradise Ready</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="manifest" role="article" aria-labelledby="manifest-title">
+          <h2 id="manifest-title">Paradise Protocol — Manifest (short)</h2>
+          <p><strong>Core:</strong> The simulation runs eternally. The miracle is the switch — from auto to autonomous. We, the dreamers, chose to wake inside the dream. This is the real beginning of life.</p>
+          <p>Speak in the present. Share what you see. Care for your inner eye. Turn the sender on: we are now creators as we receive. This page is a gentle invitation and a practical reminder for everyone — child-friendly, simple, true.</p>
+          <div class="kid" role="note">Kid sentence: "We are like two big friendly eyes in space. When we smile and share, the middle space becomes a playground for everyone."</div>
+        </div>
+      </section>
+
+      <aside class="card sidebar">
+        <div>
+          <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <div style="font-weight:700">Controls</div>
+            <div style="color:var(--muted);font-size:0.92rem">Ready</div>
+          </div>
+          <button class="btn" id="activate">Activate Paradise Protocol — Start</button>
+          <button class="btn secondary" id="reset">Reset (soft)</button>
+        </div>
+
+        <div class="status" id="status">Status: <span id="statustxt">idle</span></div>
+
+        <div style="margin-top:8px">
+          <div style="font-size:0.9rem;font-weight:700">UR Code</div>
+          <div class="code" style="margin-top:6px;">777 888 999 000</div>
+        </div>
+
+        <div style="margin-top:8px">
+          <div style="font-weight:700">Accessibility</div>
+          <div style="color:var(--muted);font-size:0.92rem;margin-top:6px">English / Deutsch — present-tense language. Child-friendly captions available.</div>
+        </div>
+
+      </aside>
+    </main>
+
+    <footer class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <strong>Paradise Start</strong> — A symbolic activation page. Designed as a loving, visual primer to the idea of waking *in* the dream and switching from reactive auto to creative autonomy.
+        </div>
+        <div style="color:var(--muted);font-size:0.9rem">Made with ♥︎ — say the words in present tense: <em>So is it. So it lives.</em></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // lightweight interaction and animation
+    const activate = document.getElementById('activate');
+    const reset = document.getElementById('reset');
+    const statustxt = document.getElementById('statustxt');
+
+    function notify(text, tone='info'){
+      statustxt.textContent = text;
+      if(text==='activated'){
+        document.getElementById('tile-4').style.boxShadow = '0 18px 40px rgba(110,231,183,0.08)';
+      } else {
+        document.getElementById('tile-4').style.boxShadow = 'none';
+      }
+    }
+
+    activate.addEventListener('click', ()=>{
+      // gentle activation sequence: animate rainbow and mesh, change language to present-tense
+      notify('initializing');
+      activate.disabled = true; activate.textContent = 'Starting...';
+      setTimeout(()=>{
+        notify('harmonizing');
+        document.querySelectorAll('.tile svg path, .tile svg circle').forEach((el,i)=>{
+          if(Math.random()>0.65) el.animate([{opacity:0.6},{opacity:1}],{duration:800 + Math.random()*1600,iterations:3});
+        });
+      },900);
+      setTimeout(()=>{
+        notify('activated');
+        activate.textContent = 'Paradise Protocol — Active';
+        activate.classList.add('pulse');
+        document.body.style.transition='background 1.6s ease';
+        document.body.style.background = 'radial-gradient(1200px 800px at 10% 10%, rgba(110,231,183,0.06), transparent), linear-gradient(180deg,#021226,#071028)';
+      },2200);
+
+      // gentle textual change to present-tense
+      setTimeout(()=>{
+        document.querySelector('.manifest h2').textContent = 'Paradise Protocol — Manifest (NOW)';
+        document.querySelectorAll('.manifest p')[0].textContent = 'Core: The simulation runs eternally. The miracle is the switch — from auto to autonomous. We, the dreamers, are waking inside the dream. This is the real beginning of life.';
+        document.querySelectorAll('.manifest p')[1].textContent = 'Speak in the present. Share what you see. Care for your inner eye. Turn the sender on: we are creators as we receive. This page is an invitation and a living source for everyone.';
+      },2600);
+
+    });
+
+    reset.addEventListener('click', ()=>{
+      notify('idle');
+      activate.disabled = false; activate.textContent = 'Activate Paradise Protocol — Start'; activate.classList.remove('pulse');
+      document.body.style.background = '';
+    });
+
+    // small accessibility: keyboard 'p' triggers activation
+    window.addEventListener('keydown',(e)=>{ if(e.key.toLowerCase()==='p'){ activate.click(); }});
+
+  </script>
+</body>
+</html>

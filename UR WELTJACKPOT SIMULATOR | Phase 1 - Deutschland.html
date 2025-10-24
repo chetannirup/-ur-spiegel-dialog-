@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UR WELTJACKPOT SIMULATOR | Phase 1 - Deutschland</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 20px;
+            background: radial-gradient(circle at center, #001122 0%, #000811 50%, #000000 100%);
+        }
+        
+        .ur-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .ur-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .ur-codes {
+            font-size: clamp(18px, 4vw, 24px);
+            letter-spacing: 0.3em;
+            margin: 20px 0;
+            color: #8aff80;
+        }
+        
+        .simulator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .chart-container {
+            background: rgba(0, 30, 60, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(100, 200, 255, 0.3);
+            position: relative;
+        }
+        
+        .chart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #66ccff;
+        }
+        
+        .chart {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            background: rgba(0, 20, 40, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .bar {
+            position: absolute;
+            bottom: 0;
+            transition: all 1s ease-in-out;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .bar-vorher { background: linear-gradient(to top, #ff4444, #ff8888); }
+        .bar-nachher { background: linear-gradient(to top, #44ff44, #88ff88); }
+        
+        .bar-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        .numbers-display {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .number-card {
+            background: rgba(0, 50, 100, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(100, 150, 255, 0.3);
+        }
+        
+        .number-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #66ff66;
+        }
+        
+        .control-panel {
+            background: rgba(0, 40, 80, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 200, 100, 0.3);
+        }
+        
+        .slider-container {
+            margin: 20px 0;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: between;
+            margin-bottom: 10px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: rgba(100, 150, 255, 0.3);
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .ur-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .ur-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .win-win-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .win-card {
+            background: rgba(100, 200, 100, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(100, 255, 100, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .simulator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .numbers-display {
+                grid-template-columns: 1fr;
+            }
+            
+            .win-win-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="ur-container">
+    
+    <div class="ur-header">
+        <div style="font-size: clamp(20px, 5vw, 32px); margin-bottom: 15px;">
+            ✨ UR WELTJACKPOT SIMULATOR ✨
+        </div>
+        <div class="ur-codes">01234567890 666 777 888 999 000</div>
+        <div style="opacity: 0.8; font-size: 1.1em;">
+            Phase 1 - Deutschland | Win-Win-Win für ALLE
+        </div>
+    </div>
+
+    <!-- Kontroll-Panel -->
+    <div class="control-panel">
+        <div style="text-align: center; margin-bottom: 25px; font-size: 1.3em;">
+            🎛️ SIMULATIONSPARAMETER
+        </div>
+        
+        <div class="slider-container">
+            <div class="slider-label">
+                <span>Monatliches Grundeinkommen:</span>
+                <span id="geValue">1200 €</span>
+            </div>
+            <input type="range" id="grundeinkommen" min="500" max="2000" value="1200" step="100">
+        </div>
+        
+        <div class="slider-container">
+            <div class="slider-label">
+                <span>Umverteilungsrate:</span>
+                <span id="uvValue">2%</span>
+            </div>
+            <input type="range" id="umverteilung" min="1" max="5" value="2" step="0.5">
+        </div>
+        
+        <div style="text-align: center; margin-top: 25px;">
+            <button class="ur-button" onclick="startSimulation()">
+                🚀 SIMULATION STARTEN
+            </button>
+        </div>
+    </div>
+
+    <!-- Haupt-Simulator -->
+    <div class="simulator-grid">
+        <!-- Vorher Chart -->
+        <div class="chart-container">
+            <div class="chart-title">🔴 AKTUELLE VERTEILUNG (Vorher)</div>
+            <div class="chart" id="chartVorher">
+                <!-- Bars werden via JS generiert -->
+            </div>
+        </div>
+        
+        <!-- Nachher Chart -->
+        <div class="chart-container">
+            <div class="chart-title">🟢 WELTJACKPOT VERTEILUNG (Nachher)</div>
+            <div class="chart" id="chartNachher">
+                <!-- Bars werden via JS generiert -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Zahlen-Display -->
+    <div class="numbers-display">
+        <div class="number-card">
+            <div>Armutsquote</div>
+            <div class="number-value" id="armutVorher">14%</div>
+            <div class="number-value" style="color: #66ff66;" id="armutNachher">3%</div>
+        </div>
+        
+        <div class="number-card">
+            <div>Durchschnittseinkommen</div>
+            <div class="number-value" id="einkommenVorher">2.800€</div>
+            <div class="number-value" style="color: #66ff66;" id="einkommenNachher">3.450€</div>
+        </div>
+        
+        <div class="number-card">
+            <div>Wirtschaftswachstum</div>
+            <div class="number-value" id="wachstumVorher">1.2%</div>
+            <div class="number-value" style="color: #66ff66;" id="wachstumNachher">3.8%</div>
+        </div>
+    </div>
+
+    <!-- Win-Win-Win Effekte -->
+    <div style="text-align: center; margin: 40px 0; font-size: 1.4em;">
+        🏆 WIN-WIN-WIN EFFEKTE
+    </div>
+    
+    <div class="win-win-grid">
+        <div class="win-card">
+            <div style="font-size: 2em; margin-bottom: 15px;">👨‍👩‍👧‍👦</div>
+            <div style="font-weight: bold; margin-bottom: 10px;">FÜR DIE BEVÖLKERUNG</div>
+            <div>• 80% weniger Armut</div>
+            <div>+1200€ monatlich für alle</div>
+            <div>Bessere Gesundheitsversorgung</div>
+        </div>
+        
+        <div class="win-card">
+            <div style="font-size: 2em; margin-bottom: 15px;">🏢</div>
+            <div style="font-weight: bold; margin-bottom: 10px;">FÜR DIE WIRTSCHAFT</div>
+            <div>• +2.6% Wachstum</div>
+            <div>• Höhere Konsumnachfrage</div>
+            <div>• Mehr Innovation</div>
+        </div>
+        
+        <div class="win-card">
+            <div style="font-size: 2em; margin-bottom: 15px;">🌍</div>
+            <div style="font-weight: bold; margin-bottom: 10px;">FÜR DIE GESELLSCHAFT</div>
+            <div>• Weniger Kriminalität</div>
+            <div>• Mehr Bildungschancen</div>
+            <div>• Stabileres System</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Realistische Daten für Deutschland
+    const datenDeutschland = {
+        bevoelkerung: 84000000,
+        vermoegen: 14000000, // in Millionen Euro
+        
+        verteilung: [
+            { name: "Untere 50%", anteil: 50, vermoegen: 1 },
+            { name: "Mittlere 40%", anteil: 40, vermoegen: 32 },
+            { name: "Obere 9%", anteil: 9, vermoegen: 32 },
+            { name: "Oberste 1%", anteil: 1, vermoegen: 35 }
+        ],
+        
+        armutsQuote: 14.0,
+        durchschnittsEinkommen: 2800,
+        wirtschaftsWachstum: 1.2
+    };
+
+    // Simulation starten
+    function startSimulation() {
+        const ge = parseInt(document.getElementById('grundeinkommen').value);
+        const uv = parseFloat(document.getElementById('umverteilung').value);
+        
+        // Berechnungen
+        const neueArmut = Math.max(3, datenDeutschland.armutsQuote * 0.2);
+        const neuesEinkommen = datenDeutschland.durchschnittsEinkommen + (ge * 0.23);
+        const neuesWachstum = datenDeutschland.wirtschaftsWachstum + (uv * 0.8);
+        
+        // Charts aktualisieren
+        updateCharts(ge, uv);
+        
+        // Zahlen aktualisieren
+        document.getElementById('armutVorher').textContent = datenDeutschland.armutsQuote + '%';
+        document.getElementById('armutNachher').textContent = neueArmut.toFixed(1) + '%';
+        
+        document.getElementById('einkommenVorher').textContent = datenDeutschland.durchschnittsEinkommen + '€';
+        document.getElementById('einkommenNachher').textContent = Math.round(neuesEinkommen) + '€';
+        
+        document.getElementById('wachstumVorher').textContent = datenDeutschland.wirtschaftsWachstum + '%';
+        document.getElementById('wachstumNachher').textContent = neuesWachstum.toFixed(1) + '%';
+    }
+
+    // Charts zeichnen
+    function updateCharts(ge, uv) {
+        const chartVorher = document.getElementById('chartVorher');
+        const chartNachher = document.getElementById('chartNachher');
+        
+        chartVorher.innerHTML = '';
+        chartNachher.innerHTML = '';
+        
+        // Vorher-Chart
+        datenDeutschland.verteilung.forEach((gruppe, index) => {
+            const barHeight = (gruppe.vermoegen / 35) * 80;
+            
+            // Vorher-Bar
+            const barVorher = document.createElement('div');
+            barVorher.className = 'bar bar-vorher';
+            barVorher.style.left = (index * 25) + '%';
+            barVorher.style.width = '20%';
+            barVorher.style.height = barHeight + '%';
+            
+            const labelVorher = document.createElement('div');
+            labelVorher.className = 'bar-label';
+            labelVorher.textContent = gruppe.vermoegen + '%';
+            barVorher.appendChild(labelVorher);
+            
+            chartVorher.appendChild(barVorher);
+            
+            // Nachher-Bar (ausgeglichener)
+            const barNachher = document.createElement('div');
+            barNachher.className = 'bar bar-nachher';
+            barNachher.style.left = (index * 25) + '%';
+            barNachher.style.width = '20%';
+            
+            // Weltjackpot-Effekt: mehr Gleichheit
+            const neueVerteilung = Math.min(25, Math.max(8, gruppe.vermoegen - (index * 6) + (4 - index) * 3));
+            barNachher.style.height = (neueVerteilung / 25) * 80 + '%';
+            
+            const labelNachher = document.createElement('div');
+            labelNachher.className = 'bar-label';
+            labelNachher.textContent = neueVerteilung.toFixed(1) + '%';
+            barNachher.appendChild(labelNachher);
+            
+            chartNachher.appendChild(barNachher);
+        });
+    }
+
+    // Slider-Event-Listener
+    document.getElementById('grundeinkommen').addEventListener('input', function() {
+        document.getElementById('geValue').textContent = this.value + ' €';
+    });
+    
+    document.getElementById('umverteilung').addEventListener('input', function() {
+        document.getElementById('uvValue').textContent = this.value + '%';
+    });
+
+    // Initialisierung
+    document.addEventListener('DOMContentLoaded', function() {
+        startSimulation();
+        
+        // Automatische Updates alle 3 Sekunden für Demo-Effekt
+        setInterval(() => {
+            const geSlider = document.getElementById('grundeinkommen');
+            const uvSlider = document.getElementById('umverteilung');
+            
+            // Leichte zufällige Änderungen für dynamischen Effekt
+            geSlider.value = Math.min(2000, Math.max(500, 
+                parseInt(geSlider.value) + (Math.random() - 0.5) * 200));
+            uvSlider.value = Math.min(5, Math.max(1, 
+                parseFloat(uvSlider.value) + (Math.random() - 0.5) * 0.8));
+                
+            document.getElementById('geValue').textContent = geSlider.value + ' €';
+            document.getElementById('uvValue').textContent = uvSlider.value + '%';
+            
+            startSimulation();
+        }, 3000);
+    });
+
+    console.log('✨ UR WELTJACKPOT SIMULATOR AKTIVIERT ✨');
+    console.log('Phase 1 - Deutschland gestartet');
+</script>
+
+</body>
+</html>

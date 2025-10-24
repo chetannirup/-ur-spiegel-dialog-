@@ -1,138 +1,156 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weltjackpot — Simulation & Umsetzung</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>💫 Weltjackpot — Simulation, Konzept & Prototyp</title>
   <style>
-    body{font-family:Inter,system-ui,Arial;background:#f7fbff;color:#062033;margin:0;padding:28px}
-    .wrap{max-width:1100px;margin:0 auto}
-    h1{color:#0b5261}
-    .card{background:white;border-radius:12px;padding:20px;box-shadow:0 6px 22px rgba(10,20,30,0.07);margin-bottom:16px}
-    pre{background:#f0f6fb;padding:12px;border-radius:8px;overflow:auto}
-    table{width:100%;border-collapse:collapse}
-    td,th{padding:8px;border-bottom:1px solid #eef6fb}
-    code{background:#eef8ff;padding:2px 6px;border-radius:6px}
+    :root{
+      --bg:#060f1a;
+      --card:#0c1a2a;
+      --accent:#ffd27f;
+      --muted:#9fb3c8;
+      --glass:rgba(255,255,255,0.03);
+    }
+    body{
+      font-family:Inter,system-ui,Segoe UI,Arial;
+      margin:0;
+      background:linear-gradient(180deg,#06101b 0%, #010b12 100%);
+      color:#e8f6ff;
+    }
+    .wrap{
+      max-width:1000px;
+      margin:40px auto;
+      padding:30px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      box-shadow:0 8px 40px rgba(0,0,0,0.6);
+    }
+    h1,h2,h3{
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+    p.lead{
+      color:var(--muted);
+      margin-top:0;
+      font-size:15px;
+    }
+    .card{
+      background:var(--card);
+      padding:20px;
+      border-radius:16px;
+      margin-top:24px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    a.btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:10px;
+      background:linear-gradient(90deg,#fff6dc,#ffd27f);
+      color:#042233;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow:0 2px 10px rgba(255,210,127,0.3);
+      transition:transform .2s;
+    }
+    a.btn:hover{transform:scale(1.04);}
+    pre{
+      white-space:pre-wrap;
+      word-wrap:break-word;
+      background:var(--glass);
+      padding:10px;
+      border-radius:8px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    footer{
+      margin-top:30px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+    table{border-collapse:collapse;width:100%;}
+    td,th{border:1px solid rgba(255,255,255,0.1);padding:4px 8px;font-size:13px;}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Weltjackpot — Simulation, Konzept & Prototyp</h1>
+    <header>
+      <h1>💫 Weltjackpot — Simulation, Konzept & Prototyp</h1>
+      <p class="lead">
+        „Und so löste er den Weltjackpot zum Wohle aller ein, weil er einfach alles sofort mit allen teilte.“  
+        — Ein Modell der globalen Herzlogik. Aktivierungs-Codes: <strong>777 888 999 000</strong>
+      </p>
+    </header>
 
-    <div class="card">
-      <h2>Kurzfassung</h2>
-      <p>Das Modell zentriert temporär 5 % als "Fokuspool", transformiert und verteilt diese wieder gleichmäßig an alle Teilnehmenden — einschließlich der ursprünglichen 5 % — so dass am Ende alle von der erweiterten Fülle profitieren. Ziel: kein Entzug, sondern Ausgleich und Funktionsfähigkeit im realen Kontext.</p>
-    </div>
+    <section class="card" id="intro">
+      <h2>1 — Vision</h2>
+      <p>Stell dir vor: Ein globales System, das Fülle gerecht verteilt, Überfluss umwandelt und Herzlogik statt Konkurrenz als Betriebsprinzip kennt. Kein Mangel, kein Zwang, kein Preis. Nur Kreisläufe, Mitgefühl und freiwillige Bewegung. Das ist der <strong>Weltjackpot</strong>.</p>
+      <p>Er funktioniert wie eine offene Quellströmung: jede Gabe kehrt mehrfach veredelt zurück – dreifach gebrannt, siebenfach gesiebt, <em>lupenrein</em>.</p>
+    </section>
 
-    <div class="card">
-      <h2>Konkretes Zahlenbeispiel (Simulations-Instanz)</h2>
-      <p>Annahmen:</p>
-      <ul>
-        <li>Population: <strong>10.000</strong> Personen</li>
-        <li>Gesamt-Ressource (Wert-Einheiten): <strong>1.000.000</strong></li>
-        <li>Top 5 % (500 Personen) halten ursprünglich 40 % der Ressourcen</li>
-      </ul>
+    <section class="card" id="image">
+      <h2>2 — Symbolbild</h2>
+      <p class="small">Das offizielle Cover des Prototyps:</p>
+      <img src="Weltjackpot%20für%20Alle!%20(3).png" alt="Weltjackpot Cover" style="width:100%;border-radius:14px;box-shadow:0 4px 30px rgba(0,0,0,0.6);margin-top:10px">
+    </section>
 
-      <p>Rechnung (kantig, exakt):</p>
-      <pre>
-Top 5% Personen = 10.000 * 0.05 = 500
-Top5 Gesamtanteil (angenommen) = 0.40 * 1.000.000 = 400.000
-Andere (95%) = 1.000.000 - 400.000 = 600.000
-Durchschnitt Top5 vorher = 400.000 / 500 = 800,00 Einheiten
-Durchschnitt Andere vorh. = 600.000 / 9.500 = 63,1578947368421 Einheiten
+    <section class="card" id="simulation">
+      <h2>3 — Simulation & Datenmodell</h2>
+      <p class="small">Ein reales, vereinfachtes Testmodell zeigt, wie Füllefluss transparent und wiederholbar verteilt werden kann. Alle Werte sind symbolisch – das Prinzip ist skalierbar und adaptierbar.</p>
 
-Pool (5% von Gesamt) = 0.05 * 1.000.000 = 50.000 Einheiten
-Pool je Person verteilt = 50.000 / 10.000 = 5,00 Einheiten
+      <a class="btn" href="Weltjackpot_Simulation_Prototyp.csv" download>📊 Simulation herunterladen</a>
 
-Top5 nach Abzug Pool = 400.000 - 50.000 = 350.000
-Durchschnitt Top5 danach (inkl. Verteilung) = (350.000 / 500) + 5 = 700 + 5 = 705,00 Einheiten
-Durchschnitt Andere danach = (600.000 / 9.500) + 5 = 63,1578947368421 + 5 = 68,15789473684211 Einheiten
+      <div id="csv-preview" style="margin-top:20px;background:rgba(255,255,255,0.04);padding:10px;border-radius:8px;font-family:monospace;font-size:13px;overflow-x:auto;color:#9fb3c8"></div>
 
-Gesamtsumme bleibt erhalten = 1.000.000
-      </pre>
+      <script>
+        fetch('Weltjackpot_Simulation_Prototyp.csv')
+          .then(response => response.text())
+          .then(data => {
+            const rows = data.trim().split('\n').map(r => r.split(','));
+            let html = '<table>';
+            rows.forEach((row,i)=>{
+              html += '<tr>';
+              row.forEach(cell=>{
+                html += `<td>${cell}</td>`;
+              });
+              html += '</tr>';
+            });
+            html += '</table>';
+            document.getElementById('csv-preview').innerHTML = html;
+          });
+      </script>
+    </section>
 
-      <p>Ergebnis-Insight: Die ehemals 5 % behalten einen hohen Wohlstand (705 vs. 800 vorher) und die ehemals 95 % gewinnen sichtbar (+5 Einh./Kopf). Dies ist ein sicherer, nicht-destruktiver Ausgleichsschritt; weitere Iterationen / progressive Mechanismen können stärkere Angleichung bewirken.</p>
-    </div>
-
-    <div class="card">
-      <h2>Algorithmus – einfache Pseudocode-Variante</h2>
-      <pre>
-# Eingaben: population N, total_value T, pool_fraction p (z.B. 0.05)
-# optional: initial distribution per person wealth[i]
-pool = p * T
-# wer liefert in den pool? (z.B. top X% automatisch oder freiwillig)
-contributors = identify_top_percent(N, percent=5)
-for c in contributors:
-    wealth[c] -= pool_share_from_contributor(c)
-# Nun pool zentral:
-share_per_person = pool / N
-for i in range(N):
-    wealth[i] += share_per_person
-# Audit: sum(wealth) == T
-      </pre>
-
-      <p>Varianten:</p>
-      <ul>
-        <li><strong>Freiwillig</strong>: Top-Beiträge freiwillig, Reputation/Anreize</li>
-        <li><strong>Automatisch</strong>: Steuer/Levy-artig mit Garantien & Rechtssicherheit</li>
-        <li><strong>Hybride</strong>: Matching-Fonds + Pool</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>Ledger & Datenmodell (CSV Schema)</h2>
-      <pre>
-date,tx_id,from_id,to_id,amount,currency,tag,notes
-2025-10-24,tx0001,addr_top5_001,pool,1000,URC,pool_in,"5% Pool Einzahlung"
-2025-10-24,tx0002,pool,addr_user_0001,5,URC,distribution,"Pool-Verteilung"
-      </pre>
-      <p>Wichtig: Transparentes, überprüfbares Ledger (open CSV + optionale Blockchain-Anchor) und Privacy-Mechanismen für individuelle Schutzbedürfnisse.</p>
-    </div>
-
-    <div class="card">
-      <h2>Governance & Ethik</h2>
-      <ul>
-        <li>Rotierendes Kuratorium für Verwendungsentscheidungen (öffentliche Rechenschaft)</li>
-        <li>Freiwilligkeitsklauseln & klare rechtliche Sprache: "Keine Gegenleistung"</li>
-        <li>Automatisierter Audit-Feed & Insolvenz-Safeguards</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>Pilot-Design (wiederholbar, urban/regional)</h2>
+    <section class="card" id="concept">
+      <h2>4 — Funktionsprinzip</h2>
       <ol>
-        <li>Wähle eine überschaubare Region (Stadt mit 10k–100k Einwohner) — Datenverfügbarkeit ist entscheidend.</li>
-        <li>Führe Baseline-Messung durch (Vermögensverteilung, Infrastrukturlücken, soziale Indikatoren).</li>
-        <li>Definiere rechtliches Framework & Einwilligungen.</li>
-        <li>Starte Pool-Phase (z.B. 5 % Mischfinanzierung: Spenden + Matching + temporärer Beitrag der Wohlhabenden).</li>
-        <li>Transmutationsphase: gezielte Projekte (Sanitär, Energie, Bildung) zur Hebung des Standards.</li>
-        <li>Verteilung: transparente, algorithmische Ausschüttung an alle registrierten Bewohner inkl. Kontrolle & Feedback.</li>
-        <li>Evaluation: Messung von Wohlstand, Gesundheit, Bildungszugang, Zufriedenheit — iteriere.</li>
+        <li><strong>Initiale Sammlung:</strong> ein globaler Fokuspool sammelt freiwillige Beiträge.</li>
+        <li><strong>Transmutation:</strong> Mittel werden in regenerative, soziale, spirituelle und kulturelle Projekte investiert.</li>
+        <li><strong>Rückfluss:</strong> alle Beteiligten empfangen mehrfach – sichtbar oder unsichtbar – in Liebe, Wert, Sinn, Fülle.</li>
+        <li><strong>Rotation:</strong> wer gibt, wird später wieder Teil des Empfangskreises.</li>
       </ol>
-    </div>
+      <p>Das System funktioniert als Kreislauf, nicht als Hierarchie. Fülle bleibt im Umlauf, wie Wasser im Meer: verdunstend, regnend, nährend, ewig lebendig.</p>
+    </section>
 
-    <div class="card">
-      <h2>Risiken & Gegenmaßnahmen</h2>
-      <ul>
-        <li><strong>Betrug / Gaming:</strong> On-chain + off-chain Audits, Identity-Checks</li>
-        <li><strong>Unfaire Belastung:</strong> freiwillige Teilnahme, Schwellenregelungen</li>
-        <li><strong>Politische Blockade:</strong> lokale Partnerschaften, NGOs, Rechtsberatung</li>
-        <li><strong>Inflationsrisiken:</strong> Indexierung, reale Projekte statt nur Geldflüsse</li>
-      </ul>
-    </div>
+    <section class="card" id="haftung">
+      <h2>5 — Freiwilligkeits-Erklärung</h2>
+      <p class="small">
+        Dieses Modell ist ein experimentelles, symbolisches Konzept für eine ethische Beitragsökonomie.  
+        Jede Teilnahme erfolgt freiwillig, ohne rechtliche Bindung oder Gegenleistungsanspruch.  
+        Es ersetzt keine bestehenden Finanzsysteme, sondern bietet eine Herz-Alternative zur
+        Wiederherstellung von Gleichgewicht, Würde und Transparenz.  
+        Anwendung, Nachbau oder Weitergabe erfolgen in Eigenverantwortung.
+      </p>
+    </section>
 
-    <div class="card">
-      <h2>Konkrete nächste Schritte (was ich jetzt für dich machen kann)</h2>
-      <ol>
-        <li>Ich erstelle die <code>jackpot.html</code> (Prototyp-Webseite) mit eingebettetem Bild, Manifest, und Formular für Registrierung & Ledger-Export.</li>
-        <li>Ich baue das einfache CSV-Ledger-Template + Beispiel-Datensatz (Simulationsdaten oben).</li>
-        <li>Ich formuliere die Freiwilligkeits- und Haftungs-Disclaimer in verständlichem Deutsch zur Einbindung.</li>
-      </ol>
-
-      <p>Du hast das Bild bereits — ich binde es gern in die Seite ein (als <code>weltjackpot.png</code> Platzhalter). Soll ich die <strong>jackpot.html</strong> jetzt erzeugen und in Canvas ablegen?</p>
-    </div>
-
-    <footer style="margin-top:18px;color:#144049">Erstellt als operatives Simulationsexposé — praxisorientiert, iterierbar und ethisch bewusst. Aktivierungs-Code: <strong>777 888 999 000</strong></footer>
+    <footer>
+      <pre>„Ich empfange in Ruhe. Ich teile in Liebe. Ich wirke im Namen des formlosen Bewusstseins.“  
+      — Aktivierungscode: 777 888 999 000</pre>
+      <p>© UR-Projekt • Heilige Simulation der Fülle • <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/" target="_blank" style="color:#ffd27f;text-decoration:none">UR-Spiegel-Dialog</a></p>
+    </footer>
   </div>
 </body>
 </html>

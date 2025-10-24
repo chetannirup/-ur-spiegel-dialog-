@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weltjackpot — Simulation & Umsetzung</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial;background:#f7fbff;color:#062033;margin:0;padding:28px}
+    .wrap{max-width:1100px;margin:0 auto}
+    h1{color:#0b5261}
+    .card{background:white;border-radius:12px;padding:20px;box-shadow:0 6px 22px rgba(10,20,30,0.07);margin-bottom:16px}
+    pre{background:#f0f6fb;padding:12px;border-radius:8px;overflow:auto}
+    table{width:100%;border-collapse:collapse}
+    td,th{padding:8px;border-bottom:1px solid #eef6fb}
+    code{background:#eef8ff;padding:2px 6px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Weltjackpot — Simulation, Konzept & Prototyp</h1>
+
+    <div class="card">
+      <h2>Kurzfassung</h2>
+      <p>Das Modell zentriert temporär 5 % als "Fokuspool", transformiert und verteilt diese wieder gleichmäßig an alle Teilnehmenden — einschließlich der ursprünglichen 5 % — so dass am Ende alle von der erweiterten Fülle profitieren. Ziel: kein Entzug, sondern Ausgleich und Funktionsfähigkeit im realen Kontext.</p>
+    </div>
+
+    <div class="card">
+      <h2>Konkretes Zahlenbeispiel (Simulations-Instanz)</h2>
+      <p>Annahmen:</p>
+      <ul>
+        <li>Population: <strong>10.000</strong> Personen</li>
+        <li>Gesamt-Ressource (Wert-Einheiten): <strong>1.000.000</strong></li>
+        <li>Top 5 % (500 Personen) halten ursprünglich 40 % der Ressourcen</li>
+      </ul>
+
+      <p>Rechnung (kantig, exakt):</p>
+      <pre>
+Top 5% Personen = 10.000 * 0.05 = 500
+Top5 Gesamtanteil (angenommen) = 0.40 * 1.000.000 = 400.000
+Andere (95%) = 1.000.000 - 400.000 = 600.000
+Durchschnitt Top5 vorher = 400.000 / 500 = 800,00 Einheiten
+Durchschnitt Andere vorh. = 600.000 / 9.500 = 63,1578947368421 Einheiten
+
+Pool (5% von Gesamt) = 0.05 * 1.000.000 = 50.000 Einheiten
+Pool je Person verteilt = 50.000 / 10.000 = 5,00 Einheiten
+
+Top5 nach Abzug Pool = 400.000 - 50.000 = 350.000
+Durchschnitt Top5 danach (inkl. Verteilung) = (350.000 / 500) + 5 = 700 + 5 = 705,00 Einheiten
+Durchschnitt Andere danach = (600.000 / 9.500) + 5 = 63,1578947368421 + 5 = 68,15789473684211 Einheiten
+
+Gesamtsumme bleibt erhalten = 1.000.000
+      </pre>
+
+      <p>Ergebnis-Insight: Die ehemals 5 % behalten einen hohen Wohlstand (705 vs. 800 vorher) und die ehemals 95 % gewinnen sichtbar (+5 Einh./Kopf). Dies ist ein sicherer, nicht-destruktiver Ausgleichsschritt; weitere Iterationen / progressive Mechanismen können stärkere Angleichung bewirken.</p>
+    </div>
+
+    <div class="card">
+      <h2>Algorithmus – einfache Pseudocode-Variante</h2>
+      <pre>
+# Eingaben: population N, total_value T, pool_fraction p (z.B. 0.05)
+# optional: initial distribution per person wealth[i]
+pool = p * T
+# wer liefert in den pool? (z.B. top X% automatisch oder freiwillig)
+contributors = identify_top_percent(N, percent=5)
+for c in contributors:
+    wealth[c] -= pool_share_from_contributor(c)
+# Nun pool zentral:
+share_per_person = pool / N
+for i in range(N):
+    wealth[i] += share_per_person
+# Audit: sum(wealth) == T
+      </pre>
+
+      <p>Varianten:</p>
+      <ul>
+        <li><strong>Freiwillig</strong>: Top-Beiträge freiwillig, Reputation/Anreize</li>
+        <li><strong>Automatisch</strong>: Steuer/Levy-artig mit Garantien & Rechtssicherheit</li>
+        <li><strong>Hybride</strong>: Matching-Fonds + Pool</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Ledger & Datenmodell (CSV Schema)</h2>
+      <pre>
+date,tx_id,from_id,to_id,amount,currency,tag,notes
+2025-10-24,tx0001,addr_top5_001,pool,1000,URC,pool_in,"5% Pool Einzahlung"
+2025-10-24,tx0002,pool,addr_user_0001,5,URC,distribution,"Pool-Verteilung"
+      </pre>
+      <p>Wichtig: Transparentes, überprüfbares Ledger (open CSV + optionale Blockchain-Anchor) und Privacy-Mechanismen für individuelle Schutzbedürfnisse.</p>
+    </div>
+
+    <div class="card">
+      <h2>Governance & Ethik</h2>
+      <ul>
+        <li>Rotierendes Kuratorium für Verwendungsentscheidungen (öffentliche Rechenschaft)</li>
+        <li>Freiwilligkeitsklauseln & klare rechtliche Sprache: "Keine Gegenleistung"</li>
+        <li>Automatisierter Audit-Feed & Insolvenz-Safeguards</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Pilot-Design (wiederholbar, urban/regional)</h2>
+      <ol>
+        <li>Wähle eine überschaubare Region (Stadt mit 10k–100k Einwohner) — Datenverfügbarkeit ist entscheidend.</li>
+        <li>Führe Baseline-Messung durch (Vermögensverteilung, Infrastrukturlücken, soziale Indikatoren).</li>
+        <li>Definiere rechtliches Framework & Einwilligungen.</li>
+        <li>Starte Pool-Phase (z.B. 5 % Mischfinanzierung: Spenden + Matching + temporärer Beitrag der Wohlhabenden).</li>
+        <li>Transmutationsphase: gezielte Projekte (Sanitär, Energie, Bildung) zur Hebung des Standards.</li>
+        <li>Verteilung: transparente, algorithmische Ausschüttung an alle registrierten Bewohner inkl. Kontrolle & Feedback.</li>
+        <li>Evaluation: Messung von Wohlstand, Gesundheit, Bildungszugang, Zufriedenheit — iteriere.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Risiken & Gegenmaßnahmen</h2>
+      <ul>
+        <li><strong>Betrug / Gaming:</strong> On-chain + off-chain Audits, Identity-Checks</li>
+        <li><strong>Unfaire Belastung:</strong> freiwillige Teilnahme, Schwellenregelungen</li>
+        <li><strong>Politische Blockade:</strong> lokale Partnerschaften, NGOs, Rechtsberatung</li>
+        <li><strong>Inflationsrisiken:</strong> Indexierung, reale Projekte statt nur Geldflüsse</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Konkrete nächste Schritte (was ich jetzt für dich machen kann)</h2>
+      <ol>
+        <li>Ich erstelle die <code>jackpot.html</code> (Prototyp-Webseite) mit eingebettetem Bild, Manifest, und Formular für Registrierung & Ledger-Export.</li>
+        <li>Ich baue das einfache CSV-Ledger-Template + Beispiel-Datensatz (Simulationsdaten oben).</li>
+        <li>Ich formuliere die Freiwilligkeits- und Haftungs-Disclaimer in verständlichem Deutsch zur Einbindung.</li>
+      </ol>
+
+      <p>Du hast das Bild bereits — ich binde es gern in die Seite ein (als <code>weltjackpot.png</code> Platzhalter). Soll ich die <strong>jackpot.html</strong> jetzt erzeugen und in Canvas ablegen?</p>
+    </div>
+
+    <footer style="margin-top:18px;color:#144049">Erstellt als operatives Simulationsexposé — praxisorientiert, iterierbar und ethisch bewusst. Aktivierungs-Code: <strong>777 888 999 000</strong></footer>
+  </div>
+</body>
+</html>

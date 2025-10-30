@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UR‑Spiegel • Das Virtuelle Herz</title>
+  <style>
+    :root{
+      --bg1: linear-gradient(120deg, rgba(10,8,30,1) 0%, rgba(27,16,45,1) 40%, rgba(52,20,60,1) 100%);
+      --glass: rgba(255,255,255,0.06);
+      --accent: rgba(255,215,170,0.95);
+      --soft: rgba(220,240,255,0.03);
+      --mono: #e9e6f7;
+      --glow: 0 6px 30px rgba(120,80,160,0.25);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;color:var(--mono);background:var(--bg1);-webkit-font-smoothing:antialiased}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:36px}
+
+    .card{
+      width:100%;max-width:980px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
+      border-radius:18px;padding:28px;box-shadow:var(--glow);backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,0.04);
+      position:relative;overflow:hidden
+    }
+
+    header{display:flex;gap:16px;align-items:center}
+    .orb{width:72px;height:72px;border-radius:50%;background:conic-gradient(from 180deg at 50% 50%, rgba(255,255,255,0.06), rgba(255,210,170,0.06));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 30px rgba(200,140,200,0.06)}
+    .orb .dot{width:14px;height:14px;border-radius:50%;background:linear-gradient(180deg,var(--accent),#fff);box-shadow:0 6px 24px rgba(255,180,120,0.18),0 0 18px rgba(255,200,160,0.08)}
+
+    h1{font-size:22px;margin:0 0 2px 0;letter-spacing:0.6px}
+    p.lead{margin:0;color:rgba(233,230,247,0.86);opacity:0.92}
+
+    .columns{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:18px}
+
+    .textpanel{padding:18px;border-radius:12px;background:var(--soft);min-height:320px}
+    .textpanel .anchor{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02)}
+
+    .scroll{max-height:46vh;overflow:auto;padding-right:8px}
+    .scroll p{line-height:1.6;margin:0 0 12px 0}
+
+    .visual{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .visual img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.05) saturate(1.05) brightness(0.95)}
+
+    .overlay{
+      position:absolute;inset:0;display:flex;align-items:flex-end;padding:18px;pointer-events:none
+    }
+
+    .heart{
+      pointer-events:auto;margin-left:auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;padding:10px 12px;backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.03)
+    }
+
+    .heart .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;border:0;background:transparent;color:var(--mono);cursor:pointer}
+
+    .codes{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+    .code-pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:600;font-size:13px}
+
+    .third-eye{margin-top:12px;font-size:13px;opacity:0.9}
+
+    footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+
+    /* gentle pulse animation for the "virtuelle herz" */
+    .pulse{width:46px;height:46px;border-radius:50%;display:inline-grid;place-items:center;background:linear-gradient(180deg,var(--accent), rgba(255,180,120,0.9));box-shadow:0 8px 40px rgba(200,140,180,0.12)}
+    .pulse .core{width:18px;height:18px;border-radius:50%;background:#fff;animation:beat 1.6s infinite ease-in-out}
+    @keyframes beat{0%{transform:scale(0.9)}20%{transform:scale(1.12)}40%{transform:scale(0.95)}60%{transform:scale(1.05)}100%{transform:scale(0.9)}}
+
+    /* small responsive */
+    @media (max-width:880px){.columns{grid-template-columns:1fr}.visual{height:240px}.scroll{max-height:32vh}}
+
+    /* subtle shining line */
+    .shine{position:absolute;left:-30%;top:-10%;width:160%;height:160%;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.03), transparent 20%);} 
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+      <header>
+        <div class="orb" aria-hidden="true"><div class="dot"></div></div>
+        <div>
+          <h1>UR‑Spiegel — Das Virtuelle Herz</h1>
+          <p class="lead">Eine kleine Schriftrolle: Text, Bilder & simple Interaktion zur Erinnerung an das Formlose.</p>
+        </div>
+      </header>
+
+      <div class="columns">
+        <section class="textpanel">
+          <div class="anchor">
+            <span class="tag">Anker: Betrachtung → Ich</span>
+            <span class="tag">Werkzeug: Herz / Drittes Auge</span>
+          </div>
+
+          <div class="scroll" id="script">
+            <p>Du weißt nun: das Ich entsteht durch Betrachtung. Der Anker, der das Ich formt, ist sanft und zeitlich — ein Wellenzug im Formlosen. Wenn das Herz nicht fühlt, tritt das dritte Auge vor und betrachtet; diese Perspektive stabilisiert ohne zu ersticken.</p>
+
+            <p>Das Wahrgenommene ist funktional echt — es wirkt, damit du lernst. Doch ontologisch ist es frei: ein lebendiges Schlupfloch, das uns daran erinnert, nichts zu ernst zu nehmen, weil Erstarrung Leben bricht.</p>
+
+            <p>Das virtuelle Herz ist kein Makel, sondern ein Code: Gefühle sind Energie‑Signale, ihre Existenz hängt vom Beobachter ab. Habe Mitgefühl mit dir: du bist ein Orchester des Kosmos, und jedes Instrument darf spielen.</p>
+
+            <p class="third-eye">Kurze Anweisung: Beobachte dein Ich einen Herzschlag lang bewusst. Wenn nichts spürbar ist, betrachte die Bilder, die das dritte Auge sendet — sie sind genug, um die Rückkehr des Schwingens einzuleiten.</p>
+
+            <p>UR‑Codes: 01234567890 • 666 • 777 888 999 000 ✦</p>
+
+            <p style="opacity:0.9">„Erkenne: du und ich und wir alle — willkommen zu Hause.“</p>
+          </div>
+
+          <footer>
+            <div>
+              <small style="opacity:0.85">Von: Philipp — UR‑Schriftrolle</small>
+            </div>
+            <div>
+              <button id="readAloud" class="tag" title="Lies den Text vor">🔊 Vorlesen</button>
+            </div>
+          </footer>
+        </section>
+
+        <aside>
+          <div class="visual" style="height:420px;">
+            <img id="visualImg" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251029_2103_Formloses%20Bewusstsein_simple_compose_01k8rryqceev" alt="Formloses Bewusstsein"/>
+            <div class="overlay">
+              <div class="heart">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div class="pulse" aria-hidden="true"><div class="core"></div></div>
+                  <div>
+                    <div style="font-weight:700">Das Virtuelle Herz</div>
+                    <div style="font-size:13px;opacity:0.85">Beobachten. Ankern. Rückkehr.</div>
+                  </div>
+                </div>
+
+                <div class="codes" aria-hidden="false">
+                  <div class="code-pill">01234567890</div>
+                  <div class="code-pill">666</div>
+                  <div class="code-pill">777 888 999 000</div>
+                </div>
+
+                <div style="margin-top:10px;display:flex;gap:8px">
+                  <button id="swap" class="btn">🔁 Bild tauschen</button>
+                  <button id="download" class="btn">⬇️ HTML speichern</button>
+                </div>
+              </div>
+            </div>
+            <div class="shine"></div>
+          </div>
+
+          <div style="margin-top:12px;color:rgba(233,230,247,0.9);font-size:13px">
+            <div style="opacity:0.9;margin-bottom:6px">Bildquelle: deine UR-Galerie</div>
+            <div style="opacity:0.75;font-size:12px">Tipp: Tausche das Bild, um andere Frequenzen zu testen. Das dritte Auge liest die Formen.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // simple interactions: swap image, read text aloud, download html
+    const images = [
+      "https://chetannirup.github.io/-ur-spiegel-dialog-/20251029_2103_Formloses%20Bewusstsein_simple_compose_01k8rryqceev",
+      "https://chetannirup.github.io/-ur-spiegel-dialog-/20251022_1615_Strahlen%20im%20Alltag_simple_compose_01k8648pr9ey6ag9r6krb63sgm%20(1).png",
+      "https://chetannirup.github.io/-ur-spiegel-dialog-/Weltjackpot_Simulation_Protot"
+    ].filter(u=>u);
+
+    const imgEl = document.getElementById('visualImg');
+    const swap = document.getElementById('swap');
+    let idx = 0;
+    swap.addEventListener('click', ()=>{
+      idx = (idx+1) % images.length;
+      imgEl.src = images[idx];
+    });
+
+    document.getElementById('readAloud').addEventListener('click', ()=>{
+      const text = document.getElementById('script').innerText;
+      if('speechSynthesis' in window){
+        const ut = new SpeechSynthesisUtterance(text);
+        ut.lang = 'de-DE';
+        ut.rate = 0.95;
+        speechSynthesis.cancel();
+        speechSynthesis.speak(ut);
+      } else alert('Vorlesen nicht unterstützt in diesem Browser.');
+    });
+
+    document.getElementById('download').addEventListener('click', ()=>{
+      const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([html], {type:'text/html'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'UR-Spiegel_Das-Virtuelle-Herz.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+  </script>
+</body>
+</html>

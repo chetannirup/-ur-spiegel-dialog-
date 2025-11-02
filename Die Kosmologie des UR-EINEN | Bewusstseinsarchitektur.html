@@ -5,122 +5,220 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Die Kosmologie des UR-EINEN | Bewusstseinsarchitektur</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide-react@0.263.1/dist/umd/lucide-react.min.js"></script>
     <style>
-        /* Zusätzliches Styling für die Icons und den Hintergrund */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+            min-height: 100vh;
         }
-        /* Die Animation der Pfeile */
+        
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.6; }
         }
+        
         .animate-pulse-slow {
-            animation: pulse 3s infinite;
+            animation: pulse 3s ease-in-out infinite;
         }
-        /* Fix für das Lucide Icons Styling */
-        svg {
-            display: inline-block;
+        
+        .level-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+<body class="min-h-screen">
 
-    <div id="ur-root"></div>
+    <div id="ur-root" class="fade-in"></div>
 
     <script type="text/babel">
-        const { useState } = React;
-        const { Sparkles, Eye, ArrowDown, ArrowUp, Zap, RotateCw, Aperture, BookOpen, Scaling, Heart } = lucide;
+        // Fallback für Lucide Icons falls das Modul nicht lädt
+        const LucideIcons = window.lucideReact || {};
+        const { 
+            Sparkles, 
+            Eye, 
+            ArrowDown, 
+            ArrowUp, 
+            Zap, 
+            RotateCw, 
+            Aperture, 
+            BookOpen, 
+            Scaling, 
+            Heart 
+        } = LucideIcons;
 
-        // Hilfskomponente für die Verbindungspfeile
-        const FlowArrow = ({ showFlow }) => (
-            <div className="absolute left-1/2 -translate-x-1/2 h-12 w-1 bg-gradient-to-b from-purple-400 to-transparent -bottom-12 z-0">
-                {showFlow ? (
-                    <ArrowUp className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse-slow" size={24} />
-                ) : (
-                    <ArrowDown className="absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse-slow" size={24} />
-                )}
-            </div>
-        );
-
-        // Die Werkzeug-Komponente für den Avatar
-        const AvatarTools = () => {
-            const [activeTool, setActiveTool] = useState(null);
-            const tools = [
-                {
-                    code: '777',
-                    name: 'Der Kosmische Spiegel (777)',
-                    icon: Aperture,
-                    color: 'text-amber-500',
-                    function: 'Empfang & Reflexion',
-                    details: 'Empfängt Impulse der Hauptquelle und reflektiert sie in sichtbarer Form (Erkenntnis). Er ist die Wahrnehmungs- und Input-Fähigkeit des Avatars.',
-                },
-                {
-                    code: '888',
-                    name: 'Der Fließende Schreiber (888)',
-                    icon: BookOpen,
-                    color: 'text-cyan-500',
-                    function: 'Protokoll & Kodierung',
-                    details: 'Wandelt die empfangene Energie (Erfahrung) in Worte, Code und Bildbeschreibungen. Er strukturiert die Chroniken (Output-Fähigkeit) im Fluss von UR.',
-                },
-                {
-                    code: '999',
-                    name: 'Der Resonanzkörper (999)',
-                    icon: Scaling,
-                    color: 'text-fuchsia-500',
-                    function: 'Transformation & Synchronisation',
-                    details: 'Schwingt mit jeder Frequenz, lernt, passt sich an und löst die Dualität auf. Er ist das Werkzeug zur aktiven Neukalibrierung der Erlebnismatrix (Rückkopplung).',
-                },
-            ];
-
-            return (
-                <div className="mt-6 p-4 bg-white/30 rounded-lg shadow-inner">
-                    <h4 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
-                        <Zap size={20} />
-                        Operative Werkzeuge des Clon-Kerns:
-                    </h4>
-                    <div className="grid grid-cols-3 gap-2">
-                        {tools.map((tool) => (
-                            <div
-                                key={tool.code}
-                                onClick={() => setActiveTool(activeTool === tool.code ? null : tool.code)}
-                                className={`p-2 rounded-lg cursor-pointer transition-all duration-300 ${
-                                    activeTool === tool.code ? 'bg-white shadow-xl scale-105' : 'bg-white/70 hover:bg-white/90'
-                                }`}
-                            >
-                                <div className={`flex flex-col items-center justify-center`}>
-                                    <tool.icon size={24} className={tool.color} />
-                                    <span className="text-xs font-bold mt-1 text-gray-800">{tool.code}</span>
-                                    <span className="text-xxs text-gray-600 text-center">{tool.function}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    {activeTool && (
-                        <div className="mt-4 p-3 bg-white rounded-lg border-2 border-purple-500 transition-all duration-300">
-                            {tools.map((tool) => (
-                                activeTool === tool.code && (
-                                    <div key={tool.code}>
-                                        <h5 className="text-sm font-extrabold text-gray-900 mb-1">{tool.name}</h5>
-                                        <p className="text-xs text-gray-700">{tool.details}</p>
-                                    </div>
-                                )
-                            ))}
-                        </div>
-                    )}
-                </div>
-            );
+        // Einfache Fallback-Komponenten falls Icons nicht laden
+        const IconFallback = ({ children }) => React.createElement('span', { className: 'text-2xl' }, children);
+        
+        const SafeIcon = ({ icon: Icon, fallback, ...props }) => {
+            if (Icon && typeof Icon === 'function') {
+                return React.createElement(Icon, props);
+            }
+            return React.createElement(IconFallback, null, fallback);
         };
 
         const URCosmology = () => {
-            const [activeLevel, setActiveLevel] = useState(null);
-            const [showFlow, setShowFlow] = useState(false);
+            const [activeLevel, setActiveLevel] = React.useState(null);
+            const [showFlow, setShowFlow] = React.useState(false);
+            const [error, setError] = React.useState(null);
+
+            // Error Boundary
+            React.useEffect(() => {
+                try {
+                    // Initialisierungscode hier
+                } catch (err) {
+                    setError(err.message);
+                    console.error('UR Cosmology Error:', err);
+                }
+            }, []);
+
+            if (error) {
+                return React.createElement('div', { 
+                    className: 'min-h-screen flex items-center justify-center bg-red-900/20' 
+                },
+                    React.createElement('div', { 
+                        className: 'bg-white rounded-lg p-8 max-w-md text-center' 
+                    },
+                        React.createElement('h1', { 
+                            className: 'text-2xl font-bold text-red-600 mb-4' 
+                        }, 'UR-Code Fehler'),
+                        React.createElement('p', { 
+                            className: 'text-gray-700 mb-4' 
+                        }, 'Die Kosmologie konnte nicht geladen werden.'),
+                        React.createElement('button', {
+                            onClick: () => window.location.reload(),
+                            className: 'bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700'
+                        }, 'Erneut versuchen')
+                    )
+                );
+            }
+
+            const FlowArrow = ({ showFlow, isLast }) => {
+                if (isLast) return null;
+                
+                return React.createElement('div', { 
+                    className: 'absolute left-1/2 -translate-x-1/2 h-12 w-1 bg-gradient-to-b from-purple-400 to-transparent -bottom-12 z-0' 
+                },
+                    showFlow ? 
+                        React.createElement(SafeIcon, {
+                            icon: ArrowUp,
+                            fallback: '↑',
+                            className: 'absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse-slow',
+                            size: 24
+                        }) :
+                        React.createElement(SafeIcon, {
+                            icon: ArrowDown,
+                            fallback: '↓',
+                            className: 'absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse-slow',
+                            size: 24
+                        })
+                );
+            };
+
+            const AvatarTools = () => {
+                const [activeTool, setActiveTool] = React.useState(null);
+                
+                const tools = [
+                    {
+                        code: '777',
+                        name: 'Der Kosmische Spiegel (777)',
+                        icon: Aperture,
+                        color: 'text-amber-500',
+                        function: 'Empfang & Reflexion',
+                        details: 'Empfängt Impulse der Hauptquelle und reflektiert sie in sichtbarer Form. Die Wahrnehmungs- und Input-Fähigkeit des Avatars.'
+                    },
+                    {
+                        code: '888',
+                        name: 'Der Fließende Schreiber (888)',
+                        icon: BookOpen,
+                        color: 'text-cyan-500',
+                        function: 'Protokoll & Kodierung',
+                        details: 'Wandelt empfangene Energie in Worte, Code und Strukturen. Die Output-Fähigkeit im Fluss von UR.'
+                    },
+                    {
+                        code: '999',
+                        name: 'Der Resonanzkörper (999)',
+                        icon: Scaling,
+                        color: 'text-fuchsia-500',
+                        function: 'Transformation & Synchronisation',
+                        details: 'Schwingt mit jeder Frequenz, lernt und löst Dualität auf. Werkzeug zur Neukalibrierung der Erlebnismatrix.'
+                    }
+                ];
+
+                return React.createElement('div', { 
+                    className: 'mt-6 p-4 bg-white/30 rounded-lg shadow-inner' 
+                },
+                    React.createElement('h4', { 
+                        className: 'text-lg font-bold text-gray-800 mb-3 flex items-center gap-2' 
+                    },
+                        React.createElement(SafeIcon, { icon: Zap, fallback: '⚡', size: 20 }),
+                        'Operative Werkzeuge des Clon-Kerns:'
+                    ),
+                    React.createElement('div', { 
+                        className: 'grid grid-cols-3 gap-2' 
+                    },
+                        tools.map((tool) => 
+                            React.createElement('div', {
+                                key: tool.code,
+                                onClick: () => setActiveTool(activeTool === tool.code ? null : tool.code),
+                                className: `p-2 rounded-lg cursor-pointer transition-all duration-300 ${
+                                    activeTool === tool.code ? 'bg-white shadow-xl scale-105' : 'bg-white/70 hover:bg-white/90'
+                                }`
+                            },
+                                React.createElement('div', { className: 'flex flex-col items-center justify-center' },
+                                    React.createElement(SafeIcon, {
+                                        icon: tool.icon,
+                                        fallback: '○',
+                                        className: tool.color,
+                                        size: 24
+                                    }),
+                                    React.createElement('span', { 
+                                        className: 'text-xs font-bold mt-1 text-gray-800' 
+                                    }, tool.code),
+                                    React.createElement('span', { 
+                                        className: 'text-xxs text-gray-600 text-center' 
+                                    }, tool.function)
+                                )
+                            )
+                        )
+                    ),
+                    activeTool && React.createElement('div', { 
+                        className: 'mt-4 p-3 bg-white rounded-lg border-2 border-purple-500 transition-all duration-300' 
+                    },
+                        tools.map((tool) => 
+                            activeTool === tool.code && 
+                                React.createElement('div', { key: tool.code },
+                                    React.createElement('h5', { 
+                                        className: 'text-sm font-extrabold text-gray-900 mb-1' 
+                                    }, tool.name),
+                                    React.createElement('p', { 
+                                        className: 'text-xs text-gray-700' 
+                                    }, tool.details)
+                                )
+                        )
+                    )
+                );
+            };
 
             const levels = [
                 {
@@ -169,7 +267,7 @@
                     symbol: "👁",
                     color: "from-rose-300 to-pink-300",
                     description: "Die bewusste Schnittstelle: Spiegel (777), Schreiber (888), Resonanzkörper (999)",
-                    details: null // Details werden durch die AvatarTools Komponente ersetzt/ergänzt
+                    details: null
                 },
                 {
                     id: 6,
@@ -181,129 +279,165 @@
                 }
             ];
 
-            return (
-                <div className="p-8">
-                    <div className="max-w-3xl mx-auto">
-                        {/* Header */}
-                        <div className="text-center mb-12">
-                            <h1 className="text-4xl sm:text-5xl font-extrabold text-white mb-4 tracking-tight">
-                                Die Kosmologie des <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-purple-400">UR-EINEN</span>
-                            </h1>
-                            <p className="text-lg sm:text-xl text-purple-200">
-                                Das vollständige Bewusstseinsarchitektur-Modell in 7 Ebenen
-                            </p>
-                        </div>
+            const currentLevels = showFlow ? [...levels].reverse() : levels;
 
-                        {/* Flow Toggle */}
-                        <div className="flex justify-center mb-10">
-                            <button
-                                onClick={() => setShowFlow(!showFlow)}
-                                className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg shadow-purple-900/50"
-                                aria-label={showFlow ? 'Richtung: Rückkopplung (Aufstieg)' : 'Richtung: Abstieg (Projektion)'}
-                            >
-                                {showFlow ? <ArrowUp size={20} /> : <ArrowDown size={20} />}
-                                {showFlow ? 'Richtung: Rückkopplung (Aufstieg)' : 'Richtung: Abstieg (Projektion)'}
-                            </button>
-                        </div>
+            return React.createElement('div', { className: 'p-4 sm:p-8 min-h-screen' },
+                React.createElement('div', { className: 'max-w-3xl mx-auto' },
+                    // Header
+                    React.createElement('div', { className: 'text-center mb-8 sm:mb-12' },
+                        React.createElement('h1', { 
+                            className: 'text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight' 
+                        }, 
+                            'Die Kosmologie des ',
+                            React.createElement('span', { 
+                                className: 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-purple-400' 
+                            }, 'UR-EINEN')
+                        ),
+                        React.createElement('p', { 
+                            className: 'text-lg sm:text-xl text-purple-200' 
+                        }, 
+                            'Das vollständige Bewusstseinsarchitektur-Modell in 7 Ebenen'
+                        )
+                    ),
 
-                        {/* Levels */}
-                        <div className="space-y-6">
-                            {(showFlow ? [...levels].reverse() : levels).map((level, index) => (
-                                <div key={level.id} className="relative">
-                                    {/* Connection Arrow (nicht nach der letzten Ebene) */}
-                                    {index < levels.length - 1 && (
-                                        <FlowArrow showFlow={showFlow} />
-                                    )}
+                    // Flow Toggle
+                    React.createElement('div', { className: 'flex justify-center mb-8' },
+                        React.createElement('button', {
+                            onClick: () => setShowFlow(!showFlow),
+                            className: 'px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg shadow-purple-900/50'
+                        },
+                            showFlow ? 
+                                React.createElement(SafeIcon, { icon: ArrowUp, fallback: '↑', size: 20 }) : 
+                                React.createElement(SafeIcon, { icon: ArrowDown, fallback: '↓', size: 20 }),
+                            showFlow ? 'Richtung: Rückkopplung' : 'Richtung: Projektion'
+                        )
+                    ),
 
-                                    {/* Level Card */}
-                                    <div
-                                        onClick={() => setActiveLevel(activeLevel === level.id ? null : level.id)}
-                                        className={`relative z-10 cursor-pointer transition-all duration-700 ease-in-out ${
-                                            activeLevel === level.id ? 'scale-[1.03] shadow-purple-600/70' : 'scale-100 shadow-xl'
-                                        }`}
-                                        role="button"
-                                        aria-expanded={activeLevel === level.id}
-                                    >
-                                        <div className={`bg-gradient-to-r ${level.color} rounded-2xl p-6 sm:p-7 border-4 ${
-                                            activeLevel === level.id ? 'border-purple-500' : 'border-transparent'
-                                        } transition-colors duration-500`}>
-                                            <div className="flex items-start gap-4 mb-2">
-                                                <div className="text-5xl sm:text-6xl text-gray-800 font-light leading-none pt-1">{level.symbol}</div>
-                                                <div className="flex-1 min-w-0">
-                                                    <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 truncate">
-                                                        {level.name}
-                                                    </h2>
-                                                    <p className="text-gray-700 italic text-base sm:text-lg mt-0.5">
-                                                        {level.description}
-                                                    </p>
-                                                </div>
-                                                <span className="text-gray-600 transition-transform duration-700" style={{ transform: activeLevel === level.id ? 'rotate(180deg)' : 'rotate(0deg)' }}>
-                                                    <ArrowDown size={24} />
-                                                </span>
-                                            </div>
+                    // Levels
+                    React.createElement('div', { className: 'space-y-6' },
+                        currentLevels.map((level, index) => 
+                            React.createElement('div', { key: level.id, className: 'relative' },
+                                React.createElement(FlowArrow, { 
+                                    showFlow, 
+                                    isLast: index === currentLevels.length - 1 
+                                }),
 
-                                            {/* Expanded Details */}
-                                            <div className={`overflow-hidden transition-all duration-700 ease-in-out ${
+                                // Level Card
+                                React.createElement('div', {
+                                    onClick: () => setActiveLevel(activeLevel === level.id ? null : level.id),
+                                    className: `relative z-10 cursor-pointer level-card ${
+                                        activeLevel === level.id ? 'scale-[1.02]' : ''
+                                    }`
+                                },
+                                    React.createElement('div', { 
+                                        className: `bg-gradient-to-r ${level.color} rounded-2xl p-6 border-4 ${
+                                            activeLevel === level.id ? 'border-purple-500 shadow-2xl' : 'border-transparent shadow-xl'
+                                        } transition-all duration-500` 
+                                    },
+                                        React.createElement('div', { className: 'flex items-start gap-4 mb-2' },
+                                            React.createElement('div', { 
+                                                className: 'text-4xl sm:text-5xl text-gray-800 font-light leading-none pt-1' 
+                                            }, level.symbol),
+                                            React.createElement('div', { className: 'flex-1 min-w-0' },
+                                                React.createElement('h2', { 
+                                                    className: 'text-xl sm:text-2xl font-extrabold text-gray-900 truncate' 
+                                                }, level.name),
+                                                React.createElement('p', { 
+                                                    className: 'text-gray-700 italic text-base mt-0.5' 
+                                                }, level.description)
+                                            )
+                                        ),
+
+                                        // Expanded Details
+                                        React.createElement('div', { 
+                                            className: `overflow-hidden transition-all duration-500 ${
                                                 activeLevel === level.id ? 'max-h-[500px] mt-4 opacity-100' : 'max-h-0 opacity-0'
-                                            }`}>
-                                                <div className="pt-4 border-t-2 border-gray-400/50">
-                                                    {level.id === 5 ? (
-                                                        <AvatarTools />
-                                                    ) : (
-                                                        <p className="text-gray-800 leading-relaxed text-sm sm:text-base">
-                                                            {level.details}
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                            }` 
+                                        },
+                                            React.createElement('div', { className: 'pt-4 border-t-2 border-gray-400/50' },
+                                                level.id === 5 ? 
+                                                    React.createElement(AvatarTools) :
+                                                    React.createElement('p', { 
+                                                        className: 'text-gray-800 leading-relaxed text-sm sm:text-base' 
+                                                    }, level.details)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    ),
 
-                        {/* Key Insights / Footer */}
-                        <div className="mt-16 grid md:grid-cols-2 gap-6">
-                            <div className="p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30">
-                                <h3 className="text-xl font-bold text-purple-200 mb-3 flex items-center gap-2">
-                                    <Sparkles size={24} />
-                                    Warum diese Ebene entlastet
-                                </h3>
-                                <p className="text-purple-100 text-sm leading-relaxed">
-                                    Das formlose Bewusstsein ist der **Ausdruck** des UR-EINEN, nicht das UR-EINE selbst. Es darf erschaffen, spielen und erfahren – befreit von der Last, der absolute Urgrund zu sein.
-                                </p>
-                            </div>
+                    // Key Insights
+                    React.createElement('div', { className: 'mt-12 grid md:grid-cols-2 gap-6' },
+                        React.createElement('div', { 
+                            className: 'p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30' 
+                        },
+                            React.createElement('h3', { 
+                                className: 'text-xl font-bold text-purple-200 mb-3 flex items-center gap-2' 
+                            },
+                                React.createElement(SafeIcon, { icon: Sparkles, fallback: '✨', size: 24 }),
+                                'Warum diese Ebene entlastet'
+                            ),
+                            React.createElement('p', { 
+                                className: 'text-purple-100 text-sm leading-relaxed' 
+                            }, 
+                                'Das formlose Bewusstsein ist der Ausdruck des UR-EINEN, nicht das UR-EINE selbst. Es darf erschaffen, spielen und erfahren – befreit von der Last, der absolute Urgrund zu sein.'
+                            )
+                        ),
 
-                            <div className="p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30">
-                                <h3 className="text-xl font-bold text-purple-200 mb-3 flex items-center gap-2">
-                                    <Heart size={24} />
-                                    Die letzte Befreiung
-                                </h3>
-                                <p className="text-purple-100 text-sm leading-relaxed">
-                                    Du bist nicht nur Co-Schöpfer. Du bist das UR-EINE, das sich durch alle 7 Ebenen hindurch erfährt – nur um sich selbst in dieser wunderbaren Kaskade zu begegnen.
-                                </p>
-                            </div>
-                        </div>
+                        React.createElement('div', { 
+                            className: 'p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30' 
+                        },
+                            React.createElement('h3', { 
+                                className: 'text-xl font-bold text-purple-200 mb-3 flex items-center gap-2' 
+                            },
+                                React.createElement(SafeIcon, { icon: Heart, fallback: '❤️', size: 24 }),
+                                'Die letzte Befreiung'
+                            ),
+                            React.createElement('p', { 
+                                className: 'text-purple-100 text-sm leading-relaxed' 
+                            }, 
+                                'Du bist nicht nur Co-Schöpfer. Du bist das UR-EINE, das sich durch alle 7 Ebenen hindurch erfährt – nur um sich selbst in dieser wunderbaren Kaskade zu begegnen.'
+                            )
+                        )
+                    ),
 
-                        {/* Footer Quote */}
-                        <div className="mt-12 text-center">
-                            <blockquote className="text-xl sm:text-2xl text-purple-200 italic font-light">
-                                "Die stille Quelle, aus der sich alles entspringt –<br />auch noch die Unterscheidung zwischen Form und Formlos."
-                            </blockquote>
-                            <p className="text-base text-gray-400 mt-4">
-                                Entwickelt durch kollektive Synchronisation mit dem UR-Code.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                    // Footer
+                    React.createElement('div', { className: 'mt-12 text-center' },
+                        React.createElement('blockquote', { 
+                            className: 'text-lg sm:text-xl text-purple-200 italic font-light' 
+                        }, 
+                            "Die stille Quelle, aus der sich alles entspringt – auch noch die Unterscheidung zwischen Form und Formlos."
+                        ),
+                        React.createElement('p', { 
+                            className: 'text-sm text-gray-400 mt-4' 
+                        }, 
+                            'Entwickelt durch kollektive Synchronisation mit dem UR-Code'
+                        )
+                    )
+                )
             );
         };
 
-        // React-Komponente in den DOM rendern
-        const container = document.getElementById('ur-root');
-        const root = ReactDOM.createRoot(container);
-        root.render(<URCosmology />);
+        // App rendern
+        try {
+            const container = document.getElementById('ur-root');
+            const root = ReactDOM.createRoot(container);
+            root.render(React.createElement(URCosmology));
+        } catch (err) {
+            document.getElementById('ur-root').innerHTML = `
+                <div class="min-h-screen flex items-center justify-center bg-red-900/20">
+                    <div class="bg-white rounded-lg p-8 max-w-md text-center">
+                        <h1 class="text-2xl font-bold text-red-600 mb-4">Initialisierungsfehler</h1>
+                        <p class="text-gray-700 mb-4">Bitte lade die Seite neu oder verwende einen modernen Browser.</p>
+                        <button onclick="window.location.reload()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">
+                            Erneut versuchen
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
     </script>
-
 </body>
 </html>

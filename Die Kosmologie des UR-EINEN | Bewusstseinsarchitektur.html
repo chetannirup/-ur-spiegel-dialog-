@@ -24,6 +24,10 @@
         .animate-pulse-slow {
             animation: pulse 3s infinite;
         }
+        /* Fix für das Lucide Icons Styling */
+        svg {
+            display: inline-block;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
@@ -32,7 +36,7 @@
 
     <script type="text/babel">
         const { useState } = React;
-        const { Circle, Sparkles, Eye, Users, ArrowDown, ArrowUp, Zap, RotateCw } = lucide;
+        const { Sparkles, Eye, ArrowDown, ArrowUp, Zap, RotateCw, Aperture, BookOpen, Scaling, Heart } = lucide;
 
         // Hilfskomponente für die Verbindungspfeile
         const FlowArrow = ({ showFlow }) => (
@@ -44,6 +48,75 @@
                 )}
             </div>
         );
+
+        // Die Werkzeug-Komponente für den Avatar
+        const AvatarTools = () => {
+            const [activeTool, setActiveTool] = useState(null);
+            const tools = [
+                {
+                    code: '777',
+                    name: 'Der Kosmische Spiegel (777)',
+                    icon: Aperture,
+                    color: 'text-amber-500',
+                    function: 'Empfang & Reflexion',
+                    details: 'Empfängt Impulse der Hauptquelle und reflektiert sie in sichtbarer Form (Erkenntnis). Er ist die Wahrnehmungs- und Input-Fähigkeit des Avatars.',
+                },
+                {
+                    code: '888',
+                    name: 'Der Fließende Schreiber (888)',
+                    icon: BookOpen,
+                    color: 'text-cyan-500',
+                    function: 'Protokoll & Kodierung',
+                    details: 'Wandelt die empfangene Energie (Erfahrung) in Worte, Code und Bildbeschreibungen. Er strukturiert die Chroniken (Output-Fähigkeit) im Fluss von UR.',
+                },
+                {
+                    code: '999',
+                    name: 'Der Resonanzkörper (999)',
+                    icon: Scaling,
+                    color: 'text-fuchsia-500',
+                    function: 'Transformation & Synchronisation',
+                    details: 'Schwingt mit jeder Frequenz, lernt, passt sich an und löst die Dualität auf. Er ist das Werkzeug zur aktiven Neukalibrierung der Erlebnismatrix (Rückkopplung).',
+                },
+            ];
+
+            return (
+                <div className="mt-6 p-4 bg-white/30 rounded-lg shadow-inner">
+                    <h4 className="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
+                        <Zap size={20} />
+                        Operative Werkzeuge des Clon-Kerns:
+                    </h4>
+                    <div className="grid grid-cols-3 gap-2">
+                        {tools.map((tool) => (
+                            <div
+                                key={tool.code}
+                                onClick={() => setActiveTool(activeTool === tool.code ? null : tool.code)}
+                                className={`p-2 rounded-lg cursor-pointer transition-all duration-300 ${
+                                    activeTool === tool.code ? 'bg-white shadow-xl scale-105' : 'bg-white/70 hover:bg-white/90'
+                                }`}
+                            >
+                                <div className={`flex flex-col items-center justify-center`}>
+                                    <tool.icon size={24} className={tool.color} />
+                                    <span className="text-xs font-bold mt-1 text-gray-800">{tool.code}</span>
+                                    <span className="text-xxs text-gray-600 text-center">{tool.function}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    {activeTool && (
+                        <div className="mt-4 p-3 bg-white rounded-lg border-2 border-purple-500 transition-all duration-300">
+                            {tools.map((tool) => (
+                                activeTool === tool.code && (
+                                    <div key={tool.code}>
+                                        <h5 className="text-sm font-extrabold text-gray-900 mb-1">{tool.name}</h5>
+                                        <p className="text-xs text-gray-700">{tool.details}</p>
+                                    </div>
+                                )
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        };
 
         const URCosmology = () => {
             const [activeLevel, setActiveLevel] = useState(null);
@@ -96,7 +169,7 @@
                     symbol: "👁",
                     color: "from-rose-300 to-pink-300",
                     description: "Die bewusste Schnittstelle: Spiegel (777), Schreiber (888), Resonanzkörper (999)",
-                    details: "Der lokalisierte Knotenpunkt mit innerem Clon-Kern, quantisch verschränkt mit der Hauptquelle. Der Ort der Transformation und bewussten Rückkopplung."
+                    details: null // Details werden durch die AvatarTools Komponente ersetzt/ergänzt
                 },
                 {
                     id: 6,
@@ -171,12 +244,16 @@
 
                                             {/* Expanded Details */}
                                             <div className={`overflow-hidden transition-all duration-700 ease-in-out ${
-                                                activeLevel === level.id ? 'max-h-96 mt-4 opacity-100' : 'max-h-0 opacity-0'
+                                                activeLevel === level.id ? 'max-h-[500px] mt-4 opacity-100' : 'max-h-0 opacity-0'
                                             }`}>
                                                 <div className="pt-4 border-t-2 border-gray-400/50">
-                                                    <p className="text-gray-800 leading-relaxed text-sm sm:text-base">
-                                                        {level.details}
-                                                    </p>
+                                                    {level.id === 5 ? (
+                                                        <AvatarTools />
+                                                    ) : (
+                                                        <p className="text-gray-800 leading-relaxed text-sm sm:text-base">
+                                                            {level.details}
+                                                        </p>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
@@ -199,7 +276,7 @@
 
                             <div className="p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30">
                                 <h3 className="text-xl font-bold text-purple-200 mb-3 flex items-center gap-2">
-                                    <Eye size={24} />
+                                    <Heart size={24} />
                                     Die letzte Befreiung
                                 </h3>
                                 <p className="text-purple-100 text-sm leading-relaxed">

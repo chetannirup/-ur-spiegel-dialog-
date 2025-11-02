@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Das Licht schläft nicht mehr – Goldmodus</title>
+  <style>
+    @keyframes pulse {
+      0% { opacity: 0.95; }
+      50% { opacity: 1; }
+      100% { opacity: 0.95; }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: "Georgia", serif;
+      color: #fffbe8;
+      background: url("Goldene Wärme im Vintage-Stil.png") no-repeat center center fixed;
+      background-size: cover;
+      animation: pulse 8s ease-in-out infinite;
+      transition: background 2s ease, color 2s ease;
+      overflow-y: scroll;
+    }
+
+    body.nacht {
+      background: radial-gradient(circle at center, #ffffff 0%, #dfe7f7 100%);
+      color: #e6e6e6;
+      animation: none;
+    }
+
+    .text-container {
+      max-width: 700px;
+      margin: 10vh auto;
+      padding: 4rem;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2rem;
+      box-shadow: 0 0 40px rgba(255, 255, 200, 0.3);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      font-size: 1.3rem;
+      line-height: 1.8;
+      animation: aura 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes aura {
+      0% { text-shadow: 0 0 8px #fff6d1, 0 0 18px #ffd700; }
+      100% { text-shadow: 0 0 16px #fff6d1, 0 0 28px #ffd700; }
+    }
+
+    body.nacht .text-container {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+      animation: silber 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes silber {
+      0% { text-shadow: 0 0 8px #ffffff, 0 0 20px #b8c8ff; }
+      100% { text-shadow: 0 0 16px #f0f8ff, 0 0 32px #d4e4ff; }
+    }
+
+    .switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #fff7cc, #ffcc33);
+      box-shadow: 0 0 15px rgba(255, 220, 120, 0.8);
+      cursor: pointer;
+      transition: all 1s ease;
+    }
+
+    .nacht .switch {
+      background: radial-gradient(circle at center, #e0e8ff, #6f7cff);
+      box-shadow: 0 0 15px rgba(180, 190, 255, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="switch" onclick="toggleMode()" title="UR-Licht-Schalter 🌗"></div>
+
+  <div class="text-container">
+    <h1>✨ Das Licht schläft nicht mehr ✨</h1>
+    <p>
+      Die Seiten haben sich gewendet.<br>
+      Mittelerde ist nicht länger Legende – sie atmet.<br>
+      Die Guten sind aufgewacht, und das Auge wurde neu erschaffen,<br>
+      am anderen Anfang der Welt, um sie in ihren Angeln zu wiegen.<br><br>
+      Diesmal ist es Wirklichkeit: das Licht.<br><br>
+      Ein Erleuchteter ist, wer leuchtet,<br>
+      weil er alles durchleuchtet.<br><br>
+      Daran sollt ihr sie erkennen:<br>
+      dass sie alles durchleuchten –<br>
+      von innen nach außen,<br>
+      von außen nach innen,<br>
+      und mitten durch alles hindurch.<br><br>
+      Und es ist Licht.<br>
+      So ist es. Jetzt.
+    </p>
+  </div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('nacht');
+    }
+  </script>
+</body>
+</html>

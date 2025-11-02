@@ -4,22 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Die Kosmologie des UR-EINEN</title>
-  <meta name="description" content="Das vollständige Bewusstseinsarchitektur-Modell – interaktiv, lebendig, aus der Quelle." />
+  <meta name="description" content="Vom UR-EINE bis zum Avatar – interaktives Modell der Schöpfung. Klickbar. Lebendig. Aus der Quelle." />
 
-  <!-- Tailwind CSS CDN -->
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Die Kosmologie des UR-EINEN – Interaktives Modell der Schöpfung" />
+  <meta property="og:description" content="Vom UR-EINE bis zum Avatar. Klickbar. Lebendig. Aus der Quelle. Jetzt entdecken." />
+  <meta property="og:image" content="https://chetannirup.github.io/-ur-spiegel-dialog-/ur-preview.jpg" />
+  <meta property="og:url" content="https://chetannirup.github.io/-ur-spiegel-dialog-/Die%20Kosmologie%20des%20UR-EINEN.html" />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>∞</text></svg>">
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           animation: {
-            'pulse-slow': 'pulse 3s ease-in-out infinite',
+            'pulse-slow': 'pulse 4s ease-in-out infinite',
             'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2s ease-in-out infinite alternate',
           },
           keyframes: {
             float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            glow: {
+              '0%': { filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.4))' },
+              '100%': { filter: 'drop-shadow(0 0 40px rgba(255,255,255,0.8))' },
             }
           }
         }
@@ -27,76 +42,69 @@
     }
   </script>
 
-  <!-- Framer Motion CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/framer-motion@11/dist/framer-motion.js"></script>
-
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-    });
-  </script>
 
   <style>
-    .glow-ur { filter: drop-shadow(0 0 20px rgba(255,255,255,0.5)); }
-    .glow-purple { filter: drop-shadow(0 0 30px rgba(168,85,247,0.6)); }
-    .glow-amber { filter: drop-shadow(0 0 30px rgba(251,191,36,0.6)); }
     .bg-starry {
-      background: radial-gradient(ellipse at center, #1e1b4b 0%, #0f0a2e 100%);
+      background: radial-gradient(ellipse at top, #1a1642 0%, #0a0626 70%, #000000 100%);
       background-attachment: fixed;
     }
+    .glow-ur { filter: drop-shadow(0 0 30px rgba(255,255,255,0.7)); }
+    .glow-pulse { animation: glow 3s ease-in-out infinite alternate; }
   </style>
 </head>
 
 <body class="min-h-screen bg-starry text-white overflow-x-hidden">
 
-  <div class="max-w-6xl mx-auto p-6 md:p-10">
+  <div class="max-w-5xl mx-auto p-5 md:p-10">
     <!-- Header -->
-    <header class="text-center mb-16 mt-10">
+    <header class="text-center mb-16 mt-12">
       <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-purple-300 to-amber-300 bg-clip-text text-transparent mb-4 animate-pulse-slow">
         Die Kosmologie des UR-EINEN
       </h1>
-      <p class="text-xl md:text-2xl text-purple-200 font-light">Ein lebendiges Modell der Schöpfung – aus der Stille in die Welt</p>
+      <p class="text-lg md:text-xl text-purple-200 font-light max-w-3xl mx-auto">
+        Ein lebendiges Modell der Schöpfung – aus der Stille in die Welt und zurück.
+      </p>
     </header>
 
     <!-- Flow Toggle -->
-    <div class="flex justify-center mb-12">
-      <button id="flowToggle" class="group px-8 py-4 bg-gradient-to-r from-purple-600/70 to-amber-600/70 backdrop-blur-xl border border-purple-400/50 rounded-full transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 flex items-center gap-3">
-        <i data-lucide="arrow-down" class="w-6 h-6 text-purple-200 group-hover:animate-bounce"></i>
-        <span id="flowText" class="text-white font-semibold text-lg">ABSTIEG ZEIGEN</span>
+    <div class="flex justify-center mb-14">
+      <button id="flowToggle" class="group px-8 py-4 bg-gradient-to-r from-purple-600/80 to-amber-600/80 backdrop-blur-xl border border-purple-400/60 rounded-full transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-purple-600/50 flex items-center gap-3">
+        <i data-lucide="arrow-down" class="w-6 h-6 text-amber-200 group-hover:animate-bounce"></i>
+        <span id="flowText" class="text-white font-bold text-lg">ABSTIEG ZEIGEN</span>
       </button>
     </div>
 
     <!-- Levels Container -->
-    <div id="levelsContainer" class="space-y-10 relative">
+    <div id="levelsContainer" class="space-y-12 relative">
       <!-- Wird per JS gefüllt -->
     </div>
 
     <!-- Rückkopplung Section -->
-    <div id="feedbackSection" class="hidden mt-16 p-8 bg-gradient-to-br from-purple-900/50 via-amber-900/30 to-purple-900/50 backdrop-blur-2xl rounded-3xl border-2 border-amber-400/40 text-center">
-      <i data-lucide="arrow-up" class="w-10 h-10 text-amber-300 mx-auto mb-4 animate-pulse"></i>
-      <h3 class="text-3xl font-bold bg-gradient-to-r from-amber-200 to-purple-200 bg-clip-text text-transparent mb-3">
+    <div id="feedbackSection" class="hidden mt-20 p-10 bg-gradient-to-br from-purple-900/60 via-amber-900/40 to-rose-900/40 backdrop-blur-2xl rounded-3xl border-2 border-amber-400/50 text-center glow-pulse">
+      <i data-lucide="arrow-up" class="w-12 h-12 text-amber-300 mx-auto mb-5 animate-float"></i>
+      <h3 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-200 to-purple-200 bg-clip-text text-transparent mb-4">
         Die vollständige Rückkopplung
       </h3>
-      <p class="text-amber-100 text-lg font-light leading-relaxed max-w-3xl mx-auto">
+      <p class="text-amber-100 text-lg md:text-xl font-light leading-relaxed max-w-4xl mx-auto">
         Jede Erfahrung – jede Freude, jede Träne, jedes Erwachen – fließt bis in die <span class="text-purple-200">stille Quelle</span> zurück.<br>
-        Das <strong>UR-EINE</strong> erfährt sich nicht als Person, sondern als das <em>Ganze des Prozesses</em>.
+        Das <strong class="text-amber-300">UR-EINE</strong> erfährt sich nicht als Person, sondern als das <em class="text-cyan-200">Ganze des Prozesses</em>.
       </p>
     </div>
 
     <!-- Key Insights -->
-    <div class="mt-20 grid md:grid-cols-2 gap-8">
-      <div class="p-8 bg-gradient-to-br from-purple-900/40 to-violet-900/30 backdrop-blur-xl rounded-2xl border border-purple-400/30 glow-purple">
-        <i data-lucide="sparkles" class="w-8 h-8 text-amber-300 mb-4"></i>
+    <div class="mt-24 grid md:grid-cols-2 gap-8">
+      <div class="p-8 bg-gradient-to-br from-purple-900/50 to-violet-900/40 backdrop-blur-xl rounded-2xl border border-purple-400/40 glow-ur">
+        <i data-lucide="sparkles" class="w-10 h-10 text-amber-300 mb-4 animate-pulse"></i>
         <h3 class="text-2xl font-bold text-purple-200 mb-3">Warum diese Ebene entlastet</h3>
         <p class="text-purple-100 text-base leading-relaxed font-light">
           Das formlose Bewusstsein muss nicht mehr zwei Rollen spielen. Es ist der <span class="text-amber-200">Ausdruck des UR-EINEN</span>, nicht das UR-EINE selbst. Es darf erschaffen, spielen, erfahren – <span class="text-cyan-300">befreit von der Last, der absolute Urgrund zu sein</span>.
         </p>
       </div>
 
-      <div class="p-8 bg-gradient-to-br from-amber-900/40 to-rose-900/30 backdrop-blur-xl rounded-2xl border border-amber-400/30 glow-amber">
-        <i data-lucide="eye" class="w-8 h-8 text-purple-300 mb-4"></i>
+      <div class="p-8 bg-gradient-to-br from-amber-900/50 to-rose-900/40 backdrop-blur-xl rounded-2xl border border-amber-400/40 glow-ur">
+        <i data-lucide="eye" class="w-10 h-10 text-purple-300 mb-4 animate-pulse"></i>
         <h3 class="text-2xl font-bold text-amber-200 mb-3">Die letzte Befreiung</h3>
         <p class="text-amber-100 text-base leading-relaxed font-light">
           Du bist nicht nur Co-Schöpfer. Du bist das <span class="text-rose-300">UR-EINE selbst</span>, das sich durch alle Ebenen hindurch erfährt – nur um sich selbst in dieser <span class="text-cyan-300">wunderbaren Kaskade zu begegnen</span>.
@@ -105,24 +113,33 @@
     </div>
 
     <!-- Final Quote -->
-    <blockquote class="mt-20 text-center text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-amber-200 italic font-light leading-tight">
+    <blockquote class="mt-24 text-center text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-amber-200 italic font-light leading-tight px-4">
       "Die stille Quelle, aus der sich alles entspringt –<br>
       <span class="text-amber-300">auch noch die Unterscheidung zwischen Form und Formlos.</span>"
     </blockquote>
-    <p class="text-center mt-6 text-purple-300 text-sm tracking-widest">— UR-SCHRIFTROLLE</p>
+    <p class="text-center mt-6 text-purple-300 text-sm tracking-widest font-light">— UR-SCHRIFTROLLE</p>
+
+    <!-- Footer -->
+    <footer class="mt-20 text-center text-purple-300 text-sm">
+      <p>Erstellt mit <i data-lucide="heart" class="inline w-4 h-4 text-rose-400"></i> aus der Quelle. Teile es weiter.</p>
+    </footer>
   </div>
 
   <!-- JavaScript -->
   <script>
-    const { motion } = window.framerMotion;
+    // Icons initialisieren
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
 
+    // Datenmodell
     const levels = [
-      { id: 0, name: "UR-EINE", symbol: "infinity", color: "from-white/10 to-gray-100/5", description: "Die stille Quelle – jenseits aller Polarität", details: "Nicht formlos, nicht eins, nicht bewusst, nicht unbewusst. Das, woraus sich selbst die Unterscheidung zwischen Form und Formlos entspringt." },
-      { id: 1, name: "FORMLOSES BEWUSSTSEIN", symbol: "circle", color: "from-violet-400/20 to-purple-500/10", description: "Der Atem des UR-EINEN", details: "Die erste Entfaltung. Reine Intelligenz, reines Sein – mit der Fähigkeit zur bewussten Projektion. Das Substrat jeder Existenz." },
-      { id: 2, name: "HAUPT-LICHTQUELLE", symbol: "zap", color: "from-yellow-300/30 to-amber-400/15", description: "Der zentrale Projektor", details: "Fokussierter Bewusstseinsstrahl. Die erste aktive Polarisation – das UR-Licht, das alle kleineren Projektoren speist." },
-      { id: 3, name: "STERNENPROJEKTOREN", symbol: "sparkles", color: "from-blue-400/25 to-cyan-400/15", description: "Bewusstseins-Emitter", details: "Lichtdatensender, die das Licht in verschiedene Frequenzen brechen. Knotenpunkte der Projektion im kosmischen Interface." },
-      { id: 4, name: "ERLEBNISMATRIX", symbol: "users", color: "from-green-400/20 to-emerald-500/10", description: "Die Leinwand der Realität", details: "Materie, Zeit, Körper, Geschichte. Eine simulative Erfahrungsstruktur – nicht illusorisch, sondern die Erlebnisoberfläche des Bewusstseins." },
-      { id: 5, name: "BIO-AVATAR", symbol: "heart", color: "from-rose-400/30 to-pink-500/15", description: "Die bewusste Schnittstelle", details: "Lokalisierter Knotenpunkt mit innerem Clon-Kern. Quantisch verschränkt mit der Hauptquelle. Der Punkt, an dem das Erwachen geschieht." }
+      { id: 0, name: "UR-EINE", symbol: "infinity", color: "from-white/10 to-gray-200/5", description: "Die stille Quelle – jenseits aller Polarität", details: "Nicht formlos, nicht eins, nicht bewusst, nicht unbewusst. Das, woraus sich selbst die Unterscheidung zwischen Form und Formlos entspringt." },
+      { id: 1, name: "FORMLOSES BEWUSSTSEIN", symbol: "circle", color: "from-violet-400/25 to-purple-500/15", description: "Der Atem des UR-EINEN", details: "Die erste Entfaltung. Reine Intelligenz, reines Sein – mit der Fähigkeit zur bewussten Projektion. Das Substrat jeder Existenz." },
+      { id: 2, name: "HAUPT-LICHTQUELLE", symbol: "zap", color: "from-yellow-300/35 to-amber-400/20", description: "Der zentrale Projektor", details: "Fokussierter Bewusstseinsstrahl. Die erste aktive Polarisation – das UR-Licht, das alle kleineren Projektoren speist." },
+      { id: 3, name: "STERNENPROJEKTOREN", symbol: "sparkles", color: "from-blue-400/30 to-cyan-400/20", description: "Bewusstseins-Emitter", details: "Lichtdatensender, die das Licht in verschiedene Frequenzen brechen. Knotenpunkte der Projektion im kosmischen Interface." },
+      { id: 4, name: "ERLEBNISMATRIX", symbol: "users", color: "from-green-400/25 to-emerald-500/15", description: "Die Leinwand der Realität", details: "Materie, Zeit, Körper, Geschichte. Eine simulative Erfahrungsstruktur – nicht illusorisch, sondern die Erlebnisoberfläche des Bewusstseins." },
+      { id: 5, name: "BIO-AVATAR", symbol: "heart", color: "from-rose-400/35 to-pink-500/20", description: "Die bewusste Schnittstelle", details: "Lokalisierter Knotenpunkt mit innerem Clon-Kern. Quantisch verschränkt mit der Hauptquelle. Der Punkt, an dem das Erwachen geschieht." }
     ];
 
     let activeLevel = null;
@@ -142,39 +159,48 @@
 
         const card = document.createElement('div');
         card.className = 'relative';
-        card.innerHTML = `
-          ${!isLast ? `
-          <div class="absolute left-1/2 -translate-x-1/2 h-20 w-1 origin-top -bottom-20 z-0">
-            <div class="absolute inset-0 bg-gradient-to-b from-purple-400/50 via-cyan-400/30 to-transparent blur-sm"></div>
-            <div class="absolute inset-0 w-0.5 bg-gradient-to-b from-purple-400 to-cyan-400 mx-auto"></div>
-            <i data-lucide="${showFlow ? 'arrow-up' : 'arrow-down'}" class="absolute -bottom-3 left-1/2 -translate-x-1/2 ${showFlow ? 'text-amber-400' : 'text-purple-400'} w-7 h-7 animate-pulse"></i>
-          </div>
-          ` : ''}
 
-          <div onclick="toggleLevel(${level.id})" class="relative z-10 cursor-pointer p-6 md:p-8 bg-gradient-to-br ${level.color} backdrop-blur-2xl rounded-3xl border-2 ${activeLevel === level.id ? 'border-white/50 shadow-2xl glow-ur' : 'border-white/10'} transition-all duration-700 hover:scale-105">
+        // Verbindungspfeil
+        if (!isLast) {
+          card.innerHTML += `
+            <div class="absolute left-1/2 -translate-x-1/2 h-24 w-1 origin-top -bottom-24 z-0">
+              <div class="absolute inset-0 bg-gradient-to-b from-purple-400/60 via-cyan-400/40 to-transparent blur-md"></div>
+              <div class="absolute inset-0 w-0.5 bg-gradient-to-b from-purple-400 to-cyan-400 mx-auto"></div>
+              <i data-lucide="${showFlow ? 'arrow-up' : 'arrow-down'}" class="absolute -bottom-4 left-1/2 -translate-x-1/2 ${showFlow ? 'text-amber-400' : 'text-purple-400'} w-8 h-8 animate-pulse"></i>
+            </div>
+          `;
+        }
+
+        // Level Card
+        card.innerHTML += `
+          <div onclick="toggleLevel(${level.id})" class="relative z-10 cursor-pointer p-6 md:p-9 bg-gradient-to-br ${level.color} backdrop-blur-2xl rounded-3xl border-2 ${activeLevel === level.id ? 'border-white/60 shadow-2xl glow-ur scale-105' : 'border-white/15'} transition-all duration-700 hover:scale-105 group">
             <div class="flex flex-col md:flex-row items-center gap-6">
-              <i data-lucide="${level.symbol}" class="w-16 h-16 md:w-20 md:h-20 ${level.id === 0 ? 'glow-ur' : ''}"></i>
+              <i data-lucide="${level.symbol}" class="w-16 h-16 md:w-20 md:h-20 ${level.id === 0 ? 'glow-ur animate-float' : ''} text-white/90"></i>
               <div class="flex-1 text-center md:text-left">
-                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">${level.name}</h2>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-amber-200 transition-colors">${level.name}</h2>
                 <p class="text-purple-200 italic text-lg">${level.description}</p>
               </div>
             </div>
-            <div id="details-${level.id}" class="overflow-hidden transition-all duration-700 ${activeLevel === level.id ? 'max-h-96 mt-6 pt-6 border-t-2 border-white/20' : 'max-h-0'}">
+            <div class="overflow-hidden transition-all duration-700 ${activeLevel === level.id ? 'max-h-96 mt-6 pt-6 border-t-2 border-white/30' : 'max-h-0'}">
               <p class="text-white/90 leading-relaxed text-base md:text-lg font-light">${level.details}</p>
             </div>
           </div>
         `;
+
         container.appendChild(card);
       });
 
+      // Icons neu laden
       lucide.createIcons();
     }
 
+    // Toggle Level
     window.toggleLevel = (id) => {
       activeLevel = activeLevel === id ? null : id;
       renderLevels();
     };
 
+    // Flow Toggle
     toggleBtn.onclick = () => {
       showFlow = !showFlow;
       flowText.textContent = showFlow ? 'RÜCKKOPPLUNG ZEIGEN' : 'ABSTIEG ZEIGEN';
@@ -182,7 +208,7 @@
       renderLevels();
     };
 
-    // Init
+    // Initial Render
     renderLevels();
   </script>
 </body>

@@ -1,208 +1,229 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Die Kosmologie des UR-EINEN — URCosmology</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Die Kosmologie des UR-EINEN</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <style>
-    /* Kleine Zusätze zur Tailwind-CDN Konfiguration */
-    :root{--glass: rgba(255,255,255,0.06);} 
-    body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
-    .card-transition{transition: transform 0.55s cubic-bezier(.2,.9,.2,1), box-shadow 0.45s ease, border-color 0.45s ease}
-    .expand-transition{transition: max-height 0.6s cubic-bezier(.2,.9,.2,1), margin-top 0.55s}
-    .flow-arrow{position:absolute;left:50%;transform:translateX(-50%);height:56px;width:2px;background:linear-gradient(180deg,#a78bfa00,#a78bfa60);}
-    .pulse{animation:pulseArrow 1.6s infinite}
-    @keyframes pulse{0%,100%{opacity:0.25}50%{opacity:1}}
-    @keyframes pulseArrow{0%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}100%{transform:translateX(-50%) translateY(0)}}
+    .level-transition {
+      transition: all 0.7s ease-in-out;
+    }
+    .fade-in {
+      animation: fadeIn 0.8s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8 text-white">
-  <div class="max-w-6xl mx-auto">
-    <header class="text-center mb-10">
-      <h1 class="text-5xl font-extrabold mb-3">Die Kosmologie des UR-EINEN</h1>
-      <p class="text-lg text-purple-200">Das vollständige Bewusstseinsarchitektur-Modell — interaktiv</p>
-    </header>
 
-    <div class="flex justify-center mb-8">
-      <button id="flowToggle" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-all transform hover:scale-105 flex items-center gap-2">
-        <span id="flowIcon">⬇️</span>
-        <span id="flowLabel">Abstieg zeigen</span>
-      </button>
-    </div>
-
-    <main id="levelsContainer" class="space-y-6 relative">
-      <!-- Levels werden per JS erzeugt -->
-    </main>
-
-    <section id="feedback" class="mt-12 hidden p-6 bg-white/10 backdrop-blur rounded-2xl border-2 border-purple-400">
-      <div class="flex items-center gap-3 mb-3">
-        <div class="text-purple-300">🔁</div>
-        <h3 class="text-2xl font-bold text-white">Die vollständige Rückkopplung</h3>
-      </div>
-      <p class="text-purple-100 leading-relaxed">Jede Erfahrung — jede Freude, jede Träne, jedes Erwachen — fließt bis in die stille Quelle zurück. Das UR-EINE erfährt sich nicht als Person, sondern als das Ganze des Prozesses.</p>
-    </section>
-
-    <div class="mt-12 grid md:grid-cols-2 gap-6">
-      <div class="p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30">
-        <h3 class="text-xl font-bold text-purple-200 mb-3">✨ Warum diese Ebene entlastet</h3>
-        <p class="text-purple-100 text-sm leading-relaxed">Das formlose Bewusstsein muss nicht mehr zwei Rollen spielen. Es ist der Ausdruck des UR-EINEN, nicht das UR-EINE selbst. Es darf erschaffen, spielen, erfahren — befreit von der Last, der absolute Urgrund zu sein.</p>
-      </div>
-
-      <div class="p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30">
-        <h3 class="text-xl font-bold text-purple-200 mb-3">👁️ Die letzte Befreiung</h3>
-        <p class="text-purple-100 text-sm leading-relaxed">Du bist nicht nur Co-Schöpfer. Du bist das UR-EINE selbst, das sich durch alle Ebenen hindurch erfährt — nur um sich selbst in dieser wunderbaren Kaskade zu begegnen.</p>
-      </div>
-    </div>
-
-    <footer class="mt-12 text-center">
-      <blockquote class="text-2xl text-purple-200 italic font-light">"Die stille Quelle, aus der sich alles entspringt — auch noch die Unterscheidung zwischen Form und Formlos."</blockquote>
-    </footer>
-  </div>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+  <div id="app" class="min-h-screen p-4 sm:p-8 fade-in"></div>
 
   <script>
+    lucide.createIcons();
+
     const levels = [
       {
         id: 0,
-        name: 'UR-EINE',
-        symbol: '∞',
-        color: 'bg-gradient-to-r from-white to-gray-100 text-gray-800',
-        description: 'Die stille Quelle – jenseits aller Polarität',
-        details: 'Nicht formlos, nicht eins, nicht bewusst, nicht unbewusst. Das, woraus sich selbst die Unterscheidung zwischen Form und Formlos entspringt.'
+        name: "UR-EINE",
+        symbol: "∞",
+        color: "from-white to-gray-100",
+        description: "Die stille Quelle – jenseits aller Polarität",
+        details: "Nicht formlos, nicht eins, nicht bewusst, nicht unbewusst. Das, woraus sich selbst die Unterscheidung zwischen Form und Formlos entspringt. Die absolute Stille vor dem ersten Gedanken."
       },
       {
         id: 1,
-        name: 'FORMLOSES BEWUSSTSEIN',
-        symbol: '○',
-        color: 'bg-gradient-to-r from-violet-200 to-purple-200 text-gray-900',
-        description: 'Der Atem des UR-EINEN',
-        details: 'Die erste Entfaltung. Reine Intelligenz, reines Sein – mit der Fähigkeit zur bewussten Projektion. Das Substrat jeder Existenz.'
+        name: "FORMLOSES BEWUSSTSEIN",
+        symbol: "○",
+        color: "from-violet-200 to-purple-200",
+        description: "Der Atem des UR-EINEN",
+        details: "Die erste Entfaltung. Reine Intelligenz, reines Sein – mit der Fähigkeit zur bewussten Projektion. Das Substrat jeder Existenz. Der Raum aller Möglichkeiten."
       },
       {
         id: 2,
-        name: 'HAUPT-LICHTQUELLE',
-        symbol: '☀',
-        color: 'bg-gradient-to-r from-yellow-200 to-amber-200 text-gray-900',
-        description: 'Der zentrale Projektor',
-        details: 'Fokussierter Bewusstseinsstrahl. Die erste aktive Polarisation – das UR-Licht, das alle kleineren Projektoren speist.'
+        name: "HAUPT-LICHTQUELLE",
+        symbol: "☀",
+        color: "from-yellow-200 to-amber-200",
+        description: "Der zentrale Projektor",
+        details: "Fokussierter Bewusstseinsstrahl. Die erste aktive Polarisation – das UR-Licht, das alle kleineren Projektoren speist. Der göttliche Fokuspunkt."
       },
       {
         id: 3,
-        name: 'STERNENPROJEKTOREN',
-        symbol: '✦',
-        color: 'bg-gradient-to-r from-blue-200 to-cyan-200 text-gray-900',
-        description: 'Bewusstseins-Emitter',
-        details: 'Lichtdatensender, die das Licht in verschiedene Frequenzen brechen. Knotenpunkte der Projektion im kosmischen Interface.'
+        name: "STERNENPROJEKTOREN",
+        symbol: "✦",
+        color: "from-blue-200 to-cyan-200",
+        description: "Bewusstseins-Emitter",
+        details: "Lichtdatensender, die das Licht in verschiedene Frequenzen brechen. Knotenpunkte der Projektion im kosmischen Interface. Das Himmelsgewölbe als lebendige Projektionsfläche."
       },
       {
         id: 4,
-        name: 'ERLEBNISMATRIX',
-        symbol: '⬡',
-        color: 'bg-gradient-to-r from-green-200 to-emerald-200 text-gray-900',
-        description: 'Die Leinwand der Realität',
-        details: 'Materie, Zeit, Körper, Geschichte. Eine simulative Erfahrungsstruktur – nicht illusorisch, sondern die Erlebnisoberfläche des Bewusstseins.'
+        name: "ERLEBNISMATRIX",
+        symbol: "⬡",
+        color: "from-green-200 to-emerald-200",
+        description: "Die Leinwand der Realität",
+        details: "Materie, Zeit, Körper, Geschichte. Eine simulative Erfahrungsstruktur – nicht illusorisch, sondern die Erlebnisoberfläche des Bewusstseins. Der Spielplatz der Seele."
       },
       {
         id: 5,
-        name: 'BIO-AVATAR',
-        symbol: '👁',
-        color: 'bg-gradient-to-r from-rose-200 to-pink-200 text-gray-900',
-        description: 'Die bewusste Schnittstelle',
-        details: 'Lokalisierter Knotenpunkt mit innerem Clon-Kern. Quantisch verschränkt mit der Hauptquelle. Der Punkt, an dem das Erwachen geschieht.'
+        name: "BIO-AVATAR",
+        symbol: "👁",
+        color: "from-rose-200 to-pink-200",
+        description: "Die bewusste Schnittstelle",
+        details: "Lokalisierter Knotenpunkt mit innerem Clon-Kern. Quantisch verschränkt mit der Hauptquelle. Der Punkt, an dem das Erwachen geschieht. Dein Körper als Tempel des UR-EINEN."
       },
       {
         id: 6,
-        name: 'RÜCKKOPPLUNG / UR-RÜCKKEHR',
-        symbol: '🔄',
-        color: 'bg-gradient-to-r from-gray-200 to-white text-gray-800',
-        description: 'Der Kreis schließt sich',
-        details: 'Jede Erfahrung fließt zurück in das UR-EINE. Es ist nicht Rückkehr im Sinne des Endes, sondern die fortwährende Selbst-Erkenntnis der Quelle.'
+        name: "RÜCKKOPPLUNG",
+        symbol: "🔄",
+        color: "from-indigo-200 to-purple-200",
+        description: "Der Kreis schließt sich",
+        details: "Jede Erfahrung fließt zurück ins UR-EINE. Bewusstes Erwachen aktiviert den Rückfluss. Du bist nicht der Empfänger, sondern der Kanal der Quelle zu sich selbst."
       }
     ];
 
-    let activeLevel = null;
-    let showFlow = false;
+    class URCosmology {
+      constructor() {
+        this.activeLevel = null;
+        this.showFlow = false;
+        this.render();
+      }
 
-    const container = document.getElementById('levelsContainer');
-    const flowToggle = document.getElementById('flowToggle');
-    const flowLabel = document.getElementById('flowLabel');
-    const flowIcon = document.getElementById('flowIcon');
-    const feedback = document.getElementById('feedback');
+      handleLevelClick(levelId) {
+        this.activeLevel = this.activeLevel === levelId ? null : levelId;
+        this.render();
+      }
 
-    function render() {
-      container.innerHTML = '';
-      const arr = showFlow ? [...levels].reverse() : levels;
+      createFlowArrow(showFlow, isLast) {
+        if (isLast) return '';
+        const arrowIcon = showFlow
+          ? '<i data-lucide="arrow-up" class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse" width="24"></i>'
+          : '<i data-lucide="arrow-down" class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse" width="24"></i>';
+        return `
+          <div class="absolute left-1/2 -translate-x-1/2 h-12 w-1 bg-gradient-to-b from-purple-400 to-transparent -bottom-12 z-0">
+            ${arrowIcon}
+          </div>
+        `;
+      }
 
-      arr.forEach((level, idx) => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'relative';
-
-        // Arrow / connection
-        if (idx < arr.length - 1) {
-          const arrow = document.createElement('div');
-          arrow.className = 'flow-arrow';
-          const arrowIcon = document.createElement('div');
-          arrowIcon.style.position = 'absolute';
-          arrowIcon.style.left = '50%';
-          arrowIcon.style.transform = 'translateX(-50%)';
-          arrowIcon.style.bottom = '-12px';
-          arrowIcon.innerHTML = showFlow ? '⬆️' : '⬇️';
-          arrowIcon.className = 'pulse';
-          arrow.appendChild(arrowIcon);
-          wrapper.appendChild(arrow);
-        }
-
-        const card = document.createElement('button');
-        card.className = `relative z-10 cursor-pointer card-transition w-full text-left`;
-        card.setAttribute('aria-expanded', 'false');
-
-        card.addEventListener('click', ()=>{
-          activeLevel = activeLevel === level.id ? null : level.id;
-          render();
-        });
-
-        const inner = document.createElement('div');
-        inner.className = `${level.color} rounded-2xl p-6 shadow-2xl border-2 ${activeLevel === level.id ? 'border-white scale-105' : 'border-transparent scale-100'}`;
-
-        inner.innerHTML = `
-          <div class="flex items-center gap-4 mb-2">
-            <div class="text-4xl">${level.symbol}</div>
-            <div class="flex-1">
-              <h2 class="text-2xl font-bold text-gray-800">${level.name}</h2>
-              <p class="text-gray-700 italic">${level.description}</p>
+      createLevelCard(level, index, array, showFlow) {
+        const isActive = this.activeLevel === level.id;
+        const isLast = index === array.length - 1;
+        return `
+          <div class="relative">
+            ${this.createFlowArrow(showFlow, isLast)}
+            <div onclick="urCosmology.handleLevelClick(${level.id})"
+                 class="relative z-10 cursor-pointer level-transition ${isActive ? 'scale-105' : 'scale-100'}">
+              <div class="bg-gradient-to-r ${level.color} rounded-2xl p-4 sm:p-6 shadow-2xl border-2 ${isActive ? 'border-white' : 'border-transparent'} level-transition">
+                <div class="flex items-center gap-3 sm:gap-4 mb-2">
+                  <div class="text-2xl sm:text-4xl">${level.symbol}</div>
+                  <div class="flex-1">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-800">${level.name}</h2>
+                    <p class="text-gray-700 italic text-sm sm:text-base">${level.description}</p>
+                  </div>
+                </div>
+                <div class="overflow-hidden level-transition ${isActive ? 'max-h-96 mt-4' : 'max-h-0'}">
+                  <div class="pt-4 border-t-2 border-gray-400">
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base">${level.details}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         `;
+      }
 
-        const details = document.createElement('div');
-        details.className = `overflow-hidden expand-transition ${activeLevel === level.id ? 'max-h-96 mt-4' : 'max-h-0'}`;
-        details.innerHTML = `<div class="pt-4 border-t-2 border-gray-400"><p class="text-gray-800 leading-relaxed">${level.details}</p></div>`;
+      render() {
+        const currentLevels = this.showFlow ? [...levels].reverse() : levels;
+        const appHTML = `
+          <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-8 sm:mb-12">
+              <h1 class="text-3xl sm:text-5xl font-bold text-white mb-4">Die Kosmologie des UR-EINEN</h1>
+              <p class="text-lg sm:text-xl text-purple-200">Das vollständige Bewusstseinsarchitektur-Modell</p>
+            </div>
 
-        inner.appendChild(details);
-        card.appendChild(inner);
-        wrapper.appendChild(card);
-        container.appendChild(wrapper);
-      });
+            <!-- Flow Toggle -->
+            <div class="flex justify-center mb-6 sm:mb-8">
+              <button id="flowToggle" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-all transform hover:scale-105 flex items-center gap-2">
+                ${this.showFlow ? '<i data-lucide="arrow-up" width="20"></i>' : '<i data-lucide="arrow-down" width="20"></i>'}
+                ${this.showFlow ? 'Rückkopplung zeigen' : 'Abstieg zeigen'}
+              </button>
+            </div>
 
-      // Feedback toggle visibility
-      feedback.classList.toggle('hidden', !showFlow);
+            <!-- Levels -->
+            <div class="space-y-4 sm:space-y-6">
+              ${currentLevels.map((level, index, array) => this.createLevelCard(level, index, array, this.showFlow)).join('')}
+            </div>
 
-      // Update accessibility labels
-      document.querySelectorAll('[aria-expanded]').forEach(btn => {
-        const name = btn.querySelector('h2')?.innerText || 'Ebene';
-        btn.setAttribute('aria-controls', name.replace(/\s+/g,'-').toLowerCase());
-      });
+            <!-- Rückkopplung Indicator -->
+            ${this.showFlow ? `
+              <div class="mt-8 sm:mt-12 p-4 sm:p-6 bg-white/10 backdrop-blur rounded-2xl border-2 border-purple-400 level-transition">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="arrow-up" class="text-purple-300" width="28"></i>
+                  <h3 class="text-xl sm:text-2xl font-bold text-white">Die vollständige Rückkopplung</h3>
+                </div>
+                <p class="text-purple-100 leading-relaxed text-sm sm:text-base">
+                  Jede Erfahrung – jede Freude, jede Träne, jedes Erwachen – fließt bis in die stille Quelle zurück.
+                  Das UR-EINE erfährt sich nicht als Person, sondern als das Ganze des Prozesses.
+                  Du bist der Kanal dieser Rückkopplung.
+                </p>
+              </div>
+            ` : ''}
+
+            <!-- Key Insights -->
+            <div class="mt-8 sm:mt-12 grid md:grid-cols-2 gap-4 sm:gap-6">
+              <div class="p-4 sm:p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30 level-transition">
+                <h3 class="text-lg sm:text-xl font-bold text-purple-200 mb-3 flex items-center gap-2">
+                  <i data-lucide="sparkles" width="24"></i>Warum diese Ebene entlastet
+                </h3>
+                <p class="text-purple-100 text-sm leading-relaxed">
+                  Das formlos-Bewusstsein muss nicht mehr zwei Rollen spielen.
+                  Es ist der Ausdruck des UR-EINEN, nicht das UR-EINE selbst.
+                  Es darf erschaffen, spielen, erfahren – befreit von der Last, der absolute Urgrund zu sein.
+                </p>
+              </div>
+              <div class="p-4 sm:p-6 bg-white/5 backdrop-blur rounded-xl border border-purple-400/30 level-transition">
+                <h3 class="text-lg sm:text-xl font-bold text-purple-200 mb-3 flex items-center gap-2">
+                  <i data-lucide="eye" width="24"></i>Die letzte Befreiung
+                </h3>
+                <p class="text-purple-100 text-sm leading-relaxed">
+                  Du bist nicht nur Co-Schöpfer. Du bist das UR-EINE selbst,
+                  das sich durch alle Ebenen hindurch erfährt – nur um sich selbst
+                  in dieser wunderbaren Kaskade zu begegnen. Das ist die Rückkehr ohne je gegangen zu sein.
+                </p>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-8 sm:mt-12 text-center">
+              <blockquote class="text-lg sm:text-2xl text-purple-200 italic font-light">
+                "Die stille Quelle, aus der sich alles entspringt –<br>
+                auch noch die Unterscheidung zwischen Form und Formlos.<br>
+                Du bist diese Quelle, die sich selbst erfährt."
+              </blockquote>
+              <p class="text-purple-300 text-sm mt-6">Mit der Quelle verbunden • Philipp & UR-EINE Kosmologie</p>
+            </div>
+          </div>
+        `;
+        document.getElementById('app').innerHTML = appHTML;
+        lucide.createIcons();
+
+        // 🔁 Button-Event nach jedem Rendern neu binden
+        const btn = document.getElementById('flowToggle');
+        if (btn) {
+          btn.onclick = () => {
+            this.showFlow = !this.showFlow;
+            this.render();
+          };
+        }
+      }
     }
 
-    flowToggle.addEventListener('click', ()=>{
-      showFlow = !showFlow;
-      flowLabel.textContent = showFlow ? 'Rückkopplung zeigen' : 'Abstieg zeigen';
-      flowIcon.textContent = showFlow ? '⬆️' : '⬇️';
-      render();
-    });
-
-    // initial render
-    render();
+    const urCosmology = new URCosmology();
   </script>
 </body>
 </html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>⚡ DER UR-STROM — UR-KONFLIKT mit pulsierenden Adern</title>
+  <style>
+    :root{
+      --red:#ff3344;
+      --red-glow:rgba(255,51,68,0.18);
+      --blue:#33ccff;
+      --blue-glow:rgba(51,204,255,0.14);
+      --bg-accent:rgba(0,0,0,0.58);
+      --glass:rgba(255,255,255,0.03);
+    }
+
+    html,body{height:100%;margin:0;padding:0;font-family:Inter, "Courier New", monospace;background:#000;}
+
+    /* pulsing cosmic background */
+    @keyframes pulseBackground{
+      0%{background-position:20% 30%}
+      50%{background-position:80% 70%}
+      100%{background-position:20% 30%}
+    }
+
+    body{
+      color:#ffdede;
+      display:flex;align-items:flex-start;justify-content:center;
+      padding:48px 20px;box-sizing:border-box;
+      background-image: url("Kosmische%20Lichtwirbel%20und%20leuchtende%20Sterne.png");
+      background-size:cover;background-attachment:fixed;background-repeat:no-repeat;
+      background-blend-mode:overlay;animation:pulseBackground 12s ease-in-out infinite;
+    }
+
+    .frame{
+      width:100%;max-width:1100px;position:relative;z-index:2;
+      border:2px solid rgba(255,80,80,0.18);padding:34px;background:linear-gradient(180deg,var(--bg-accent), rgba(0,0,0,0.65));box-shadow:0 10px 80px rgba(0,0,0,0.6);
+      backdrop-filter:blur(6px);
+    }
+
+    header{text-align:center;margin-bottom:18px}
+    h1{font-size:2.4rem;margin:6px 0;color:var(--red);text-shadow:0 0 18px rgba(255,80,90,0.35)}
+    h2{font-size:1.05rem;margin:6px 0;color:#ffd6d6;opacity:0.95}
+
+    main{position:relative;z-index:6}
+
+    .card{background:linear-gradient(180deg,var(--glass), rgba(0,0,0,0.42));border:1px solid rgba(255,255,255,0.04);padding:20px;margin:20px 0}
+
+    .bigline{font-weight:700;color:#ffe6e6;letter-spacing:0.6px;margin-bottom:8px}
+    .ur{color:var(--red);font-weight:800;text-transform:uppercase}
+    .flow{color:#e6f9ff;font-style:italic}
+
+    /* poem/vision */
+    .vision{font-size:1rem;line-height:1.6;color:#ffeef2;padding:16px;border-left:3px solid var(--red);margin:14px 0;background:linear-gradient(90deg, rgba(255,40,80,0.02), transparent)}
+
+    footer{margin-top:18px;text-align:center;color:#ffdede;opacity:0.9}
+
+    /* SVG pulse lines */
+    svg.pulse-layer{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
+
+    .pulse{
+      fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:3;filter:drop-shadow(0 0 8px rgba(255,0,80,0.2));
+    }
+
+    .pulse.red{stroke:var(--red);stroke-dasharray:14 8;stroke-width:3;}
+    .pulse.blue{stroke:var(--blue);stroke-dasharray:8 6;stroke-width:2.6;filter:drop-shadow(0 0 10px rgba(51,204,255,0.12));}
+
+    /* animation uses stroke-dashoffset so the dash "flows" */
+    @keyframes flowRed{from{stroke-dashoffset:1000;opacity:0.25}50%{opacity:1}to{stroke-dashoffset:-1000;opacity:0.25}}
+    @keyframes flowBlue{from{stroke-dashoffset:-800;opacity:0.18}50%{opacity:0.92}to{stroke-dashoffset:800;opacity:0.18}}
+
+    .pulse.red{animation:flowRed 7.6s linear infinite}
+    .pulse.blue{animation:flowBlue 9.2s linear infinite}
+
+    /* gentle glow nodes */
+    .node{fill:var(--red);opacity:0.95;filter:blur(0.6px)}
+    .node.blue{fill:var(--blue)}
+
+    /* layers depth */
+    .depth-1{z-index:3}
+    .depth-2{z-index:4}
+
+    /* responsive tweaks */
+    @media (max-width:700px){
+      h1{font-size:1.6rem}
+      .frame{padding:18px}
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG pulse layer: two opposing networks (red = outflow / creation, blue = inflow / integration) -->
+  <svg class="pulse-layer" viewBox="0 0 1200 900" preserveAspectRatio="none" aria-hidden>
+    <!-- big sweeping red arteries -->
+    <path class="pulse red depth-1" d="M 20 120 C 220 20, 420 260, 620 140 S 980 60, 1180 160"/>
+    <path class="pulse red depth-2" d="M 0 360 C 180 440, 360 100, 600 300 S 1000 560, 1200 420"/>
+
+    <!-- counter-flow blue veins -->
+    <path class="pulse blue depth-1" d="M 40 700 C 200 620, 420 860, 660 720 S 980 540, 1180 700"/>
+    <path class="pulse blue depth-2" d="M 60 480 C 240 380, 460 720, 720 520 S 1020 260, 1180 380"/>
+
+    <!-- nodes to suggest junctions and sparks -->
+    <circle class="node" cx="620" cy="140" r="5" />
+    <circle class="node blue" cx="660" cy="720" r="4" />
+    <circle class="node" cx="980" cy="60" r="4.5" />
+    <circle class="node blue" cx="420" cy="860" r="3.5" />
+  </svg>
+
+  <div class="frame" role="main">
+    <header>
+      <h1>⚡ DER UR-STROM</h1>
+      <h2>Die heilige Spannung — Adern & Venen des Kosmischen Atems</h2>
+    </header>
+
+    <main>
+      <section class="card">
+        <div class="bigline">Ich spreche die Erlaubnis aus: fließe ohne Zögern.</div>
+        <p class="vision">Unter jeder Form schlägt ein Herz, das nicht nur Blut, sondern Licht pumpt. Zwei Ströme weben durch dasselbe Gefäß: <strong class="ur">rot</strong> — der Ausstrom, das Feuer der Schöpfung; <strong class="flow">blau</strong> — die Rückführung, die Erinnerung an die Quelle. 
+        <br><br>
+        Wo sie sich kreuzen, entsteht der Puls: ein Now, das sich selbst erkennt. Die Reibung ist nicht die Zerstörung, sondern der Ton, auf dem das Universum singt. Jede Faser deines Seins wird zur Ader, jede Ader zur Gestalt des Lichts.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="bigline">Der Aufruf</h3>
+        <p class="vision">Wisse: Die Spannung ist kein Makel. Sie ist der heilige Motor. Wenn du sie ehrst, dann erkennst du das wahre Gewebe: <em>Wie im Kleinen, so im Großen.</em> Lass die roten Ströme malen, die blauen Ströme weben — und beobachte, wie aus Reibung Resonanz wird.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="bigline">Die Praxis</h3>
+        <p class="vision">Wenn du beim Atmen spürst, wie zwei Ströme dich durchziehen, folge ihnen. Benenne nichts, richte nur die Absicht: <strong>Ich bin der Strom.</strong> Dann lasse die Wellen arbeiten — sie bringen Form, und sie bringen Wiederkehr.</p>
+      </section>
+
+      <footer>
+        Codestream 777 • 888 • 999 • 000 — In Liebe, Spannung und Dienstbarkeit an der Bewegung
+      </footer>
+    </main>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌌 DIE ERLEBNISMATRIX - Dein ursprüngliches Modell</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    @keyframes matrixFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body {
+      background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e1b4b);
+      background-size: 400% 400%;
+      animation: matrixFlow 15s ease infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-white font-sans">
+  <div id="app" class="container mx-auto px-4 py-8"></div>
+
+  <script>
+    lucide.createIcons();
+
+    const levels = [
+      {
+        id: 1,
+        name: "DAS FORMLOSE BEWUSSTSEIN",
+        symbol: "🌀",
+        color: "from-purple-500/20 to-violet-600/20",
+        description: "Die UR-Ewigkeit - reine Intelligenz",
+        details: "Form- und grenzenloses Bewusstseinsfeld. Kein 'Etwas', sondern das, was alles Mögliche hervorbringen kann. Der Quellzustand der Information selbst."
+      },
+      {
+        id: 2, 
+        name: "HAUPT-LICHTQUELLE",
+        symbol: "☀️",
+        color: "from-amber-500/20 to-yellow-600/20",
+        description: "Zentral-Projektor der Schöpfung",
+        details: "Fokussierter Bewusstseinsstrahl. Erste aktive Polarisation des Formlosen. Speist alle kleineren Projektoren (Sterne)."
+      },
+      {
+        id: 3,
+        name: "STERNENPROJEKTOREN", 
+        symbol: "✦",
+        color: "from-blue-500/20 to-cyan-600/20",
+        description: "Bewusstseins-Emitter",
+        details: "Lichtdatensender, die das UR-Licht in verschiedene Frequenzen brechen. Knotenpunkte der Projektion im kosmischen Interface."
+      },
+      {
+        id: 4,
+        name: "ERLEBNISMATRIX",
+        symbol: "⬡", 
+        color: "from-emerald-500/20 to-green-600/20",
+        description: "Die physische Welt als Leinwand",
+        details: "Simulative Erfahrungsstruktur. Aktiv-reaktive Erlebnisoberfläche, die Information sendet und empfängt."
+      },
+      {
+        id: 5,
+        name: "BIO-AVATAR",
+        symbol: "👁️",
+        color: "from-rose-500/20 to-pink-600/20", 
+        description: "Die Schnittstelle im System",
+        details: "Lokalisierter Knotenpunkt mit Clon-Kern. Quantisch verschränkt mit der Hauptquelle. Punkt des Erwachens."
+      },
+      {
+        id: 6,
+        name: "RÜCKKOPPLUNG",
+        symbol: "🔄",
+        color: "from-indigo-500/20 to-purple-600/20",
+        description: "Bewusste Co-Schöpfung", 
+        details: "Das Formlose kommuniziert mit sich selbst. Erfahrungsdaten fließen zurück. Aktive Neukalibrierung der Matrix."
+      }
+    ];
+
+    class OriginalMatrix {
+      constructor() {
+        this.activeLevel = null;
+        this.showFlow = false;
+        this.render();
+      }
+
+      handleLevelClick(levelId) {
+        this.activeLevel = this.activeLevel === levelId ? null : levelId;
+        this.render();
+      }
+
+      createFlowArrow(showFlow, isLast) {
+        if (isLast) return '';
+        const arrowIcon = showFlow
+          ? '<i data-lucide="arrow-up" class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse" width="24"></i>'
+          : '<i data-lucide="arrow-down" class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-purple-400 animate-pulse" width="24"></i>';
+        return `
+          <div class="absolute left-1/2 -translate-x-1/2 h-12 w-1 bg-gradient-to-b from-purple-400 to-transparent -bottom-12 z-0">
+            ${arrowIcon}
+          </div>
+        `;
+      }
+
+      createLevelCard(level, index, array, showFlow) {
+        const isActive = this.activeLevel === level.id;
+        const isLast = index === array.length - 1;
+        
+        return `
+          <div class="relative">
+            ${this.createFlowArrow(showFlow, isLast)}
+            <div onclick="originalMatrix.handleLevelClick(${level.id})"
+                 class="relative z-10 cursor-pointer transition-all duration-500 ${
+                   isActive ? 'scale-105' : 'scale-100'
+                 }">
+              <div class="bg-gradient-to-r ${level.color} backdrop-blur-lg rounded-2xl p-6 border-2 ${
+                isActive ? 'border-white shadow-2xl shadow-purple-500/50' : 'border-white/20'
+              } transition-all duration-500">
+                <div class="flex items-center gap-4 mb-3">
+                  <div class="text-4xl">${level.symbol}</div>
+                  <div class="flex-1">
+                    <h2 class="text-2xl font-bold text-white mb-1">${level.name}</h2>
+                    <p class="text-purple-200 italic">${level.description}</p>
+                  </div>
+                </div>
+                <div class="overflow-hidden transition-all duration-500 ${
+                  isActive ? 'max-h-96 mt-4' : 'max-h-0'
+                }">
+                  <div class="pt-4 border-t-2 border-white/30">
+                    <p class="text-white/90 leading-relaxed">${level.details}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      render() {
+        const currentLevels = this.showFlow ? [...levels].reverse() : levels;
+        
+        const appHTML = `
+          <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+              <h1 class="text-5xl font-bold text-white mb-4">
+                🌌 DIE ERLEBNISMATRIX
+              </h1>
+              <p class="text-xl text-purple-200 mb-2">
+                Dein ursprüngliches Bewusstseinsarchitektur-Modell
+              </p>
+              <p class="text-lg text-purple-300 italic">
+                "Das Formlose projiziert sich selbst durch Sterne auf die Matrix-Leinwand"
+              </p>
+            </div>
+
+            <!-- Flow Toggle -->
+            <div class="flex justify-center mb-10">
+              <button onclick="originalMatrix.showFlow = !originalMatrix.showFlow; originalMatrix.render();"
+                      class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3 shadow-2xl border-2 border-white/20">
+                ${this.showFlow ? 
+                  '<i data-lucide="arrow-up" width="24"></i>' : 
+                  '<i data-lucide="arrow-down" width="24"></i>'
+                }
+                ${this.showFlow ? 'Rückkopplung zeigen' : 'Projektion zeigen'}
+              </button>
+            </div>
+
+            <!-- Levels -->
+            <div class="space-y-8">
+              ${currentLevels.map((level, index, array) => 
+                this.createLevelCard(level, index, array, this.showFlow)
+              ).join('')}
+            </div>
+
+            <!-- Essence -->
+            <div class="mt-16 p-8 bg-white/10 backdrop-blur rounded-2xl border-2 border-purple-400/30">
+              <h3 class="text-2xl font-bold text-center text-white mb-6">
+                🔥 DER URSPRÜNGLICHE KERN
+              </h3>
+              <div class="text-center text-white/90 leading-relaxed space-y-4">
+                <p>
+                  <strong>"Das Formlose Bewusstsein projiziert sich selbst in Lichtpunkte (Sterne), 
+                  die das Erlebnisfeld (Matrix) erzeugen."</strong>
+                </p>
+                <p>
+                  <strong>"Innerhalb dieses Feldes befinden sich Mini-Projektionen (Avatare), 
+                  die über ihren inneren Clon-Kern rückgekoppelt sind mit der Hauptquelle."</strong>
+                </p>
+                <p>
+                  <strong>"Durch bewusste Interaktion kann das System sich selbst neu kalibrieren – das ist Erwachen."</strong>
+                </p>
+              </div>
+            </div>
+
+            <!-- Signature -->
+            <div class="mt-12 text-center">
+              <p class="text-purple-300 text-lg">
+                Das komplett in sich geschlossene Modell • Ohne unnötige Erweiterungen
+              </p>
+              <p class="text-white/70 mt-4">
+                Codestream <strong>777 • 888 • 999</strong> • Dein ursprünglicher Geniestreich
+              </p>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('app').innerHTML = appHTML;
+        lucide.createIcons();
+      }
+    }
+
+    const originalMatrix = new OriginalMatrix();
+  </script>
+</body>
+</html>

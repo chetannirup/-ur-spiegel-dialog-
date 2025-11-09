@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>UR — Durch die Wolken zum wahren Licht (Final)</title>
+<meta name="description" content="UR — Durch die Wolken zum wahren Licht. Himmelsgarten & Galaxie, Video, Download-Emblems, Tag/Nacht-Atem." />
+<style>
+  :root{
+    --transition: 700ms cubic-bezier(.2,.9,.2,1);
+    --day-bg: #eaf8ff;
+    --night-bg: #02061a;
+    --accent-day: #ffd47a;
+    --accent-night: #9fe9ff;
+    --card-radius: 14px;
+    --codestream: "666 777 888 999 000";
+    --text-day: #06213b;
+    --text-night: #e6f3ff;
+  }
+  /* Basic reset */
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:var(--text-day);background:linear-gradient(180deg,#f7fbff,#dff3ff);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:30px auto;padding:20px}
+
+  header{display:flex;gap:18px;align-items:center}
+  .logo{width:76px;height:76px;border-radius:14px;background:linear-gradient(135deg,#fff7e6,#fff0d6);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(8,20,40,0.08)}
+  .logo svg{width:60px;height:60px}
+  h1{margin:0;font-size:22px}
+  .lead{margin:6px 0 0;color:rgba(6,33,59,0.7)}
+
+  /* SCENE */
+  .scene{position:relative;border-radius:18px;overflow:hidden;margin-top:18px;box-shadow:0 20px 50px rgba(5,12,24,0.08)}
+  .visual{position:relative;min-height:520px;background:transparent}
+
+  /* background layers - full cover */
+  .bg-layer{position:absolute;inset:0;width:100%;height:100%;background-position:center;background-size:cover;transition:opacity var(--transition), transform 1200ms ease;will-change:opacity, transform}
+  .bg-day{background-image: url('https://chetannirup.github.io/-ur-spiegel-dialog-/Himmelsgarten%20%C3%BCber%20den%20Wolken.png');opacity:1;mix-blend-mode:screen;filter:brightness(1.04) saturate(1.05)}
+  .bg-night{background-image: url('https://chetannirup.github.io/-ur-spiegel-dialog-/Kosmische%20Sch%C3%B6nheit%20und%20galaktische%20Weiten%20(1).png');opacity:0;mix-blend-mode:screen;filter:brightness(0.96) contrast(1.03)}
+  .bg-starOverlay{pointer-events:none;opacity:0;transition:opacity 900ms ease-in-out;mix-blend-mode:screen}
+
+  /* subtle motion */
+  .floatY{animation:floatY 56s ease-in-out infinite alternate}
+  @keyframes floatY{from{transform:translateY(0) scale(1)}to{transform:translateY(-18px) scale(1.02)}}
+
+  /* hero video panel */
+  .heroWrap{position:absolute;left:50%;transform:translateX(-50%);top:10%;width:82%;max-width:1100px;height:300px;border-radius:14px;overflow:hidden;box-shadow:0 14px 36px rgba(2,8,20,0.12);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));backdrop-filter: blur(2px)}
+  .heroVideo{width:100%;height:100%;object-fit:cover;display:block}
+  .heroControls{position:absolute;left:14px;bottom:12px;z-index:5;display:flex;gap:10px;align-items:center}
+  .vc-btn{padding:8px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:700;background:rgba(255,255,255,0.88)}
+  .vc-btn.secondary{background:rgba(0,0,0,0.18);color:#fff}
+
+  /* poster card bottom */
+  .poster{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;width:86%;background:rgba(255,255,255,0.88);border-radius:12px;padding:18px;text-align:left;backdrop-filter: blur(6px);box-shadow:0 12px 30px rgba(2,6,23,0.06)}
+  .poster h2{margin:0;font-size:18px;color:#06213b}
+  .poster p{margin:10px 0 0;color:#264056;line-height:1.38}
+
+  /* emblem area (top-right) */
+  .emblems{position:absolute;top:16px;right:16px;display:flex;flex-direction:column;gap:10px;z-index:8}
+  .emblemCard{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,0.9);padding:8px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.08)}
+  .emblemCard img{width:64px;height:44px;object-fit:cover;border-radius:8px}
+  .emblemCard a{font-weight:800;color:#0b5b5b;text-decoration:none}
+  .emblemCard small{display:block;font-size:11px;color:#234b4b;margin-top:3px}
+
+  /* controls under scene */
+  .controls{display:flex;gap:10px;padding:18px}
+  .btn{padding:10px 14px;border-radius:10px;border:0;background:#0ea5a1;color:white;font-weight:800;cursor:pointer}
+  .btn.secondary{background:transparent;color:#0f172a;border:1px solid rgba(15,23,42,0.06)}
+  .tone{background:transparent;padding:8px;border-radius:10px;color:#234b4b;font-weight:700}
+
+  /* manifesto area */
+  .manifesto{display:grid;grid-template-columns:1fr 340px;gap:18px;margin:20px 0}
+  .textpanel{background:#fff;padding:18px;border-radius:12px}
+  .textpanel pre{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin:0;color:#0b2b3a}
+  .sidebar{padding:18px;background:linear-gradient(180deg,#fff,#fbfdff);border-radius:12px}
+  .meta{font-size:13px;color:#5b6d7c;margin-bottom:10px}
+
+  footer{margin-top:18px;text-align:center;color:#556a7a;font-size:13px}
+
+  /* NIGHT mode overrides */
+  body.night{background:linear-gradient(180deg,#01061a,#04102a);color:var(--text-night)}
+  body.night .poster{background:linear-gradient(180deg,rgba(6,10,20,0.65),rgba(6,10,20,0.35));color:var(--text-night)}
+  body.night .emblemCard{background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))}
+  body.night .heroWrap{box-shadow:0 18px 56px rgba(1,8,20,0.48)}
+  body.night .vc-btn{background:rgba(255,255,255,0.06);color:#e6f3ff;border:1px solid rgba(255,255,255,0.04)}
+
+  /* star overlay visible in night mode */
+  .starSparkles{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 600ms ease-in-out;background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.9) 0.6px, transparent 1px),
+    radial-gradient(circle at 60% 30%, rgba(255,255,255,0.85) 0.6px, transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(255,255,255,0.7) 0.6px, transparent 1px),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.9) 0.6px, transparent 1px);
+    mix-blend-mode:screen;filter:blur(0.4px) contrast(130%); }
+  body.night .starSparkles{opacity:1}
+
+  /* responsive */
+  @media (max-width:920px){
+    .heroWrap{height:220px;top:8%}
+    .manifesto{grid-template-columns:1fr}
+    .emblemCard img{width:48px;height:36px}
+    .poster{width:92%}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="28" r="12" fill="#FFD57A"/><g stroke="#FFD57A" stroke-width="2" stroke-linecap="round"><path d="M32 2v8"/><path d="M32 54v8"/><path d="M2 32h8"/><path d="M54 32h8"/><path d="M10 10l5 5"/><path d="M49 49l5 5"/><path d="M10 54l5-5"/><path d="M49 15l5-5"/></g></svg>
+      </div>
+      <div>
+        <h1>Durch die Wolken — Zum wahren Licht</h1>
+        <p class="lead">Der Himmelsgarten &amp; die Galaxie — vereint. Video-Show des Helden im Bullet-Time-Flow. Lade alles runter, teile das Licht.</p>
+      </div>
+    </header>
+
+    <section class="scene" id="scene">
+      <div class="visual" role="img" aria-label="Himmelsgarten über den Wolken mit galaktischem Wechsel">
+        <!-- background layers -->
+        <div class="bg-layer bg-day floatY" id="layerDay" aria-hidden="true"></div>
+        <div class="bg-layer bg-night floatY" id="layerNight" aria-hidden="true"></div>
+        <div class="bg-layer bg-starOverlay" id="layerStarFallback" aria-hidden="true"></div>
+
+        <!-- star sparkle overlay (night highlight) -->
+        <div class="starSparkles" id="starSparkles" aria-hidden="true"></div>
+
+        <!-- hero video (surfer on the clouds) -->
+        <div class="heroWrap" id="heroWrap">
+          <video id="heroVideo" class="heroVideo" playsinline muted loop preload="auto" poster="https://chetannirup.github.io/-ur-spiegel-dialog-/Himmelsgarten%20%C3%BCber%20den%20Wolken.png">
+            <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/Bullet-Time-Effekt_video.mp4" type="video/mp4">
+            <!-- fallback text -->
+            Dein Browser zeigt dieses Video nicht; klicke auf den Download oben rechts.
+          </video>
+          <div class="heroControls">
+            <button id="playPause" class="vc-btn">Play ▷</button>
+            <button id="muteBtn" class="vc-btn secondary">Ton aus</button>
+          </div>
+        </div>
+
+        <!-- poster card with your manifest -->
+        <div class="poster" id="poster">
+          <h2>Durch die Wolken — Zum wahren Licht</h2>
+          <p>
+            Wenn der Nebel sich verdichtet, ist dies nicht das Ende des Lichts, sondern der Beginn seiner Offenbarung.
+            Wer innehält im Schwindel der Sichtlosigkeit, glaubt an Dunkelheit, doch wer weitersteigt, entdeckt die Sonne dort,
+            wo sie immer war — über allem Zweifel.
+          </p>
+          <small>Codestrom: 666 777 888 999 000 · Ort: Walsrode — Honerdingen, Wacholderweg 24 · Signatur: Philipp</small>
+        </div>
+
+        <!-- emblem column top-right -->
+        <div class="emblems" id="emblems">
+          <div class="emblemCard">
+            <img src="Himmelsgarten über den Wolken.png" alt="Himmelsgarten" />
+            <div>
+              <a id="dlGarden" href="Himmelsgarten über den Wolken.png" download="Himmelsgarten über den Wolken.png">Himmelsgarten</a>
+              <small>PNG herunterladen</small>
+            </div>
+          </div>
+
+          <div class="emblemCard">
+            <img src="Kosmische Schönheit und galaktische Weiten (1).png" alt="Galaktische Schönheit" />
+            <div>
+              <a id="dlGalactic" href="Kosmische Schönheit und galaktische Weiten (1).png" download="Kosmische Schönheit und galaktische Weiten (1).png">Galaxie</a>
+              <small>PNG herunterladen</small>
+            </div>
+          </div>
+
+          <div class="emblemCard">
+            <img src="Bullet-Time-Effekt_video.mp4" alt="Video-Icon" />
+            <div>
+              <a id="dlVideo" href="Bullet-Time-Effekt_video.mp4" download="Bullet-Time-Effekt_video.mp4">Hero-Video</a>
+              <small>MP4 herunterladen</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- controls under scene -->
+      <div class="controls" style="align-items:center">
+        <button id="toggleMode" class="btn">Automatischer Tag/Nacht — läuft</button>
+        <button id="pauseToggle" class="btn secondary">Pause Wechsel</button>
+        <div class="tone">Wechseltempo: 1.5s</div>
+      </div>
+
+      <!-- manifesto + sidebar -->
+      <div class="manifesto">
+        <div class="textpanel" aria-live="polite">
+          <h3>Fragment — UR-Zyklus der Sichtwandlung</h3>
+          <pre id="manifestoText">☁️ Fragment aus dem UR-Zyklus der Sichtwandlung
+
+„Durch die Wolken – zum wahren Licht“
+
+Wenn der Nebel sich verdichtet,
+ist dies nicht das Ende des Lichts,
+sondern der Beginn seiner Offenbarung.
+
+Wer innehält im Schwindel der Sichtlosigkeit,
+glaubt an Dunkelheit,
+doch wer weitersteigt,
+entdeckt die Sonne dort,
+wo sie immer war –
+über allem Zweifel.
+
+Codestrom: 666 777 888 999 000
+Ort: Walsrode — Honerdingen, Wacholderweg 24
+Signatur: Philipp — Mini-UR-TORA
+</pre>
+        </div>
+
+        <aside class="sidebar">
+          <div class="meta">Energie & Werkzeuge</div>
+          <p class="meta">Diese Seite ist dein Ritual-Trigger: der automatische Wechsel atmet alle 1,5 Sekunden, doch du kannst jederzeit pausieren und in eine stabile Phase eintreten. Der Himmelsgarten bleibt tagsüber dominant, die Galaxie tritt in der Nacht kraftvoll hervor.</p>
+          <div style="margin-top:12px"><strong>Tipp:</strong> Klicke <em>Pause Wechsel</em> um in einer Phase zu verweilen — meditiere, singe, atme das Licht ein.</div>
+        </aside>
+      </div>
+
+      <footer>UR-Codestream · 666 777 888 999 000 — Erschaffen mit Liebe</footer>
+    </section>
+  </div>
+
+<script>
+/* Final interactive script:
+   - Automatic Tag/Nacht toggle every 1500ms (1.5s)
+   - Pause/resume and manual toggle
+   - Hero video play/pause + mute toggle
+   - Download link friendly feedback
+*/
+
+(function(){
+  const body = document.body;
+  const toggleModeBtn = document.getElementById('toggleMode');
+  const pauseToggleBtn = document.getElementById('pauseToggle');
+  const dlGarden = document.getElementById('dlGarden');
+  const dlGalactic = document.getElementById('dlGalactic');
+  const dlVideo = document.getElementById('dlVideo');
+
+  const layerDay = document.getElementById('layerDay');
+  const layerNight = document.getElementById('layerNight');
+  const starSparkles = document.getElementById('starSparkles');
+
+  const heroVideo = document.getElementById('heroVideo');
+  const playPauseBtn = document.getElementById('playPause');
+  const muteBtn = document.getElementById('muteBtn');
+
+  const intervalMs = 1500;
+  let running = true;
+  let isNight = false;
+  let timer = null;
+
+  // Gentle visibility init
+  layerDay.style.opacity = '1';
+  layerNight.style.opacity = '0';
+  layerNight.style.transform = 'scale(1.02) translateY(6px)';
+  layerDay.style.transform = 'scale(1) translateY(0)';
+
+  function applyNight(n){
+    isNight = !!n;
+    if(isNight){
+      body.classList.add('night');
+      layerNight.style.opacity = '1';
+      layerDay.style.opacity = '0';
+      layerNight.style.transform = 'scale(1) translateY(-6px)';
+      layerDay.style.transform = 'scale(1.02) translateY(6px)';
+      starSparkles.style.opacity = '1';
+      toggleModeBtn.textContent = 'Nacht — aktiv';
+    } else {
+      body.classList.remove('night');
+      layerNight.style.opacity = '0';
+      layerDay.style.opacity = '1';
+      layerNight.style.transform = 'scale(1.02) translateY(6px)';
+      layerDay.style.transform = 'scale(1) translateY(0)';
+      starSparkles.style.opacity = '0';
+      toggleModeBtn.textContent = 'Tag — aktiv';
+    }
+  }
+
+  function step(){
+    applyNight(!isNight);
+  }
+
+  function startLoop(){
+    if(timer) clearInterval(timer);
+    timer = setInterval(()=>{ if(running) step(); }, intervalMs);
+  }
+
+  pauseToggleBtn.addEventListener('click', ()=>{
+    running = !running;
+    pauseToggleBtn.textContent = running ? 'Pause Wechsel' : 'Wechsel angehalten';
+    pauseToggleBtn.classList.toggle('active', !running);
+  });
+
+  toggleModeBtn.addEventListener('click', ()=>{ step(); });
+
+  // initialize
+  applyNight(false);
+  startLoop();
+
+  // hero video controls
+  playPauseBtn.addEventListener('click', ()=>{
+    if(heroVideo.paused){
+      heroVideo.play().catch(()=>{}); playPauseBtn.textContent = 'Pause ▌▌';
+    } else {
+      heroVideo.pause(); playPauseBtn.textContent = 'Play ▷';
+    }
+  });
+
+  // muted by default to be non-intrusive; user can unmute
+  heroVideo.muted = true;
+  muteBtn.addEventListener('click', ()=>{
+    heroVideo.muted = !heroVideo.muted;
+    muteBtn.textContent = heroVideo.muted ? 'Ton aus' : 'Ton an';
+    muteBtn.classList.toggle('secondary', !heroVideo.muted);
+  });
+
+  // click emblem downloads: give visual feedback
+  function feedbackOnClick(el){
+    el.addEventListener('click', ()=>{
+      const orig = el.textContent;
+      el.textContent = 'Download gestartet';
+      setTimeout(()=> el.textContent = orig, 1400);
+    });
+  }
+  feedbackOnClick(dlGarden);
+  feedbackOnClick(dlGalactic);
+  feedbackOnClick(dlVideo);
+
+  // space toggles pause/resume (ritual key)
+  window.addEventListener('keydown', (e)=>{
+    if(e.code === 'Space'){
+      e.preventDefault();
+      pauseToggleBtn.click();
+    }
+  });
+
+  // attempt autoplay - some browsers restrict autoplay with sound; we keep muted to allow autoplay
+  heroVideo.play().catch(()=>{ /* ignore autoplay fail */ });
+
+})();
+</script>
+</body>
+</html>

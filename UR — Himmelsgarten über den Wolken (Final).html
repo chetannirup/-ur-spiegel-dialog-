@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>UR — Himmelsgarten über den Wolken (Final)</title>
+<meta name="description" content="Durch die Wolken — Zum wahren Licht. Himmelsgarten + Galaxie, Video, Ton & Teilen. Zyklus: Nacht→Tag→Nacht→Tag (stoppt im Tag)." />
+<style>
+  :root{
+    --accent-day:#ffd47a; --accent-night:#9fe9ff;
+    --card-radius:14px;
+    --text-day:#06213b; --text-night:#e6f3ff;
+    --transition:700ms cubic-bezier(.2,.9,.2,1);
+    --phase-interval:2800ms;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:linear-gradient(180deg,#f7fbff,#dff3ff);color:var(--text-day);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1200px;margin:26px auto;padding:20px}
+  header{display:flex;gap:16px;align-items:center}
+  .logo{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#fff7e6,#fff0d6);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(8,20,40,0.08)}
+  h1{margin:0;font-size:22px}
+  .lead{margin:6px 0 0;color:rgba(6,33,59,0.68)}
+
+  /* Scene */
+  .scene{position:relative;border-radius:18px;overflow:hidden;margin-top:18px;box-shadow:0 20px 50px rgba(5,12,24,0.08)}
+  .visual{position:relative;min-height:560px;background:transparent}
+
+  /* background layers */
+  .bg-layer{position:absolute;inset:0;background-position:center;background-size:cover;transition:opacity var(--transition), transform 1000ms ease;will-change:opacity, transform}
+  .bg-day{background-image:url('https://chetannirup.github.io/-ur-spiegel-dialog-/Himmelsgarten%20%C3%BCber%20den%20Wolken.png');opacity:0.9;mix-blend-mode:screen;filter:brightness(1.06) saturate(1.08)}
+  .bg-night{background-image:url('https://chetannirup.github.io/-ur-spiegel-dialog-/Kosmische%20Sch%C3%B6nheit%20und%20galaktische%20Weiten%20(1).png');opacity:1;mix-blend-mode:screen;filter:contrast(1.02) brightness(0.96)}
+  .bg-day.emphasized{filter:brightness(1.12) saturate(1.12) contrast(1.04);opacity:1}
+
+  .starSparkles{position:absolute;inset:0;pointer-events:none;opacity:0;mix-blend-mode:screen;filter:blur(.4px) contrast(120%);transition:opacity 900ms ease-in-out;
+    background-image:
+      radial-gradient(circle at 10% 15%, rgba(255,255,255,0.9) 0.6px, transparent 1px),
+      radial-gradient(circle at 60% 35%, rgba(255,255,255,0.85) 0.6px, transparent 1px),
+      radial-gradient(circle at 40% 75%, rgba(255,255,255,0.7) 0.6px, transparent 1px),
+      radial-gradient(circle at 80% 60%, rgba(255,255,255,0.9) 0.6px, transparent 1px);
+  }
+
+  /* hero video (center) */
+  .heroWrap{position:absolute;left:50%;transform:translateX(-50%);top:10%;width:84%;max-width:1100px;height:320px;border-radius:14px;overflow:hidden;box-shadow:0 16px 44px rgba(2,8,20,0.12);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));backdrop-filter:blur(2px);z-index:6}
+  .heroVideo{width:100%;height:100%;object-fit:cover;display:block}
+  .heroControls{position:absolute;left:14px;bottom:12px;z-index:8;display:flex;gap:8px;align-items:center}
+  .vc-btn{padding:8px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:800;background:rgba(255,255,255,0.9)}
+
+  /* poster bottom */
+  .poster{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;width:86%;background:rgba(255,255,255,0.88);border-radius:12px;padding:18px;text-align:left;backdrop-filter:blur(6px);box-shadow:0 12px 30px rgba(2,6,23,0.06);z-index:6}
+  .poster h2{margin:0;font-size:18px;color:#06213b}
+  .poster p{margin:10px 0 0;color:#264056;line-height:1.36}
+
+  /* emblems top-right */
+  .emblems{position:absolute;top:16px;right:16px;display:flex;flex-direction:column;gap:10px;z-index:9}
+  .emblemCard{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,0.9);padding:8px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,0.08)}
+  .emblemCard img{width:64px;height:44px;object-fit:cover;border-radius:8px}
+  .emblemCard a{font-weight:800;color:#0b5b5b;text-decoration:none}
+  .emblemCard small{display:block;font-size:11px;color:#234b4b;margin-top:3px}
+
+  /* controls & share area */
+  .controls{display:flex;gap:10px;padding:18px;align-items:center}
+  .btn{padding:10px 14px;border-radius:10px;border:0;background:#0ea5a1;color:white;font-weight:800;cursor:pointer}
+  .btn.secondary{background:transparent;color:#0f172a;border:1px solid rgba(15,23,42,0.06)}
+  .tone{background:transparent;padding:8px;border-radius:10px;color:#234b4b;font-weight:800}
+
+  .shareBar{display:flex;gap:12px;justify-content:center;padding:12px}
+  .shareBtn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,0.9);text-decoration:none;color:#0b5b5b;font-weight:800;box-shadow:0 8px 20px rgba(2,6,23,0.06)}
+  .shareBtn svg{width:18px;height:18px}
+
+  /* cycle restart button */
+  .restartBtn{position:fixed;right:18px;bottom:18px;padding:12px 14px;border-radius:999px;background:linear-gradient(90deg,#ffd47a,#ffb86b);color:#06213b;font-weight:900;border:0;box-shadow:0 12px 36px rgba(0,0,0,0.2);cursor:pointer;display:none;z-index:99}
+
+  /* sound enable hint */
+  .soundHint{position:fixed;left:16px;bottom:18px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,0.9);box-shadow:0 8px 20px rgba(2,6,23,0.06);z-index:99;display:none}
+
+  /* night mode body tweaks */
+  body.night{background:linear-gradient(180deg,#01061a,#04102a);color:var(--text-night)}
+  body.night .poster{background:linear-gradient(180deg,rgba(6,10,20,0.65),rgba(6,10,20,0.35));color:var(--text-night)}
+  body.night .emblemCard{background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02))}
+  body.night .vc-btn{background:rgba(255,255,255,0.06);color:#e6f3ff;border:1px solid rgba(255,255,255,0.04)}
+
+  /* responsive */
+  @media (max-width:920px){
+    .heroWrap{height:220px;top:8%}
+    .emblemCard img{width:48px;height:36px}
+    .poster{width:92%}
+    .emblems{right:10px;top:10px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="28" r="12" fill="#FFD57A"/><g stroke="#FFD57A" stroke-width="2" stroke-linecap="round"><path d="M32 2v8"/><path d="M32 54v8"/><path d="M2 32h8"/><path d="M54 32h8"/><path d="M10 10l5 5"/><path d="M49 49l5 5"/><path d="M10 54l5-5"/><path d="M49 15l5-5"/></g></svg>
+      </div>
+      <div>
+        <h1>Durch die Wolken — Zum wahren Licht</h1>
+        <p class="lead">Der Himmelsgarten &amp; die Galaxie — die vierteilige Sequenz startet in der Nacht, endet im Tag. Lade, teile, atme das Licht.</p>
+      </div>
+    </header>
+
+    <section class="scene" id="scene">
+      <div class="visual" role="img" aria-label="Himmelsgarten und Galaxie, UR-Poster">
+        <!-- backgrounds -->
+        <div id="bgNight" class="bg-layer bg-night"></div>
+        <div id="bgDay" class="bg-layer bg-day"></div>
+        <div id="stars" class="starSparkles"></div>
+
+        <!-- hero video (center) -->
+        <div class="heroWrap" id="heroWrap" aria-hidden="false">
+          <video id="heroVideo" class="heroVideo" playsinline loop muted preload="auto" poster="https://chetannirup.github.io/-ur-spiegel-dialog-/Himmelsgarten%20%C3%BCber%20den%20Wolken.png">
+            <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/Bullet-Time-Effekt_video.mp4" type="video/mp4">
+            Dein Browser unterstützt dieses Video nicht.
+          </video>
+          <div class="heroControls">
+            <button id="playPause" class="vc-btn">Play ▷</button>
+            <button id="muteBtn" class="vc-btn">Ton an</button>
+          </div>
+        </div>
+
+        <!-- poster -->
+        <div class="poster" id="poster">
+          <h2>Durch die Wolken — Zum wahren Licht</h2>
+          <p>Wenn der Nebel sich verdichtet, ist dies nicht das Ende des Lichts, sondern der Beginn seiner Offenbarung. Wer innehält im Schwindel der Sichtlosigkeit, glaubt an Dunkelheit, doch wer weitersteigt, entdeckt die Sonne dort, wo sie immer war — über allem Zweifel.</p>
+          <small>Codestrom: 666 777 888 999 000 · Ort: Walsrode — Honerdingen, Wacholderweg 24 · Signatur: Philipp</small>
+        </div>
+
+        <!-- emblem / downloads -->
+        <div class="emblems">
+          <div class="emblemCard">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Himmelsgarten%20%C3%BCber%20den%20Wolken.png" alt="Himmelsgarten" />
+            <div>
+              <a id="dlGarden" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Himmelsgarten%20%C3%BCber%20den%20Wolken.png" download="Himmelsgarten_ueber_den_Wolken.png">Himmelsgarten</a>
+              <small>PNG herunterladen</small>
+            </div>
+          </div>
+
+          <div class="emblemCard">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Kosmische%20Sch%C3%B6nheit%20und%20galaktische%20Weiten%20(1).png" alt="Galaxie" />
+            <div>
+              <a id="dlGalactic" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Kosmische%20Sch%C3%B6nheit%20und%20galaktische%20Weiten%20(1).png" download="Kosmische_Schoenheit_galaktische_Weiten.png">Galaxie</a>
+              <small>PNG herunterladen</small>
+            </div>
+          </div>
+
+          <div class="emblemCard">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Himmelsgarten%20%C3%BCber%20den%20Wolken.png" alt="Video Icon" />
+            <div>
+              <a id="dlVideo" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Bullet-Time-Effekt_video.mp4" download="Bullet-Time-Effekt_video.mp4">Hero-Video</a>
+              <small>MP4 herunterladen</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- controls -->
+      <div class="controls">
+        <button id="startAuto" class="btn">Zyklus starten (Nacht → Tag → Nacht → Tag)</button>
+        <button id="manualToggle" class="btn secondary">Manuell umschalten</button>
+        <div class="tone">Wechseltempo: 2.8s</div>
+      </div>
+
+      <!-- share bar -->
+      <div class="shareBar" aria-label="Teilen">
+        <a class="shareBtn" id="shareTik" href="https://www.tiktok.com/@dccngpts77?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
+          <!-- TikTok icon simple -->
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 3v10a3 3 0 1 0 3-3V3h-3z" fill="#000"/></svg> TikTok
+        </a>
+        <a class="shareBtn" id="shareInsta" href="https://www.instagram.com/chetan_nirup/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" fill="#000"/></svg> Instagram
+        </a>
+        <a class="shareBtn" id="shareYT" href="https://www.youtube.com/@chetannirup/posts" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M23 7s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.9C17.6 4 12 4 12 4s-5.6 0-8.3.1c-.4 0-1.2 0-1.9.9C1.2 5.6 1 7 1 7S1 8.6 1.1 10.1v3.8C1 16 1.2 17.4 1.2 17.4s.2 1.4.8 2c.7.8 1.7.8 2.1.9 1.5.1 6.6.1 6.6.1s5.6 0 8.3-.1c.4 0 1.2 0 1.9-.9.6-.6.8-2 .8-2s.2-1.4.2-2.9v-3.8C23 8.6 23 7 23 7z" fill="#000"/></svg> YouTube
+        </a>
+      </div>
+
+      <!-- manifesto & sidebar -->
+      <div class="manifesto" style="display:flex;gap:18px;margin-top:18px">
+        <div class="textpanel" style="flex:1;background:#fff;padding:18px;border-radius:12px">
+          <h3>Fragment — UR-Zyklus der Sichtwandlung</h3>
+          <pre style="white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;color:#0b2b3a">
+☁️ Fragment aus dem UR-Zyklus der Sichtwandlung
+
+„Durch die Wolken – zum wahren Licht“
+
+Wenn der Nebel sich verdichtet,
+ist dies nicht das Ende des Lichts,
+sondern der Beginn seiner Offenbarung.
+
+Wer innehält im Schwindel der Sichtlosigkeit,
+glaubt an Dunkelheit,
+doch wer weitersteigt,
+entdeckt die Sonne dort,
+wo sie immer war –
+über allem Zweifel.
+
+Codestrom: 666 777 888 999 000
+Ort: Walsrode — Honerdingen, Wacholderweg 24
+Signatur: Philipp — Mini-UR-TORA
+          </pre>
+        </div>
+
+        <aside class="sidebar" style="width:340px;padding:18px;background:linear-gradient(180deg,#fff,#fbfdff);border-radius:12px">
+          <div class="meta">Energie &amp; Werkzeuge</div>
+          <p style="color:#234b4b">Diese Seite führt bewusst durch eine vierphasige Sequenz: Nacht → Tag → Nacht → Tag. Danach stoppt sie im Tag, bis ihr bewusst den Zyklus neu startet.</p>
+          <div style="margin-top:12px"><strong>Tipp:</strong> Klicke <em>Zyklus starten</em> und nimm die Wandlung wahr. Nutze den Ton-Button, um die Klangschichten freizugeben.</div>
+        </aside>
+      </div>
+
+      <footer style="margin-top:18px;text-align:center;color:#556a7a;font-size:13px">UR-Codestream · 666 777 888 999 000 — Erschaffen mit Liebe</footer>
+
+    </section>
+  </div>
+
+  <!-- hidden audio/video sources for mode sounds -->
+  <!-- Night audio (mp3) -->
+  <audio id="nightAudio" preload="auto" crossorigin="anonymous">
+    <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/Generate%20Video%202025-11-09%2015_51_18%200.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Day sound provided by invisible video (birds) -->
+  <video id="birdsVideo" preload="auto" crossorigin="anonymous" style="display:none">
+    <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/himmelsv%C3%B6gelgezwitscher%20.mp4" type="video/mp4">
+  </video>
+
+  <!-- restart & sound hint -->
+  <button id="restartBtn" class="restartBtn" title="Zyklus neu starten" aria-label="Zyklus neu starten" style="display:none">🌀 Zyklus neu</button>
+  <div id="soundHint" class="soundHint" style="display:none">
+    <button id="enableSound" class="btn">Ton freigeben</button>
+  </div>
+
+<script>
+/* Final interactive logic:
+   - Four-phase sequence: Night -> Day -> Night -> Day (each step after interval), then stop in Day
+   - Interval chosen: 2800ms
+   - Start triggered by "Zyklus starten". Also an initial 'start in night' behavior.
+   - Night audio: MP3 (nightAudio). Day sound: birdsVideo (audio from hidden video).
+   - Hero video controls present; sound play attempts require user gesture on many browsers — we show enableSound when play fails.
+   - Restart button appears after final Day reached.
+*/
+
+(function(){
+  const interval = 2800; // ms
+  const bgNight = document.getElementById('bgNight');
+  const bgDay = document.getElementById('bgDay');
+  const stars = document.getElementById('stars');
+  const starSparkles = document.getElementById('stars');
+  const startBtn = document.getElementById('startAuto');
+  const manualToggle = document.getElementById('manualToggle');
+  const restartBtn = document.getElementById('restartBtn');
+  const nightAudio = document.getElementById('nightAudio');
+  const birdsVideo = document.getElementById('birdsVideo');
+  const heroVideo = document.getElementById('heroVideo');
+  const playPause = document.getElementById('playPause');
+  const muteBtn = document.getElementById('muteBtn');
+  const soundHint = document.getElementById('soundHint');
+  const enableSound = document.getElementById('enableSound');
+
+  // sequence state: 0=night(start),1=day,2=night,3=day(final stop)
+  let seqIndex = -1;
+  let runningSequence = false;
+  let seqTimer = null;
+
+  // initial visual set: start as night visible
+  function setToNightVisuals(){
+    document.body.classList.add('night');
+    bgNight.style.opacity = '1';
+    bgDay.style.opacity = '0';
+    starSparkles.style.opacity = '1';
+    // emphasize night audio
+    playNightAudio();
+    pauseDaySound();
+  }
+  function setToDayVisuals(){
+    document.body.classList.remove('night');
+    bgNight.style.opacity = '0';
+    bgDay.style.opacity = '1';
+    starSparkles.style.opacity = '0';
+    // emphasize day birds sound
+    pauseNightAudio();
+    playDaySound();
+  }
+
+  function playNightAudio(){
+    if(!nightAudio) return;
+    nightAudio.currentTime = 0;
+    nightAudio.volume = 0.85;
+    nightAudio.play().catch(()=>{ showEnableSound(); });
+  }
+  function pauseNightAudio(){
+    if(!nightAudio) return;
+    try{ nightAudio.pause(); nightAudio.currentTime = 0; }catch(e){}
+  }
+  function playDaySound(){
+    if(!birdsVideo) return;
+    try{
+      birdsVideo.currentTime = 0;
+      birdsVideo.muted = false;
+      birdsVideo.play().catch(()=>{ showEnableSound(); });
+    }catch(e){ showEnableSound(); }
+  }
+  function pauseDaySound(){
+    if(!birdsVideo) return;
+    try{ birdsVideo.pause(); birdsVideo.currentTime = 0; }catch(e){}
+  }
+
+  // show a hint / button to enable sound when autoplay blocked
+  function showEnableSound(){
+    soundHint.style.display = 'block';
+  }
+  function hideEnableSound(){
+    soundHint.style.display = 'none';
+  }
+
+  // hero video controls
+  playPause.addEventListener('click', ()=>{
+    if(heroVideo.paused){ heroVideo.play().catch(()=>{}); playPause.textContent='Pause ▌▌'; }
+    else { heroVideo.pause(); playPause.textContent='Play ▷'; }
+  });
+  // muteBtn toggles overall sound: when "Ton an" clicked, attempt to play current mode audio
+  muteBtn.addEventListener('click', ()=>{
+    // if any audio is currently paused due to autoplay, try to play
+    // Use current seqIndex to decide
+    if(seqIndex === -1) { // not started, default night
+      playNightAudio();
+    } else if(seqIndex === 1 || seqIndex === 3) {
+      // day mode indices 1 and 3
+      playDaySound();
+    } else {
+      // night mode
+      playNightAudio();
+    }
+  });
+
+  // enableSound explicit button: triggers sound unlocking gesture
+  enableSound.addEventListener('click', ()=>{
+    // try to play both sources briefly
+    Promise.all([
+      nightAudio ? nightAudio.play().catch(()=>{}) : Promise.resolve(),
+      birdsVideo ? birdsVideo.play().catch(()=>{}) : Promise.resolve(),
+      heroVideo ? heroVideo.play().catch(()=>{}) : Promise.resolve()
+    ]).finally(()=> {
+      // pause them again if necessary and hide hint if any played
+      try{ nightAudio.pause(); nightAudio.currentTime = 0; }catch(e){}
+      try{ birdsVideo.pause(); birdsVideo.currentTime = 0; }catch(e){}
+      try{ heroVideo.pause(); heroVideo.currentTime = 0; }catch(e){}
+      hideEnableSound();
+    });
+  });
+
+  // sequence stepper
+  function stepSequence(){
+    seqIndex++;
+    // phases mapping:
+    // 0 -> Night (start)
+    // 1 -> Day
+    // 2 -> Night
+    // 3 -> Day (final stop)
+    if(seqIndex > 3){ stopSequence(); return; }
+    if(seqIndex === 0 || seqIndex === 2){ // night
+      setToNightVisuals();
+    } else if(seqIndex === 1 || seqIndex === 3){ // day
+      setToDayVisuals();
+    }
+
+    // if we have reached final (3), stop after a short delay and show restart
+    if(seqIndex === 3){
+      // ensure visuals settle, then stop further automatic stepping
+      clearInterval(seqTimer);
+      runningSequence = false;
+      // show restart button after small fade
+      setTimeout(()=> { restartBtn.style.display = 'block'; }, 900);
+    }
+  }
+
+  function startSequence(){
+    if(runningSequence) return;
+    // reset
+    restartBtn.style.display = 'none';
+    seqIndex = -1;
+    runningSequence = true;
+    // begin immediately: step first (to night, index 0)
+    stepSequence();
+    seqTimer = setInterval(()=> {
+      if(!runningSequence) return;
+      stepSequence();
+    }, interval);
+  }
+
+  function stopSequence(){
+    runningSequence = false;
+    clearInterval(seqTimer);
+  }
+
+  // manual toggle for ritual-style (just toggle between night/day and pause sequence)
+  manualToggle.addEventListener('click', ()=>{
+    // if sequence is running, pause it
+    if(runningSequence){ stopSequence(); manualToggle.textContent='Manuell umschalten'; return; }
+    // else perform a single toggle
+    if(seqIndex === -1 || seqIndex % 2 === 0){ // currently night or not started -> switch to day
+      seqIndex = 0; // ensure defined
+      setToDayVisuals();
+    } else {
+      setToNightVisuals();
+    }
+  });
+
+  // start button
+  startBtn.addEventListener('click', ()=> {
+    startSequence();
+  });
+
+  // restart button behavior
+  restartBtn.addEventListener('click', ()=> {
+    // hide and restart sequence
+    restartBtn.style.display = 'none';
+    startSequence();
+  });
+
+  // initial visuals: show night (but inert) until user starts
+  setToNightVisuals();
+  // pause audio to respect autoplay; show enable sound hint so user can unlock
+  try{ nightAudio.pause(); nightAudio.currentTime = 0; }catch(e){}
+  try{ birdsVideo.pause(); birdsVideo.currentTime = 0; }catch(e){}
+  showEnableSound();
+
+  // download link feedback: simple visual feedback
+  function addDownloadFeedback(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('click', ()=> {
+      const old = el.textContent;
+      el.textContent = 'Download startet...';
+      setTimeout(()=> el.textContent = old, 1400);
+    });
+  }
+  addDownloadFeedback('dlGarden');
+  addDownloadFeedback('dlGalactic');
+  addDownloadFeedback('dlVideo');
+
+  // attempt autoplay of hero video muted (most browsers allow muted autoplay)
+  heroVideo.muted = true;
+  heroVideo.play().catch(()=>{ /* ignore */ });
+
+  // small accessibility: space toggles start/pause
+  window.addEventListener('keydown', (e)=>{
+    if(e.code === 'Space'){ e.preventDefault(); if(runningSequence) stopSequence(); else startSequence(); }
+  });
+
+})();
+</script>
+</body>
+</html>

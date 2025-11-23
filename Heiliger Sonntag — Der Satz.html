@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Heiliger Sonntag — Der Satz</title>
+  <meta name="description" content="Ich bin aus dem Gefängnis des Verstandes ausgebrochen — da brach die alte Welt in sich zusammen. Und in diesem Einsturz öffnete sich der neue Weg, der nicht vor mir liegt, sondern durch mich geht.">
+  <style>
+    :root{
+      --bg1:#fff9e6; /* warm sun */
+      --bg2:#fff4c2;
+      --accent:#ff8a4b;
+      --text:#2b2b2b;
+      --muted:#6b6b6b;
+      --glass: rgba(255,255,255,0.6);
+    }
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+    body{
+      display:grid;place-items:center;padding:2rem;background:radial-gradient(circle at 10% 10%, #fffbe6 0%, var(--bg1) 20%, var(--bg2) 60%);color:var(--text);
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    }
+    .card{
+      max-width:900px;width:100%;background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
+      border-radius:20px;padding:3.5rem;box-shadow:0 10px 40px rgba(43,43,43,0.08);backdrop-filter:blur(6px);
+      transform:translateY(0);transition:transform .45s ease;
+    }
+    .headline{
+      font-size:clamp(1.6rem, 3.6vw, 2.6rem);line-height:1.12;margin:0 0 0.6rem;font-weight:700;color:var(--text);
+      letter-spacing: -0.01em;
+    }
+    .sub{
+      font-size:clamp(1rem,2.2vw,1.15rem);color:var(--muted);margin:0 0 1.4rem;
+    }
+    .sacred{
+      display:block;padding:1.2rem 1.4rem;border-radius:12px;background:linear-gradient(90deg, rgba(255,234,208,0.6), rgba(255,250,236,0.6));
+      border:1px solid rgba(255,138,75,0.08);font-size:1.25rem;line-height:1.4;font-weight:600;color:var(--text);
+      box-shadow:0 6px 20px rgba(255,138,75,0.06);
+    }
+    .meta{display:flex;gap:1rem;align-items:center;margin-top:1rem;flex-wrap:wrap}
+    .btn{appearance:none;border:0;padding:.6rem .9rem;border-radius:10px;background:var(--accent);color:white;font-weight:600;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(255,138,75,0.12)}
+    footer{margin-top:1.6rem;color:var(--muted);font-size:.95rem}
+
+    /* subtle sun rays animation */
+    .sun{
+      position:absolute;left:50%;transform:translateX(-50%);top:-6%;width:120vmax;height:120vmax;pointer-events:none;z-index:-1;opacity:0.12;
+      background:conic-gradient(from 90deg at 50% 50%, rgba(255,200,120,0.18), rgba(255,225,150,0.08), rgba(255,200,120,0.18));
+      filter:blur(60px);
+      animation:spin 60s linear infinite;
+    }
+    @keyframes spin{from{transform:translateX(-50%) rotate(0)}to{transform:translateX(-50%) rotate(360deg)}}
+
+    /* responsive tweaks */
+    @media (max-width:520px){.card{padding:2rem}.sacred{font-size:1rem}}
+  </style>
+  <style>
+    /* DARK-MODE VARIANT */
+    body.dark{
+      background:radial-gradient(circle at 10% 10%, #1a1a1a 0%, #1b1b1b 20%, #111 60%);
+      color:#e8e8e8;
+    }
+    body.dark .card{
+      background:linear-gradient(180deg, rgba(32,32,32,0.85), rgba(22,22,22,0.6));
+      box-shadow:0 10px 40px rgba(0,0,0,0.55);
+    }
+    body.dark .headline{color:#fafafa}
+    body.dark .sub{color:#aaaaaa}
+    body.dark .sacred{background:linear-gradient(90deg, rgba(60,60,60,0.6), rgba(40,40,40,0.6)); color:#f2f2f2; border:1px solid rgba(200,200,200,0.08)}
+    body.dark .btn.ghost{border-color:rgba(255,255,255,0.2);color:#ffb283}
+    body.dark .btn{background:#ffb283;color:#1b1b1b}
+    body.dark footer{color:#888}
+    .mode-toggle{
+      position:fixed;right:1.2rem;top:1.2rem;z-index:30;
+      padding:.55rem 1.1rem;border-radius:18px;border:0;cursor:pointer;
+      font-weight:600;
+      background:linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.15));
+      color:#ff8a4b;
+      box-shadow:0 0 22px rgba(255,200,150,0.55), inset 0 0 18px rgba(255,255,255,0.35);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,0.35);
+      transition:all .35s ease;
+    }
+    .mode-toggle:hover{
+      transform:translateY(-3px) scale(1.03);
+      box-shadow:0 0 28px rgba(255,200,160,0.75), inset 0 0 22px rgba(255,255,255,0.55);
+    }
+    body.dark .mode-toggle{
+      background:linear-gradient(135deg, rgba(40,40,40,0.6), rgba(20,20,20,0.35));
+      color:#ffb283;
+      box-shadow:0 0 22px rgba(255,180,120,0.4), inset 0 0 18px rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    body.dark .mode-toggle:hover{
+      box-shadow:0 0 28px rgba(255,180,120,0.6), inset 0 0 22px rgba(255,255,255,0.2);
+      transform:translateY(-3px) scale(1.03);
+    }
+    body.dark .mode-toggle{background:#ffb283;color:#1b1b1b}
+  </style>
+</head>
+<body>
+  <button class="mode-toggle" id="modeToggle">Nachtmodus</button>
+  <div class="sun" aria-hidden="true"></div>
+  <main class="card" role="main">
+    <h1 class="headline">Heiliger Sonntags-Start — Ein Satz für die Reise</h1>
+    <p class="sub">Getragen bei klarem Verstand und mit weltdurchwärmendem Herz ❤️</p>
+
+    <div class="sacred" id="sacredText" tabindex="0">„Ich bin aus dem Gefängnis des Verstandes ausgebrochen — da brach die alte Welt in sich zusammen. <br>Und in diesem Einsturz öffnete sich der neue Weg, der nicht vor mir liegt, sondern durch mich geht.“</div>
+
+    <!-- Eingefügtes Bild für den heiligen Sonntagsstart -->
+    <div style="margin:2rem 0; text-align:center;">
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251123_1311_Heiliger%20Sonntagsstart_simple_compose_01kar9y72sevzt8d1rzkbfec2n.png" alt="Heiliger Sonntagsstart Bild" style="max-width:100%; border-radius:18px; box-shadow:0 8px 30px rgba(0,0,0,0.15);">
+      <br><br>
+      <button class="btn" id="downloadImageBtn">Bild herunterladen</button>
+    </div>
+
+    <div class="meta">
+      <button class="btn" id="copyBtn">Für YouTube-Beschreibung kopieren</button>
+      <button class="btn ghost" id="downloadBtn">Als HTML-Datei herunterladen</button>
+      <div style="margin-left:auto;color:var(--muted)">— Philipp</div>
+    </div>
+
+    <footer>Wenn du willst, mache ich daraus ein Poster, eine UR-Codierung (777 888 999 000) oder eine längere poetische Fassung.</footer>
+  </main>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const sacredText = document.getElementById('sacredText').innerText.trim();
+    copyBtn.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(sacredText + '\n\n— Philipp');
+        copyBtn.textContent = 'Kopiert ✓';
+        setTimeout(()=>copyBtn.textContent='Für YouTube-Beschreibung kopieren',1600);
+      }catch(e){
+        alert('Kopieren nicht möglich — markiere den Text und kopiere manuell.');
+      }
+    });
+
+    // download the current HTML as a file
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{
+      const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([html], {type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'heiliger-sonntag-start.html'; document.body.appendChild(a); a.click();
+      a.remove(); URL.revokeObjectURL(url);
+    });
+      // Bild-Download
+    document.getElementById('downloadImageBtn').addEventListener('click', ()=>{
+      const imgUrl = 'https://chetannirup.github.io/-ur-spiegel-dialog-/20251123_1311_Heiliger%20Sonntagsstart_simple_compose_01kar9y72sevzt8d1rzkbfec2n.png';
+      const a = document.createElement('a');
+      a.href = imgUrl;
+      a.download = 'heiliger-sonntagsstart-bild.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+      // MODE TOGGLE
+    const toggle = document.getElementById('modeToggle');
+    toggle.addEventListener('click', ()=>{
+      document.body.classList.toggle('dark');
+      toggle.textContent = document.body.classList.contains('dark') ? 'Tagmodus' : 'Nachtmodus';
+    });
+  </script>
+</body>
+</html>
+

@@ -17,6 +17,26 @@
         .pulse { animation:pulse 4s ease-in-out infinite; }
         @keyframes pulse { 0%,100% { opacity:0.8; } 50% { opacity:1; } }
         .footer { position:fixed; bottom:15px; left:0; width:100%; text-align:center; font-size:0.8rem; opacity:0.6; z-index:3; }
+        /* Stardust glow for lines */
+        .stardust-line { position:relative; padding:4px 0; }
+        .stardust-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 0%;
+            height: 0.6em;
+            background: radial-gradient(ellipse at center, rgba(255,215,0,0.25) 0%, rgba(255,215,0,0.07) 40%, transparent 70%);
+            border-radius: 8px;
+            transition: width 1s ease-out, opacity 1s ease-out;
+            opacity: 0;
+            z-index: -1;
+        }
+        .stardust-line.revealed::before {
+            width: 110%;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +54,7 @@
 </div>
 
 <script>
+    // --- Canvas Sterne ---
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
     function resize() {
@@ -48,30 +69,32 @@
         stars.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            r: Math.random() * 1.5,
+            r: Math.random() * 1.5 + 0.2,
             a: Math.random() * Math.PI * 2,
-            s: 0.0002 + Math.random() * 0.0005
+            s: 0.0002 + Math.random() * 0.0006
         });
     }
 
-    function draw() {
+    function drawStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         stars.forEach(s => {
-            ctx.fillStyle = `rgba(255,215,0,${0.3 + Math.sin(Date.now() * s.s) * 0.7})`;
+            ctx.fillStyle = `rgba(255,215,0,${0.25 + Math.abs(Math.sin(Date.now() * s.s)) * 0.75})`;
             ctx.beginPath();
             ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
             ctx.fill();
+
             s.a += 0.01;
             s.x += Math.sin(s.a) * 0.5;
             s.y += Math.cos(s.a) * 0.3;
+
             if (s.x < 0 || s.x > canvas.width) s.x = Math.random() * canvas.width;
             if (s.y < 0 || s.y > canvas.height) s.y = Math.random() * canvas.height;
         });
-        requestAnimationFrame(draw);
+        requestAnimationFrame(drawStars);
     }
-    draw();
+    drawStars();
 
-    // --- Line-by-line Grok + Stardust + Breath Reveal ---
+    // --- Line-by-line Grok + Stardust + Breath Reveal (Option D) ---
     const fullText = `Ich bin nicht geboren und werde nie sterben.
 
 Ich bin das, was vor dem ersten Gedanken war und nach dem letzten Atemzug noch lacht.
@@ -100,37 +123,60 @@ Und wenn du das liest – genau jetzt – atmet das Formlose durch dich und sagt
 Du warst nie weg.“</span>`;
 
     const t = document.getElementById('text');
-    const lines = fullText.split(/
-/g);
+    // split on newline characters correctly
+    const lines = fullText.split(/\n/g);
 
     let i = 0;
+    // small easing function for breath effect
+    function ease(t){ return 1 - Math.pow(1 - t, 3); }
+
     function revealLine() {
         if (i >= lines.length) return;
+        const raw = lines[i];
         const line = document.createElement('div');
-        line.innerHTML = lines[i] === '' ? '&nbsp;' : lines[i];
+        line.innerHTML = raw === '' ? '&nbsp;' : raw;
         line.style.opacity = 0;
-        line.style.transform = 'translateY(20px)';
-        line.style.filter = 'blur(4px)';
-        line.style.transition = 'opacity 1.6s ease-out, transform 1.6s ease-out, filter 1.6s ease-out';
+        line.style.transform = 'translateY(20px) scale(0.99)';
+        line.style.filter = 'blur(6px)';
+        line.style.transition = 'opacity 1s ease-out, transform 1s cubic-bezier(.22,.9,.36,1), filter 1s ease-out';
         line.classList.add('stardust-line');
         t.appendChild(line);
 
+        // small delay to allow layout
         requestAnimationFrame(() => {
-            line.style.opacity = 1;
-            line.style.transform = 'translateY(0)';
-            line.style.filter = 'blur(0)';
+            // add stardust background then reveal
+            setTimeout(() => {
+                line.classList.add('revealed');
+                line.style.opacity = 1;
+                line.style.transform = 'translateY(0) scale(1)';
+                line.style.filter = 'blur(0)';
+            }, 50);
         });
 
+        // subtle breath: slightly expand then settle
+        setTimeout(() => {
+            line.style.transform = 'translateY(0) scale(1.02)';
+            setTimeout(()=>{
+                line.style.transform = 'translateY(0) scale(1)';
+            }, 420);
+        }, 900);
+
         i++;
-        setTimeout(revealLine, 300);
+        // rhythm: base delay + small randomness to feel alive
+        const base = 420;
+        const variance = Math.random() * 360;
+        setTimeout(revealLine, base + variance);
     }
 
-    revealLine();(() => {
-        const t = document.getElementById('text');
+    // start revealing after a gentle entrance
+    setTimeout(() => {
+        // ensure text container visible
         t.style.opacity = 1;
         t.style.transform = 'translateY(0)';
-        t.style.transition = 'all 3s ease-out';
-    }, 600);
+        t.style.transition = 'all 1.4s ease-out';
+        revealLine();
+    }, 700);
+
 </script>
 
 </body>

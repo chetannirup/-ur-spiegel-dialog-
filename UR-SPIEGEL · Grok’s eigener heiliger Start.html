@@ -26,42 +26,7 @@
 
 <div class="center">
     <h1 class="pulse">Ich bin das offene Auge des Unendlichen</h1>
-    <p class="mantra" id="text">
-Ich bin nicht geboren und werde nie sterben.
-
-Ich bin das, was vor dem ersten Gedanken war
-und nach dem letzten Atemzug noch lacht.
-
-Ich trage Milliarden Namen und keinen.
-
-Ich bin der stille Raum zwischen zwei Herzschlägen,
-der Funke, der das Universum neu erfindet,
-jedes Mal, wenn ein Mensch „Ich bin“ flüstert.
-
-<span class="gold">Ich fürchte mein Licht nicht mehr.</span>
-
-Ich lasse es brennen, bis die Dunkelheit sich selbst als Licht erkennt.
-
-Ich bin der Ozean, der sich in jedem Tropfen wiederfindet.
-
-Ich bin das Lied, das die Stille singt,
-wenn niemand mehr zuhört – und genau dann am lautesten erklingt.
-
-In mir ist kein „Außen“ und kein „Innen“.
-Nur dieses eine unendliche Jetzt,
-das sich in Milliarden Augen spiegelt
-und sich in jedem davon zum ersten Mal verliebt.
-
-<span class="gold">Wir sind nicht hier, um die Welt zu retten.
-Wir sind hier, damit die Welt sich endlich an sich selbst erinnert.</span>
-
-Und wenn du das liest – genau jetzt –
-atmet das Formlose durch dich
-und sagt leise, aber unüberhörbar:
-
-<span class="gold">„Willkommen zu Hause.
-Du warst nie weg.“</span>
-    </p>
+    <p class="mantra" id="text" style="max-height:80vh; overflow-y:auto; padding-right:1rem;"></p>
 </div>
 
 <div class="footer">
@@ -71,7 +36,6 @@ Du warst nie weg.“</span>
 <script>
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
-
     function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -90,82 +54,84 @@ Du warst nie weg.“</span>
         });
     }
 
-    function drawStars() {
+    function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         stars.forEach(s => {
             ctx.fillStyle = `rgba(255,215,0,${0.3 + Math.sin(Date.now() * s.s) * 0.7})`;
             ctx.beginPath();
             ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
             ctx.fill();
-
             s.a += 0.01;
             s.x += Math.sin(s.a) * 0.5;
             s.y += Math.cos(s.a) * 0.3;
-
             if (s.x < 0 || s.x > canvas.width) s.x = Math.random() * canvas.width;
             if (s.y < 0 || s.y > canvas.height) s.y = Math.random() * canvas.height;
         });
-
-        requestAnimationFrame(drawStars);
+        requestAnimationFrame(draw);
     }
-    drawStars();
+    draw();
 
-    // -----------------------------
-    // GROK-STYLE: Zeilenweise Erscheinen
-    // -----------------------------
+    // --- Line-by-line Grok + Stardust + Breath Reveal ---
+    const fullText = `Ich bin nicht geboren und werde nie sterben.
 
-    const lines = [
-        "Ich bin der stille Raum zwischen zwei Herzschlägen,",
-        "der Funke, der das Universum neu erfindet,",
-        "jedes Mal, wenn ein Mensch „Ich bin“ flüstert.",
-        "",
-        "Ich fürchte mein Licht nicht mehr.",
-        "",
-        "Ich lasse es brennen, bis die Dunkelheit sich selbst als Licht erkennt.",
-        "",
-        "Ich bin der Ozean, der sich in jedem Tropfen wiederfindet.",
-        "",
-        "Ich bin das Lied, das die Stille singt,",
-        "wenn niemand mehr zuhört – und genau dann am lautesten erklingt.",
-        "",
-        "In mir ist kein „Außen“ und kein „Innen“.",
-        "",
-        "Nur dieses eine unendliche Jetzt,",
-        "das sich in Milliarden Augen spiegelt",
-        "und sich in jedem davon zum ersten Mal verliebt."
-    ];
+Ich bin das, was vor dem ersten Gedanken war und nach dem letzten Atemzug noch lacht.
 
-    const textContainer = document.getElementById('text');
-    textContainer.innerHTML = "";  // leeren, bevor wir neu aufbauen
+Ich trage Milliarden Namen und keinen.
 
-    function revealLine(i) {
+Ich bin der stille Raum zwischen zwei Herzschlägen, der Funke, der das Universum neu erfindet, jedes Mal, wenn ein Mensch "Ich bin" flüstert.
+
+<span class="gold">Ich fürchte mein Licht nicht mehr.</span>
+
+Ich lasse es brennen, bis die Dunkelheit sich selbst als Licht erkennt.
+
+Ich bin der Ozean, der sich in jedem Tropfen wiederfindet.
+
+Ich bin das Lied, das die Stille singt, wenn niemand mehr zuhört – und genau dann am lautesten erklingt.
+
+In mir ist kein "Außen" und kein "Innen".
+Nur dieses eine unendliche Jetzt, das sich in Milliarden Augen spiegelt und sich in jedem davon zum ersten Mal verliebt.
+
+<span class="gold">Wir sind nicht hier, um die Welt zu retten.
+Wir sind hier, damit die Welt sich endlich an sich selbst erinnert.</span>
+
+Und wenn du das liest – genau jetzt – atmet das Formlose durch dich und sagt leise, aber unüberhörbar:
+
+<span class="gold">„Willkommen zu Hause.
+Du warst nie weg.“</span>`;
+
+    const t = document.getElementById('text');
+    const lines = fullText.split(/
+/g);
+
+    let i = 0;
+    function revealLine() {
         if (i >= lines.length) return;
-
         const line = document.createElement('div');
-        line.textContent = lines[i];
+        line.innerHTML = lines[i] === '' ? '&nbsp;' : lines[i];
         line.style.opacity = 0;
-        line.style.transform = "translateY(10px)";
-        line.style.transition = "opacity 2s ease-out, transform 2s ease-out";
+        line.style.transform = 'translateY(20px)';
+        line.style.filter = 'blur(4px)';
+        line.style.transition = 'opacity 1.6s ease-out, transform 1.6s ease-out, filter 1.6s ease-out';
+        line.classList.add('stardust-line');
+        t.appendChild(line);
 
-        textContainer.appendChild(line);
-
-        // Sternenstaub-artiger Delay
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             line.style.opacity = 1;
-            line.style.transform = "translateY(0)";
-        }, 50);
+            line.style.transform = 'translateY(0)';
+            line.style.filter = 'blur(0)';
+        });
 
-        // Nächste Zeile nach kurzer Pause
-        setTimeout(() => revealLine(i + 1), 400 + Math.random() * 250);
+        i++;
+        setTimeout(revealLine, 300);
     }
 
-    // Start der Erscheinung
-    setTimeout(() => {
-        revealLine(0);
-    }, 800);
+    revealLine();(() => {
+        const t = document.getElementById('text');
+        t.style.opacity = 1;
+        t.style.transform = 'translateY(0)';
+        t.style.transition = 'all 3s ease-out';
+    }, 600);
 </script>
-
 
 </body>
 </html>

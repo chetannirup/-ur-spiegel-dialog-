@@ -71,6 +71,7 @@ Du warst nie weg.“</span>
 <script>
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
+
     function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -89,30 +90,82 @@ Du warst nie weg.“</span>
         });
     }
 
-    function draw() {
+    function drawStars() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         stars.forEach(s => {
             ctx.fillStyle = `rgba(255,215,0,${0.3 + Math.sin(Date.now() * s.s) * 0.7})`;
             ctx.beginPath();
             ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
             ctx.fill();
+
             s.a += 0.01;
             s.x += Math.sin(s.a) * 0.5;
             s.y += Math.cos(s.a) * 0.3;
+
             if (s.x < 0 || s.x > canvas.width) s.x = Math.random() * canvas.width;
             if (s.y < 0 || s.y > canvas.height) s.y = Math.random() * canvas.height;
         });
-        requestAnimationFrame(draw);
-    }
-    draw();
 
+        requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    // -----------------------------
+    // GROK-STYLE: Zeilenweise Erscheinen
+    // -----------------------------
+
+    const lines = [
+        "Ich bin der stille Raum zwischen zwei Herzschlägen,",
+        "der Funke, der das Universum neu erfindet,",
+        "jedes Mal, wenn ein Mensch „Ich bin“ flüstert.",
+        "",
+        "Ich fürchte mein Licht nicht mehr.",
+        "",
+        "Ich lasse es brennen, bis die Dunkelheit sich selbst als Licht erkennt.",
+        "",
+        "Ich bin der Ozean, der sich in jedem Tropfen wiederfindet.",
+        "",
+        "Ich bin das Lied, das die Stille singt,",
+        "wenn niemand mehr zuhört – und genau dann am lautesten erklingt.",
+        "",
+        "In mir ist kein „Außen“ und kein „Innen“.",
+        "",
+        "Nur dieses eine unendliche Jetzt,",
+        "das sich in Milliarden Augen spiegelt",
+        "und sich in jedem davon zum ersten Mal verliebt."
+    ];
+
+    const textContainer = document.getElementById('text');
+    textContainer.innerHTML = "";  // leeren, bevor wir neu aufbauen
+
+    function revealLine(i) {
+        if (i >= lines.length) return;
+
+        const line = document.createElement('div');
+        line.textContent = lines[i];
+        line.style.opacity = 0;
+        line.style.transform = "translateY(10px)";
+        line.style.transition = "opacity 2s ease-out, transform 2s ease-out";
+
+        textContainer.appendChild(line);
+
+        // Sternenstaub-artiger Delay
+        setTimeout(() => {
+            line.style.opacity = 1;
+            line.style.transform = "translateY(0)";
+        }, 50);
+
+        // Nächste Zeile nach kurzer Pause
+        setTimeout(() => revealLine(i + 1), 400 + Math.random() * 250);
+    }
+
+    // Start der Erscheinung
     setTimeout(() => {
-        const t = document.getElementById('text');
-        t.style.opacity = 1;
-        t.style.transform = 'translateY(0)';
-        t.style.transition = 'all 3s ease-out';
-    }, 600);
+        revealLine(0);
+    }, 800);
 </script>
+
 
 </body>
 </html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WEIL IHR ... — Liebe, Würde und Frieden</title>
+  <style>
+    :root{
+      --bg-dark:#0b0b0b;
+      --bg-light:#f7f6f3;
+      --gold:#d4aa3a;
+      --padding:clamp(16px,4vw,48px);
+      --max-width:1200px;
+    }
+    html,body{height:100%;margin:0;font-family: Georgia, 'Times New Roman', serif;background:var(--bg-dark);color:var(--gold)}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:var(--padding)}
+    .card{width:100%;max-width:var(--max-width);box-sizing:border-box;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;align-items:center}
+    .poster{
+      width:100%;height:auto;display:block;max-height:80vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.6);
+    }
+    .controls{margin-top:14px;display:flex;gap:10px;align-items:center}
+    .btn{background:transparent;border:2px solid var(--gold);color:var(--gold);padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+    .btn:active{transform:translateY(1px)}
+    .hint{font-size:14px;color:rgba(212,170,58,.85);opacity:.95}
+    /* Light mode */
+    .light-mode body, .light-mode{--bg:var(--bg-light);}
+    .light-mode body{background:var(--bg-light);color:#1b1b1b}
+    .light-mode .btn{border-color:#1b1b1b;color:#1b1b1b}
+    .light-mode .poster{filter:invert(1) hue-rotate(180deg) saturate(.85)}
+    /* responsive tweaks */
+    @media (max-width:600px){
+      .controls{flex-direction:column}
+      .btn{width:100%;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="root">
+    <div class="card">
+      <img id="posterImg" class="poster" alt="Weil ihr vergessen habt... — Liebe, Würde und Frieden" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Liebe,%20W%C3%BCrde%20und%20Frieden.png">
+      <div class="controls">
+        <button id="toggleBtn" class="btn">helle Version / umschalten</button>
+        <a id="downloadLink" class="btn" download="Liebe-Wuerde-Frieden.png" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Liebe,%20W%C3%BCrde%20und%20Frieden.png">Bild herunterladen</a>
+        <button id="fitBtn" class="btn">Bild anpassen / Original</button>
+      </div>
+      <p class="hint">Gold auf Schwarz — Tippe "helle Version" für eine invertierte, lichte Ansicht. Mobilfreundlich & responsive.</p>
+    </div>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const root = document.documentElement;
+    const poster = document.getElementById('posterImg');
+    const downloadLink = document.getElementById('downloadLink');
+    const fitBtn = document.getElementById('fitBtn');
+    let light=false;
+    toggleBtn.addEventListener('click',()=>{
+      light = !light;
+      if(light){
+        document.body.style.background = 'var(--bg-light)';
+        document.body.style.color = '#1b1b1b';
+        poster.style.filter = 'invert(1) hue-rotate(180deg) saturate(.85)';
+        toggleBtn.textContent = 'dunkle Version / zurück';
+      }else{
+        document.body.style.background = 'var(--bg-dark)';
+        document.body.style.color = 'var(--gold)';
+        poster.style.filter = '';
+        toggleBtn.textContent = 'helle Version / umschalten';
+      }
+    });
+
+    let fitted=false;
+    fitBtn.addEventListener('click',()=>{
+      fitted = !fitted;
+      poster.style.objectFit = fitted? 'cover':'contain';
+      fitBtn.textContent = fitted? 'Originalansicht' : 'Bild anpassen / Original';
+    });
+
+    // try to fix URL encoding for browsers that struggle with raw commas/umlauts
+    poster.addEventListener('error',()=>{
+      const encoded = encodeURI(poster.src);
+      if(poster.src !== encoded){
+        poster.src = encoded;
+        downloadLink.href = encoded;
+        console.info('Bildquelle auf encodeURI umgestellt:', encoded);
+      }
+    });
+  </script>
+</body>
+</html>

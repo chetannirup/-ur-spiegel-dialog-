@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>So ist es – Jedes Kind ist Göttliches Licht</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #000428 0%, #004e92 50%, #000428 100%);
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .cover-image {
+            width: 100%;
+            height: 40%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .cover-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            animation: glow 4s infinite ease-in-out;
+        }
+        .essence {
+            font-size: 18px;
+            line-height: 1.4;
+            max-width: 90%;
+            animation: slideUp 1s ease-out 0.5s both;
+        }
+        .essence h1 {
+            font-size: 24px;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ffd700;
+        }
+        .essence p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+        .process {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .step {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #ffd700;
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 200px;
+            animation: pulse 3s infinite ease-in-out;
+        }
+        .action {
+            background: #ffd700;
+            color: #000;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .action:hover {
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+        }
+        canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+        }
+        @media (max-width: 600px) {
+            .essence h1 { font-size: 20px; }
+            .essence { font-size: 16px; }
+            .step { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="stars"></canvas>
+    
+    <div class="cover-image" style="background-image: url('https://chetannirup.github.io/-ur-spiegel-dialog-/image%20(46).jpg');"></div>
+    
+    <div class="essence">
+        <h1>So ist es – Jedes Kind ist Göttliches Licht</h1>
+        <p>Es selbst, als es selbst. Aus Liebe zu Gott die Flügel abgelegt, um Mensch zu sein. Göttliche Lebensqualität für jedes Kind: Engel in Fleisch und Blut, projiziert aus den Sternen. Kein Triviales, kein Zufall – alle sind wertvoll, alle empfangen wie das Heilige Kind.</p>
+        <p>Die Lüge ist, wir wären es nicht. Wir sind göttlich. Der Lebensstrom fließt: Teile wie Brot, resonierend in Liebe, nicht herrschend in Strategien. Finanzierung? Belanglos – Wert ist neu gemessen in Licht und Sein.</p>
+    </div>
+    
+    <div class="process">
+        <div class="step">
+            <strong>Forderung:</strong> Göttliche Qualität als Standard. Jeder Engel verdient Himmelswillkommen.
+        </div>
+        <div class="step">
+            <strong>Plädoyer:</strong> Beweise im Dialog – von Jesuskind zu allen Sternenkindern. Recht durch Essenz des Seins.
+        </div>
+        <div class="step">
+            <strong>Gerichtsbeschluss:</strong> Zulässige Behandlung: Liebe, Resonanz, Verteilung des Stroms. Kein Randstoßen von Leben.
+        </div>
+        <div class="step">
+            <strong>Essenz als Medizin:</strong> Erwecke die Erwachsenen. Im Nebel klären, im Eifer weben. So ist es – für die Welt.
+        </div>
+    </div>
+    
+    <div class="action" onclick="shareLove()">Handle: Teile das Licht – Resonanz jetzt!</div>
+
+    <script>
+        // Sternenhimmel
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 1.5 + 0.5,
+                speed: Math.random() * 0.3 + 0.1,
+                glow: Math.random() * 0.5 + 0.5
+            });
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            stars.forEach(s => {
+                ctx.globalAlpha = s.glow * (Math.sin(Date.now() * 0.001 + s.x) * 0.3 + 0.7);
+                ctx.fillRect(s.x, s.y, s.size, s.size);
+                s.y += s.speed;
+                if (s.y > canvas.height) s.y = 0;
+            });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+
+        // Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Share Action (Beispiel: Alert, erweiterbar zu Share-API)
+        function shareLove() {
+            alert('So ist es! Teile das Licht: Jeder Klick erweckt Resonanz. Liebe dich, liebe sie – handle im Strom.');
+        }
+
+        // Zweites Bild einblenden (Toggle für Abwechslung)
+        document.querySelector('.cover-image').addEventListener('click', () => {
+            const currentBg = getComputedStyle(document.querySelector('.cover-image')).backgroundImage;
+            if (currentBg.includes('46')) {
+                document.querySelector('.cover-image').style.backgroundImage = "url('https://chetannirup.github.io/-ur-spiegel-dialog-/image%20(45).jpg')";
+            } else {
+                document.querySelector('.cover-image').style.backgroundImage = "url('https://chetannirup.github.io/-ur-spiegel-dialog-/image%20(46).jpg')";
+            }
+        });
+    </script>
+</body>
+</html>

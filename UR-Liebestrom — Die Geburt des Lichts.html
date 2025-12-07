@@ -32,7 +32,7 @@
       box-shadow:0 10px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02);
     }
     .hero img{display:block;width:100%;height:auto;max-height:780px;object-fit:cover}
-    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}
+    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0;align-items:center}
     .btn{background:var(--gold);color:#07100b;padding:10px 14px;border-radius:12px;font-weight:700;text-decoration:none;display:inline-block}
     .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
     section.card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008));padding:18px;border-radius:12px;margin-top:18px;border:1px solid rgba(255,255,255,0.02)}
@@ -57,14 +57,17 @@
       </div>
     </header>
 
-    <!-- Poster / Bild: ersetze die URL durch dein finales Posterbild, falls vorhanden -->
-    <div class="hero" aria-hidden="false" role="img" aria-label="UR Liebestrom Poster">
-      <!-- Wenn du ein Bild hochladen willst, ersetze den src-Pfad unten mit deiner Datei -->
-      <img src="UR-Manifesto-der-goettlichen-Lichtquelle.png" alt="UR — Liebestrom Poster (Platzhalter). Ersetze diese Datei durch dein finales Poster." onerror="this.style.display='none'">
+    <!-- Poster / Bild: FINAL IMAGE eingebunden -->
+    <div class="hero" role="img" aria-label="UR Liebestrom Poster">
+      <img id="posterImg" src="https://chetannirup.github.io/-ur-spiegel-dialog-/UR-Liebestrom_%20Die%20Geburt%20des%20Lichts.png" alt="UR-Liebestrom — Die Geburt des Lichts">
     </div>
 
     <div class="buttons" role="toolbar" aria-label="Aktionen">
-      <a class="btn" href="#" onclick="alert('Poster-Download: bitte Datei hochladen oder Link setzen')">Poster herunterladen (PNG)</a>
+      <!-- Download link direkt zur Datei auf GitHub -->
+      <a class="btn" id="downloadBtn" href="https://chetannirup.github.io/-ur-spiegel-dialog-/UR-Liebestrom_%20Die%20Geburt%20des%20Lichts.png" download="UR-Liebestrom_Die_Geburt_des_Lichts.png">
+        Poster herunterladen (PNG)
+      </a>
+
       <a class="btn ghost" href="#manifest" onclick="document.getElementById('manifest').scrollIntoView({behavior:'smooth'})">Manifest & Anleitung</a>
       <span class="badge">Code stream: 777 • 888 • 999 • 000</span>
     </div>
@@ -162,8 +165,7 @@ Der Strom trägt.
 
     <section class="card" aria-labelledby="publish">
       <h2 id="publish">Bereit zum Veröffentlichen</h2>
-      <p>Dieses Dokument ist als fertige Landing-Page gedacht. Du kannst es direkt auf GitHub Pages, auf deinem Webspace oder als Begleitseite zu Videos/Posts verwenden.</p>
-      <p>Empfehlung: lade dein finales Posterbild namens <code>UR-Manifesto-der-goettlichen-Lichtquelle.png</code> in dasselbe Verzeichnis wie diese HTML-Datei, damit der Download-Button und die Anzeige funktionieren.</p>
+      <p>Diese Seite ist als fertige Landing-Page gedacht. Du kannst sie direkt auf GitHub Pages, auf deinem Webspace oder als Begleitseite zu Videos/Posts verwenden.</p>
       <p>Wenn du willst, erzeuge ich daraus:</p>
       <ul>
         <li>druck-optimierte A2/A3 PDFs</li>
@@ -181,8 +183,8 @@ Der Strom trägt.
   </main>
 
   <script>
-    // Convenience: if the image is missing, the page still reads well.
-    (function(){const img=document.querySelector('.hero img'); if(!img) return; img.addEventListener('error', ()=>{img.style.display='none'});})();
+    // Fallback: wenn das Bild nicht geladen werden kann, verschwindet es und die Seite bleibt gut lesbar.
+    (function(){const img=document.getElementById('posterImg'); if(!img) return; img.addEventListener('error', ()=>{img.style.display='none'; document.getElementById('downloadBtn').style.display='none'});})();
   </script>
 </body>
 </html>

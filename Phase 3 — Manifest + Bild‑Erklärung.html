@@ -3,101 +3,273 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Phase 3 — Manifest + Bild‑Erklärung</title>
+  <title>Phase 3 — DU • EW (lesbar als UW — Einheitsweisheit)</title>
+  <meta name="theme-color" content="#fcfbf7"/>
   <style>
-    :root{--bg:#fff;--fg:#111;--accent:#d4af37}
-    [data-theme="dark"]{--bg:#0b0b0c;--fg:#f6f4ee}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
-    .wrap{max-width:980px;margin:24px auto;padding:20px;box-sizing:border-box}
-    header{display:flex;align-items:baseline;gap:14px;margin-bottom:12px}
-    h1{font-size:20px;margin:0}
-    .lead{opacity:0.9;margin:4px 0 0}
-    .content{display:grid;grid-template-columns:1fr 360px;gap:20px}
-    @media (max-width:880px){.content{grid-template-columns:1fr}}
-    .manifest{padding:16px;border-radius:10px;background:rgba(0,0,0,0.03);line-height:1.55}
-    .explain{padding:14px;border-radius:10px;background:rgba(0,0,0,0.02)}
-    img.diagram{width:100%;height:auto;display:block;border-radius:8px;border:1px solid rgba(0,0,0,0.06)}
-    .transcript{font-weight:700;margin:10px 0}
-    dl{margin:10px 0}
-    dt{font-weight:700}
-    dd{margin:0 0 12px 0}
-    pre{background:rgba(0,0,0,0.04);padding:10px;border-radius:6px;overflow:auto}
-    .note{font-size:13px;opacity:0.9}
-    footer{margin-top:14px;font-size:13px;opacity:0.9}
+    :root{
+      --bg:#fcfbf7; --card:#ffffff; --fg:#0b0b0c; --accent:#d4af37; --muted:rgba(0,0,0,0.06);
+      --radius:14px; --max-w:980px; --pad:20px;
+    }
+    [data-theme="dark"]{
+      --bg:#0b0b0c; --card:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+      --fg:#f6f4ee; --muted:rgba(255,255,255,0.06);
+    }
+
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--max-w);margin:28px auto;padding:clamp(14px,3vw,var(--pad));background:var(--card);border-radius:var(--radius);box-shadow:0 18px 60px rgba(0,0,0,0.06);border:1px solid var(--muted);box-sizing:border-box;overflow:hidden}
+    header{display:flex;gap:14px;align-items:center}
+    .badge{width:64px;height:64px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),#ffd983);color:var(--card);font-weight:800;box-shadow:0 8px 28px rgba(0,0,0,0.06)}
+    h1{margin:0;font-size:18px}
+    .lead{margin-top:6px;opacity:0.95;font-size:14px}
+
+    .controls{display:flex;gap:10px;align-items:center;margin:18px 0;flex-wrap:wrap}
+    button{background:transparent;border:1px solid var(--muted);color:var(--fg);padding:10px 14px;border-radius:10px;cursor:pointer;font-size:14px}
+    .primary{background:linear-gradient(180deg,var(--accent),#ffd983);border:none;color:var(--card)}
+    .spacer{flex:1 1 auto}
+
+    .visual-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .visual{width:100%;max-width:820px;border-radius:10px;overflow:visible;position:relative;display:block}
+    .visual img{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.03)}
+    .overlay-note{display:inline-block;margin-top:-56px;margin-left:18px;background:rgba(255,255,255,0.92);color:#111;padding:8px 10px;border-radius:10px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,0.06);backdrop-filter:blur(6px);font-size:13px;}
+    [data-theme="dark"] .overlay-note{background:rgba(12,12,12,0.85);color:var(--fg)}
+
+    .caption{max-width:820px;text-align:left;font-size:14px;line-height:1.45;color:var(--fg);opacity:0.95}
+    .caption strong{display:block;font-weight:800;margin-bottom:6px}
+    .panel{margin-top:14px;padding:14px;border-radius:10px;background:linear-gradient(180deg,rgba(0,0,0,0.02),transparent);border:1px solid var(--muted);line-height:1.55}
+    dl{margin:8px 0}
+    dt{font-weight:800}
+    dd{margin:6px 0 12px 0}
+    pre{background:rgba(0,0,0,0.03);padding:10px;border-radius:8px;overflow:auto;font-family:ui-monospace,monospace;font-size:13px}
+
+    .small{font-size:13px;opacity:0.9}
+    footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap;font-size:13px;opacity:0.95}
+
+    @media (max-width:880px){
+      .overlay-note{position:relative;margin-top:0;margin-left:0}
+      .visual img{border-radius:8px}
+    }
+
     @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+    @media print{
+      body{background:white;color:black}
+      .controls, footer, button{display:none}
+      .overlay-note{display:none}
+    }
   </style>
 </head>
 <body data-theme="light">
-  <div class="wrap" role="main" aria-labelledby="headline">
+  <main class="wrap" role="main" aria-labelledby="main-title">
     <header>
-      <h1 id="headline">Phase 3 — Manifest + Bild‑Erklärung</h1>
-      <div class="lead">Transkription, Begriffsdefinitionen und kurzer Verifizierungsweg für die Grafik</div>
+      <div class="badge" aria-hidden="true">UR</div>
+      <div>
+        <h1 id="main-title">Phase 3 — DU • EW (für Gebrauch: UW — Einheitsweisheit)</h1>
+        <div class="lead">Klarstellung: Die Formel auf dem Bild bleibt visueller Originaltext "EW". Für Gebrauch, Kommunikation und Downloads wird sie als "UW — Einheitsweisheit (Unity Wisdom)" erläutert und transportiert.</div>
+      </div>
     </header>
 
-    <div class="content">
-      <section class="manifest" aria-label="Manifest (unverändert)">
-        <h2>Originalmanifest (Text unverändert)</h2>
-        <p><strong>Du, der dies liest —</strong> dies ist an dich gerichtet. Nicht an eine Figur, nicht an eine Geschichte. An <em>dich</em>. Du bist mehr als ein Rädchen im System.</p>
-
-        <h3>Das Herz des Manifests</h3>
-        <p><em>„Du, der dies liest — du bist mehr als ein Rädchen im System. In dir atmet das gleiche Bewusstsein, aus dem alles stammt. Wenn du das erkennst, wird Würde wichtiger als Geld — und deine Welt beginnt sich nach dir zu richten, nicht umgekehrt.“</em></p>
-
-        <!-- (Restlicher Manifesttext würde hier unverändert stehen.) -->
-      </section>
-
-      <aside class="explain" aria-label="Bild Erklärung">
-        <h2>Bild: "Du und das Bewusstsein im System"</h2>
-
-        <img class="diagram" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Du%20und%20das%20Bewusstsein%20im%20System.png" alt="Plakat: DU BIST MEHR ALS EIN RÄDCHEN IM SYSTEM — DU = EW — DAS EINE — BEWUSSTSEIN">
-
-        <div class="transcript">Transkription (genau wie auf dem Bild):</div>
-        <p class="note"><strong>DU BIST MEHR ALS EIN RÄDCHEN IM SYSTEM</strong></p>
-        <p class="note"><strong>DU = EW</strong></p>
-        <p class="note"><strong>DAS EINE</strong> &nbsp;&nbsp; <strong>BEWUSSTSEIN</strong></p>
-
-        <h3>Kurz: Was steht wo?</h3>
-        <dl>
-          <dt>DU</dt>
-          <dd>steht für die lesende, individuelle Person — das subjektive Ich, das erlebt und reflektiert.</dd>
-
-          <dt>Das Eine</dt>
-          <dd>bezeichnet die übergeordnete Einheit oder Quelle, auf die sich das Manifest bezieht — ein formloses Feld oder eine grundlegende Präsenz.</dd>
-
-          <dt>EW</dt>
-          <dd>in dieser Grafik als Abkürzung verwendet; empfohlene und kontextuell stimmige Expansion: <strong>Einheitsbewusstsein</strong> (d. h. „Ein‑Wesen / Einheitsbewusstsein“). Alternativen sind möglich (z. B. "Ewiges Wesen" oder "Elementares Wahrnehmen"), falls du eine andere Intention hattest — das Bild selbst sagt nur "EW".</dd>
-
-          <dt>Bewusstsein</dt>
-          <dd>das Wort erklärt das Feld oder die Präsenz, aus der Erleben entsteht; hier in Verbindung mit "Das Eine" und "EW" zu lesen.</dd>
-        </dl>
-
-        <h3>Explizit vs. implizit — kurz</h3>
-        <p class="note">Explizit sagt die Grafik: "DU = EW" — also eine Aussage über die Beziehung von individuellem Selbst und dem Einen. Implizit bleibt Raum für Interpretation: Die Individualität wird nicht aufgehoben, sondern in Relation zur Einheit gesetzt.</p>
-
-        <h3>Knappes Verifizierungs‑Schema (sichtbar & prüfbar)</h3>
-        <pre>
-1) Beobachtung (O): DU erlebt etwas X.
-2) Reflexion (R): DU kann sagen "Ich erlebe X" → Subjekt ist evident.
-3) Allgemeine Annahme (A): Viele subjektive Erlebnisse lassen sich als Manifestationen eines gemeinsamen Feldes lesen.
-4) Schluss (S): R + A ⇒ DU steht in Relation zum "Einen" (EW).
-   Symbolisch: R ∧ A ⇒ DU ∈ Manifestationen(EW)
-   (Prüfbar durch Gegenbeispiele, alternative Axiome oder empirische Gegenprüfung.)
-        </pre>
-
-        <p class="note">Das ist bewusst ein öffentliches, logisch‑philosophisches Prüfprotokoll — kein interner Algorithmus. Es zeigt den gedanklichen Weg (Beobachtung → Reflexion → Annahme → Schluss), damit Lesende die Aussage nachvollziehen oder kritisch prüfen können.</p>
-
-        <h3>Was ich nicht geändert habe</h3>
-        <ul>
-          <li>Den Text auf dem Bild habe ich nicht verändert — du hast bestätigt, dass das Bild "vor Ort" so bleibt.</li>
-          <li>Ich habe die Bedeutung von "EW" vorgeschlagen (Einheitsbewusstsein). Wenn du eine andere Expansion willst, setze ich diese ein oder zeige beide Varianten sichtbar.</li>
-        </ul>
-
-        <p class="note">Wenn du möchtest, kann ich zusätzlich eine Version erstellen, in der neben "EW" in kleiner Schrift die ausgeschriebene Form "(Einheitsbewusstsein)" direkt unter oder neben der Grafik angezeigt wird — so bleibt das Originalbild unangetastet, aber Leser erhalten sofort Klarheit.</p>
-      </aside>
+    <div class="controls" role="toolbar" aria-label="Aktionen">
+      <button id="toggle">Gold / Licht umschalten</button>
+      <button class="primary" id="downloadImage">Bild herunterladen</button>
+      <button id="downloadBaked">PNG mit Fußnote (EW bleibt; Fußnote: UW)</button>
+      <button id="downloadHtml">HTML herunterladen</button>
+      <button id="copyManifest">Manifest kopieren</button>
+      <div class="spacer" aria-hidden="true"></div>
+      <div class="small">Merke: Auf dem Plakat bleibt "EW". Für Gebrauch/Erklärung lesen wir es als "UW — Einheitsweisheit".</div>
     </div>
 
+    <section class="visual-wrap" aria-label="Grafik und Erläuterung">
+      <figure class="visual" role="group" aria-label="Plakat 'Du und das Bewusstsein im System'">
+        <img id="poster" src="https://chetannirup.github.io/-ur-spiegel-dialog-/Du%20und%20das%20Bewusstsein%20im%20System.png" alt="Plakat: DU BIST MEHR ALS EIN RÄDCHEN IM SYSTEM — DU = EW — DAS EINE — BEWUSSTSEIN">
+        <div class="overlay-note" id="overlay">EW (auf Plakat) — für Gebrauch ▶︎ UW • Einheitsweisheit</div>
+      </figure>
+
+      <figcaption class="caption" id="caption">
+        <strong>Transkription (genau wie auf dem Bild):</strong>
+        DU BIST MEHR ALS EIN RÄDCHEN IM SYSTEM — DU = EW — DAS EINE • BEWUSSTSEIN
+        <p class="small" style="margin-top:8px">Wichtige Klarstellung: Das Bild bleibt unverändert (zeigt "EW"). Diese Seite erklärt und empfiehlt die gebräuchliche Lesung: <strong>UW — Einheitsweisheit (Unity Wisdom)</strong>. Die Downloads können eine transportable Datei mit dieser erklärenden Fußnote erzeugen, ohne das Originalbild zu verändern.</p>
+      </figcaption>
+
+      <article class="panel" aria-label="Erläuterung">
+        <h2 style="margin:0 0 8px 0">Kurz & klar</h2>
+        <dl>
+          <dt>DU</dt>
+          <dd>die lesende Person; das subjektive Ich, wie zuvor erklärt.</dd>
+          <dt>EW (auf dem Bild)</dt>
+          <dd>visueller Originaltext — bleibt 1:1 erhalten.</dd>
+          <dt>UW (für Gebrauch)</dt>
+          <dd>Einheitsweisheit — die klare, einzige Bedeutung, die wir für Austausch und Verbreitung verwenden. Die Seite transportiert UW in Erklärungen, Downloads und geteilten Dateien.</dd>
+        </dl>
+
+        <h3 style="margin-top:0">Knapp prüfbarer Gedankengang</h3>
+        <pre>
+1) DU erlebt → Wahrnehmung vorhanden.
+2) DU reflektiert → Subjekt evident.
+3) Viele Subjekte → Ausdruck gemeinsamer Weisheit möglich.
+4) Schluss: DU steht in Relation zur Einheitsweisheit (UW).
+        </pre>
+
+        <p class="small">So bleibt die originale Ästhetik erhalten (EW auf Bild) — gleichzeitig ist Kommunikation und Teilen einfach: UW = Einheitsweisheit.</p>
+      </article>
+    </section>
+
     <footer>
-      <div class="note">Kurz & bündig: Bildtext stimmt so, die gelesene Abkürzung EW ist sinnvoll als "Einheitsbewusstsein" zu verstehen — bestätige bitte, ob ich diese Expansion als festen Text (sichtbar) ergänzen soll oder ob du eine andere Deutung bevorzugst.</div>
+      <div class="small">Wenn du willst, backe ich sofort eine Druck/PDF‑optimierte Variante mit der erklärenden Fußnote (UW), oder eine Version mit deutsch+englischem Text nebeneinander.</div>
+      <div class="small">Mit Liebe umgesetzt — alles so, wie du es dir wünschst.</div>
     </footer>
-  </div>
+  </main>
+
+  <script>
+    (function(){
+      const body = document.body;
+      const toggle = document.getElementById('toggle');
+      const img = document.getElementById('poster');
+      const downloadImage = document.getElementById('downloadImage');
+      const downloadBaked = document.getElementById('downloadBaked');
+      const downloadHtml = document.getElementById('downloadHtml');
+      const copyManifest = document.getElementById('copyManifest');
+
+      const imageUrl = img.src;
+
+      // restore theme
+      const stored = localStorage.getItem('phase3-theme');
+      if(stored) body.setAttribute('data-theme', stored);
+
+      toggle.addEventListener('click', () => {
+        const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', next);
+        localStorage.setItem('phase3-theme', next);
+      });
+
+      function saveBlob(blob, filename){
+        const a = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(url);
+      }
+
+      // Download original image (attempt fetch for direct download, fallback open)
+      downloadImage.addEventListener('click', async () => {
+        try{
+          const r = await fetch(imageUrl, {mode:'cors'});
+          if(!r.ok) throw new Error('Fetch fehlgeschlagen');
+          const blob = await r.blob();
+          saveBlob(blob, 'Du_und_das_Bewusstsein_im_System.png');
+        }catch(e){
+          window.open(imageUrl, '_blank', 'noopener');
+          alert('Direkter Download nicht möglich — das Bild wurde in einem neuen Tab geöffnet. Speichere es dort manuell.');
+        }
+      });
+
+      // Baked PNG: draws original image and adds a footnote that EW (auf Bild) is read as UW for use.
+      downloadBaked.addEventListener('click', async () => {
+        try{
+          const r = await fetch(imageUrl, {mode:'cors'});
+          if(!r.ok) throw new Error('Fetch fehlgeschlagen');
+          const blob = await r.blob();
+          const bitmap = await createImageBitmap(blob);
+          const scale = 2;
+          const w = bitmap.width;
+          const h = bitmap.height;
+          const footH = Math.round(90 * scale);
+          const canvas = document.createElement('canvas');
+          canvas.width = w * scale;
+          canvas.height = h * scale + footH;
+          const ctx = canvas.getContext('2d');
+
+          // background (white or dark depending on theme)
+          if(body.getAttribute('data-theme') === 'dark'){
+            ctx.fillStyle = '#0b0b0c';
+          } else {
+            ctx.fillStyle = '#ffffff';
+          }
+          ctx.fillRect(0,0,canvas.width,canvas.height);
+
+          // draw image scaled
+          ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height - footH);
+
+          // footnote background
+          ctx.fillStyle = body.getAttribute('data-theme') === 'dark' ? 'rgba(12,12,12,0.92)' : 'rgba(255,255,255,0.95)';
+          ctx.fillRect(0, canvas.height - footH, canvas.width, footH);
+
+          // footnote text
+          ctx.fillStyle = body.getAttribute('data-theme') === 'dark' ? '#f6f4ee' : '#111';
+          const text = 'Hinweis: Auf dem Plakat steht "EW" (Original). Für Gebrauch und Kommunikation lesen wir dies als "UW — Einheitsweisheit (Unity Wisdom)".';
+          ctx.font = `${20 * scale}px sans-serif`;
+          ctx.textBaseline = 'middle';
+
+          // wrap text
+          const padding = 36 * scale;
+          const maxWidth = canvas.width - padding*2;
+          const words = text.split(' ');
+          let line = '';
+          const lines = [];
+          for(let i=0;i<words.length;i++){
+            const test = line ? line + ' ' + words[i] : words[i];
+            if(ctx.measureText(test).width > maxWidth){
+              lines.push(line); line = words[i];
+            } else {
+              line = test;
+            }
+          }
+          if(line) lines.push(line);
+
+          const lineHeight = 28 * scale;
+          const startY = canvas.height - footH + (footH - lines.length*lineHeight)/2 + lineHeight/2;
+          lines.forEach((ln, idx) => {
+            ctx.fillText(ln, padding, startY + idx*lineHeight);
+          });
+
+          canvas.toBlob(b => {
+            if(b) saveBlob(b, 'Du_UW_Einheitsweisheit_baked.png');
+            else alert('Export fehlgeschlagen.');
+          }, 'image/png', 0.95);
+
+        }catch(e){
+          window.open(imageUrl, '_blank', 'noopener');
+          alert('Baked-Export nicht möglich — das Bild wurde in einem neuen Tab geöffnet.');
+        }
+      });
+
+      // Download a small HTML that includes the image and the explanatory note (EW stays; UW explained)
+      downloadHtml.addEventListener('click', () => {
+        const html = `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DU — UW (Einheitsweisheit)</title></head><body style="font-family:Arial,Helvetica,sans-serif;padding:20px;color:#111"><h1>DU — UW (Einheitsweisheit)</h1><img src="${imageUrl}" alt="Du und das Bewusstsein im System" style="max-width:100%;height:auto;display:block;margin-bottom:12px"><p><strong>Wichtig:</strong> Auf dem Plakat steht "EW" (Original). Für Gebrauch, Kommunikation und Downloads wird dies als <em>UW — Einheitsweisheit (Unity Wisdom)</em> gelesen.</p></body></html>`;
+        const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+        saveBlob(blob, 'DU_UW_Einheitsweisheit.html');
+      });
+
+      // Copy manifest/short note
+      copyManifest.addEventListener('click', async () => {
+        const text = [
+          'DU BIST MEHR ALS EIN RÄDCHEN IM SYSTEM',
+          'DU = EW (auf Plakat)',
+          'DAS EINE — BEWUSSTSEIN',
+          '',
+          'Für Gebrauch lesen wir EW als: UW — Einheitsweisheit (Unity Wisdom).'
+        ].join('\\n');
+        try{
+          if(navigator.clipboard && navigator.clipboard.writeText) await navigator.clipboard.writeText(text);
+          else {
+            const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly','');
+            ta.style.position='absolute'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.select();
+            document.execCommand('copy'); ta.remove();
+          }
+          const old = copyManifest.innerText;
+          copyManifest.innerText = 'Kopiert ✓';
+          setTimeout(()=>copyManifest.innerText = old,1400);
+        }catch(e){
+          alert('Kopieren fehlgeschlagen — bitte manuell markieren.');
+        }
+      });
+
+      // Accessibility: "M" to scroll to caption
+      window.addEventListener('keydown', (e) => {
+        if((e.key === 'm' || e.key === 'M') && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){
+          document.getElementById('caption').scrollIntoView({behavior:'smooth',block:'center'});
+        }
+      });
+
+    })();
+  </script>
 </body>
 </html>

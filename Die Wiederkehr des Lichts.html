@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Wiederkehr des Lichts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gray-dark: #1a1a1a;
+            --gray-mid: #4a4a4a;
+            --gray-light: #888;
+            --white: #fafafa;
+            
+            --bloom-yellow: #ffd93d;
+            --bloom-pink: #ffb4d2;
+            --bloom-green: #b4e7ce;
+            --bloom-sky: #a8daff;
+            --bloom-lavender: #d4c5f9;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            background: var(--gray-dark);
+            color: var(--white);
+            transition: background 4s ease, color 4s ease;
+        }
+
+        body.erwacht {
+            background: linear-gradient(135deg, 
+                var(--bloom-sky) 0%, 
+                var(--bloom-lavender) 25%,
+                var(--bloom-pink) 50%,
+                var(--bloom-yellow) 75%,
+                var(--bloom-green) 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 20s ease infinite;
+            color: var(--gray-dark);
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8vh 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fade-in 2s ease forwards;
+            line-height: 1.2;
+        }
+
+        @keyframes fade-in {
+            to { opacity: 1; }
+        }
+
+        .subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            font-style: italic;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fade-in 2s ease 0.5s forwards;
+            color: var(--gray-light);
+        }
+
+        body.erwacht .subtitle {
+            color: var(--gray-mid);
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section.visible {
+            animation: reveal 1.5s ease forwards;
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .kern {
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            font-weight: 600;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            letter-spacing: 0.01em;
+        }
+
+        .text {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+
+        .highlight {
+            display: inline-block;
+            padding: 0.1em 0.3em;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: all 1s ease;
+        }
+
+        body.erwacht .highlight {
+            background: rgba(255, 217, 61, 0.3);
+            color: var(--gray-dark);
+        }
+
+        .einladung {
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            font-style: italic;
+            margin: 5rem 0 3rem;
+            text-align: center;
+            opacity: 0;
+        }
+
+        .einladung.visible {
+            animation: glow 2s ease forwards;
+        }
+
+        @keyframes glow {
+            0% {
+                opacity: 0;
+                text-shadow: none;
+            }
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 30px rgba(255, 217, 61, 0.5);
+            }
+        }
+
+        .schalter-container {
+            text-align: center;
+            margin: 4rem 0;
+            opacity: 0;
+        }
+
+        .schalter-container.visible {
+            animation: fade-in 1s ease forwards;
+        }
+
+        .schalter {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-transform: uppercase;
+        }
+
+        .schalter:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        body.erwacht .schalter {
+            background: var(--bloom-yellow);
+            color: var(--gray-dark);
+            border-color: var(--bloom-yellow);
+            box-shadow: 0 15px 50px rgba(255, 217, 61, 0.4);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .blumen {
+            position: fixed;
+            bottom: -20%;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 3s ease, bottom 3s ease;
+            z-index: -1;
+        }
+
+        body.erwacht .blumen {
+            opacity: 0.6;
+            bottom: 0;
+        }
+
+        .blume {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .blume:nth-child(1) { left: 10%; background: var(--bloom-pink); animation-delay: 0s; }
+        .blume:nth-child(2) { left: 25%; background: var(--bloom-yellow); animation-delay: 1s; }
+        .blume:nth-child(3) { left: 45%; background: var(--bloom-lavender); animation-delay: 0.5s; }
+        .blume:nth-child(4) { left: 65%; background: var(--bloom-green); animation-delay: 1.5s; }
+        .blume:nth-child(5) { left: 80%; background: var(--bloom-sky); animation-delay: 2s; }
+        .blume:nth-child(6) { left: 35%; background: var(--bloom-pink); animation-delay: 2.5s; bottom: 20%; }
+        .blume:nth-child(7) { left: 55%; background: var(--bloom-yellow); animation-delay: 1.2s; bottom: 15%; }
+        .blume:nth-child(8) { left: 15%; background: var(--bloom-green); animation-delay: 0.8s; bottom: 25%; }
+
+        footer {
+            text-align: center;
+            margin-top: 6rem;
+            padding: 2rem;
+            font-size: 1rem;
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 6vh 1.5rem;
+            }
+            
+            .blume {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blumen">
+        <div class="blume"></div>
+        <div class="blume"></div>
+        <div class="blume"></div>
+        <div class="blume"></div>
+        <div class="blume"></div>
+        <div class="blume"></div>
+        <div class="blume"></div>
+        <div class="blume"></div>
+    </div>
+
+    <div class="container">
+        <h1>Die Wiederkehr des Lichts</h1>
+        <div class="subtitle">weil wir uns erinnert haben</div>
+
+        <div class="section">
+            <div class="kern">Es gibt ein Fach, das fehlt.</div>
+            <div class="text">
+                Nicht aus Absicht.<br>
+                Aus Gewohnheit.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="kern">Das Fach heißt: <span class="highlight">Liebe</span>.</div>
+            <div class="text">
+                Nicht als Gefühl.<br>
+                Als Haltung.<br>
+                Als Praxis.<br>
+                Als Grundlage.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text">
+                <strong>Was würde sich ändern?</strong>
+            </div>
+            <div class="text">
+                Nicht sofort alles.<br>
+                Aber das <span class="highlight">Vorzeichen</span>.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text">
+                Kinder räumen den Spielplatz auf –<br>
+                nicht weil sie müssen.<br>
+                Weil sie ihn <span class="highlight">lieben</span>.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text">
+                Jemand bückt sich automatisch,<br>
+                wenn etwas herunterfällt.<br>
+                Nicht aus Pflicht.<br>
+                Aus <span class="highlight">Resonanz</span>.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="text">
+                Weggucken oder vorbeigehen<br>
+                ist gar keine gewählte Option mehr –<br>
+                weil etwas <span class="highlight">geshiftet</span> ist.
+            </div>
+        </div>
+
+        <div class="schalter-container">
+            <button class="schalter" onclick="erwache()">Licht anschalten</button>
+        </div>
+
+        <div class="einladung">
+            Das ist kein Manifest.<br>
+            Das ist eine Einladung.
+        </div>
+
+        <div class="section">
+            <div class="text" style="text-align: center;">
+                Erinnert euch.<br>
+                Das Licht war immer da.<br>
+                Ihr habt nur vergessen, den Schalter zu sehen.
+            </div>
+        </div>
+
+        <footer>
+            Von Grau zu Farbe.<br>
+            Von Stummfilm zu Leben.<br>
+            Von Überforderung zu Selbstverständlichkeit.<br>
+            🌱
+        </footer>
+    </div>
+
+    <script>
+        function erwache() {
+            document.body.classList.add('erwacht');
+            
+            // Change button text after activation
+            setTimeout(() => {
+                const button = document.querySelector('.schalter');
+                button.textContent = '✨ Es leuchtet ✨';
+            }, 1000);
+        }
+
+        // Reveal sections on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        document.querySelectorAll('.section, .einladung, .schalter-container').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Auto-activate after reading if user hasn't clicked
+        setTimeout(() => {
+            if (!document.body.classList.contains('erwacht')) {
+                erwache();
+            }
+        }, 25000); // 25 seconds - enough time to read
+    </script>
+</body>
+</html>

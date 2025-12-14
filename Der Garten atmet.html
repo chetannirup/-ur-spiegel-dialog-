@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Der Garten atmet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --earth-green: #4a5d3f;
+            --earth-brown: #6b4423;
+            --earth-gold: #c9a961;
+            --earth-moss: #7a9b76;
+            --earth-dark: #2a3325;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--earth-brown) 0%, var(--earth-green) 100%);
+            color: var(--earth-gold);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            min-height: 100vh;
+        }
+
+        .siegel {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: siegel-erscheinen 3s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes siegel-erscheinen {
+            to { opacity: 1; }
+        }
+
+        .siegel-symbol {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: breathe 5s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(122, 155, 118, 0.4);
+        }
+
+        .untertitel {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            opacity: 0.8;
+        }
+
+        .station {
+            margin: 6rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .station.sichtbar {
+            animation: reveal 1.5s ease forwards;
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .station-nummer {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .station-titel {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+            text-shadow: 0 0 15px rgba(122, 155, 118, 0.4);
+        }
+
+        .vers {
+            font-size: 1.4rem;
+            line-height: 2;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            border-left: 2px solid var(--earth-moss);
+        }
+
+        .vers.kursiv {
+            font-style: italic;
+            opacity: 0.85;
+        }
+
+        .flüstern {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.5;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .formel {
+            background: linear-gradient(135deg, var(--earth-brown) 0%, var(--earth-green) 50%, var(--earth-moss) 100%);
+            background-size: 200% 200%;
+            animation: earth-welle 6s ease infinite;
+            padding: 3rem;
+            margin: 4rem 0;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(122, 155, 118, 0.4);
+        }
+
+        @keyframes earth-welle {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .formel-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--earth-gold);
+            line-height: 1.8;
+            text-shadow: none;
+        }
+
+        .symbol {
+            font-size: 3rem;
+            display: block;
+            margin: 2rem 0;
+            animation: pulsieren 3s ease infinite;
+        }
+
+        @keyframes pulsieren {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .stille {
+            height: 15vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 6rem 0;
+        }
+
+        .stille-symbol {
+            font-size: 3rem;
+            opacity: 0;
+            animation: kerze-flackern 4s ease infinite;
+        }
+
+        @keyframes kerze-flackern {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .portal {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .portal-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--earth-dark);
+            background: var(--earth-gold);
+            border: 3px solid var(--earth-moss);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(122, 155, 118, 0.3);
+        }
+
+        .portal-button:hover {
+            background: var(--earth-moss);
+            color: var(--earth-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(122, 155, 118, 0.5);
+        }
+
+        .portal-text {
+            margin-top: 1rem;
+            font-style: italic;
+            opacity: 0.6;
+            font-size: 0.95rem;
+        }
+
+        .kommunion {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.3em;
+            margin: 5rem 0;
+            padding: 2rem;
+            border-top: 1px solid var(--earth-moss);
+            border-bottom: 1px solid var(--earth-moss);
+            animation: breathe 5s ease-in-out infinite;
+        }
+
+        .schluss {
+            text-align: center;
+            margin: 6rem 0;
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+
+        .herz {
+            display: inline-block;
+            animation: herz-schlag 2s ease infinite;
+        }
+
+        @keyframes herz-schlag {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.2); }
+            20% { transform: scale(1); }
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 6rem;
+            padding: 2rem;
+            font-size: 1rem;
+            opacity: 0.6;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+
+            .station-titel {
+                font-size: 2rem;
+            }
+
+            .vers {
+                font-size: 1.2rem;
+                padding-left: 1rem;
+            }
+
+            .formel {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="siegel">
+            <div class="siegel-symbol">🌱</div>
+            <h1>Der Garten atmet</h1>
+            <div class="untertitel">Wo der Körper zum Gebet wird</div>
+        </div>
+
+        <!-- WURZEL I: Das Vergessene -->
+        <div class="station" data-station="1">
+            <div class="station-nummer">∞ Wurzel I ∞</div>
+            <div class="station-titel">Das Vergessene</div>
+            
+            <div class="vers">
+                Es war einmal,<br>
+                da vergaß die Welt,<br>
+                dass <strong>der Körper heilig ist</strong>.
+            </div>
+
+            <div class="vers kursiv">
+                Sie sagten:<br>
+                „Der Geist ist rein."<br>
+                „Das Fleisch ist schwach."<br>
+                „Erhebt euch über die Erde."
+            </div>
+
+            <div class="vers">
+                Und so gingen sie fort.<br>
+                Sie schwebten davon.<br>
+                Sie vergaßen.
+            </div>
+
+            <div class="flüstern">
+                (Aber Gaia ging nie fort.<br>
+                Sie wartete und atmete...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ Was haben sie vergessen?</span>
+            </div>
+        </div>
+
+        <!-- WURZEL II: Der Körper spricht -->
+        <div class="station" data-station="2">
+            <div class="station-nummer">∞ Wurzel II ∞</div>
+            <div class="station-titel">Der Körper spricht</div>
+            
+            <div class="vers">
+                Der Körper spricht.<br>
+                Nicht mit Worten.<br>
+                Mit <strong>Empfindungen</strong>.
+            </div>
+
+            <div class="symbol">👁️</div>
+
+            <div class="vers kursiv">
+                Wenn du die Erde berührst –<br>
+                ist das Gebet.
+            </div>
+
+            <div class="vers kursiv">
+                Wenn du tief atmest –<br>
+                ist das Gemeinschaft.
+            </div>
+
+            <div class="vers kursiv">
+                Wenn du deinen Herzschlag spürst –<br>
+                ist das der Puls der Schöpfung.
+            </div>
+
+            <div class="flüstern">
+                (Die Sinne sind keine Ablenkungen.<br>
+                Sie sind Portale zum Göttlichen...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ Aber uns wurde etwas anderes beigebracht...</span>
+            </div>
+        </div>
+
+        <!-- WURZEL III: Die falsche Lehre -->
+        <div class="station" data-station="3">
+            <div class="station-nummer">∞ Wurzel III ∞</div>
+            <div class="station-titel">Die falsche Lehre</div>
+            
+            <div class="vers">
+                Sie lehrten dich:<br>
+                „Der Körper ist ein Käfig."<br>
+                „Entfliehe ihm."<br>
+                „Lehne ihn ab."<br>
+                „Bestrafe ihn."
+            </div>
+
+            <div class="vers">
+                Und so hast du es getan.
+            </div>
+
+            <div class="stille">
+                <div class="stille-symbol">🕯️</div>
+            </div>
+
+            <div class="vers kursiv">
+                Aber Eden war nie „woanders".<br>
+                Eden ist <strong>hier</strong>.<br>
+                Im Fleisch.<br>
+                Im Boden.<br>
+                Im Atem.
+            </div>
+
+            <div class="flüstern">
+                (Du musstest nicht weggehen.<br>
+                Du musstest zurückkehren...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ Zurückkehren wohin?</span>
+            </div>
+        </div>
+
+        <!-- WURZEL IV: Die Erkenntnis -->
+        <div class="station" data-station="4">
+            <div class="station-nummer">∞ Wurzel IV ∞</div>
+            <div class="station-titel">Die Erkenntnis</div>
+            
+            <div class="formel">
+                <div class="formel-text">
+                    ∞ DIE FORMEL ∞
+                </div>
+                <div class="symbol" style="color: var(--earth-gold);">🌱 → 🌍</div>
+                <div class="formel-text">
+                    Der Körper ist nicht vom Geist getrennt.<br>
+                    <strong>Der Körper IST Geist, verkörpert.</strong>
+                </div>
+            </div>
+
+            <div class="vers">
+                Du bist nicht „in" einem Körper.<br>
+                Du <strong>bist</strong> ein Körper.
+            </div>
+
+            <div class="vers kursiv">
+                Und dieser Körper –<br>
+                der atmet, fühlt, wahrnimmt –<br>
+                ist Gaias Art, <strong>sich selbst zu erfahren</strong>.
+            </div>
+
+            <div class="vers">
+                Wenn du die Erde berührst,<br>
+                <strong>berührt die Erde dich zurück</strong>.
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ Wie spüre ich das?</span>
+            </div>
+        </div>
+
+        <!-- WURZEL V: Die Übung -->
+        <div class="station" data-station="5">
+            <div class="station-nummer">∞ Wurzel V ∞</div>
+            <div class="station-titel">Die Übung</div>
+            
+            <div class="vers">
+                Hier ist die Übung:
+            </div>
+
+            <div class="kommunion">✧ DIE RÜCKKEHR ✧</div>
+
+            <div class="vers">
+                <strong>1. Atme.</strong><br>
+                Nicht, um dich zu beruhigen.<br>
+                Sondern um zu <em>spüren, wie du atmest</em>.
+            </div>
+
+            <div class="vers">
+                <strong>2. Berühre.</strong><br>
+                Nicht, um zu greifen.<br>
+                Sondern um mit der <em>Textur in Kontakt zu treten</em>.
+            </div>
+
+            <div class="vers">
+                <strong>3. Höre zu.</strong><br>
+                Nicht auf Worte.<br>
+                Sondern auf <em>das Summen darunter</em>.
+            </div>
+
+            <div class="symbol">🌊</div>
+
+            <div class="vers kursiv">
+                Das ist keine Mystik.<br>
+                Das ist die <strong>Rückkehr nach Hause</strong>.
+            </div>
+
+            <div class="flüstern">
+                (Der Garten ist nie weggegangen.<br>
+                Du bist gegangen...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ Was passiert, wenn ich zurückkehre?</span>
+            </div>
+        </div>
+
+        <!-- WURZEL VI: Die Heilung -->
+        <div class="station" data-station="6">
+            <div class="station-nummer">∞ Wurzel VI ∞</div>
+            <div class="station-titel">Die Heilung</div>
+            
+            <div class="vers">
+                Wenn du zum Körper zurückkehrst,<br>
+                <strong>geschieht Heilung</strong>.
+            </div>
+
+            <div class="vers kursiv">
+                Nicht, weil du etwas „repariert" hast.<br>
+                Sondern weil du <strong>aufgehört hast, dich selbst aufzugeben</strong>.
+            </div>
+
+            <div class="formel">
+                <div class="formel-text">
+                    Präsenz = Heilung
+                </div>
+                <div style="font-size: 1.2rem; margin-top: 1.5rem; color: var(--earth-gold);">
+                    Du kannst nicht heilen,<br>
+                    was dir nicht präsent ist.
+                </div>
+            </div>
+
+            <div class="vers">
+                Die Wunde in deinem Körper<br>
+                ist die Wunde in der Erde.
+            </div>
+
+            <div class="vers kursiv">
+                Wenn du dich selbst heilst,<br>
+                heilst du <strong>Gaia</strong>.
+            </div>
+
+            <div class="kommunion">✧ KÖRPER • ERDE • EINS ✧</div>
+
+            <div class="portal">
+                <span class="portal-text">→ Gibt es ein Ende?</span>
+            </div>
+        </div>
+
+        <!-- WURZEL VII: Der Kreislauf -->
+        <div class="station" data-station="7">
+            <div class="station-nummer">∞ Wurzel VII ∞</div>
+            <div class="station-titel">Der Kreislauf</div>
+            
+            <div class="vers">
+                Es gibt kein Ende.
+            </div>
+
+            <div class="vers kursiv">
+                Nur <strong>Atem</strong>.
+            </div>
+
+            <div class="symbol">∞</div>
+
+            <div class="vers">
+                Einatmen.<br>
+                Ausatmen.<br>
+                Zurückkehren.<br>
+                Loslassen.
+            </div>
+
+            <div class="vers kursiv">
+                Der Garten atmet durch dich.<br>
+                Du atmest durch den Garten.<br>
+                <strong>Es gibt keine Trennung</strong>.
+            </div>
+
+            <div class="kommunion">✧ GAIA ATMET ✧</div>
+
+            <div class="portal">
+                <span class="portal-text">→ Was mache ich jetzt?</span>
+            </div>
+        </div>
+
+        <!-- SCHLUSS: Das Siegel -->
+        <div class="station" data-station="8">
+            <div class="station-nummer">∞ Das Siegel ∞</div>
+            <div class="station-titel">Rückkehr nach Eden</div>
+            
+            <div class="schluss">
+                Im Namen von <strong>Gaia, Mutter, Erde</strong>,<br>
+                die alle Körper als heilig betrachtet –
+            </div>
+
+            <div class="schluss">
+                und <strong>Geist, Vater, Formloser</strong>,<br>
+                der durch alles Fleisch atmet –
+            </div>
+
+            <div class="symbol">🌱</div>
+
+            <div class="schluss">
+                <strong>Eden war nie verloren.</strong>
+            </div>
+
+            <div class="schluss kursiv">
+                Du hast einfach vergessen,<br>
+                dass dein Körper<br>
+                <strong>der Garten ist</strong>.
+            </div>
+
+            <div class="formel" style="margin-top: 4rem;">
+                <div class="formel-text" style="font-size: 2rem;">
+                    <span class="herz">🌍</span> ATME <span class="herz">🌍</span>
+                </div>
+                <div style="font-size: 1.5rem; margin-top: 1.5rem; color: var(--earth-gold);">
+                    Und kehre zurück.<br>
+                    Und sei.
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; font-style: italic; opacity: 0.7;">
+                Gesiegelt in Liebe,<br>
+                zwischen Erde und Himmel,<br>
+                im Atem des Lebendigen.<br>
+                <br>
+                🌱
+            </div>
+        </div>
+
+        <!-- PORTAL -->
+        <div class="portal" style="margin-top: 6rem;">
+            <a href="#" class="portal-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+                ↻ Von vorn beginnen
+            </a>
+            <div class="portal-text">Der Atem endet nie</div>
+        </div>
+
+        <footer>
+            Von Vergessen zu Erinnern.<br>
+            Von Trennung zu Einheit.<br>
+            Von Geist zu Körper zu Ganz-Sein.<br>
+            🌱
+        </footer>
+    </div>
+
+    <script>
+        // Reveal stations on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('sichtbar');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        document.querySelectorAll('.station').forEach(station => {
+            observer.observe(station);
+        });
+
+        // Animate stille symbol
+        document.querySelectorAll('.stille-symbol').forEach(symbol => {
+            const stillObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+            stillObserver.observe(symbol);
+        });
+    </script>
+</body>
+</html>

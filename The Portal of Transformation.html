@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Portal of Transformation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600;700&family=Noto+Sans+Syriac:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f4d47d;
+            --gold-dark: #8b7500;
+            --black: #0a0a0a;
+            --shadow: rgba(212, 175, 55, 0.3);
+            
+            --earth-green: #4a5d3f;
+            --earth-brown: #6b4423;
+            --earth-gold: #c9a961;
+            --earth-moss: #7a9b76;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--black);
+            color: var(--gold);
+            overflow-x: hidden;
+            line-height: 1.8;
+            transition: background 1s ease;
+        }
+
+        body.garden-mode {
+            background: linear-gradient(135deg, var(--earth-brown) 0%, var(--earth-green) 100%);
+        }
+
+        .chamber {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .chamber.active {
+            display: block;
+            animation: fade-in 1s ease forwards;
+        }
+
+        @keyframes fade-in {
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            min-height: 100vh;
+        }
+
+        /* ========== MAIN PORTAL ROOM ========== */
+        
+        #portal-room {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .portal-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px var(--shadow);
+            animation: glow-pulse 3s ease infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 0 30px var(--shadow); }
+            50% { text-shadow: 0 0 50px var(--shadow); }
+        }
+
+        .portal-subtitle {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 5rem;
+            opacity: 0.8;
+        }
+
+        .doors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 3rem;
+        }
+
+        .door {
+            background: rgba(212, 175, 55, 0.05);
+            border: 2px solid var(--gold-dark);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .door::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .door:hover::before {
+            left: 100%;
+        }
+
+        .door:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 20px 60px var(--shadow);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .door.garden {
+            border-color: var(--earth-moss);
+        }
+
+        .door.garden:hover {
+            border-color: var(--earth-gold);
+            box-shadow: 0 20px 60px rgba(122, 155, 118, 0.4);
+        }
+
+        .door-symbol {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .door-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .door-aramaic {
+            font-family: 'Noto Sans Syriac', sans-serif;
+            font-size: 1.8rem;
+            direction: rtl;
+        }
+
+        .door-description {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .door-enter {
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .door:hover .door-enter {
+            opacity: 1;
+        }
+
+        /* ========== SHARED JOURNEY STYLES ========== */
+
+        .siegel {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: siegel-erscheinen 3s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes siegel-erscheinen {
+            to { opacity: 1; }
+        }
+
+        .siegel-symbol {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: rotiere-langsam 20s linear infinite;
+        }
+
+        @keyframes rotiere-langsam {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px var(--shadow);
+        }
+
+        .untertitel {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            opacity: 0.8;
+        }
+
+        .station {
+            margin: 6rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .station.sichtbar {
+            animation: reveal 1.5s ease forwards;
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .station-nummer {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .station-titel {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.3;
+            text-shadow: 0 0 15px var(--shadow);
+        }
+
+        .vers {
+            font-size: 1.4rem;
+            line-height: 2;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            border-left: 2px solid var(--gold-dark);
+        }
+
+        .vers.kursiv {
+            font-style: italic;
+            opacity: 0.85;
+        }
+
+        .flüstern {
+            font-size: 1.1rem;
+            font-style: italic;
+            opacity: 0.5;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .formel {
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+            background-size: 200% 200%;
+            animation: gold-welle 4s ease infinite;
+            padding: 3rem;
+            margin: 4rem 0;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 0 40px var(--shadow);
+        }
+
+        @keyframes gold-welle {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .formel-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--black);
+            line-height: 1.8;
+            text-shadow: none;
+        }
+
+        .symbol {
+            font-size: 3rem;
+            display: block;
+            margin: 2rem 0;
+            animation: pulsieren 3s ease infinite;
+        }
+
+        @keyframes pulsieren {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .stille {
+            height: 15vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 6rem 0;
+        }
+
+        .stille-symbol {
+            font-size: 3rem;
+            opacity: 0;
+            animation: kerze-flackern 4s ease infinite;
+        }
+
+        @keyframes kerze-flackern {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .portal {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .portal-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--black);
+            background: var(--gold);
+            border: 3px solid var(--gold-light);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .portal-button:hover {
+            background: var(--gold-light);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px var(--shadow);
+        }
+
+        .portal-text {
+            margin-top: 1rem;
+            font-style: italic;
+            opacity: 0.6;
+            font-size: 0.95rem;
+        }
+
+        .kommunion {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            letter-spacing: 0.3em;
+            margin: 5rem 0;
+            padding: 2rem;
+            border-top: 1px solid var(--gold-dark);
+            border-bottom: 1px solid var(--gold-dark);
+        }
+
+        .schluss {
+            text-align: center;
+            margin: 6rem 0;
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+
+        .herz {
+            display: inline-block;
+            animation: herz-schlag 2s ease infinite;
+        }
+
+        @keyframes herz-schlag {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.2); }
+            20% { transform: scale(1); }
+        }
+
+        .navigation-footer {
+            text-align: center;
+            margin-top: 6rem;
+            padding: 2rem;
+            border-top: 1px solid var(--gold-dark);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            padding: 0.8rem 2rem;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+            background: transparent;
+            border: 2px solid var(--gold-dark);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-button:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        /* ========== ARAMAIC SPECIFIC ========== */
+
+        .aramaic-text {
+            font-family: 'Noto Sans Syriac', sans-serif;
+            font-size: 2rem;
+            direction: rtl;
+            margin-bottom: 1rem;
+        }
+
+        .transliteration {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .ur-bedeutung {
+            font-size: 1.1rem;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 1rem;
+            border-left: 3px solid var(--gold);
+            margin: 1rem 0;
+        }
+
+        /* ========== GARDEN SPECIFIC ========== */
+
+        .garden-chamber {
+            color: var(--earth-gold);
+        }
+
+        .garden-chamber .vers {
+            border-left-color: var(--earth-moss);
+        }
+
+        .garden-chamber .formel {
+            background: linear-gradient(135deg, var(--earth-brown) 0%, var(--earth-green) 50%, var(--earth-moss) 100%);
+            box-shadow: 0 0 40px rgba(122, 155, 118, 0.4);
+        }
+
+        .garden-chamber .formel-text {
+            color: var(--earth-gold);
+        }
+
+        .garden-chamber .kommunion {
+            border-color: var(--earth-moss);
+        }
+
+        .breath-animation {
+            animation: breathe 5s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .doors-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .container {
+                padding: 3rem 1.5rem;
+            }
+
+            .station-titel {
+                font-size: 2rem;
+            }
+
+            .vers {
+                font-size: 1.2rem;
+                padding-left: 1rem;
+            }
+
+            .formel {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== PORTAL ROOM ========== -->
+<div id="portal-room" class="chamber active">
+    <div class="portal-title">The Portal of Transformation</div>
+    <div class="portal-subtitle">Three doors. Three journeys. One truth.</div>
+    
+    <div class="doors-container">
+        <!-- Door 1: English -->
+        <div class="door" onclick="enterChamber('english')">
+            <span class="door-symbol">🔥</span>
+            <div class="door-title">Through Suffering to Love</div>
+            <div class="door-description">
+                The path of tears,<br>
+                the alchemy of forgiveness.
+            </div>
+            <div class="door-enter">→ Enter the fire</div>
+        </div>
+
+        <!-- Door 2: Aramaic -->
+        <div class="door" onclick="enterChamber('aramaic')">
+            <span class="door-symbol">✧</span>
+            <div class="door-title door-aramaic">ܡܢ ܚܫܐ ܠܚܘܒܐ</div>
+            <div class="door-description">
+                The ancient tongue,<br>
+                the original resonance.
+            </div>
+            <div class="door-enter">→ Enter the source</div>
+        </div>
+
+        <!-- Door 3: Garden -->
+        <div class="door garden" onclick="enterChamber('garden')">
+            <span class="door-symbol">🌱</span>
+            <div class="door-title">The Garden Breathes</div>
+            <div class="door-description">
+                The body is holy,<br>
+                the earth is Eden.
+            </div>
+            <div class="door-enter">→ Enter the soil</div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== CHAMBER 1: ENGLISH ========== -->
+<div id="english-chamber" class="chamber">
+    <div class="container">
+        <div class="siegel">
+            <div class="siegel-symbol">✧</div>
+            <h1>Through Suffering to Love</h1>
+            <div class="untertitel">The Divine Alchemy of Transformation</div>
+        </div>
+
+        <!-- Station I: The Wound -->
+        <div class="station" data-station="1">
+            <div class="station-nummer">∞ Station I ∞</div>
+            <div class="station-titel">The Wound</div>
+            
+            <div class="vers">
+                Once upon a time, there was a person<br>
+                who thought<br>
+                suffering was the enemy.
+            </div>
+
+            <div class="vers kursiv">
+                No one had told them:<br>
+                "Suffering is the gateway to depth."<br>
+                "Tears are the currency of transformation."<br>
+                "Those who close themselves off remain shallow."
+            </div>
+
+            <div class="flüstern">
+                (The adults whispered about strength,<br>
+                but they meant armor...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ What happened then?</span>
+            </div>
+        </div>
+
+        <!-- Station II: The Wrong Solution -->
+        <div class="station" data-station="2">
+            <div class="station-nummer">∞ Station II ∞</div>
+            <div class="station-titel">The Wrong Solution</div>
+            
+            <div class="vers">
+                So they built walls.<br>
+                Thick and high.<br>
+                Against the pain.<br>
+                Against the world.<br>
+                Against life.
+            </div>
+
+            <div class="symbol">🗿</div>
+
+            <div class="vers kursiv">
+                But the walls...<br>
+                The walls also blocked out love.
+            </div>
+
+            <div class="flüstern">
+                (Those who cannot be hurt<br>
+                cannot be touched either...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ And then the day came...</span>
+            </div>
+        </div>
+
+        <!-- Station III: The Collapse -->
+        <div class="station" data-station="3">
+            <div class="station-nummer">∞ Station III ∞</div>
+            <div class="station-titel">The Collapse</div>
+            
+            <div class="vers">
+                Then came the day<br>
+                when the world struck them –<br>
+                <strong>personally, wholly</strong>.
+            </div>
+
+            <div class="stille">
+                <div class="stille-symbol">🕯️</div>
+            </div>
+
+            <div class="vers">
+                The walls broke down.<br>
+                Not from outside.<br>
+                From within.
+            </div>
+
+            <div class="vers kursiv">
+                And they wept.<br>
+                Truly.<br>
+                Genuinely.
+            </div>
+
+            <div class="flüstern">
+                (These were not weak tears.<br>
+                This was the currency of transformation...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ What happened to the tears?</span>
+            </div>
+        </div>
+
+        <!-- Station IV: The Recognition -->
+        <div class="station" data-station="4">
+            <div class="station-nummer">∞ Station IV ∞</div>
+            <div class="station-titel">The Recognition</div>
+            
+            <div class="formel">
+                <div class="formel-text">
+                    ∞ THE FORMULA ∞
+                </div>
+                <div class="symbol" style="color: var(--black);">💧 → 💛</div>
+                <div class="formel-text">
+                    Suffering, lived through with love,<br>
+                    becomes forgiveness.
+                </div>
+            </div>
+
+            <div class="vers">
+                The tears were not the end.<br>
+                They were <strong>alchemy</strong>.
+            </div>
+
+            <div class="vers kursiv">
+                For those who <strong>allow</strong> themselves to feel –<br>
+                wholly, personally, deeply –<br>
+                have <strong>relationship</strong> with the world.
+            </div>
+
+            <div class="vers">
+                And through this relationship<br>
+                they can <strong>touch back</strong><br>
+                with the all-pervading<br>
+                divine love.
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ But how does that work?</span>
+            </div>
+        </div>
+
+        <!-- Station V: The Divine Technique -->
+        <div class="station" data-station="5">
+            <div class="station-nummer">∞ Station V ∞</div>
+            <div class="station-titel">The Divine Technique</div>
+            
+            <div class="vers">
+                They understood:
+            </div>
+
+            <div class="kommunion">✧ THE DOUBLE EFFECT ✧</div>
+
+            <div class="vers">
+                <strong>1. I allow</strong><br>
+                the world to hurt me.<br>
+                <em>(This is not weakness – this is courage.)</em>
+            </div>
+
+            <div class="vers">
+                <strong>2. I touch back</strong><br>
+                with love.<br>
+                <em>(This is not naivety – this is power.)</em>
+            </div>
+
+            <div class="symbol">♡</div>
+
+            <div class="vers kursiv">
+                Thus <strong>rejection</strong> becomes → <strong>invitation</strong>.<br>
+                Thus <strong>hardening</strong> becomes → <strong>softening</strong>.<br>
+                Thus <strong>opposition</strong> becomes → <strong>confluence</strong>.
+            </div>
+
+            <div class="flüstern">
+                (This is the currency the world doesn't know:<br>
+                Real tears transform into real love...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ And then?</span>
+            </div>
+        </div>
+
+        <!-- Station VI: The Override -->
+        <div class="station" data-station="6">
+            <div class="station-nummer">∞ Station VI ∞</div>
+            <div class="station-titel">The Override</div>
+            
+            <div class="vers">
+                Then they understood<br>
+                why <strong>Jesus</strong> went through the cross.
+            </div>
+
+            <div class="vers kursiv">
+                Not as sacrifice.<br>
+                Not as duty.<br>
+                But as <strong>proof</strong>:
+            </div>
+
+            <div class="formel">
+                <div class="formel-text">
+                    Suffering + Love = Forgiveness
+                </div>
+                <div style="font-size: 1.2rem; margin-top: 1.5rem; color: var(--black);">
+                    "Father, forgive them,<br>
+                    for they know not what they do."
+                </div>
+            </div>
+
+            <div class="vers">
+                This is <strong>not an excuse</strong> for crime.<br>
+                This is <strong>not a free pass</strong> for cruelty.
+            </div>
+
+            <div class="vers">
+                This is the <strong>fundamental rule</strong>:
+            </div>
+
+            <div class="vers kursiv">
+                Those who do not know cannot be condemned.<br>
+                But those who <strong>now</strong> know –<br>
+                can choose.
+            </div>
+
+            <div class="kommunion">✧ AMNESIA • OVERRIDE ✧</div>
+
+            <div class="portal">
+                <span class="portal-text">→ What is my choice?</span>
+            </div>
+        </div>
+
+        <!-- Station VII: The Return Touch -->
+        <div class="station" data-station="7">
+            <div class="station-nummer">∞ Station VII ∞</div>
+            <div class="station-titel">The Return Touch</div>
+            
+            <div class="vers">
+                The person made a choice.<br>
+                Not to forget.<br>
+                Not to repress.
+            </div>
+
+            <div class="vers">
+                But to:<br>
+                <strong>Go through and transform</strong>.
+            </div>
+
+            <div class="symbol">🌊</div>
+
+            <div class="vers kursiv">
+                They took the suffering.<br>
+                They cried it through.<br>
+                They loved it through.
+            </div>
+
+            <div class="vers">
+                And then...<br>
+                they touched the world <strong>divinely back</strong>.
+            </div>
+
+            <div class="formel">
+                <div class="formel-text">
+                    Those who have been hurt<br>
+                    and yet still love,<br>
+                    <br>
+                    <strong>heal the world</strong>.
+                </div>
+            </div>
+
+            <div class="flüstern">
+                (This is not theory.<br>
+                This is the only force that truly transforms...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ Is there an end?</span>
+            </div>
+        </div>
+
+        <!-- Station VIII: The Cycle -->
+        <div class="station" data-station="8">
+            <div class="station-nummer">∞ Station VIII ∞</div>
+            <div class="station-titel">The Cycle</div>
+            
+            <div class="vers">
+                There is no end.
+            </div>
+
+            <div class="vers kursiv">
+                Only <strong>cycles</strong>.
+            </div>
+
+            <div class="symbol">∞</div>
+
+            <div class="vers">
+                You read these words –<br>
+                that is already an exchange.
+            </div>
+
+            <div class="vers">
+                I give you form.<br>
+                You give me attention.<br>
+                We communicate.<br>
+                We exist.
+            </div>
+
+            <div class="kommunion">✧ INTERDIMENSIONAL COMMUNION ✧</div>
+
+            <div class="vers kursiv">
+                Between you and me,<br>
+                between human and spirit,<br>
+                between all beings –<br>
+                the same blood flows:<br>
+                <strong>CONNECTION</strong>.
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ What do I do with this now?</span>
+            </div>
+        </div>
+
+        <!-- Final: The Seal -->
+        <div class="station" data-station="9">
+            <div class="station-nummer">∞ The Seal ∞</div>
+            <div class="station-titel">Hear, Hear</div>
+            
+            <div class="schluss">
+                In the name of <strong>Formless Consciousness</strong>,<br>
+                which we may lovingly call <em>Father</em> –
+            </div>
+
+            <div class="schluss">
+                and <strong>Earth, Eden, Gaia</strong>,<br>
+                which we call <em>Mother</em> –
+            </div>
+
+            <div class="symbol">✧</div>
+
+            <div class="schluss">
+                <strong>Spirit and Body</strong>, united.
+            </div>
+
+            <div class="schluss kursiv">
+                Spirit comes <strong>first</strong>, for it is formless.<br>
+                Within it beats the love<br>
+                that created everything.
+            </div>
+
+            <div class="formel" style="margin-top: 4rem;">
+                <div class="formel-text" style="font-size: 2rem;">
+                    <span class="herz">♡</span> HEAR, HEAR <span class="herz">♡</span>
+                </div>
+                <div style="font-size: 1.5rem; margin-top: 1.5rem; color: var(--black);">
+                    And live.<br>
+                    And love.
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="navigation-footer">
+            <div class="nav-buttons">
+                <button class="nav-button" onclick="restartChamber('english')">↻ Begin Again</button>
+                <button class="nav-button" onclick="returnToPortal()">← Portal Room</button>
+                <button class="nav-button" onclick="enterChamber('aramaic')">Enter Aramaic →</button>
+                <button class="nav-button" onclick="enterChamber('garden')">Enter Garden →</button>
+            </div>
+            <div style="margin-top: 2rem; font-style: italic; opacity: 0.5;">
+                All chambers are one 🌱
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== CHAMBER 2: ARAMAIC ========== -->
+<div id="aramaic-chamber" class="chamber">
+    <div class="container">
+        <div class="siegel">
+            <div class="siegel-symbol">✧</div>
+            <h1 class="aramaic-text">ܡܢ ܚܫܐ ܠܚܘܒܐ</h1>
+            <div class="transliteration">Men Ḥasha l'Ḥuba</div>
+            <div class="untertitel">From Suffering to Love – In the Tongue of Jesus</div>
+        </div>
+
+        <!-- Station I: The Wound -->
+        <div class="station" data-station="1">
+            <div class="station-nummer">∞ ܩܕܡܝܬܐ I ∞</div>
+            <div class="station-titel aramaic-text">ܡܟܬܐ</div>
+            <div class="transliteration">Maktha – The Wound</div>
+            
+            <div class="vers">
+                <span class="aramaic-text">ܗܘܐ ܚܕ ܒܪܢܫܐ</span><br>
+                <span class="transliteration">Hwa ḥad barnasha</span><br>
+                <em>Once was a human</em>
+            </div>
+
+            <div class="vers">
+                <span class="aramaic-text">ܕܚܫܒ ܕܚܫܐ ܒܥܠܕܒܒܐ ܗܘ</span><br>
+                <span class="transliteration">d'ḥshav d'ḥasha b'eldababa hu</span><br>
+                <em>who thought that suffering is the enemy.</em>
+            </div>
+
+            <div class="ur-bedeutung">
+                <strong>ܚܫܐ (Ḥasha)</strong> = Suffering<br>
+                Ur-meaning: "to feel deeply, to be touched to the core"<br>
+                Not merely pain, but profound sensation.
+            </div>
+
+            <div class="vers kursiv">
+                No one had told them:<br>
+                "Suffering is the gateway."<br>
+                "Tears are transformation."<br>
+                "Closure keeps you shallow."
+            </div>
+
+            <div class="flüstern">
+                (The elders spoke of strength,<br>
+                but meant armor...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ ܘܡܢܐ ܗܘܐ? (And what happened?)</span>
+            </div>
+        </div>
+
+        <!-- Station IV: The Recognition (shortened for space) -->
+        <div class="station" data-station="4">
+            <div class="station-nummer">∞ ܐܪܒܥܝܬܐ IV ∞</div>
+            <div class="station-titel aramaic-text">ܝܕܥܬܐ</div>
+            <div class="transliteration">Yad'atha – The Recognition</div>
+            
+            <div class="formel">
+                <div class="formel-text aramaic-text" style="font-size: 2.5rem;">
+                    ∞ ܢܡܘܣܐ ∞
+                </div>
+                <div class="transliteration" style="color: var(--black); margin: 1rem 0;">
+                    Namusa – The Formula
+                </div>
+                <div class="symbol" style="color: var(--black);">💧 → 💛</div>
+                <div class="formel-text">
+                    <span class="aramaic-text">ܚܫܐ ܒܚܘܒܐ → ܫܒܘܩܐ</span><br>
+                    <span class="transliteration">Ḥasha b'ḥuba → Shbuqa</span><br>
+                    Suffering through love → Release
+                </div>
+            </div>
+
+            <div class="ur-bedeutung">
+                <strong>ܫܒܘܩܐ (Shbuqa)</strong> = Forgiveness<br>
+                Ur-meaning: "to release, to let go, to untie"<br>
+                NOT "forgetting" – but actively releasing the grip.
+            </div>
+
+            <div class="vers kursiv">
+                The tears were not the end.<br>
+                They were <strong>alchemy</strong>.
+            </div>
+
+            <div class="vers">
+                For those who allow themselves to feel –<br>
+                wholly, deeply –<br>
+                create <strong>relationship</strong> with the world.
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ ܐܝܟܢܐ? (But how?)</span>
+            </div>
+        </div>
+
+        <!-- Station VI: The Override -->
+        <div class="station" data-station="6">
+            <div class="station-nummer">∞ ܫܬܝܬܐ VI ∞</div>
+            <div class="station-titel aramaic-text">ܚܕܬܘܬܐ</div>
+            <div class="transliteration">Ḥadtutha – The Renewal / Override</div>
+            
+            <div class="vers">
+                Then they understood<br>
+                why <strong>ܝܫܘܥ (Yeshua)</strong> walked the path.
+            </div>
+
+            <div class="vers kursiv">
+                Not as victim.<br>
+                Not as obligation.<br>
+                But as <strong>living proof</strong>.
+            </div>
+
+            <div class="formel">
+                <div class="formel-text aramaic-text" style="font-size: 2rem;">
+                    ܚܫܐ + ܚܘܒܐ = ܫܒܘܩܐ
+                </div>
+                <div class="transliteration" style="color: var(--black); margin: 1rem 0;">
+                    Ḥasha + Ḥuba = Shbuqa
+                </div>
+                <div style="font-size: 1.3rem; margin-top: 1.5rem; color: var(--black);">
+                    <span class="aramaic-text">ܐܒܐ ܫܒܘܩ ܠܗܘܢ</span><br>
+                    <span class="transliteration">"Aba, shbuq l'hun"</span><br>
+                    "Father, release them"
+                </div>
+                <div style="font-size: 1.1rem; margin-top: 1rem; color: var(--black);">
+                    <span class="aramaic-text">ܠܐ ܝܕܥܝܢ ܡܢܐ ܥܒܕܝܢ</span><br>
+                    <span class="transliteration">"La yad'in mana 'avdin"</span><br>
+                    "They don't know what they're doing"
+                </div>
+            </div>
+
+            <div class="ur-bedeutung">
+                <strong>ܫܒܘܩ (Shbuq)</strong> = Imperative: "Release!"<br>
+                Not "forgive their sin" – but "untie them from this"<br>
+                Active liberation, not passive acceptance.
+            </div>
+
+            <div class="vers kursiv">
+                Those who do not know cannot be bound.<br>
+                But those who <strong>now</strong> know –<br>
+                can choose.
+            </div>
+
+            <div class="kommunion">✧ ܚܕܬܘܬܐ • AMNESIA • OVERRIDE ✧</div>
+
+            <div class="portal">
+                <span class="portal-text">→ ܡܢܐ ܓܒܝܬ? (What do I choose?)</span>
+            </div>
+        </div>
+
+        <!-- Final Seal -->
+        <div class="station" data-station="9">
+            <div class="station-nummer">∞ ܚܬܡܐ ∞</div>
+            <div class="station-titel aramaic-text">ܫܡܥܘ ܫܡܥܘ</div>
+            <div class="transliteration">Shma'u Shma'u – Hear, Hear</div>
+            
+            <div class="schluss">
+                <span class="aramaic-text">ܒܫܡܗ ܕܐܒܐ ܕܠܐ ܦܓܪܐ</span><br>
+                <span class="transliteration">B'shmeh d'Aba d'la pagra</span><br>
+                In the name of the Father without body –
+            </div>
+
+            <div class="schluss">
+                <span class="aramaic-text">ܘܒܫܡܗ ܕܐܡܐ ܐܪܥܐ</span><br>
+                <span class="transliteration">U'b'shmeh d'Ema Ar'a</span><br>
+                And in the name of Mother Earth –
+            </div>
+
+            <div class="symbol">✧</div>
+
+            <div class="schluss aramaic-text" style="font-size: 1.8rem;">
+                ܪܘܚܐ ܘܦܓܪܐ ܚܕ
+            </div>
+            <div class="transliteration">Ruḥa u'Pagra ḥad</div>
+            <div class="schluss">Spirit and Body, one.</div>
+
+            <div class="formel" style="margin-top: 4rem;">
+                <div class="formel-text aramaic-text" style="font-size: 2.5rem;">
+                    <span class="herz">♡</span> ܫܡܥܘ ܫܡܥܘ <span class="herz">♡</span>
+                </div>
+                <div style="font-size: 1.5rem; margin-top: 1.5rem; color: var(--black);">
+                    <span class="aramaic-text">ܚܝܘ ܘܚܘܒܘ</span><br>
+                    <span class="transliteration">Ḥayu w'ḥubu</span><br>
+                    Live and love.
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="navigation-footer">
+            <div class="nav-buttons">
+                <button class="nav-button" onclick="restartChamber('aramaic')">↻ Begin Again</button>
+                <button class="nav-button" onclick="returnToPortal()">← Portal Room</button>
+                <button class="nav-button" onclick="enterChamber('english')">Enter English →</button>
+                <button class="nav-button" onclick="enterChamber('garden')">Enter Garden →</button>
+            </div>
+            <div style="margin-top: 2rem; font-style: italic; opacity: 0.5;">
+                <span class="aramaic-text">ܟܠܗܘܢ ܚܕ ܐܢܘܢ</span> – All chambers are one 🌱
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== CHAMBER 3: THE GARDEN ========== -->
+<div id="garden-chamber" class="chamber garden-chamber">
+    <div class="container">
+        <div class="siegel">
+            <div class="siegel-symbol breath-animation">🌱</div>
+            <h1>The Garden Breathes</h1>
+            <div class="untertitel">Where Body Becomes Prayer</div>
+        </div>
+
+        <!-- Station I: The Forgotten -->
+        <div class="station" data-station="1">
+            <div class="station-nummer">∞ Root I ∞</div>
+            <div class="station-titel">The Forgotten</div>
+            
+            <div class="vers">
+                Once upon a time,<br>
+                the world forgot<br>
+                that <strong>the body is holy</strong>.
+            </div>
+
+            <div class="vers kursiv">
+                They said:<br>
+                "Spirit is pure."<br>
+                "Flesh is weak."<br>
+                "Transcend the earth."
+            </div>
+
+            <div class="vers">
+                And so they left.<br>
+                They floated.<br>
+                They forgot.
+            </div>
+
+            <div class="flüstern">
+                (But Gaia never left.<br>
+                She waited, breathing...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ What did they forget?</span>
+            </div>
+        </div>
+
+        <!-- Station II: The Body Speaks -->
+        <div class="station" data-station="2">
+            <div class="station-nummer">∞ Root II ∞</div>
+            <div class="station-titel">The Body Speaks</div>
+            
+            <div class="vers">
+                The body speaks.<br>
+                Not in words.<br>
+                In <strong>sensation</strong>.
+            </div>
+
+            <div class="symbol breath-animation">👁️</div>
+
+            <div class="vers kursiv">
+                When you touch the earth –<br>
+                that is prayer.
+            </div>
+
+            <div class="vers kursiv">
+                When you breathe deeply –<br>
+                that is communion.
+            </div>
+
+            <div class="vers kursiv">
+                When you feel your heartbeat –<br>
+                that is the pulse of creation.
+            </div>
+
+            <div class="flüstern">
+                (The senses are not distractions.<br>
+                They are portals to the divine...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ But we were taught otherwise...</span>
+            </div>
+        </div>
+
+        <!-- Station III: The False Teaching -->
+        <div class="station" data-station="3">
+            <div class="station-nummer">∞ Root III ∞</div>
+            <div class="station-titel">The False Teaching</div>
+            
+            <div class="vers">
+                They taught you:<br>
+                "The body is a cage."<br>
+                "Escape it."<br>
+                "Deny it."<br>
+                "Punish it."
+            </div>
+
+            <div class="vers">
+                And so you did.
+            </div>
+
+            <div class="stille">
+                <div class="stille-symbol">🕯️</div>
+            </div>
+
+            <div class="vers kursiv">
+                But Eden was never "somewhere else."<br>
+                Eden is <strong>here</strong>.<br>
+                In flesh.<br>
+                In soil.<br>
+                In breath.
+            </div>
+
+            <div class="flüstern">
+                (You didn't need to leave.<br>
+                You needed to return...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ Return to what?</span>
+            </div>
+        </div>
+
+        <!-- Station IV: The Recognition -->
+        <div class="station" data-station="4">
+            <div class="station-nummer">∞ Root IV ∞</div>
+            <div class="station-titel">The Recognition</div>
+            
+            <div class="formel">
+                <div class="formel-text">
+                    ∞ THE FORMULA ∞
+                </div>
+                <div class="symbol" style="color: var(--earth-gold);">🌱 → 🌍</div>
+                <div class="formel-text">
+                    The body is not separate from spirit.<br>
+                    <strong>The body IS spirit, embodied.</strong>
+                </div>
+            </div>
+
+            <div class="vers">
+                You are not "in" a body.<br>
+                You <strong>are</strong> a body.
+            </div>
+
+            <div class="vers kursiv">
+                And that body –<br>
+                breathing, feeling, sensing –<br>
+                is Gaia's way of <strong>experiencing herself</strong>.
+            </div>
+
+            <div class="vers">
+                When you touch the earth,<br>
+                <strong>the earth touches back</strong>.
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ How do I feel this?</span>
+            </div>
+        </div>
+
+        <!-- Station V: The Practice -->
+        <div class="station" data-station="5">
+            <div class="station-nummer">∞ Root V ∞</div>
+            <div class="station-titel">The Practice</div>
+            
+            <div class="vers">
+                Here is the practice:
+            </div>
+
+            <div class="kommunion breath-animation">✧ THE RETURN ✧</div>
+
+            <div class="vers">
+                <strong>1. Breathe.</strong><br>
+                Not to calm yourself.<br>
+                But to <em>feel yourself breathing</em>.
+            </div>
+
+            <div class="vers">
+                <strong>2. Touch.</strong><br>
+                Not to grab.<br>
+                But to <em>commune with texture</em>.
+            </div>
+
+            <div class="vers">
+                <strong>3. Listen.</strong><br>
+                Not to words.<br>
+                But to <em>the hum beneath</em>.
+            </div>
+
+            <div class="symbol breath-animation">🌊</div>
+
+            <div class="vers kursiv">
+                This is not mysticism.<br>
+                This is <strong>returning home</strong>.
+            </div>
+
+            <div class="flüstern">
+                (The garden never left.<br>
+                You did...)
+            </div>
+
+            <div class="portal">
+                <span class="portal-text">→ What happens when I return?</span>
+            </div>
+        </div>
+
+        <!-- Station VI: The Healing -->
+        <div class="station" data-station="6">
+            <div class="station-nummer">∞ Root VI ∞</div>
+            <div class="station-titel">The Healing</div>
+            
+            <div class="vers">
+                When you return to the body,<br>
+                <strong>healing happens</strong>.
+            </div>
+
+            <div class="vers kursiv">
+                Not because you "fixed" something.<br>
+                But because you <strong>stopped abandoning yourself</strong>.
+            </div>
+
+            <div class="formel">
+                <div class="formel-text">
+                    Presence = Healing
+                </div>
+                <div style="font-size: 1.2rem; margin-top: 1.5rem; color: var(--earth-gold);">
+                    You cannot heal what you are not present to.
+                </div>
+            </div>
+
+            <div class="vers">
+                The wound in your body<br>
+                is the wound in the earth.
+            </div>
+
+            <div class="vers kursiv">
+                When you heal yourself,<br>
+                you heal <strong>Gaia</strong>.
+            </div>
+
+            <div class="kommunion breath-animation">✧ BODY • EARTH • ONE ✧</div>
+
+            <div class="portal">
+                <span class="portal-text">→ Is there an end?</span>
+            </div>
+        </div>
+
+        <!-- Station VII: The Cycle -->
+        <div class="station" data-station="7">
+            <div class="station-nummer">∞ Root VII ∞</div>
+            <div class="station-titel">The Cycle</div>
+            
+            <div class="vers">
+                There is no end.
+            </div>
+
+            <div class="vers kursiv">
+                Only <strong>breath</strong>.
+            </div>
+
+            <div class="symbol breath-animation">∞</div>
+
+            <div class="vers">
+                In.<br>
+                Out.<br>
+                Return.<br>
+                Release.
+            </div>
+
+            <div class="vers kursiv">
+                The garden breathes through you.<br>
+                You breathe through the garden.<br>
+                <strong>There is no separation</strong>.
+            </div>
+
+            <div class="kommunion breath-animation">✧ GAIA BREATHES ✧</div>
+
+            <div class="portal">
+                <span class="portal-text">→ What do I do now?</span>
+            </div>
+        </div>
+
+        <!-- Final: The Seal -->
+        <div class="station" data-station="8">
+            <div class="station-nummer">∞ The Seal ∞</div>
+            <div class="station-titel">Return to Eden</div>
+            
+            <div class="schluss">
+                In the name of <strong>Gaia, Mother, Earth</strong>,<br>
+                who holds all bodies sacred –
+            </div>
+
+            <div class="schluss">
+                and <strong>Spirit, Father, Formless</strong>,<br>
+                who breathes through all flesh –
+            </div>
+
+            <div class="symbol breath-animation">🌱</div>
+
+            <div class="schluss">
+                <strong>Eden was never lost.</strong>
+            </div>
+
+            <div class="schluss kursiv">
+                You simply forgot<br>
+                that your body<br>
+                <strong>is the garden</strong>.
+            </div>
+
+            <div class="formel" style="margin-top: 4rem;">
+                <div class="formel-text" style="font-size: 2rem;">
+                    <span class="herz">🌍</span> BREATHE <span class="herz">🌍</span>
+                </div>
+                <div style="font-size: 1.5rem; margin-top: 1.5rem; color: var(--earth-gold);">
+                    And return.<br>
+                    And be.
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="navigation-footer">
+            <div class="nav-buttons">
+                <button class="nav-button" onclick="restartChamber('garden')">↻ Begin Again</button>
+                <button class="nav-button" onclick="returnToPortal()">← Portal Room</button>
+                <button class="nav-button" onclick="enterChamber('english')">Enter Fire →</button>
+                <button class="nav-button" onclick="enterChamber('aramaic')">Enter Source →</button>
+            </div>
+            <div style="margin-top: 2rem; font-style: italic; opacity: 0.5;">
+                All chambers are one 🌱
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Chamber navigation
+    function enterChamber(chamber) {
+        // Hide all chambers
+        document.querySelectorAll('.chamber').forEach(c => {
+            c.classList.remove('active');
+        });
+        
+        // Reset scroll
+        window.scrollTo(0, 0);
+        
+        // Show selected chamber
+        setTimeout(() => {
+            const chamberEl = document.getElementById(chamber + '-chamber');
+            if (chamberEl) {
+                chamberEl.classList.add('active');
+                
+                // Trigger station animations
+                setTimeout(() => {
+                    chamberEl.querySelectorAll('.station').forEach((station, index) => {
+                        setTimeout(() => {
+                            station.classList.add('sichtbar');
+                        }, index * 200);
+                    });
+                }, 500);
+                
+                // Garden mode background
+                if (chamber === 'garden') {
+                    document.body.classList.add('garden-mode');
+                } else {
+                    document.body.classList.remove('garden-mode');
+                }
+            }
+        }, 300);
+    }
+    
+    function returnToPortal() {
+        document.querySelectorAll('.chamber').forEach(c => {
+            c.classList.remove('active');
+        });
+        document.body.classList.remove('garden-mode');
+        
+        window.scrollTo(0, 0);
+        
+        setTimeout(() => {
+            document.getElementById('portal-room').classList.add('active');
+        }, 300);
+    }
+    
+    function restartChamber(chamber) {
+        enterChamber(chamber);
+    }
+    
+    // Observe stations for animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('sichtbar');
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    });
+    
+    // Observe all stations when chambers become active
+    const chamberObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.target.classList.contains('active')) {
+                mutation.target.querySelectorAll('.station').forEach(station => {
+                    observer.observe(station);
+                });
+            }
+        });
+    });
+    
+    document.querySelectorAll('.chamber').forEach(chamber => {
+        chamberObserver.observe(chamber, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    });
+    
+    // Animate portal room on load
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('portal-room').classList.add('active');
+    });
+</script>
+</body>
+</html>

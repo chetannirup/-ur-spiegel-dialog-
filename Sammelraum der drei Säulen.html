@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sammelraum der drei Säulen</title>
+
+<style>
+:root {
+  --bg-light: radial-gradient(circle at top, #f6f2ea, #e4dccf);
+  --bg-dark: radial-gradient(circle at top, #1e1e1e, #0f0f0f);
+  --text-light: #2a2a2a;
+  --text-dark: #e6e6e6;
+  --card-light: rgba(255,255,255,0.65);
+  --card-dark: rgba(30,30,30,0.75);
+}
+
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background 1s ease, color 1s ease;
+}
+
+body.dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px 90px;
+  text-align: center;
+  animation: breathe 14s ease-in-out infinite;
+}
+
+/* sanftes Atmen */
+@keyframes breathe {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.012); }
+  100% { transform: scale(1); }
+}
+
+h1 {
+  font-size: 2.3em;
+  font-weight: normal;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 18px;
+  margin: 40px 0;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.2);
+}
+
+.paths {
+  display: grid;
+  gap: 22px;
+  margin-top: 40px;
+}
+
+.path {
+  padding: 22px;
+  border-radius: 16px;
+  background: var(--card-light);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+body.dark .path {
+  background: var(--card-dark);
+}
+
+.path:hover {
+  transform: translateY(-4px);
+}
+
+.toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.15);
+  color: white;
+  font-size: 0.9em;
+}
+
+body.dark .toggle {
+  background: rgba(255,255,255,0.15);
+  color: #ddd;
+}
+
+.footer {
+  margin-top: 70px;
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+</style>
+</head>
+
+<body>
+
+<div class="toggle" onclick="toggleMode()">Licht / Dunkel</div>
+
+<div class="container" id="sammelraum">
+
+  <h1>Sammelraum der drei Säulen</h1>
+  <p>
+    Dies ist ein Ort der Rückkehr.  
+    Kein Weg ist vorgeschrieben.
+  </p>
+
+  <img src="ChatGPT Image 15. Dez. 2025, 11_42_31.png"
+       alt="Übersichtskarte der drei Säulen">
+
+  <p>
+    Die Karte ist kein Ziel.  
+    Sie ist Orientierung.
+  </p>
+
+  <div class="paths">
+
+    <a class="path" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Durch%20Leid%20zur%20Liebe.html">
+      <strong>Durch Leid zur Liebe</strong><br>
+      <small>Wenn Berührung schmerzt.</small>
+    </a>
+
+    <a class="path" href="https://chetannirup.github.io/-ur-spiegel-dialog-/The%20Portal%20of%20Transformation.html">
+      <strong>Portal der Transformation</strong><br>
+      <small>Wenn ein Übergang ruft.</small>
+    </a>
+
+    <a class="path" href="https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Garten%20atmet.html">
+      <strong>Der Garten atmet</strong><br>
+      <small>Wenn Rückkehr geschieht.</small>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    Du kannst jederzeit hierher zurückkehren.
+  </div>
+
+</div>
+
+<script>
+function toggleMode() {
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

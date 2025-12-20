@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gebetskarte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card-container {
+            perspective: 1000px;
+        }
+
+        .card {
+            width: 350px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.98) 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.3),
+                0 0 40px rgba(255,255,255,0.1) inset;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            animation: gentle-pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(10px, 10px) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .ornament-top {
+            text-align: center;
+            font-size: 28px;
+            color: #764ba2;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .prayer-text {
+            text-align: center;
+            line-height: 1.8;
+            color: #2d3748;
+            position: relative;
+            z-index: 1;
+            font-size: 17px;
+            letter-spacing: 0.3px;
+        }
+
+        .prayer-text .opening {
+            font-size: 18px;
+            font-weight: 600;
+            color: #764ba2;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .prayer-text .main-text {
+            font-style: italic;
+            margin: 15px 0;
+            padding: 0 10px;
+        }
+
+        .prayer-text .emphasis {
+            font-weight: 500;
+            color: #667eea;
+        }
+
+        .ornament-bottom {
+            text-align: center;
+            font-size: 28px;
+            color: #764ba2;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .light-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px;
+            height: 60%;
+            background: linear-gradient(to bottom, transparent, rgba(255,215,0,0.3), transparent);
+            transform-origin: top center;
+            opacity: 0;
+            animation: ray-sweep 12s ease-in-out infinite;
+        }
+
+        .light-ray:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation-delay: 0s;
+        }
+
+        .light-ray:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(60deg);
+            animation-delay: 2s;
+        }
+
+        .light-ray:nth-child(3) {
+            transform: translate(-50%, -50%) rotate(120deg);
+            animation-delay: 4s;
+        }
+
+        .light-ray:nth-child(4) {
+            transform: translate(-50%, -50%) rotate(180deg);
+            animation-delay: 6s;
+        }
+
+        .light-ray:nth-child(5) {
+            transform: translate(-50%, -50%) rotate(240deg);
+            animation-delay: 8s;
+        }
+
+        .light-ray:nth-child(6) {
+            transform: translate(-50%, -50%) rotate(300deg);
+            animation-delay: 10s;
+        }
+
+        @keyframes ray-sweep {
+            0%, 100% {
+                opacity: 0;
+            }
+            10%, 30% {
+                opacity: 0.6;
+            }
+            40%, 100% {
+                opacity: 0;
+            }
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 11px;
+            color: #718096;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+            }
+
+            .card::before,
+            .light-ray {
+                display: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                width: 100%;
+                padding: 30px 20px;
+            }
+
+            .prayer-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+            <div class="light-ray"></div>
+            
+            <div class="ornament-top">✧</div>
+            
+            <div class="prayer-text">
+                <span class="opening">Gott, ich liebe dich</span>
+                
+                <div class="main-text">
+                    und ich danke dir innigst<br>
+                    und mit ganzem Herzen
+                </div>
+                
+                <div class="main-text">
+                    für deine <span class="emphasis">allmächtige, ewige Liebe</span>
+                </div>
+                
+                <div class="main-text">
+                    in deiner Schöpfung,<br>
+                    in allen Geschöpfen<br>
+                    und in deinem göttlichen Geschlecht.
+                </div>
+            </div>
+            
+            <div class="ornament-bottom">✧</div>
+            
+            <div class="footer-note">
+                Ein Anker. Ein Leuchtturm. Ein Strom aus Zwei.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

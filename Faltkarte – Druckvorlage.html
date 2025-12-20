@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faltkarte – Druckvorlage</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+                font-family: 'Georgia', serif;
+            }
+            .seite {
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
+                position: relative;
+                border: 1px dashed #ccc;
+            }
+            .karte {
+                width: 90mm;
+                height: 140mm;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #fefefe;
+                border: 1px solid #aaa;
+                padding: 15mm 10mm;
+                text-align: center;
+                box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+            }
+            .linien {
+                border: 1px dashed #ccc;
+                width: 88mm;
+                height: 138mm;
+                position: absolute;
+                top: 1mm;
+                left: 1mm;
+            }
+            .falzhinweis {
+                position: absolute;
+                bottom: 5mm;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 10pt;
+                color: #999;
+            }
+            .vorderseite, .rueckseite {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .zentrum {
+                width: 50mm;
+                height: 50mm;
+                margin: 0 auto 5mm;
+                border: 2px dotted #8ab;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 28pt;
+                color: #8ab;
+            }
+            .textblock {
+                font-size: 11pt;
+                line-height: 1.8;
+                color: #333;
+                margin-top: 8mm;
+            }
+            .symbolzeile {
+                margin-top: 8mm;
+                font-size: 16pt;
+                letter-spacing: 10px;
+                color: #7a9;
+            }
+            .hinweis {
+                font-size: 8pt;
+                color: #aaa;
+                margin-top: 10mm;
+                font-style: italic;
+            }
+            .anleitung {
+                position: absolute;
+                top: 10mm;
+                left: 10mm;
+                font-size: 9pt;
+                color: #777;
+                width: 80mm;
+            }
+        }
+        @media screen {
+            body {
+                background: #eee;
+                padding: 20px;
+            }
+            .seite {
+                background: white;
+                width: 210mm;
+                height: 297mm;
+                margin: 20px auto;
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="seite">
+        <div class="anleitung">
+            <strong>Anleitung:</strong> Dieses Blatt ausdrucken (A4). Die gestrichelten Linien zeigen die Faltkanten. Entlang der Linien ausschneiden, dann in der Mitte falten. Vorder- und Rückseite ergeben eine Karte im Format ~9×14 cm.
+        </div>
+        <div class="karte">
+            <div class="linien"></div>
+            <div class="vorderseite">
+                <div class="zentrum">☯</div>
+                <div class="textblock">
+                    Gott, ich liebe dich<br>
+                    und ich danke dir innigst<br>
+                    mit ganzem Herzen<br>
+                    für deine allmächtige, ewige Liebe
+                </div>
+                <div class="symbolzeile">⚓ ☀️</div>
+            </div>
+        </div>
+        <div class="falzhinweis">⟵ Falzlinie</div>
+    </div>
+    
+    <div class="seite">
+        <div class="karte">
+            <div class="linien"></div>
+            <div class="rueckseite">
+                <div class="textblock">
+                    in deiner Schöpfung,<br>
+                    in allen Geschöpfen<br>
+                    und in deinem göttlichen Geschlecht.
+                </div>
+                <div class="hinweis">
+                    Diese Karte ist ein stiller Anker.<br>
+                    Sie erklärt nichts, missioniert nicht.<br>
+                    Sie erinnert nur – an Geborgenheit, an Liebe, an Halt.
+                </div>
+                <div class="symbolzeile" style="margin-top: 15mm;">❀ ❀ ❀</div>
+            </div>
+        </div>
+        <div class="falzhinweis">⟵ Falzlinie</div>
+    </div>
+</body>
+</html>

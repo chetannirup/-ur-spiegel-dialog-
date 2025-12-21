@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gebetskarte – Alle Versionen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Palatino', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        h1 {
+            color: white;
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 18px;
+            font-style: italic;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .card-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .card-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+        }
+
+        .card-title {
+            color: #764ba2;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-view {
+            background: white;
+            color: #764ba2;
+            border: 2px solid #764ba2;
+        }
+
+        .btn-view:hover {
+            background: #764ba2;
+            color: white;
+        }
+
+        .interactive-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.98) 100%);
+            border: 3px solid #667eea;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .heart {
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .card-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Gebetskarte – Alle Versionen ✨</h1>
+            <p class="subtitle">Ein Anker. Ein Leuchtturm. Ein Strom aus Zwei.</p>
+        </header>
+
+        <div class="gallery">
+            <!-- Version 1: Leuchtende Karte -->
+            <div class="card-container">
+                <div class="card-title">🌟 Leuchtende Version</div>
+                <div class="card-description">
+                    Die digitale Karte mit Lichtstrahlen und Sternen – perfekt fürs Handy, als Bildschirmhintergrund oder zum Teilen.
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251220_1205_Spirituelle%20Faltkarte%20Vorlage_simple_compose_01kcxpy8wefqvbc2x33gw4wyd3.png" 
+                         alt="Leuchtende Gebetskarte mit Lichtstrahlen">
+                </div>
+                <div class="button-group">
+                    <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251220_1205_Spirituelle%20Faltkarte%20Vorlage_simple_compose_01kcxpy8wefqvbc2x33gw4wyd3.png" 
+                       download="Gebetskarte_Leuchtend.png" 
+                       class="btn btn-download">
+                        📥 Bild herunterladen
+                    </a>
+                    <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251220_1205_Spirituelle%20Faltkarte%20Vorlage_simple_compose_01kcxpy8wefqvbc2x33gw4wyd3.png" 
+                       target="_blank" 
+                       class="btn btn-view">
+                        👁️ Vollbild ansehen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Version 2: Druckvorlage -->
+            <div class="card-container">
+                <div class="card-title">🖨️ Druckvorlage (Faltkarte)</div>
+                <div class="card-description">
+                    Die klassische Faltkarte mit Einström/Ausström – zum Ausdrucken, Ausschneiden und Falten auf A4-Papier.
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251220_1205_Spirituelle%20Faltkarte%20Vorlage_simple_compose_01kcxpy8wffa8v56yf7ce1jj67.png" 
+                         alt="Druckvorlage Faltkarte mit Einström und Ausström">
+                </div>
+                <div class="button-group">
+                    <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251220_1205_Spirituelle%20Faltkarte%20Vorlage_simple_compose_01kcxpy8wffa8v56yf7ce1jj67.png" 
+                       download="Gebetskarte_Druckvorlage.png" 
+                       class="btn btn-download">
+                        📥 Bild herunterladen
+                    </a>
+                    <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/20251220_1205_Spirituelle%20Faltkarte%20Vorlage_simple_compose_01kcxpy8wffa8v56yf7ce1jj67.png" 
+                       target="_blank" 
+                       class="btn btn-view">
+                        👁️ Vollbild ansehen
+                    </a>
+                </div>
+            </div>
+
+            <!-- Version 3: Interaktive HTML -->
+            <div class="card-container interactive-card">
+                <span class="badge">INTERAKTIV</span>
+                <div class="card-title">💻 Interaktive Web-Version</div>
+                <div class="card-description">
+                    Die lebendige HTML-Karte mit sanften Animationen – zum Speichern, Teilen oder direkt im Browser nutzen.
+                </div>
+                <div class="image-wrapper">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20251220_1153_Gebetskarte_mit_Lichtstrahlen_simple_compose_01kcxp80w4f43bem1ep3qhts4q.png" 
+                         alt="Interaktive HTML Gebetskarte">
+                </div>
+                <div class="button-group">
+                    <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Gebetskarte.html" 
+                       target="_blank" 
+                       class="btn btn-download">
+                        🌐 Karte öffnen
+                    </a>
+                    <a href="gebetskarte_druckvorlage.html" 
+                       class="btn btn-view">
+                        🖨️ Druck-Version
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>
+                <strong>Diese Karte ist ein stiller Anker.</strong><br>
+                Sie erklärt nichts, missioniert nicht.<br>
+                Sie erinnert nur – an Geborgenheit, an Liebe, an Halt.
+            </p>
+            <p>
+                Mit <span class="heart">♥</span> und ganzem Herzen erschaffen.
+            </p>
+            <p style="font-size: 14px; opacity: 0.8; margin-top: 20px;">
+                Gott, ich liebe dich – und ich danke dir innigst.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

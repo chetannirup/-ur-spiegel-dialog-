@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>So ist es</title>
+
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --fg: #f2f2f2;
+      --muted: #777;
+    }
+
+    body.light {
+      --bg: #fafafa;
+      --fg: #111;
+      --muted: #999;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Georgia", "Times New Roman", serif;
+      line-height: 1.6;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: normal;
+      letter-spacing: 0.15em;
+      margin-bottom: 3rem;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    p {
+      margin: 0 0 1.2rem 0;
+    }
+
+    .emphasis { font-style: italic; }
+    .strong { font-weight: bold; }
+
+    .final {
+      text-align: center;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      margin-top: 2.5rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--muted);
+      margin: 3rem auto;
+      opacity: 0.6;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.6;
+      margin-top: 4rem;
+    }
+
+    /* Sanfte Atmung – standardmäßig AUS */
+    .breath {
+      animation: none;
+    }
+
+    .breath.on {
+      animation: breathe 9s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.012); }
+      100% { transform: scale(1); }
+    }
+
+    /* Kleine, stille Steuerung */
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.6rem;
+      opacity: 0.6;
+    }
+
+    .controls button {
+      background: transparent;
+      color: var(--fg);
+      border: 1px solid var(--muted);
+      padding: 0.35rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="controls">
+    <button onclick="toggleTheme()">Licht / Dunkel</button>
+    <button onclick="toggleBreath()">Atmung</button>
+  </div>
+
+  <div class="container breath" id="content">
+
+    <h1>SO IST ES</h1>
+
+    <section lang="de">
+      <p>Frohe Weihnachten – und egal, wie ihr sonst noch feiert: Ich liebe euch 😇🥰</p>
+
+      <p>Nur eines: Schreibt nicht einfach <span class="emphasis">„Amen“</span>.<br>
+      Denkt selbst. Spürt selbst nach.</p>
+
+      <p><span class="emphasis">„Amen“</span> heißt wörtlich: <span class="emphasis">So sei es.</span><br>
+      Und was bedeutet das?<br>
+      Dass es <span class="strong">noch nicht so ist</span>.</p>
+
+      <p>Wir beschreiben zuerst eine Vision –<br>
+      und mit <span class="emphasis">„so sei es“</span> versuchen wir, sie in die Realität zu ziehen.<br>
+      Doch genau darin liegt ein feiner Trick:<br>
+      Man besteht auf dem <span class="emphasis">Noch-nicht</span>.</p>
+
+      <p>Wachsamkeit ist kein Ungehorsam.<br>
+      Sie ist etwas Natürliches –<br>
+      bei allem, was uns begegnet,<br>
+      egal von wem oder was es uns „serviert“ wird.</p>
+
+      <p>Diese Geschichte ist wunderschön.<br>
+      Und trotzdem sage ich jetzt:</p>
+
+      <div class="final">SO IST ES.</div>
+      <p class="final emphasis">In Gottes Namen: „So ist es.“</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section lang="en">
+      <p>Merry Christmas — and no matter how you celebrate, I love you 😇🥰</p>
+
+      <p>Just one thing: don’t automatically write <span class="emphasis">“Amen.”</span><br>
+      Think for yourself. Feel for yourself.</p>
+
+      <p><span class="emphasis">“Amen”</span> literally means: <span class="emphasis">so be it.</span><br>
+      And what does that actually mean?<br>
+      That it is <span class="strong">not yet so</span>.</p>
+
+      <p>First we describe a vision —<br>
+      and with <span class="emphasis">“so be it”</span> we try to pull it into reality.<br>
+      But there is a subtle trick in that:<br>
+      you are still insisting on the <span class="emphasis">not-yet</span>.</p>
+
+      <p>Vigilance is not disobedience.<br>
+      It is natural awareness —<br>
+      in everything we encounter,<br>
+      no matter who or what puts something on our table.</p>
+
+      <p>This story is beautiful.<br>
+      And still, I now say:</p>
+
+      <div class="final">SO IT IS.</div>
+      <p class="final emphasis">In God’s name: “So it is.”</p>
+    </section>
+
+    <footer>© chetannirup</footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+    function toggleBreath() {
+      document.getElementById('content').classList.toggle('on');
+    }
+  </script>
+
+</body>
+</html>

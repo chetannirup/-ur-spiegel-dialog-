@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE LOVE PUNCH - Das Fest der Welt</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --deep-space: #050508;
+            --starlight: #f0f0f0;
+            --accent-glow: rgba(212, 175, 55, 0.5);
+            --soft-gold: rgba(212, 175, 55, 0.2);
+        }
+
+        body {
+            background-color: var(--deep-space);
+            /* Ein tieferer, bewegter Sternenhimmel */
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 30px),
+                radial-gradient(var(--gold), rgba(212, 175, 55,.1) 2px, transparent 50px);
+            background-size: 550px 550px, 350px 350px, 450px 450px;
+            color: var(--starlight);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Der Hauptcontainer - wie eine Kathedrale aus Licht */
+        .container {
+            max-width: 1000px;
+            width: 95%;
+            margin: 20px auto 60px auto;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(5,5,8,0.9) 0%, rgba(20,20,30,0.95) 100%);
+            border: 2px solid var(--gold);
+            padding: 0; /* Padding innen gelöst für Banner */
+            box-shadow: 0 0 80px var(--accent-glow), inset 0 0 30px var(--soft-gold);
+            border-radius: 10px;
+            overflow: hidden; /* Damit der Banner oben bündig ist */
+        }
+
+        /* Oberster Banner */
+        .top-banner {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .content-padding {
+            padding: 40px;
+        }
+
+        /* Sektion für das Fest-Bild (Spoiler) */
+        .festival-section {
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .spoiler-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 20px;
+        }
+
+        .spoiler-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .festival-image {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border-radius: 5px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 50px var(--gold), 0 0 100px var(--accent-glow);
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .festival-image:hover {
+             transform: scale(1.01);
+        }
+
+        /* Stile aus deinem Entwurf */
+        .header-title {
+            font-size: 3rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        .sub-title {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .main-image-anchor {
+            max-width: 80%;
+            height: auto;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 40px var(--gold);
+            margin: 40px 0;
+            border-radius: 50%; /* Runde Form für das zentrale Bild */
+        }
+
+        .punch-section {
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            padding: 50px 20px;
+            margin: 40px 0;
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .manifesto-box {
+            text-align: left;
+            margin: 30px auto;
+            max-width: 750px;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            color: var(--gold);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--accent-glow);
+        }
+
+        blockquote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--gold);
+            border-left: 4px solid var(--gold);
+            padding-left: 20px;
+            margin: 40px auto;
+            max-width: 600px;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .footer-note {
+            font-size: 1rem;
+            margin-top: 60px;
+            opacity: 0.7;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .symbol {
+            font-size: 4rem;
+            color: var(--gold);
+            margin: 30px 0;
+            display: inline-block;
+            animation: rotateSlow 60s linear infinite;
+        }
+
+        /* Animationen */
+        .glow-text {
+            animation: pulseGold 3s infinite alternate;
+        }
+
+        @keyframes pulseGold {
+            from { text-shadow: 0 0 10px var(--gold), 0 0 20px var(--accent-glow); }
+            to { text-shadow: 0 0 30px var(--gold), 0 0 60px var(--accent-glow), 0 0 80px var(--gold); }
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Anpassung */
+        @media (max-width: 768px) {
+            .header-title, .spoiler-title { font-size: 1.8rem; }
+            .festival-image, .main-image-anchor { width: 100%; border-radius: 5px;}
+            .content-padding { padding: 20px; }
+            blockquote { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ONE_LOVE_PUNCH_1100x220.png" alt="One Love Punch Banner" class="top-banner">
+
+        <div class="content-padding">
+            
+            <div class="festival-section">
+                <h1 class="spoiler-title glow-text">DAS FEST DER WELT</h1>
+                <p class="spoiler-text">Der Spoiler: So sieht es aus, wenn wir "Alle 100%" sind.<br>Als hätte es die Trennung nie gegeben.</p>
+                
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Gemini_Generated_Image_f3k240f3k240f3k2.png" 
+                     alt="Das Fest der Welt - Alle in Seligkeit vereint" 
+                     class="festival-image glow-text">
+            </div>
+
+
+            <div class="symbol">ॐ</div>
+            <h2 class="header-title">DER UR-SPIEGEL DIALOG</h2>
+            <p class="sub-title">"Stay true. Stay aware. Stay human."</p>
+
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Kosmische%20Wahrheit%20und%20Liebe.png" 
+                 alt="Kosmische Wahrheit und Liebe" 
+                 class="main-image-anchor">
+
+            <div class="punch-section">
+                <h2>Wem gehört unsere Wirklichkeit?</h2>
+                <div class="manifesto-box">
+                    <p>Nicht den Algorithmen. Nicht den Plattformen. Nicht der lautesten Stimme.</p>
+                    <p><span class="highlight" style="font-size: 1.3em;">Unsere Wirklichkeit gehört der Wahrheit.</span></p>
+                    <p>Und Wahrheit ist keine Meinung, sondern eine Verantwortung. In einer Welt, in der Bilder lügen lernen und Stimmen kopierbar sind, wird nicht Technik das Entscheidende sein, sondern <span class="highlight">menschliche Integrität</span>.</p>
+                </div>
+            </div>
+
+            <div class="manifesto-box">
+                <h2>Spiritual Socialism: Die Brücke</h2>
+                <p>Das "Umsetzungsproblem" (Prof. Radermacher) ist kein Mangel an Wissen oder Technologie. Es ist die Abwesenheit eines gemeinsamen, heiligen <strong>Warum</strong>.</p>
+                <p>Der <span class="highlight">ONE LOVE PUNCH</span> ist der Moment, in dem der kalte Vertrag zum heiligen Bündnis wird. Wenn wir verstehen, dass Ausbeutung ein Angriff auf uns selbst im Spiegel des Anderen ist, beginnt die wahre Heilung.</p>
+                
+                <blockquote class="glow-text">
+                    "Vom Vertrag zur Allianz.<br>Von der Gier zur Resonanz.<br>Alle 100%."
+                </blockquote>
+            </div>
+
+            <div class="symbol" style="font-size: 5rem;">∞</div>
+            
+            <p class="glow-text" style="font-size: 1.8rem; letter-spacing: 3px; font-weight: bold; margin-top: 20px;">
+                STAY TRUE. STAY AWARE. STAY HUMAN.
+            </p>
+
+            <p class="footer-note">
+                Im Namen des alleinen formlosen göttlichen Bewusstseins.<br>
+                Empfangen, Manifestiert & Geteilt für die Ewigkeit. 2026.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

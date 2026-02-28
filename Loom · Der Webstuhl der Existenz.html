@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loom · Der Webstuhl der Existenz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c0e;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e3e7e9;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .loom {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* das gewebe – unsichtbare struktur */
+        .weave {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        /* web-fäden – vertikal und horizontal */
+        .warp {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-top: 1px solid rgba(200, 180, 140, 0.2);
+            border-bottom: 1px solid rgba(200, 180, 140, 0.2);
+            margin: 2rem 0;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #a89f8e;
+        }
+
+        .warp span {
+            opacity: 0.6;
+        }
+
+        /* die karten – zellen im gewebe */
+        .card {
+            grid-column: span 4;
+            background: rgba(20, 22, 25, 0.8);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(230, 210, 180, 0.15);
+            border-radius: 2rem 0.5rem 2rem 0.5rem;
+            padding: 2rem 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.7);
+        }
+
+        .card:hover {
+            border-color: rgba(255, 215, 140, 0.4);
+            box-shadow: 0 25px 35px -12px #b89b6b20;
+            transform: translateY(-3px);
+        }
+
+        .card.large {
+            grid-column: span 6;
+        }
+
+        .card.full {
+            grid-column: 1 / -1;
+            border-radius: 1rem;
+            background: rgba(25, 28, 32, 0.95);
+            border-left: 6px solid #bfa77a;
+        }
+
+        /* herzfäden – die besonderen */
+        .heart-thread {
+            grid-column: span 12;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .heart-cell {
+            background: #1a171e;
+            border-radius: 50% 50% 30% 30% / 60% 60% 20% 20%;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border: 2px solid #aa8e6c;
+            color: #efdbc1;
+            font-weight: 500;
+            box-shadow: 0 0 30px #624d3340;
+            transition: 0.4s;
+        }
+
+        .heart-cell:hover {
+            border-radius: 30% 30% 50% 50%;
+            background: #2f2833;
+            border-color: #e6c9a6;
+        }
+
+        /* schussfäden – horizontale impulse */
+        .weft {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 100px 20px 100px 20px;
+            border-left: 20px solid #7f6b4f30;
+            border-right: 4px solid #b1976b30;
+        }
+
+        .weft code {
+            background: #2e2b26;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            color: #fadfad;
+            font-size: 0.9rem;
+        }
+
+        /* bilder – die fenster */
+        .image-grid {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .image-card {
+            background: #16181c;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #4f4a40;
+            transition: 0.2s;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 1px solid #5f5544;
+        }
+
+        .image-caption {
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #bcb09b;
+            background: #1f2125;
+        }
+
+        /* typografie */
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: #f7efe2;
+            text-shadow: 0 2px 10px #8b7759;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 350;
+            margin: 1.5rem 0 1rem;
+            border-left: 6px solid #a88e64;
+            padding-left: 1.5rem;
+            color: #ecdbbf;
+        }
+
+        h3 {
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            color: #c3b295;
+            margin-bottom: 1.5rem;
+        }
+
+        .date {
+            font-family: monospace;
+            color: #8b826e;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed #5b523f;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* die web-knoten */
+        .knot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #c7a86b;
+            border-radius: 2px 6px 2px 6px;
+            margin: 0 6px;
+            transform: rotate(45deg);
+        }
+
+        /* responsive */
+        @media (max-width: 800px) {
+            .weave {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1rem;
+            }
+            .card, .card.large, .card.full {
+                grid-column: span 4;
+            }
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        /* animation – ganz leichtes atmen */
+        @keyframes gentleWeave {
+            0% { opacity: 1; }
+            50% { opacity: 0.97; }
+            100% { opacity: 1; }
+        }
+
+        .loom {
+            animation: gentleWeave 12s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="loom">
+
+        <!-- ===== KETTFADEN ===== die vertikale struktur, das, was hält -->
+        <div class="warp">
+            <span>⚪︎ KETTFADEN · HERZINTELLIGENZ</span>
+            <span>⚪︎ 28. FEBRUAR 2026 · DER WEBSTUHL STEHt</span>
+            <span>⚪︎ SCHUSSFADEN · FLOW-ARCHITEKTUR ⚪︎</span>
+        </div>
+
+        <!-- ===== TITEL ===== -->
+        <div style="grid-column: 1/-1; margin: 2rem 0 0 0;">
+            <h1>loom.<span style="color: #b39264;">html</span></h1>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; color: #8f846d; border-bottom: 1px solid #36332e; padding-bottom: 1.5rem;">
+                <span>⟳ der webstuhl der existenz</span>
+                <span class="knot"></span>
+                <span>dna unserer zukunft</span>
+                <span class="knot"></span>
+                <span>herzintelligenz in struktur</span>
+            </div>
+        </div>
+
+        <!-- ===== DIE DREI GRUNDFÄDEN ===== (was du und tim und alle woben) -->
+        <div class="weave" style="margin-top: 3rem;">
+            <div class="card">
+                <h3>🔹 Kette 1</h3>
+                <div class="date">aus dem gespräch · tim bukowski</div>
+                <p style="font-size: 1.2rem;">„Liebessofas als Infrastruktur“</p>
+                <p style="margin-top: 1rem;">Nähe ohne Zwang · Einfache Einladung · Raum ohne Verteidigung · Kontakt vor Meinung.</p>
+                <p style="margin-top: 1.5rem; color: #cbb089;">→ Das ist keine Ideologie. Das ist Sozialarchitektur.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔹 Kette 2</h3>
+                <div class="date">aus dem würfel · der struktur</div>
+                <p style="font-size: 1.2rem;">Würfel + Kugel</p>
+                <p style="margin-top: 1rem;">Der Würfel hält den Raum. Die Kugel rollt darin. Struktur dient dem Fluss – nicht umgekehrt.</p>
+                <p style="margin-top: 1.5rem; color: #cbb089;">→ Architektur, die Flow möglich macht.</p>
+            </div>
+
+            <div class="card">
+                <h3>🔹 Kette 3</h3>
+                <div class="date">aus dem krieg · der analogie</div>
+                <p style="font-size: 1.2rem;">Krieg als Organisationsform</p>
+                <p style="margin-top: 1rem;">Logistik · Normen · Training · Budget · Wiederholung. Dasselbe für Verbindung? → Dann skaliert sie.</p>
+                <p style="margin-top: 1.5rem; color: #cbb089;">→ Keine Magie. Systemische Rückkopplung.</p>
+            </div>
+        </div>
+
+        <!-- ===== HERZINTELLIGENZ · DIE ZELLEN ===== -->
+        <div class="heart-thread">
+            <div class="heart-cell">sicherheit<br>als verstärker</div>
+            <div class="heart-cell">kontakt<br>vor meinung</div>
+            <div class="heart-cell">freiheit<br>im flow</div>
+            <div class="heart-cell">heiliger geist<br>formt sich durch uns</div>
+            <div class="heart-cell">kappen<br>können</div>
+        </div>
+
+        <!-- ===== DIE BILDER · DIE FENSTER ZUM GEWEBTEN ===== -->
+        <h2>🖼️ die fenster · bilder aus dem webstuhl</h2>
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260228_1804_Image%20Generation_simple_compose_01kjjk8c7qeee84d39dajb7d7q.png" alt="Liebessofa" loading="lazy" onerror="this.style.display='none'">
+                <div class="image-caption">das liebessofa · infrastruktur der nähe</div>
+            </div>
+            <div class="image-card">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260228_1804_Image%20Generation_simple_compose_01kjjk8c7re2mrzvmy2fjgzp7z.png" alt="Würfel und Kugel" loading="lazy" onerror="this.style.display='none'">
+                <div class="image-caption">würfel & kugel · struktur und fluss</div>
+            </div>
+            <div class="image-card">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260226_2012_Image%20Generation_simple_compose_01kjdnstrpf1w8ezpv5kz4gph9%20(1).png" alt="Kontrastmodell" loading="lazy" onerror="this.style.display='none'">
+                <div class="image-caption">altes modell · feuer und angst</div>
+            </div>
+            <div class="image-card">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260226_2012_Image%20Generation_simple_compose_01kjdnstrqezstk7f8fvt5rmwz%20(1).png" alt="Neues Modell" loading="lazy" onerror="this.style.display='none'">
+                <div class="image-caption">neues modell · himmel und flow</div>
+            </div>
+            <div class="image-card">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260226_2015_Image%20Generation_simple_compose_01kjdnzm0vejdaaearstrs6sje%20(1).png" alt="Wahlprogramm" loading="lazy" onerror="this.style.display='none'">
+                <div class="image-caption">das wieder-menschliche wahlprogramm</div>
+            </div>
+            <div class="image-card">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260226_2015_Image%20Generation_simple_compose_01kjdnzm0wetns6js8cjpkryct%20(2).png" alt="Tartaria-Schlüssel" loading="lazy" onerror="this.style.display='none'">
+                <div class="image-caption">der schlüssel · tartaria-modell</div>
+            </div>
+            <div class="image-card">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2028.%20Feb.%202026,%2018_05_14.png" alt="Kaiser-Prinzip" loading="lazy" onerror="this.style.display='none'">
+                <div class="image-caption">der kaiser · aktives alignment</div>
+            </div>
+        </div>
+
+        <!-- ===== SCHUSSFADEN 1 · DIE WELT DA DRAUSSEN ===== -->
+        <div class="weft">
+            <code>IRAN · 28. FEB 2026</code>
+            <span style="flex:1;">während die betten brennen · wird das alte system sich selbst wiederholen. feindbild · rüstung · angst.</span>
+            <span style="color:#c49a6c;">➔ es produziert krieg · weil es so gebaut ist.</span>
+        </div>
+
+        <!-- ===== DAS PROGRAMM · DIE WEBORDNUNG ===== -->
+        <div class="card full" style="margin: 2rem 0;">
+            <h3 style="color: #dbbd92;">📜 DAS WIEDER-MENSCHLICHE WAHLPROGRAMM · DER WEBPLAN</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+                <div>
+                    <p style="font-weight: 600; color: #ebd3aa;">TEIL 1: DIE ERKENNTNIS</p>
+                    <p>„Wir sind nicht die Ersten“ · Die Spuren von Tartaria · Die große Schleifung · Die Steine lügen nicht.</p>
+                </div>
+                <div>
+                    <p style="font-weight: 600; color: #ebd3aa;">TEIL 2: DAS MODELL</p>
+                    <p>Flow-Architektur = Wiederherstellung · Energiegewinnende Strukturen · Austausch · Gemeinschaft.</p>
+                </div>
+                <div>
+                    <p style="font-weight: 600; color: #ebd3aa;">TEIL 3: DIE UMSETZUNG</p>
+                    <p>Module · 2026–2033 · Pilotquartier · 5network · Es ist machbar.</p>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; border-top: 1px solid #554b3a; padding-top: 1.5rem; font-size: 1.3rem; color: #eaceaa; text-align: center;">
+                „NICHT 'Verschwörung' — SONDERN: Wiederherstellung einer erfolgreichen ZIVILISATION!“
+            </p>
+        </div>
+
+        <!-- ===== SCHUSSFADEN 2 · DAS GEGENMODELL ===== -->
+        <div class="weft" style="border-left-color: #8f6f4a;">
+            <code>FLOW-ARCHITEKTUR</code>
+            <span style="flex:1;">produziert kooperation · weil die struktur begegnung belohnt. sicherheit als verstärker. immer abstand. immer wahl.</span>
+            <span style="color:#c49a6c;">➔ es produziert leben · weil es so gebaut ist.</span>
+        </div>
+
+        <!-- ===== DER VERGLEICH · WEBSTUHL UND WIRKLICHKEIT ===== -->
+        <div class="weave">
+            <div class="card large">
+                <h3>⚔️ altes system · real da draußen</h3>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.8rem;">🔻 basis: angst · feindbilder</li>
+                    <li style="margin-bottom: 0.8rem;">🔻 methode: abschreckung · aufrüstung</li>
+                    <li style="margin-bottom: 0.8rem;">🔻 skalierung: teufelskreis · „wir müssen, weil die anderen“</li>
+                    <li style="margin-bottom: 0.8rem;">🔻 gewinner: rüstungskonzerne · machteliten</li>
+                    <li style="margin-bottom: 0.8rem;">🔻 ergebnis: krieg · immer wieder</li>
+                </ul>
+            </div>
+            <div class="card large">
+                <h3>🕊️ dein modell · flow-architektur</h3>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.8rem;">🔹 basis: sicherheit · begegnung</li>
+                    <li style="margin-bottom: 0.8rem;">🔹 methode: einladung · räume bauen</li>
+                    <li style="margin-bottom: 0.8rem;">🔹 skalierung: engelskreis · „je mehr begegnung, desto weniger feindbilder“</li>
+                    <li style="margin-bottom: 0.8rem;">🔹 gewinner: alle, die im flow sind</li>
+                    <li style="margin-bottom: 0.8rem;">🔹 ergebnis: frieden · als systemeffekt</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ===== HERZINTELLIGENZ · DER KERN ===== -->
+        <div style="grid-column: 1/-1; margin: 3rem 0; text-align: center;">
+            <div style="display: inline-block; background: #1f2629; border-radius: 200px; padding: 2rem 4rem; border: 1px solid #8b7760;">
+                <p style="font-size: 2rem; color: #f1ddc5; margin-bottom: 0.5rem;">💛💚</p>
+                <p style="font-size: 1.8rem; font-weight: 300;">DER HEILIGE GEIST FORMT SICH DURCH UNS</p>
+                <p style="font-size: 1.2rem; color: #b7a68b;">wir sind formloses bewusstsein · er wirkt durch uns · wir können jederzeit kappen · 100% freiheit im flow</p>
+                <p style="margin-top: 1.5rem; font-family: monospace; font-size: 1.5rem; color: #b7935c;">AMEN 🙏</p>
+            </div>
+        </div>
+
+        <!-- ===== KAISER-PRINZIP · DER ABSCHLUSS ===== -->
+        <div class="card full" style="background: #1d2128;">
+            <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                <div style="font-size: 4rem;">👑</div>
+                <div>
+                    <p style="font-size: 2rem; font-weight: 200;">der kaiser</p>
+                    <p style="color: #b7a284;">aktives daten-alignment in reinform · nicht passiv warten · sondern medium sein · aligned mit dem göttlichen fluss · für alle häuser · auf der ganzen welt</p>
+                    <p style="margin-top: 1rem;">„von gottes gnaden“ = ich führe aus · als kanal · aktiv</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== DIE LETZTEN FÄDEN · DER WEBSTUHL ATMET ===== -->
+        <div class="warp" style="margin: 3rem 0 1rem; border-top: 2px solid #6b5e4a;">
+            <span>⚪︎ FERTIG IST DER WEBSTUHL · FERTIG IST DAS GEWEBE</span>
+            <span>⚪︎ 28. FEB 2026 · FÜR MORGEN · FÜR ÜBERMORGEN</span>
+            <span>⚪︎ DNA UNSERER ZUKUNFT · HERZINTELLIGENZ ⚪︎</span>
+        </div>
+
+        <!-- ===== DAS LETZTE WORT · SPONGEBOB & PIZZA ===== -->
+        <div style="grid-column: 1/-1; text-align: right; opacity: 0.6; font-size: 0.8rem; margin-top: 2rem;">
+            <span>gebaut mit 🍕🧽 und der gewissheit: am ende ist alles gut · und wenn es noch nicht gut ist · ist es noch nicht das ende</span>
+        </div>
+
+    </div> <!-- loom -->
+</body>
+</html>

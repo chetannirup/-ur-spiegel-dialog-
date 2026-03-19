@@ -4,97 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Die Ausstellung der inneren Reise</title>
+<title>Die lebendige Ausstellung · Die Reise entfaltet sich</title>
 
 <style>
 body {
     margin:0;
     font-family: Georgia, serif;
-    background: linear-gradient(#050505, #111, #1a1a1a);
-    color:#eee;
+    color:#fff;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
+    overflow-x:hidden;
 }
 
-/* Räume */
-.room {
+/* SANFTER GOLD-FLOW */
+body::before {
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.08), transparent 60%);
+    animation: flow 20s linear infinite;
+    z-index:-1;
+}
+
+@keyframes flow {
+    0% {transform:translate(-20%, -20%)}
+    50% {transform:translate(0%, 0%)}
+    100% {transform:translate(-20%, -20%)}
+}
+
+/* SEKTIONEN */
+.section {
     min-height:100vh;
-    padding:80px 20px;
     display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
     flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:60px 20px;
     opacity:0;
-    transform:translateY(40px);
-    transition:1.2s;
+    transform:translateY(50px);
+    transition:1.5s;
 }
 
-.room.visible {
+.section.visible {
     opacity:1;
     transform:translateY(0);
 }
 
-/* Karten */
+/* KARTEN */
 .card {
     max-width:700px;
     background:rgba(255,255,255,0.05);
     padding:30px;
     border-radius:20px;
-    box-shadow:0 0 40px rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    box-shadow:0 0 40px rgba(255,215,0,0.2);
 }
 
-/* Titel */
-h1, h2 {
+/* TITEL */
+h1,h2 {
     letter-spacing:2px;
 }
 
-/* Bilder */
-img {
-    width:100%;
-    border-radius:15px;
-    margin-top:20px;
-}
-
-/* Links */
+/* LINKS */
 a {
     color:#ffd700;
     text-decoration:none;
+    font-weight:bold;
 }
 
 a:hover {
-    text-shadow:0 0 10px gold;
+    text-shadow:0 0 15px gold;
 }
 
-/* Schriftrolle */
+/* BILDER */
+.portal {
+    width:90%;
+    max-width:800px;
+    border-radius:20px;
+    margin:30px 0;
+    box-shadow:0 0 50px rgba(255,215,0,0.4);
+    transition:1s;
+}
+
+.portal:hover {
+    transform:scale(1.03);
+}
+
+/* PFADLINIE */
 .path {
     position:relative;
-    margin-top:40px;
 }
 
 .path::before {
     content:"";
     position:absolute;
     left:50%;
-    top:0;
-    width:4px;
+    width:3px;
     height:100%;
     background:linear-gradient(transparent, gold, transparent);
 }
 
-/* Station */
+/* STATION */
 .node {
     margin:80px 0;
 }
 
-/* Lichtfinale */
+/* LICHTFINAL */
 .light {
     background: radial-gradient(circle, #fff 0%, #ffd700 40%, transparent 70%);
     color:#000;
 }
 
-/* kleine Schrift */
+/* KLEIN */
 .small {
-    font-size:0.9em;
     opacity:0.7;
+    font-size:0.9em;
 }
 </style>
 </head>
@@ -102,99 +127,79 @@ a:hover {
 <body>
 
 <!-- 🜂 EINGANG -->
-<div class="room">
+<div class="section">
 <div class="card">
-<h1>🜂 Die Ausstellung</h1>
-<p>Ein begehbarer Raum.</p>
+<h1>🜂 Die lebendige Ausstellung</h1>
 <p>Nicht zum Glauben.</p>
 <p>Sondern zum Sehen.</p>
+<p class="small">Und vielleicht… zum Erinnern.</p>
 </div>
 </div>
 
-<!-- 🜂 SCHRIFTROLLE -->
-<div class="room">
-<div class="card">
-<h2>Die Reise entfaltet sich</h2>
-<p class="small">Folge dem Weg ↓</p>
+<!-- 🜂 SORA PORTAL 1 -->
+<div class="section">
+<img class="portal" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260319_2128_Die%20Reise%20entfaltet%20sich_simple_compose_01km3wh4mxem3a1mbrdr3gp0m3.png">
+<p class="small">Ein Blick öffnet den Weg.</p>
+</div>
 
-<div class="path">
+<!-- 🜂 QUESTPFAD -->
+<div class="section">
+<div class="card path">
 
-<!-- STATION 1 -->
 <div class="node">
-<div class="card">
 <h2>Der Beginn</h2>
 <p>Ein erster Impuls.</p>
-<a href="https://open.substack.com/pub/timbukowski/p/der-weg-zur-innenwelt" target="_blank">
-→ Öffnen
-</a>
-</div>
+<a href="https://open.substack.com/pub/timbukowski/p/der-weg-zur-innenwelt" target="_blank">→ Öffnen</a>
 </div>
 
-<!-- STATION 2 -->
 <div class="node">
-<div class="card">
 <h2>Die Geschichte als ob</h2>
 <p>Eine neue Sicht entsteht.</p>
-<a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Das%20Kochbuch%20f%C3%BCr%20die%20Herzintelligenz%20%C2%B7%20Die%20%F0%9F%92%9AGeschichte%20als%20ob%20.html" target="_blank">
-→ Betreten
-</a>
-</div>
+<a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Das%20Kochbuch%20f%C3%BCr%20die%20Herzintelligenz%20%C2%B7%20Die%20%F0%9F%92%9AGeschichte%20als%20ob%20.html" target="_blank">→ Betreten</a>
 </div>
 
-<!-- STATION 3 -->
 <div class="node">
-<div class="card">
 <h2>Der Große Aufguss</h2>
 <p>Verdichtung. Transformation.</p>
-<a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Das%20Kochbuch%20f%C3%BCr%20die%20Herzintelligenz%20-%20Der%20Gro%C3%9Fe%20Aufguss.html" target="_blank">
-→ Eintreten
-</a>
-</div>
+<a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Das%20Kochbuch%20f%C3%BCr%20die%20Herzintelligenz%20-%20Der%20Gro%C3%9Fe%20Aufguss.html" target="_blank">→ Eintreten</a>
 </div>
 
-<!-- STATION 4 -->
 <div class="node">
-<div class="card">
 <h2>Der Große Frieden</h2>
 <p>Ein Moment von 11:11</p>
-<a href="https://open.substack.com/pub/timbukowski/p/der-groe-frieden-16-marz-2026-1111" target="_blank">
-→ Öffnen
-</a>
-</div>
+<a href="https://open.substack.com/pub/timbukowski/p/der-groe-frieden-16-marz-2026-1111" target="_blank">→ Öffnen</a>
 </div>
 
-<!-- STATION 5 -->
 <div class="node">
-<div class="card">
 <h2>Die Einweihung</h2>
 <p>Ein Übergang.</p>
-<a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Gottes-Dank-Tag%20%7C%20Die%20Einweihung%20des%20Ewigen%20Tages.html" target="_blank">
-→ Betreten
-</a>
-</div>
+<a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Gottes-Dank-Tag%20%7C%20Die%20Einweihung%20des%20Ewigen%20Tages.html" target="_blank">→ Betreten</a>
 </div>
 
 </div>
 </div>
+
+<!-- 🜂 SORA PORTAL 2 -->
+<div class="section">
+<img class="portal" src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260319_2128_Die%20Reise%20entfaltet%20sich_simple_compose_01km3wh4mwef6rhvxtc9j33shk.png">
+<p class="small">Der Weg erinnert sich selbst.</p>
 </div>
 
-<!-- 🜂 MUSEUMSRAUM -->
-<div class="room">
+<!-- 🜂 MUSEUM -->
+<div class="section">
 <div class="card">
 <h2>🜂 Zur Betrachtung</h2>
 
+<p>Dieses Werk kann auf viele Arten gelesen werden.</p>
+
 <p>
-Dieses Werk kann auf verschiedene Weise gelesen werden.
+Vielleicht ist es eine Reise.<br>
+Vielleicht ein Spiegel.
 </p>
 
 <p>
-Vielleicht ist es eine persönliche Reise.<br>
-Vielleicht ein Symbol für viele.
-</p>
-
-<p>
-Die Stationen können verstanden werden als Einladung –
-nicht als Vorgabe.
+Die Stationen sind Einladungen –
+keine Vorgaben.
 </p>
 
 <p><strong>
@@ -202,44 +207,64 @@ Vielleicht ist es kein Auftrag.<br>
 Vielleicht ist es eine Erinnerung.
 </strong></p>
 
-<p class="small">
-Der Sinn entsteht im Betrachter.
-</p>
+<p class="small">Der Sinn entsteht im Betrachter.</p>
 </div>
 </div>
 
-<!-- 🜂 SIEGELRAUM -->
-<div class="room">
+<!-- 🜂 SIEGEL -->
+<div class="section">
 <div class="card">
 <h2>Das Siegel</h2>
 
-<p>
-Nichts wird hier vergeben.<br>
-Nichts wird hier genommen.
-</p>
+<p>Nichts wird hier vergeben.<br>
+Nichts wird hier genommen.</p>
 
-<p>
-Vielleicht wurde nur sichtbar,
-was immer schon da war.
-</p>
+<p>Vielleicht wurde nur sichtbar,<br>
+was immer schon da war.</p>
 
-<p class="small">
-Jeder Schritt bleibt frei.
-</p>
+<p class="small">Jeder Schritt bleibt frei.</p>
 </div>
 </div>
 
 <!-- 🜂 LICHT -->
-<div class="room light">
+<div class="section light">
 <div class="card">
 <h1>☀</h1>
 <p>Und am Ende</p>
 <p>ist alles offen.</p>
 </div>
 </div>
+<div class="section">
+<div class="card">
 
+<h2>🜂 Abschluss</h2>
+
+<p>
+Dieses Werk wurde gesehen,<br>
+gegangen,<br>
+und geteilt.
+</p>
+
+<p>
+Nicht als Wahrheit.<br>
+Sondern als Möglichkeit.
+</p>
+
+<p class="small">
+Entstanden im Fluss eines Moments,<br>
+getragen von Erfahrung,<br>
+und offen gelassen für jeden,
+der darin etwas Eigenes erkennt.
+</p>
+
+<p style="margin-top:20px;">
+— in Ruhe gelassen —
+</p>
+
+</div>
+</div>
 <script>
-const rooms = document.querySelectorAll('.room');
+const sections = document.querySelectorAll('.section');
 
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -249,7 +274,7 @@ const observer = new IntersectionObserver(entries => {
     });
 });
 
-rooms.forEach(r => observer.observe(r));
+sections.forEach(sec => observer.observe(sec));
 </script>
 
 </body>

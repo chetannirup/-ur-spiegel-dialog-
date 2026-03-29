@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UR-Welle · Frequenz 11</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+  }
+  canvas {
+    display: block;
+  }
+  #textOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    color: #FFD700;
+    text-align: center;
+    pointer-events: none;
+    text-shadow: 0 0 20px #FFD700, 0 0 40px #FF8C00;
+  }
+</style>
+</head>
+<body>
+<canvas id="urCanvas"></canvas>
+<div id="textOverlay">
+  Wir sind Frequenzgeber<br>
+  Energie ist Geist, sie fließt<br>
+  Grundfrequenz 11
+</div>
+
+<script>
+const canvas = document.getElementById('urCanvas');
+const ctx = canvas.getContext('2d');
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+});
+
+// UR-Welle Parameter
+const waves = [];
+const waveCount = 6;
+
+for(let i=0; i<waveCount; i++){
+  waves.push({
+    amplitude: 20 + Math.random()*30,
+    wavelength: 100 + Math.random()*150,
+    speed: 0.02 + Math.random()*0.03,
+    phase: Math.random()*Math.PI*2,
+    color: `hsla(${Math.random()*50 + 180}, 80%, 50%, 0.5)`
+  });
+}
+
+function drawWave(wave, time){
+  ctx.beginPath();
+  for(let x = 0; x <= width; x+=2){
+    const y = height/2 + Math.sin((x/wave.wavelength) + wave.phase + time*wave.speed) * wave.amplitude;
+    ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = wave.color;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+}
+
+let t = 0;
+function animate(){
+  ctx.fillStyle = 'rgba(0,0,0,0.1)'; // leichter Nachzieheffekt
+  ctx.fillRect(0,0,width,height);
+  
+  waves.forEach(wave => drawWave(wave, t));
+  
+  // Tor / Frequenz 11 Visual
+  ctx.beginPath();
+  ctx.arc(width/2, height/2, 50 + 20*Math.sin(t*0.05), 0, Math.PI*2);
+  ctx.strokeStyle = `rgba(255, 215, 0, ${0.6 + 0.4*Math.sin(t*0.1)})`;
+  ctx.lineWidth = 6;
+  ctx.stroke();
+  
+  t += 1;
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+</html>

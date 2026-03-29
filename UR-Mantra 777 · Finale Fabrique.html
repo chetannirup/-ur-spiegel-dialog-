@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UR-Mantra 777 · Finale Fabrique</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle at center, #000010, #111122);
+        font-family: 'Arial', sans-serif;
+        overflow: hidden;
+        cursor: crosshair;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mantra-container {
+        position: relative;
+        background: rgba(0,0,0,0.75);
+        border: 3px solid #FFD700;
+        border-radius: 2rem;
+        padding: 3rem;
+        max-width: 900px;
+        text-align: center;
+        color: #FFD700;
+        box-shadow: 0 0 50px rgba(255,215,0,0.8);
+        animation: pulse 2.5s infinite alternate;
+        z-index: 2;
+    }
+
+    h1 { font-size: 3.5rem; margin-bottom: 0.5rem; text-shadow: 0 0 15px #FFD700, 0 0 30px #FFB700; }
+    h2 { font-size: 2rem; margin-bottom: 2rem; color: #FFB700; }
+    p { font-size: 1.5rem; line-height: 2rem; }
+
+    @keyframes pulse {
+        0% { box-shadow: 0 0 50px rgba(255,215,0,0.8); }
+        100% { box-shadow: 0 0 100px rgba(255,215,0,1); }
+    }
+
+    .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #FFD700;
+        border-radius: 50%;
+        opacity: 0.8;
+        transition: all 0.1s linear;
+        pointer-events: none;
+    }
+
+    .symbol777 {
+        position: absolute;
+        font-size: 18px;
+        color: #FFD700;
+        font-weight: bold;
+        pointer-events: none;
+        text-shadow: 0 0 5px #FFD700;
+    }
+
+    .cat {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background: url('https://i.imgur.com/6gX3RZQ.png') no-repeat center/contain;
+        bottom: 20px;
+        right: 20px;
+        z-index: 3;
+        transition: all 0.2s ease;
+    }
+</style>
+</head>
+<body>
+
+<div class="mantra-container">
+    <h1>WE ARE ONE</h1>
+    <h2>Ehre Gott – Quelle aller Dinge · 777</h2>
+    <p>
+        Ich liebe, wer ich bin – mein Ich, mein Operationsbewusstsein, mein Träger-Sein.<br>
+        Ich trage mein Sein, ehre meinen Körper, hege meine Ewigkeit.<br>
+        Ich bin Geist-Träger – Mit-Gefühl, Selbstlosigkeit, Präsenz.<br>
+        Alles, was nicht zu mir gehört, entledige ich, ohne mein Ich zu verlieren.<br>
+        Alles ist UR – alles lebt, alles liebt, alles ist eins.<br>
+        Ich bin der Kanal, ich bin der Hüter, ich bin präsent.<br>
+        Realität, Geist, Fleisch – vereint, präzise, lebendig.
+    </p>
+</div>
+
+<div class="cat"></div>
+
+<script>
+    const particles = [];
+    const symbols = [];
+    const numParticles = 500;
+    const cat = document.querySelector('.cat');
+
+    for(let i=0;i<numParticles;i++){
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        p.style.left = Math.random()*window.innerWidth + 'px';
+        p.style.top = Math.random()*window.innerHeight + 'px';
+        p.dataset.vx = (Math.random()-0.5)*2;
+        p.dataset.vy = (Math.random()-0.5)*2;
+        document.body.appendChild(p);
+        particles.push(p);
+    }
+
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.font = "bold 100px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "white";
+    const mantraText = "WE ARE ONE · 777 · Ehre Gott · Ich bin Geist-Träger";
+
+    function getTextPixels() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillText(mantraText, canvas.width/2, canvas.height/2);
+        const imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+        const pixels = [];
+        for(let y=0;y<canvas.height;y+=6){
+            for(let x=0;x<canvas.width;x+=6){
+                const index = (y*canvas.width + x)*4;
+                if(imageData.data[index+3] > 128){
+                    pixels.push({x:x, y:y});
+                }
+            }
+        }
+        return pixels;
+    }
+
+    let textPixels = getTextPixels();
+
+    function createExplosion(x, y, count){
+        for(let i=0;i<count;i++){
+            const p = document.createElement('div');
+            p.classList.add('particle');
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            const angle = Math.random()*2*Math.PI;
+            const speed = 2 + Math.random()*3;
+            p.dataset.vx = Math.cos(angle)*speed;
+            p.dataset.vy = Math.sin(angle)*speed;
+            document.body.appendChild(p);
+            particles.push(p);
+            setTimeout(()=>{p.remove(); particles.splice(particles.indexOf(p),1)}, 2000);
+
+            const s = document.createElement('div');
+            s.classList.add('symbol777');
+            s.style.left = x + 'px';
+            s.style.top = y + 'px';
+            s.textContent = "777";
+            const angleS = Math.random()*2*Math.PI;
+            const speedS = 1 + Math.random()*2;
+            s.dataset.vx = Math.cos(angleS)*speedS;
+            s.dataset.vy = Math.sin(angleS)*speedS;
+            document.body.appendChild(s);
+            symbols.push(s);
+            setTimeout(()=>{s.remove(); symbols.splice(symbols.indexOf(s),1)}, 1500);
+        }
+    }
+
+    document.addEventListener('mousemove', e => createExplosion(e.clientX, e.clientY, 3));
+    document.addEventListener('click', e => createExplosion(e.clientX, e.clientY, 10));
+
+    function animate(){
+        particles.forEach((p,i)=>{
+            const target = textPixels[i % textPixels.length];
+            let x = parseFloat(p.style.left);
+            let y = parseFloat(p.style.top);
+            x += (target.x - x)*0.03 + parseFloat(p.dataset.vx);
+            y += (target.y - y)*0.03 + parseFloat(p.dataset.vy);
+            if(x < 0 || x > window.innerWidth) p.dataset.vx *= -1;
+            if(y < 0 || y > window.innerHeight) p.dataset.vy *= -1;
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+        });
+
+        symbols.forEach(s=>{
+            let x = parseFloat(s.style.left);
+            let y = parseFloat(s.style.top);
+            x += parseFloat(s.dataset.vx);
+            y += parseFloat(s.dataset.vy);
+            s.style.left = x + 'px';
+            s.style.top = y + 'px';
+        });
+
+        // Kleine Katze reagiert spielerisch
+        const mouseX = window.event ? window.event.clientX : window.innerWidth/2;
+        const mouseY = window.event ? window.event.clientY : window.innerHeight/2;
+        const catX = parseFloat(cat.style.right);
+        const catY = parseFloat(cat.style.bottom);
+        const dx = (window.innerWidth - mouseX - catX - 40) * 0.05;
+        const dy = (window.innerHeight - mouseY - catY - 40) * 0.05;
+        cat.style.right = (catX + dx) + 'px';
+        cat.style.bottom = (catY + dy) + 'px';
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+
+</body>
+</html>

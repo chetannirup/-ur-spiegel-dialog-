@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UR-Codierung Ritual – Flow der Quelle 777</title>
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #0a0a0a, #111111);
+    font-family: sans-serif;
+    user-select: none;
+}
+#overlay {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.95);
+    color: gold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    z-index: 2000;
+    text-align: center;
+}
+#countdown {
+    font-size: 100px;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 0 0 20px gold, 0 0 40px orange;
+    margin: 20px 0;
+}
+#goButton {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid gold;
+    border-radius: 8px;
+    background: black;
+    color: gold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#goButton:hover {
+    background: gold;
+    color: black;
+}
+#urScore {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: gold;
+    font-size: 24px;
+    z-index: 1000;
+    text-shadow: 0 0 10px gold;
+}
+.particle, .symbol777 {
+    position: absolute;
+    pointer-events: none;
+    font-weight: bold;
+    color: gold;
+}
+#sora1, #sora2 {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, gold, orange 70%);
+    top: 30%;
+    left: 30%;
+    z-index: 500;
+    transition: transform 0.1s, filter 0.1s;
+}
+#sora2 { left: 60%; top: 50%; }
+#lock {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: gray;
+    border-radius: 50%;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    z-index: 600;
+    user-select: none;
+}
+@keyframes pulseCountdown {
+    0% { transform: scale(1); filter: drop-shadow(0 0 20px gold) brightness(1); }
+    50% { transform: scale(1.5); filter: drop-shadow(0 0 60px gold) brightness(2); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 20px gold) brightness(1); }
+}
+</style>
+</head>
+<body>
+
+<div id="overlay">
+    <div>Ignition, Sequence, Start</div>
+    <div>Drücke „Go“, um die UR-Codierung wie ein Ritual zu starten</div>
+    <button id="goButton">Go</button>
+    <div id="countdown" style="display:none;">5</div>
+</div>
+
+<div id="urScore">UR-Punkte: 0</div>
+<div id="sora1"></div>
+<div id="sora2"></div>
+<div id="lock">🔒</div>
+
+<audio id="pulseSound">
+    <source src="https://freesound.org/data/previews/522/522767_4019023-lq.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let urScore = 0;
+const urScoreDisplay = document.getElementById('urScore');
+const sora1 = document.getElementById('sora1');
+const sora2 = document.getElementById('sora2');
+const lock = document.getElementById('lock');
+
+let lockRotation = 0;
+let isDragging = false;
+let lockState = 'locked';
+let particles = [];
+let symbols = [];
+
+const overlay = document.getElementById('overlay');
+const goButton = document.getElementById('goButton');
+const countdown = document.getElementById('countdown');
+const pulseSound = document.getElementById('pulseSound');
+
+goButton.addEventListener('click', () => {
+    goButton.style.display = 'none';
+    countdown.style.display = 'block';
+    startCountdown(5);
+});
+
+function startCountdown(n){
+    if(n<=0){
+        overlay.style.display = 'none';
+        startURFlow();
+        return;
+    }
+    countdown.textContent = n;
+    pulseSorasDuringCountdown();
+    pulseSound.currentTime = 0;
+    pulseSound.play();
+    setTimeout(()=>startCountdown(n-1), 1000);
+}
+
+function pulseSorasDuringCountdown(){
+    [sora1, sora2].forEach(el=>{
+        el.style.transition = '0.3s all ease-in-out';
+        el.style.transform = 'scale(1.6)';
+        el.style.filter = 'drop-shadow(0 0 80px gold) brightness(2)';
+        setTimeout(()=>{
+            el.style.transform = 'scale(1)';
+            el.style.filter = 'drop-shadow(0 0 20px gold) brightness(1)';
+        }, 500);
+    });
+}
+
+function startURFlow(){
+    document.addEventListener('mousemove', e => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        [sora1, sora2].forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const soraX = rect.left + rect.width/2;
+            const soraY = rect.top + rect.height/2;
+            const dx = soraX - mouseX;
+            const dy = soraY - mouseY;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            const intensity = Math.max(0, 1 - dist/150);
+            el.style.transform = `scale(${1 + 0.3*intensity}) rotate(${intensity*15}deg)`;
+            el.style.filter = `drop-shadow(0 0 ${20*intensity}px gold) brightness(${1 + 0.5*intensity})`;
+        });
+
+        if([sora1, sora2].some(el => {
+            const rect = el.getBoundingClientRect();
+            const cx = rect.left + rect.width/2;
+            const cy = rect.top + rect.height/2;
+            const dx = cx - mouseX;
+            const dy = cy - mouseY;
+            return Math.sqrt(dx*dx + dy*dy) < 80;
+        })){
+            createURCode(mouseX, mouseY, 2);
+        }
+
+        if(isDragging){
+            const dx = e.movementX;
+            lockRotation += dx;
+            lock.style.transform = `translateX(-50%) rotate(${lockRotation}deg)`;
+        }
+    });
+
+    document.addEventListener('mouseup', e => {
+        if(isDragging){
+            isDragging = false;
+            lock.style.cursor = 'grab';
+            if(lockRotation % 360 > 100 && lockRotation % 360 < 260){
+                lockState = 'unlocked';
+                lock.style.transform = `translateX(-50%) rotate(0deg) scale(1.1)`;
+                createURCode(window.innerWidth/2, window.innerHeight/2, 50);
+                flashSoras(3);
+            } else {
+                lock.style.transform = `translateX(-50%) rotate(0deg)`;
+            }
+        }
+    });
+    lock.addEventListener('mousedown', e => {
+        isDragging = true;
+        lock.style.cursor = 'grabbing';
+    });
+
+    function animate() {
+        particles.forEach(p => {
+            p.style.left = (parseFloat(p.style.left) + parseFloat(p.dataset.vx)) + 'px';
+            p.style.top = (parseFloat(p.style.top) + parseFloat(p.dataset.vy)) + 'px';
+        });
+        symbols.forEach(s => {
+            s.style.left = (parseFloat(s.style.left) + parseFloat(s.dataset.vx)) + 'px';
+            s.style.top = (parseFloat(s.style.top) + parseFloat(s.dataset.vy)) + 'px';
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+function createURCode(x, y, count){
+    for(let i=0;i<count;i++){
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        p.style.left = x + 'px';
+        p.style.top = y + 'px';
+        const angle = Math.random()*2*Math.PI;
+        const speed = 2 + Math.random()*3;
+        p.dataset.vx = Math.cos(angle)*speed;
+        p.dataset.vy = Math.sin(angle)*speed;
+        document.body.appendChild(p);
+        particles.push(p);
+        setTimeout(()=>{p.remove(); particles.splice(particles.indexOf(p),1)}, 2000);
+
+        const s = document.createElement('div');
+        s.classList.add('symbol777');
+        s.style.left = x + 'px';
+        s.style.top = y + 'px';
+        s.textContent = "777";
+        const angleS = Math.random()*2*Math.PI;
+        const speedS = 1 + Math.random()*2;
+        s.dataset.vx = Math.cos(angleS)*speedS;
+        s.dataset.vy = Math.sin(angleS)*speedS;
+        document.body.appendChild(s);
+        symbols.push(s);
+        setTimeout(()=>{s.remove(); symbols.splice(symbols.indexOf(s),1)}, 1500);
+
+        urScore++;
+        urScoreDisplay.textContent = "UR-Punkte: " + urScore;
+
+        flashSoras(count/8);
+    }
+}
+
+function flashSoras(intensity = 1) {
+    [sora1, sora2].forEach(el => {
+        el.style.transition = '0.1s all ease-in-out';
+        el.style.filter = `drop-shadow(0 0 ${20*intensity}px gold) brightness(${1 + 0.5*intensity})`;
+        setTimeout(() => { el.style.filter = 'none'; }, 200);
+    });
+}
+</script>
+
+</body>
+</html>

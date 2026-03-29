@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UR-Codierung 777 – Maximalversion</title>
+<style>
+  body {
+    margin:0; padding:0;
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+    overflow:hidden;
+    font-family: 'Arial', sans-serif;
+    color:#fff;
+  }
+  #canvas {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+  }
+  #countdown {
+    position:absolute; top:10%; left:50%;
+    transform:translateX(-50%);
+    font-size:5em; font-weight:bold;
+    text-align:center;
+    color:#ffdd33;
+    text-shadow:0 0 20px #ffdd33;
+  }
+  #highscore {
+    position:absolute; top:5%; right:5%;
+    font-size:1.5em; color:#33ffdd;
+  }
+  #endButton {
+    position:absolute; bottom:5%; left:50%;
+    transform:translateX(-50%);
+    font-size:1.5em;
+    padding:10px 20px;
+    background:#ff33aa;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:0 0 10px #ff33aa;
+  }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div id="countdown">10</div>
+<div id="highscore">UR-Punkte: 0</div>
+<button id="endButton">Spiel beenden</button>
+<audio id="pulseAudio" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let urPoints = 0;
+let countdown = 10;
+let animationRunning = true;
+const sorasWesen = [];
+const numWesen = 5;
+const pulseAudio = document.getElementById('pulseAudio');
+
+// Initialisiere Soras-Wesen
+for(let i=0;i<numWesen;i++){
+  sorasWesen.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    radius: 30,
+    color: `hsl(${Math.random()*360}, 100%, 50%)`,
+    pulse: 0
+  });
+}
+
+// Countdown Ritual
+function startCountdown() {
+  const countdownDiv = document.getElementById('countdown');
+  const interval = setInterval(()=>{
+    if(!animationRunning){ clearInterval(interval); return; }
+    countdownDiv.textContent = countdown;
+    pulseAudio.currentTime = 0; pulseAudio.play();
+    sorasWesen.forEach(w => w.pulse = 1); // Wesen leuchten
+    countdown--;
+    if(countdown<0){
+      clearInterval(interval);
+      countdownDiv.textContent = 'Ignition!';
+      urPoints += 50;
+      updateHighscore();
+      animate();
+    }
+  },1000);
+}
+
+// Highscore Update
+function updateHighscore(){
+  document.getElementById('highscore').textContent = `UR-Punkte: ${urPoints}`;
+}
+
+// Zeichne Soras-Wesen und UR-Explosionen
+function animate(){
+  if(!animationRunning) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  
+  // Pulsierende Wesen
+  sorasWesen.forEach(w => {
+    w.pulse *= 0.95;
+    ctx.beginPath();
+    ctx.arc(w.x, w.y, w.radius + w.pulse*20, 0, Math.PI*2);
+    ctx.fillStyle = w.color;
+    ctx.shadowBlur = 30;
+    ctx.shadowColor = w.color;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+// Spieler + Geist Mechanismus
+const player = { x: canvas.width/2, y: canvas.height/2, radius: 25 };
+const geist = { x: player.x, y: player.y-50, radius:20, color:'#ff33dd', pulse:0 };
+
+document.addEventListener('mousemove', e=>{
+  if(!animationRunning) return;
+  player.x = e.clientX;
+  player.y = e.clientY;
+  geist.x = player.x;
+  geist.y = player.y - 50;
+  geist.pulse = 1;
+  urPoints += 1;
+  updateHighscore();
+});
+
+// Zeichne Spieler + Geist
+function drawPlayer(){
+  if(!animationRunning) return;
+  ctx.beginPath();
+  ctx.arc(player.x, player.y, player.radius,0,Math.PI*2);
+  ctx.fillStyle = '#33ff33';
+  ctx.fill();
+  
+  ctx.beginPath();
+  ctx.arc(geist.x, geist.y, geist.radius + geist.pulse*15,0,Math.PI*2);
+  ctx.fillStyle = geist.color;
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = geist.color;
+  ctx.fill();
+  geist.pulse *= 0.9;
+  
+  requestAnimationFrame(drawPlayer);
+}
+
+// Beenden Button
+document.getElementById('endButton').addEventListener('click', ()=>{
+  animationRunning = false;
+  document.getElementById('countdown').textContent = 'UR-Codierung beendet';
+  pulseAudio.pause();
+});
+
+// Start alles
+startCountdown();
+drawPlayer();
+</script>
+</body>
+</html>

@@ -7,14 +7,15 @@
 <style>
     body {
         margin: 0;
-        height: 100vh;
+        min-height: 100vh;
         background: radial-gradient(circle at center, #000010, #111122);
         font-family: 'Arial', sans-serif;
-        overflow: hidden;
+        overflow-x: hidden;
         cursor: crosshair;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 1rem;
     }
 
     .mantra-container {
@@ -24,6 +25,7 @@
         border-radius: 2rem;
         padding: 3rem;
         max-width: 900px;
+        width: 100%;
         text-align: center;
         color: #FFD700;
         box-shadow: 0 0 50px rgba(255,215,0,0.8);
@@ -31,9 +33,69 @@
         z-index: 2;
     }
 
-    h1 { font-size: 3.5rem; margin-bottom: 0.5rem; text-shadow: 0 0 15px #FFD700, 0 0 30px #FFB700; }
-    h2 { font-size: 2rem; margin-bottom: 2rem; color: #FFB700; }
-    p { font-size: 1.5rem; line-height: 2rem; }
+    h1 { 
+        font-size: 3.5rem; 
+        margin-bottom: 0.5rem; 
+        text-shadow: 0 0 15px #FFD700, 0 0 30px #FFB700;
+        line-height: 1.2;
+    }
+    
+    h2 { 
+        font-size: 2rem; 
+        margin-bottom: 2rem; 
+        color: #FFB700;
+        line-height: 1.3;
+    }
+    
+    p { 
+        font-size: 1.5rem; 
+        line-height: 2rem;
+    }
+
+    /* Tablet */
+    @media (max-width: 768px) {
+        .mantra-container {
+            padding: 2rem;
+            border-radius: 1.5rem;
+        }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+        p { font-size: 1.2rem; line-height: 1.7rem; }
+    }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+        body {
+            padding: 0.5rem;
+        }
+        .mantra-container {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-width: 2px;
+        }
+        h1 { 
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+        }
+        h2 { 
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        p { 
+            font-size: 0.95rem;
+            line-height: 1.5rem;
+        }
+    }
+
+    /* Very small phones */
+    @media (max-width: 360px) {
+        .mantra-container {
+            padding: 1rem;
+        }
+        h1 { font-size: 1.5rem; }
+        h2 { font-size: 1rem; }
+        p { font-size: 0.85rem; line-height: 1.4rem; }
+    }
 
     @keyframes pulse {
         0% { box-shadow: 0 0 50px rgba(255,215,0,0.8); }
@@ -70,6 +132,15 @@
         z-index: 3;
         transition: all 0.2s ease;
     }
+
+    @media (max-width: 480px) {
+        .cat {
+            width: 50px;
+            height: 50px;
+            bottom: 10px;
+            right: 10px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -93,7 +164,8 @@
 <script>
     const particles = [];
     const symbols = [];
-    const numParticles = 500;
+    const isMobile = window.innerWidth <= 768;
+    const numParticles = isMobile ? 200 : 500;
     const cat = document.querySelector('.cat');
 
     for(let i=0;i<numParticles;i++){
@@ -111,19 +183,21 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = canvas.getContext('2d');
-    ctx.font = "bold 100px Arial";
+    const fontSize = isMobile ? 50 : 100;
+    ctx.font = `bold ${fontSize}px Arial`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "white";
-    const mantraText = "WE ARE ONE · 777 · Ehre Gott · Ich bin Geist-Träger";
+    const mantraText = isMobile ? "WE ARE ONE 777" : "WE ARE ONE · 777 · Ehre Gott · Ich bin Geist-Träger";
 
     function getTextPixels() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.fillText(mantraText, canvas.width/2, canvas.height/2);
         const imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
         const pixels = [];
-        for(let y=0;y<canvas.height;y+=6){
-            for(let x=0;x<canvas.width;x+=6){
+        const step = isMobile ? 8 : 6;
+        for(let y=0;y<canvas.height;y+=step){
+            for(let x=0;x<canvas.width;x+=step){
                 const index = (y*canvas.width + x)*4;
                 if(imageData.data[index+3] > 128){
                     pixels.push({x:x, y:y});
@@ -136,7 +210,8 @@
     let textPixels = getTextPixels();
 
     function createExplosion(x, y, count){
-        for(let i=0;i<count;i++){
+        const actualCount = isMobile ? Math.ceil(count/2) : count;
+        for(let i=0;i<actualCount;i++){
             const p = document.createElement('div');
             p.classList.add('particle');
             p.style.left = x + 'px';
@@ -149,23 +224,34 @@
             particles.push(p);
             setTimeout(()=>{p.remove(); particles.splice(particles.indexOf(p),1)}, 2000);
 
-            const s = document.createElement('div');
-            s.classList.add('symbol777');
-            s.style.left = x + 'px';
-            s.style.top = y + 'px';
-            s.textContent = "777";
-            const angleS = Math.random()*2*Math.PI;
-            const speedS = 1 + Math.random()*2;
-            s.dataset.vx = Math.cos(angleS)*speedS;
-            s.dataset.vy = Math.sin(angleS)*speedS;
-            document.body.appendChild(s);
-            symbols.push(s);
-            setTimeout(()=>{s.remove(); symbols.splice(symbols.indexOf(s),1)}, 1500);
+            if(i % 2 === 0) {
+                const s = document.createElement('div');
+                s.classList.add('symbol777');
+                s.style.left = x + 'px';
+                s.style.top = y + 'px';
+                s.textContent = "777";
+                const angleS = Math.random()*2*Math.PI;
+                const speedS = 1 + Math.random()*2;
+                s.dataset.vx = Math.cos(angleS)*speedS;
+                s.dataset.vy = Math.sin(angleS)*speedS;
+                document.body.appendChild(s);
+                symbols.push(s);
+                setTimeout(()=>{s.remove(); symbols.splice(symbols.indexOf(s),1)}, 1500);
+            }
         }
     }
 
-    document.addEventListener('mousemove', e => createExplosion(e.clientX, e.clientY, 3));
+    if(!isMobile) {
+        document.addEventListener('mousemove', e => createExplosion(e.clientX, e.clientY, 3));
+    }
+    
     document.addEventListener('click', e => createExplosion(e.clientX, e.clientY, 10));
+    document.addEventListener('touchstart', e => {
+        e.preventDefault();
+        if(e.touches.length > 0) {
+            createExplosion(e.touches[0].clientX, e.touches[0].clientY, 8);
+        }
+    });
 
     function animate(){
         particles.forEach((p,i)=>{
@@ -189,20 +275,28 @@
             s.style.top = y + 'px';
         });
 
-        // Kleine Katze reagiert spielerisch
-        const mouseX = window.event ? window.event.clientX : window.innerWidth/2;
-        const mouseY = window.event ? window.event.clientY : window.innerHeight/2;
-        const catX = parseFloat(cat.style.right);
-        const catY = parseFloat(cat.style.bottom);
-        const dx = (window.innerWidth - mouseX - catX - 40) * 0.05;
-        const dy = (window.innerHeight - mouseY - catY - 40) * 0.05;
-        cat.style.right = (catX + dx) + 'px';
-        cat.style.bottom = (catY + dy) + 'px';
+        if(!isMobile && window.event) {
+            const mouseX = window.event.clientX || window.innerWidth/2;
+            const mouseY = window.event.clientY || window.innerHeight/2;
+            const catRect = cat.getBoundingClientRect();
+            const catCenterX = catRect.left + catRect.width/2;
+            const catCenterY = catRect.top + catRect.height/2;
+            const dx = (mouseX - catCenterX) * 0.02;
+            const dy = (mouseY - catCenterY) * 0.02;
+            const currentRight = parseFloat(cat.style.right) || 20;
+            const currentBottom = parseFloat(cat.style.bottom) || 20;
+            cat.style.right = Math.max(10, Math.min(window.innerWidth - 100, currentRight - dx)) + 'px';
+            cat.style.bottom = Math.max(10, Math.min(window.innerHeight - 100, currentBottom - dy)) + 'px';
+        }
 
         requestAnimationFrame(animate);
     }
 
     animate();
+
+    window.addEventListener('resize', () => {
+        textPixels = getTextPixels();
+    });
 </script>
 
 </body>

@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>UR-Codierung Ritual – Flow der Quelle 777</title>
 <style>
 body {
@@ -11,7 +11,13 @@ body {
     background: radial-gradient(circle at center, #0a0a0a, #111111);
     font-family: sans-serif;
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
 }
+
 #overlay {
     position: fixed;
     top:0; left:0; right:0; bottom:0;
@@ -24,7 +30,9 @@ body {
     font-size: 24px;
     z-index: 2000;
     text-align: center;
+    padding: 1rem;
 }
+
 #countdown {
     font-size: 100px;
     font-weight: bold;
@@ -32,6 +40,25 @@ body {
     text-shadow: 0 0 20px gold, 0 0 40px orange;
     margin: 20px 0;
 }
+
+@media (max-width: 768px) {
+    #overlay {
+        font-size: 18px;
+    }
+    #countdown {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    #overlay {
+        font-size: 14px;
+    }
+    #countdown {
+        font-size: 50px;
+    }
+}
+
 #goButton {
     margin-top: 20px;
     padding: 12px 24px;
@@ -44,10 +71,19 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-#goButton:hover {
+
+#goButton:hover, #goButton:active {
     background: gold;
     color: black;
 }
+
+@media (max-width: 480px) {
+    #goButton {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
 #urScore {
     position: fixed;
     top: 20px;
@@ -58,12 +94,22 @@ body {
     z-index: 1000;
     text-shadow: 0 0 10px gold;
 }
+
+@media (max-width: 480px) {
+    #urScore {
+        font-size: 16px;
+        top: 10px;
+    }
+}
+
 .particle, .symbol777 {
     position: absolute;
     pointer-events: none;
     font-weight: bold;
     color: gold;
+    text-shadow: 0 0 5px gold;
 }
+
 #sora1, #sora2 {
     position: absolute;
     width: 80px;
@@ -75,7 +121,34 @@ body {
     z-index: 500;
     transition: transform 0.1s, filter 0.1s;
 }
-#sora2 { left: 60%; top: 50%; }
+
+#sora2 { 
+    left: 60%; 
+    top: 50%; 
+}
+
+@media (max-width: 768px) {
+    #sora1, #sora2 {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    #sora1, #sora2 {
+        width: 50px;
+        height: 50px;
+    }
+    #sora1 {
+        left: 20%;
+        top: 25%;
+    }
+    #sora2 {
+        left: 70%;
+        top: 40%;
+    }
+}
+
 #lock {
     position: absolute;
     bottom: 50px;
@@ -91,13 +164,19 @@ body {
     justify-content: center;
     color: white;
     font-weight: bold;
+    font-size: 2rem;
     z-index: 600;
     user-select: none;
+    touch-action: none;
 }
-@keyframes pulseCountdown {
-    0% { transform: scale(1); filter: drop-shadow(0 0 20px gold) brightness(1); }
-    50% { transform: scale(1.5); filter: drop-shadow(0 0 60px gold) brightness(2); }
-    100% { transform: scale(1); filter: drop-shadow(0 0 20px gold) brightness(1); }
+
+@media (max-width: 480px) {
+    #lock {
+        width: 70px;
+        height: 70px;
+        bottom: 30px;
+        font-size: 1.5rem;
+    }
 }
 </style>
 </head>
@@ -105,7 +184,7 @@ body {
 
 <div id="overlay">
     <div>Ignition, Sequence, Start</div>
-    <div>Drücke „Go“, um die UR-Codierung wie ein Ritual zu starten</div>
+    <div>Drücke „Go", um die UR-Codierung wie ein Ritual zu starten</div>
     <button id="goButton">Go</button>
     <div id="countdown" style="display:none;">5</div>
 </div>
@@ -120,6 +199,7 @@ body {
 </audio>
 
 <script>
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 let urScore = 0;
 const urScoreDisplay = document.getElementById('urScore');
 const sora1 = document.getElementById('sora1');
@@ -131,6 +211,8 @@ let isDragging = false;
 let lockState = 'locked';
 let particles = [];
 let symbols = [];
+let lastTouchX = 0;
+let lastTouchY = 0;
 
 const overlay = document.getElementById('overlay');
 const goButton = document.getElementById('goButton');
@@ -151,8 +233,12 @@ function startCountdown(n){
     }
     countdown.textContent = n;
     pulseSorasDuringCountdown();
-    pulseSound.currentTime = 0;
-    pulseSound.play();
+    try {
+        pulseSound.currentTime = 0;
+        pulseSound.play().catch(e => console.log('Audio playback failed:', e));
+    } catch(e) {
+        console.log('Audio not available');
+    }
     setTimeout(()=>startCountdown(n-1), 1000);
 }
 
@@ -169,57 +255,45 @@ function pulseSorasDuringCountdown(){
 }
 
 function startURFlow(){
-    document.addEventListener('mousemove', e => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-
-        [sora1, sora2].forEach(el => {
-            const rect = el.getBoundingClientRect();
-            const soraX = rect.left + rect.width/2;
-            const soraY = rect.top + rect.height/2;
-            const dx = soraX - mouseX;
-            const dy = soraY - mouseY;
-            const dist = Math.sqrt(dx*dx + dy*dy);
-            const intensity = Math.max(0, 1 - dist/150);
-            el.style.transform = `scale(${1 + 0.3*intensity}) rotate(${intensity*15}deg)`;
-            el.style.filter = `drop-shadow(0 0 ${20*intensity}px gold) brightness(${1 + 0.5*intensity})`;
-        });
-
-        if([sora1, sora2].some(el => {
-            const rect = el.getBoundingClientRect();
-            const cx = rect.left + rect.width/2;
-            const cy = rect.top + rect.height/2;
-            const dx = cx - mouseX;
-            const dy = cy - mouseY;
-            return Math.sqrt(dx*dx + dy*dy) < 80;
-        })){
-            createURCode(mouseX, mouseY, 2);
+    // Mouse events
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
+    
+    // Touch events
+    document.addEventListener('touchmove', e => {
+        e.preventDefault();
+        if(e.touches.length > 0) {
+            handleMove({
+                clientX: e.touches[0].clientX,
+                clientY: e.touches[0].clientY,
+                movementX: e.touches[0].clientX - lastTouchX,
+                movementY: e.touches[0].clientY - lastTouchY
+            });
+            lastTouchX = e.touches[0].clientX;
+            lastTouchY = e.touches[0].clientY;
         }
-
-        if(isDragging){
-            const dx = e.movementX;
-            lockRotation += dx;
-            lock.style.transform = `translateX(-50%) rotate(${lockRotation}deg)`;
+    }, {passive: false});
+    
+    document.addEventListener('touchend', handleEnd);
+    document.addEventListener('touchstart', e => {
+        if(e.touches.length > 0) {
+            lastTouchX = e.touches[0].clientX;
+            lastTouchY = e.touches[0].clientY;
         }
     });
 
-    document.addEventListener('mouseup', e => {
-        if(isDragging){
-            isDragging = false;
-            lock.style.cursor = 'grab';
-            if(lockRotation % 360 > 100 && lockRotation % 360 < 260){
-                lockState = 'unlocked';
-                lock.style.transform = `translateX(-50%) rotate(0deg) scale(1.1)`;
-                createURCode(window.innerWidth/2, window.innerHeight/2, 50);
-                flashSoras(3);
-            } else {
-                lock.style.transform = `translateX(-50%) rotate(0deg)`;
-            }
-        }
-    });
     lock.addEventListener('mousedown', e => {
         isDragging = true;
         lock.style.cursor = 'grabbing';
+    });
+    
+    lock.addEventListener('touchstart', e => {
+        e.preventDefault();
+        isDragging = true;
+        if(e.touches.length > 0) {
+            lastTouchX = e.touches[0].clientX;
+            lastTouchY = e.touches[0].clientY;
+        }
     });
 
     function animate() {
@@ -236,38 +310,107 @@ function startURFlow(){
     animate();
 }
 
+function handleMove(e) {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    [sora1, sora2].forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const soraX = rect.left + rect.width/2;
+        const soraY = rect.top + rect.height/2;
+        const dx = soraX - mouseX;
+        const dy = soraY - mouseY;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const touchRadius = isMobile ? 100 : 150;
+        const intensity = Math.max(0, 1 - dist/touchRadius);
+        el.style.transform = `scale(${1 + 0.3*intensity}) rotate(${intensity*15}deg)`;
+        el.style.filter = `drop-shadow(0 0 ${20*intensity}px gold) brightness(${1 + 0.5*intensity})`;
+    });
+
+    const triggerRadius = isMobile ? 60 : 80;
+    if([sora1, sora2].some(el => {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width/2;
+        const cy = rect.top + rect.height/2;
+        const dx = cx - mouseX;
+        const dy = cy - mouseY;
+        return Math.sqrt(dx*dx + dy*dy) < triggerRadius;
+    })){
+        const particleCount = isMobile ? 1 : 2;
+        createURCode(mouseX, mouseY, particleCount);
+    }
+
+    if(isDragging){
+        const dx = e.movementX || 0;
+        lockRotation += dx * (isMobile ? 2 : 1);
+        lock.style.transform = `translateX(-50%) rotate(${lockRotation}deg)`;
+    }
+}
+
+function handleEnd(e) {
+    if(isDragging){
+        isDragging = false;
+        lock.style.cursor = 'grab';
+        const normalizedRotation = ((lockRotation % 360) + 360) % 360;
+        if(normalizedRotation > 100 && normalizedRotation < 260){
+            lockState = 'unlocked';
+            lock.textContent = '🔓';
+            lock.style.transform = `translateX(-50%) rotate(0deg) scale(1.2)`;
+            lock.style.background = 'gold';
+            lock.style.color = 'black';
+            const explosionCount = isMobile ? 25 : 50;
+            createURCode(window.innerWidth/2, window.innerHeight/2, explosionCount);
+            flashSoras(3);
+        } else {
+            lockRotation = 0;
+            lock.style.transform = `translateX(-50%) rotate(0deg)`;
+        }
+    }
+}
+
 function createURCode(x, y, count){
-    for(let i=0;i<count;i++){
+    const actualCount = Math.min(count, isMobile ? 15 : 50);
+    for(let i=0;i<actualCount;i++){
         const p = document.createElement('div');
         p.classList.add('particle');
         p.style.left = x + 'px';
         p.style.top = y + 'px';
+        p.textContent = '•';
         const angle = Math.random()*2*Math.PI;
         const speed = 2 + Math.random()*3;
         p.dataset.vx = Math.cos(angle)*speed;
         p.dataset.vy = Math.sin(angle)*speed;
         document.body.appendChild(p);
         particles.push(p);
-        setTimeout(()=>{p.remove(); particles.splice(particles.indexOf(p),1)}, 2000);
+        setTimeout(()=>{
+            if(p.parentNode) p.remove(); 
+            const idx = particles.indexOf(p);
+            if(idx > -1) particles.splice(idx,1);
+        }, 2000);
 
-        const s = document.createElement('div');
-        s.classList.add('symbol777');
-        s.style.left = x + 'px';
-        s.style.top = y + 'px';
-        s.textContent = "777";
-        const angleS = Math.random()*2*Math.PI;
-        const speedS = 1 + Math.random()*2;
-        s.dataset.vx = Math.cos(angleS)*speedS;
-        s.dataset.vy = Math.sin(angleS)*speedS;
-        document.body.appendChild(s);
-        symbols.push(s);
-        setTimeout(()=>{s.remove(); symbols.splice(symbols.indexOf(s),1)}, 1500);
+        if(i % 2 === 0) {
+            const s = document.createElement('div');
+            s.classList.add('symbol777');
+            s.style.left = x + 'px';
+            s.style.top = y + 'px';
+            s.textContent = "777";
+            const angleS = Math.random()*2*Math.PI;
+            const speedS = 1 + Math.random()*2;
+            s.dataset.vx = Math.cos(angleS)*speedS;
+            s.dataset.vy = Math.sin(angleS)*speedS;
+            document.body.appendChild(s);
+            symbols.push(s);
+            setTimeout(()=>{
+                if(s.parentNode) s.remove(); 
+                const idx = symbols.indexOf(s);
+                if(idx > -1) symbols.splice(idx,1);
+            }, 1500);
+        }
 
         urScore++;
-        urScoreDisplay.textContent = "UR-Punkte: " + urScore;
-
-        flashSoras(count/8);
     }
+    urScoreDisplay.textContent = "UR-Punkte: " + urScore;
+    flashSoras(count/8);
 }
 
 function flashSoras(intensity = 1) {

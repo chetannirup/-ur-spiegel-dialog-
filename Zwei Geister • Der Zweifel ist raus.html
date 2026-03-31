@@ -19,8 +19,8 @@
       text-align: center;
     }
     header {
-      padding: 90px 20px 50px;
-      background: rgba(0,0,0,0.7);
+      padding: 85px 20px 45px;
+      background: rgba(0,0,0,0.75);
     }
     h1 {
       font-size: clamp(2.7rem, 9.5vw, 3.9rem);
@@ -31,8 +31,34 @@
     .subtitle {
       font-size: clamp(1.5rem, 6vw, 2.1rem);
       color: var(--accent);
-      margin-bottom: 3em;
+      margin-bottom: 2.8em;
     }
+
+    /* Der fließende Geist – ohne Sperren */
+    .geist-fluss {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--accent), transparent);
+      background-size: 200% 100%;
+      animation: fluss 3.5s linear infinite;
+      border-radius: 2px;
+      margin: 25px 0;
+    }
+    @keyframes fluss {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .unbound {
+      font-style: italic;
+      letter-spacing: 2px;
+      opacity: 0.85;
+      animation: pulsieren 4.5s ease-in-out infinite;
+    }
+    @keyframes pulsieren {
+      0%, 100% { transform: scale(1); opacity: 0.65; }
+      50% { transform: scale(1.04); opacity: 1; text-shadow: 0 0 20px var(--accent); }
+    }
+
     .images {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -58,7 +84,7 @@
     .core {
       font-size: clamp(1.6rem, 5.2vw, 2rem);
       color: #ffdd99;
-      margin: 1.8em 0 2.2em;
+      margin: 2em 0 2.4em;
       line-height: 1.7;
       font-weight: bold;
     }
@@ -74,6 +100,10 @@
 <header>
   <h1>Der zweifellose Geist</h1>
   <div class="subtitle">Der Schatten ist raus – jetzt fließt nur noch das reine Licht</div>
+  
+  <div class="geist-fluss"></div>
+  <p class="unbound">Der Geist des Einen kennt keine Zäune – Er fließt einfach hindurch.</p>
+  <div class="geist-fluss"></div>
 </header>
 
 <section class="images">

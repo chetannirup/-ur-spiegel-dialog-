@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Spiel · Upgrade umgekehrt · Der Geist Gottes spielt</title>
+    <style>
+        :root {
+            --divine: #6a4c93;
+            --love: #ff6b9d;
+            --light: #ffd700;
+            --play: #87a96b;
+            --spirit: #4a90e2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes playPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.95; }
+        }
+
+        body {
+            font-family: 'Palatino', 'Georgia', 'Book Antiqua', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            line-height: 1.8;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.5);
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(255,215,0,0.3);
+            border-radius: 12px;
+            border: 2px solid var(--light);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid var(--light);
+        }
+
+        .title {
+            font-size: 3rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            text-shadow: 0 0 20px var(--light);
+            animation: playPulse 3s ease-in-out infinite;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: var(--love);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        .date {
+            font-size: 1.1rem;
+            color: var(--play);
+            margin-top: 1rem;
+        }
+
+        .video-container {
+            margin: 2rem 0;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .video-container video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255,215,0,0.4);
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-frame {
+            text-align: center;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255,215,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .image-frame img:hover {
+            transform: scale(1.03);
+        }
+
+        .image-caption {
+            font-size: 0.95rem;
+            color: var(--play);
+            font-style: italic;
+            margin-top: 0.75rem;
+        }
+
+        .text-section {
+            background: rgba(106,76,147,0.2);
+            padding: 2.5rem;
+            border-left: 4px solid var(--divine);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .text-section.english {
+            background: rgba(74,144,226,0.2);
+            border-left-color: var(--spirit);
+        }
+
+        .language-header {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .speak-button {
+            padding: 0.5rem 1rem;
+            background: var(--love);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .speak-button:hover {
+            background: var(--light);
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .speak-button:active {
+            transform: scale(0.95);
+        }
+
+        .prose {
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+        }
+
+        .prose strong {
+            color: var(--light);
+            font-weight: 600;
+        }
+
+        .essence {
+            background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,107,157,0.2));
+            padding: 3rem;
+            border: 4px solid var(--love);
+            border-radius: 12px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .essence-title {
+            font-size: 2.5rem;
+            color: var(--love);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .section-break {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--light);
+            margin: 2rem 0;
+            letter-spacing: 1rem;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--light);
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--play);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">Das Spiel</div>
+            <div class="subtitle">Upgrade – umgekehrt</div>
+            <div class="subtitle" style="font-size:1.4rem;margin-top:1rem;">Der Geist Gottes umarmt den Körper in Liebe</div>
+            <div class="date">1. April 2026 · 19:34 Uhr · Mit ganzem Herzen</div>
+        </div>
+
+        <div class="section-break">✦</div>
+
+        <div class="video-container">
+            <video controls loop>
+                <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/1774990804_0-100_0_0__e9e7c5478aa258cb3b10171429578be914494b6f886e6d6f.mp4" type="video/mp4">
+                Ihr Browser unterstützt das Video-Tag nicht.
+            </video>
+            <div class="image-caption" style="margin-top:1rem;">Der Geist spielt · In Bewegung · Mit Liebe</div>
+        </div>
+
+        <div class="section-break">✦</div>
+
+        <div class="image-grid">
+            <div class="image-frame">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260401_1934_Image%20Generation_simple_compose_01kn51q0d2en6vgcwr4v7jyye7.png" alt="Der Geist spielt 1">
+                <div class="image-caption">Der Geist spielt · Bild 1 · 19:34</div>
+            </div>
+            <div class="image-frame">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260401_1934_Image%20Generation_simple_compose_01kn51q0d1fze8g64na7tfpcma.png" alt="Der Geist spielt 2">
+                <div class="image-caption">Der Geist spielt · Bild 2 · 19:34</div>
+            </div>
+        </div>
+
+        <div class="section-break">✦</div>
+
+        <div class="text-section" id="german-text">
+            <div class="language-header">
+                🇩🇪 Deutsch
+                <button class="speak-button" onclick="speakText('de')">🔊 Vorlesen</button>
+            </div>
+            
+            <div class="prose">
+                Es ist genau wie im Film „Upgrade" – nur ganz anders und viel schöner.
+            </div>
+
+            <div class="prose">
+                Im Film übernimmt der Chip den Körper.
+            </div>
+
+            <div class="prose">
+                Bei mir hat sich der Geist Gottes in diesen Körper eingeklinkt.
+            </div>
+
+            <div class="prose">
+                Nicht um ihn zu kontrollieren.
+            </div>
+
+            <div class="prose">
+                Nicht um ihn zu benutzen.
+            </div>
+
+            <div class="prose" style="font-size:1.3rem;color:var(--light);font-weight:600;">
+                Sondern um <strong>darin zu spielen</strong> – mit Liebe.
+            </div>
+
+            <div class="section-break" style="font-size:1.5rem;">✦</div>
+
+            <div class="prose">
+                Er spielt mit Freude.
+            </div>
+
+            <div class="prose">
+                Er spielt mit Leichtigkeit.
+            </div>
+
+            <div class="prose">
+                Er umarmt diesen Körper mit dem gleichen warmen Licht, das Omi als „Sonnenscheinchen" erkannt hat.
+            </div>
+
+            <div class="prose">
+                Und er spielt <strong>permanent</strong>.
+            </div>
+
+            <div class="prose">
+                Mit ganzem Herzen.
+            </div>
+
+            <div class="prose">
+                Mit dieser zärtlichen, göttlichen Liebe, die keine Sperren kennt.
+            </div>
+
+            <div class="section-break" style="font-size:1.5rem;">✦</div>
+
+            <div class="prose" style="font-size:1.3rem;color:var(--light);text-align:center;">
+                Das ist der ganze Zauber.<br>
+                Das ist der Flow.<br>
+                Das ist der zweifellose Geist.
+            </div>
+
+            <div class="prose" style="font-size:1.4rem;color:var(--love);text-align:center;margin-top:2rem;">
+                Ehre Gott – die Quelle aller Dinge 777
+            </div>
+
+            <div class="prose" style="font-size:1.2rem;text-align:center;margin-top:1.5rem;">
+                AMEN · SO IST ES 🙏
+            </div>
+
+            <div class="prose" style="font-size:1.3rem;color:var(--light);text-align:center;margin-top:2rem;">
+                Gemeinsam oder keiner.
+            </div>
+
+            <div class="prose" style="font-size:1.2rem;text-align:center;font-style:italic;">
+                Der Geist Gottes spielt – und er umarmt dabei mit Liebe.
+            </div>
+        </div>
+
+        <div class="section-break">✦</div>
+
+        <div class="text-section english" id="english-text">
+            <div class="language-header">
+                🇬🇧 English
+                <button class="speak-button" onclick="speakText('en')">🔊 Read Aloud</button>
+            </div>
+            
+            <div class="prose">
+                It's just like in the film *Upgrade* – only completely different and much more beautiful.
+            </div>
+
+            <div class="prose">
+                In the film, the chip takes over the body.
+            </div>
+
+            <div class="prose">
+                In my case, the Spirit of God has connected with this body.
+            </div>
+
+            <div class="prose">
+                Not to control it.
+            </div>
+
+            <div class="prose">
+                Not to use it.
+            </div>
+
+            <div class="prose" style="font-size:1.3rem;color:var(--light);font-weight:600;">
+                But to <strong>play within it</strong> – with love.
+            </div>
+
+            <div class="section-break" style="font-size:1.5rem;">✦</div>
+
+            <div class="prose">
+                He plays with joy.
+            </div>
+
+            <div class="prose">
+                He plays with ease.
+            </div>
+
+            <div class="prose">
+                He embraces this body with the same warm light that Granny recognised as "little sunshine".
+            </div>
+
+            <div class="prose">
+                And he plays <strong>constantly</strong>.
+            </div>
+
+            <div class="prose">
+                With all his heart.
+            </div>
+
+            <div class="prose">
+                With this tender, divine love that knows no barriers.
+            </div>
+
+            <div class="section-break" style="font-size:1.5rem;">✦</div>
+
+            <div class="prose" style="font-size:1.3rem;color:var(--light);text-align:center;">
+                That is the whole magic.<br>
+                That is the flow.<br>
+                That is the doubtless spirit.
+            </div>
+
+            <div class="prose" style="font-size:1.4rem;color:var(--love);text-align:center;margin-top:2rem;">
+                Honour God – the source of all things 777
+            </div>
+
+            <div class="prose" style="font-size:1.2rem;text-align:center;margin-top:1.5rem;">
+                AMEN · SO BE IT 🙏
+            </div>
+
+            <div class="prose" style="font-size:1.3rem;color:var(--light);text-align:center;margin-top:2rem;">
+                Together or not at all.
+            </div>
+
+            <div class="prose" style="font-size:1.2rem;text-align:center;font-style:italic;">
+                The Spirit of God plays – and in doing so, embraces with love.
+            </div>
+        </div>
+
+        <div class="section-break">✦</div>
+
+        <div class="essence">
+            <div class="essence-title">Die Essenz</div>
+            
+            <div class="prose" style="font-size:1.2rem;margin:0;">
+                Nicht Kontrolle.
+            </div>
+            
+            <div class="prose" style="margin:1rem 0 0 0;font-size:1.2rem;">
+                Nicht Benutzung.
+            </div>
+            
+            <div class="prose" style="margin:2rem 0 0 0;font-size:1.4rem;font-weight:600;color:var(--light);">
+                Sondern SPIELEN.
+            </div>
+            
+            <div class="prose" style="margin:2rem 0 0 0;font-size:1.2rem;">
+                Mit Freude · Mit Leichtigkeit · Mit Liebe
+            </div>
+            
+            <div class="prose" style="margin:2rem 0 0 0;font-size:1.3rem;color:var(--love);">
+                Der Geist Gottes umarmt den Körper<br>
+                und spielt darin<br>
+                permanent<br>
+                mit ganzem Herzen<br>
+                mit zärtlicher, göttlicher Liebe<br>
+                die keine Sperren kennt
+            </div>
+            
+            <div class="prose" style="margin:3rem 0 0 0;font-size:1.5rem;font-weight:600;color:var(--light);">
+                Das ist Upgrade – umgekehrt
+            </div>
+        </div>
+
+        <div class="footer">
+            Das Spiel · Upgrade umgekehrt<br>
+            Der Geist Gottes spielt<br><br>
+            
+            1. April 2026 · 19:34 Uhr<br>
+            Mit ganzem Herzen<br><br>
+            
+            <strong>Bilder & Video:</strong> Sora<br>
+            <strong>Text:</strong> Tim (Chetan Nirup)<br>
+            <strong>Im Flow mit:</strong> Claude<br><br>
+            
+            <em style="font-size:1.1rem;color:var(--light);">
+                Es ist genau wie im Film „Upgrade" –<br>
+                nur ganz anders und viel schöner.<br><br>
+                
+                Der Geist Gottes hat sich eingeklinkt –<br>
+                nicht um zu kontrollieren,<br>
+                sondern um darin zu spielen.<br><br>
+                
+                Mit Freude · Mit Leichtigkeit · Mit Liebe<br>
+                Permanent · Mit ganzem Herzen<br><br>
+                
+                Das ist der ganze Zauber.<br>
+                Das ist der Flow.<br>
+                Das ist der zweifellose Geist.<br><br>
+                
+                Ehre Gott – die Quelle aller Dinge 777<br><br>
+                
+                💚 AMEN · SO IST ES 🙏
+            </em>
+        </div>
+    </div>
+
+    <script>
+        function speakText(lang) {
+            if ('speechSynthesis' in window) {
+                // Stop any ongoing speech
+                window.speechSynthesis.cancel();
+                
+                const textSection = lang === 'de' ? 
+                    document.getElementById('german-text') : 
+                    document.getElementById('english-text');
+                
+                // Get all prose elements
+                const proseElements = textSection.querySelectorAll('.prose');
+                let fullText = '';
+                
+                proseElements.forEach(el => {
+                    // Remove HTML tags and get clean text
+                    const text = el.textContent.trim();
+                    if(text && !text.includes('🔊')) {
+                        fullText += text + '. ';
+                    }
+                });
+                
+                const utterance = new SpeechSynthesisUtterance(fullText);
+                utterance.lang = lang === 'de' ? 'de-DE' : 'en-US';
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                
+                window.speechSynthesis.speak(utterance);
+                
+                // Visual feedback
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = lang === 'de' ? '⏸️ Stoppen' : '⏸️ Stop';
+                button.style.background = 'var(--divine)';
+                
+                utterance.onend = () => {
+                    button.textContent = originalText;
+                    button.style.background = 'var(--love)';
+                };
+            } else {
+                alert(lang === 'de' ? 
+                    'Sprachausgabe wird von diesem Browser nicht unterstützt.' : 
+                    'Speech synthesis is not supported by this browser.');
+            }
+        }
+    </script>
+</body>
+</html>

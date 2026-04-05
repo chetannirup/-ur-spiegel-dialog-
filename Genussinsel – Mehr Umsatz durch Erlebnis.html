@@ -5,89 +5,171 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Genussinsel – Mehr Umsatz durch Erlebnis</title>
 
+<!-- Google Tracking -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXX');
+</script>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)
+}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'XXXXXXXX');
+fbq('track', 'PageView');
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    background: linear-gradient(to bottom, #2b1a0f, #000);
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#0f0b08;
+    color:white;
 }
 
-.hero {
-    height: 100vh;
-    background: url('https://chetannirup.github.io/-ur-spiegel-dialog-/Genussinsel_%20Atmosph%C3%A4re,%20Verbindung%20und%20mehr%20Umsatz.png') center/cover no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
+/* HERO */
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+    url('https://chetannirup.github.io/-ur-spiegel-dialog-/Genussinsel_%20Atmosph%C3%A4re,%20Verbindung%20und%20mehr%20Umsatz.png') center/cover fixed;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    max-width: 800px;
-    margin-bottom: 20px;
+.hero h1{
+    font-size:3rem;
+    max-width:900px;
+    animation:fadeUp 1.5s ease;
 }
 
-.hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
+.hero p{
+    margin-top:20px;
+    opacity:0.85;
+    animation:fadeUp 2s ease;
 }
 
-.cta {
-    margin-top: 30px;
-    padding: 15px 30px;
-    background: gold;
-    color: black;
-    border-radius: 30px;
-    font-weight: bold;
-    text-decoration: none;
+/* CTA */
+.cta{
+    margin-top:30px;
+    padding:15px 35px;
+    background:linear-gradient(45deg,gold,orange);
+    color:black;
+    border-radius:40px;
+    font-weight:bold;
+    text-decoration:none;
+    box-shadow:0 0 20px rgba(255,200,0,0.4);
+    transition:0.3s;
+}
+.cta:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 30px rgba(255,200,0,0.8);
 }
 
-.section {
-    padding: 80px 20px;
-    text-align: center;
+/* SECTIONS */
+.section{
+    padding:80px 20px;
+    text-align:center;
 }
 
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+.grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    margin-top:40px;
 }
 
-.card {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 15px;
-    max-width: 300px;
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:25px;
+    border-radius:20px;
+    width:280px;
+    transition:0.3s;
+}
+.card:hover{
+    transform:translateY(-10px);
+    background:rgba(255,200,0,0.08);
 }
 
-.highlight {
-    font-size: 2rem;
-    margin: 40px 0;
-    color: gold;
+.highlight{
+    font-size:2rem;
+    margin-top:50px;
+    color:gold;
 }
 
-.footer {
-    padding: 40px;
-    text-align: center;
-    opacity: 0.7;
+/* FORM */
+form{
+    max-width:420px;
+    margin:auto;
+}
+
+input, textarea{
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    background:gold;
+    border:none;
+    font-weight:bold;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* SUCCESS / ERROR */
+[data-fs-success]{
+    color:lightgreen;
+    margin-top:20px;
+}
+[data-fs-error]{
+    color:red;
+    font-size:0.9rem;
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .hero h1{font-size:2rem;}
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
     <h1>Hier kaufen Menschen nicht – sie bleiben.</h1>
-    <p>Die Genussinsel – Das System für mehr Umsatz durch echte Verbindung</p>
-    <a href="#" class="cta">Jetzt erleben</a>
+    <p>Die Genussinsel – Mehr Umsatz durch echte Verbindung</p>
+    <a href="#kontakt" class="cta">Jetzt Erlebnis starten</a>
 </section>
 
+<!-- PROBLEM -->
 <section class="section">
     <h2>Das Problem</h2>
     <div class="grid">
@@ -97,8 +179,9 @@ body {
     </div>
 </section>
 
+<!-- LÖSUNG -->
 <section class="section">
-    <h2>Die Lösung</h2>
+    <h2>Die Genussinsel</h2>
     <div class="grid">
         <div class="card">Atmosphäre</div>
         <div class="card">Verbindung</div>
@@ -106,12 +189,13 @@ body {
     </div>
 </section>
 
+<!-- ERGEBNIS -->
 <section class="section">
-    <h2>Ergebnis</h2>
+    <h2>Messbare Ergebnisse</h2>
     <div class="grid">
         <div class="card">+15–35% Zusatzverkäufe</div>
         <div class="card">+10–25% höherer Warenkorb</div>
-        <div class="card">ROI < 3 Monate</div>
+        <div class="card">ROI &lt; 3 Monate</div>
     </div>
 
     <div class="highlight">
@@ -119,14 +203,52 @@ body {
     </div>
 </section>
 
-<section class="section">
-    <h2>Wirtschaft trifft Menschlichkeit</h2>
-    <a href="#" class="cta">Genussinsel starten</a>
+<!-- KONTAKT -->
+<section class="section" id="kontakt">
+    <h2>Erlebe die Genussinsel in deinem Betrieb</h2>
+
+    <div data-fs-success></div>
+    <div data-fs-error></div>
+
+    <form id="contact-form">
+        <input type="hidden" name="_subject" value="🔥 Neue Genussinsel Anfrage!">
+
+        <input type="text" name="name" placeholder="Dein Name" required data-fs-field>
+        <span data-fs-error="name"></span>
+
+        <input type="email" name="email" placeholder="E-Mail" required data-fs-field>
+        <span data-fs-error="email"></span>
+
+        <textarea name="message" placeholder="Erzähl mir kurz von deinem Betrieb..." required data-fs-field></textarea>
+        <span data-fs-error="message"></span>
+
+        <button type="submit" data-fs-submit-btn>
+            🚀 Jetzt Genussinsel starten
+        </button>
+    </form>
 </section>
 
-<div class="footer">
-    © Genussinsel Konzeptplattform
-</div>
+<!-- FOOTER -->
+<section class="section">
+    <p>Wirtschaft trifft Menschlichkeit</p>
+</section>
+
+<!-- FORM LOGIC -->
+<script>
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+
+formspree('initForm', {
+  formElement: '#contact-form',
+  formId: 'mojppggw',
+
+  onSuccess: function() {
+    fbq('track', 'Lead');
+    gtag('event', 'conversion');
+  }
+});
+</script>
+
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>

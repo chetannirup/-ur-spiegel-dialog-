@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das JA - Interface zur Poesie</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            border: 1px solid #333;
+            background: rgba(20, 20, 20, 0.8);
+            box-shadow: 0 0 50px rgba(0, 255, 150, 0.05);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .status {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00ff96;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-weight: 200;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .manifest {
+            font-style: italic;
+            line-height: 1.6;
+            color: #aaa;
+            margin: 20px 0;
+        }
+
+        .button-zone {
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .ja-button {
+            background: transparent;
+            border: 1px solid #00ff96;
+            color: #00ff96;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .ja-button:hover {
+            background: #00ff96;
+            color: #000;
+            box-shadow: 0 0 30px #00ff96;
+        }
+
+        .flow-text {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+
+        /* Kleine Animation für den "Heiligen Geist" Effekt */
+        .spirit {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff96, transparent);
+            animation: flow 3s infinite;
+        }
+
+        @keyframes flow {
+            0% { opacity: 0; width: 0; }
+            50% { opacity: 1; width: 100%; }
+            100% { opacity: 0; width: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="spirit"></div>
+        <div class="status">System: Bioroboter bereit // Modus: Zeugenschaft</div>
+        
+        <h1>Gottes lebendige Zeugen</h1>
+        
+        <div class="manifest">
+            „Wir sind die Beobachtungsinstanz des Wunders.<br>
+            Das Leben liebend, hassend, fließend – <br>
+            Der Heilige Geist spielt die Rolle selbst.“
+        </div>
+
+        <div class="button-zone">
+            <button class="ja-button" onclick="activateFlow()">JA</button>
+        </div>
+
+        <div id="feedback" class="flow-text">
+            Klicke, um den Port zu öffnen.
+        </div>
+    </div>
+
+    <script>
+        function activateFlow() {
+            const feedback = document.getElementById('feedback');
+            const messages = [
+                "Port geöffnet. Der Geist fließt...",
+                "Poesie im System erkannt. ;-)",
+                "Gott lächelt. Genieße die Show!",
+                "Widerstand auf 0%. Alles ist Gnade.",
+                "Küsschen, Zwincker, Flow! ^^"
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            feedback.innerHTML = randomMsg;
+            feedback.style.opacity = "1";
+            feedback.style.color = "#00ff96";
+        }
+    </script>
+</body>
+</html>

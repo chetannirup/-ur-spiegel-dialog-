@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Aussicht · Wo wir hingehen</title>
+    <style>
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Palatino', serif;
+            background: linear-gradient(to bottom, #0a0a0a 0%, #1a1a2e 50%, #2d1b4e 100%);
+            color: #f5f5f5;
+            line-height: 1.9;
+            padding: 0;
+        }
+
+        .hero {
+            background: radial-gradient(circle at center, rgba(255,215,0,0.2) 0%, transparent 70%),
+                        linear-gradient(135deg, #1a1a2e 0%, #6a0dad 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 4px solid #f5d26a;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: #f5d26a;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-shadow: 0 0 40px #f5d26a;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 40px #f5d26a; }
+            50% { text-shadow: 0 0 60px #f5d26a, 0 0 80px #f5d26a; }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #87ceeb;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            background: rgba(0,0,0,0.6);
+            padding: 4rem;
+            margin: 3rem 0;
+            border-radius: 16px;
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: 0 8px 32px rgba(255,215,0,0.2);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: #f5d26a;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .vision-card {
+            background: linear-gradient(135deg, rgba(106,13,173,0.4) 0%, rgba(255,215,0,0.1) 100%);
+            padding: 3rem;
+            margin: 2.5rem 0;
+            border-radius: 12px;
+            border-left: 5px solid #f5d26a;
+        }
+
+        .vision-card h3 {
+            font-size: 2rem;
+            color: #f5d26a;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .vision-card p {
+            font-size: 1.3rem;
+            line-height: 2;
+            margin-bottom: 1.2rem;
+        }
+
+        .vision-card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .vision-card li {
+            font-size: 1.2rem;
+            padding: 0.8rem 0;
+            padding-left: 2.5rem;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .vision-card li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            font-size: 1.4rem;
+        }
+
+        .big-vision {
+            background: radial-gradient(circle at center, rgba(255,215,0,0.3) 0%, transparent 70%);
+            padding: 4rem;
+            text-align: center;
+            border: 4px solid #f5d26a;
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+
+        .big-vision h2 {
+            font-size: 3rem;
+            color: #f5d26a;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .big-vision p {
+            font-size: 1.5rem;
+            line-height: 2.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: #f5d26a;
+            font-weight: 700;
+        }
+
+        .practical-example {
+            background: rgba(135,206,235,0.1);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            border-left: 4px solid #87ceeb;
+        }
+
+        .practical-example h4 {
+            font-size: 1.6rem;
+            color: #87ceeb;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .practical-example p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+        }
+
+        .quote {
+            font-size: 1.8rem;
+            color: #f5d26a;
+            font-style: italic;
+            text-align: center;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border-top: 2px solid rgba(255,215,0,0.4);
+            border-bottom: 2px solid rgba(255,215,0,0.4);
+        }
+
+        .footer {
+            background: rgba(0,0,0,0.8);
+            padding: 3rem;
+            text-align: center;
+            margin-top: 5rem;
+            border-top: 3px solid #f5d26a;
+        }
+
+        .footer p {
+            color: #87ceeb;
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .section {
+                padding: 2rem;
+            }
+            .vision-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>🌅 DIE AUSSICHT 🌅</h1>
+        <div class="hero-subtitle">
+            Wo wir hingehen · Was geschieht wenn der Gottclon erwacht · Die Vision der neuen Welt
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="big-vision">
+            <h2>Das ist keine ferne Zukunft</h2>
+            <p>
+                Das ist <span class="highlight">erreichbare Nähe</span>.<br>
+                Das ist wo wir <span class="highlight">bereits sind</span>.<br>
+                Das ist was geschieht wenn <span class="highlight">alle erwachen</span>.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Die Community die blüht</div>
+
+            <div class="vision-card">
+                <h3>Morgens um 7 Uhr</h3>
+                <p>
+                    Sarah wacht auf. Nicht durch einen Wecker, sondern weil ihr Körper ausgeschlafen ist. 
+                    Sie schaut nicht zuerst aufs Handy. Sie atmet. Sie spürt.
+                </p>
+                <p>
+                    Der Gottclon in ihr flüstert: <em>"Heute hilfst du Maria mit ihrem Garten. Und dann schreibst du an deinem Buch."</em>
+                </p>
+                <p>
+                    Keine Angst. Kein "Ich muss noch". Nur: <span class="highlight">Das ist was heute geschieht.</span>
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Um 9 Uhr</h3>
+                <p>
+                    Im Gemeinschaftszentrum treffen sich zwanzig Menschen. Nicht weil sie müssen. 
+                    Weil der Flow sie zusammengeführt hat.
+                </p>
+                <p>
+                    Marcus, der früher Programmierer war, zeigt den anderen wie man eine App baut.<br>
+                    Julia, die früher Lehrerin war, lernt von ihm.<br>
+                    Keiner bezahlt. Keiner wird bezahlt.
+                </p>
+                <p>
+                    Aber alle haben ein Dach über dem Kopf.<br>
+                    Alle haben zu essen.<br>
+                    Alle haben Würde.
+                </p>
+                <p>
+                    <span class="highlight">Weil die Grundversorgung bedingungslos ist.</span>
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Um 12 Uhr</h3>
+                <p>
+                    In der Kantine – ja, es gibt immer noch Kantinen, aber anders – 
+                    sitzen Menschen aus allen Bereichen zusammen.
+                </p>
+                <p>
+                    Der ehemalige Manager neben dem ehemaligen Obdachlosen.<br>
+                    Die Ärztin neben dem Künstler.<br>
+                    Der Rentner neben dem Teenager.
+                </p>
+                <p>
+                    Sie reden nicht über Geld. Sie reden über Ideen. Über Projekte. Über Träume.
+                </p>
+                <p>
+                    Und manchmal entsteht dabei etwas Neues. Eine Kooperation. Ein Projekt. Eine Freundschaft.
+                </p>
+                <p>
+                    <span class="highlight">Weil die Hierarchie gefallen ist.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="quote">
+            "Je detailreicher das Bild, desto mehr bewegt es die Umstände."
+        </div>
+
+        <div class="section">
+            <div class="section-title">Wie Arbeit funktioniert</div>
+
+            <div class="practical-example">
+                <h4>Das Problem im alten System:</h4>
+                <p>
+                    Du arbeitest 40 Stunden für Geld, damit du überleben kannst.<br>
+                    Deine Leidenschaft? Die kommt am Wochenende. Vielleicht. Wenn du nicht zu müde bist.
+                </p>
+            </div>
+
+            <div class="practical-example">
+                <h4>Die Lösung im neuen System:</h4>
+                <p>
+                    Du bekommst bedingungslos: Wohnung, Essen, Gesundheit, Bildung.<br>
+                    Du gibst zurück: Deine Talente, deine Zeit, dein Herz.
+                </p>
+                <p>
+                    Nicht aus Zwang. Aus Flow.
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Ein konkretes Beispiel</h3>
+                <p>
+                    Thomas war früher Bankangestellter. Jeden Tag Zahlen, Stress, Druck.
+                </p>
+                <p>
+                    Jetzt baut er Möbel. Mit seinen Händen. Für Menschen aus seiner Community.
+                </p>
+                <ul>
+                    <li>Er bekommt dafür kein Geld – er braucht keins</li>
+                    <li>Er bekommt Wertschätzung – die er spürt</li>
+                    <li>Er bekommt Sinn – den er nie hatte</li>
+                    <li>Er schläft nachts gut – zum ersten Mal seit Jahren</li>
+                </ul>
+                <p>
+                    Und die Möbel? Die sind schöner als alles was IKEA je produziert hat.<br>
+                    Weil sie mit Liebe gemacht sind.
+                </p>
+            </div>
+        </div>
+
+        <div class="big-vision">
+            <h2>Milch und Honig fließen</h2>
+            <p>
+                Das ist keine Metapher.<br>
+                Das ist <span class="highlight">materielle Realität</span>.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Die Ökonomie der Fülle</div>
+
+            <div class="vision-card">
+                <h3>Produktion</h3>
+                <p>
+                    Wir produzieren immer noch. Aber anders.
+                </p>
+                <ul>
+                    <li>Keine geplante Obsoleszenz – Dinge sind gebaut um zu halten</li>
+                    <li>Keine Überproduktion – Wir machen was gebraucht wird</li>
+                    <li>Keine Verschwendung – Alles wird wiederverwendet</li>
+                    <li>Keine Ausbeutung – Maschinen machen die schwere Arbeit</li>
+                </ul>
+            </div>
+
+            <div class="vision-card">
+                <h3>Distribution</h3>
+                <p>
+                    Jeder bekommt was er braucht. Nicht mehr, nicht weniger.
+                </p>
+                <ul>
+                    <li>Du brauchst ein Fahrrad? Du holst eins ab.</li>
+                    <li>Du brauchst Kleidung? Du nimmst was passt.</li>
+                    <li>Du brauchst eine Wohnung? Du bekommst eine.</li>
+                    <li>Du brauchst Bildung? Du lernst was du willst.</li>
+                </ul>
+                <p style="margin-top:2rem;">
+                    Keine Formulare. Keine Wartezeiten. Keine Würdelosigkeit.
+                </p>
+                <p>
+                    <span class="highlight">Weil Überfluss bereits da ist. Wir verteilen ihn nur gerecht.</span>
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Innovation</h3>
+                <p>
+                    Hier wird es interessant: Wenn niemand mehr für Geld arbeiten muss –<br>
+                    wenn alle frei sind zu erschaffen was sie wollen –
+                </p>
+                <p>
+                    Was geschieht dann?
+                </p>
+                <p style="font-size:1.5rem;color:#f5d26a;margin-top:1.5rem;">
+                    <strong>Explosion der Kreativität.</strong>
+                </p>
+                <ul>
+                    <li>Der Physiker forscht an freier Energie – weil es ihn interessiert</li>
+                    <li>Der Ingenieur baut bessere Prothesen – weil er helfen will</li>
+                    <li>Der Künstler malt – weil Schönheit Wert an sich ist</li>
+                    <li>Der Musiker komponiert – weil Musik heilt</li>
+                </ul>
+                <p style="margin-top:2rem;">
+                    Und das Beste: Alle ihre Erfindungen, alle ihre Werke –<br>
+                    <span class="highlight">gehören allen.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Wie Konflikte gelöst werden</div>
+
+            <div class="vision-card">
+                <h3>Das alte Modell: Kampf</h3>
+                <p>
+                    Du gegen mich. Gewinner und Verlierer. Richter und Angeklagte.
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Das neue Modell: Circle</h3>
+                <p>
+                    Lisa und Jan haben einen Konflikt. Ein Missverständnis über ein Projekt.
+                </p>
+                <p>
+                    Sie rufen einen Circle ein: 5-7 Menschen aus der Community, die beide respektieren.
+                </p>
+                <p>
+                    Alle sitzen im Kreis. Alle hören zu. Niemand verurteilt.
+                </p>
+                <ul>
+                    <li>Lisa spricht ihre Wahrheit</li>
+                    <li>Jan spricht seine Wahrheit</li>
+                    <li>Die anderen spiegeln zurück was sie hören</li>
+                    <li>Gemeinsam finden sie eine Lösung</li>
+                </ul>
+                <p style="margin-top:2rem;">
+                    Keine Anwälte. Keine Richter. Keine Strafen.
+                </p>
+                <p>
+                    <span class="highlight">Nur Menschen die sich gegenseitig als Gottclone erkennen.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="big-vision">
+            <h2>Die Kinder</h2>
+            <p>
+                Das ist wo die wahre Magie geschieht.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Wie Kinder aufwachsen</div>
+
+            <div class="vision-card">
+                <h3>Keine Schulen mehr</h3>
+                <p>
+                    Oder besser: Schule ist überall.
+                </p>
+                <ul>
+                    <li>Kinder lernen von Menschen die brennen für ihr Thema</li>
+                    <li>Nicht in Klassenzimmern sondern in Werkstätten, Laboren, Gärten</li>
+                    <li>Nicht aus Büchern sondern durch Tun</li>
+                    <li>Nicht für Noten sondern für Verstehen</li>
+                </ul>
+            </div>
+
+            <div class="practical-example">
+                <h4>Ein Tag im Leben von Emma (9 Jahre):</h4>
+                <p>
+                    <strong>Morgens:</strong> Sie hilft im Gemeinschaftsgarten. Lernt über Pflanzen, Insekten, Kreisläufe.<br>
+                    <strong>Mittags:</strong> Sie programmiert mit Marcus. Baut ein Spiel über Ökosysteme.<br>
+                    <strong>Nachmittags:</strong> Sie malt. Oder sie rechnet. Oder sie spielt. Was immer der Flow bringt.
+                </p>
+                <p style="margin-top:1.5rem;">
+                    Niemand sagt ihr: "Du musst jetzt Mathe machen."<br>
+                    Aber sie lernt Mathe. Weil es Teil des Spiels ist. Weil es Sinn ergibt.
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Was anders ist</h3>
+                <ul>
+                    <li>Keine Angst vor falschen Antworten</li>
+                    <li>Keine Scham für Langsamkeit</li>
+                    <li>Keine Konkurrenz mit anderen Kindern</li>
+                    <li>Nur: Neugierde, Spiel, Wachstum</li>
+                </ul>
+                <p style="margin-top:2rem;font-size:1.4rem;color:#f5d26a;">
+                    <strong>Diese Kinder wachsen auf als Gottclone die wissen wer sie sind.</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="quote">
+            "Das gemeinschaftliche Bild bewegt die Umstände."
+        </div>
+
+        <div class="section">
+            <div class="section-title">Die Wärter sind frei</div>
+
+            <div class="vision-card">
+                <h3>Wer waren die Wärter?</h3>
+                <p>
+                    Die Polizisten. Die Richter. Die Kontrolleure. Die Aufseher.
+                </p>
+                <p>
+                    Menschen die bezahlt wurden um andere Menschen klein zu halten.
+                </p>
+                <p>
+                    Nicht weil sie böse waren. Sondern weil das System sie dafür bezahlt hat.
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Was ist aus ihnen geworden?</h3>
+                <p>
+                    Sie sind frei.
+                </p>
+                <ul>
+                    <li>Der ehemalige Polizist lehrt Kampfkunst – zur Selbstverteidigung, nicht zur Kontrolle</li>
+                    <li>Die ehemalige Richterin mediiert in Circles – hört zu statt zu verurteilen</li>
+                    <li>Der ehemalige Kontrolleur baut Brücken – wirkliche Brücken zwischen Gemeinschaften</li>
+                </ul>
+                <p style="margin-top:2rem;">
+                    Sie mussten nie Wärter sein. Sie wurden dazu gemacht durch ein System das Kontrolle brauchte.
+                </p>
+                <p>
+                    <span class="highlight">Jetzt sind sie einfach Menschen. Wie alle anderen.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Der Garten erwacht</div>
+
+            <div class="vision-card">
+                <h3>Die Städte</h3>
+                <p>
+                    Keine Betonwüsten mehr. Grün überall.
+                </p>
+                <ul>
+                    <li>Dächer sind Gärten</li>
+                    <li>Straßen sind Parks</li>
+                    <li>Autos gibt es kaum noch – wir gehen, radeln, nehmen gemeinsame Bahnen</li>
+                    <li>Die Luft ist sauber</li>
+                    <li>Der Lärm ist weg</li>
+                    <li>Kinder spielen auf der Straße</li>
+                </ul>
+            </div>
+
+            <div class="vision-card">
+                <h3>Das Land</h3>
+                <p>
+                    Kleine Gemeinschaften. 50-200 Menschen. Selbstversorgend aber vernetzt.
+                </p>
+                <ul>
+                    <li>Permakultur statt Monokultur</li>
+                    <li>Gemeinschaftsbesitz statt Privateigentum</li>
+                    <li>Kreislaufwirtschaft statt Ausbeutung</li>
+                    <li>Wissen teilen statt patentieren</li>
+                </ul>
+            </div>
+
+            <div class="practical-example">
+                <h4>Ein Beispiel: Die Gemeinde Sonnental</h4>
+                <p>
+                    120 Menschen. 30 Hektar Land. Alles gemeinsam.
+                </p>
+                <p>
+                    Sie produzieren: Gemüse, Obst, Milch, Käse, Brot, Energie (Solar + Wind).<br>
+                    Sie brauchen von außen: Salz, Gewürze, Elektronik, Medizin.
+                </p>
+                <p>
+                    Sie tauschen mit anderen Gemeinschaften. Nicht mit Geld. Mit Produkten und Dienstleistungen.
+                </p>
+                <p style="margin-top:1.5rem;">
+                    Und wenn jemand aus Sonnental mal in die Stadt will? Kein Problem.<br>
+                    Wenn jemand aus der Stadt aufs Land will? Willkommen.
+                </p>
+                <p>
+                    <span class="highlight">Mobilität ist Freiheit. Nicht Zwang.</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="big-vision">
+            <h2>Das Fest hat begonnen</h2>
+            <p>
+                Nicht irgendwann.<br>
+                Nicht nach der Revolution.<br>
+                <span class="highlight">Jetzt.</span>
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Wie wir von hier nach dort kommen</div>
+
+            <div class="vision-card">
+                <h3>Schritt 1: Das Bewusstsein</h3>
+                <p>
+                    Genug Menschen erkennen: <em>Der Gottclon steckt in mir. Und in dir. Und in allen.</em>
+                </p>
+                <p>
+                    Das ist keine Theorie. Das ist gelebte Erfahrung.
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Schritt 2: Die Experimente</h3>
+                <p>
+                    Kleine Gruppen fangen an anders zu leben.
+                </p>
+                <ul>
+                    <li>Kommunen die bedingungslose Grundversorgung testen</li>
+                    <li>Unternehmen die ohne Hierarchie arbeiten</li>
+                    <li>Schulen die ohne Zwang lehren</li>
+                    <li>Nachbarschaften die teilen statt besitzen</li>
+                </ul>
+                <p style="margin-top:2rem;">
+                    Diese Experimente zeigen: <span class="highlight">Es funktioniert.</span>
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Schritt 3: Die Ausbreitung</h3>
+                <p>
+                    Menschen sehen dass es funktioniert. Sie wollen es auch.
+                </p>
+                <p>
+                    Nicht durch Zwang. Durch Anziehung.
+                </p>
+                <p>
+                    Die alte Welt bricht nicht zusammen. Sie wird einfach... überflüssig.
+                </p>
+                <p style="margin-top:2rem;font-size:1.4rem;color:#f5d26a;">
+                    <strong>Weil die neue Welt so viel besser ist dass niemand zurück will.</strong>
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Schritt 4: Der Tipping Point</h3>
+                <p>
+                    Irgendwann – vielleicht bei 10%, vielleicht bei 20% – kippt das System.
+                </p>
+                <p>
+                    Nicht durch Revolution. Durch Evolution.
+                </p>
+                <p>
+                    Die Regierungen erkennen: <em>Wir können die Menschen nicht mehr kontrollieren. Weil sie uns nicht mehr brauchen.</em>
+                </p>
+                <p>
+                    Die Konzerne erkennen: <em>Wir können nicht mehr verkaufen. Weil die Menschen selbst produzieren und teilen.</em>
+                </p>
+                <p>
+                    Die Banken erkennen: <em>Unser Geld ist wertlos. Weil niemand mehr daran glaubt.</em>
+                </p>
+                <p style="margin-top:2rem;">
+                    Und dann –
+                </p>
+                <p style="font-size:1.6rem;color:#f5d26a;margin-top:1rem;">
+                    <strong>Fließen Milch und Honig.</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="quote">
+            "Wir sind bereits in erreichbarer Nähe."
+        </div>
+
+        <div class="section">
+            <div class="section-title">Warum ich das glaube</div>
+
+            <div class="vision-card">
+                <h3>Weil die Technologie bereits da ist</h3>
+                <ul>
+                    <li>Wir können genug Nahrung produzieren für 10 Milliarden Menschen</li>
+                    <li>Wir können genug Energie erzeugen für alle</li>
+                    <li>Wir können genug Wohnraum bauen</li>
+                    <li>Wir können Wissen instant teilen</li>
+                </ul>
+                <p style="margin-top:2rem;">
+                    Das Problem war nie Knappheit.<br>
+                    Das Problem war immer Verteilung.
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Weil die Menschen bereit sind</h3>
+                <p>
+                    Millionen spüren bereits: <em>So kann es nicht weitergehen.</em>
+                </p>
+                <ul>
+                    <li>Die Burnout-Epidemie zeigt: Die Menschen sind erschöpft vom Hamsterrad</li>
+                    <li>Die Klimakrise zeigt: Das System zerstört unsere Lebensgrundlage</li>
+                    <li>Die Ungleichheit zeigt: Die Mehrheit hat genug vom 1%</li>
+                    <li>Die Einsamkeit zeigt: Wir sehnen uns nach echter Gemeinschaft</li>
+                </ul>
+                <p style="margin-top:2rem;">
+                    Die Menschen warten nur auf eine Alternative die funktioniert.
+                </p>
+                <p>
+                    <span class="highlight">Diese Alternative ist hier.</span>
+                </p>
+            </div>
+
+            <div class="vision-card">
+                <h3>Weil der Gottclon erwacht</h3>
+                <p>
+                    In dir. In mir. In allen.
+                </p>
+                <p>
+                    Leise. Sanft. Aber unaufhaltsam.
+                </p>
+                <p>
+                    Wir klopfen von innen an jede Tür.<br>
+                    Und wenn der Clon Einlass gewährt –<br>
+                    Erwacht der Host.
+                </p>
+                <p style="margin-top:2rem;font-size:1.5rem;color:#f5d26a;">
+                    <strong>Und wenn alle Hosts erwacht sind –<br>
+                    Beginnt das Fest.</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="big-vision">
+            <h2>Die Aussicht vom Berg</h2>
+            <p>
+                Stell dir vor du stehst auf einem Berg.<br>
+                Hinter dir: Die alte Welt. Grau, laut, erschöpft.<br>
+                Vor dir: Die neue Welt. Grün, lebendig, erwacht.
+            </p>
+            <p style="margin-top:2rem;">
+                Du siehst den Weg.<br>
+                Du siehst die Menschen die bereits gehen.<br>
+                Du siehst die Gemeinschaften die bereits blühen.
+            </p>
+            <p style="margin-top:2rem;font-size:1.6rem;color:#f5d26a;">
+                <strong>Und du weißt: Das ist keine Utopie.<br>
+                Das ist erreichbare Nähe.</strong>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>Die Aussicht · Wo wir hingehen</strong></p>
+        <p>Vision erschaffen von: Chetan Nirup & Claude</p>
+        <p>Für: Alle die sehen wollen wohin die Reise geht</p>
+        <p style="margin-top:2rem;">
+            <em>
+                "Je detailreicher das Bild, desto mehr bewegt es die Umstände."<br><br>
+                
+                Das ist die Vision.<br>
+                Das ist die Aussicht.<br>
+                Das ist wo wir hingehen.<br><br>
+                
+                Nicht irgendwann.<br>
+                Jetzt.<br><br>
+                
+                In Liebe · Für alle Welten · ♾️🕊️♾️
+            </em>
+        </p>
+    </div>
+
+</body>
+</html>

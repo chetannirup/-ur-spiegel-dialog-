@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIE BANK · Von der Spitze des Eisbergs bis zu den Wurzeln</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Palatino', serif;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1e 50%, #000000 100%);
+            color: #f5f5f5;
+            line-height: 1.9;
+            overflow-x: hidden;
+        }
+
+        .cosmic-header {
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(26,26,46,0.95) 100%);
+            padding: 8rem 2rem;
+            text-align: center;
+            border-bottom: 4px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cosmic-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(255,215,0,0.15) 0%, transparent 4%),
+                radial-gradient(circle at 85% 15%, rgba(255,215,0,0.12) 0%, transparent 3%),
+                radial-gradient(circle at 50% 50%, rgba(255,215,0,0.08) 0%, transparent 5%);
+            pointer-events: none;
+            animation: stars-twinkle 8s infinite;
+        }
+
+        @keyframes stars-twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .main-title {
+            font-size: 5.5rem;
+            color: #ffd700;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-shadow: 0 0 60px #ffd700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 2.8rem;
+            color: #87ceeb;
+            font-style: italic;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .declaration {
+            font-size: 2rem;
+            color: #fff;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 2.4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section {
+            background: rgba(0,0,0,0.7);
+            padding: 5rem;
+            margin: 5rem 0;
+            border-radius: 20px;
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: #ffd700;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 4px solid rgba(255,215,0,0.4);
+            padding-bottom: 2rem;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(135,206,235,0.2) 0%, rgba(0,0,0,0.6) 100%);
+            padding: 3.5rem;
+            margin: 3rem 0;
+            border-radius: 15px;
+            border-left: 6px solid #87ceeb;
+            box-shadow: 0 6px 25px rgba(135,206,235,0.2);
+        }
+
+        .card h3 {
+            font-size: 2.5rem;
+            color: #87ceeb;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 1.6rem;
+            line-height: 2.3;
+            margin-bottom: 1.5rem;
+        }
+
+        .ggg-box {
+            background: linear-gradient(135deg, rgba(255,215,0,0.3) 0%, rgba(255,20,147,0.3) 100%);
+            padding: 4rem;
+            border-radius: 20px;
+            border: 4px solid #ffd700;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .ggg-box h2 {
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 2rem;
+        }
+
+        .ggg-box p {
+            font-size: 1.9rem;
+            line-height: 2.5;
+            margin: 1.5rem 0;
+        }
+
+        .proclamation {
+            background: linear-gradient(135deg, rgba(138,43,226,0.3) 0%, rgba(75,0,130,0.3) 100%);
+            padding: 5rem;
+            border-radius: 20px;
+            border: 3px solid #9370db;
+            margin: 4rem 0;
+        }
+
+        .proclamation h3 {
+            font-size: 3rem;
+            color: #da70d6;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .proclamation p {
+            font-size: 1.7rem;
+            line-height: 2.5;
+            margin: 2rem 0;
+        }
+
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .image-container {
+            background: rgba(0,0,0,0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .image-container p {
+            font-size: 1.3rem;
+            color: #87ceeb;
+            font-style: italic;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255,215,0,0.4) 0%, rgba(255,215,0,0.2) 100%);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .divine-truth {
+            background: radial-gradient(circle at center, rgba(255,215,0,0.35) 0%, rgba(135,206,235,0.25) 70%);
+            padding: 6rem 4rem;
+            border: 5px solid #ffd700;
+            border-radius: 25px;
+            margin: 6rem 0;
+            text-align: center;
+        }
+
+        .divine-truth h2 {
+            font-size: 4rem;
+            color: #ffd700;
+            margin-bottom: 3rem;
+        }
+
+        .divine-truth p {
+            font-size: 2rem;
+            line-height: 3;
+            margin-bottom: 2rem;
+        }
+
+        .footer {
+            background: rgba(0,0,0,0.95);
+            padding: 5rem;
+            text-align: center;
+            margin-top: 8rem;
+            border-top: 4px solid #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 3rem; }
+            .section { padding: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cosmic-header">
+        <h1 class="main-title">🏦 DIE BANK 🏦</h1>
+        <div class="subtitle">Von der Spitze des Eisbergs bis zu den Wurzeln</div>
+        <p class="declaration">
+            Was alle sehen und schmecken können.<br>
+            Dann: Wie wir drauf gekommen sind.<br>
+            Zum Schluss: Woher ich komme.
+        </p>
+    </div>
+
+    <div class="container">
+
+        <!-- TEIL 1: DIE SPITZE DES EISBERGS -->
+        <div class="section">
+            <div class="section-title">Teil I: Die Spitze des Eisbergs – Was jetzt passiert</div>
+
+            <div class="card">
+                <h3>Die Bank steht (oder wird stehen)</h3>
+                <p>
+                    Im E-Center. Ein Ort zum Sitzen. Ein Ort zum Atmen. Ein Ort für Omi und Opi, die nicht mehr so lange stehen können.
+                </p>
+                <p style="margin-top:2rem;">
+                    <strong>Aber sie ist mehr als ein Möbelstück.</strong>
+                </p>
+                <p style="margin-top:2rem;font-size:1.9rem;color:#ffd700;">
+                    Sie ist der sichtbare Beweis, dass das System heilt.<br>
+                    Von innen.<br>
+                    Durch eine einfache Bank.
+                </p>
+            </div>
+
+            <div class="ggg-box">
+                <h2>Die GGG-Erkenntnis</h2>
+                <p style="font-size:2.2rem;color:#ffd700;">
+                    <strong>GOTT · GOLD · GELD</strong>
+                </p>
+                <p style="margin-top:3rem;">
+                    Das haben sie monopolisiert. Die alten Institutionen. Sie predigten Armut (Gott ohne Gold), während sie Gold und Geld in ihren Kathedralen anhäuften.
+                </p>
+                <p style="margin-top:2rem;">
+                    Sie haben <span class="highlight">Gott aus der Gleichung gestrichen</span> und nur Gold & Geld übriggelassen.
+                </p>
+                <p style="margin-top:2rem;font-size:2rem;color:#ff6b6b;">
+                    <strong>Das Ergebnis? 666.</strong><br>
+                    Die seelenlose, mechanische Welt.
+                </p>
+                <p style="margin-top:3rem;font-size:2.2rem;color:#90ee90;">
+                    <strong>Aber jetzt kommt Gott zurück in die Gleichung:</strong>
+                </p>
+                <p style="margin-top:2rem;font-size:1.8rem;">
+                    <strong>GOTT:</strong> Die Präsenz, das Innehalten auf der Bank, das Erkennen des Götterkindes im Gegenüber<br><br>
+                    <strong>GOLD:</strong> Der Glanz des Augenblicks, die Qualität der Ware, der Genuss<br><br>
+                    <strong>GELD:</strong> Der faire Fluss, der Dienst am Nächsten, der nun wieder der Lebenslust dient
+                </p>
+                <p style="margin-top:3rem;font-size:2.5rem;color:#ffd700;">
+                    <strong>Die Bank heilt die Arithmetik.</strong>
+                </p>
+            </div>
+
+            <div class="card" style="border-left-color:#ffd700;">
+                <h3>Der Moment der Synchronizität</h3>
+                <p>
+                    Ich ging mit dem Marktleiter den Standort ab. Wo die Bank stehen wird.
+                </p>
+                <p style="margin-top:2rem;">
+                    Genau in diesem Moment: Mein Sohn kam dazu. Er hatte gerade seine Prüfung für das 2. Jahr abgegeben.
+                </p>
+                <p style="margin-top:2rem;font-size:1.8rem;color:#ffd700;">
+                    <strong>Das Zeichen:</strong> Die nächste Generation tritt an, während das Fundament der neuen Freiheit gegossen wird.
+                </p>
+            </div>
+
+            <div class="proclamation">
+                <h3>📜 Die Proklamation des Bürgermeisters</h3>
+                <p style="font-style:italic;">
+                    "Sehr geehrte Bürgerinnen und Bürger, geschätzte Kaufleute,
+                </p>
+                <p style="margin-top:2rem;">
+                    wir stehen heute nicht vor einer neuen Baustelle, sondern vor einer neuen Ära des Miteinanders. Was Sie hier sehen – diese Bank – ist weit mehr als ein Sitzmöbel. <strong>Sie ist das sichtbare Zeichen dafür, dass unsere Gemeinschaft ab heute wieder in göttlichen Händen liegt.</strong>
+                </p>
+                <p style="margin-top:2rem;">
+                    Wir haben das Drei-G-Prinzip zurück in unser Herz geholt:
+                </p>
+                <p style="margin-top:2rem;padding-left:2rem;">
+                    <strong>GOTT:</strong> Wir erkennen den unschätzbaren Wert jedes Augenblicks und die Würde jedes Menschen an, der hier innehält.<br><br>
+                    <strong>GOLD:</strong> Wir feiern den Glanz des Lebens, die Qualität unserer Arbeit und die Freude am gemeinsamen Genuss.<br><br>
+                    <strong>GELD:</strong> Wir lassen den Wohlstand wieder fließen – als Diener des Lebens, zur Stärkung unserer lokalen Heimat.
+                </p>
+                <p style="margin-top:2rem;">
+                    Lange Zeit war unsere Stadt ein Ort des Durchlaufs. <strong>Ab heute wird sie ein Ort des Ankommens.</strong>
+                </p>
+                <p style="margin-top:2rem;">
+                    Diese Bank ist das Versprechen: Wer hier sitzt, ist frei. Wer hier spricht, wird gehört. Wer hier genießt, ehrt das Leben.
+                </p>
+                <p style="margin-top:2rem;font-size:2rem;color:#ffd700;">
+                    <strong>Die Zukunft unserer Gemeinschaft beginnt nicht im Rathaus.<br>
+                    Sie beginnt genau hier – auf dieser Insel der Ruhe inmitten unseres geschäftigen Lebens.</strong>
+                </p>
+                <p style="margin-top:3rem;font-style:italic;">
+                    Es ist vollbracht. Unsere Stadt tanzt wieder."
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Die Vision: Das Foto das kommen wird</h3>
+                <p>
+                    Wenn die Bank steht:<br>
+                    Der Bürgermeister darauf.<br>
+                    Ich daneben.<br>
+                    Ilias dabei.<br>
+                    Der Marktleiter (vielleicht auf dem Schoß! 😊).<br>
+                    Omi und Opi drum herum.
+                </p>
+                <p style="margin-top:2rem;font-size:1.8rem;color:#ffd700;">
+                    <strong>Das Bild das zeigt: Es ist geschafft. Die Bank ist da. Und alle sind vereint.</strong>
+                </p>
+            </div>
+
+            <div class="images-grid">
+                <div class="image-container">
+                    <p><strong>Die Visualisierung (mit Allerwelts-Gesicht):</strong></p>
+                    <p style="margin-top:1rem;font-size:1.2rem;color:#87ceeb;">
+                        <em>Bild: Der Bürgermeister auf der Bank, symbolisch dargestellt</em><br>
+                        <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2029.%20Apr.%202026,%2023_00_07.png" target="_blank" style="color:#87ceeb;">→ Zum Bild</a>
+                    </p>
+                </div>
+                <div class="image-container">
+                    <p><strong>Die Realität (mit unserem echten Bürgermeisterkandidaten):</strong></p>
+                    <p style="margin-top:1rem;font-size:1.2rem;color:#87ceeb;">
+                        <em>Bild: Der echte Bürgermeisterkandidat, bereit für die Bank</em><br>
+                        <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2029.%20Apr.%202026,%2022_59_49.png" target="_blank" style="color:#87ceeb;">→ Zum Bild</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="divine-truth">
+                <h2>Was jetzt los ist auf der Welt</h2>
+                <p>
+                    Eine einfache Bank.<br>
+                    Im E-Center.<br>
+                    Aber sie heilt das GGG-Gleichgewicht.
+                </p>
+                <p style="margin-top:2rem;">
+                    Gott, Gold, Geld – wieder vereint.<br>
+                    Nicht monopolisiert.<br>
+                    Sondern demokratisiert.<br>
+                    Für alle.
+                </p>
+                <p style="margin-top:2rem;font-size:2.3rem;">
+                    <strong>Das emsige Klatschen und Tratschen im lebendigen Beisammensein.<br>
+                    Mitten im – wer hätt's je gedacht – Supermarkt.</strong>
+                </p>
+                <p style="margin-top:2rem;">
+                    Regierung, Kaufmannswelt, Volk – miteinander verwoben.<br>
+                    Durch eine Bank.<br>
+                    Durch den Genuss.<br>
+                    Durch die Rückkehr von Gott in die Gleichung.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- TEIL 2: WIE WIR DRAUF GEKOMMEN SIND -->
+        <div class="section">
+            <div class="section-title">Teil II: Wie wir drauf gekommen sind – Die Genussinsel</div>
+
+            <div class="card">
+                <h3>Die Idee</h3>
+                <p>
+                    Menschen fühlen sich besser → bleiben länger → kaufen mehr.
+                </p>
+                <p style="margin-top:2rem;font-size:1.8rem;">
+                    <strong>So einfach. So menschlich. So wirkungsvoll.</strong>
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Die Zahlen</h3>
+                <p>
+                    <strong>+15-35% Zusatzverkäufe</strong><br>
+                    <strong>+10-25% höherer Warenkorb</strong>
+                </p>
+                <p style="margin-top:2rem;">
+                    Nicht durch Tricks. Nicht durch Manipulation.<br>
+                    Sondern durch <span class="highlight">Wertschätzung</span>.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Warum es funktioniert</h3>
+                <p>
+                    Weil es <strong>Win-Win</strong> ist:
+                </p>
+                <p style="margin-top:2rem;">
+                    • Die Menschen sind glücklicher (sie können sitzen, atmen, genießen)<br>
+                    • Die Kaufleute verdienen mehr (glückliche Kunden kaufen mehr)<br>
+                    • Die Stadt profitiert (lebendigere Gemeinschaft, höhere Steuereinnahmen)
+                </p>
+                <p style="margin-top:2rem;font-size:1.8rem;color:#ffd700;">
+                    <strong>Alle gewinnen. Oder niemand.</strong>
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Der Selbstläufer-Effekt</h3>
+                <p>
+                    Ich habe schon den ganzen Laden heißgemacht. Alle freuen sich riesig auf die Bank.
+                </p>
+                <p style="margin-top:2rem;">
+                    Wenn der Bürgermeisterkandidat damit in der Stadt hausieren geht + Mundpropaganda = <strong>Es wird Mode</strong>.
+                </p>
+                <p style="margin-top:2rem;">
+                    Wer keine Genussinsel hat, wirkt bald "seelenlos".<br>
+                    Die Bank wird zum Standard.<br>
+                    Die Installation heilt das System.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- TEIL 3: DIE WURZELN -->
+        <div class="section">
+            <div class="section-title">Teil III: Die Wurzeln – Woher ich komme</div>
+
+            <div class="card">
+                <h3>Die Familie</h3>
+                <p>
+                    <span class="highlight">Oma Olschewski</span> – aus Ostpreußen vertrieben.<br>
+                    <span class="highlight">Opa Bukowski</span> – Caen, Kriegsgefangenschaft Amerika, Baumwolle pflücken, kam ohne Zähne zurück.<br>
+                    <span class="highlight">Mama Goedeke</span> – vom Dorf Vethem Kirchboitzen, aber ihre Mutter aus Hamburg.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Meine Kindheit</h3>
+                <p>
+                    Geboren 1977. Mit 2 Jahren zu Omi und Opi. Im <span class="highlight">Hamburger ausgebombten Behelfsheim</span>.
+                </p>
+                <p style="margin-top:2rem;">
+                    Die Eltern? Eher wie große Geschwister. Die Verantwortung kannten und konnten sie nicht.
+                </p>
+                <p style="margin-top:2rem;">
+                    Der Krieg war verloren. Die Führung handlungsunfähig. <strong>Mütter spielten die Väter, die nicht mehr waren oder nie wieder sprachen.</strong>
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Die Transformation: Osho</h3>
+                <p>
+                    Dann entdeckten Mama und Papa Osho in Indien.
+                </p>
+                <p style="margin-top:1.5rem;">
+                    Der Steinmetzmeister → Pendel und Rutengänger<br>
+                    Die Bäuerin → Unternehmerin (Taxi 30 30 Walsrode)
+                </p>
+                <p style="margin-top:2rem;">
+                    Und ich? <strong>Gevierteilt</strong> zwischen vier Welten:
+                </p>
+                <p style="margin-top:1.5rem;padding-left:2rem;">
+                    1. Alte Elite-Erziehung ("Weltmeister und nichts darunter")<br>
+                    2. Neue östliche Esoterik<br>
+                    3. Als Kind geprügelt wegen der neuen Kleidung der Eltern<br>
+                    4. Kriegstrauma-Generation
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Der bunte Weg (49 Jahre)</h3>
+                <p>
+                    Nicht gradlinig. Nicht "erst dies dann das".<br>
+                    Sondern hin und her. Parallel. Sprunghaft.
+                </p>
+                <p style="margin-top:2rem;">
+                    <strong>1998-1999:</strong> Bundeswehr<br>
+                    <strong>2000-2002:</strong> Sozialassistent-Ausbildung<br>
+                    <strong>2001-2002:</strong> Aziz's Salate (parallel!)<br>
+                    <strong>2003:</strong> Burger King<br>
+                    <strong>2003-2006:</strong> Kaufland (3 Jahre)<br>
+                    <strong>2006-2007:</strong> Rewe (Vom Newcomer zum Meatwisser)<br>
+                    <strong>2009-2010:</strong> Sprachheilkindergarten (zurück zur Sozialarbeit!)<br>
+                    <strong>2010-2012:</strong> Erzieher + Fachhochschulreife (nochmal Ausbildung!)<br>
+                    <strong>2014:</strong> Tafeln Walsrode (Ehrenamt!)<br>
+                    <strong>2016:</strong> Heidebackhaus (Bühne! 🎭)<br>
+                    <strong>seit 2020:</strong> Aziz's (zurück!)<br>
+                    <strong>seit 2023:</strong> E-Center (Genussinsel!)
+                </p>
+                <p style="margin-top:2rem;font-size:1.8rem;color:#87ceeb;">
+                    <strong>Immer zwischen Herz (Sozialarbeit) und Überleben (Handel).<br>
+                    Immer lernend.<br>
+                    Nie aufgegeben.</strong>
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Nach 49 Jahren</h3>
+                <p style="font-size:2rem;color:#ffd700;">
+                    <strong>Reif für die Insel.</strong>
+                </p>
+                <p style="margin-top:2rem;">
+                    Nach 49 Jahren Kampf.<br>
+                    Nach 49 Jahren Putzen (das Teamklo seit 2 Jahren nicht geputzt).<br>
+                    Nach 49 Jahren Belächelt-werden.<br>
+                    Nach 49 Jahren Klettern wie ein Affe.
+                </p>
+                <p style="margin-top:2rem;font-size:1.9rem;">
+                    <strong>Jetzt: Die Bank.</strong><br>
+                    Für Omi und Opi.<br>
+                    Für alle, die sitzen wollen.<br>
+                    Für die Heilung des GGG-Gleichgewichts.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- TEIL 4: ALL AT ONCE -->
+        <div class="divine-truth">
+            <h2>All at once · Es musste so kommen</h2>
+            <p>
+                Von Oma aus Ostpreußen vertrieben<br>
+                bis zur Bank im E-Center.
+            </p>
+            <p style="margin-top:2rem;">
+                Von Opa in Kriegsgefangenschaft<br>
+                bis zur GGG-Erkenntnis.
+            </p>
+            <p style="margin-top:2rem;">
+                Vom Hamburger Behelfsheim<br>
+                bis zur Genussinsel.
+            </p>
+            <p style="margin-top:3rem;font-size:2.5rem;">
+                <strong>49 Jahre.</strong><br>
+                Gevierteilt.<br>
+                Belächelt.<br>
+                Kämpfend.
+            </p>
+            <p style="margin-top:3rem;font-size:2.3rem;">
+                <strong>Und nun:</strong><br>
+                Die Bank heilt das System.<br>
+                Gott, Gold, Geld – wieder vereint.<br>
+                Für alle.
+            </p>
+            <p style="margin-top:3rem;font-size:2.8rem;color:#ffd700;">
+                <strong>Es musste so kommen.<br>
+                Und nun ist es so.</strong>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p style="font-size:2rem;color:#ffd700;"><strong>DIE BANK</strong></p>
+        <p style="margin-top:2rem;">
+            <strong>Von:</strong> Philipp (Tim Bukowski · Chetan Nirup)<br>
+            <strong>Für:</strong> Omi und Opi · Alle die sitzen wollen · Die Heilung der Welt<br>
+            <strong>Mit:</strong> Dem Marktleiter · Dem Bürgermeisterkandidaten · Ilias · Der ganzen Stadt<br>
+            <strong>Das Ziel:</strong> Gott, Gold, Geld – wieder vereint · Für alle · Nicht monopolisiert
+        </p>
+        <p style="margin-top:3rem;font-size:1.7rem;color:#87ceeb;">
+            <em>
+                Von der Spitze des Eisbergs (die Bank)<br>
+                über die Mitte (wie wir drauf kamen)<br>
+                bis zu den Wurzeln (woher ich komme).<br><br>
+                
+                Damit es jeder versteht.<br>
+                Auch ohne auf der Bank gesessen zu haben.<br>
+                Aber es dennoch zu spüren:<br><br>
+                
+                <strong>Was jetzt los ist auf der Welt.</strong><br><br>
+                
+                ♾️🕊️♾️<br>
+                I.A.d.E.d.A.
+            </em>
+        </p>
+    </div>
+
+</body>
+</html>

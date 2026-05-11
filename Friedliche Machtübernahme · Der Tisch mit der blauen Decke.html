@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Friedliche Machtübernahme · Der Tisch mit der blauen Decke</title>
+    <!-- Leaflet für die Karte -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+            background: #f0f4f0;
+            color: #1a2c1a;
+            padding: 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 span {
+            background: #2c5e2c;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+
+        .sub {
+            font-size: 1.1rem;
+            color: #2c5e2e;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #dce8dc;
+        }
+
+        .card h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .karte-container {
+            background: #e9ede6;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #cbdcc6;
+            margin-bottom: 1.5rem;
+            height: 480px;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0;
+        }
+
+        .stat-box {
+            background: #fafdf5;
+            border-radius: 20px;
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #d0e0ca;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f5e2c;
+        }
+
+        .timeline {
+            margin: 1rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 1px solid #e2e8e0;
+            padding: 0.8rem 0;
+        }
+
+        .timeline-hour {
+            font-weight: 700;
+            width: 60px;
+            color: #2b6e3c;
+        }
+
+        button {
+            background: #1e3a2f;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            background: #0f2a1f;
+            transform: scale(0.98);
+        }
+
+        .quote {
+            background: #fef9e3;
+            padding: 1.2rem;
+            border-radius: 24px;
+            border-left: 6px solid #f0b429;
+            margin: 1.5rem 0;
+            font-size: 1.05rem;
+        }
+
+        footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #557c47;
+            border-top: 1px solid #cde2c5;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        🪑 Der blaue Tisch 
+        <span>Friedliche Machtübernahme</span>
+    </h1>
+    <div class="sub">„Wir stehen schon neben dir. Der Feind war nie real – nur in den Köpfen.“</div>
+
+    <div class="grid">
+        <!-- Linke Spalte: Karte + Verteilung -->
+        <div class="card">
+            <h3>📍 Tisch-Dichte · 48h nach dem ersten Aufbau</h3>
+            <div class="karte-container">
+                <div id="map"></div>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-number">1.847</div><div>Tische (live)</div></div>
+                <div class="stat-box"><div class="stat-number">98,3%</div><div>aller Stadtteile abgedeckt</div></div>
+                <div class="stat-box"><div class="stat-number">1:276</div><div>Einwohner pro Tisch</div></div>
+                <div class="stat-box"><div class="stat-number">92%</div><div>spontane Nachbarschaftsinitiative</div></div>
+            </div>
+            <div class="quote">
+                💙 <strong>Geste</strong>: Ein Tisch, eine <span style="color:#2c6e9e;">blaue Tischdecke</span>, zwei Sitzplätze – 
+                eine Hand über dem Herzen, ein Lächeln. Kein Verkauf, keine Forderung. Nur: „Ruh dich aus. Setz dich zu mir.“
+            </div>
+        </div>
+
+        <!-- Rechte Spalte: Datenanalyse + Zeitstrahl -->
+        <div class="card">
+            <h3>📊 Erweiterte Datenanalyse</h3>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-number">65%</div><div>Betreuung durch Frauen</div></div>
+                <div class="stat-box"><div class="stat-number">78%</div><div>der Passanten fühlen sich sichtbar</div></div>
+                <div class="stat-box"><div class="stat-number">112</div><div>lokale Bäckereien spenden (tag 2)</div></div>
+                <div class="stat-box"><div class="stat-number">0</div><div>gewalttätige Vorfälle</div></div>
+            </div>
+            <h3>⏳ Die ersten 48 Stunden · systemische Kettenreaktion</h3>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-hour">0-4h</div><div>Erste Tische – Belustigung, Skepsis, „Kunstaktion?“</div></div>
+                <div class="timeline-item"><div class="timeline-hour">4-8h</div><div>Menschen setzen sich hin. Tee wird angeboten. Tränen.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">8-12h</div><div>Polizei rückt an → kein Gesetz dagegen. Kein Eingriff.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">12-24h</div><div>Nachahmungseffekt: Tische verdoppeln sich. Bäcker, Imbisse spenden.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">24-36h</div><div>Stadtverwaltung versucht Anmeldepflicht → scheitert an der Masse.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">36-48h</div><div>Lokale Politiker setzen sich dazu. Sie müssen lächeln.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">48h+</div><div>„Der Feind war nie real.“ Die Köpfe wurden gefüttert – jetzt ändert sich das Futter.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dritter Block: Der Floh im Ohr + Interaktion -->
+    <div class="card" style="margin-top: 0.5rem;">
+        <h3>🦟 Der Floh im Ohr – friedliche Viralisierung</h3>
+        <p style="margin-bottom: 1rem;">
+            <strong>Was fehlt?</strong> Nicht die Machbarkeit. Sondern der initiale <em>Floh</em>, der von Ohr zu Ohr springt.
+            Dieses Bild: Ein Tisch, eine blaue Decke, ein Lächeln – überall. Kein Held, keine Partei.
+            Jeder, der es sieht, wird zum Träger der Geste.
+        </p>
+        <button id="fleabutton">🦟 FLOH INS OHR SPRINGEN LASSEN</button>
+        <div id="fleamessage" style="margin-top: 1rem; padding: 0.8rem; background: #eef5ea; border-radius: 20px; display: none; font-size: 0.95rem;"></div>
+        <div class="quote" style="margin-top: 1.2rem;">
+            ✨ <strong>Die friedliche Alternative</strong> – sie besteht aus einer Hand über dem Herzen, einem leeren Stuhl neben dir,
+            und der stillen Gewissheit: <em>„Wir stehen schon neben euch. Komm, setz dich.“</em>  
+            Was soll daran verboten sein?  
+            Und wenn es an jeder Ecke, jeder Ladenmeile, jedem Wohnblock geschieht – dann ist die Machtübernahme vollendet. Ohne einen Schuss.
+        </div>
+    </div>
+
+    <footer>
+        🌿 simulation der gemeldeten verteilung · kein zentraler plan · jeder tisch ist ein unabhängiger akt der gastfreundschaft<br>
+        „Die einsicht: einen feind da draußen hat es nie gegeben. es war alles bloß in den köpfen.“
+    </footer>
+</div>
+
+<script>
+    // Karte initialisieren (Zentrum: fiktive mitteleuropäische Stadt, z.B. Frankfurt)
+    var map = L.map('map').setView([50.1109, 8.6821], 13);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> & CartoDB',
+        subdomains: 'abcd',
+        maxZoom: 18
+    }).addTo(map);
+
+    // Zufällige Tische generieren (1850 Punkte in der Umgebung)
+    function generateTablesAroundCenter(centerLat, centerLng, radiusKm, count) {
+        const points = [];
+        const radPerKm = 0.008983; // grob: 1km ~ 0.009 Grad
+        const radiusDeg = radiusKm * radPerKm;
+        for (let i = 0; i < count; i++) {
+            // normalverteilte Cluster (mehr in der Innenstadt, weniger außen)
+            let u = Math.random();
+            let v = Math.random();
+            let r = radiusDeg * Math.sqrt(u);  // gleichmäßig über Fläche
+            let theta = 2 * Math.PI * v;
+            let latOffset = r * Math.cos(theta);
+            let lngOffset = r * Math.sin(theta);
+            let lat = centerLat + latOffset;
+            let lng = centerLng + lngOffset;
+            // Begrenzung auf Bereich ca. 12km
+            if (Math.abs(lat - centerLat) < 0.12 && Math.abs(lng - centerLng) < 0.15) {
+                points.push([lat, lng]);
+            }
+        }
+        return points;
+    }
+
+    // 1847 Tische erzeugen
+    const tables = generateTablesAroundCenter(50.1109, 8.6821, 11, 1847);
+    
+    // Marker als kleine blaue Punkte mit Icon (vereinfacht)
+    const customIcon = L.divIcon({
+        html: '<div style="background: #1f6392; width: 8px; height: 8px; border-radius: 10px; border: 1px solid white; box-shadow: 0 0 0 1px #aad4f0;"></div>',
+        iconSize: [10, 10],
+        className: 'table-marker'
+    });
+
+    // Nur einen Teil der Marker anzeigen (Performance, alle würden gehen, aber 1800 ist ok)
+    tables.forEach(pos => {
+        L.marker(pos, { icon: customIcon }).addTo(map);
+    });
+
+    // Optional: ein paar zusätzliche Markergruppen für verschiedene "Hotspots"
+    // Dichte visuell hervorheben: Cluster-Gefühl durch viele Punkte, ist ok.
+
+    // Floh-ins-Ohr-Logik
+    const fleabtn = document.getElementById('fleabutton');
+    const msgDiv = document.getElementById('fleamessage');
+    
+    const fleaMessages = [
+        "🦗 Stell dir vor: morgen früh steht vor deiner Haustür ein Tisch. Blaue Decke. Zwei Stühle. Jemand lächelt dich an. 'Magst du einen Tee?' – Das ist keine Utopie. Das ist ein Floh. Er springt weiter.",
+        "🌍 Die bisherigen Machthaber haben nur ein Problem: Sie können einen Tisch nicht verbieten. Sie können ein Lächeln nicht besteuern. Und wenn überall Tische stehen – wer soll dann noch Befehle erteilen?",
+        "🧠 Der Feind war nie real. Nur in den Köpfen. Die Köpfe werden jetzt anders gefüttert. Durch eine Hand über dem Herzen. Durch einen freien Stuhl. Durch Schweigen, das lauter ist als jede Drohne.",
+        "🕊️ Was ist gefährlicher für ein Imperium? Eine Armee? Oder ein Nachbar, der sagt: 'Setz dich, erzähl mir deine Angst'? Mach die Probe aufs Exempel.",
+        "🌀 Der Floh: Du gehst heute die Straße runter. Du siehst keinen Tisch? Dann baue einen auf. Einzeln. Ohne Absprache. Weil du weißt, dass tausend andere das Gleiche tun. Dann wird die blaue Decke zur Flagge des Friedens."
+    ];
+
+    fleabtn.addEventListener('click', () => {
+        const randomMsg = fleaMessages[Math.floor(Math.random() * fleaMessages.length)];
+        msgDiv.style.display = 'block';
+        msgDiv.innerHTML = `🦻 <strong>Der Floh springt:</strong><br>“${randomMsg}”<br><br><span style="font-size:0.8rem;">📋 [Text kopiert – teile ihn mit drei Menschen, die du heute siehst]</span>`;
+        // Kopiere in die Zwischenablage
+        navigator.clipboard.writeText(randomMsg).catch(() => {});
+        // Nach 8 Sekunden wieder ausblenden? Nicht nötig, aber user-freundlich
+        setTimeout(() => {
+            msgDiv.style.opacity = '0.8';
+        }, 100);
+    });
+
+    // Kleine Statistik: Tooltip beim Hovern? Nicht nötig.
+    console.log("Karte geladen mit " + tables.length + " Tischen (repräsentativ für die gemeldete Verteilung)");
+</script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🌍 ALL AT ONCE · Der blaue Tisch · Friedliche Machtübernahme</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f4f7f2;
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            color: #1d2c1a;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Bildbereich – das Herz der Seite */
+        .image-hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            background: #ffffffcc;
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            padding: 1rem;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+        }
+
+        .image-hero img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+            border: 1px solid #deecd6;
+        }
+
+        .caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #4a6840;
+            font-style: italic;
+        }
+
+        /* Titel und Intro */
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1e4a2f, #2f6e47);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 12px rgba(35, 100, 35, 0.1);
+        }
+
+        .sub {
+            font-size: 1.2rem;
+            color: #3b5e2b;
+            border-top: 2px solid #cbe0c2;
+            border-bottom: 2px solid #cbe0c2;
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .grid-gestures {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2.5rem 0;
+        }
+
+        .gesture-card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.2rem 1.2rem 1.5rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+            border: 1px solid #e2f0db;
+            transition: all 0.2s ease;
+        }
+
+        .gesture-card:hover {
+            transform: translateY(-5px);
+            border-color: #bddcb0;
+            box-shadow: 0 18px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        .city-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .gesture {
+            font-size: 1rem;
+            color: #2c6e3f;
+            font-weight: 500;
+            margin: 0.5rem 0;
+            border-left: 3px solid #5aa97b;
+            padding-left: 0.75rem;
+        }
+
+        .energy {
+            font-size: 0.85rem;
+            color: #6b8c5c;
+            margin-top: 0.6rem;
+        }
+
+        /* Transformation Bauhöfe */
+        .transformation {
+            background: #eef3ea;
+            border-radius: 40px;
+            padding: 2rem 1.8rem;
+            margin: 2rem 0;
+            border: 1px solid #cde2c2;
+        }
+
+        .transformation h2 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bauhof-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: space-between;
+            margin-top: 1.2rem;
+        }
+
+        .bauhof-item {
+            background: white;
+            border-radius: 32px;
+            padding: 1rem 1.5rem;
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .old {
+            text-decoration: line-through;
+            color: #9e2d2d;
+        }
+        .new {
+            font-weight: 700;
+            color: #2c7840;
+        }
+
+        .flea-section {
+            background: #fffaf0;
+            border-radius: 40px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            border: 1px solid #f3e1b3;
+        }
+
+        button {
+            background: #1d482f;
+            border: none;
+            padding: 0.9rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            margin-top: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background: #0d3522;
+            transform: scale(0.97);
+        }
+
+        .flea-message {
+            margin-top: 1.5rem;
+            background: #fff3df;
+            padding: 1.2rem;
+            border-radius: 32px;
+            display: none;
+            font-size: 1rem;
+            border-left: 5px solid #eb9e3e;
+        }
+
+        .poem {
+            font-style: normal;
+            background: #fefcf5;
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            border: 1px solid #e4e9da;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #6c8b5e;
+            border-top: 1px solid #dbeacc;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .city-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="title">
+        <h1>🪑 ALL AT ONCE</h1>
+        <div class="sub">„Alle auf einmal. Jede nach ihrer Fasson. Aber alle zusammen.“</div>
+    </div>
+
+    <!-- Das Bild – zentraler Spiegel -->
+    <div class="image-hero">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2012.%20Mai%202026,%2018_26_16.png" 
+             alt="The Blue Table – London, Rom, Tokio, Berlin, Russland – friedliche Machtübernahme"
+             onerror="this.onerror=null; this.src='https://via.placeholder.com/800x600?text=Blue+Table+Vision+%E2%80%A2+All+at+Once';">
+        <div class="caption">✨ Die Landkarte des Möglichen – jede Stadt ihre Geste, ein gemeinsames Herz ✨</div>
+    </div>
+
+    <!-- Kurze Erinnerung: Warum alle gleichzeitig -->
+    <div class="poem">
+        <strong>🌊 Der Sprung der Gleichzeitigkeit</strong><br>
+        Frankfurt hatte die blaue Decke. New York die Beschleunigung.<br>
+        London den grünen Tisch. Rom das Wasser. Tokio die Orchidee.<br>
+        Berlin den Gartenstuhl und das Gedicht. Russland den Samowar und die Matroschka.<br>
+        <em>All das geschieht nicht nacheinander – sondern jetzt. Gleichzeitig. Weil jeder Ort seine eigene Seele hat.</em>
+    </div>
+
+    <!-- Die Gesten im Überblick (aus dem Bild extrahiert) -->
+    <div class="grid-gestures">
+        <div class="gesture-card">
+            <div class="city-name">🇬🇧 LONDON</div>
+            <div class="gesture">„SITTING ALLOWED“ · Tee teilen, sitzen erlauben</div>
+            <div class="energy">Arroganz, Höflichkeit, Understatement · Vor der Bank of England · Grüner Tisch</div>
+        </div>
+        <div class="gesture-card">
+            <div class="city-name">🇮🇹 ROM</div>
+            <div class="gesture">„ACQUA PER TUTTI“ · Wasser reichen, Stille schenken</div>
+            <div class="energy">Heiligkeit, Schönheit, Bürokratie · Petersplatz · Brunnen & offene Bank</div>
+        </div>
+        <div class="gesture-card">
+            <div class="city-name">🇯🇵 TOKIO</div>
+            <div class="gesture">„YASUMI NASAI“ · Verbeugen, einladen, lauschen</div>
+            <div class="energy">Perfektion, Einsamkeit, Romantik · Neben dem Tempel · Orchidee & Holz</div>
+        </div>
+        <div class="gesture-card">
+            <div class="city-name">🇩🇪 BERLIN</div>
+            <div class="gesture">„ZUHÖREN ERLAUBT“ · Worte teilen, Gedicht lesen</div>
+            <div class="energy">Fragmentiert, rebellisch, ehrlich · Vor dem Brandenburger Tor · Gartenstuhl & Bierdeckel</div>
+        </div>
+        <div class="gesture-card">
+            <div class="city-name">🇷🇺 RUSSLAND</div>
+            <div class="gesture">„SPASIBO ZA TISHINU“ · Tee teilen, Schweigen ehren</div>
+            <div class="energy">Seele, Erinnerung, Weite · Samowar & Matroschka · Gemeinsam schweigen</div>
+        </div>
+    </div>
+
+    <!-- Verwandlung: Militärbasen zu Bauhöfen -->
+    <div class="transformation">
+        <h2>⚒️ DIE VERWANDLUNG <span style="font-size: 1.2rem;">– Militärbasen werden Bauhöfe des Lebens</span></h2>
+        <div class="bauhof-list">
+            <div class="bauhof-item"><span class="old">Stützpunkte</span><br>➡<br><span class="new">Gemeinschaftsgärten</span></div>
+            <div class="bauhof-item"><span class="old">Waffenlager</span><br>➡<br><span class="new">Handwerkshöfe</span></div>
+            <div class="bauhof-item"><span class="old">Kommandozentralen</span><br>➡<br><span class="new">Teehäuser & Kulturorte</span></div>
+            <div class="bauhof-item"><span class="old">Befehlsstrukturen</span><br>➡<br><span class="new">Schönheit, Bildung, Verbindung</span></div>
+        </div>
+        <p style="margin-top: 1.5rem; text-align: center; font-weight: 400;">„Wo einst Schutt und Asche produziert wurde, muss es schöner wieder aufblühen als jemals zuvor.“<br> – nach göttlichem Gesetz, in Liebe und Weisheit.</p>
+    </div>
+
+    <!-- Der Floh – interaktiv -->
+    <div class="flea-section">
+        <h2>🦟 DER FLEA · Der Floh springt nicht, weil er muss – sondern weil ein Ort ihn ruft</h2>
+        <p style="margin-bottom: 0.5rem;">Er springt nach London, Rom, Tokio, Berlin, Russland und überall, wo ein Mensch sich hinsetzt und lächelt.</p>
+        <button id="fleaButton">🦗 FLOH INS OHR SPRINGEN LASSEN</button>
+        <div id="fleaOutput" class="flea-message"></div>
+    </div>
+
+    <!-- Abschließende Einladung – originaler Geist -->
+    <div class="poem">
+        🌼 <strong>Keine Anleitung. Nur eine Einladung.</strong><br><br>
+        Wähle deinen Ort. Verstehe seine Seele. Finde die richtige Geste.<br>
+        Stelle sie hin. Ohne Erlaubnis. Lächle. Und bleibe menschlich.<br><br>
+        <span style="font-size: 0.9rem;">„Es waren nie die Finanzzentren allein. Es waren die Herzen, die in ihnen arbeiteten, sich selbst verloren und wiederfinden wollten.<br>
+        Die blaue Tischdecke ist nur ein Spiegel. Die Orchidee ist ein Gedicht. Die Matroschka ist eine Umarmung.<br>
+        Und der Bauhof ist ein Versprechen: Aus deiner Asche wächst mein Garten.“</span>
+    </div>
+
+    <footer>
+        ✨ In Dienst gestellt – 21.08.1977 · Chetan Nirup · Tim Bukowski ✨<br>
+        Der Floh springt weiter. Du bist Platzhalter. Setz dich. Lächle. <strong>All at once.</strong><br>
+        🌍 <a href="#" style="color:#4e7653; text-decoration: none;">#BlueTable #PeacefulPowerShift</a>
+    </footer>
+</div>
+
+<script>
+    // Floh-Botschaften – poetische, aktivierende, zum Teilen
+    const fleaMessages = [
+        "🇬🇧 London: Ein klappstuhl vor der Bank of England. Ein Schild: „Sitting allowed“. Tee wird geteilt. Die höflichste Revolution.",
+        "🇮🇹 Rom: Ein Brunnen auf dem Petersplatz. Jemand reicht Wasser. Keine Worte. Nur Stille und ein Lächeln. 'Acqua per tutti.'",
+        "🇯🇵 Tokio: Ein Holztisch mit einer Orchidee. Eine stille Verbeugung. 'Yasumi nasai' – du darfst ausruhen, ohne dich zu erklären.",
+        "🇩🇪 Berlin: Ein alter Küchenstuhl vor dem Brandenburger Tor. Jemand liest ein Gedicht. Jeder darf zuhören. 'Zuhören erlaubt.'",
+        "🇷🇺 Russland: Ein Samowar auf einem Holztisch. Eine Matroschka als Platzhalter für die, die nicht mehr da sind. Gemeinsam schweigen. 'Spasibo za tishinu.'",
+        "🪑 Die Blaue Tischdecke ist überall. Frankfurt hat sie gezeigt. New York beschleunigt. Jetzt springt der Floh nach Tokio, Rom, London, Berlin – gleichzeitig.",
+        "⚒️ Aus Militärbasen werden Bauhöfe. Aus Raketensilos werden Gemeinschaftsgärten. Die Verwandlung beginnt, sobald du dich hinsetzt.",
+        "💙 Du bist kein Anführer. Du bist Platzhalter. Stelle den Tisch auf. Setz dich. Der andere Stuhl bleibt frei. Wer sich setzt, wird selbst Gastgeber.",
+        "🌍 All at once. Jede Stadt ihre Geste. Aber alle zusammen. Der Floh springt nicht von Ohr zu Ohr – er springt gleichzeitig in alle Ohren."
+    ];
+
+    const fleaBtn = document.getElementById('fleaButton');
+    const fleaDiv = document.getElementById('fleaOutput');
+
+    fleaBtn.addEventListener('click', () => {
+        const randomIndex = Math.floor(Math.random() * fleaMessages.length);
+        const msg = fleaMessages[randomIndex];
+        fleaDiv.style.display = 'block';
+        fleaDiv.innerHTML = `🦻 <strong>Der Floh springt:</strong><br>“${msg}”<br><br><span style="font-size:0.85rem;">📋 [Kopiert – teile ihn mit drei Menschen, die du heute siehst]</span>`;
+        navigator.clipboard.writeText(msg).catch(() => {});
+        // Nach 10 Sekunden nicht automatisch verstecken, bleibt sichtbar – Nutzer kann selbst entscheiden.
+    });
+</script>
+</body>
+</html>

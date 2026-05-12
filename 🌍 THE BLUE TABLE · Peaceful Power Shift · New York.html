@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🌍 THE BLUE TABLE · Peaceful Power Shift · New York</title>
+    <!-- Leaflet for NYC map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            background: #eef2ef;
+            color: #1a2c1a;
+            padding: 1.8rem 1.2rem;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        h1 span {
+            background: #1e5f3a;
+            color: white;
+            padding: 0.2rem 0.9rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        .sub {
+            font-size: 1.2rem;
+            color: #2a6b3c;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1.1rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 1.4rem 1.7rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            border: 1px solid #d7e5d3;
+        }
+        .card h3 {
+            font-weight: 600;
+            margin-bottom: 1.1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .map-container {
+            background: #e3e8e0;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #c2d6bc;
+            margin-bottom: 1.2rem;
+            height: 460px;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.3rem 0;
+        }
+        .stat-box {
+            background: #fafdf7;
+            border-radius: 24px;
+            padding: 0.9rem;
+            text-align: center;
+            border: 1px solid #d1e2c9;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1b6e3b;
+            line-height: 1.2;
+        }
+        .timeline {
+            margin: 1.2rem 0;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            border-bottom: 1px solid #e0e9db;
+            padding: 0.8rem 0;
+        }
+        .timeline-hour {
+            font-weight: 700;
+            min-width: 70px;
+            color: #256f3e;
+        }
+        button {
+            background: #1e3a2f;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.9rem;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-top: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        button:hover {
+            background: #0c2a1e;
+            transform: scale(0.97);
+        }
+        .quote {
+            background: #fef7e0;
+            padding: 1.3rem;
+            border-radius: 28px;
+            border-left: 6px solid #e6a817;
+            margin: 1.6rem 0;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        .highlight {
+            background: #dff0e2;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        footer {
+            margin-top: 2.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #567e4a;
+            border-top: 1px solid #cde0c5;
+            padding-top: 1.8rem;
+        }
+        @media (max-width: 780px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>
+        🪑 THE BLUE TABLE 
+        <span>Peaceful Power Shift · NYC</span>
+    </h1>
+    <div class="sub">„We are already standing next to you. The enemy was never real — only inside heads.“</div>
+
+    <div class="grid">
+        <!-- COLUMN 1: MAP + DENSITY -->
+        <div class="card">
+            <h3>📍 TABLE DENSITY · 48h after first setup</h3>
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-number">28,400+</div><div>Tables (live)</div></div>
+                <div class="stat-box"><div class="stat-number">99.1%</div><div>NYC neighborhoods covered</div></div>
+                <div class="stat-box"><div class="stat-number">1:298</div><div>Residents per table</div></div>
+                <div class="stat-box"><div class="stat-number">94%</div><div>Spontaneous grassroots</div></div>
+            </div>
+            <div class="quote">
+                💙 <strong>THE GESTURE</strong>: One table, one <span style="color:#1e5f9e;">blue tablecloth</span>, two chairs –  
+                one hand over the heart, a soft smile. No selling. No slogan. Just: <em>„Rest. Sit with me.“</em>
+            </div>
+        </div>
+
+        <!-- COLUMN 2: HARD DATA + TIMELINE (NYC specific) -->
+        <div class="card">
+            <h3>📊 EXTENDED DATA ANALYSIS · NYC</h3>
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-number">68%</div><div>Women hosts</div></div>
+                <div class="stat-box"><div class="stat-number">82%</div><div>Passengers feel seen</div></div>
+                <div class="stat-box"><div class="stat-number">2,100+</div><div>Local shops donating (day 2)</div></div>
+                <div class="stat-box"><div class="stat-number">0</div><div>Violent incidents</div></div>
+            </div>
+            <h3>⏳ FIRST 48 HOURS · Systemic chain reaction</h3>
+            <div class="timeline">
+                <div class="timeline-item"><div class="timeline-hour">0–6h</div><div>First tables appear. NYers amused, curious, skeptical.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">6–12h</div><div>People sit down. Tea is offered. Tears appear.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">12–24h</div><div>NYPD shows up — no law broken. No grounds to remove.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">24–36h</div><div>Imitation explosion. Tables double. Bodegas, bakeries join.</div></div>
+                <div class="timeline-item"><div class="timeline-hour">36–48h</div><div>City Hall tries registration → fails (too many, no leader).</div></div>
+                <div class="timeline-item"><div class="timeline-hour">48h+</div><div>Local politicians sit down. They have to smile.</div></div>
+            </div>
+            <div class="quote" style="margin-top: 0.8rem;">
+                🧠 <strong>The game theory insight</strong><br>
+                An empire that survives on control and fear has no counter-strategy for a table, a blue cloth, and a warm invitation. You cannot bomb a chair. You cannot sanction a smile.
+            </div>
+        </div>
+    </div>
+
+    <!-- FLEA + NEXT STEP SECTION -->
+    <div class="card" style="margin-top: 0.2rem;">
+        <h3>🦟 THE FLEA IN THE EAR · Viral peace mechanics</h3>
+        <p style="margin-bottom: 1rem;">
+            <strong>What is missing?</strong> Not feasibility. Not data. The only missing element is the initial <em>flea</em> —  
+            the earworm that jumps from person to person.  
+            <br><br>
+            This image: a table, a blue cloth, a smile — everywhere. No hero. No party. No permission.  
+            Everyone who sees it becomes the carrier.
+        </p>
+        <button id="nycFleaButton">🦟 RELEASE THE FLEA · JUMP TO NYC</button>
+        <div id="fleaMessage" style="margin-top: 1.2rem; padding: 1rem; background: #ecf6e8; border-radius: 24px; display: none; font-size: 0.95rem;"></div>
+
+        <div class="quote" style="margin-top: 1.5rem;">
+            🌎 <strong>THE PEACEFUL ALTERNATIVE</strong> — it consists of a hand over the heart, an empty chair beside you, and the quiet certainty:  
+            <em>„We are already standing next to you. Come, sit down.“</em><br><br>
+            What could possibly be forbidden about that?  
+            And when it happens on every corner, every subway stop, every housing block — then the power shift is complete. Without a single shot.
+        </div>
+    </div>
+
+    <footer>
+        🗽 simulation based on real-time distribution modeling · no central command · each table is an independent act of radical hospitality<br>
+        „First we take Frankfurt, then we take New York, then we take whatever is left of fear.“
+    </footer>
+</div>
+
+<script>
+    // NEW YORK CITY BASE: Manhattan / downtown focus (lat 40.7128, lng -74.0060)
+    var map = L.map('map').setView([40.7128, -74.0060], 12);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors & CartoDB',
+        subdomains: 'abcd',
+        maxZoom: 18
+    }).addTo(map);
+
+    // Generate ~28,400 realistic table locations around NYC (representative subset for performance: ~5,700 markers / 20% sample)
+    function generateNYCTables(centerLat, centerLng, radiusKm, targetCount, sampleFactor = 0.2) {
+        const points = [];
+        const radPerKm = 0.009;
+        const radiusDeg = radiusKm * radPerKm;
+        const visualCount = Math.floor(targetCount * sampleFactor);
+        for (let i = 0; i < visualCount; i++) {
+            let u = Math.random();
+            let r = radiusDeg * Math.sqrt(u);
+            let theta = 2 * Math.PI * Math.random();
+            let lat = centerLat + r * Math.cos(theta);
+            let lng = centerLng + r * Math.sin(theta);
+            // keep within NYC bounds roughly
+            if (Math.abs(lat - centerLat) < 0.25 && Math.abs(lng - centerLng) < 0.3) {
+                points.push([lat, lng]);
+            }
+        }
+        return points;
+    }
+
+    const totalSimulatedTables = 28400;
+    const markerSubset = generateNYCTables(40.7128, -74.0060, 22, totalSimulatedTables, 0.22);  // ~6200 markers – feels dense
+    const blueIcon = L.divIcon({
+        html: '<div style="background: #1f7ca5; width: 7px; height: 7px; border-radius: 8px; border: 1px solid white; box-shadow: 0 0 0 1px #bcddff;"></div>',
+        iconSize: [9, 9],
+        className: 'nyc-blue-marker'
+    });
+    markerSubset.forEach(pos => {
+        L.marker(pos, { icon: blueIcon }).addTo(map);
+    });
+
+    // FLEA LOGIC (bilingual essence)
+    const fleaBtn = document.getElementById('nycFleaButton');
+    const fleaDiv = document.getElementById('fleaMessage');
+    
+    const fleaCorpus = [
+        "🇺🇸 Imagine: tomorrow morning you walk out of your building in Brooklyn. A small table appears. Blue cloth. Two chairs. Someone smiles at you. 'Would you like to sit down?' — That's not a protest. That's a parallel world. And parallel worlds win.",
+        "🗽 The system has no answer to a chair. You cannot shoot a smile. You cannot ban a hand over a heart. New York runs on energy — but the most radical energy is stillness shared with a stranger.",
+        "🧠 The enemy was never real. The enemy was a story printed in a few heads. The blue table rewrites the story without firing a bullet. First Frankfurt. Now Manhattan. Next? Everywhere.",
+        "🌀 The flea jumps. You see this page. You share one image. One sentence. 'Blue table outside my stop.' No leader. No hashtag. Just tables. Thousands of them. That's the double spearhead.",
+        "🍎 They said 'first we take Manhattan, then we take Berlin' — but you reversed it. Frankfurt bled first. Now the Manhattan moment has arrived. Build a table. Put out a blue cloth. Sit down. Stay human."
+    ];
+
+    fleaBtn.addEventListener('click', () => {
+        const randomFlea = fleaCorpus[Math.floor(Math.random() * fleaCorpus.length)];
+        fleaDiv.style.display = 'block';
+        fleaDiv.innerHTML = `🦻 <strong>The flea jumps:</strong><br>“${randomFlea}”<br><br><span style="font-size:0.8rem;">📋 [copied to clipboard — share it with three New Yorkers today]</span>`;
+        navigator.clipboard.writeText(randomFlea).catch(() => {});
+    });
+
+    // small console note
+    console.log("NYC Blue Table map loaded with ~" + markerSubset.length + " marker positions (simulated real distribution)");
+</script>
+</body>
+</html>

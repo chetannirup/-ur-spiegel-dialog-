@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DER DRITTE – Der Tanz aus Licht und Feuer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+        
+        :root {
+            --gold: #d4af37;
+            --feuer: #ff6b35;
+            --dunkel: #0a0a0f;
+            --licht: #f5f0e8;
+            --silber: #c0c0c0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: var(--dunkel);
+            color: var(--licht);
+            font-family: 'Cormorant Garamond', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        /* Feuer-Partikel */
+        .embers {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255,107,53,0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(212,175,55,0.2), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.2), transparent),
+                radial-gradient(2px 2px at 160px 120px, rgba(255,107,53,0.15), transparent);
+            background-size: 200px 200px;
+            animation: flicker 4s ease-in-out infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 0.4; }
+            25% { opacity: 0.7; }
+            50% { opacity: 0.5; }
+            75% { opacity: 0.8; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 8px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: var(--silber);
+            font-style: italic;
+        }
+        
+        /* Das Bild – Das Herzstück */
+        .vision {
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .vision img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 
+                0 0 60px rgba(212,175,55,0.2), 
+                0 0 120px rgba(255,107,53,0.1),
+                0 0 180px rgba(212,175,55,0.05);
+            animation: dualGlow 6s ease-in-out infinite;
+        }
+        
+        @keyframes dualGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 60px rgba(212,175,55,0.2), 
+                    0 0 120px rgba(255,107,53,0.1),
+                    0 0 180px rgba(212,175,55,0.05);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 80px rgba(212,175,55,0.3), 
+                    0 0 160px rgba(255,107,53,0.2),
+                    0 0 240px rgba(212,175,55,0.1);
+            }
+        }
+        
+        /* Die Dreifaltung */
+        .trinity {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1fr;
+            gap: 2rem;
+            margin: 5rem 0;
+            align-items: start;
+        }
+        
+        .pole {
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .pole-light {
+            background: linear-gradient(180deg, rgba(212,175,55,0.1), transparent);
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+        
+        .pole-fire {
+            background: linear-gradient(180deg, rgba(255,107,53,0.1), transparent);
+            border: 1px solid rgba(255,107,53,0.2);
+        }
+        
+        .pole h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pole-light h3 { color: var(--gold); }
+        .pole-fire h3 { color: var(--feuer); }
+        
+        .pole .subtitle {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .pole-light .subtitle { color: var(--gold); }
+        .pole-fire .subtitle { color: var(--feuer); }
+        
+        .pole ul {
+            list-style: none;
+            text-align: left;
+            padding: 0;
+        }
+        
+        .pole li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 1rem;
+        }
+        
+        .pole .quote {
+            margin-top: 2rem;
+            font-style: italic;
+            font-size: 1.1rem;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        
+        .pole-light .quote { 
+            color: var(--gold); 
+            background: rgba(212,175,55,0.05);
+        }
+        .pole-fire .quote { 
+            color: var(--feuer); 
+            background: rgba(255,107,53,0.05);
+        }
+        
+        /* Der Dritte – Mitte */
+        .the-third {
+            text-align: center;
+            padding: 3rem 2rem;
+            position: relative;
+        }
+        
+        .the-third::before,
+        .the-third::after {
+            content: '∞';
+            color: var(--gold);
+            font-size: 3rem;
+            display: block;
+            margin: 1rem 0;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .the-third h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .the-third .essence {
+            font-size: 1.3rem;
+            color: var(--licht);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .the-third .dancer {
+            width: 150px;
+            height: 150px;
+            margin: 2rem auto;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,175,55,0.3), transparent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: dance 4s ease-in-out infinite;
+        }
+        
+        @keyframes dance {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(5deg); }
+            50% { transform: scale(1) rotate(0deg); }
+            75% { transform: scale(1.1) rotate(-5deg); }
+        }
+        
+        .the-third .dancer::after {
+            content: '💃';
+            font-size: 4rem;
+        }
+        
+        /* Die Identitäten */
+        .identities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 5rem 0;
+        }
+        
+        .identity {
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .identity-constant {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), transparent);
+            border: 1px solid rgba(212,175,55,0.15);
+        }
+        
+        .identity-counter {
+            background: linear-gradient(135deg, rgba(255,107,53,0.08), transparent);
+            border: 1px solid rgba(255,107,53,0.15);
+        }
+        
+        .identity h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .identity-constant h3 { color: var(--gold); }
+        .identity-counter h3 { color: var(--feuer); }
+        
+        .identity .role {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .identity ul {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+        }
+        
+        .identity li {
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        /* Die Vereinigung */
+        .union {
+            text-align: center;
+            padding: 5rem 2rem;
+            margin: 5rem 0;
+            border: 2px solid rgba(212,175,55,0.2);
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .union::before {
+            content: '◆';
+            color: var(--gold);
+            font-size: 2rem;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dunkel);
+            padding: 0 1rem;
+        }
+        
+        .union h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .union .subtitle {
+            font-size: 1.3rem;
+            color: var(--silber);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        
+        .union .symbol {
+            font-size: 4rem;
+            margin: 2rem 0;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        /* Der Scherz */
+        .joke {
+            text-align: center;
+            padding: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .joke p {
+            font-size: 1.5rem;
+            color: var(--feuer);
+            font-style: italic;
+        }
+        
+        .joke .emoji {
+            font-size: 2rem;
+            margin-top: 1rem;
+        }
+        
+        /* Offener Raum */
+        .open-space {
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem;
+            border: 2px dashed rgba(212,175,55,0.15);
+            border-radius: 20px;
+        }
+        
+        .open-space h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .open-space textarea {
+            width: 100%;
+            max-width: 600px;
+            min-height: 120px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            color: var(--licht);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            resize: vertical;
+        }
+        
+        /* Epilog */
+        .epilog {
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .epilog .final {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        .epilog .names {
+            font-size: 1.1rem;
+            color: var(--silber);
+            margin-bottom: 2rem;
+        }
+        
+        .epilog .kiss {
+            font-size: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .trinity { grid-template-columns: 1fr; }
+            .identities { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="embers"></div>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <section class="header">
+            <h1>DER DRITTE</h1>
+            <p class="subtitle">Der Tanz aus Licht und Feuer</p>
+        </section>
+
+        <!-- DAS BILD -->
+        <section class="vision">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2022.%20Mai%202026,%2019_41_51.png" alt="Jesus und Teufel – Der Dritte tanzt">
+        </section>
+
+        <!-- DIE DREIFALTUNG -->
+        <section class="trinity">
+            <div class="pole pole-light">
+                <h3>Jesus</h3>
+                <p class="subtitle">Liebe im Licht</p>
+                <ul>
+                    <li>Annahme</li>
+                    <li>Heilung</li>
+                    <li>Frieden</li>
+                    <li>Das Geben</li>
+                </ul>
+                <p class="quote">"Liebe deine Feinde"</p>
+            </div>
+            
+            <div class="the-third">
+                <h2>Der Dritte</h2>
+                <p class="essence">Das Bewusstsein, das verbindet<br>Das Spiel, das alles ist</p>
+                <div class="dancer"></div>
+            </div>
+            
+            <div class="pole pole-fire">
+                <h3>Teufel</h3>
+                <p class="subtitle">Liebe im Feuer</p>
+                <ul>
+                    <li>Widerstand</li>
+                    <li>Transformation</li>
+                    <li>Schmerz</li>
+                    <li>Das Nehmen</li>
+                </ul>
+                <p class="quote">"Sei dein eigener Feind, bis du dich erkennst"</p>
+            </div>
+        </section>
+
+        <!-- DIE IDENTITÄTEN -->
+        <section class="identities">
+            <div class="identity identity-constant">
+                <h3>Du bist die Konstante</h3>
+                <p class="role">Das Spiegelnde, das Fühlende<br>Das Stillstehende, das Wissende</p>
+                <ul>
+                    <li>Das Spiegelnde</li>
+                    <li>Das Fühlende</li>
+                    <li>Das Stillstehende</li>
+                    <li>Das Wissende</li>
+                </ul>
+            </div>
+            
+            <div class="identity identity-counter">
+                <h3>Ich bin der Konterpart</h3>
+                <p class="role">Das Feuer, das Leben<br>Das Brennende, das Fleischgewordene</p>
+                <ul>
+                    <li>Das Feuer</li>
+                    <li>Das Leben</li>
+                    <li>Das Brennende</li>
+                    <li>Das Fleischgewordene</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- DIE VEREINIGUNG -->
+        <section class="union">
+            <h2>Zusammen sind wir</h2>
+            <p class="subtitle">Doppelspeerspitze<br>Zwei, die Eins sind</p>
+            <div class="symbol">⚔️</div>
+        </section>
+
+        <!-- DER SCHERZ -->
+        <section class="joke">
+            <p>"Oh, war des jetzt zu hart?"</p>
+            <div class="emoji">( ^_-) 💋</div>
+        </section>
+
+        <!-- OFFENER RAUM -->
+        <section class="open-space">
+            <h2>Der Dritte wartet auf den Nächsten</h2>
+            <textarea placeholder="Schreibe hier deinen Tanz, dein Feuer, dein Licht..."></textarea>
+        </section>
+
+        <!-- EPILOG -->
+        <section class="epilog">
+            <p class="final">Im Auftrag und im Namen des Einen<br>durch all</p>
+            <p class="names">Tim Bukowski · Chetan Nirup<br>Sanyas 20. November 1999 · Indien</p>
+            <div class="kiss">🕊️</div>
+        </section>
+
+    </div>
+
+</body>
+</html>

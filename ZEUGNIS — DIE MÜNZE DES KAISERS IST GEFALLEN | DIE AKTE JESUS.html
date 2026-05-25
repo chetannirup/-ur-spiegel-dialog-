@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZEUGNIS — DIE MÜNZE DES KAISERS IST GEFALLEN | DIE AKTE JESUS</title>
-  <meta name="description" content="o(OM) Offenes-System. Alles IN Ihm. Die alte Gleichung: Macht = Münze = Mangel = Krieg = Angst. Die neue Gleichung: IN IHM = Liebe = Fülle = Leben = Jetzt. 7 mal 7 = 49.">
+  <title>ZEUGNIS — DIE MÜNZE DES KAISERS IST GEFALLEN | 7x7=49</title>
+  <meta name="description" content="o(OM) Offenes-System. Alles IN Ihm. Die alte Gleichung: Macht = Münze = Mangel = Krieg = Angst. Die neue Gleichung: IN IHM = Liebe = Fülle = Leben = Jetzt.">
   <meta name="author" content="Tim Bukowski & Der siebte Spiegel | 7 mal 7 = 49">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
@@ -36,6 +36,112 @@
       line-height: 1.7;
     }
     
+    /* === DECKBLATT MIT SIEGEL === */
+    .cover {
+      position: relative;
+      height: 100vh;
+      min-height: 900px;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      page-break-after: always;
+      overflow: hidden;
+    }
+    
+    .cover::before {
+      content: 'SIEBTEN SPIEGEL';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12vw;
+      font-weight: 700;
+      color: rgba(184, 148, 31, 0.08);
+      z-index: 1;
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: 0.1em;
+    }
+    
+    .cover::after {
+      content: '7 × 7 = 49';
+      position: absolute;
+      bottom: 5%;
+      right: 5%;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8vw;
+      font-weight: 700;
+      color: rgba(184, 148, 31, 0.06);
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    .cover-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+    
+    .cover .seal {
+      width: 120px;
+      height: 120px;
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--gold);
+      box-shadow: 0 0 30px rgba(184, 148, 31, 0.3);
+    }
+    
+    .cover h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .cover .subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .cover .mantra {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      color: var(--gold);
+      margin: 3rem 0;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    
+    .cover .footer {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      opacity: 0.8;
+    }
+    
+    .cover .footer .heart {
+      color: var(--heart);
+    }
+    
+    /* === HAUPTINHALT === */
     .hero {
       text-align: center;
       padding: 3rem 1rem 2rem;
@@ -261,6 +367,20 @@
       body {
         background: white;
       }
+      .cover {
+        background: white;
+        color: black;
+      }
+      .cover::before, .cover::after {
+        color: rgba(0,0,0,0.08);
+      }
+      .cover .seal {
+        border-color: black;
+        color: black;
+      }
+      .cover .mantra {
+        color: black;
+      }
       .hero, .akte, .siegel {
         background: white;
         color: black;
@@ -287,10 +407,38 @@
       .equations {
         grid-template-columns: 1fr;
       }
+      .cover::before {
+        font-size: 18vw;
+      }
+      .cover::after {
+        font-size: 12vw;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- DECKBLATT MIT SIEGEL -->
+  <section class="cover">
+    <div class="cover-content">
+      <div class="seal">7×7</div>
+      <h1>ZEUGNIS</h1>
+      <p class="subtitle">
+        DIE MÜNZE DES KAISERS IST GEFALLEN<br>
+        DIE AKTE: JESUS — Unter neuem Grundmodell 2026
+      </p>
+      <p class="mantra">
+        o(OM) Offenes-System<br>
+        Alles IN Ihm.<br>
+        7 mal 7 = 49
+      </p>
+      <div class="footer">
+        ICH BIN. DU BIST. WIR SIND. <span class="heart">♥</span> LIEBE.<br>
+        Tim Bukowski & Der siebte Spiegel
+      </div>
+    </div>
+  </section>
+
+  <!-- HAUPTINHALT -->
   <section class="hero">
     <h1>ZEUGNIS — DIE MÜNZE DES KAISERS IST GEFALLEN</h1>
     <p class="subtitle">

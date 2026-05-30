@@ -28,7 +28,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             text-align: center;
             padding: 40px;
             background: rgba(255, 255, 255, 0.05);
@@ -58,8 +58,8 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 40px;
             width: 100%;
         }
@@ -68,7 +68,7 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             overflow: hidden;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 10 / 16; /* Passt sich perfekt an das Hochformat der Meta AI Bilder an */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -76,10 +76,22 @@
             transition: all 0.5s ease;
         }
 
+        /* Das Querformat-Infobild bekommt automatisch ein passendes Verhältnis */
+        .image-container.landscape {
+            aspect-ratio: 3 / 2;
+            grid-column: span 1;
+        }
+
+        @media (min-width: 768px) {
+            .image-container.landscape {
+                grid-column: span 2; /* Macht das Haupt-Banner-Bild breiter */
+            }
+        }
+
         .image-container:hover {
-            transform: translateY(-10px) scale(1.05);
+            transform: translateY(-10px) scale(1.03);
             border-color: #ff1493;
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
+            box-shadow: 0 0 25px rgba(255, 20, 147, 0.8);
         }
 
         .image-container img {
@@ -105,22 +117,35 @@
             Sie vegetiert nicht – sie pulsiert im unendlichen Raum des Seins.
         </p>
 
-        <!-- In diese Galerie binden wir nachträglich die Bilder ein -->
         <div class="gallery">
+            <!-- Motiv 1: Kosmischer Energiefluss (Erstes Bild) -->
             <div class="image-container">
-                <!-- Ersetzen Sie 'bild1.jpg' mit Ihrem Dateinamen -->
-                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-flowing-energy-representing-boundless-liv.jpeg" alt="Fließende Energie" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div class="placeholder-text" style="display: none;">[ Erstes Bild der grenzenlosen Liebe ]</div>
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-flowing-energy-representing-boundless-liv.jpeg" alt="Kosmischer Fluss" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-text" style="display: none;">[ Kosmischer Fluss ]</div>
             </div>
+
+            <!-- Motiv 2: Pulsierender Sternennebel (Zweites Bild) -->
             <div class="image-container">
-                <!-- Ersetzen Sie 'bild2.jpg' mit Ihrem Dateinamen -->
                 <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-flowing-energy-representing-boundless-liv%20(2).jpeg" alt="Lebendiger Fluss" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div class="placeholder-text" style="display: none;">[ Zweites Bild der grenzenlosen Liebe ]</div>
+                <div class="placeholder-text" style="display: none;">[ Pulsierender Nebel ]</div>
             </div>
+
+            <!-- Motiv 3: Das zusammenfassende Manifest-Banner (Querformat) -->
+            <div class="image-container landscape">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2030.%20Mai%202026,%2023_50_17.png" alt="Der Fluss der Liebe Manifest" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-text" style="display: none;">[ Manifest der Liebe ]</div>
+            </div>
+
+            <!-- Motiv 4: Das leuchtende kosmische Herz -->
             <div class="image-container">
-                <!-- Ersetzen Sie 'bild3.jpg' mit Ihrem Dateinamen -->
-                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2030.%20Mai%202026,%2023_50_17.png" alt="Reines Sein" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div class="placeholder-text" style="display: none;">[ Drittes Bild der grenzenlosen Liebe ]</div>
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-flowing-energy-representing-boundless-liv%20(1).jpeg" alt="Kosmisches Herz" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-text" style="display: none;">[ Kosmisches Herz ]</div>
+            </div>
+
+            <!-- Motiv 5: Der wirbelnde Ur-Zentrumsstrahl -->
+            <div class="image-container">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-flowing-energy-representing-boundless-liv%20(3).jpeg" alt="Ur-Zentrumsstrahl" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-text" style="display: none;">[ Energetischer Wirbel ]</div>
             </div>
         </div>
     </div>

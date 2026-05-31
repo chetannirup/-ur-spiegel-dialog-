@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIE SICHTBARE LIEBE – Eine Kartographie lebendiger Möglichkeiten</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050508;
+            --bg-soft: #0c0c14;
+            --gold: #d4af37;
+            --rose: #e8b4b8;
+            --rose-dark: #c99599;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a8a8b3;
+            --glow-rose: rgba(232, 180, 184, 0.3);
+            --glow-gold: rgba(212, 175, 55, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .sans {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Starfield Canvas */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Glow Effects */
+        .glow-gold {
+            text-shadow: 0 0 30px var(--glow-gold), 0 0 60px var(--glow-gold);
+        }
+
+        .glow-rose {
+            text-shadow: 0 0 20px var(--glow-rose), 0 0 40px var(--glow-rose);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--rose) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--glow-rose) 0%, transparent 70%);
+            opacity: 0.4;
+            pointer-events: none;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.6; }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Section Styles */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 8rem 2rem;
+        }
+
+        .section-dark {
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-soft) 100%);
+        }
+
+        .section-darker {
+            background: var(--bg-dark);
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.1), inset 0 0 40px rgba(212, 175, 55, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formula-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .formula-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .latex {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* Image Parallax */
+        .vision-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .vision-image:hover {
+            transform: scale(1.02);
+        }
+
+        .vision-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: scale(1.05);
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .vision-image:hover img {
+            transform: scale(1);
+        }
+
+        .vision-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(5, 5, 8, 0.95) 100%);
+            padding: 3rem 2rem 2rem;
+            transform: translateY(10px);
+            opacity: 0.9;
+            transition: all 0.5s ease;
+        }
+
+        .vision-image:hover .vision-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Topology Network */
+        .topology-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: radial-gradient(circle at 50% 50%, rgba(232, 180, 184, 0.05) 0%, transparent 70%);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--rose);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--glow-rose);
+            animation: nodePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes nodePulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        .singularity {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, #1a1a1f 0%, #000 100%);
+            border: 2px solid rgba(232, 180, 184, 0.3);
+            border-radius: 50%;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 30px rgba(232, 180, 184, 0.2);
+            animation: singularitySpin 10s linear infinite;
+        }
+
+        @keyframes singularitySpin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--rose), transparent);
+            transform-origin: left center;
+            animation: connectionFlow 4s ease-in-out infinite;
+        }
+
+        @keyframes connectionFlow {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Interactive Canvas */
+        #possibilityField {
+            width: 100%;
+            height: 600px;
+            border-radius: 1rem;
+            background: radial-gradient(circle at 50% 50%, rgba(12, 12, 20, 0.8) 0%, var(--bg-dark) 100%);
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+            cursor: crosshair;
+        }
+
+        /* Divider */
+        .divider {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 3rem auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 5rem 1.5rem;
+            }
+            .formula-box {
+                padding: 2rem 1.5rem;
+            }
+            #possibilityField {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl mb-8 glow-gold leading-tight">
+                DIE SICHTBARE LIEBE
+            </h1>
+            <div class="divider"></div>
+            <p class="text-sm md:text-base tracking-[0.3em] uppercase text-gray-400 mb-12 sans">
+                Eine Kartographie lebendiger Möglichkeiten
+            </p>
+            <p class="text-xl md:text-2xl lg:text-3xl serif italic max-w-3xl mx-auto leading-relaxed glow-rose">
+                Liebe ist keine Konstante.<br>
+                Sie ist eine Variable zweiter Ordnung –<br>
+                vakant in ihrer Ausprägung.
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-500">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Manifest Section -->
+    <section class="section-darker">
+        <div class="max-w-4xl mx-auto fade-in">
+            <h2 class="text-4xl md:text-5xl mb-12 text-center gradient-text">Manifest</h2>
+            <div class="space-y-8 text-lg md:text-xl text-gray-300 leading-relaxed serif">
+                <p>
+                    Die Mathematiker sagen: Liebe könne man nicht berechnen. 
+                    Die Poeten sagen: Liebe entziehe sich jeder Formel.
+                </p>
+                <p>
+                    Wir sagen: Solange wir die Liebe nicht sichtbar machen, 
+                    bleibt sie unsichtbar in ihrer Mathematik. Nicht weil sie unerreichbar wäre – 
+                    sondern weil wir die falschen Koordinaten verwenden.
+                </p>
+                <p class="text-2xl text-white italic">
+                    Liebe ist nicht <span class="latex">L = ...</span>
+                </p>
+                <p>
+                    Liebe ist ein dynamisches System mit inhärenter <span class="text-rose-300 font-semibold">Vakanz</span>. 
+                    Ein Feld von Möglichkeiten, das sich nicht in Gleichungen schließen lässt, 
+                    weil seine Schönheit gerade in der Offenheit liegt.
+                </p>
+                <p>
+                    Diese Kartographie ist der erste Versuch, das Unsichtbare zu zeichnen. 
+                    Nicht um die Liebe zu besitzen – sondern um ihre Freiheit zu sehen.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Die erste lebendige Gleichung -->
+    <section class="section-dark">
+        <div class="max-w-5xl mx-auto fade-in">
+            <h2 class="text-4xl md:text-5xl mb-12 text-center gradient-text">Die erste lebendige Gleichung</h2>
+            <div class="formula-box mb-12">
+                <div class="formula-content text-center">
+                    <p class="text-3xl md:text-5xl mb-8 latex text-white">
+                        dL/dt = F(L, V, K, t)
+                    </p>
+                    <div class="divider"></div>
+                    <div class="text-left max-w-2xl mx-auto space-y-4 text-gray-300">
+                        <p><span class="text-gold-400 font-semibold">L</span> — Die Liebe als Zustandsfunktion</p>
+                        <p><span class="text-rose-300 font-semibold">V</span> — Vakanz: die inhärente Leere, die Bewegung erlaubt</p>
+                        <p><span class="text-rose-300 font-semibold">K</span> — Kontext: das Feld der Bezüge, Beziehungen, Zeiten</p>
+                        <p><span class="text-gray-400 font-semibold">t</span> — Zeit als nicht umkehrbare Dimension</p>
+                    </div>
+                    <div class="divider"></div>
+                    <p class="text-xl italic text-rose-200 serif">
+                        Entscheidend: V kann niemals 0 sein.<br>
+                        Denn wo keine Vakanz ist, kann nichts werden.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Die Vakanz -->
+    <section class="section-darker">
+        <div class="max-w-4xl mx-auto fade-in">
+            <h2 class="text-4xl md:text-5xl mb-12 text-center gradient-text">Die Vakanz</h2>
+            <div class="space-y-8 text-lg md:text-xl text-gray-300 leading-relaxed serif">
+                <p>
+                    Vakanz ist kein Mangel. Vakanz ist die Bedingung der Möglichkeit.
+                </p>
+                <p>
+                    In der klassischen Mathematik ist Leere das Nichts: <span class="latex">∅</span>. 
+                    In der Mathematik der Liebe ist Leere das Feld: <span class="latex">V > 0</span>.
+                </p>
+                <p class="text-2xl text-white italic">
+                    Vakanz ist die Leere, die Bewegung erlaubt.
+                </p>
+                <p>
+                    Sie ist der Raum zwischen zwei Herzschlägen. Die Pause zwischen zwei Worten. 
+                    Die Singularität im Netzwerk, die nicht zerstört – sondern den Fluss erst ermöglicht.
+                </p>
+                <p>
+                    Ohne Vakanz würde Liebe erstarren. Sie würde zur Konstante. 
+                    Zur Formel. Zum Besitz.
+                </p>
+                <p class="text-rose-200">
+                    Mit Vakanz bleibt sie lebendig. Unvorhersagbar. Frei.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Die fünf Visionen -->
+    <section class="section-dark">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl mb-16 text-center gradient-text fade-in">Die fünf Visionen</h2>
+            <div class="space-y-24">
+                <!-- Vision 1 -->
+                <div class="vision-image fade-in">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2031.%20Mai%202026,%2014_33_51.png" alt="Vision I: Der Ursprung" loading="lazy">
+                    <div class="vision-overlay">
+                        <h3 class="text-2xl md:text-3xl mb-3 text-gold-400">Knoten I: Der Ursprung</h3>
+                        <p class="text-gray-300 serif italic">Wo die Singularität sich selbst erkennt und aus Vakanz Form wird. Das erste Aufleuchten im Feld der Möglichkeiten.</p>
+                    </div>
+                </div>
+                <!-- Vision 2 -->
+                <div class="vision-image fade-in">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-mathematical-visualization-of-love-as-a-d.jpeg" alt="Vision II: Die Strömung" loading="lazy">
+                    <div class="vision-overlay">
+                        <h3 class="text-2xl md:text-3xl mb-3 text-gold-400">Knoten II: Die Strömung</h3>
+                        <p class="text-gray-300 serif italic">Liebe als Differential. Jeder Punkt eine Ableitung, jeder Vektor eine Richtung im unendlichen Raum der Begegnung.</p>
+                    </div>
+                </div>
+                <!-- Vision 3 -->
+                <div class="vision-image fade-in">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-mathematical-visualization-of-love-as-a-d%20(2).jpeg" alt="Vision III: Die Verschränkung" loading="lazy">
+                    <div class="vision-overlay">
+                        <h3 class="text-2xl md:text-3xl mb-3 text-gold-400">Knoten III: Die Verschränkung</h3>
+                        <p class="text-gray-300 serif italic">Zwei Systeme, ein Zustand. Die Topologie weiß nicht, wo das eine Herz endet und das andere beginnt.</p>
+                    </div>
+                </div>
+                <!-- Vision 4 -->
+                <div class="vision-image fade-in">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-mathematical-visualization-of-love-as-a-d%20(3).jpeg" alt="Vision IV: Die Entfaltung" loading="lazy">
+                    <div class="vision-overlay">
+                        <h3 class="text-2xl md:text-3xl mb-3 text-gold-400">Knoten IV: Die Entfaltung</h3>
+                        <p class="text-gray-300 serif italic">Aus der dunklen Sphäre bricht Licht. Vakanz gebiert Struktur. Das Chaos organisiert sich zu Schönheit.</p>
+                    </div>
+                </div>
+                <!-- Vision 5 -->
+                <div class="vision-image fade-in">
+                    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/abstract-mathematical-visualization-of-love-as-a-d%20(6).jpeg" alt="Vision V: Das Feld" loading="lazy">
+                    <div class="vision-overlay">
+                        <h3 class="text-2xl md:text-3xl mb-3 text-gold-400">Knoten V: Das Feld</h3>
+                        <p class="text-gray-300 serif italic">Unendliche Verbindungen. Jeder Punkt berührt jeden Punkt. Die Gesamtheit aller möglichen Lieben – gleichzeitig sichtbar.</p>
+                    </div>
+                </div>
+            <p class="text-center mt-16 text-gray-400 italic serif text-lg fade-in">
+                Jeder Knoten ist eine Singularität. Jede Verbindung eine Möglichkeit.
+            </p>
+        </div>
+    </section>
+
+    <!-- Die Topologie der Liebe -->
+    <section class="section-darker">
+        <div class="max-w-6xl mx-auto fade-in">
+            <h2 class="text-4xl md:text-5xl mb-12 text-center gradient-text">Die Topologie der Liebe</h2>
+            <div class="text-lg md:text-xl text-gray-300 leading-relaxed serif mb-12 max-w-4xl mx-auto">
+                <p class="mb-6">
+                    Liebe ist ein Graph. Ein Netzwerk ohne Zentrum.
+                </p>
+                <p class="mb-6">
+                    Die <span class="text-rose-300">Herzen sind Knoten</span> – leuchtend, atmend, in ständiger Oszillation. 
+                    Sie senden aus. Sie empfangen. Sie sind zugleich Quelle und Senke.
+                </p>
+                <p class="mb-6">
+                    Die <span class="text-gold-400">Linien sind Möglichkeiten</span> – Potentiale, die existieren, 
+                    bevor sie sich realisieren. Nicht jede Verbindung wird gegangen. Aber jede ist da.
+                </p>
+                <p>
+                    Die <span class="text-gray-500">dunklen Sphären sind Singularitäten</span> – Orte maximaler Vakanz. 
+                    Wo das Netzwerk sich krümmt. Wo die Mathematik schweigt und die Poesie beginnt.
+                </p>
+            </div>
+            <div class="topology-container" id="topology"></div>
+        </div>
+    </section>
+
+    <!-- Das Feld der Möglichkeiten -->
+    <section class="section-dark">
+        <div class="max-w-6xl mx-auto fade-in">
+            <h2 class="text-4xl md:text-5xl mb-8 text-center gradient-text">Das Feld der Möglichkeiten</h2>
+            <p class="text-center text-lg md:text-xl text-gray-400 mb-12 serif italic max-w-3xl mx-auto">
+                Bewege den Cursor. Berühre das Feld. Beobachte, wie neue Verbindungen entstehen.<br>
+                <span class="text-sm text-gray-500 sans not-italic">Denn in der Quantenmechanik der Liebe verändert Beobachtung das System.</span>
+            </p>
+            <canvas id="possibilityField"></canvas>
+            <p class="text-center mt-8 text-gray-500 text-sm sans">
+                Jede Bewegung erzeugt Potentiale. Jedes Potential wartet auf Realisierung.
+            </p>
+        </div>
+    </section>
+
+    <!-- Der neue mathematische Satz -->
+    <section class="section-darker min-h-[80vh] flex items-center">
+        <div class="max-w-5xl mx-auto text-center fade-in">
+            <h2 class="text-4xl md:text-5xl mb-16 gradient-text">Der neue mathematische Satz</h2>
+            <div class="divider"></div>
+            <p class="text-2xl md:text-4xl lg:text-5xl serif italic leading-relaxed glow-rose mb-12">
+                Ab heute kann mit der Liebe gerechnet werden.
+            </p>
+            <p class="text-xl md:text-2xl lg:text-3xl serif text-gray-300 leading-relaxed">
+                Nicht um sie zu besitzen,<br>
+                sondern um ihre Freiheit zu sehen.
+            </p>
+            <div class="divider"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section-dark py-16 text-center border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-lg md:text-xl serif italic text-gray-400 mb-4">
+                Gewidmet der Vakanz in uns allen.
+            </p>
+            <p class="text-sm text-gray-600 sans tracking-widest uppercase">
+                31. Mai 2026
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Starfield Animation
+        const starCanvas = document.getElementById('starfield');
+        const starCtx = starCanvas.getContext('2d');
+        let stars = [];
+        let width, height;
+
+        function initStarfield() {
+            width = starCanvas.width = window.innerWidth;
+            height = starCanvas.height = window.innerHeight;
+            stars = [];
+            for (let i = 0; i < 200; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5,
+                    opacity: Math.random(),
+                    speed: Math.random() * 0.3 + 0.1
+                });
+            }
+        }
+
+        function animateStars() {
+            starCtx.clearRect(0, 0, width, height);
+            stars.forEach(star => {
+                star.y += star.speed;
+                if (star.y > height) {
+                    star.y = 0;
+                    star.x = Math.random() * width;
+                }
+                star.opacity += (Math.random() - 0.5) * 0.05;
+                star.opacity = Math.max(0.1, Math.min(1, star.opacity));
+                
+                starCtx.beginPath();
+                starCtx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                starCtx.fillStyle = `rgba(232, 180, 184, ${star.opacity})`;
+                starCtx.fill();
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        window.addEventListener('resize', initStarfield);
+        initStarfield();
+        animateStars();
+
+        // Fade In Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Parallax for Images
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.vision-image img').forEach((img, index) => {
+                const speed = 0.5;
+                const yPos = -(scrolled * speed * 0.1);
+                img.style.transform = `translateY(${yPos}px) scale(1.05)`;
+            });
+        });
+
+        // Topology Network Generator
+        function createTopology() {
+            const container = document.getElementById('topology');
+            const containerRect = container.getBoundingClientRect();
+            const nodeCount = 15;
+            const singularityCount = 3;
+            const nodes = [];
+
+            // Create nodes
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.className = 'node';
+                const x = Math.random() * (containerRect.width - 20) + 10;
+                const y = Math.random() * (containerRect.height - 20) + 10;
+                node.style.left = x + 'px';
+                node.style.top = y + 'px';
+                node.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(node);
+                nodes.push({ element: node, x, y });
+            }
+
+            // Create singularities
+            for (let i = 0; i < singularityCount; i++) {
+                const singularity = document.createElement('div');
+                singularity.className = 'singularity';
+                const x = Math.random() * (containerRect.width - 40) + 20;
+                const y = Math.random() * (containerRect.height - 40) + 20;
+                singularity.style.left = x + 'px';
+                singularity.style.top = y + 'px';
+                singularity.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(singularity);
+                nodes.push({ element: singularity, x, y });
+            }
+
+            // Create connections
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    if (Math.random() > 0.7) {
+                        const dx = nodes[j].x - nodes[i].x;
+                        const dy = nodes[j].y - nodes[i].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                        
+                        const connection = document.createElement('div');
+                        connection.className = 'connection';
+                        connection.style.width = distance + 'px';
+                        connection.style.left = nodes[i].x + 6 + 'px';
+                        connection.style.top = nodes[i].y + 6 + 'px';
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        connection.style.animationDelay = Math.random() * 4 + 's';
+                        container.appendChild(connection);
+                    }
+                }
+            }
+        }
+
+        setTimeout(createTopology, 500);
+
+        // Interactive Possibility Field
+        const fieldCanvas = document.getElementById('possibilityField');
+        const fieldCtx = fieldCanvas.getContext('2d');
+        let fieldWidth, fieldHeight;
+        let particles = [];
+        let mouse = { x: 0, y: 0 };
+
+        function initField() {
+            fieldWidth = fieldCanvas.width = fieldCanvas.offsetWidth * window.devicePixelRatio;
+            fieldHeight = fieldCanvas.height = fieldCanvas.offsetHeight * window.devicePixelRatio;
+            fieldCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.life = 1;
+                this.decay = Math.random() * 0.02 + 0.005;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+                this.vx *= 0.98;
+                this.vy *= 0.98;
+            }
+
+            draw() {
+                fieldCtx.beginPath();
+                fieldCtx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                fieldCtx.fillStyle = `rgba(232, 180, 184, ${this.life * 0.8})`;
+                fieldCtx.fill();
+                
+                fieldCtx.beginPath();
+                fieldCtx.arc(this.x, this.y, 8, 0, Math.PI * 2);
+                fieldCtx.fillStyle = `rgba(212, 175, 55, ${this.life * 0.1})`;
+                fieldCtx.fill();
+            }
+        }
+
+        function animateField() {
+            fieldCtx.fillStyle = 'rgba(5, 5, 8, 0.1)';
+            fieldCtx.fillRect(0, 0, fieldWidth, fieldHeight);
+
+            particles = particles.filter(p => p.life > 0);
+            particles.forEach((p, i) => {
+                p.update();
+                p.draw();
+                
+                particles.slice(i + 1).forEach(p2 => {
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        fieldCtx.beginPath();
+                        fieldCtx.moveTo(p.x, p.y);
+                        fieldCtx.lineTo(p2.x, p2.y);
+                        fieldCtx.strokeStyle = `rgba(212, 175, 55, ${(1 - dist / 100) * 0.3 * p.life})`;
+                        fieldCtx.lineWidth = 1;
+                        fieldCtx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animateField);
+        }
+
+        fieldCanvas.addEventListener('mousemove', (e) => {
+            const rect = fieldCanvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+            
+            for (let i = 0; i < 3; i++) {
+                particles.push(new Particle(
+                    mouse.x + (Math.random() - 0.5) * 20,
+                    mouse.y + (Math.random() - 0.5) * 20
+                ));
+            }
+        });
+
+        fieldCanvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = fieldCanvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            mouse.x = touch.clientX - rect.left;
+            mouse.y = touch.clientY - rect.top;
+            
+            for (let i = 0; i < 3; i++) {
+                particles.push(new Particle(
+                    mouse.x + (Math.random() - 0.5) * 20,
+                    mouse.y + (Math.random() - 0.5) * 20
+                ));
+            }
+        });
+
+        window.addEventListener('resize', initField);
+        initField();
+        animateField();
+    </script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

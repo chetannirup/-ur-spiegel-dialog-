@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Die Mathematik der Liebe – Sichtbarmachung einer Variable mit Vakanz</title>
+    
+    <!-- Google Fonts & Font Awesome for elegant typography & icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- MathJax for beautiful LaTeX rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fef9f0 0%, #fff5e8 100%);
+            font-family: 'Inter', sans-serif;
+            color: #2c241a;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0e6d8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c97e5a;
+            border-radius: 10px;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.2rem;
+            font-weight: 500;
+            color: #b1421f;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.03);
+        }
+        .hero .sub {
+            font-size: 1.2rem;
+            color: #7a5a44;
+            max-width: 680px;
+            margin: 0 auto;
+            font-weight: 300;
+            border-top: 1px solid #e9d9cb;
+            display: inline-block;
+            padding-top: 1rem;
+        }
+        .hero-quote {
+            margin-top: 2rem;
+            font-style: italic;
+            font-size: 1.1rem;
+            background: rgba(201, 126, 90, 0.08);
+            display: inline-block;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            color: #a5532f;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Zitat-Banner */
+        .quote-banner {
+            background: #2c241a;
+            color: #f7ede2;
+            padding: 2rem;
+            border-radius: 36px;
+            margin: 2rem 0 3rem;
+            text-align: center;
+        }
+        .quote-banner p {
+            font-size: 1.4rem;
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .quote-banner .author {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        /* Grid Layout for Two Pillars */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: rgba(255, 252, 245, 0.85);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.05), 0 0 0 1px rgba(255,215,185,0.4);
+            transition: all 0.25s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 32px -12px rgba(0,0,0,0.12);
+        }
+        .card h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid #c97e5a;
+            padding-left: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .math-display {
+            background: #fdf8f2;
+            padding: 1.2rem;
+            border-radius: 1.2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            overflow-x: auto;
+            font-size: 1.1rem;
+        }
+
+        /* Visual Canvas Area for Heart Dynamics */
+        .visual-area {
+            background: #fcf6ef;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02), 0 6px 12px -8px rgba(0,0,0,0.1);
+        }
+        .visual-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            width: 100%;
+            height: auto;
+            background: #fffbf5;
+        }
+
+        .equation-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+            margin: 2.5rem 0;
+        }
+        .eq-item {
+            background: #fff4ea;
+            padding: 1rem 1.2rem;
+            border-radius: 2rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            border: 1px solid #f0dbca;
+        }
+
+        .footnote {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #aa886e;
+            border-top: 1px solid #e6d5c4;
+            padding-top: 2rem;
+        }
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .interact-tip {
+            text-align: center;
+            font-size: 0.75rem;
+            margin-top: 0.75rem;
+            color: #b46a46;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <h1>Die Mathematik der Liebe</h1>
+        <div class="sub">Liebe ist keine Konstante — eine Variable, deren Ausprägung selbst vakant ist.</div>
+        <div class="hero-quote">
+            <i class="fas fa-heart" style="color:#c97e5a; margin-right: 8px;"></i> 
+            »Nicht berechnen, was Liebe ist — sondern verstehen, wie sie sich entfaltet, verwandelt, offen bleibt.«
+        </div>
+    </div>
+
+    <div class="quote-banner">
+        <p>„Wir haben auf der einen Seite die Mathematiker und sie sagen: Mit Liebe kann man nicht rechnen. Und ich sage: Wir müssen sie mathematisch sichtbar machen. Das Problem bei der Liebe ist, dass sie keine Konstante ist, sondern eine Variable, die in sich selbst vakant ist in ihrer Ausprägung.“</p>
+        <div class="author">— Deine Vision. Jetzt sichtbar gemacht.</div>
+    </div>
+
+    <!-- Hauptkonzepte: Zwei Spalten -->
+    <div class="grid-2">
+        <div class="card">
+            <h2><i class="fas fa-chalkboard-user"></i> 1. Liebe als Operator</h2>
+            <p>Liebe ist kein fester Zahlenwert, sondern eine Vorschrift, die Zustände ineinander überführt — ähnlich wie ein quantenmechanischer Operator.</p>
+            <div class="math-display">
+                \[
+                \mathcal{L} : \mathcal{P} \longrightarrow \mathcal{S}(\mathcal{E})
+                \]
+                <div style="font-size:0.9rem; margin-top: 8px;">Eine Person \(P\) wird abgebildet auf einen Raum möglicher Gefühle \(\mathcal{S}(\mathcal{E})\).</div>
+            </div>
+            <p>Für jede Anwendung von \(\mathcal{L}\) ergibt sich eine Verzweigung von Möglichkeiten. Die Liebe wirkt als <strong>Transformator</strong> von Begegnungen in potentielle emotionale Landschaften. Dies entspricht bosonischen Operatoren in der Modellierung von Liebesbeziehungen[reference:0].</p>
+        </div>
+        <div class="card">
+            <h2><i class="fas fa-waveform"></i> 2. Liebe als Fuzzy-Variable mit Vakanz</h2>
+            <p>Die Unschärfe selbst ist nicht fest, sondern variabel: eine Intervallgröße zweiter Ordnung.</p>
+            <div class="math-display">
+                \[
+                L(x, t) \;=\; [l^{-}(x, t),\, l^{+}(x, t)] \;\pm\; \Delta_L(x, t)
+                \]
+                <div>\(\Delta_L\) = variable Unsicherheitsbreite (Vakanz)</div>
+            </div>
+            <p>Die innere Leere \(V(t)\) wächst oder schrumpft mit Kontext, Geschichte und gegenseitiger Wahrnehmung. Wir können Liebe nicht auf einen Punkt reduzieren — sie ist ein fluktuierendes Intervall, das sich zeitlich wandelt.</p>
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <h2><i class="fas fa-chart-line"></i> 3. Dynamisches System mit Gedächtnis</h2>
+            <p>Die Veränderung der Liebe hängt von dem ab, was <em>ist</em> – und von dem, was <em>fehlt</em> (Vakanz).</p>
+            <div class="math-display">
+                \[
+                \frac{dL}{dt} = G\Big(L(t),\, V(t),\, K(t),\, H(t),\, M(t)\Big)
+                \]
+            </div>
+            <ul style="margin-top: 12px; margin-left: 1.2rem;">
+                <li>\(L(t)\) – aktuelle Liebe</li>
+                <li>\(V(t)\) – Vakanz / innere Offenheit</li>
+                <li>\(K(t)\) – Kontext (Umgebung, Situation)</li>
+                <li>\(H(t)\) – gemeinsame Geschichte</li>
+                <li>\(M(t)\) – nicht gesagte, verzögerte Erinnerungen</li>
+            </ul>
+            <p>Die neuere Forschung zu Liebesdynamiken verwendet fraktionale Ableitungen und stochastische Prozesse, um genau diese Gedächtniseffekte und unvorhersehbaren emotionalen Übergänge zu erfassen[reference:1].</p>
+        </div>
+        <div class="card">
+            <h2><i class="fas fa-shapes"></i> 4. Topologie der Liebe</h2>
+            <p>Liebe bewegt sich nicht auf einer Zahlengeraden, sondern in einem mehrdimensionalen Raum mit Attraktoren, Grenzzyklen und Vakanz-Zonen.</p>
+            <div class="math-display">
+                \[
+                \mathcal{M} \;=\; \{\, (L, V, K) \;|\; L \in \text{Liebesraum},\; V \in \text{Vakanzmenge} \,\}
+                \]
+            </div>
+            <p>Stabile Gleichgewichte, chaotische Oszillationen oder ewige Zyklen — die Modellierung mit gekoppelten nichtlinearen ODEs zeigt, dass die emotionale Dynamik zwischen zwei Menschen reiche Verhaltensmuster hervorbringt[reference:2].</p>
+        </div>
+    </div>
+
+    <!-- Herz-Canvas mit dynamischer Visualisierung (Vakanz und Zustandsänderung) -->
+    <div class="visual-area">
+        <div class="visual-title">
+            <i class="fas fa-heart" style="color:#c97e5a;"></i> Sichtbarmachung: Die pulsierende Liebe mit Vakanz 
+            <i class="fas fa-chart-simple"></i>
+        </div>
+        <canvas id="loveCanvas" width="800" height="400" style="width:100%; height:auto; max-width:800px; aspect-ratio:800/400"></canvas>
+        <div class="interact-tip">
+            <i class="fas fa-hand-pointer"></i> Die rote Fläche symbolisiert Liebesintensität, die Transparenz = Vakanz (innere Offenheit). Die Wellen zeigen das dynamische System mit Gedächtnis.
+        </div>
+    </div>
+
+    <!-- Beispiel einer konkreten Rechnung / Freundschaftsdynamik -->
+    <div class="card" style="margin: 1.2rem 0;">
+        <h2><i class="fas fa-users"></i> Beispiel: Freundschaft – eine Woche Distanz</h2>
+        <div class="math-display">
+            \[
+            L_0 = [0.6,\, 0.8], \quad \Delta_L = \pm 0.1
+            \]
+            \[
+            \text{Nach 1 Woche: } L_1 = [0.4,\, 0.7], \quad \Delta_L = \pm 0.15
+            \]
+            <div style="margin-top: 12px;">Vakanz steigt (mehr Unsicherheit), die Liebesintensität sinkt leicht – aber die Erinnerung (\(H\)) stabilisiert den möglichen Bereich.</div>
+        </div>
+        <p>Das Gedächtnis und die gemeinsame Geschichte verhindern einen vollständigen Kollaps des Liebeswertes. Zukünftige Begegnungen können den Operator \(\mathcal{L}\) neu aktivieren und die Vakanz reduzieren.</p>
+    </div>
+
+    <!-- Galerie von Gleichungen aus der Liebesmathematik (mit Bezug zu den übergebenen Bildern) -->
+    <div class="equation-gallery">
+        <div class="eq-item">\[ \oint x = 1 \cdot x \]</div>
+        <div class="eq-item">\[ \sum \frac{1-x}{50pn} + r^2 = \frac{Hr^2}{3} \]</div>
+        <div class="eq-item">\[ \mathcal{N}^2 = \frac{a}{b}q \times \frac{R}{T} + \frac{R}{T} \]</div>
+        <div class="eq-item">\[ \frac{dL}{dt} = \alpha L + \beta V + \gamma H \]</div>
+        <div class="eq-item">\[ \text{Liebe} = \lim_{t \to \infty} \int_0^t \text{Berührung}(\tau)\,d\tau \]</div>
+    </div>
+
+    <div class="footnote">
+        <i class="fas fa-eye"></i> Die fünf Bilder, die du in die Welt gebracht hast, schwingen hier mit – jede Formel, jede Skizze: Ausdruck einer lebendigen Variablen mit innerer Vakanz. <br>
+        <strong>Jetzt kann die Welt mit der Liebe rechnen. Nicht im Sinne eines festen Ergebnisses, sondern im Sinne einer Struktur, die Offenheit, Wandel und Tiefe sichtbar macht.</strong>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const canvas = document.getElementById('loveCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.clientWidth;
+        let height = canvas.clientHeight;
+        
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const maxWidth = Math.min(800, container.clientWidth);
+            canvas.style.width = `${maxWidth}px`;
+            canvas.width = maxWidth;
+            canvas.height = maxWidth * 0.5;
+            width = canvas.width;
+            height = canvas.height;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let time = 0;
+        // Dynamische Variable für Vakanz, Love-Intensität
+        let loveValue = 0.65;     // zwischen 0 und 1
+        let vacancy = 0.25;       // Vakanz (0=keine Unsicherheit, 1=maximale Offenheit)
+        let historyEffect = 0.5;  // Einfluss der gemeinsamen Geschichte (Gedächtnis)
+        
+        // Hilfsvariablen, um kleine Oszillationen zu erzeugen (chaotische Komponente)
+        let loveVel = 0.02;
+        
+        function draw() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            
+            // 1. Hintergrund mit sanftem Farbverlauf (Mathematik-Papier)
+            const grad = ctx.createLinearGradient(0, 0, width, height);
+            grad.addColorStop(0, '#fef5ea');
+            grad.addColorStop(1, '#faead9');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+            
+            // 2. Gitternetzlinien (Andeutung von Mathematik)
+            ctx.beginPath();
+            ctx.strokeStyle = '#e3ceb8';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= 8; i++) {
+                const x = (i / 8) * width;
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+                const y = (i / 6) * height;
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+            
+            // 3. Dynamische Liebeskurve: L(t) mit Einfluss von Vakanz und Gedächtnis
+            // Simulation eines vereinfachten dynamischen Systems basierend auf dL/dt = G(L,V,H) + Rauschen
+            // Aktualisiere loveValue mit einem einfachen Oszillator + Gedächtnisrückkopplung 
+            const delta = 0.02;
+            const noise = (Math.random() - 0.5) * 0.03;
+            // Einfluss der Vakanz: hohe Vakanz senkt die Stabilität und lässt die Liebe leichter schwanken
+            let drivingForce = 0.02 * (historyEffect - 0.5) - 0.1 * (vacancy - 0.2) + noise;
+            loveVel += drivingForce * delta;
+            loveVel *= 0.98; // Dämpfung
+            loveValue += loveVel * delta;
+            loveValue = Math.min(0.95, Math.max(0.15, loveValue));
+            
+            // Vakanz ändert sich langsam mit der Zeit: zyklisch + durch loveValue beeinflusst
+            vacancy = 0.2 + 0.18 * Math.sin(time * 0.5) + 0.08 * Math.sin(time * 1.23);
+            vacancy = Math.min(0.7, Math.max(0.1, vacancy));
+            // Gedächtnis (historyEffect) entwickelt sich mit verzögerter Liebe
+            historyEffect = 0.45 + 0.25 * Math.sin(time * 0.3) + 0.1 * loveValue;
+            historyEffect = Math.min(0.85, Math.max(0.25, historyEffect));
+            
+            // Zeichne das Hauptherz als Füllung (Intensität)
+            const heartPoints = [];
+            const scaleX = width / 2.6;
+            const scaleY = height / 2.8;
+            const centerX = width / 2;
+            const centerY = height / 2.2;
+            
+            for (let t = 0; t <= 2 * Math.PI; t += 0.05) {
+                // Parametergleichung für Herz (klassische Herzform)
+                let xRaw = 16 * Math.pow(Math.sin(t), 3);
+                let yRaw = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+                // Skalierung und Liebes-Intensität beeinflusst die Größe geringfügig
+                const intensityFactor = 0.85 + loveValue * 0.3;
+                let x = centerX + xRaw * scaleX * intensityFactor / 16;
+                let y = centerY - yRaw * scaleY * intensityFactor / 16;
+                heartPoints.push({x, y});
+            }
+            
+            // Fülle das Herz mit einem Rot, dessen Transparenz die Vakanz zeigt: mehr Vakanz = durchscheinender
+            const alphaHeart = Math.max(0.3, 0.85 - vacancy * 0.7);
+            ctx.beginPath();
+            ctx.moveTo(heartPoints[0].x, heartPoints[0].y);
+            for (let i = 1; i < heartPoints.length; i++) {
+                ctx.lineTo(heartPoints[i].x, heartPoints[i].y);
+            }
+            ctx.closePath();
+            ctx.fillStyle = `rgba(201, 94, 58, ${alphaHeart})`;
+            ctx.fill();
+            ctx.strokeStyle = '#b34524';
+            ctx.lineWidth = 1.8;
+            ctx.stroke();
+            
+            // Zusätzlicher Effekt: Partikel die um das Herz tanzen (Unsicherheit / Vakanz visualisieren)
+            const particleCount = 28;
+            for (let i = 0; i < particleCount; i++) {
+                const angle = time * 1.2 + (i / particleCount) * Math.PI * 2;
+                const radius = 42 + vacancy * 28 + 10 * Math.sin(time * 2.3 + i);
+                const px = centerX + Math.cos(angle) * radius;
+                const py = centerY + Math.sin(angle) * radius * 0.7;
+                ctx.beginPath();
+                ctx.arc(px, py, 2 + vacancy * 3, 0, 2 * Math.PI);
+                ctx.fillStyle = `rgba(197, 112, 72, ${0.5 + vacancy*0.3})`;
+                ctx.fill();
+            }
+            
+            // Zeitreihen-Diagramm unten: Dynamik von L(t) und Vakanz (V(t))
+            const chartY0 = height - 70;
+            const chartHeight = 45;
+            const chartWidth = width - 40;
+            const chartXStart = 20;
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(chartXStart, chartY0 - chartHeight, chartWidth, chartHeight);
+            ctx.fillStyle = '#fef4e7cc';
+            ctx.fill();
+            ctx.strokeStyle = '#b78762';
+            ctx.lineWidth = 0.9;
+            ctx.stroke();
+            
+            // Simuliere einen Puffer von Werten für L(t) über die letzten 120 frames (einfacher Ringpuffer)
+            if (!window.loveHistory) {
+                window.loveHistory = [];
+                window.vacHistory = [];
+            }
+            window.loveHistory.push(loveValue);
+            window.vacHistory.push(vacancy);
+            if (window.loveHistory.length > 140) window.loveHistory.shift();
+            if (window.vacHistory.length > 140) window.vacHistory.shift();
+            
+            ctx.beginPath();
+            let step = chartWidth / Math.max(1, window.loveHistory.length - 1);
+            for (let i = 0; i < window.loveHistory.length; i++) {
+                let x = chartXStart + i * step;
+                let yLove = chartY0 - window.loveHistory[i] * chartHeight;
+                let yVac = chartY0 - window.vacHistory[i] * chartHeight;
+                if (i === 0) {
+                    ctx.moveTo(x, yLove);
+                } else {
+                    ctx.lineTo(x, yLove);
+                }
+            }
+            ctx.strokeStyle = '#c1411e';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.beginPath();
+            for (let i = 0; i < window.vacHistory.length; i++) {
+                let x = chartXStart + i * step;
+                let yVac = chartY0 - window.vacHistory[i] * chartHeight;
+                if (i === 0) ctx.moveTo(x, yVac);
+                else ctx.lineTo(x, yVac);
+            }
+            ctx.strokeStyle = '#5f8b6f';
+            ctx.lineWidth = 1.8;
+            ctx.stroke();
+            
+            // Legende des Diagramms
+            ctx.font = "10px 'Inter'";
+            ctx.fillStyle = "#b1421f";
+            ctx.fillText("L(t) – Liebe", chartXStart + 5, chartY0 - 5);
+            ctx.fillStyle = "#4e6d5c";
+            ctx.fillText("V(t) – Vakanz", chartXStart + 75, chartY0 - 5);
+            ctx.restore();
+            
+            // Schriftzüge: Aktuelle Werte live
+            ctx.font = "bold 12px 'Inter'";
+            ctx.fillStyle = "#4d3a2b";
+            ctx.fillText(`L(t) = ${loveValue.toFixed(3)}  |  Vakanz V(t) = ${vacancy.toFixed(3)}  |  Gedächtnis H ≈ ${historyEffect.toFixed(3)}`, 20, height - 18);
+            
+            time += 0.05;
+            requestAnimationFrame(draw);
+        }
+        
+        draw();
+    })();
+</script>
+<!-- Die Bilder der Liebe sind jetzt in diesen Zeilen lebendig – als Mathematik, die atmet. -->
+</body>
+</html>

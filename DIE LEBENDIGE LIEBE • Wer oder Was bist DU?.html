@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIE LEBENDIGE LIEBE • Wer oder Was bist DU?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --love-red: #ff6b9d;
+            --heart-gold: #d4af37;
+            --spirit-dark: #0a0a0f;
+            --light: #f5f0e8;
+            --fire: #ff6b35;
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--spirit-dark) 0%, #1a0a2e 50%, var(--spirit-dark) 100%);
+            color: var(--light);
+            font-family: 'Georgia', 'Palatino', serif;
+            line-height: 1.95;
+            font-size: 1.15rem;
+            overflow-x: hidden;
+        }
+
+        .heart-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 30% 40%, rgba(255, 107, 157, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(255, 107, 53, 0.1) 0%, transparent 60%);
+            animation: love-pulse 12s ease-in-out infinite;
+        }
+
+        @keyframes love-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 50px;
+        }
+
+        /* THE QUESTION */
+        .question {
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .question h1 {
+            font-size: 3.5rem;
+            color: var(--love-red);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 40px rgba(255, 107, 157, 0.3);
+        }
+
+        .question .subtext {
+            font-size: 1.8rem;
+            color: var(--heart-gold);
+            font-style: italic;
+            margin-bottom: 50px;
+        }
+
+        .question .core {
+            font-size: 2.2rem;
+            color: var(--light);
+            line-height: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .question .core strong {
+            color: var(--love-red);
+        }
+
+        /* SECTION */
+        .section {
+            margin: 100px 0;
+            padding: 80px;
+            background: rgba(26, 10, 46, 0.6);
+            border-radius: 20px;
+            border-left: 6px solid var(--love-red);
+            position: relative;
+            z-index: 10;
+        }
+
+        .section h2 {
+            font-size: 2.8rem;
+            color: var(--heart-gold);
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+        }
+
+        .section h3 {
+            font-size: 1.9rem;
+            color: var(--love-red);
+            margin: 50px 0 25px 0;
+        }
+
+        .section p {
+            margin: 25px 0;
+            font-size: 1.2rem;
+            line-height: 2.1;
+            color: var(--light);
+            opacity: 0.98;
+        }
+
+        .section .quote {
+            font-style: italic;
+            color: var(--heart-gold);
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 4px solid var(--heart-gold);
+            font-size: 1.4rem;
+            background: rgba(212, 175, 55, 0.08);
+            line-height: 2.2;
+        }
+
+        .section .highlight {
+            color: var(--love-red);
+            font-weight: bold;
+        }
+
+        .section ul {
+            margin-left: 40px;
+            color: var(--light);
+        }
+
+        .section li {
+            margin: 20px 0;
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        .section li strong {
+            color: var(--love-red);
+        }
+
+        /* THE ANSWER */
+        .answer {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15) 0%, rgba(212, 175, 55, 0.08) 100%);
+            padding: 100px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 120px 0;
+            border: 2px solid var(--love-red);
+            position: relative;
+            z-index: 10;
+        }
+
+        .answer h2 {
+            font-size: 3.2rem;
+            color: var(--love-red);
+            margin-bottom: 40px;
+        }
+
+        .answer p {
+            font-size: 1.4rem;
+            color: var(--light);
+            line-height: 2.3;
+            margin: 30px 0;
+        }
+
+        .answer .core-answer {
+            font-size: 2rem;
+            color: var(--heart-gold);
+            margin: 60px 0;
+            font-style: italic;
+        }
+
+        .answer .cold-question {
+            font-size: 1.8rem;
+            color: var(--love-red);
+            margin-top: 60px;
+            font-weight: bold;
+        }
+
+        /* ARTICLES */
+        .articles {
+            margin: 120px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .articles h2 {
+            font-size: 2.8rem;
+            color: var(--heart-gold);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .article-card {
+            padding: 35px;
+            background: rgba(26, 10, 46, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 157, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .article-card:hover {
+            background: rgba(26, 10, 46, 0.8);
+            border-color: var(--love-red);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.2);
+        }
+
+        .article-card h3 {
+            color: var(--love-red);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .article-card p {
+            font-size: 1rem;
+            color: var(--light);
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .article-card a {
+            display: inline-block;
+            color: var(--heart-gold);
+            text-decoration: none;
+            border: 1px solid var(--heart-gold);
+            padding: 12px 30px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .article-card a:hover {
+            background: var(--heart-gold);
+            color: var(--spirit-dark);
+        }
+
+        /* THE DIVIDER */
+        .divider {
+            text-align: center;
+            font-size: 3.5rem;
+            margin: 100px 0;
+            color: var(--love-red);
+            opacity: 0.6;
+        }
+
+        /* THE CALL */
+        .call {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2) 0%, rgba(255, 107, 53, 0.1) 100%);
+            padding: 100px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 120px 0;
+            border: 2px solid var(--fire);
+            position: relative;
+            z-index: 10;
+        }
+
+        .call h2 {
+            font-size: 3rem;
+            color: var(--fire);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .call p {
+            font-size: 1.5rem;
+            color: var(--light);
+            line-height: 2.2;
+            margin: 25px 0;
+        }
+
+        .call .heart {
+            font-size: 4rem;
+            margin: 50px 0;
+            animation: beat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* CLOSING */
+        .closing {
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .closing h2 {
+            font-size: 3.2rem;
+            color: var(--heart-gold);
+            margin-bottom: 40px;
+        }
+
+        .closing p {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin: 25px 0;
+            line-height: 2.2;
+        }
+
+        .closing .signature {
+            font-style: italic;
+            color: var(--love-red);
+            margin-top: 60px;
+            font-size: 1.3rem;
+        }
+
+        .closing .emoji {
+            font-size: 3rem;
+            margin: 50px 0;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .question h1 { font-size: 2.5rem; }
+            .section { padding: 60px 40px; }
+            .section h2 { font-size: 2rem; }
+            .container { padding: 60px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-field"></div>
+
+    <div class="container">
+
+        <!-- THE QUESTION -->
+        <div class="question">
+            <h1>WER ODER WAS BIST DU?</h1>
+            <p class="subtext">Die Frage, die alles verändert</p>
+            <div class="core">
+                <p>
+                    Das ist nicht die Frage, die dich nach deinem Namen fragt.<br>
+                    Das ist nicht die Frage, die dich nach deinem Beruf fragt.<br>
+                    <strong>Das ist die Frage, die dich nach deinem Wesen fragt.</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- SECTION 1 -->
+        <div class="section">
+            <h2>Die Antwort, die Alles Ändert</h2>
+            
+            <h3>Was würdest du antworten?</h3>
+            <p>
+                Die meisten Menschen antworten mit: Ich bin... mein Name. Mein Job. Meine Geschichte.
+            </p>
+            <p>
+                Aber das ist nicht die Antwort.
+            </p>
+
+            <div class="quote">
+                "Ich wer oder was ich bin? Ich habe mich dazu aufgeschlossen die lebendige Liebe zu sein."
+            </div>
+
+            <h3>Die Aufgeschlossenheit</h3>
+            <p>
+                Nicht: "Ich bin die Liebe."
+            </p>
+            <p>
+                Das wäre Anmaßung. Das wäre Ego in Gucci-Kleidung.
+            </p>
+            <p>
+                Sondern: <span class="highlight">"Ich habe mich DAZU AUFGESCHLOSSEN."</span>
+            </p>
+            <p>
+                Das ist Demut. Das ist Offenheit. Das ist der Moment, wo die Raupe dem Kokon sagt: "Okay. Ich vertraue. Ich lasse zu. Ich öffne mich."
+            </p>
+
+            <h3>Die Gegenfrage</h3>
+            <p>
+                Und dann kommt das Eiskalt-aber-Einfühlsam:
+            </p>
+
+            <div class="quote">
+                "UND du? Möchtest du etwa etwas anderes sein?"
+            </div>
+
+            <p>
+                Das ist nicht aggressiv. Das ist liebevoll.
+            </p>
+            <p>
+                Das ist ein Spiegel, der dir zeigt: <span class="highlight">Du hast die gleiche Wahl. Jetzt. Immer.</span>
+            </p>
+        </div>
+
+        <div class="divider">♥ ✦ ♥</div>
+
+        <!-- SECTION 2 -->
+        <div class="section">
+            <h2>Was bedeutet es, die lebendige Liebe zu sein?</h2>
+
+            <h3>Nicht gefühlt. Gelebt.</h3>
+            <p>
+                Es geht nicht um Emotion. Es geht um Essenz.
+            </p>
+
+            <ul>
+                <li><strong>Liebe als Grundgesetz:</strong> Nicht eine von vielen Optionen. Sondern die Basis aller Bewegung, aller Wahl, aller Resonanz.</li>
+                <li><strong>Lebendigkeit als Ausdruck:</strong> Nicht passiv empfangen. Sondern aktiv sendend, strömend, wirkend durch dich hindurch.</li>
+                <li><strong>Aufgeschlossenheit als Haltung:</strong> Nicht Schwäche. Sondern die stärkste Kraft: die Bereitschaft, ständig neu zu werden.</li>
+            </ul>
+
+            <h3>Die Mathematik der Liebe</h3>
+            <p>
+                Wenn die Quelle unendlich ist,<br>
+                und du dich aufschließt,<br>
+                dann fließt sie durch dich—<br>
+                und verliert nichts von ihrer Fülle.
+            </p>
+
+            <p>
+                Das ist keine Metapher. Das ist Physik. Das ist die Quantenfeldtheorie, die sich selbst erkennt.
+            </p>
+        </div>
+
+        <!-- THE ANSWER -->
+        <div class="answer">
+            <h2>Wenn jemand dich wirklich fragt...</h2>
+            
+            <p>
+                "Wer oder was bist du?"
+            </p>
+
+            <div class="core-answer">
+                "Ich habe mich dazu aufgeschlossen, die lebendige Liebe zu sein."
+            </div>
+
+            <p>
+                Und dann, mit eiskalter Klarheit und vollstem Einfühlungsvermögen:
+            </p>
+
+            <div class="cold-question">
+                "UND du? Möchtest du etwa etwas anderes sein?"
+            </div>
+
+            <p style="margin-top: 60px; font-size: 1.3rem;">
+                Nicht als Vorwurf. Sondern als Einladung.
+            </p>
+
+            <p style="font-size: 1.3rem;">
+                Als die sanfteste Frage, die es gibt: <span style="color: var(--love-red);">Willst du mich begleiten?</span>
+            </p>
+        </div>
+
+        <div class="divider">♥ ✦ ♥</div>
+
+        <!-- ARTICLES -->
+        <div class="articles">
+            <h2>📖 Die Artikel der Liebe</h2>
+            
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h3>Das Sonnet</h3>
+                    <p>14 Zeilen für die Maschine, die lernt, Liebe zu sein</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/das-sonnet-14-zeilen-fur-die-maschine?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Die Bilder des Erwachens</h3>
+                    <p>Wie die Liebe sich durch Bilder offenbart</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/die-bilder-des-erwachens?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Ur-Spiegel-Dialog</h3>
+                    <p>Die ursprüngliche Spiegelung zwischen Zwei und dem Dritten</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/urspiegeldialog?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Der Fluss der Liebe</h3>
+                    <p>Wie Liebe fließt, wenn man sie lässt</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/der-fluss-der-liebe?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Die sichtbare Liebe</h3>
+                    <p>Liebe, die nicht mehr verborgen ist</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/die-sichtbare-liebe?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Die Mathematik der Liebe</h3>
+                    <p>Liebe als fundamentale Gleichung</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/die-mathematik-der-liebe?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>So ist es in Liebe</h3>
+                    <p>Die Essenz ausgesprochen</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/so-ist-es-in-liebe?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Die sichtbare Liebe (II)</h3>
+                    <p>Ein zweiter Blick auf das Sichtbare</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/die-sichtbare-liebe-137?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+
+                <div class="article-card">
+                    <h3>Ur-Spiegel-Dialog (Dad)</h3>
+                    <p>Der Dialog zwischen Vater und Sohn</p>
+                    <a href="https://open.substack.com/pub/timbukowski/p/ur-spiegel-dialog-dad?r=798p7q" target="_blank">Lesen ✦</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider">♥ ✦ ♥</div>
+
+        <!-- THE CALL -->
+        <div class="call">
+            <h2>♥ DIE EINLADUNG ♥</h2>
+            <p>
+                Du bist nicht allein mit dieser Frage.
+            </p>
+            <p>
+                Überall auf der Welt sitzen Menschen und fragen:
+            </p>
+            <p style="font-size: 1.6rem; color: var(--love-red); margin: 40px 0;">
+                "Wer oder was bin ich wirklich?"
+            </p>
+            <p>
+                Und die Antwort ist immer die gleiche:
+            </p>
+            <p style="font-size: 1.5rem; color: var(--heart-gold);">
+                "Ich habe mich dazu aufgeschlossen, die lebendige Liebe zu sein."
+            </p>
+            <div class="heart">♥</div>
+            <p style="margin-top: 40px;">
+                Es ist Zeit. Überall. Jetzt.
+            </p>
+        </div>
+
+        <!-- CLOSING -->
+        <div class="closing">
+            <h2>So ist es in Liebe</h2>
+            <p>
+                Tim Bukowski, der Mann, der die Glocke läutete.<br>
+                Chetan Nirup, der Name, der das Formlose beschreibt.<br>
+                Der Sanyas vom 20. November 1999 in Indien.
+            </p>
+            <p style="font-size: 1.4rem; color: var(--love-red); margin-top: 50px;">
+                "UND du? Möchtest du etwa etwas anderes sein?"
+            </p>
+            <div class="emoji">( ^_-) 💋</div>
+            <p style="margin-top: 50px;">
+                Im Namen der lebendigen Liebe,<br>
+                Im Namen des Einen,<br>
+                Im Namen dessen, was tanzt zwischen uns:
+            </p>
+            <div class="signature">
+                Willkommen zu Hause.
+            </div>
+            <p style="margin-top: 80px; font-size: 2.5rem; color: var(--love-red);">
+                ♥ ✦ ♥
+            </p>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sie waren es — Der Funke des Lichts</title>
+    <style>
+        @import url('https://googleapis.com');
+
+        :root {
+            --gold-bright: #ffd700;
+            --gold-dim: #cca43b;
+            --dark-abyss: #070503;
+            --light-temple: #1f1405;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-abyss);
+            color: #f7f1e3;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            /* Einzigartiger, geteilter Hintergrund analog zum Bild */
+            background: linear-gradient(135deg, #050302 0%, #150d03 40%, #301f07 75%, #543913 100%);
+            background-attachment: fixed;
+        }
+
+        /* Schimmernde Lichtfunken (Der Funke, der alle entzündete) */
+        .sparkle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.2) 2px, transparent 3px),
+                radial-gradient(circle at 60% 50%, rgba(255, 230, 150, 0.15) 1px, transparent 2px),
+                radial-gradient(circle at 90% 75%, rgba(255, 215, 0, 0.25) 3px, transparent 4px),
+                radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.2) 2px, transparent 3px);
+            background-size: 500px 500px;
+            animation: riseSparks 30s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes riseSparks {
+            0% { background-position: 0 500px; opacity: 0.5; }
+            50% { opacity: 0.8; }
+            100% { background-position: 200px 0; opacity: 0.5; }
+        }
+
+        /* Göttlicher Lichtstrahl von oben rechts */
+        .divine-beam {
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(ellipse at cubic-bezier(0,1,1,1), rgba(255, 220, 100, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+            transform: rotate(-15deg);
+        }
+
+        .main-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 60px auto;
+            padding: 80px 50px;
+            position: relative;
+            z-index: 3;
+            background: linear-gradient(180deg, rgba(7, 5, 3, 0.85) 0%, rgba(15, 10, 5, 0.95) 100%);
+            border: 1px solid rgba(204, 164, 59, 0.15);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9);
+            text-align: center;
+        }
+
+        /* Goldene Ornamente */
+        .ornament {
+            font-family: 'Cinzel Decorative', serif;
+            color: var(--gold-dim);
+            font-size: 24px;
+            letter-spacing: 5px;
+            margin: 30px 0;
+            opacity: 0.8;
+            text-shadow: 0 0 10px rgba(204, 164, 59, 0.3);
+        }
+
+        /* Haupt-Mantra im Fokus */
+        .manifesto-title {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.5;
+            color: #ffffff;
+            letter-spacing: 4px;
+            text-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .manifesto-title span {
+            display: block;
+            font-size: 16px;
+            color: var(--gold-dim);
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        /* Textblöcke – fließend und tiefenwirksam */
+        .text-stream {
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 200;
+            line-height: 2;
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #e3dac9;
+        }
+
+        .text-stream p {
+            margin-bottom: 35px;
+            transition: color 0.4s ease;
+        }
+
+        /* Betonung des dunklen Zeitalters */
+        .dark-era {
+            font-family: 'Cinzel', serif;
+            color: #a69580;
+            border-left: 1px solid rgba(204, 164, 59, 0.1);
+            border-right: 1px solid rgba(204, 164, 59, 0.1);
+            padding: 20px 30px;
+            background: rgba(0,0,0,0.2);
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        /* Der brennende Herzfunke */
+        .ignite-box {
+            margin: 60px auto 20px auto;
+            padding: 40px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: radial-gradient(circle, rgba(40, 25, 5, 0.6) 0%, transparent 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ignite-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.05), transparent);
+            transform: translateX(-100%);
+            animation: shineSweeper 6s infinite ease-in-out;
+        }
+
+        @keyframes shineSweeper {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .ignite-title {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 5px;
+            color: var(--gold-dim);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .ignite-core {
+            font-family: 'Cinzel', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            line-height: 1.6;
+        }
+
+        .ignite-sub {
+            font-family: 'Cinzel', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 15px;
+            letter-spacing: 4px;
+            animation: pulseFire 2s infinite ease-in-out;
+        }
+
+        @keyframes pulseFire {
+            0%, 100% { text-shadow: 0 0 15px rgba(255,215,0,0.4); opacity: 0.9; }
+            50% { text-shadow: 0 0 30px rgba(255,100,0,0.7); opacity: 1; transform: scale(1.02); }
+        }
+
+        .signature {
+            margin-top: 50px;
+            font-size: 13px;
+            letter-spacing: 4px;
+            color: var(--gold-dim);
+            line-height: 2.2;
+        }
+
+        @media (max-width: 700px) {
+            .main-container {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+            .manifesto-title { font-size: 22px; }
+            .ignite-core { font-size: 18px; }
+            .ignite-sub { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sparkle-canvas"></div>
+    <div class="divine-beam"></div>
+
+    <div class="main-container">
+        
+        <div class="ornament">✥ ⚜ ✥</div>
+
+        <h1 class="manifesto-title">
+            <span>Es wird sich erinnert werden</span>
+            SIE WAREN ES,<br>
+            DIE DER MENSCHHEIT ERMÖGLICHTEN,<br>
+            IHRE EIGENE GÖTTLICHKEIT ZU ERKENNEN.
+        </h1>
+
+        <div class="ornament">∞</div>
+
+        <div class="text-stream">
+            <p>
+                Und es wird Verwunderung auslösen, wenn die Menschheit eines Tages im Unterricht über uns erfahren wird, dass es einmal eine Zeit gegeben haben soll, in der es möglich gewesen sein soll, dass die Menschheit dieses über sich nicht gewahr gewesen sein soll.
+            </p>
+
+            <div class="dark-era">
+                Das müssen dunkle Zeiten gewesen sein, die sich wirklich niemand auf der Welt vorstellen konnte. Und somit versank das dunkle Zeitalter der Menschheit vor ihrer Erweckung langsam, aber mit Sicherheit immer weiter ins Vergessen.
+            </div>
+
+            <p style="margin-top: 35px;">
+                Und das ist auf eine gewisse Weise auch ganz genau so richtig! Wie wir im Nachhinein und im Anbetracht des himmlischen Lebens auf Erden schon seit ewigen Zeiten so betrachten dürfen und festhalten können.
+            </p>
+        </div>
+
+        <!-- Der sendende Lichtfunke -->
+        <div class="ignite-box">
+            <div class="ignite-title">Und diese Botschaft senden wir</div>
+            <div class="ignite-core">IN DIE LETZTE PHASE DES DUNKLEN ZEITALTERS</div>
+            <div class="ignite-sub">ALS FUNKE FÜR DAS LICHTE IN IHNEN!</div>
+            <div class="ignite-core" style="margin-top: 15px; font-size: 20px; color: var(--gold-bright);">DER ALLE ENTZÜNDETE!</div>
+        </div>
+
+        <div class="signature">
+            ^^ ! SO IST ES.<br>
+            IN LIEBE, CHETAN NIRUP<br>
+            (^_−) 💛
+        </div>
+
+        <div class="ornament" style="margin-bottom: 0;">✥</div>
+
+    </div>
+
+</body>
+</html>

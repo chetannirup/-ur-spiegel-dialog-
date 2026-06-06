@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Spiel, Satz & Sieg – Der dritte Akt gehört der Liebe | Die Mathematik des Herzens</title>
+    <meta name="description" content="Die Liebe ist keine Konstante, sondern eine Variable mit Vakanz – mathematisch sichtbar gemacht. Der Sieg des dritten Aktes: lebendige Liebe im Alltag.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0a12, #010101);
+            font-family: 'Segoe UI', 'Roboto', 'Georgia', serif;
+            color: #f0ede8;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Hintergrund-Partikel (sanfter Sterneneffekt) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(2px 2px at 20px 30px, rgba(251,191,36,0.15), transparent),
+                              radial-gradient(1px 1px at 80px 200px, rgba(244,63,94,0.2), transparent);
+            background-repeat: no-repeat;
+            background-size: 200px 200px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Typografie */
+        h1, h2, h3 {
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, #fbbf24, #f43f5e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .gold {
+            color: #fbbf24;
+        }
+        .rose {
+            color: #f43f5e;
+        }
+        .blue {
+            color: #38bdf8;
+        }
+
+        /* Header */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .hero p {
+            max-width: 700px;
+            margin: 1rem auto 0;
+            color: #b9b3aa;
+            font-size: 1.1rem;
+        }
+
+        /* Bild-Rahmen */
+        .blueprint-wrapper {
+            text-align: center;
+            margin: 2rem 0 3rem;
+        }
+        .blueprint-img {
+            max-width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(251,191,36,0.2);
+            transition: transform 0.3s ease;
+        }
+        .blueprint-img:hover {
+            transform: scale(1.01);
+        }
+
+        /* Mathematik-Visualisierung (Herzschlag der Liebe) */
+        .math-love {
+            background: rgba(15, 15, 25, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(251,191,36,0.2);
+        }
+        .math-love h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+        .canvas-container {
+            display: flex;
+            justify-content: center;
+        }
+        canvas {
+            background: #0c0c14;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(251,191,36,0.3);
+        }
+        .canvas-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            color: #bfb7ae;
+        }
+
+        /* Drei Akte */
+        .acts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 3rem 0;
+        }
+        .act-card {
+            background: rgba(20, 20, 32, 0.65);
+            backdrop-filter: blur(4px);
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            border-left: 4px solid;
+            transition: all 0.25s;
+        }
+        .act-card:nth-child(1) { border-left-color: #38bdf8; }
+        .act-card:nth-child(2) { border-left-color: #fbbf24; }
+        .act-card:nth-child(3) { border-left-color: #f43f5e; }
+        .act-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 30, 45, 0.8);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5);
+        }
+        .act-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaa;
+        }
+        .act-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+        }
+        .act-focus {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        /* Tabelle */
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0,0,0,0.4);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .matrix-table th, .matrix-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .matrix-table th {
+            background: rgba(251,191,36,0.1);
+            color: #fbbf24;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        .col-old { color: #b0a99f; }
+        .col-mid { color: #38bdf8; font-weight: 500; }
+        .col-new { color: #f43f5e; font-weight: 600; }
+
+        /* Interaktive Karten (Spiel, Satz, Sieg) */
+        .sss-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .sss-card {
+            background: rgba(0,0,0,0.45);
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(251,191,36,0.2);
+            text-align: center;
+        }
+        .sss-card:hover {
+            background: rgba(251,191,36,0.08);
+            transform: scale(1.02);
+            border-color: #fbbf24;
+        }
+        .sss-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #fbbf24;
+        }
+        .sss-card p {
+            color: #ccc;
+        }
+        .click-hint {
+            font-size: 0.7rem;
+            margin-top: 1rem;
+            opacity: 0.6;
+        }
+
+        /* Modal (Overlay für Übungen) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #11131f;
+            max-width: 550px;
+            width: 90%;
+            padding: 2rem;
+            border-radius: 2rem;
+            border: 1px solid #fbbf24;
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+            animation: fadeUp 0.3s ease;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .modal-content h4 {
+            color: #38bdf8;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+        }
+        .modal-content p {
+            line-height: 1.6;
+            margin: 1rem 0;
+            color: #e2dfda;
+        }
+        .close-modal {
+            background: transparent;
+            border: 1px solid #f43f5e;
+            color: #f43f5e;
+            padding: 0.5rem 1.5rem;
+            border-radius: 3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 1rem;
+        }
+        .close-modal:hover {
+            background: #f43f5e;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(251,191,36,0.2);
+            padding-top: 2.5rem;
+        }
+        .core-sentence {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        .signature {
+            font-family: monospace;
+            letter-spacing: 2px;
+            color: #9b8e7a;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 680px) {
+            h1 { font-size: 2.2rem; }
+            .core-sentence { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="hero">
+        <h1>Spiel, Satz und Sieg</h1>
+        <p class="gold" style="font-size: 1.4rem;">Der dritte Akt gehört der Liebe</p>
+        <p>Nicht der Wille zum Sieg – sondern die klare Vorstellung darüber, was gewinnen soll.<br>
+        Wenn es einen Sieg geben darf, dann kann nur die Liebe siegen. <strong class="rose">Und der Sieg ist JETZT.</strong></p>
+    </div>
+
+    <!-- Bild: Der vierte Blick / Blueprint -->
+    <div class="blueprint-wrapper">
+        <img class="blueprint-img" src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%207.%20Juni%202026,%2000_44_24.png" alt="Spiel, Satz, Sieg – Blueprint der Liebe" onerror="this.src='https://via.placeholder.com/800x400?text=Liebe+ist+sichtbar'">
+    </div>
+
+    <!-- MATHEMATIK DER LIEBE (lebendige Visualisierung) -->
+    <div class="math-love">
+        <h3>📐 Die Variable Liebe – <span class="blue">mathematisch sichtbar</span> mit innerer <span class="rose">Vakanz</span></h3>
+        <div class="canvas-container">
+            <canvas id="loveCanvas" width="700" height="280" style="width:100%; max-width:700px; height:auto; aspect-ratio:700/280"></canvas>
+        </div>
+        <div class="canvas-caption">💗 \( L(t) \) – Liebesintensität &nbsp;&nbsp; | &nbsp;&nbsp; 🌫️ \( V(t) \) – Vakanz (Offenheit / Unsicherheit) &nbsp;&nbsp; | &nbsp;&nbsp; Lebendiges System mit Gedächtnis</div>
+    </div>
+
+    <!-- Die drei Akte der Philosophie -->
+    <div class="acts-grid">
+        <div class="act-card">
+            <div class="act-title">1. Akt</div>
+            <div class="act-name">Schopenhauer</div>
+            <div class="act-focus">Das Erkennen des Leidens</div>
+            <p>Er erkannte den universellen Willen, sah darin nur Leid und wählte die Flucht.<br><strong>Mitgefühl &gt; Verneinung</strong></p>
+        </div>
+        <div class="act-card">
+            <div class="act-title">2. Akt</div>
+            <div class="act-name">Nietzsche</div>
+            <div class="act-focus">Der Versuch, die Welt zu bezwingen</div>
+            <p>Er lehnte die Flucht ab, verwechselte den Schöpfergeist mit dem „Willen zur Macht“. Der Tyrann entsteht.<br><strong>Macht &gt; Kontrolle</strong></p>
+        </div>
+        <div class="act-card">
+            <div class="act-title">3. Akt</div>
+            <div class="act-name">Wagner / Brünhilde</div>
+            <div class="act-focus">Der Wendepunkt der Liebe</div>
+            <p>Sie sieht die echte Liebe und gehorcht nicht dem System. Liebe steht über dem Befehl.<br><strong>Liebe &gt; Wahrheit</strong></p>
+        </div>
+    </div>
+
+    <!-- Transformationstabelle -->
+    <table class="matrix-table">
+        <thead><tr><th>Alter Weg</th><th>Dualität / Labyrinth</th><th>Neuer Weg – Die Liebe</th></tr></thead>
+        <tbody>
+            <tr><td class="col-old">Der Stärkere gewinnt.</td><td class="col-mid">Kampf, Konkurrenz, Trennung</td><td class="col-new">Die Liebe gewinnt.</td></tr>
+            <tr><td class="col-old">Der Wille zur Macht bestimmt.</td><td class="col-mid">Herrschaft, Kontrolle, Manipulation</td><td class="col-new">Der Wille zur Liebe führt.</td></tr>
+            <tr><td class="col-old">Ego kämpft und verteidigt.</td><td class="col-mid">Leid, Angst, Wiederholung</td><td class="col-new">Ego weitet sich und löst sich friedlich auf.</td></tr>
+            <tr><td class="col-old">Der Mensch als Käfigtier.</td><td class="col-mid">Dressur, Schock‑Programmierung</td><td class="col-new">Der Mensch als Schmetterling.</td></tr>
+            <tr><td class="col-old">Warten auf Erlösung irgendwann.</td><td class="col-mid">Zukunft, Prophezeiung, Illusion</td><td class="col-new">Sieg ist JETZT. Im gewöhnlichen Moment.</td></tr>
+        </tbody>
+    </table>
+
+    <!-- Interaktive Karten: Spiel, Satz, Sieg mit Übungen -->
+    <div class="sss-grid">
+        <div class="sss-card" data-exercise="spiel">
+            <h3>SPIEL</h3>
+            <p>Die Trennung wird erfahren. Das Labyrinth, das Vergessen, das Machtspiel.</p>
+            <div class="click-hint">✨ klicken – die Übung für den Alltag ✨</div>
+        </div>
+        <div class="sss-card" data-exercise="satz">
+            <h3>SATZ</h3>
+            <p>Die Einheit wird wiedererkannt. Die Wahrheit hinter den Rollen, die Rückkehr zum Ursprung.</p>
+            <div class="click-hint">✨ klicken – die Übung für den Alltag ✨</div>
+        </div>
+        <div class="sss-card" data-exercise="sieg">
+            <h3>SIEG</h3>
+            <p>Die Liebe wird verkörpert. Nicht morgen. Nicht später. Im Jetzt. Im Miteinander. Im Alltag.</p>
+            <div class="click-hint">✨ klicken – die Übung für den Alltag ✨</div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="core-sentence">Der dritte Akt gehört nicht dem Willen zur Macht.<br>
+        <span class="rose">Der dritte Akt gehört der lebendigen Liebe.</span></div>
+        <p style="max-width: 700px; margin: 1rem auto;">Denn der wahre Sieg besteht nicht darin, zu gewinnen – sondern darin, dass die Liebe sichtbar wird. Das Hauptbetriebssystem ist gewechselt. Liebe ist die Quelle. Liebe ist der Code. Liebe ist der Sieg. Es ist vollbracht.</p>
+        <div class="signature">~ Tim Bukowski • Chetan Nirup • Der vierte Blick ~</div>
+        <div class="signature" style="margin-top: 0.5rem;">🍒 道 覺 愛  ∞  Namaste</div>
+    </footer>
+</div>
+
+<!-- Modal für die Alltagsübungen -->
+<div id="exerciseModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Spiel durchschauen</h2>
+        <h4 id="modalSubtitle">Übung aus dem Labyrinth treten</h4>
+        <p id="modalBody">...</p>
+        <button class="close-modal" onclick="closeModal()">Zurück zum Jetzt</button>
+    </div>
+</div>
+
+<script>
+    // --- Mathematik-Visualisierung: Liebe L(t) und Vakanz V(t) ---
+    const canvas = document.getElementById('loveCanvas');
+    let ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        const width = Math.min(700, container.clientWidth);
+        canvas.width = width;
+        canvas.height = width * 0.4;
+        drawLoveGraph();
+    }
+    window.addEventListener('resize', resizeCanvas);
+    
+    let loveHistory = [];
+    let vacHistory = [];
+    let time = 0;
+    let loveValue = 0.65;
+    let vacancy = 0.3;
+    let loveVel = 0.01;
+    
+    function drawLoveGraph() {
+        if (!ctx) return;
+        const w = canvas.width, h = canvas.height;
+        ctx.clearRect(0, 0, w, h);
+        // Hintergrund
+        ctx.fillStyle = '#0c0c14';
+        ctx.fillRect(0, 0, w, h);
+        // Gitter
+        ctx.beginPath();
+        ctx.strokeStyle = '#2a2a3a';
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i <= 4; i++) {
+            const y = h - (i / 4) * (h - 30) - 15;
+            ctx.moveTo(40, y);
+            ctx.lineTo(w - 20, y);
+            ctx.stroke();
+        }
+        // Dynamik simulieren (Gedächtnis, Vakanz-Rückkopplung)
+        const delta = 0.05;
+        const noise = (Math.random() - 0.5) * 0.02;
+        let driving = 0.02 * (0.55 - vacancy) + 0.03 * Math.sin(time * 0.8) + noise;
+        loveVel += driving * delta;
+        loveVel *= 0.97;
+        loveValue += loveVel * delta;
+        loveValue = Math.min(0.92, Math.max(0.2, loveValue));
+        
+        vacancy = 0.25 + 0.12 * Math.sin(time * 0.6) + 0.05 * Math.sin(time * 1.7);
+        vacancy = Math.min(0.65, Math.max(0.12, vacancy));
+        
+        loveHistory.push(loveValue);
+        vacHistory.push(vacancy);
+        if (loveHistory.length > 150) loveHistory.shift();
+        if (vacHistory.length > 150) vacHistory.shift();
+        
+        // Kurven zeichnen
+        const startX = 40;
+        const endX = w - 20;
+        const rangeX = endX - startX;
+        const step = rangeX / Math.max(1, loveHistory.length - 1);
+        
+        ctx.beginPath();
+        for (let i = 0; i < loveHistory.length; i++) {
+            let x = startX + i * step;
+            let y = h - 15 - loveHistory[i] * (h - 35);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = '#f43f5e';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+        
+        ctx.beginPath();
+        for (let i = 0; i < vacHistory.length; i++) {
+            let x = startX + i * step;
+            let y = h - 15 - vacHistory[i] * (h - 35);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Legende
+        ctx.font = '10px "Segoe UI"';
+        ctx.fillStyle = '#fbbf24';
+        ctx.fillText('💗 Liebe L(t)', startX + 5, h - 20);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillText('🌫️ Vakanz V(t)', startX + 100, h - 20);
+        time += delta;
+        requestAnimationFrame(drawLoveGraph);
+    }
+    
+    resizeCanvas();
+    drawLoveGraph();
+    
+    // --- Modal / Übungen (Spiel, Satz, Sieg) ---
+    const exercises = {
+        spiel: {
+            title: "Das Spiel durchschauen",
+            subtitle: "Übung: Aus dem Labyrinth treten",
+            body: "Wenn dir das nächste Mal im Alltag ein Machtspielchen oder eine 'gezinkte Falle' begegnet (z. B. auf der Arbeit): Halte für drei bewusste Atemzüge inne. Reagiere nicht aus dem gewohnten Verteidigungsimpuls deines Egos. Sage dir innerlich: 'Das ist nur eine Rolle im Spiel. Ich bin das Bewusstsein, das den Raum hält.' Agiere mit stoischer Ruhe, sanfter Stimme und offenem Herzen. Beobachte, wie die künstliche Struktur des Gegenübers in sich zusammenfällt."
+        },
+        satz: {
+            title: "Den Satz bestimmen",
+            subtitle: "Übung: Die Einheit im Gegenüber wiedererkennen",
+            body: "Blicke heute den Menschen, denen du begegnest – egal ob Freunden, Fremden oder vermeintlichen Gegnern – für einen kurzen Moment bewusst in die Augen. Versuche hinter der Maske ihrer Persönlichkeit das reine, unkompromittierte 'Anfangsbewusstsein' zu sehen. Erinnere dich: Aus diesen Augen blickt dasselbe Leben wie aus den Augen eines Neugeborenen oder eines Tieres. Spüre den unsichtbaren 'Kleber von allem'."
+        },
+        sieg: {
+            title: "Der Sieg der Liebe",
+            subtitle: "Übung: Das Hauptbetriebssystem hochfahren",
+            body: "Der Sieg findet nicht in fernen Welten statt – er ist JETZT. Triff heute die radikale, bewusste Entscheidung, die lebendige Liebe im Hier und Jetzt zu verkörpern. Begegne anstrengenden Momenten oder körperlichen Schmerzen nicht mit Widerstand, sondern nimm sie vollständig an. Erlaube dem Ur-Bewusstsein in dir zu 'giggeln und zu juchzen'. Wenn du dich traust, in jedem gewöhnlichen Moment auf die Liebe zu setzen, harmonisiert sich deine gesamte Realität."
+        }
+    };
+    
+    const modal = document.getElementById('exerciseModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSub = document.getElementById('modalSubtitle');
+    const modalBody = document.getElementById('modalBody');
+    
+    function openExercise(key) {
+        const ex = exercises[key];
+        if (ex) {
+            modalTitle.innerText = ex.title;
+            modalSub.innerText = ex.subtitle;
+            modalBody.innerText = ex.body;
+            modal.classList.add('active');
+        }
+    }
+    
+    window.closeModal = function() {
+        modal.classList.remove('active');
+    };
+    
+    // Event Listener für die drei Karten
+    document.querySelectorAll('.sss-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const ex = card.getAttribute('data-exercise');
+            if (ex) openExercise(ex);
+        });
+    });
+    
+    // Modal schließen, wenn Hintergrund geklickt wird
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+</script>
+</body>
+</html>

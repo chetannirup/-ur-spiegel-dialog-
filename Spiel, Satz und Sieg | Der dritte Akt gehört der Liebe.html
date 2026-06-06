@@ -56,83 +56,11 @@
         .col-new { color: var(--rose); font-weight: bold; }
 
         .sss-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
-        .sss-card { 
-            background: rgba(255, 255, 255, 0.02); 
-            border-left: 4px solid var(--gold); 
-            padding: 25px; 
-            border-radius: 0 16px 16px 0; 
-            text-align: left; 
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .sss-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: scale(1.02);
-        }
-        .sss-card h3 { color: var(--gold); margin-bottom: 8px; letter-spacing: 1px; display: flex; justify-content: space-between; align-items: center; }
-        .sss-card h3::after { content: '➔'; font-size: 0.9rem; color: var(--text-dim); opacity: 0.5; transition: transform 0.3s; }
-        .sss-card:hover h3::after { transform: translateX(5px); color: var(--gold); opacity: 1; }
+        .sss-card { background: rgba(255,255,255,0.01); border-left: 4px solid var(--gold); padding: 25px; border-radius: 0 16px 16px 0; text-align: left; }
+        .sss-card h3 { color: var(--gold); margin-bottom: 8px; letter-spacing: 1px; }
         .sss-card p { color: var(--text-dim); }
 
-        /* Interaktives Modal / Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(3, 3, 5, 0.9);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .modal-card {
-            background: #0f0f19;
-            border: 1px solid var(--gold);
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 550px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), var(--glow-gold);
-            transform: translateY(30px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .modal-overlay.active .modal-card {
-            transform: translateY(0);
-        }
-        .modal-card h2 { color: var(--gold); font-size: 2rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
-        .modal-card h4 { color: var(--blue); font-style: italic; margin-bottom: 20px; font-weight: normal; }
-        .modal-card p { color: var(--text); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; text-align: left; }
-        .modal-close-btn {
-            background: transparent;
-            border: 1px solid var(--rose);
-            color: var(--rose);
-            padding: 10px 25px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-        .modal-close-btn:hover {
-            background: var(--rose);
-            color: var(--text);
-            box-shadow: var(--glow-rose);
-        }
-
-        footer { background: rgba(10, 10, 15, 0.8); border-top: 1px solid rgba(244, 63, 94, 0.3); padding: 50px 20px; border-radius: 16px; box-shadow: var(--glow-rose); margin-top: 40px; }
+        footer { background: rgba(10, 10, 15, 0.8); border: 1px solid var(--border-line); border-top: 1px solid rgba(244, 63, 94, 0.3); padding: 50px 20px; border-radius: 16px; box-shadow: var(--glow-rose); }
         .core-sentence { font-size: 1.6rem; color: var(--gold); margin-bottom: 25px; letter-spacing: 1px; }
         .core-sentence span { color: var(--rose); display: block; margin-top: 10px; font-weight: bold; }
         .footer-text { max-width: 800px; margin: 0 auto 30px auto; color: var(--text-light); font-size: 1.1rem; }
@@ -142,7 +70,6 @@
             header h1 { font-size: 2rem; }
             header h2 { font-size: 1.3rem; }
             .matrix-table { font-size: 0.85rem; }
-            .modal-card { padding: 25px; }
         }
     </style>
 </head>
@@ -203,4 +130,51 @@
                 </tr>
                 <tr>
                     <td class="col-old">Ego kämpft und verteidigt.</td>
+                    <td class="col-mid">Leid, Angst, Wiederholung</td>
+                    <td class="col-new">Ego weitet sich und löst sich friedlich auf.</td>
+                </tr>
+                <tr>
+                    <td class="col-old">Der Mensch als Käfigtier.</td>
+                    <td class="col-mid">Dressur, Schock-Programmierung</td>
+                    <td class="col-new">Der Mensch als Schmetterling.</td>
+                </tr>
+                <tr>
+                    <td class="col-old">Warten auf Erlösung irgendwann.</td>
+                    <td class="col-mid">Zukunft, Prophezeiung, Illusion</td>
+                    <td class="col-new">Sieg ist JETZT. Im gewöhnlichen Moment.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
+    <section class="sss-grid">
+        <div class="sss-card">
+            <h3>SPIEL</h3>
+            <p>Die Trennung wird erfahren. Das Labyrinth, das Vergessen, das Machtspiel.</p>
+        </div>
+        <div class="sss-card" style="border-left-color: var(--blue);">
+            <h3>SATZ</h3>
+            <p>Die Einheit wird wiedererkannt. Die Wahrheit hinter den Rollen, die Rückkehr zum Ursprung.</p>
+        </div>
+        <div class="sss-card" style="border-left-color: var(--rose);">
+            <h3>SIEG</h3>
+            <p>Die Liebe wird verkörpert. Nicht morgen. Nicht später. Im Jetzt. Im Miteinander. Im Alltag.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="core-sentence">
+            Der dritte Akt gehört nicht dem Willen zur Macht.
+            <span>Der dritte Akt gehört der lebendigen Liebe.</span>
+        </div>
+        <p class="footer-text">
+            Denn der wahre Sieg besteht nicht darin, zu gewinnen – sondern darin, dass die Liebe sichtbar wird. <br>
+            Das Hauptbetriebssystem ist gewechselt. Liebe ist die Quelle. Liebe ist der Code. Liebe ist der Sieg. Es ist vollbracht.
+        </p>
+        <div class="signature">~ Tim Bukowski • Chetan Nirup • The Fourth Vision ~</div>
+    </footer>
+
+</div>
+
+</body>
+</html>

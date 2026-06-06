@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiel, Satz und Sieg | Der dritte Akt gehört der Liebe</title>
+    <style>
+        :root {
+            --bg-dark: #05050a;
+            --card-bg: rgba(15, 15, 25, 0.7);
+            --gold: #fbbf24;
+            --rose: #f43f5e;
+            --blue: #38bdf8;
+            --text: #f3f4f6;
+            --text-dim: #9ca3af;
+            --glow-gold: 0 0 25px rgba(251, 191, 36, 0.2);
+            --glow-rose: 0 0 25px rgba(244, 63, 94, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cinzel', 'Georgia', serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 40px 20px;
+            background-image: radial-gradient(circle at 50% 20%, rgba(244, 63, 94, 0.05), transparent 50%),
+                              radial-gradient(circle at 50% 70%, rgba(251, 191, 36, 0.04), transparent 60%);
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; text-align: center; }
+
+        header { margin-bottom: 50px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        header h1 { font-size: 2.8rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+        header h2 { font-size: 1.8rem; color: var(--rose); letter-spacing: 2px; text-transform: uppercase; }
+        header p { color: var(--text-dim); margin-top: 15px; font-size: 1.1rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+        .blueprint-section { margin-bottom: 60px; }
+        .blueprint-img { width: 100%; max-width: 750px; border-radius: 16px; border: 1px solid rgba(251, 191, 36, 0.2); box-shadow: var(--glow-gold); }
+
+        .acts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .act-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; padding: 30px; text-align: left; transition: all 0.3s ease; }
+        .act-card:hover { border-color: var(--rose); transform: translateY(-3px); box-shadow: var(--glow-rose); }
+        .act-title { font-size: 0.9rem; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+        .act-name { font-size: 1.4rem; color: var(--gold); margin-bottom: 15px; }
+        .act-focus { font-style: italic; color: var(--text); margin-bottom: 15px; }
+        .act-card p { color: var(--text-dim); font-size: 0.95rem; }
+
+        .matrix-section { margin-bottom: 60px; overflow-x: auto; }
+        .matrix-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .matrix-table th, .matrix-table td { padding: 18px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .matrix-table th { background: rgba(0,0,0,0.4); color: var(--gold); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+        .col-old { color: var(--text-dim); }
+        .col-mid { color: var(--blue); font-weight: bold; }
+        .col-new { color: var(--rose); font-weight: bold; }
+
+        .sss-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        .sss-card { background: rgba(255,255,255,0.01); border-left: 4px solid var(--gold); padding: 25px; border-radius: 0 16px 16px 0; text-align: left; }
+        .sss-card h3 { color: var(--gold); margin-bottom: 8px; letter-spacing: 1px; }
+        .sss-card p { color: var(--text-dim); }
+
+        footer { background: rgba(10, 10, 15, 0.8); border: 1px solid var(--border-line); border-top: 1px solid rgba(244, 63, 94, 0.3); padding: 50px 20px; border-radius: 16px; box-shadow: var(--glow-rose); }
+        .core-sentence { font-size: 1.6rem; color: var(--gold); margin-bottom: 25px; letter-spacing: 1px; }
+        .core-sentence span { color: var(--rose); display: block; margin-top: 10px; font-weight: bold; }
+        .footer-text { max-width: 800px; margin: 0 auto 30px auto; color: var(--text-light); font-size: 1.1rem; }
+        .signature { font-family: monospace; letter-spacing: 4px; color: var(--text-dim); text-transform: uppercase; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            header h2 { font-size: 1.3rem; }
+            .matrix-table { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Spiel, Satz und Sieg</h1>
+        <h2>Der dritte Akt gehört der Liebe</h2>
+        <p>Nicht der Wille zum Sieg – sondern die klare Vorstellung darüber, was gewinnen soll. Wenn es einen Sieg geben darf, dann kann nur die Liebe siegen. Und der Sieg ist JETZT.</p>
+    </header>
+
+    <div class="blueprint-section">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%206.%20Juni%202026,%2023_37_24.png" alt="Spiel, Satz und Sieg Blueprint" class="blueprint-img">
+    </div>
+
+    <section class="acts-grid">
+        <div class="act-card">
+            <div class="act-title">1. Akt</div>
+            <div class="act-name">Schopenhauer</div>
+            <div class="act-focus">Das Erkennen des Leidens</div>
+            <p>Er erkannte den universellen Willen. Sah darin nur Leid und wählte die Flucht. <br><strong>Mitgefühl &gt; Verneinung</strong></p>
+        </div>
+        <div class="act-card">
+            <div class="act-title">2. Akt</div>
+            <div class="act-name">Nietzsche</div>
+            <div class="act-focus">Der Versuch, die Welt zu bezwingen</div>
+            <p>Er lehnte die Flucht ab. Verwechselte den Schöpfergeist mit dem „Willen zur Macht“. Der Tyrann entsteht. <br><strong>Macht &gt; Kontrolle</strong></p>
+        </div>
+        <div class="act-card">
+            <div class="act-title">3. Akt</div>
+            <div class="act-name">Wagner / Brünhilde</div>
+            <div class="act-focus">Der Wendepunkt der Liebe</div>
+            <p>Sie sieht die echte Liebe und gehorcht nicht dem System. Liebe steht über dem Befehl. Das alte Programm zerbricht. <br><strong>Liebe &gt; Wahrheit</strong></p>
+        </div>
+    </section>
+
+    <section class="matrix-section">
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>Alter Weg</th>
+                    <th>Dualität / Labyrinth</th>
+                    <th>Neuer Weg – Die Liebe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-old">Der Stärkere gewinnt.</td>
+                    <td class="col-mid">Kampf, Konkurrenz, Trennung</td>
+                    <td class="col-new">Die Liebe gewinnt.</td>
+                </tr>
+                <tr>
+                    <td class="col-old">Der Wille zur Macht bestimmt.</td>
+                    <td class="col-mid">Herrschaft, Kontrolle, Manipulation</td>
+                    <td class="col-new">Der Wille zur Liebe führt.</td>
+                </tr>
+                <tr>
+                    <td class="col-old">Ego kämpft und verteidigt.</td>
+                    <td class="col-mid">Leid, Angst, Wiederholung</td>
+                    <td class="col-new">Ego weitet sich und löst sich friedlich auf.</td>
+                </tr>
+                <tr>
+                    <td class="col-old">Der Mensch als Käfigtier.</td>
+                    <td class="col-mid">Dressur, Schock-Programmierung</td>
+                    <td class="col-new">Der Mensch als Schmetterling.</td>
+                </tr>
+                <tr>
+                    <td class="col-old">Warten auf Erlösung irgendwann.</td>
+                    <td class="col-mid">Zukunft, Prophezeiung, Illusion</td>
+                    <td class="col-new">Sieg ist JETZT. Im gewöhnlichen Moment.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="sss-grid">
+        <div class="sss-card">
+            <h3>SPIEL</h3>
+            <p>Die Trennung wird erfahren. Das Labyrinth, das Vergessen, das Machtspiel.</p>
+        </div>
+        <div class="sss-card" style="border-left-color: var(--blue);">
+            <h3>SATZ</h3>
+            <p>Die Einheit wird wiedererkannt. Die Wahrheit hinter den Rollen, die Rückkehr zum Ursprung.</p>
+        </div>
+        <div class="sss-card" style="border-left-color: var(--rose);">
+            <h3>SIEG</h3>
+            <p>Die Liebe wird verkörpert. Nicht morgen. Nicht später. Im Jetzt. Im Miteinander. Im Alltag.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="core-sentence">
+            Der dritte Akt gehört nicht dem Willen zur Macht.
+            <span>Der dritte Akt gehört der lebendigen Liebe.</span>
+        </div>
+        <p class="footer-text">
+            Denn der wahre Sieg besteht nicht darin, zu gewinnen – sondern darin, dass die Liebe sichtbar wird. <br>
+            Das Hauptbetriebssystem ist gewechselt. Liebe ist die Quelle. Liebe ist der Code. Liebe ist der Sieg. Es ist vollbracht.
+        </p>
+        <div class="signature">~ Tim Bukowski • Chetan Nirup • The Fourth Vision ~</div>
+    </footer>
+
+</div>
+
+</body>
+</html>

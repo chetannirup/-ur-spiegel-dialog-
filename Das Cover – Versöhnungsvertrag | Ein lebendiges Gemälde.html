@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Das Cover – Versöhnungsvertrag | Ein lebendiges Gemälde</title>
+    <meta name="description" content="Lebendiges Cover für den Versöhnungsvertrag. Digitales Gemälde: pulsierendes Herz, schwebende Symbole, sich auflösende Mauern, erblühende Gärten.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050508;
+            overflow: hidden;
+            font-family: 'Cinzel', 'Georgia', 'Noto Serif SC', serif;
+            color: #f0ede8;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        /* Overlay-Text, sanft eingeblendet */
+        .overlay {
+            position: fixed;
+            z-index: 10;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3vh 5vw;
+            text-align: center;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        .top-text {
+            opacity: 0;
+            animation: fadeInDown 3s ease 1s forwards;
+        }
+
+        .top-text h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            letter-spacing: 0.3em;
+            color: #d4af7a;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .top-text .subtitle {
+            font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+            color: #b8a88a;
+            letter-spacing: 0.15em;
+            font-style: italic;
+        }
+
+        .center-space {
+            flex: 1;
+        }
+
+        .bottom-text {
+            opacity: 0;
+            animation: fadeInUp 3s ease 2s forwards;
+            margin-bottom: 2vh;
+        }
+
+        .bottom-text .verse {
+            font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+            color: #e8dcc8;
+            line-height: 1.8;
+            max-width: 600px;
+            font-style: italic;
+            letter-spacing: 0.05em;
+        }
+
+        .bottom-text .symbols {
+            margin-top: 1.5rem;
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            letter-spacing: 0.5em;
+            color: #d4af7a;
+            opacity: 0.8;
+        }
+
+        .interaction-hint {
+            position: fixed;
+            bottom: 3vh;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            font-size: 0.75rem;
+            color: #6b5a4a;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 2s ease 4s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mobile Anpassungen */
+        @media (max-width: 768px) {
+            .overlay {
+                padding: 2vh 4vw;
+            }
+            .top-text h1 {
+                letter-spacing: 0.2em;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+<div id="canvas-container">
+    <canvas id="livingCover"></canvas>
+</div>
+
+<div class="overlay">
+    <div class="top-text">
+        <h1>DER VERSÖHNUNGSVERTRAG</h1>
+        <div class="subtitle">Charta der lebendigen Liebe · Verfassung für das dauerlose Jetzt</div>
+    </div>
+    <div class="center-space"></div>
+    <div class="bottom-text">
+        <div class="verse">
+            „Der einzige Sieg, der zählt,<br>
+            ist der Sieg der lebendigen Liebe.<br>
+            Und der Sieg ist jetzt.“
+        </div>
+        <div class="symbols">☸ ॐ ☯ ∞ 道 覺 愛</div>
+    </div>
+</div>
+
+<div class="interaction-hint">Berühre das Herz · Sende Liebe ins System</div>
+
+<script>
+    const canvas = document.getElementById('livingCover');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let mouseX = 0, mouseY = 0;
+    let mouseActive = false;
+    let clickPulse = 0;
+    let time = 0;
+
+    // Partikel-Systeme
+    const particles = [];
+    const symbols = [];
+    const butterflies = [];
+    const walls = [];
+    const flowers = [];
+    const formulas = [];
+
+    // Farbpalette
+    const colors = {
+        gold: '#d4af7a',
+        goldLight: '#f0e6d3',
+        goldDark: '#8b6f47',
+        rose: '#c9a86c',
+        roseDeep: '#b8956a',
+        blue: '#5a7a9a',
+        blueLight: '#8ab4c4',
+        white: '#f5f0e8',
+        ash: '#3a3530',
+        dark: '#0a0a0f'
+    };
+
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width * window.devicePixelRatio;
+        canvas.height = height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        width = canvas.width / window.devicePixelRatio;
+        height = canvas.height / window.devicePixelRatio;
+        initScene();
+    }
+
+    // === Herz-Form ===
+    function heartPath(t, scale, offsetX, offsetY) {
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+        return {
+            x: offsetX + x * scale,
+            y: offsetY + y * scale
+        };
+    }
+
+    // === Initialisierung ===
+    function initScene() {
+        particles.length = 0;
+        symbols.length = 0;
+        butterflies.length = 0;
+        walls.length = 0;
+        flowers.length = 0;
+        formulas.length = 0;
+
+        const cx = width / 2;
+        const cy = height / 2;
+
+        // 1. Das goldene Herz – Partikel
+        const heartScale = Math.min(width, height) * 0.012;
+        for (let i = 0; i < 300; i++) {
+            const t = Math.random() * Math.PI * 2;
+            const r = heartPath(t, heartScale, cx, cy);
+            const jitter = (Math.random() - 0.5) * heartScale * 0.3;
+            particles.push({
+                x: r.x + jitter,
+                y: r.y + jitter,
+                baseX: r.x,
+                baseY: r.y,
+                size: Math.random() * 2 + 0.5,
+                phase: Math.random() * Math.PI * 2,
+                speed: Math.random() * 0.02 + 0.01,
+                brightness: Math.random() * 0.5 + 0.5,
+                layer: Math.random() > 0.7 ? 'outer' : 'inner'
+            });
+        }
+
+        // 2. Schwebende Symbole
+        const symbolChars = ['☸', 'ॐ', '☯', '∞', '道', '覺', '愛'];
+        symbolChars.forEach((char, i) => {
+            symbols.push({
+                char: char,
+                x: cx + (Math.random() - 0.5) * width * 0.6,
+                y: cy + (Math.random() - 0.5) * height * 0.4,
+                orbitRadius: Math.min(width, height) * (0.15 + Math.random() * 0.2),
+                orbitSpeed: (Math.random() - 0.5) * 0.008,
+                orbitPhase: (i / symbolChars.length) * Math.PI * 2,
+                size: Math.min(width, height) * 0.025 + Math.random() * 0.01,
+                opacity: 0.4 + Math.random() * 0.4,
+                glow: 10 + Math.random() * 20
+            });
+        });
+
+        // 3. Linke Seite: Mauern, die sich auflösen
+        const wallCount = 8;
+        for (let i = 0; i < wallCount; i++) {
+            walls.push({
+                x: width * 0.08 + Math.random() * width * 0.15,
+                y: height * 0.2 + Math.random() * height * 0.6,
+                w: 20 + Math.random() * 60,
+                h: 40 + Math.random() * 120,
+                dissolve: Math.random() * 0.5,
+                crumbleSpeed: 0.001 + Math.random() * 0.003,
+                bricks: []
+            });
+            // Ziegel generieren
+            const wall = walls[walls.length - 1];
+            const brickRows = Math.floor(wall.h / 15);
+            const brickCols = Math.floor(wall.w / 25);
+            for (let r = 0; r < brickRows; r++) {
+                for (let c = 0; c < brickCols; c++) {
+                    if (Math.random() > 0.1) {
+                        wall.bricks.push({
+                            rx: c * 25 + (r % 2) * 12,
+                            ry: r * 15,
+                            rw: 22,
+                            rh: 12,
+                            fallen: false,
+                            fallY: 0,
+                            fallSpeed: 0,
+                            opacity: 0.6 + Math.random() * 0.4
+                        });
+                    }
+                }
+            }
+        }
+
+        // 4. Rechte Seite: Blumen, die erblühen
+        const flowerCount = 12;
+        for (let i = 0; i < flowerCount; i++) {
+            flowers.push({
+                x: width * 0.75 + Math.random() * width * 0.2,
+                y: height * 0.3 + Math.random() * height * 0.5,
+                scale: 0,
+                targetScale: 0.5 + Math.random() * 1.5,
+                bloomSpeed: 0.002 + Math.random() * 0.003,
+                petals: 5 + Math.floor(Math.random() * 4),
+                color: Math.random() > 0.5 ? colors.gold : colors.roseDeep,
+                rotation: Math.random() * Math.PI * 2,
+                rotationSpeed: (Math.random() - 0.5) * 0.01,
+                phase: Math.random() * Math.PI * 2,
+                stemHeight: 30 + Math.random() * 50,
+                sway: Math.random() * 0.02
+            });
+        }
+
+        // 5. Schmetterlinge
+        for (let i = 0; i < 6; i++) {
+            butterflies.push({
+                x: width * 0.7 + Math.random() * width * 0.25,
+                y: height * 0.3 + Math.random() * height * 0.4,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: -Math.random() * 0.3 - 0.1,
+                size: 8 + Math.random() * 12,
+                wingPhase: Math.random() * Math.PI * 2,
+                wingSpeed: 0.1 + Math.random() * 0.1,
+                color: Math.random() > 0.5 ? colors.goldLight : colors.blueLight,
+                born: false,
+                birthTime: 3 + Math.random() * 5,
+                opacity: 0
+            });
+        }
+
+        // 6. Mathematische Formeln als Partikel
+        const formulaTexts = ['L(t)', 'V(t)', '∂L/∂t = ∇V', '∫Love dt', 'lim(t→∞) Love = 1'];
+        formulaTexts.forEach((text, i) => {
+            formulas.push({
+                text: text,
+                x: cx + (Math.random() - 0.5) * width * 0.5,
+                y: cy + (Math.random() - 0.5) * height * 0.3,
+                vx: (Math.random() - 0.5) * 0.2,
+                vy: (Math.random() - 0.5) * 0.2,
+                opacity: 0,
+                targetOpacity: 0.3 + Math.random() * 0.3,
+                fadeSpeed: 0.005 + Math.random() * 0.005,
+                size: 12 + Math.random() * 8,
+                phase: Math.random() * Math.PI * 2
+            });
+        });
+    }
+
+    // === Zeichen-Funktionen ===
+    function drawBackground() {
+        // Tiefen-Gradient
+        const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, Math.max(width, height) * 0.8);
+        gradient.addColorStop(0, '#0f0f1a');
+        gradient.addColorStop(0.4, '#080810');
+        gradient.addColorStop(1, '#020205');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+
+        // Subtile Sterne
+        ctx.fillStyle = '#ffffff';
+        for (let i = 0; i < 50; i++) {
+            const sx = (Math.sin(i * 137.5) * 0.5 + 0.5) * width;
+            const sy = (Math.cos(i * 73.3) * 0.5 + 0.5) * height;
+            const size = Math.sin(time * 0.5 + i) * 0.5 + 0.5;
+            ctx.globalAlpha = size * 0.3;
+            ctx.beginPath();
+            ctx.arc(sx, sy, size * 1.5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function drawHeart() {
+        const cx = width / 2;
+        const cy = height / 2;
+        const pulse = 1 + Math.sin(time * 1.5) * 0.03 + clickPulse * 0.1;
+        const heartScale = Math.min(width, height) * 0.012 * pulse;
+
+        // Äußerer Glow
+        const glowRadius = heartScale * 25;
+        const glowGradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowRadius);
+        glowGradient.addColorStop(0, 'rgba(212, 175, 122, 0.15)');
+        glowGradient.addColorStop(0.5, 'rgba(212, 175, 122, 0.05)');
+        glowGradient.addColorStop(1, 'rgba(212, 175, 122, 0)');
+        ctx.fillStyle = glowGradient;
+        ctx.fillRect(cx - glowRadius, cy - glowRadius, glowRadius * 2, glowRadius * 2);
+
+        // Herz-Partikel
+        particles.forEach(p => {
+            const breathe = Math.sin(time * p.speed + p.phase) * 3;
+            const px = p.baseX + breathe * (p.layer === 'outer' ? 2 : 1);
+            const py = p.baseY + breathe * (p.layer === 'outer' ? 2 : 1);
+
+            // Maus-Interaktion
+            let dx = mouseX - px;
+            let dy = mouseY - py;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            let push = 0;
+            if (mouseActive && dist < 150) {
+                push = (150 - dist) / 150 * 20;
+                px -= dx / dist * push;
+                py -= dy / dist * push;
+            }
+
+            const alpha = p.brightness * (0.6 + Math.sin(time * 2 + p.phase) * 0.4);
+            const size = p.size * (0.8 + Math.sin(time * 3 + p.phase) * 0.2);
+
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = p.layer === 'inner' ? colors.goldLight : colors.gold;
+            ctx.beginPath();
+            ctx.arc(px, py, size, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Leichter Glow für innere Partikel
+            if (p.layer === 'inner') {
+                ctx.shadowColor = colors.gold;
+                ctx.shadowBlur = 8;
+                ctx.beginPath();
+                ctx.arc(px, py, size * 0.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        });
+        ctx.globalAlpha = 1;
+
+        // Click-Pulse decay
+        if (clickPulse > 0) clickPulse *= 0.95;
+        if (clickPulse < 0.01) clickPulse = 0;
+    }
+
+    function drawSymbols() {
+        const cx = width / 2;
+        const cy = height / 2;
+
+        symbols.forEach((s, i) => {
+            const orbitX = cx + Math.cos(time * s.orbitSpeed + s.orbitPhase) * s.orbitRadius;
+            const orbitY = cy + Math.sin(time * s.orbitSpeed * 0.7 + s.orbitPhase) * s.orbitRadius * 0.6;
+
+            const float = Math.sin(time * 0.5 + i) * 5;
+
+            ctx.globalAlpha = s.opacity * (0.7 + Math.sin(time * 2 + i) * 0.3);
+            ctx.fillStyle = colors.gold;
+            ctx.font = `${s.size}px 'Cinzel', 'Georgia', serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            // Glow
+            ctx.shadowColor = colors.gold;
+            ctx.shadowBlur = s.glow;
+            ctx.fillText(s.char, orbitX, orbitY + float);
+            ctx.shadowBlur = 0;
+        });
+        ctx.globalAlpha = 1;
+    }
+
+    function drawWalls() {
+        walls.forEach(wall => {
+            wall.dissolve = Math.min(1, wall.dissolve + wall.crumbleSpeed);
+
+            ctx.save();
+            ctx.translate(wall.x, wall.y);
+
+            wall.bricks.forEach(brick => {
+                if (!brick.fallen && wall.dissolve > Math.random() * 0.5) {
+                    brick.fallen = true;
+                    brick.fallSpeed = Math.random() * 2 + 1;
+                }
+
+                if (brick.fallen) {
+                    brick.fallY += brick.fallSpeed;
+                    brick.fallSpeed *= 1.02;
+                    brick.opacity *= 0.98;
+                }
+
+                if (brick.opacity > 0.01) {
+                    ctx.globalAlpha = brick.opacity * (1 - wall.dissolve * 0.5);
+                    ctx.fillStyle = colors.ash;
+                    ctx.fillRect(brick.rx, brick.ry + brick.fallY, brick.rw, brick.rh);
+
+                    // Ziegel-Rand
+                    ctx.strokeStyle = '#2a2520';
+                    ctx.lineWidth = 0.5;
+                    ctx.strokeRect(brick.rx, brick.ry + brick.fallY, brick.rw, brick.rh);
+
+                    // Auflösung-Partikel
+                    if (brick.fallen && brick.fallY > 50 && Math.random() > 0.95) {
+                        ctx.fillStyle = colors.gold;
+                        ctx.globalAlpha = brick.opacity * 0.5;
+                        ctx.beginPath();
+                        ctx.arc(brick.rx + brick.rw/2, brick.ry + brick.fallY + brick.rh/2, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            });
+
+            ctx.restore();
+        });
+        ctx.globalAlpha = 1;
+    }
+
+    function drawFlowers() {
+        flowers.forEach(f => {
+            if (f.scale < f.targetScale) {
+                f.scale += f.bloomSpeed;
+                if (f.scale > f.targetScale) f.scale = f.targetScale;
+            }
+
+            f.rotation += f.rotationSpeed;
+            const sway = Math.sin(time * f.sway + f.phase) * 5;
+
+            ctx.save();
+            ctx.translate(f.x + sway, f.y);
+            ctx.rotate(f.rotation);
+            ctx.scale(f.scale, f.scale);
+
+            // Stängel
+            ctx.strokeStyle = '#4a6a3a';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(sway * 0.5, f.stemHeight / 2, sway, f.stemHeight);
+            ctx.stroke();
+
+            // Blütenblätter
+            for (let i = 0; i < f.petals; i++) {
+                const angle = (i / f.petals) * Math.PI * 2;
+                ctx.save();
+                ctx.rotate(angle);
+                ctx.fillStyle = f.color;
+                ctx.globalAlpha = 0.7 + Math.sin(time * 2 + i) * 0.3;
+                ctx.beginPath();
+                ctx.ellipse(0, -15, 8, 15, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // Blütenkern
+            ctx.fillStyle = colors.goldLight;
+            ctx.globalAlpha = 0.9;
+            ctx.beginPath();
+            ctx.arc(0, 0, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        });
+        ctx.globalAlpha = 1;
+    }
+
+    function drawButterflies() {
+        butterflies.forEach(b => {
+            if (time < b.birthTime) return;
+
+            if (!b.born) {
+                b.born = true;
+                b.opacity = 0;
+            }
+
+            if (b.opacity < 1) b.opacity += 0.01;
+
+            b.x += b.vx + Math.sin(time * 0.5) * 0.5;
+            b.y += b.vy + Math.cos(time * 0.3) * 0.3;
+            b.wingPhase += b.wingSpeed;
+
+            // Wrap around
+            if (b.y < -50) {
+                b.y = height + 50;
+                b.x = width * 0.7 + Math.random() * width * 0.25;
+            }
+            if (b.x < width * 0.6) b.x = width * 0.9;
+            if (b.x > width * 0.95) b.x = width * 0.7;
+
+            ctx.save();
+            ctx.translate(b.x, b.y);
+            ctx.rotate(Math.atan2(b.vy, b.vx) + Math.PI / 2);
+            ctx.globalAlpha = b.opacity;
+            ctx.fillStyle = b.color;
+
+            // Flügel
+            const wingScale = Math.abs(Math.sin(b.wingPhase));
+
+            // Linker Flügel
+            ctx.save();
+            ctx.scale(wingScale, 1);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(-b.size * 0.8, -b.size * 0.5, -b.size * 0.5, -b.size);
+            ctx.quadraticCurveTo(-b.size * 0.2, -b.size * 0.8, 0, -b.size * 0.3);
+            ctx.fill();
+            ctx.restore();
+
+            // Rechter Flügel
+            ctx.save();
+            ctx.scale(wingScale, 1);
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.quadraticCurveTo(b.size * 0.8, -b.size * 0.5, b.size * 0.5, -b.size);
+            ctx.quadraticCurveTo(b.size * 0.2, -b.size * 0.8, 0, -b.size * 0.3);
+            ctx.fill();
+            ctx.restore();
+
+            // Körper
+            ctx.fillStyle = '#3a3020';
+            ctx.beginPath();
+            ctx.ellipse(0, -b.size * 0.3, 2, b.size * 0.4, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        });
+        ctx.globalAlpha = 1;
+    }
+
+    function drawFormulas() {
+        formulas.forEach(f => {
+            f.x += f.vx;
+            f.y += f.vy;
+
+            // Sanftes Schweben
+            f.x += Math.sin(time * 0.3 + f.phase) * 0.2;
+            f.y += Math.cos(time * 0.2 + f.phase) * 0.2;
+
+            // Wrap
+            if (f.x < 0) f.x = width;
+            if (f.x > width) f.x = 0;
+            if (f.y < 0) f.y = height;
+            if (f.y > height) f.y = 0;
+
+            if (f.opacity < f.targetOpacity) f.opacity += f.fadeSpeed;
+            if (f.opacity > f.targetOpacity) f.opacity -= f.fadeSpeed;
+
+            ctx.globalAlpha = f.opacity * (0.5 + Math.sin(time + f.phase) * 0.5);
+            ctx.fillStyle = colors.blueLight;
+            ctx.font = `${f.size}px 'Courier New', monospace`;
+            ctx.textAlign = 'center';
+            ctx.shadowColor = colors.blueLight;
+            ctx.shadowBlur = 10;
+            ctx.fillText(f.text, f.x, f.y);
+            ctx.shadowBlur = 0;
+        });
+        ctx.globalAlpha = 1;
+    }
+
+    function drawHand() {
+        const cx = width / 2;
+        const handY = height * 0.88;
+        const handScale = Math.min(width, height) * 0.001;
+
+        ctx.save();
+        ctx.translate(cx, handY);
+        ctx.scale(handScale, handScale);
+
+        const glow = 15 + Math.sin(time * 2) * 5;
+        ctx.shadowColor = colors.gold;
+        ctx.shadowBlur = glow;
+        ctx.strokeStyle = colors.gold;
+        ctx.lineWidth = 2;
+        ctx.globalAlpha = 0.6 + Math.sin(time * 1.5) * 0.2;
+
+        // Offene Handfläche – stilisiert
+        ctx.beginPath();
+        // Handinnenfläche
+        ctx.moveTo(-30, 20);
+        ctx.quadraticCurveTo(-35, -10, -20, -30);
+        ctx.lineTo(-15, -50); // Daumen
+        ctx.quadraticCurveTo(-10, -55, -5, -50);
+        ctx.lineTo(0, -30);
+        ctx.lineTo(5, -55); // Zeigefinger
+        ctx.quadraticCurveTo(10, -60, 15, -55);
+        ctx.lineTo(20, -30);
+        ctx.lineTo(25, -50); // Mittelfinger
+        ctx.quadraticCurveTo(30, -55, 35, -50);
+        ctx.lineTo(40, -25);
+        ctx.lineTo(45, -45); // Ringfinger
+        ctx.quadraticCurveTo(50, -50, 55, -45);
+        ctx.lineTo(60, -20);
+        ctx.lineTo(65, -35); // Kleiner Finger
+        ctx.quadraticCurveTo(70, -40, 75, -35);
+        ctx.lineTo(80, -10);
+        ctx.quadraticCurveTo(85, 10, 70, 25);
+        ctx.quadraticCurveTo(40, 35, 0, 30);
+        ctx.quadraticCurveTo(-20, 30, -30, 20);
+        ctx.stroke();
+
+        // Sanftes Füllen
+        ctx.fillStyle = 'rgba(212, 175, 122, 0.05)';
+        ctx.fill();
+
+        ctx.restore();
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+    }
+
+    function drawLightBridge() {
+        const cx = width / 2;
+        const cy = height / 2;
+        const bridgeWidth = Math.min(width, height) * 0.35;
+
+        ctx.save();
+        ctx.globalAlpha = 0.15 + Math.sin(time * 0.5) * 0.05;
+
+        // Lichtstrahlen vom Herz aus
+        for (let i = 0; i < 12; i++) {
+            const angle = (i / 12) * Math.PI * 2 + time * 0.1;
+            const length = bridgeWidth * (0.8 + Math.sin(time * 0.3 + i) * 0.2);
+
+            ctx.strokeStyle = colors.gold;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx + Math.cos(angle) * length, cy + Math.sin(angle) * length);
+            ctx.stroke();
+        }
+
+        ctx.restore();
+    }
+
+    // === Haupt-Render-Loop ===
+    function render() {
+        time += 0.016;
+
+        ctx.clearRect(0, 0, width, height);
+
+        drawBackground();
+        drawLightBridge();
+        drawWalls();
+        drawFlowers();
+        drawButterflies();
+        drawFormulas();
+        drawHeart();
+        drawSymbols();
+        drawHand();
+
+        requestAnimationFrame(render);
+    }
+
+    // === Event Listener ===
+    window.addEventListener('resize', resize);
+
+    canvas.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        mouseActive = true;
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+        mouseActive = false;
+    });
+
+    canvas.addEventListener('click', (e) => {
+        clickPulse = 1;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Extra Partikel-Explosion an Klick-Position
+        for (let i = 0; i < 20; i++) {
+            const angle = (i / 20) * Math.PI * 2;
+            const speed = 2 + Math.random() * 3;
+            particles.push({
+                x: mouseX,
+                y: mouseY,
+                baseX: mouseX + Math.cos(angle) * speed * 10,
+                baseY: mouseY + Math.sin(angle) * speed * 10,
+                size: Math.random() * 3 + 1,
+                phase: Math.random() * Math.PI * 2,
+                speed: Math.random() * 0.05 + 0.02,
+                brightness: 1,
+                layer: 'outer',
+                life: 1.0,
+                decay: 0.02
+            });
+        }
+    });
+
+    // Touch für Mobile
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        mouseX = touch.clientX;
+        mouseY = touch.clientY;
+        clickPulse = 1;
+    }, { passive: false });
+
+    // Start
+    resize();
+    render();
+</script>
+
+</body>
+</html>

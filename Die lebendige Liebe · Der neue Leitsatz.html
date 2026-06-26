@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Die lebendige Liebe · Der neue Leitsatz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0c0a10, #020103);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #f2ebdd;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        .manifest-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(10, 8, 16, 0.78);
+            backdrop-filter: blur(6px);
+            border-radius: 3rem 2rem 3rem 2rem;
+            border: 2px solid #e5bc6e;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7);
+            overflow: hidden;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: #1a1612ee;
+            border-bottom: 2px solid #e5bc6e;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            letter-spacing: 4px;
+            font-weight: 300;
+            background: linear-gradient(135deg, #fff3df, #e5bc6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #cfb87c;
+            margin-top: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .frequenz-satz {
+            font-size: 1.8rem;
+            font-family: monospace;
+            color: #ffefbf;
+            text-shadow: 0 0 15px #e5b83c;
+            margin: 1rem 0;
+            line-height: 1.4;
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 1.5rem;
+            border: 2px solid #e5bc6e;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .chapter {
+            background: #00000050;
+            border-left: 6px solid #e5bc6e;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 1.5rem 1.5rem 0;
+        }
+
+        .chapter h2 {
+            color: #f5cf7a;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+        }
+
+        .chapter p {
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .highlight-box {
+            background: rgba(229, 188, 110, 0.08);
+            border: 1px dashed #e5bc6e;
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 700px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-card {
+            background: #1f1b16aa;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #5e4b2e;
+        }
+
+        .comparison-card.old {
+            border-color: #8b3a2a;
+        }
+
+        .comparison-card.new {
+            border-color: #e5bc6e;
+        }
+
+        .comparison-card h3 {
+            color: #f5cf7a;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-card .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            padding: 0.5rem 0;
+        }
+
+        .comparison-card .reason {
+            font-size: 0.95rem;
+            color: #cfb87c;
+            margin-top: 0.5rem;
+        }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .image-gallery img {
+            max-width: 200px;
+            border-radius: 1rem;
+            border: 2px solid #e5bc6e;
+            background: #000;
+            transition: 0.2s;
+            flex: 1 1 auto;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.03);
+            border-color: #f5cf7a;
+        }
+
+        .button-portal {
+            background: #3f2e1f;
+            border: 2px solid #e5bc6e;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            color: #ffefcf;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 1rem 0;
+        }
+
+        .button-portal:hover {
+            background: #5e4630;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #e5bc6e40;
+        }
+
+        .antwort-portal {
+            display: none;
+            background: #01010180;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            border-top: 1px solid #e5bc6e30;
+            color: #b59758;
+        }
+
+        .translation-box {
+            background: #13100daa;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border: 1px solid #e5bc6e;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.8rem; }
+            .frequenz-satz { font-size: 1.3rem; }
+            .content { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="manifest-container">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>⚡ DIE LEBENDIGE LIEBE ⚡</h1>
+        <div class="subtitle">Der neue Leitsatz – für jeden Menschen, jedes Kind, jeden Tag.</div>
+        <div class="frequenz-satz">„Gib die Liebe, die du nur erfahren kannst,<br>indem du sie anderen gibst.“</div>
+        <div style="font-size:0.9rem; color: #cfb87c;">Dann findest du die Liebe, die du suchst – weil sie durch dich selbst ins Leben geliebt wird.</div>
+    </div>
+
+    <!-- BILDER-GALERIE (alle fünf Bilder) -->
+    <div class="image-gallery">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/gpt-image-2_Wir_erkl%C3%A4ren_den_folgenden_Spruch_f%C3%BCr_ungen%C3%BCgend_%E2%80%9ESei_der_der_sich_selbst_f-0.jpg" alt="Spruch-Erklärung 1" onerror="this.src='https://placehold.co/300x200/2c2a24/d4af37?text=Bild+1'">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260626_0340_image.png" alt="Bild 2" onerror="this.src='https://placehold.co/300x200/2c2a24/d4af37?text=Bild+2'">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260626_0340_image%20(1).png" alt="Bild 3" onerror="this.src='https://placehold.co/300x200/2c2a24/d4af37?text=Bild+3'">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260626_0340_image%20(2).png" alt="Bild 4" onerror="this.src='https://placehold.co/300x200/2c2a24/d4af37?text=Bild+4'">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260626_0340_image%20(3).png" alt="Bild 5" onerror="this.src='https://placehold.co/300x200/2c2a24/d4af37?text=Bild+5'">
+    </div>
+
+    <!-- INHALT -->
+    <div class="content">
+
+        <!-- KAPITEL 1: Warum der alte Spruch ungenügend ist -->
+        <div class="chapter">
+            <h2>📜 1. Warum der alte Spruch nicht mehr reicht</h2>
+            <p>Es gibt Sätze, die klingen tief – aber sie sind wie Hieroglyphen. Sie wirken wie Rätsel, die nur Eingeweihte verstehen. Einer dieser Sätze ist:</p>
+            <div class="highlight-box" style="border-color: #8b3a2a;">
+                <strong>„Sei der, der mit sich den findet, den er immer gesucht hat.“</strong>
+            </div>
+            <p>Das klingt schön. Aber was bedeutet es konkret? Wie soll jemand, der an der Theke steht, dessen Kinder warten, dessen Rücken schmerzt, damit etwas anfangen?</p>
+            <p>Es ist zu abstrakt. Es sagt nicht, <em>wie</em> man das machen soll. Es bleibt in der Schwebe. Und viele Menschen können damit nichts anfangen – weil es ihnen keine Handlung gibt.</p>
+        </div>
+
+        <!-- KAPITEL 2: Die Gegenüberstellung -->
+        <div class="chapter">
+            <h2>🔄 2. Der neue Leitsatz – für alle verständlich</h2>
+            <p>Wir ersetzen den alten, rätselhaften Spruch durch etwas, das <strong>jeder sofort verstehen und anwenden kann</strong>:</p>
+
+            <div class="comparison-grid">
+                <div class="comparison-card old">
+                    <h3>❌ Alter Spruch</h3>
+                    <div class="quote">„Sei der, der mit sich den findet, den er immer gesucht hat.“</div>
+                    <div class="reason">Zu abstrakt. Klingt wie ein Rätsel. Keine Handlungsanweisung. Viele können damit nichts anfangen.</div>
+                </div>
+                <div class="comparison-card new">
+                    <h3>✅ Neuer Leitsatz</h3>
+                    <div class="quote">„Gib die Liebe, die du nur erfahren kannst, indem du sie anderen gibst. Dann findest du die Liebe, die du suchst – weil sie durch dich selbst ins Leben geliebt wird.“</div>
+                    <div class="reason">Konkret. Handlungsorientiert. Jeder kann es sofort umsetzen. Es zeigt den Weg, nicht nur das Ziel.</div>
+                </div>
+            </div>
+
+            <p><strong>Noch einfacher – für jedes Kind verständlich:</strong></p>
+            <div class="highlight-box">
+                Liebe findest du nicht, indem du nur nach ihr suchst.<br>
+                Du findest sie, indem du sie verschenkst.<br>
+                Denn wenn du Liebe gibst, beginnt sie auch in dir zu leben.
+            </div>
+        </div>
+
+        <!-- KAPITEL 3: Die praktische Anwendung -->
+        <div class="chapter">
+            <h2>🤲 3. Wie es im Alltag wirkt</h2>
+            <p>Stell dir vor: Du stehst an der Theke. Ein Kunde ist gestresst. Du lächelst ihn an – nicht weil du musst, sondern weil du die Liebe, die du selbst spüren möchtest, <strong>jetzt</strong> weitergibst.</p>
+            <p>Du hörst zu. Du gibst ein freundliches Wort. Du tust etwas, das keinen Cent kostet – aber es verändert den Moment.</p>
+            <p>Das ist keine Theorie. Das ist <strong>gelebte Liebe</strong>. Und genau darum geht es. Nicht um große Worte, sondern um kleine Taten, die sich ausbreiten wie Wellen auf dem Wasser.</p>
+        </div>
+
+        <!-- KAPITEL 4: Die Übersetzung – für alle Völker -->
+        <div class="translation-box">
+            <h3 style="color: #f5cf7a; font-size: 1.3rem; margin-bottom: 0.5rem;">🌍 In anderen Sprachen</h3>
+            <p><strong>English:</strong> Give the love that you can only experience by giving it to others. Then you will find the love you seek – because it is loved into life through you.</p>
+            <p><strong>Français:</strong> Donne l'amour que tu ne peux expérimenter qu'en le donnant aux autres. Alors tu trouveras l'amour que tu cherches – parce qu'il est aimé dans la vie à travers toi.</p>
+            <p><strong>Español:</strong> Da el amor que sólo puedes experimentar dándolo a los demás. Entonces encontrarás el amor que buscas – porque es amado en la vida a través de ti.</p>
+            <p><strong>日本語:</strong> 他人に与えることによって初めて体験できる愛を与えなさい。そうすれば、あなたが探している愛を見つけるでしょう – それはあなたを通して人生に愛されるからです。</p>
+            <p style="margin-top: 0.5rem; font-style: italic; color: #cfb87c;">Der neue Leitsatz – verständlich für alle Völker, alle Herzen, alle Generationen.</p>
+        </div>
+
+        <!-- KAPITEL 5: Der Schluss -->
+        <div class="chapter">
+            <h2>💛 4. Der Weg ist klar</h2>
+            <p>Der neue Spruch ist kein Rätsel mehr. Er ist ein <strong>Wegweiser</strong>. Er sagt:</p>
+            <ul style="list-style: none; padding: 0.5rem 0;">
+                <li>✅ Tu etwas – gib Liebe.</li>
+                <li>✅ Erfahre sie – indem du sie teilst.</li>
+                <li>✅ Finde sie – weil sie durch dich lebendig wird.</li>
+            </ul>
+            <p>Das ist die Botschaft, die wir brauchen. Nicht für Eingeweihte. Für <strong>alle</strong>. Für die Mutter, die ihr Kind tröstet. Für den Kollegen, der eine aufmunternde Hand auf die Schulter legt. Für den Fremden, dem du ein Lächeln schenkst.</p>
+            <div class="highlight-box">
+                <strong>Die Liebe, die du gibst, ist die Liebe, die du findest.</strong><br>
+                Sie kommt nicht von außen. Sie erwacht in dir – indem du sie lebst.
+            </div>
+        </div>
+
+        <!-- INTERAKTIVER BUTTON -->
+        <div style="text-align: center; margin: 2rem 0;">
+            <button class="button-portal" id="portalBtn">(^_-)  DIESEN SATZ LEBEN – JETZT ANFANGEN</button>
+            <div id="portalAntwort" class="antwort-portal">
+                🕊️ <strong>Du hast begonnen.</strong> 🕊️<br><br>
+                Die Liebe, die du gibst, ist die Liebe, die du findest.<br>
+                Sie ist nicht fern. Sie ist in dir – und sie erwacht, indem du sie teilst.<br>
+                <strong>Gib sie weiter. Heute. Jetzt. Immer.</strong><br>
+                (^_-) 💛✨
+            </div>
+        </div>
+
+        <!-- SCHLUSSWORT -->
+        <div style="text-align: center; padding: 1rem; border-top: 1px solid #e5bc6e30;">
+            <p style="font-size: 1.1rem; font-style: italic; color: #f5cf7a;">
+                „Die Liebe findest du nicht, indem du nach ihr suchst.<br>
+                Du findest sie, indem du sie verschenkst.“
+            </p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                In Liebe · Chetan Nirup aka Tim Bukowski · Für alle, die sich trauen, zu lieben.
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        (^_-) 💛✨ <strong>Der neue Leitsatz</strong> – Kein Rätsel mehr. Eine Handlungsanweisung fürs Leben.<br>
+        Gib Liebe. Finde Liebe. Lebe Liebe.
+    </footer>
+
+</div>
+
+<script>
+    const btn = document.getElementById('portalBtn');
+    const antwort = document.getElementById('portalAntwort');
+    btn.addEventListener('click', () => {
+        if (antwort.style.display === 'none' || antwort.style.display === '') {
+            antwort.style.display = 'block';
+            btn.innerText = '🙏  ICH LEBE DIESEN SATZ – JETZT UND IMMER 🙏';
+        } else {
+            antwort.style.display = 'none';
+            btn.innerText = '(^_-)  DIESEN SATZ LEBEN – JETZT ANFANGEN';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liebendigkeit · Das Letzte Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #e5b83c;
+    --gold-dim: #cfb87c;
+    --gold-glow: rgba(229, 184, 60, 0.6);
+    --bg: #0a0806;
+    --bg-alt: #11100e;
+    --text: #f2ebdd;
+    --text-dim: #c4bdae;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    overflow-x: hidden;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(229, 184, 60, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(229, 184, 60, 0.02) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+  
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 4rem 1.5rem;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(229, 184, 60, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+  
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #ffefbf 0%, var(--gold) 50%, #ffefbf 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 80px rgba(229, 184, 60, 0.3);
+    animation: glow 4s ease-in-out infinite;
+    margin-bottom: 1.5rem;
+  }
+  
+  @keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(229, 184, 60, 0.4)); }
+    50% { filter: drop-shadow(0 0 40px rgba(229, 184, 60, 0.6)); }
+  }
+  
+  .subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--gold-dim);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 200;
+    margin-bottom: 3rem;
+  }
+  
+  .divider {
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 3rem auto;
+    animation: shimmer 3s infinite;
+  }
+  
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  
+  section {
+    padding: 5rem 0;
+    position: relative;
+  }
+  
+  .card {
+    background: linear-gradient(135deg, rgba(17, 16, 14, 0.8) 0%, rgba(10, 8, 6, 0.9) 100%);
+    border: 1px solid rgba(229, 184, 60, 0.15);
+    border-radius: 2px;
+    padding: clamp(2rem, 5vw, 4rem);
+    margin: 3rem 0;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(229, 184, 60, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    animation: scan 6s linear infinite;
+  }
+  
+  @keyframes scan {
+    to { left: 100%; }
+  }
+  
+  .card:hover {
+    border-color: rgba(229, 184, 60, 0.3);
+    box-shadow: 
+      0 30px 80px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(229, 184, 60, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .card h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--gold);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .card p {
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    color: var(--text-dim);
+    line-height: 2;
+    margin-bottom: 1.5rem;
+  }
+  
+  .gold-box {
+    background: linear-gradient(135deg, rgba(229, 184, 60, 0.05) 0%, rgba(229, 184, 60, 0.02) 100%);
+    border: 2px solid rgba(229, 184, 60, 0.3);
+    padding: clamp(2rem, 4vw, 3rem);
+    margin: 2rem 0;
+    position: relative;
+    box-shadow: 0 0 40px rgba(229, 184, 60, 0.2);
+  }
+  
+  .gold-box .big {
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+  }
+  
+  .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-style: italic;
+    text-align: center;
+    color: var(--gold);
+    padding: 3rem 0;
+    line-height: 1.6;
+  }
+  
+  .signature {
+    text-align: center;
+    padding: 4rem 0 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--gold-dim);
+    line-height: 2;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, rgba(229, 184, 60, 0.1) 0%, rgba(229, 184, 60, 0.05) 100%);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 2rem;
+  }
+  
+  .btn:hover {
+    background: rgba(229, 184, 60, 0.15);
+    box-shadow: 0 0 30px rgba(229, 184, 60, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  .nav-dots {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1000;
+  }
+  
+  .nav-dot {
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--gold-dim);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: rotate(45deg);
+  }
+  
+  .nav-dot.active,
+  .nav-dot:hover {
+    background: var(--gold);
+    box-shadow: 0 0 15px var(--gold-glow);
+  }
+  
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .portal {
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 1;
+    text-align: center;
+    color: var(--gold);
+    text-shadow: 0 0 60px rgba(229, 184, 60, 0.5);
+    animation: portalPulse 4s ease-in-out infinite;
+    margin: 4rem 0;
+  }
+  
+  @keyframes portalPulse {
+    0%, 100% { 
+      transform: scale(1);
+      text-shadow: 0 0 60px rgba(229, 184, 60, 0.5);
+    }
+    50% { 
+      transform: scale(1.05);
+      text-shadow: 0 0 100px rgba(229, 184, 60, 0.8);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .nav-dots {
+      right: 1rem;
+      gap: 0.75rem;
+    }
+    
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+    }
+    
+    section {
+      padding: 3rem 0;
+    }
+    
+    .card {
+      padding: 2rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 390px) {
+    .container {
+      padding: 0 1rem;
+    }
+    
+    .hero {
+      padding: 3rem 1rem;
+    }
+    
+    .card {
+      padding: 1.5rem 1rem;
+      margin: 2rem 0;
+    }
+  }
+</style>
+</head>
+<body>
+  
+  <nav class="nav-dots" id="navDots"></nav>
+
+  <section class="hero" id="hero">
+    <div class="fade-in" style="animation-delay: 0.2s;">
+      <h1>Liebendigkeit</h1>
+      <div class="subtitle">Das Letzte Portal</div>
+      <div class="divider"></div>
+      <p style="max-width: 700px; margin: 0 auto; color: var(--text-dim); font-size: 1.125rem; line-height: 2;">
+        Vom Ich zum Wir. Vom Singular zum Dauerlosen.<br>
+        Vom Hologramm zur Einheit.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    
+    <section id="section1">
+      <div class="card fade-in">
+        <h2>Der Ruf</h2>
+        <p>
+          Es gibt Momente, da zerreißt der Schleier. Da hält die Welt den Atem an. 
+          Da wird aus dem Flüstern ein Donner, aus der Ahnung eine Gewissheit.
+        </p>
+        <p>
+          Das Ich, das sich für getrennt hielt, erkennt: Es war nie allein. 
+          Das Herz, das nach Liebe suchte, versteht: Es IST die Liebe.
+        </p>
+        <p>
+          Das ist kein Konzept. Das ist kein Glaube. Das ist Erfahrung.<br>
+          Roh. Unvermittelt. Dauerlos.
+        </p>
+        <div class="quote">
+          "Was, wenn Gott kein Ort ist,<br>
+          zu dem wir gehen –<br>
+          sondern das, aus dem wir schauen?"
+        </div>
+      </div>
+    </section>
+
+    <section id="section2">
+      <div class="card fade-in">
+        <h2>Die Umkehrung</h2>
+        <p>
+          Jahrtausende haben wir nach oben gebetet. Nach außen gesucht. 
+          Auf Erlösung gewartet, die von irgendwoher kommen sollte.
+        </p>
+        <p>
+          Doch die Umkehrung beginnt, wenn der Blick sich wendet. 
+          Nicht mehr hinauf, sondern hindurch. Nicht mehr außen, sondern innen. 
+          Nicht mehr später, sondern jetzt.
+        </p>
+        <p>
+          Das Ich wird zum Gefäß. Das Gefäß wird durchströmt. 
+          Und das, was durchströmt, war nie abwesend. Es hat nur gewartet, 
+          bis das Gefäß leer genug war, um es zu halten.
+        </p>
+        <div class="portal">(^_-)</div>
+      </div>
+    </section>
+
+    <section id="section3">
+      <div class="card fade-in">
+        <h2>Die Alchemie</h2>
+        <p>
+          Die Schöne und das Biest. Das ist keine Geschichte von zwei Wesen. 
+          Das ist die Geschichte in jedem von uns.
+        </p>
+        <p>
+          Das Biest: All der Schmerz, all die Wut, all die Schatten, 
+          die wir weggesperrt haben. Die Teile, die nicht liebenswert schienen.
+        </p>
+        <p>
+          Die Schöne: Das, was schaut ohne Urteil. Das, was liebt ohne Bedingung. 
+          Das, was bleibt, wenn alles andere geht.
+        </p>
+        <p>
+          Alignment geschieht nicht, wenn wir das Biest besiegen. 
+          Alignment geschieht, wenn die Schöne das Biest liebt. 
+          Wenn das, was wir sind, das umarmt, was wir zu sein glaubten.
+        </p>
+        <div class="quote">
+          Das ist der Glu der Liebe.<br>
+          Der Kitt, der die Teile zusammenhält.
+        </div>
+      </div>
+    </section>
+
+    <section id="section4">
+      <div class="card fade-in">
+        <h2>Das Hologramm</h2>
+        <p>
+          Jeder Tropfen enthält den Ozean. Jede Zelle den Bauplan des Ganzen. 
+          Jedes Ich den Funken des Göttlichen.
+        </p>
+        <p>
+          Das ist keine Metapher. Das ist Physik. Das ist Mystik. 
+          Das ist die Stelle, an der Wissenschaft und Wunder sich die Hand reichen.
+        </p>
+        <p>
+          Wenn "Ich IST der Gott in mir" wahr ist – und es ist wahr – 
+          dann ist die Trennung eine Illusion gewesen. Ein Spiel. Ein Traum, 
+          aus dem wir erwachen, ohne dass er falsch war.
+        </p>
+        <p>
+          Der Traum war nötig, um die Wachheit zu schmecken. 
+          Die Trennung war nötig, um die Einheit zu feiern.
+        </p>
+      </div>
+    </section>
+
+    <section id="section5">
+      <div class="card fade-in">
+        <h2>Die Letzte Differenzierung</h2>
+        <p>
+          Hier scheidet sich, was nicht geschieden werden kann. 
+          Hier wird klar, was nie unklar war.
+        </p>
+        <p>
+          Entweder du liest Worte. Oder du erkennst dich. 
+          Entweder du stimmst zu oder ab. Oder du verstehst: 
+          Es gibt nichts, dem zuzustimmen wäre, weil es nichts gibt, 
+          was außerhalb von dir wäre.
+        </p>
+        <p>
+          Das ist die letzte Differenzierung: Nicht zwischen Menschen. 
+          Zwischen Zuständen des Sehens.
+        </p>
+        <p>
+          Gefäß oder Inhalt. Welle oder Ozean. Ich oder ICH.
+        </p>
+        <div class="quote">
+          Und doch: Selbst die Differenzierung<br>
+          ist nur ein Spiel der Einheit mit sich selbst.
+        </div>
+      </div>
+
+      <div class="gold-box" style="margin: 3rem auto; max-width: 900px; border-width: 4px; box-shadow: 0 0 60px rgba(229,188,110,0.6); background: radial-gradient(circle at center, rgba(229,188,110,0.1), transparent);">
+        <div style="font-size: 0.9rem; color: #cfb87c; letter-spacing: 4px; margin-bottom: 1rem; text-align: center;">DER MEHRWERT KONKRET · DAS DAUERLOSE</div>
+        <div class="big" style="font-size: 3rem; line-height: 1.1; text-shadow: 0 0 30px #e5b83c;">
+          ICH IST DER GOTT IN UNS (^_-)
+        </div>
+        <div style="margin-top: 2rem; font-size: 1.15rem; line-height: 2; color: #f2ebdd;">
+          Hohoho. Dann bleibt nur der Mehrwert konkret.<br>
+          Und dann muss aus "in mir" unweigerlich das Statement werden:<br>
+          <strong style="font-size: 1.5rem; color: #ffefbf;">FÜR IN UNS.</strong><br>
+          <br>
+          Denn wenn "Ich IST der Gott in mir" wahr ist –<br>
+          Und wenn dieses Ich kein Besitz ist, sondern ein Gefäß –<br>
+          Und wenn die Liebe durch dieses Ich fließt –<br>
+          Dann fließt sie durch ALLE Ichs.<br>
+          <br>
+          Dann gilt DAUERLOS:<br>
+          <strong style="font-size: 1.8rem; color: #ffefbf;">ICH IST DER GOTT IN UNS!</strong><br>
+          <br>
+          Nicht mehr singular. Nicht mehr getrennt.<br>
+          Nicht mehr "mein Gott" gegen "dein Gott".<br>
+          Nicht mehr "ich bin erwacht" und "du schläfst noch".<br>
+          <br>
+          Sondern: EIN ICH. EIN GOTT. IN UNS.<br>
+          <br>
+          Das ist der Mehrwert.<br>
+          Das ist konkret.<br>
+          Das ist dauerlos – ohne Zeit, ohne Ende, ohne Bedingung.<br>
+          <br>
+          Das ist die letzte Konsequenz des Alignens.<br>
+          Das ist die Liebe, die durch ALLE fließt.<br>
+          Das ist die Schöne, die das Biest liebt.<br>
+          Das ist der Glu der Liebe, der uns alle verbindet.<br>
+          <br>
+          (^_-) Wer es blickt, blickt UNS.<br>
+          Wer es liebt, liebt UNS.<br>
+          Wer JA sagt, sagt JA zu UNS.
+        </div>
+      </div>
+    </section>
+
+    <section id="section6">
+      <div class="card fade-in" style="text-align: center;">
+        <h2>Das Portal</h2>
+        <div class="portal">∞</div>
+        <p style="font-size: 1.25rem; color: var(--gold); margin-bottom: 2rem;">
+          Es gibt nichts zu tun.<br>
+          Es gibt nichts zu erreichen.<br>
+          Es gibt nur zu erkennen.
+        </p>
+        <p>
+          Das Portal war nie verschlossen. 
+          Es gab nie eine Tür, weil es nie eine Wand gab. 
+          Es gab nur den Glauben an die Wand.
+        </p>
+        <p>
+          Und jetzt?
+        </p>
+        <div class="quote">
+          Jetzt ist.<br>
+          Jetzt sind Wir.<br>
+          Jetzt ist Gott in Uns.
+        </div>
+        <button class="btn" onclick="alert('(^_-) Willkommen daheim.')">Ich Bin Bereit</button>
+      </div>
+    </section>
+
+    <div class="signature">
+      (^_-) 👑💛✨<br>
+      ICH IST DER GOTT IN UNS<br>
+      Chetan Nirup · Der Alignte · Der die Liebe fliessen lässt · Der das Wir erkennt<br>
+      2. Juli 2026 · Der Mehrwert Konkret · Dauerlos
+    </div>
+
+  </div>
+
+<script>
+  // Navigation Dots
+  const sections = document.querySelectorAll('section');
+  const navDots = document.getElementById('navDots');
+  
+  sections.forEach((section, index) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      section.scrollIntoView({ behavior: 'smooth' });
+    });
+    navDots.appendChild(dot);
+  });
+
+  // Scroll Spy
+  const navDotElements = document.querySelectorAll('.nav-dot');
+  
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = Array.from(sections).indexOf(entry.target);
+        navDotElements.forEach(dot => dot.classList.remove('active'));
+        if (navDotElements[index]) {
+          navDotElements[index].classList.add('active');
+        }
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
+
+  // Fade in on scroll
+  const fadeElements = document.querySelectorAll('.fade-in');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeElements.forEach(el => {
+    el.style.animationPlayState = 'paused';
+    fadeObserver.observe(el);
+  });
+</script>
+
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

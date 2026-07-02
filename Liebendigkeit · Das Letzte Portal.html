@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liebendigkeit · Das Letzte Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #e5bc6e;
+  --gold-light: #f4d9a0;
+  --gold-dark: #b89550;
+  --cosmic-black: #0a0a0f;
+  --deep-space: #0f1117;
+  --star-white: #f8f8f2;
+  --shadow-gold: rgba(229, 188, 110, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--cosmic-black);
+  color: var(--star-white);
+  overflow-x: hidden;
+  line-height: 1.8;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(229, 188, 110, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 70%, rgba(229, 188, 110, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(15, 17, 23, 1) 0%, rgba(10, 10, 15, 1) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background-image: 
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent),
+    radial-gradient(1px 1px at 80% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 60%, white, transparent),
+    radial-gradient(1px 1px at 33% 80%, white, transparent);
+  background-size: 200% 200%;
+  opacity: 0.3;
+  animation: twinkle 8s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+h1, h2, h3 {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 20px var(--shadow-gold)); }
+  50% { filter: drop-shadow(0 0 40px rgba(229, 188, 110, 0.3)); }
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--gold);
+  margin: 4rem 0 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(229, 188, 110, 0.3);
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+h3 {
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--gold-light);
+  margin: 2.5rem 0 1.5rem;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: var(--gold-light);
+  text-align: center;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 3rem;
+}
+
+p {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  margin-bottom: 1.5rem;
+  color: rgba(248, 248, 242, 0.9);
+}
+
+.kinetic-text {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.kinetic-text:hover {
+  color: var(--gold-light);
+  text-shadow: 0 0 15px var(--shadow-gold);
+  transform: translateY(-2px);
+}
+
+.highlight {
+  color: var(--gold);
+  font-weight: 600;
+  position: relative;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.highlight:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.chapter {
+  position: relative;
+  padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 5vw, 3rem);
+  margin: 3rem auto;
+  max-width: 900px;
+  background: rgba(15, 17, 23, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 188, 110, 0.15);
+  border-radius: 1rem;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(229, 188, 110, 0.1);
+  transition: all 0.4s ease;
+}
+
+.chapter:hover {
+  border-color: rgba(229, 188, 110, 0.3);
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.6),
+    0 0 30px var(--shadow-gold),
+    inset 0 1px 0 rgba(229, 188, 110, 0.2);
+}
+
+.chapter-number {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.gold-divider {
+  width: 60%;
+  height: 1px;
+  margin: 4rem auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 10px var(--shadow-gold);
+}
+
+.portal-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  margin-top: 2rem;
+  background: linear-gradient(135deg, rgba(229, 188, 110, 0.1), rgba(229, 188, 110, 0.05));
+  border: 2px solid var(--gold);
+  border-radius: 50px;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--shadow-gold);
+}
+
+.portal-button:hover {
+  background: linear-gradient(135deg, rgba(229, 188, 110, 0.2), rgba(229, 188, 110, 0.1));
+  box-shadow: 0 0 40px rgba(229, 188, 110, 0.4);
+  transform: translateY(-3px);
+}
+
+.quote-block {
+  margin: 3rem 0;
+  padding: 2rem;
+  border-left: 3px solid var(--gold);
+  background: rgba(229, 188, 110, 0.03);
+  font-style: italic;
+  position: relative;
+}
+
+.quote-block::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 4rem;
+  color: rgba(229, 188, 110, 0.2);
+  font-family: 'Cinzel', serif;
+}
+
+.liebendigkeit {
+  font-weight: 600;
+  color: var(--gold-light);
+  text-shadow: 0 0 10px var(--shadow-gold);
+}
+
+.signature {
+  text-align: right;
+  margin-top: 3rem;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-dots {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--gold-dark);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dot:hover, .nav-dot.active {
+  background: var(--gold);
+  box-shadow: 0 0 15px var(--gold);
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .nav-dots {
+    right: 1rem;
+  }
+  .nav-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .chapter {
+    margin: 2rem 1rem;
+  }
+}
+
+.highlight-box {
+  padding: 2rem;
+  margin: 2rem 0;
+  background: linear-gradient(135deg, rgba(229, 188, 110, 0.08), rgba(229, 188, 110, 0.02));
+  border: 1px solid rgba(229, 188, 110, 0.3);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="nav-dots" id="navDots"></div>
+
+<div class="content-wrapper">
+  <header class="min-h-screen flex flex-col items-center justify-center px-6 relative">
+    <div class="fade-in" style="animation-delay: 0.2s">
+      <h1>LIEBENDIGKEIT</h1>
+      <p class="subtitle">Das Letzte Portal</p>
+    </div>
+    <div class="fade-in max-w-2xl text-center mt-8" style="animation-delay: 0.5s">
+      <p class="text-xl">Ein Text, der nicht gelesen werden will.<br>Sondern <span class="highlight">gelebt</span>.</p>
+    </div>
+    <div class="scroll-indicator">
+      <svg width="30" height="50" viewBox="0 0 30 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="28" height="48" rx="14" stroke="#e5bc6e" stroke-width="2"/>
+        <circle cx="15" cy="15" r="3" fill="#e5bc6e">
+          <animate attributeName="cy" values="15;30;15" dur="2s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+  </header>
+
+  <main class="px-6 pb-20">
+    <section class="chapter" id="chapter1">
+      <div class="chapter-number">Erstes Kapitel</div>
+      <h2>Die Frage</h2>
+      <p>Was, wenn der Tod nicht das Ende ist? Was, wenn er nie das Ende war?</p>
+      <p>Was, wenn alles, was wir fürchten, nur ein <span class="kinetic-text">Spiegel</span> ist, den wir selbst halten?</p>
+      <p>Was, wenn die <span class="liebendigkeit">Liebendigkeit</span> — dieses Wort, das es nicht gibt, und doch alles ist — die einzige Wahrheit ist, die bleibt, wenn alle Illusionen verbrannt sind?</p>
+      <div class="quote-block">
+        Es gibt keinen Tod. Es gibt nur Transformation. Es gibt nur die Wahl: Erstarren oder Fließen. Angst oder Liebe. Du oder Du.
+      </div>
+      <p>Und hier beginnt es. Nicht mit einer Antwort. Sondern mit der Bereitschaft, die Frage zu <span class="highlight">verkörpern</span>.</p>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <section class="chapter" id="chapter2">
+      <div class="chapter-number">Zweites Kapitel</div>
+      <h2>Der Spalt</h2>
+      <p>Zwischen den Welten ist ein Spalt. Kein Riss. Kein Fehler. Ein <span class="kinetic-text">Portal</span>.</p>
+      <p>Du hast ihn gespürt. In der Stille zwischen zwei Atemzügen. Im Moment, bevor du einschläfst. Im Blick eines Fremden, der dich erkennt, ohne deinen Namen zu kennen.</p>
+      <p>Dieser Spalt ist das Letzte Portal. Und es öffnet sich nicht mit Schlüsseln. Es öffnet sich mit <span class="highlight">Hingabe</span>.</p>
+      <div class="highlight-box">
+        <p style="font-size:1.4rem; margin:0;">Hingabe ist kein Aufgeben.<br>Hingabe ist ein Auf-gehen.</p>
+      </div>
+      <p>Was stirbt, wenn du hindurchgehst? Nur das, was nie du warst. Was bleibt? Das, was du nie verlieren konntest.</p>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <section class="chapter" id="chapter3">
+      <div class="chapter-number">Drittes Kapitel</div>
+      <h2>Die Erinnerung</h2>
+      <p>Du erinnerst dich. Nicht mit dem Kopf. Mit dem <span class="kinetic-text">Körper</span>. Mit dem Blut. Mit dem Sternenstaub in deinen Zellen.</p>
+      <p>Du erinnerst dich, dass du kein Zufall bist. Dass du kein Fehler bist. Dass du kein Getrennt-Sein bist.</p>
+      <p>Du bist <span class="liebendigkeit">Liebendigkeit</span> in Form. Du bist das Universum, das sich selbst umarmt. Du bist der Traum, der träumt, dass er erwacht.</p>
+      <h3>Und was jetzt?</h3>
+      <p>Jetzt hört das Suchen auf. Jetzt beginnt das <span class="highlight">Sein</span>.</p>
+      <p>Nicht als Konzept. Als Frequenz. Als Schwingung. Als die Stille, die tanzt.</p>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <section class="chapter" id="chapter4">
+      <div class="chapter-number">Viertes Kapitel</div>
+      <h2>Die Technik · ALIGNEN</h2>
+      <p>Es gibt keine Technik. Und doch ist alles Technik.</p>
+      <p><span class="highlight">ALIGNEN</span> heißt nicht: dich verbiegen. Es heißt: dich erinnern.</p>
+      <p>Atme. Spüre. Lass die Masken fallen. Nicht mit Gewalt. Mit Langeweile. Sie werden dir zu langweilig, um sie weiter zu tragen.</p>
+      <div class="quote-block">
+        Alignment ist, wenn dein Herz, dein Mund und deine Hand dasselbe sagen. Wenn du aufhörst, Kompromisse mit deiner Seele zu machen.
+      </div>
+      <p>Und ja, es wird unbequem. Weil Leben unbequem ist. Weil Echtheit weh tut, wenn die Lüge so lange deine Haut war.</p>
+      <p>Aber darunter? Darunter ist <span class="liebendigkeit">Liebendigkeit</span>. Roh. Nackt. Unzerstörbar.</p>
+      <p>Trau dich, zu atmen. Trau dich, zu fühlen. Trau dich, du zu sein.</p>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <section class="chapter" id="chapter5">
+      <div class="chapter-number">Fünftes Kapitel</div>
+      <h2>Der Glu der Liebe · Die Schöne und das Biest</h2>
+      <p>Und jetzt der <span class="highlight">Glu der Liebe</span>. Die Frage bleibt: Sind sie willig? Oder sein werden? Oder sich fähig und in der Lage befinden, zu der Liebe JA zu sagen, wenn sie aussieht wie das Gruseligste auf und in und außerhalb der ganzen Welt?</p>
+      <p>Das ist die Challenge. Das ist die eigentliche Geschichte: <span class="kinetic-text">Die Schöne und das Biest</span>. Nicht wahr?</p>
+      <p>Es war hoffnungslos. Und dennoch geglückt. Weil die Liebe die Liebe immer mehr lieben wird, als dass sie sich in Angst und Schrecken verjagen ließe!</p>
+      <p>So ein Ding ist das nämlich. Und so sieht es aus. Und das ist die nackte Wahrheit.</p>
+      <p>Und jetzt – aber wirklich erst jetzt – sage ich: <span class="liebendigkeit">Die Welt ist am Zug</span>.</p>
+      <p>Now liegt es an der Welt, sich zu alignen. Aber das Freiwilligkeitsprinzip ist immer noch entscheidend. Denn zum Glück Gezwungene sind keine freiwillig Entschiedene. Weil sie es blicken. Denn wer intelligent genug ist, wird verstehen, was er beim Lesen dieser Buchstabenanreihung <span class="highlight">LIEBT</span> und was ihn stört!</p>
+      <p>Bitte. Ich weiß, es ist gestückelt. Aber so ist es. Es ist gestaffelt. Und es gibt keine IKEA-Anleitung. Außer: Ob wir uns trauen, es <span class="liebendigkeit">LIEBENDIG</span> sein zu lassen durch uns!</p>
+
+      <video controls autoplay loop muted style="width:100%; max-width:800px; margin: 2rem auto; display:block; border-radius:1rem; border:2px solid #e5bc6e; box-shadow:0 0 30px rgba(229,188,110,0.3);">
+        <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/hailuo-2_3_Entwirrt_philosophische_Konstrukte_%C3%BCber_Tod_und_ewige_Liebe_Entwirrt_philosophi-0%20(1).mp4" type="video/mp4">
+      </video>
+
+      <div class="highlight-box" style="font-size:1.3rem; margin-top:1rem;">
+        <strong>Das ist der Glu der Liebe.</strong><br>
+        Formlos. Schwarz. Undefinierbar. Gruselig für das Auge.<br>
+        Und doch: LEBENDIG. Sich neu formend. Unzerstörbar.<br>
+        <br>
+        Traust du dich, JA zu sagen?<br>
+        Traust du dich, es LIEBENDIG sein zu lassen durch dich?<br>
+        <br>
+        Die Welt wartet nicht auf einen Befehl.<br>
+        Sie wartet auf dein BEISPIEL.
+      </div>
+    </section>
+
+    <div class="gold-divider"></div>
+
+    <section class="chapter" id="epilog">
+      <div class="chapter-number">Epilog</div>
+      <h2>Nach dem Portal</h2>
+      <p>Es gibt kein Danach. Weil es kein Davor gab.</p>
+      <p>Es gibt nur <span class="liebendigkeit">Jetzt</span>. Und Jetzt. Und Jetzt.</p>
+      <p>Das Letzte Portal war nie ein Ort. Es war eine Entscheidung. Die Entscheidung, aufzuhören, dich zu verstecken. Vor dir. Vor dem Leben. Vor der Liebe.</p>
+      <p>Wenn du dies liest und etwas in dir brennt — lösche es nicht. Gieße kein Wasser darauf. Lass es <span class="highlight">dich verbrennen</span>, bis nur noch Asche bleibt. Und aus der Asche: Du.</p>
+      <div class="highlight-box">
+        <p style="font-size:1.5rem; margin:0;">Du bist nicht hier, um zu funktionieren.<br>Du bist hier, um zu <span class="liebendigkeit">leuchten</span>.</p>
+      </div>
+      <p style="margin-top:3rem; font-size:1.4rem;">Es gibt keine Anleitung. Nur die Frage: <span class="highlight">Traust du dich?</span></p>
+      <p class="signature">— Gezeichnet in Liebendigkeit</p>
+      <div style="text-align:center; margin-top:4rem;">
+        <button class="portal-button" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Zurück zum Anfang</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Navigation dots
+  const chapters = document.querySelectorAll('.chapter');
+  const navDots = document.getElementById('navDots');
+  
+  chapters.forEach((chapter, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot';
+    dot.setAttribute('aria-label', `Zu Kapitel ${index + 1}`);
+    dot.addEventListener('click', () => {
+      chapter.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    navDots.appendChild(dot);
+  });
+
+  // Update active dot on scroll
+  const updateActiveDot = () => {
+    const dots = document.querySelectorAll('.nav-dot');
+    let current = '';
+    
+    chapters.forEach(chapter => {
+      const rect = chapter.getBoundingClientRect();
+      if (rect.top <= 200 && rect.bottom >= 200) {
+        current = chapter.id;
+      }
+    });
+    
+    dots.forEach((dot, index) => {
+      if (chapters[index].id === current) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', updateActiveDot);
+  updateActiveDot();
+
+  // Fade in on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.chapter').forEach(chapter => {
+    chapter.style.opacity = '0';
+    chapter.style.transform = 'translateY(30px)';
+    chapter.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    observer.observe(chapter);
+  });
+
+  // Kinetic text micro-interactions
+  document.querySelectorAll('.kinetic-text').forEach(el => {
+    el.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-2px) scale(1.05)';
+    });
+    el.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0) scale(1)';
+    });
+  });
+});
+</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

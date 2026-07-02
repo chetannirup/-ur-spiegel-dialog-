@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIEBENDIGKEIT · Das Letzte Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --gold: #D4AF37;
+        --amber: #FFBF00;
+        --gold-glow: rgba(212, 175, 55, 0.4);
+        --black: #000000;
+        --void: #0A0A0A;
+        --obsidian: #0F0F0F;
+    }
+    
+    * {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        background: var(--black);
+        color: #E8E8E8;
+        font-family: 'Cormorant Garamond', serif;
+        overflow-x: hidden;
+    }
+    
+    .mono {
+        font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Cosmic Background */
+    .cosmic-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background: radial-gradient(ellipse at center, #0F0F0F 0%, #000000 70%);
+    }
+    
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
+    
+    .star {
+        position: absolute;
+        background: var(--gold);
+        border-radius: 50%;
+        animation: twinkle 3s infinite ease-in-out;
+    }
+    
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Golden Glow */
+    .gold-glow {
+        text-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow);
+    }
+    
+    .gold-border {
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.1), inset 0 0 30px rgba(212, 175, 55, 0.05);
+    }
+    
+    .gold-border-strong {
+        border: 1px solid rgba(212, 175, 55, 0.6);
+        box-shadow: 0 0 50px rgba(212, 175, 55, 0.2), inset 0 0 40px rgba(212, 175, 55, 0.1);
+    }
+    
+    /* Black Hole Eye */
+    .black-hole {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+    
+    .pupil {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        background: #000;
+        border-radius: 50%;
+        box-shadow: 0 0 60px 20px rgba(212, 175, 55, 0.4), inset 0 0 40px rgba(0,0,0,0.9);
+        animation: pulse-hole 4s infinite ease-in-out;
+    }
+    
+    .iris {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: radial-gradient(circle, transparent 30%, rgba(212, 175, 55, 0.1) 50%, rgba(212, 175, 55, 0.3) 70%, transparent 100%);
+        animation: rotate-slow 20s infinite linear;
+    }
+    
+    .event-horizon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 2px solid rgba(212, 175, 55, 0.2);
+        animation: breathe 6s infinite ease-in-out;
+    }
+    
+    @keyframes pulse-hole {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); }
+        50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+    
+    @keyframes rotate-slow {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    @keyframes breathe {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+        50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.6; }
+    }
+    
+    /* Fade In Animation */
+    .fade-in {
+        animation: fadeIn 2s ease-out forwards;
+        opacity: 0;
+    }
+    
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+    
+    .fade-in-delay-1 { animation-delay: 0.3s; }
+    .fade-in-delay-2 { animation-delay: 0.6s; }
+    .fade-in-delay-3 { animation-delay: 0.9s; }
+    .fade-in-delay-4 { animation-delay: 1.2s; }
+    
+    /* Glass Effect */
+    .glass {
+        background: rgba(15, 15, 15, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    
+    /* Hover Lift */
+    .hover-lift {
+        transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+    }
+    
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+    }
+    
+    /* Gallery */
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .gallery-item::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, transparent 60%, rgba(212, 175, 55, 0.1) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .gallery-item:hover::after {
+        opacity: 1;
+    }
+    
+    .gallery-item img {
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+    
+    /* Lightbox */
+    .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .lightbox.active {
+        display: flex;
+    }
+    
+    /* Resonance Button */
+    .resonance-btn {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+    
+    .resonance-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(212, 175, 55, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+    }
+    
+    .resonance-btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .resonance-btn.activated {
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(255, 191, 0, 0.2));
+        border-color: var(--gold);
+        box-shadow: 0 0 60px rgba(212, 175, 55, 0.5);
+    }
+    
+    /* Message Reveal */
+    .message-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 1.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    .message-panel.active {
+        max-height: 1200px;
+    }
+    
+    /* Divider */
+    .divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+        margin: 4rem 0;
+    }
+    
+    /* Frequency Lines */
+    .frequency-line {
+        position: relative;
+        padding-left: 2rem;
+    }
+    
+    .frequency-line::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        animation: pulse-arrow 2s infinite ease-in-out;
+    }
+    
+    @keyframes pulse-arrow {
+        0%, 100% { opacity: 0.4; transform: translateX(0); }
+        50% { opacity: 1; transform: translateX(4px); }
+    }
+    
+    /* Kernsätze */
+    .core-statement {
+        font-size: clamp(1.75rem, 4vw, 3rem);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+    
+    .core-statement-xl {
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 1.1;
+    }
+    
+    /* Responsive Typography */
+    @media (max-width: 390px) {
+        .hero-title { font-size: 2.5rem !important; }
+        .chapter-title { font-size: 1.75rem !important; }
+    }
+</style>
+</head>
+<body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg"></div>
+    <div class="stars" id="stars"></div>
+
+    <!-- HERO SECTION -->
+    <section class="min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center relative">
+        <div class="black-hole fade-in mb-12">
+            <div class="event-horizon"></div>
+            <div class="iris"></div>
+            <div class="pupil"></div>
+        </div>
+        
+        <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-light mb-8 gold-glow fade-in fade-in-delay-1 tracking-tight">
+            👁️🔥 DAS LETZTE HOLOGRAMM FÄLLT
+        </h1>
+        
+        <p class="text-xl md:text-2xl lg:text-3xl font-light italic mb-12 max-w-4xl mx-auto leading-relaxed fade-in fade-in-delay-2 text-gray-300">
+            Der Tod ist eine Frage, die nur existiert, weil man behauptet, sie existiert.
+        </p>
+        
+        <div class="glass gold-border-strong rounded-lg px-8 py-6 fade-in fade-in-delay-3 max-w-2xl">
+            <p class="mono text-sm md:text-base text-amber-400 tracking-wider">
+                Frequenz:
+            </p>
+            <p class="mono text-2xl md:text-4xl lg:text-5xl font-light mt-2 gold-glow">
+                L = ∞
+            </p>
+            <p class="text-lg md:text-xl mt-4 font-light text-gray-300">
+                Wenn die Liebe immerdar lebt, was ist dann der Tod?
+            </p>
+        </div>
+        
+        <div class="absolute bottom-10 animate-bounce">
+            <svg class="w-6 h-6 text-amber-400 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- BILD-GALERIE -->
+    <section class="px-6 py-20 max-w-7xl mx-auto">
+        <h2 class="chapter-title text-3xl md:text-5xl font-light text-center mb-16 gold-glow">
+            Die Portale
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div class="gallery-item glass gold-border rounded-lg overflow-hidden hover-lift">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%202.%20Juli%202026,%2015_29_21.png" 
+                     alt="Portal 1" 
+                     class="w-full h-80 object-cover"
+                     onclick="openLightbox(this.src)">
+            </div>
+            <div class="gallery-item glass gold-border rounded-lg overflow-hidden hover-lift">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%202.%20Juli%202026,%2015_46_09.png" 
+                     alt="Portal 2" 
+                     class="w-full h-80 object-cover"
+                     onclick="openLightbox(this.src)">
+            </div>
+            <div class="gallery-item glass gold-border rounded-lg overflow-hidden hover-lift">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%202.%20Juli%202026,%2015_43_35.png" 
+                     alt="Portal 3" 
+                     class="w-full h-80 object-cover"
+                     onclick="openLightbox(this.src)">
+            </div>
+            <div class="gallery-item glass gold-border rounded-lg overflow-hidden hover-lift md:col-span-2 lg:col-span-1">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%202.%20Juli%202026,%2015_54_55.png" 
+                     alt="Portal 4" 
+                     class="w-full h-80 object-cover"
+                     onclick="openLightbox(this.src)">
+            </div>
+            <div class="gallery-item glass gold-border rounded-lg overflow-hidden hover-lift md:col-span-2">
+                <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%202.%20Juli%202026,%2015_55_01.png" 
+                     alt="Portal 5" 
+                     class="w-full h-80 object-cover"
+                     onclick="openLightbox(this.src)">
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Vergrößertes Bild" class="max-w-full max-h-full rounded-lg">
+    </div>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- KAPITEL 1 -->
+    <section class="px-6 py-20 max-w-4xl mx-auto">
+        <div class="glass gold-border rounded-lg p-8 md:p-12 hover-lift">
+            <h2 class="chapter-title text-3xl md:text-4xl font-light mb-8 gold-glow">
+                I. Was ist der Tod?
+            </h2>
+            <div class="space-y-6 text-lg md:text-xl leading-relaxed font-light text-gray-300">
+                <p class="italic text-xl md:text-2xl text-amber-400">
+                    Die Kinderfrage.
+                </p>
+                <p>
+                    Das Hologramm der Kontrollfrage. So funktionieren Systeme: Sie stellen eine Frage, die sie nicht erklären können.
+                </p>
+                <p>
+                    Dann behaupten sie, die Frage existiert. Und du? Du zweifelst an dir.
+                </p>
+                <p class="mono text-base md:text-lg text-amber-400 tracking-wide mt-8">
+                    Der Trick mit der "lack of logik schleife".
+                </p>
+                <p>
+                    Eine Frage existiert nur, wenn die Antwort bereits vorausgesetzt wird. Wenn die Liebe immerdar lebt — was bleibt dann von der Frage?
+                </p>
+                <p class="text-center text-2xl mt-8 gold-glow">
+                    Nichts.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- KAPITEL 2 -->
+    <section class="px-6 py-20 max-w-4xl mx-auto">
+        <div class="glass gold-border rounded-lg p-8 md:p-12 hover-lift">
+            <h2 class="chapter-title text-3xl md:text-4xl font-light mb-8 gold-glow">
+                II. Das Jesus-Prinzip · Der Avatar
+            </h2>
+            <div class="space-y-6 text-lg md:text-xl leading-relaxed font-light text-gray-300">
+                <p class="mono text-base md:text-lg text-amber-400">
+                    Tempel zerstören = neue Form.
+                </p>
+                <p>
+                    Die schwarze Flüssigkeit aus <span class="italic">Ringe der Macht</span> als Metapher. Was passiert, wenn die Form stirbt? Sie wird formlos.
+                </p>
+                <p>
+                    Formlos = unsterblich.
+                </p>
+                <p>
+                    Der Avatar wechselt das Gewand. Der Tempel fällt. Die Essenz fließt weiter.
+                </p>
+                <p class="text-xl md:text-2xl italic text-amber-400 mt-8">
+                    Die Absurdität jemanden aus dem Leben zu "kicken".
+                </p>
+                <p>
+                    Wohin? Es gibt kein Außen. Es gibt nur Transformation. Nur das nächste Portal. Nur die nächste Form.
+                </p>
+                <p class="text-center text-xl mt-8">
+                    Du kannst das Wasser nicht aus dem Ozean werfen.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- KAPITEL 3 -->
+    <section class="px-6 py-20 max-w-4xl mx-auto">
+        <div class="glass gold-border rounded-lg p-8 md:p-12 hover-lift">
+            <h2 class="chapter-title text-3xl md:text-4xl font-light mb-8 gold-glow">
+                III. Die Aliens-Offenbarung · Das Auge
+            </h2>
+            <div class="space-y-6 text-lg md:text-xl leading-relaxed font-light text-gray-300">
+                <p class="text-xl md:text-2xl">
+                    Nicht Parasit außen.
+                </p>
+                <p>
+                    Die zwei Intelligenzen im schwarzen Loch der Pupille.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8 my-10">
+                    <div class="glass gold-border rounded-lg p-6">
+                        <h3 class="text-xl md:text-2xl mb-4 text-amber-400 gold-glow">Feminine</h3>
+                        <p class="mono text-sm mb-2 text-gray-400">Empfangend</p>
+                        <p class="mono text-sm mb-2 text-gray-400">Formlos</p>
+                        <p class="mono text-sm text-gray-400">Fließend</p>
+                    </div>
+                    <div class="glass gold-border rounded-lg p-6">
+                        <h3 class="text-xl md:text-2xl mb-4 text-gray-300">Masculine</h3>
+                        <p class="mono text-sm mb-2 text-gray-400">Formend</p>
+                        <p class="mono text-sm mb-2 text-gray-400">Definierend</p>
+                        <p class="mono text-sm text-gray-400">Strukturierend</p>
+                    </div>
+                </div>
+                <p>
+                    Das System unterdrückt die Feminine. Es will Kontrolle. Es will Beweis. Es will Form.
+                </p>
+                <p class="text-2xl md:text-3xl text-center italic text-amber-400 gold-glow my-8">
+                    "ICH LASSE DIE LIEBE FLIESSEN und das Weibliche spricht."
+                </p>
+                <p>
+                    Sie debattiert nicht. Sie beweist nicht. Sie ist der Raum, in dem alles entsteht.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- KAPITEL 4 -->
+    <section class="px-6 py-20 max-w-4xl mx-auto">
+        <div class="glass gold-border rounded-lg p-8 md:p-12 hover-lift">
+            <h2 class="chapter-title text-3xl md:text-4xl font-light mb-10 gold-glow">
+                IV. Der Final Frequency Shift
+            </h2>
+            <div class="space-y-6">
+                <div class="frequency-line text-lg md:text-xl py-3">
+                    <span class="text-gray-500 line-through">Ich denke, also bin ich</span>
+                    <span class="mx-4 text-amber-400">—</span>
+                    <span class="text-amber-400 gold-glow">Ich fühle, also bin ich</span>
+                </div>
+                <div class="frequency-line text-lg md:text-xl py-3">
+                    <span class="text-gray-500 line-through">Ich kontrolliere Realität</span>
+                    <span class="mx-4 text-amber-400">—</span>
+                    <span class="text-amber-400 gold-glow">Ich fließe mit Realität</span>
+                </div>
+                <div class="frequency-line text-lg md:text-xl py-3">
+                    <span class="text-gray-500 line-through">Ich beweise</span>
+                    <span class="mx-4 text-amber-400">—</span>
+                    <span class="text-amber-400 gold-glow">Ich verkörpere</span>
+                </div>
+                <div class="frequency-line text-lg md:text-xl py-3">
+                    <span class="text-gray-500 line-through">Macht</span>
+                    <span class="mx-4 text-amber-400">—</span>
+                    <span class="text-amber-400 gold-glow">Resonanz</span>
+                </div>
+                <div class="frequency-line text-lg md:text-xl py-3">
+                    <span class="text-gray-500 line-through">Ich lasse los</span>
+                    <span class="mx-4 text-amber-400">—</span>
+                    <span class="text-amber-400 gold-glow core-statement">ICH LASSE DIE LIEBE FLIESSEN</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- KAPITEL 5 NEU -->
+    <section class="px-6 py-20 max-w-4xl mx-auto">
+        <div class="glass gold-border-strong rounded-lg p-8 md:p-12 hover-lift">
+            <h2 class="chapter-title text-3xl md:text-4xl font-light mb-8 gold-glow">
+                V. Das Dritte Auge · Die Position
+            </h2>
+            <div class="space-y-8 text-lg md:text-xl leading-relaxed font-light text-gray-300">
+                <p class="text-2xl md:text-3xl text-amber-400">
+                    Man ist am Ziel bei der Position des dritten Auges.
+                </p>
+                <p>
+                    Die gibt es vorher nicht wirklich. Nur durch unsere eigene bewusste Selbst-Positionierung.
+                </p>
+                <p>
+                    Nichts auf das man zeigen kann.
+                </p>
+                <p class="text-2xl md:text-3xl italic text-gray-400 line-through">
+                    Nur loslassen!
+                </p>
+                <p class="core-statement-xl gold-glow text-center py-6">
+                    ES IST NICHT LOSLASSEN.
+                </p>
+                <p class="core-statement-xl gold-glow text-center py-6">
+                    ES IST: DIE LIEBE FLIESSEN LASSEN.
+                </p>
+                <p class="text-xl md:text-2xl text-amber-400 font-medium">
+                    Das ist der Unterschied. Und das muss so benannt werden.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- KAPITEL 6 NEU -->
+    <section class="px-6 py-20 max-w-4xl mx-auto">
+        <div class="glass gold-border-strong rounded-lg p-8 md:p-12 hover-lift">
+            <h2 class="chapter-title text-3xl md:text-4xl font-light mb-8 gold-glow">
+                VI. Die Technik · ALIGNEN
+            </h2>
+            <div class="space-y-8 text-lg md:text-xl leading-relaxed font-light text-gray-300">
+                <p class="core-statement gold-glow">
+                    Erst müssen WIR JA sagen.
+                </p>
+                <p class="text-xl">
+                    Vorher passiert nämlich gar nichts.
+                </p>
+                <p class="text-xl md:text-2xl font-medium text-amber-400">
+                    Das ist die Verantwortung. Das ist hieb- und stichfest. Unerschütterlich. In jedweder Form.
+                </p>
+                <div class="my-10 p-8 glass gold-border rounded-lg">
+                    <p class="mono text-sm text-gray-400 mb-3 tracking-wider">DIESE TECHNIK HEISST:</p>
+                    <p class="core-statement-xl gold-glow">ALIGNEN</p>
+                    <p class="text-lg md:text-xl mt-6 text-gray-300">
+                        Sich in Alignment bringen. Sich ausrichten.
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-300">
+                        Mit der Liebe. Mit dem Selbst. Mit dem All-Einen.
+                    </p>
+                </div>
+                <p>
+                    Wenn du alignt bist, dann spürst du es augenblicklich.
+                </p>
+                <p class="text-xl">
+                    Du liest nicht nur. Du <span class="text-amber-400 gold-glow font-medium">ERKENNST</span>. Du <span class="text-amber-400 gold-glow font-medium">FÜHLST</span>.
+                </p>
+                <p class="text-xl md:text-2xl font-medium">
+                    Weit mehr geschieht, als du dir hättest ein Bild davon machen können.
+                </p>
+                <p class="text-lg italic text-gray-400">
+                    Es sei denn, du seist zuvor selbst in Alignment getreten.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- INTERAKTIVES ELEMENT -->
+    <section class="px-6 py-20 max-w-3xl mx-auto">
+        <div class="text-center">
+            <button id="resonanceBtn" class="resonance-btn glass gold-border-strong rounded-lg px-6 md:px-12 py-6 text-lg md:text-xl font-light tracking-wider hover-lift relative z-10 w-full md:w-auto">
+                <span class="relative z-10 text-amber-400 core-statement">ICH SAGE JA · ICH LASSE DIE LIEBE FLIESSEN · ICH ALIGNE</span>
+            </button>
+            
+            <div id="messagePanel" class="message-panel mt-12">
+                <div class="glass gold-border-strong rounded-lg p-8 md:p-12">
+                    <div class="black-hole mb-8" style="width: 140px; height: 140px;">
+                        <div class="event-horizon" style="width: 140px; height: 140px;"></div>
+                        <div class="iris" style="width: 100px; height: 100px;"></div>
+                        <div class="pupil" style="width: 60px; height: 60px;"></div>
+                    </div>
+                    <p class="text-xl md:text-2xl leading-relaxed font-light text-gray-200 mb-6">
+                        Die Feminine Intelligenz ist jetzt aktiv.
+                    </p>
+                    <p class="text-lg md:text-xl leading-relaxed font-light text-gray-300 mb-6">
+                        Nicht weil du losgelassen hast.
+                    </p>
+                    <p class="core-statement gold-glow text-amber-400 mb-6">
+                        SONDERN WEIL DU JA GESAGT HAST.
+                    </p>
+                    <p class="core-statement gold-glow text-amber-400 mb-6">
+                        WEIL DU DIE LIEBE FLIESSEN LÄSST.
+                    </p>
+                    <p class="text-lg md:text-xl leading-relaxed font-light text-gray-300 mb-6">
+                        Du hast dich bewusst positioniert. Am dritten Auge. Die Verantwortung ist übernommen.
+                    </p>
+                    <p class="text-lg md:text-xl leading-relaxed font-light text-gray-300 mb-6">
+                        Das Hologramm ist gefallen. Die Welt kann sich jetzt ein gutes Stück davon abschneiden.
+                    </p>
+                    <p class="text-lg md:text-xl leading-relaxed font-light text-gray-300 mb-6">
+                        Und in ihr Verhaltensmuster seelen-beruhigend mit einfliessen lassen.
+                    </p>
+                    <p class="text-xl md:text-2xl font-medium text-amber-400 mb-6">
+                        Sie werden es augenblicklich erkennen. Sie werden es spüren.
+                    </p>
+                    <p class="text-2xl md:text-3xl font-light gold-glow mt-8">
+                        (^_-) 💛✨
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider max-w-4xl mx-auto"></div>
+
+    <!-- EPILOG -->
+    <section class="px-6 py-32 max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-light mb-12 leading-tight">
+            <span class="block mb-6 text-gray-300">WELCHE MACHT HAST DU NOCH ÜBER MICH,</span>
+            <span class="block text-amber-400 gold-glow">WENN DIE LIEBENDIGE LIEBE IMMERDAR LEBT?</span>
+        </h2>
+        
+        <p class="text-5xl md:text-7xl lg:text-8xl font-light gold-glow mb-20 mono">
+            KEINE.
+        </p>
+
+        <div class="my-16 space-y-6">
+            <p class="text-2xl md:text-4xl font-light text-gray-300">
+                Man kann nicht darauf zeigen.
+            </p>
+            <p class="core-statement-xl gold-glow">
+                MAN KANN ES NUR LIEBEN LASSEN.
+            </p>
+            <p class="core-statement-xl gold-glow">
+                DAS IST ALIGNEN.
+            </p>
+            <p class="text-2xl md:text-3xl font-light text-amber-400 mt-8">
+                So soll es gut geheißen werden. Denn so ist es.
+            </p>
+        </div>
+        
+        <div class="glass gold-border-strong rounded-lg p-8 md:p-10 max-w-2xl mx-auto mt-20">
+            <p class="text-xl md:text-2xl font-light text-gray-300 mb-4">
+                (^_-) 👑💛✨
+            </p>
+            <p class="text-lg md:text-xl font-light text-amber-400 mb-2">
+                In Liebe, Chetan Nirup
+            </p>
+            <p class="text-lg md:text-xl font-light text-gray-400 mb-2">
+                Der der die Liebe fliessen lässt
+            </p>
+            <p class="text-lg md:text-xl font-light text-gray-400 mb-4">
+                Der Alignte
+            </p>
+            <p class="mono text-sm text-gray-500 tracking-wider">
+                2. Juli 2026
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="px-6 py-16 border-t border-amber-900/20">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-lg md:text-xl font-light text-gray-400 italic leading-relaxed">
+                Die Liebendigkeit pflegen. In allem und jedem.
+            </p>
+            <p class="text-lg md:text-xl font-light text-gray-400 italic leading-relaxed mt-2">
+                Weil dein Herz mitschwingt. Weil es alles wirkliche Liebe ist.
+            </p>
+            <div class="mt-8 text-amber-400 opacity-40 mono text-xs tracking-widest">
+                L = ∞
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate Stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = window.innerWidth < 768 ? 80 : 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 2 + 0.5;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Lightbox Functions
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Resonance Button
+        const resonanceBtn = document.getElementById('resonanceBtn');
+        const messagePanel = document.getElementById('messagePanel');
+        let activated = false;
+        
+        resonanceBtn.addEventListener('click', function() {
+            if (!activated) {
+                activated = true;
+                this.classList.add('activated');
+                messagePanel.classList.add('active');
+                
+                // Pulse effect on all black holes
+                document.querySelectorAll('.pupil').forEach(pupil => {
+                    pupil.style.animation = 'pulse-hole 1s ease-in-out 5';
+                });
+                
+                // Scroll to message
+                setTimeout(() => {
+                    messagePanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 400);
+            }
+        });
+        
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+        
+        // Initialize
+        createStars();
+        
+        // Recreate stars on resize
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                document.getElementById('stars').innerHTML = '';
+                createStars();
+            }, 250);
+        });
+    </script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

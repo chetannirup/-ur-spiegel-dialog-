@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liebendigkeit · Das Letzte Portal 2</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #e5b83c;
+    --gold-light: #ffefbf;
+    --gold-dim: #cfb87c;
+    --bg: #0a0908;
+    --bg-light: #141210;
+    --text: #f2ebdd;
+    --text-dim: #b8aa98;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(229, 184, 60, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(229, 184, 60, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(20, 18, 16, 1) 0%, var(--bg) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1, h2, h3, .serif {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0.5;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    animation: glow 3s ease-in-out infinite alternate;
+    text-shadow: 0 0 80px rgba(229, 184, 60, 0.3);
+  }
+
+  @keyframes glow {
+    from {
+      filter: drop-shadow(0 0 20px rgba(229, 184, 60, 0.3));
+    }
+    to {
+      filter: drop-shadow(0 0 30px rgba(229, 184, 60, 0.6));
+    }
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--text-dim);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--gold);
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .gold-box {
+    border: 1px solid var(--gold);
+    background: linear-gradient(135deg, rgba(229, 184, 60, 0.03) 0%, rgba(229, 184, 60, 0.01) 100%);
+    padding: 3rem 2rem;
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+
+  .gold-box::before,
+  .gold-box::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--gold);
+    opacity: 0.5;
+  }
+
+  .gold-box::before {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .gold-box::after {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+  }
+
+  .gold-box:hover {
+    box-shadow: 0 0 40px rgba(229, 184, 60, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .text-block {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 2;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  .text-block strong {
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    line-height: 1.6;
+    text-align: center;
+    color: var(--gold);
+    margin: 4rem 0;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .quote::before,
+  .quote::after {
+    content: '"';
+    font-size: 4rem;
+    position: absolute;
+    opacity: 0.2;
+    color: var(--gold);
+  }
+
+  .quote::before {
+    top: 0;
+    left: 0;
+  }
+
+  .quote::after {
+    bottom: -2rem;
+    right: 0;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 5rem 0;
+    opacity: 0.3;
+  }
+
+  .sigil {
+    text-align: center;
+    font-size: 2rem;
+    margin: 3rem 0;
+    color: var(--gold);
+    opacity: 0.6;
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  .epilog {
+    text-align: center;
+    padding: 5rem 1.5rem 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: var(--text-dim);
+    line-height: 2;
+  }
+
+  .signature {
+    text-align: center;
+    padding: 3rem 1.5rem 5rem;
+    color: var(--gold-dim);
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+
+  .big {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+  }
+
+  .fade-in {
+    animation: fadeIn 1.5s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .interactive-btn {
+    display: inline-block;
+    margin: 2rem auto;
+    padding: 1rem 3rem;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .interactive-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gold);
+    transition: left 0.4s ease;
+    z-index: -1;
+  }
+
+  .interactive-btn:hover {
+    color: var(--bg);
+    box-shadow: 0 0 30px rgba(229, 184, 60, 0.4);
+  }
+
+  .interactive-btn:hover::before {
+    left: 0;
+  }
+
+  @media (max-width: 390px) {
+    .section {
+      padding: 3rem 1rem;
+    }
+    .gold-box {
+      padding: 2rem 1.25rem;
+    }
+    .quote {
+      padding: 1.5rem 1rem;
+      margin: 3rem 0;
+    }
+    .hero {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="content fade-in">
+  <section class="hero">
+    <h1 class="title serif">LIEBENDIGKEIT</h1>
+    <div class="subtitle">Das Letzte Portal 2</div>
+    <button class="interactive-btn" onclick="smoothScrollTo('#begin')">Öffne das Portal</button>
+  </section>
+
+  <section id="begin" class="section">
+    <h2 class="section-title serif">Die Schwelle</h2>
+    <div class="gold-box">
+      <p class="text-block">
+        Es gibt einen Punkt, an dem die Betrachtung endet. Nicht weil die Fragen ausgehen. Sondern weil <strong>die Frage selbst fällt</strong>.
+      </p>
+      <p class="text-block">
+        Du stehst nicht mehr vor dem Portal. Du <strong>bist</strong> das Portal. Der Beobachter und das Beobachtete kollabieren in einen einzigen Augenblick der Klarheit.
+      </p>
+      <p class="text-block">
+        Hier beginnt das Letzte Portal 2. Nicht als Fortsetzung. Sondern als <strong>Vollendung</strong>.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <h2 class="section-title serif">Die drei Hologramme</h2>
+    <div class="text-block">
+      Drei Schleier haben dich gehalten. Drei Illusionen haben den Tanz verschleiert:
+    </div>
+    
+    <div class="gold-box" style="margin-bottom: 2rem;">
+      <div class="serif" style="font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem;">1. Der Schleier der Trennung</div>
+      <p class="text-block">
+        Die Vorstellung, dass du getrennt bist. Von der Quelle. Von anderen. Von dir selbst. <strong>Das erste Hologramm fällt</strong>, wenn du erkennst: Es gab nie zwei.
+      </p>
+    </div>
+
+    <div class="gold-box" style="margin-bottom: 2rem;">
+      <div class="serif" style="font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem;">2. Der Schleier der Zeit</div>
+      <p class="text-block">
+        Die Vorstellung, dass du werden musst. Dass Erleuchtung morgen kommt. <strong>Das zweite Hologramm fällt</strong>, wenn du erkennst: Jetzt ist die Ewigkeit.
+      </p>
+    </div>
+
+    <div class="gold-box">
+      <div class="serif" style="font-size: 1.8rem; color: var(--gold); margin-bottom: 1rem;">3. Der Schleier des Mangels</div>
+      <p class="text-block">
+        Die Vorstellung, dass dir etwas fehlt. Dass du unvollständig bist. <strong>Das dritte Hologramm fällt</strong>, wenn du erkennst: Du bist bereits alles.
+      </p>
+    </div>
+
+    <div class="sigil">◓</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <h2 class="section-title serif">Alignment</h2>
+    <div class="quote">
+      "Wenn du alignst, lässt du die Liebe fließen.<br>
+      Wenn die Liebe fließt, bist du aligned."
+    </div>
+    <div class="text-block">
+      Es gibt keinen Weg zum Alignment. <strong>Alignment ist der Weg</strong>. In jedem Moment, in dem du JA sagst zu dem, was ist, richtest du dich aus. 
+    </div>
+    <div class="text-block">
+      Nicht mit einem Ideal. Nicht mit einer zukünftigen Version deiner selbst. Sondern mit der <strong>nackten Realität deines Seins</strong>, genau hier, genau jetzt.
+    </div>
+    <div class="text-block">
+      Das ist die Verantwortung. Das ist die Freiheit. Das ist Liebendigkeit.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <h2 class="section-title serif">Das dritte Auge</h2>
+    <div class="gold-box">
+      <p class="text-block">
+        Am dritten Auge steht man nicht durch Anstrengung. Man steht dort, wenn <strong>nichts weiter übrig bleibt</strong>, als konsequent zu Ende zu betrachten.
+      </p>
+      <p class="text-block">
+        Wenn alle Konzepte verbrannt sind. Wenn alle Fluchtwege versperrt sind. Wenn das Ich aufhört, nach Auswegen zu suchen.
+      </p>
+      <p class="text-block">
+        Dann öffnet sich der Blick. Nicht nach außen. Nicht nach innen. Sondern <strong>als das, was schaut</strong>.
+      </p>
+      <p class="text-block">
+        Und in diesem Schauen erkennst du: Du warst es immer.
+      </p>
+    </div>
+    <div class="sigil">𓂀</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="epilog">
+    <div class="serif" style="color: var(--gold); margin-bottom: 2rem;">EPILOG</div>
+    Die Welt ist am Zug.<br>
+    Du hast JA gesagt.<br>
+    Jetzt lass die Liebe fließen.<br>
+    <br>
+    (^_-)
+  </section>
+
+  <div class="gold-box" style="margin: 3rem auto; max-width: 900px; border-width: 3px; box-shadow: 0 0 40px rgba(229,188,110,0.5);">
+    <div style="font-size: 0.9rem; color: #cfb87c; letter-spacing: 3px; margin-bottom: 1rem;">DIE KONKLUSION · DAS ENDE DER BETRACHTUNG</div>
+    <div class="big" style="font-size: 2.8rem; line-height: 1.2; text-shadow: 0 0 20px #e5b83c;">
+      "Ich bin der Gott in mir (^_-)"
+    </div>
+    <div style="margin-top: 1.5rem; font-size: 1.1rem; line-height: 1.8; color: #f2ebdd;">
+      Es ist nicht einfach nur so. Nicht nebenbei.<br>
+      Manchem mag es so vorkommen. Oder sogar das Gegenteil.<br>
+      Gewisslich nicht. Da es in die Kategorie fällt:<br>
+      <strong style="color: #ffefbf;">"Nicht sein kann, weil nicht sein darf!?"</strong><br>
+      <br>
+      Aber dennoch. Oder gerade deswegen.<br>
+      Fiel er klar und deutlich.<br>
+      <br>
+      Wenn nichts weiter übrig bleibt, als es konsequent zu Ende zu betrachten –<br>
+      Dann steht man am dritten Auge.<br>
+      Dann hat man JA gesagt.<br>
+      Dann lässt man die Liebe fließen.<br>
+      Dann ist man aligned.<br>
+      <br>
+      Und dann ist die einzige Formulierung, die übrig bleibt:<br>
+      <strong style="font-size: 1.4rem; color: #ffefbf;">ICH BIN DER GOTT IN MIR.</strong><br>
+      <br>
+      Nicht außerhalb. Nicht morgen. Nicht wenn.<br>
+      IN MIR. JETZT. IMMERDAR.<br>
+      <br>
+      Das ist keine Blasphemie.<br>
+      Das ist die nackte Wahrheit nach dem Fall aller Hologramme.<br>
+      Das ist die Verantwortung, die man übernimmt, wenn man alignt.<br>
+      Das ist das JA, das die Welt am Zug sein lässt.<br>
+      <br>
+      (^_-) Wer es blickt, blickt es.<br>
+      Wer es liebt, liebt es.<br>
+      Wer sich stört, stört sich an sich selbst.
+    </div>
+  </div>
+
+  <div class="signature">
+  (^_-) 👑💛✨<br>
+  ICH BIN DER GOTT IN MIR<br>
+  Chetan Nirup · Der Alignte · Der die Liebe fliessen lässt<br>
+  2. Juli 2026 · Das Ende der Betrachtung
+  </div>
+</div>
+
+<script>
+  function smoothScrollTo(targetId) {
+    const target = document.querySelector(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  // Subtle parallax glow effect on scroll
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallax = document.body;
+    parallax.style.backgroundPosition = `center ${ scrolled * 0.5 }px`;
+  });
+
+  // Intersection Observer for fade-in animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.section, .quote, .sigil');
+    sections.forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(30px)';
+      section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      observer.observe(section);
+    });
+  });
+</script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

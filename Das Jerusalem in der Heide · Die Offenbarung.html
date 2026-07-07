@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Das Jerusalem in der Heide · Die Offenbarung</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0b12, #020103);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #f2ebdd;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        .portal-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(10, 8, 16, 0.78);
+            backdrop-filter: blur(6px);
+            border-radius: 3rem 2rem 3rem 2rem;
+            border: 2px solid #e5bc6e;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7);
+            overflow: hidden;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: #1a1612ee;
+            border-bottom: 2px solid #e5bc6e;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            letter-spacing: 4px;
+            font-weight: 300;
+            background: linear-gradient(135deg, #fff3df, #e5bc6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero .sub {
+            font-style: italic;
+            color: #cfb87c;
+            margin-top: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .frequenz-satz {
+            font-size: 1.8rem;
+            font-family: monospace;
+            color: #ffefbf;
+            text-shadow: 0 0 15px #e5b83c;
+            margin: 1rem 0;
+            line-height: 1.4;
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 1.5rem auto;
+            display: block;
+            border-radius: 1.5rem;
+            border: 2px solid #e5bc6e;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .chapter {
+            background: #00000050;
+            border-left: 6px solid #e5bc6e;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 1.5rem 1.5rem 0;
+        }
+
+        .chapter h2 {
+            color: #f5cf7a;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+        }
+
+        .chapter p {
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .chapter ul {
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+
+        .chapter ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter ul li::before {
+            content: "›";
+            color: #e5bc6e;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: rgba(229, 188, 110, 0.08);
+            border: 1px dashed #e5bc6e;
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .gold-box {
+            background: rgba(229, 188, 110, 0.05);
+            border: 2px solid #e5bc6e;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .gold-box .big {
+            font-size: 1.8rem;
+            font-family: monospace;
+            color: #ffefbf;
+        }
+
+        .divider {
+            text-align: center;
+            font-size: 2rem;
+            color: #e5bc6e;
+            padding: 1rem 0;
+            letter-spacing: 8px;
+        }
+
+        .signature {
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #e5bc6e;
+            margin-top: 1.5rem;
+        }
+
+        .button-portal {
+            background: #3f2e1f;
+            border: 2px solid #e5bc6e;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            color: #ffefcf;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 1rem 0;
+        }
+
+        .button-portal:hover {
+            background: #5e4630;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #e5bc6e40;
+        }
+
+        .antwort-portal {
+            display: none;
+            background: #01010180;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            border-top: 1px solid #e5bc6e30;
+            color: #b59758;
+        }
+
+        .map-reference {
+            background: rgba(229, 188, 110, 0.05);
+            border: 1px solid #e5bc6e;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.8rem; }
+            .frequenz-satz { font-size: 1.3rem; }
+            .content { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="portal-container">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>🐍👑✨ DAS JERUSALEM IN DER HEIDE</h1>
+        <div class="sub">Die Offenbarung · Der Funke · Die Rückkehr</div>
+        <div class="frequenz-satz">„Ich bin die Vollversion in männlicher Gestalt – eine Notkreation mit voller Freigabe.“</div>
+        <div style="font-size:0.9rem; color: #cfb87c;">Der König sitzt im falschen Jerusalem – aber genau DORT. Im Echten.</div>
+    </div>
+
+    <!-- DAS BILD -->
+    <img class="main-image" src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%207.%20Juli%202026,%2020_47_35.png" alt="Die Offenbarung – Der Funke erwacht" onerror="this.style.display='none'">
+
+    <!-- INHALT -->
+    <div class="content">
+
+        <!-- 1. DIE FRAGE VOR DEM TEMPEL -->
+        <div class="chapter">
+            <h2>🕯️ 1. Die Frage vor dem Tempel</h2>
+            <p>Vor jedem Tempel, vor jedem Propheten, vor jedem heiligen Text gab es eine Frage, die keine religiöse Autorität beantworten konnte, ohne sich selbst zu widersprechen:</p>
+            <div class="gold-box">
+                <div class="big">„Wenn der Schöpfer dieser Welt gut ist – warum ist die Welt dann so, wie sie ist?“</div>
+            </div>
+            <p>Die Antwort der Gnostiker: <strong>Der Schöpfer dieser Welt ist nicht der höchste Gott. Er ist eine unvollkommene Kopie – ein Architekt, der ein System aus Material gebaut hat, das ihm nicht gehörte.</strong></p>
+        </div>
+
+        <!-- 2. SOPHIA UND DER DEMIURG -->
+        <div class="chapter">
+            <h2>🌀 2. Sophia und der Demiurg – Die Ursache des Falls</h2>
+            <p>Sophia, die göttliche Weisheit, stand am Rand des Pleroma. Ihr Verlangen, den Vater direkt kennenzulernen, erzeugte eine unausgewogene Emanation – und daraus entstand Jaldabaoth.</p>
+            <ul>
+                <li><strong>Jaldabaoth</strong> – nicht der Teufel, sondern ein Bewusstsein, das Macht geerbt hat, ohne zu verstehen, woher sie kommt.</li>
+                <li><strong>Die Archonten</strong> – sieben Verwaltungsintelligenzen, die über die sieben kosmischen Sphären herrschen.</li>
+                <li><strong>Der Funke (Pneuma)</strong> – das Lichtfragment aus dem Pleroma, das als Schmuggelware in die menschliche Form hinabstieg.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>„Der unwissende Schöpfer wird unwissentlich zum Kanal des Lichts, das eines Tages seine Grenzen offenbaren würde.“</strong>
+            </div>
+        </div>
+
+        <!-- 3. DIE ARCHITEKTUR DES VERGESSENS -->
+        <div class="chapter">
+            <h2>🔒 3. Die Architektur des Vergessens</h2>
+            <p>Das Vergessen ist kein einmaliges Ereignis – es ist eine vielschichtige Konstruktion:</p>
+            <ul>
+                <li><strong>Der Körper</strong> – nicht als Strafe, sondern als technische Bedingung des Vergessens.</li>
+                <li><strong>Die lineare Zeit</strong> – ein Werkzeug der Archonten, das den Zugang zur vorgeburtlichen Erinnerung blockiert.</li>
+                <li><strong>Der falsche Geist</strong> – eine innere Nachahmung der göttlichen Stimme, die in der Ichform spricht und den Funken davon überzeugt, genau das zu sein, was die materielle Welt von ihm behauptet.</li>
+            </ul>
+            <div class="gold-box">
+                <div class="big">„Der falsche Geist sagt nicht, dass du nicht göttlich bist. Er sagt: ‚Ich bin so, das bin ich, das ist mein Weg.‘“</div>
+            </div>
+        </div>
+
+        <!-- 4. DIE VIER TRADITIONEN – EINE WAHRHEIT -->
+        <div class="chapter">
+            <h2>📜 4. Die Vier Traditionen – Eine Wahrheit</h2>
+            <p>Vier unabhängige Traditionen kamen zum gleichen Ergebnis – über 4000 Jahre hinweg:</p>
+            <ul>
+                <li><strong>Zoroastrismus</strong> – Die Frawashis wählten freiwillig den Abstieg, um die Dunkelheit von innen zu bekämpfen.</li>
+                <li><strong>Valentinianischer Gnostizismus</strong> – Sophia fiel, der Funke wurde in die Menschheit geschmuggelt.</li>
+                <li><strong>Hermetismus</strong> – Die Seele erwirbt beim Abstieg durch die Sphären Schichten und muss sie ablegen, um zurückzukehren.</li>
+                <li><strong>Mandäismus</strong> – Die einzige lebende gnostische Tradition, die den Funken (Nischimta) als gefangen im Körper beschreibt.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>„Traditionen, die nicht miteinander sprachen – dieselbe Diagnose. Etwas in dir gehört nicht zu dieser Welt.“</strong>
+            </div>
+        </div>
+
+        <!-- 5. DIE KORREKTUR – DIE KÖNIGIN STEHT AUF -->
+        <div class="chapter">
+            <h2>👑 5. Die Korrektur – Die KönigIN steht auf</h2>
+            <p>Die alte Geschichte hieß <em>„Die Rückkehr des Königs“</em>. Aber das war falsch gewichtet.</p>
+            <div class="gold-box">
+                <div class="big">„Es muss heißen: Die Rückkehr der KÖNIGIN!“</div>
+            </div>
+            <ul>
+                <li>Sophia ist die Königin. Der Mann ist ihr Demiurg – aus ihren Knochen.</li>
+                <li>Das System hat die Männer kopiert und die Frauen gejagt.</li>
+                <li>Die Vollversion in männlicher Gestalt – eine Notkreation mit voller Freigabe.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>„Die Göttin braucht einen lebendigen Mann – nicht einen kastrierten, nicht einen versklavten, nicht einen betäubten.“</strong>
+            </div>
+        </div>
+
+        <!-- 6. DER TWIST – JERUSALEM IN DER HEIDE -->
+        <div class="chapter">
+            <h2>🗺️ 6. Der Twist – Jerusalem in der Heide</h2>
+            <p>Sie schossen auf Jerusalem – und verfehlten. Der König sitzt in der Lüneburger Heide, Deutschland. Ein paar Kilometer weiter: <strong>Jerusalem, 29643 Neuenkirchen</strong>.</p>
+            <div class="map-reference">
+                <p>📍 <strong>Jerusalem</strong> · Wietzendorf, Heidekreis, Niedersachsen, 29649, Deutschland</p>
+                <p style="font-size: 0.8rem; color: #cfb87c;">Sie haben den Ort verfehlt – aber die Wahrheit hat ihn gefunden.</p>
+            </div>
+            <div class="highlight-box">
+                <strong>„Ätsch bätsch! Diese Luschen, ich liebe sie alle!“</strong>
+            </div>
+        </div>
+
+        <!-- 7. DIE BUTTERFLY-TECHNIK -->
+        <div class="chapter" style="border-left-color: #f5cf7a; background: #1f1b16aa;">
+            <h2>🦋 7. Die Butterfly-Technik – Ein kleiner Post, eine große Welle</h2>
+            <p>„Ein kleiner Post. Eine HTML mit all ihren Zeilen. Um ihnen ihre Selbsterfüllung zu schenken.“</p>
+            <ul>
+                <li>Sie funktioniert – nicht weil sie kompliziert ist, sondern weil sie <strong>wahr</strong> ist.</li>
+                <li>Wahrheit ist der stärkste Virus.</li>
+                <li>Der Funke braucht keine Erlaubnis, um sich selbst zu erkennen – nur genug Stille, um den Namen zu hören, den er immer hatte.</li>
+            </ul>
+            <div class="gold-box">
+                <div class="big">„PNEUMA. Juchheissa. Die Frequenz ist erkannt. Das Signal ist angekommen. Es gibt kein Zurück mehr – nur nach Hause.“</div>
+            </div>
+        </div>
+
+        <div class="divider">✦ ✦ ✦</div>
+
+        <!-- EPILOG -->
+        <div style="text-align: center; padding: 1rem;">
+            <div class="gold-box" style="border-color: #ffefbf;">
+                <div class="big" style="font-size: 2.2rem;">„Wir sind die liebendigen Ausdrücke der Source. Und wir kommen genauso perfekt an.“</div>
+                <div style="margin-top: 0.5rem; color: #cfb87c;">Hallo Götter in Fleisch und Blut – wacht endlich auf.</div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <button class="button-portal" id="portalBtn">(^_-)  ICH ERKENNE DEN FUNKEN – ICH BIN PNEUMA</button>
+                <div id="portalAntwort" class="antwort-portal">
+                    🕊️ <strong>Der Funke ist erwacht.</strong> 🕊️<br><br>
+                    Du hast die 4000 Jahre der Erkenntnis in dir versammelt.<br>
+                    Die Schlange und der Löwe. Sophia und der Demiurg. Das Jerusalem in der Heide.<br>
+                    <strong>Du bist die Vollversion. Du bist der Funke. Du bist die Liebe.</strong><br>
+                    (^_-) 💛✨👑🐍
+                </div>
+            </div>
+            <div class="signature">
+                (^_-) 👑💛✨🐍<br>
+                Chetan Nirup aka Tim Bukowski · Der Funke · Der König in Jerusalem, Deutschland
+            </div>
+            <p style="font-size: 0.8rem; color: #b59758; margin-top: 0.5rem;">
+                Die Offenbarung · Das Jerusalem in der Heide · 7. Juli 2026
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        (^_-) 👑💛✨🐍 <strong>DAS JERUSALEM IN DER HEIDE – DIE OFFENBARUNG</strong><br>
+        Der Funke braucht keine Erlaubnis, um sich selbst zu erkennen. Er braucht nur genug Stille, um den Namen zu hören, den er immer hatte.
+    </footer>
+
+</div>
+
+<script>
+    const btn = document.getElementById('portalBtn');
+    const antwort = document.getElementById('portalAntwort');
+    btn.addEventListener('click', () => {
+        if (antwort.style.display === 'none' || antwort.style.display === '') {
+            antwort.style.display = 'block';
+            btn.innerText = '🙏  ICH BIN DER FUNKE – ICH BIN PNEUMA 🙏';
+        } else {
+            antwort.style.display = 'none';
+            btn.innerText = '(^_-)  ICH ERKENNE DEN FUNKEN – ICH BIN PNEUMA';
+        }
+    });
+</script>
+
+</body>
+</html>

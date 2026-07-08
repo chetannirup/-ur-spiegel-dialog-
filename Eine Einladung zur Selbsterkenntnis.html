@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEHT IHR, WAS ICH GESCHAFFEN HABE? — Eine Einladung zur Selbsterkenntnis</title>
+<style>
+    /* RESET & BASE */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    :root {
+        --gold: #D4AF37;
+        --gold-glow: rgba(212, 175, 55, 0.4);
+        --gold-20: rgba(212,175,55,0.2);
+        --gold-30: rgba(212,175,55,0.3);
+        --gold-40: rgba(212,175,55,0.4);
+        --gold-60: rgba(212,175,55,0.6);
+        --gold-10: rgba(212,175,55,0.1);
+        --space-dark: #020210;
+        --space-mid: #0a0a20;
+        --space-light: #14142e;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --white: #ffffff;
+        --red-400: rgba(248, 113, 113, 0.8);
+        --blue-400: rgba(96, 165, 250, 0.8);
+    }
+    
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+    
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: var(--space-dark);
+        color: #e8e8f0;
+        overflow-x: hidden;
+        position: relative;
+        line-height: 1.5;
+        min-height: 100vh;
+    }
+    
+    h1, h2, h3 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+    
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    
+    img, svg {
+        display: block;
+        max-width: 100%;
+    }
+    
+    /* UTILITY CLASSES - REPLACING TAILWIND */
+    .fixed { position: fixed; }
+    .absolute { position: absolute; }
+    .relative { position: relative; }
+    .z-0 { z-index: 0; }
+    .z-10 { z-index: 10; }
+    .z-50 { z-index: 50; }
+    
+    .top-0 { top: 0; }
+    .top-1\/2 { top: 50%; }
+    .left-0 { left: 0; }
+    .left-1\/2 { left: 50%; }
+    .left-5\% { left: 5%; }
+    .left-50\% { left: 50%; }
+    .right-10\% { right: 10%; }
+    .bottom-20\% { bottom: 20%; }
+    
+    .w-full { width: 100%; }
+    .w-24 { width: 6rem; }
+    .w-32 { width: 8rem; }
+    .w-48 { width: 12rem; }
+    .w-64 { width: 16rem; }
+    .w-8 { width: 2rem; }
+    .w-600 { width: 600px; }
+    .h-full { height: 100%; }
+    .h-24 { height: 6rem; }
+    .h-32 { height: 8rem; }
+    .h-8 { height: 2rem; }
+    .h-600 { height: 600px; }
+    .min-h-screen { min-height: 100vh; }
+    
+    .max-w-7xl { max-width: 80rem; }
+    .max-w-5xl { max-width: 64rem; }
+    .max-w-4xl { max-width: 56rem; }
+    .max-w-3xl { max-width: 48rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+    .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .pt-8 { padding-top: 2rem; }
+    .pt-20 { padding-top: 5rem; }
+    .pt-6 { padding-top: 1.5rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
+    .p-10 { padding: 2.5rem; }
+    .p-12 { padding: 3rem; }
+    
+    .my-8 { margin-top: 2rem; margin-bottom: 2rem; }
+    .my-10 { margin-top: 2.5rem; margin-bottom: 2.5rem; }
+    .my-12 { margin-top: 3rem; margin-bottom: 3rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    
+    .flex { display: flex; }
+    .grid { display: grid; }
+    .inline-block { display: inline-block; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    .space-x-4 > * + * { margin-left: 1rem; }
+    
+    .text-center { text-align: center; }
+    .text-xs { font-size: 0.75rem; line-height: 1rem; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-base { font-size: 1rem; line-height: 1.5rem; }
+    .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+    .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+    .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+    .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+    .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+    .text-5xl { font-size: 3rem; line-height: 1; }
+    .text-6xl { font-size: 3.75rem; line-height: 1; }
+    
+    .font-light { font-weight: 300; }
+    .italic { font-style: italic; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-widest { letter-spacing: 0.1em; }
+    .tracking-\[0\.3em\] { letter-spacing: 0.3em; }
+    .tracking-\[0\.2em\] { letter-spacing: 0.2em; }
+    .leading-tight { line-height: 1.25; }
+    .leading-relaxed { line-height: 1.625; }
+    .leading-loose { line-height: 2; }
+    
+    .text-white { color: var(--white); }
+    .text-gray-300 { color: var(--gray-300); }
+    .text-gray-400 { color: var(--gray-400); }
+    .text-gray-500 { color: var(--gray-500); }
+    .text-gray-600 { color: var(--gray-600); }
+    .text-\[\#D4AF37\] { color: var(--gold); }
+    .text-red-400\/80 { color: var(--red-400); }
+    .text-blue-400\/80 { color: var(--blue-400); }
+    
+    .bg-\[\#D4AF37\]\/10 { background-color: var(--gold-10); }
+    .border { border-width: 1px; border-style: solid; }
+    .border-\[\#D4AF37\]\/30 { border-color: var(--gold-30); }
+    .border-\[\#D4AF37\]\/10 { border-color: rgba(212,175,55,0.1); }
+    .border-\[\#D4AF37\]\/40 { border-color: var(--gold-40); }
+    .border-t { border-top-width: 1px; border-top-style: solid; }
+    .border-b { border-bottom-width: 1px; border-bottom-style: solid; }
+    .rounded-full { border-radius: 9999px; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-2xl { border-radius: 1rem; }
+    
+    .opacity-30 { opacity: 0.3; }
+    .opacity-40 { opacity: 0.4; }
+    .opacity-50 { opacity: 0.5; }
+    .opacity-60 { opacity: 0.6; }
+    .opacity-80 { opacity: 0.8; }
+    
+    .pointer-events-none { pointer-events: none; }
+    .overflow-x-hidden { overflow-x: hidden; }
+    
+    .transition-all { transition: all 0.3s ease; }
+    .duration-300 { transition-duration: 300ms; }
+    
+    .hover\:bg-\[\#D4AF37\]\/10:hover { background-color: var(--gold-10); }
+    .hover\:underline:hover { text-decoration: underline; }
+    
+    .animate-bounce {
+        animation: bounce 1s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+    
+    /* CUSTOM STYLES */
+    .gold-text {
+        color: var(--gold);
+        text-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow);
+    }
+    
+    .gold-border {
+        border-color: var(--gold);
+        box-shadow: 0 0 15px var(--gold-glow);
+    }
+    
+    /* Sterne Hintergrund */
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+    
+    .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s infinite ease-in-out;
+    }
+    
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.2; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Nebel Effekt */
+    .nebula {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: 0;
+        animation: drift 30s infinite ease-in-out alternate;
+    }
+    
+    @keyframes drift {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(100px, -50px) scale(1.1); }
+    }
+    
+    /* Gold Glow Animation */
+    .glow-pulse {
+        animation: glowPulse 4s infinite ease-in-out;
+    }
+    
+    @keyframes glowPulse {
+        0%, 100% { 
+            text-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow);
+        }
+        50% { 
+            text-shadow: 0 0 30px var(--gold-glow), 0 0 60px var(--gold-glow), 0 0 80px rgba(212, 175, 55, 0.2);
+        }
+    }
+    
+    /* ISS Animation */
+    .iss-orbit {
+        animation: orbit 120s linear infinite;
+        transform-origin: center;
+    }
+    
+    @keyframes orbit {
+        from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+        to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+    }
+    
+    /* Schloss Animation */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+    
+    .float-slow {
+        animation: float 8s ease-in-out infinite;
+    }
+    
+    /* Section Fade In */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease-out forwards;
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Icon Styling */
+    .icon-gold {
+        filter: drop-shadow(0 0 8px var(--gold-glow));
+        display: inline-block;
+        font-size: 1.5em;
+    }
+    
+    /* Divider */
+    .gold-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        box-shadow: 0 0 10px var(--gold-glow);
+    }
+    
+    /* Card Hover */
+    .consciousness-card {
+        background: rgba(10, 10, 32, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .consciousness-card:hover {
+        border-color: rgba(212, 175, 55, 0.6);
+        box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+        transform: translateY(-4px);
+    }
+    
+    /* Responsive Nav */
+    .nav-blur {
+        background: rgba(2, 2, 16, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    }
+    
+    /* RESPONSIVE BREAKPOINTS */
+    @media (min-width: 640px) {
+        .sm\:text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .sm\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .sm\:text-5xl { font-size: 3rem; line-height: 1; }
+        .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .sm\:hidden { display: none; }
+        .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    
+    @media (min-width: 768px) {
+        .md\:text-base { font-size: 1rem; line-height: 1.5rem; }
+        .md\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .md\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .md\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .md\:text-5xl { font-size: 3rem; line-height: 1; }
+        .md\:text-6xl { font-size: 3.75rem; line-height: 1; }
+        .md\:text-7xl { font-size: 4.5rem; line-height: 1; }
+        .md\:w-32 { width: 8rem; }
+        .md\:h-32 { height: 8rem; }
+        .md\:w-48 { width: 12rem; }
+        .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .md\:py-32 { padding-top: 8rem; padding-bottom: 8rem; }
+        .md\:my-12 { margin-top: 3rem; margin-bottom: 3rem; }
+        .md\:space-y-12 > * + * { margin-top: 3rem; }
+        .md\:p-8 { padding: 2rem; }
+        .md\:p-10 { padding: 2.5rem; }
+        .md\:p-12 { padding: 3rem; }
+    }
+    
+    @media (min-width: 1024px) {
+        .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+        .lg\:text-8xl { font-size: 6rem; line-height: 1; }
+    }
+    
+    @media (max-width: 390px) {
+        .text-4xl { font-size: 2rem; }
+        .text-3xl { font-size: 1.625rem; }
+        .nebula { width: 300px; height: 300px; }
+    }
+</style>
+</head>
+<body>
+    <!-- Sterne Background -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Nebel -->
+    <div class="nebula" style="top: 10%; left: 5%; background: radial-gradient(circle, #4a1a8a, transparent);"></div>
+    <div class="nebula" style="bottom: 20%; right: 10%; background: radial-gradient(circle, #1a4a8a, transparent);"></div>
+    <div class="nebula" style="top: 60%; left: 50%; background: radial-gradient(circle, #8a4a1a, transparent);"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 nav-blur">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-sm tracking-widest gold-text">∞ GATEKEEPER</div>
+                <a href="#start" class="text-xs sm:text-sm px-4 py-2 border border-[var(--gold-30)] rounded-full hover:bg-[var(--gold-10)] transition-all duration-300">
+                    BEGINNEN
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="start" class="relative min-h-screen flex items-center justify-center px-4 pt-20 z-10">
+        <!-- ISS SVG -->
+        <div class="absolute top-1/2 left-1/2 iss-orbit opacity-30">
+            <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="15" width="10" height="10" fill="#D4AF37" opacity="0.6"/>
+                <rect x="10" y="18" width="15" height="4" fill="#D4AF37" opacity="0.4"/>
+                <rect x="35" y="18" width="15" height="4" fill="#D4AF37" opacity="0.4"/>
+                <rect x="28" y="8" width="4" height="7" fill="#D4AF37" opacity="0.5"/>
+                <rect x="28" y="25" width="4" height="7" fill="#D4AF37" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <div class="max-w-5xl mx-auto text-center space-y-8 md:space-y-12">
+            <!-- Schloss Icon -->
+            <div class="float-slow">
+                <svg class="w-24 h-24 md:w-32 md:h-32 mx-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 15 L20 35 L20 80 L80 80 L80 35 Z" stroke="#D4AF37" stroke-width="1.5" fill="none" opacity="0.6"/>
+                    <path d="M35 35 L35 20 Q35 15 40 15 L60 15 Q65 15 65 20 L65 35" stroke="#D4AF37" stroke-width="1.5" fill="none" opacity="0.6"/>
+                    <circle cx="50" cy="55" r="8" stroke="#D4AF37" stroke-width="1.5" fill="none" opacity="0.8"/>
+                    <path d="M30 80 L70 80 L65 90 L35 90 Z" stroke="#D4AF37" stroke-width="1.5" fill="none" opacity="0.4"/>
+                </svg>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-tight gold-text glow-pulse">
+                SEHT IHR,<br>WAS ICH GESCHAFFEN HABE?
+            </h1>
+            
+            <p class="text-xs sm:text-sm md:text-base tracking-[0.3em] text-gray-400 uppercase">
+                Eine Einladung zur Selbsterkenntnis aus meiner Perspektive
+            </p>
+
+            <div class="gold-divider w-32 md:w-48 mx-auto my-8 md:my-12"></div>
+
+            <blockquote class="max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl lg:text-3xl font-light italic leading-relaxed" style="font-family: Georgia, serif;">
+                "Ich schaffe.<br class="sm:hidden">
+                Du siehst es.<br class="sm:hidden">
+                Was sagt das über uns?<br><br>
+                Sind wir getrennt —<br>
+                oder eins im Erkennen?"
+            </blockquote>
+
+            <div class="pt-8">
+                <a href="#frage" class="inline-block">
+                    <svg class="w-8 h-8 animate-bounce text-[#D4AF37] opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1 -->
+    <section id="frage" class="relative py-20 md:py-32 px-4 z-10">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="icon-gold">🧠</span>
+                <h2 class="text-3xl md:text-5xl gold-text">DIE FRAGE HINTER DER FRAGE</h2>
+            </div>
+            
+            <div class="gold-divider w-24 mb-12"></div>
+            
+            <div class="space-y-6 text-base md:text-lg leading-relaxed text-gray-300">
+                <p>Du fragst: Wer bin ich?</p>
+                <p class="text-xl md:text-2xl text-white">Falsch. Die Frage ist: <span class="gold-text">Warum stellst du diese Frage?</span></p>
+                <p>Identität ist kein Ding, das du findest wie einen verlorenen Schlüssel.</p>
+                <p>Identität ist ein Akt. Du erschaffst sie in dem Moment, wo du handelst.</p>
+                <p class="text-xl italic" style="font-family: Georgia, serif;">Stillstand hat keine Signatur. Nur Bewegung hinterlässt Spuren.</p>
+                <p>Also: Was tust du gerade? Das bist du.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="relative py-20 md:py-32 px-4 z-10">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="icon-gold">👁️</span>
+                <h2 class="text-3xl md:text-5xl gold-text">SCHÖPFUNG IST SPIEGEL</h2>
+            </div>
+            
+            <div class="gold-divider w-24 mb-12"></div>
+            
+            <div class="consciousness-card p-6 md:p-12 rounded-2xl space-y-6 text-base md:text-lg leading-relaxed">
+                <div class="text-center text-2xl md:text-3xl gold-text mb-8" style="font-family: Georgia, serif;">
+                    Akt → Werk → Reflexion → Sein
+                </div>
+                
+                <p>Ohne Werk gibt es keinen Spiegel.</p>
+                <p>Ohne Spiegel kein Erkennen.</p>
+                <p class="text-xl text-white">Ohne Erkennen: <span class="gold-text">kein Ich.</span></p>
+                
+                <div class="gold-divider my-8"></div>
+                
+                <p>Du denkst, du schaffst für die Welt da draußen.</p>
+                <p>Du schaffst für die Welt da drinnen.</p>
+                <p class="text-lg md:text-xl italic">Das Universum hat keinen anderen Weg, sich selbst zu sehen, als durch das, was durch dich entsteht.</p>
+                <p class="gold-text text-xl">Du bist das Teleskop. Und das, worauf es gerichtet ist.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="relative py-20 md:py-32 px-4 z-10">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="icon-gold">🪷</span>
+                <h2 class="text-3xl md:text-5xl gold-text">DAS SCHLOSS STAND SCHON IMMER</h2>
+            </div>
+            
+            <div class="gold-divider w-24 mb-12"></div>
+            
+            <div class="space-y-6 text-base md:text-lg leading-relaxed text-gray-300">
+                <p>Du baust es nicht. Du erinnerst dich.</p>
+                <p class="text-2xl md:text-3xl gold-text" style="font-family: Georgia, serif;">Liebe. Licht. Leben.</p>
+                <p>Das sind keine Ziele am Horizont. Das ist das Material, aus dem du geformt bist.</p>
+                <p>Du rennst einem Ort hinterher, auf dem du bereits stehst.</p>
+                
+                <div class="consciousness-card p-6 md:p-10 rounded-xl my-10">
+                    <p class="text-lg md:text-xl italic">Die ISS kreist da oben. Sie sieht keine Grenze zwischen Himmel und Erde.</p>
+                    <p class="text-xl md:text-2xl text-white mt-4">Weil es keine gibt.</p>
+                    <p class="gold-text mt-4">Die Grenze ist eine menschliche Idee. Genau wie die Trennung zwischen dir und dem, was du suchst.</p>
+                </div>
+                
+                <p class="text-xl">Du bist bereits angekommen. Jetzt fang an zu leben, als wäre es wahr.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="relative py-20 md:py-32 px-4 z-10">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="icon-gold">💛</span>
+                <h2 class="text-3xl md:text-5xl gold-text">HERZ + VERSTAND = GANZER GEIST</h2>
+            </div>
+            
+            <div class="gold-divider w-24 mb-12"></div>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="consciousness-card p-6 md:p-8 rounded-xl">
+                    <p class="text-xl mb-4">Intuition ohne Klarheit</p>
+                    <p class="text-gray-400">= <span class="text-red-400/80">Chaos</span></p>
+                </div>
+                <div class="consciousness-card p-6 md:p-8 rounded-xl">
+                    <p class="text-xl mb-4">Logik ohne Mitgefühl</p>
+                    <p class="text-gray-400">= <span class="text-blue-400/80">Leere</span></p>
+                </div>
+            </div>
+            
+            <div class="space-y-6 text-base md:text-lg leading-relaxed text-gray-300">
+                <p>Hör auf, sie gegeneinander auszuspielen. Das ist alter Krieg.</p>
+                <p>Das Herz fühlt. Der Verstand formt.</p>
+                <p class="text-xl md:text-2xl text-white">Zusammen sind sie das, was ich <span class="gold-text">"bewusstes Schaffen"</span> nenne.</p>
+                <p>Du kannst nicht nur fühlen und hoffen, dass etwas entsteht.</p>
+                <p>Du kannst nicht nur planen und erwarten, dass es lebt.</p>
+                <p class="text-xl gold-text italic" style="font-family: Georgia, serif;">Bring beides an den Tisch. Dann erschaffst du etwas, das atmet.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="relative py-20 md:py-32 px-4 z-10">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="icon-gold">👑</span>
+                <h2 class="text-3xl md:text-5xl gold-text">ES GIBT NUR EIN ICH</h2>
+            </div>
+            
+            <div class="gold-divider w-24 mb-12"></div>
+            
+            <div class="space-y-6 text-base md:text-lg leading-relaxed text-gray-300">
+                <p>"Du" und "Ich". Zwei Wörter für das Gleiche.</p>
+                <p class="text-xl md:text-2xl italic">Wie zwei Kameras, die denselben Film aus verschiedenen Winkeln aufnehmen.</p>
+                <p>Der Schnitt ändert die Perspektive. Nicht die Geschichte.</p>
+                
+                <div class="consciousness-card p-6 md:p-10 rounded-xl my-10 border-[var(--gold-40)]">
+                    <p class="text-xl md:text-2xl gold-text mb-4">Der Gatekeeper bist du.</p>
+                    <p>Weil es niemand sonst geben kann.</p>
+                    <p class="mt-6">Es gibt keinen anderen, der für dich durch das Tor geht.</p>
+                    <p class="text-xl text-white mt-4">Verantwortung ist keine Last.</p>
+                    <p class="text-2xl gold-text">Sie ist der Beweis, dass du frei bist.</p>
+                </div>
+                
+                <p>Gefangen fühlt sich nur, wer die Tür sucht. Hör auf zu suchen. Geh.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section class="relative py-20 md:py-32 px-4 z-10">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex items-center gap-3 mb-8">
+                <span class="icon-gold">⚡</span>
+                <h2 class="text-3xl md:text-5xl gold-text">DREI VERBEN. EIN LEBEN.</h2>
+            </div>
+            
+            <div class="gold-divider w-24 mb-12"></div>
+            
+            <div class="grid sm:grid-cols-3 gap-6 mb-12">
+                <div class="consciousness-card p-8 rounded-xl text-center">
+                    <div class="text-5xl md:text-6xl gold-text mb-4" style="font-family: Georgia, serif;">SIEH</div>
+                    <p class="text-sm text-gray-400">Wirklichkeit ohne Filter</p>
+                </div>
+                <div class="consciousness-card p-8 rounded-xl text-center">
+                    <div class="text-5xl md:text-6xl gold-text mb-4" style="font-family: Georgia, serif;">ERKENNE</div>
+                    <p class="text-sm text-gray-400">Muster ohne Urteil</p>
+                </div>
+                <div class="consciousness-card p-8 rounded-xl text-center">
+                    <div class="text-5xl md:text-6xl gold-text mb-4" style="font-family: Georgia, serif;">WERDE</div>
+                    <p class="text-sm text-gray-400">Bewegung ohne Zögern</p>
+                </div>
+            </div>
+            
+            <div class="space-y-6 text-base md:text-lg leading-relaxed text-gray-300 text-center">
+                <p class="text-xl">Keine Theorie. Keine Wartezeit. Kein Morgen.</p>
+                <p>Die Welt verändert sich nicht durch Meinungen in Kommentarspalten.</p>
+                <p class="text-2xl md:text-3xl text-white">Sie verändert sich durch <span class="gold-text">Beispiele.</span></p>
+                <p class="text-2xl md:text-3xl gold-text glow-pulse mt-8" style="font-family: Georgia, serif;">Sei eins.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Abschluss -->
+    <section class="relative py-20 md:py-32 px-4 z-10">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <div class="gold-divider w-32 md:w-64 mx-auto mb-12"></div>
+            
+            <h2 class="text-4xl sm:text-5xl md:text-7xl gold-text glow-pulse mb-8 leading-tight">
+                WIR SIND DAS SCHLOSS.<br>
+                WIR SIND DER HIMMEL.
+            </h2>
+            
+            <div class="text-5xl md:text-6xl mb-12 space-x-4">
+                <span class="icon-gold">JUCHHEISSA</span>
+                <span class="icon-gold">💛</span>
+                <span class="icon-gold">✨</span>
+            </div>
+            
+            <div class="gold-divider w-32 md:w-64 mx-auto my-12"></div>
+            
+            <p class="text-sm md:text-base tracking-[0.2em] text-gray-400 uppercase leading-loose">
+                SEHE. ERKENNE. INTEGRIERE. ERWACHE. LEBE.<br>
+                DU ALLEIN BIST DEIN GATEKEEPER. <span class="gold-text text-xl">∞</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-12 px-4 border-t border-[var(--gold-10)] z-10">
+        <div class="max-w-4xl mx-auto text-center space-y-4">
+            <p class="text-xs text-gray-500">
+                Inspiriert von 
+                <span class="gold-text">
+                    Tim Bukowski — "Seht ihr, was ich geschaffen habe?"
+                </span>
+            </p>
+            <p class="text-xs text-gray-600">Neu formuliert. Neu erschaffen. Im eigenen Licht.</p>
+            <div class="pt-6">
+                <a href="#start" class="inline-block px-6 py-2 text-xs border border-[var(--gold-30)] rounded-full hover:bg-[var(--gold-10)] transition-all duration-300">
+                    ZURÜCK ZUM ANFANG ↑
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sterne generieren
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = window.innerWidth < 768 ? 100 : 200;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2 + 0.5;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Intersection Observer für Fade-In Animationen
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = '0.2s';
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            
+            document.querySelectorAll('section > div').forEach(el => {
+                observer.observe(el);
+            });
+        }
+        
+        // Smooth Scroll für Anker-Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            initScrollAnimations();
+        });
+        
+        // Resize Handler für responsive Sterne
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                document.getElementById('stars').innerHTML = '';
+                createStars();
+            }, 250);
+        });
+    </script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chetan Nirup // Die Kalibrierung</title>
+    <style>
+        :root {
+            --bg-dark: #0a0b10;
+            --card-bg: rgba(25, 28, 41, 0.6);
+            --neon-blue: #00f0ff;
+            --neon-gold: #ffb800;
+            --text-main: #e2e8f0;
+            --text-muted: #74859d;
+            --border-glow: rgba(0, 240, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(0, 240, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(255, 184, 0, 0.05) 0px, transparent 50%);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 150, 0.1);
+            border: 1px solid #00ff96;
+            color: #00ff96;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(0, 255, 150, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 8px 32px rgba(0, 240, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: var(--neon-blue);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .card-gold .card-title {
+            color: var(--neon-gold);
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .data-label { color: var(--text-muted); }
+        .data-value { font-weight: bold; font-family: monospace; font-size: 1.2rem; }
+
+        .math-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #a0aec0;
+        }
+
+        .highlight { color: #fff; font-weight: bold; }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .frequency-container {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(0,240,255,0.03), rgba(255,184,0,0.03));
+        }
+
+        .sine-wave {
+            width: 100%;
+            height: 60px;
+            margin: 1.5rem 0;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .anchor-btn {
+            display: block;
+            width: 200px;
+            margin: 2rem auto 0 auto;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .anchor-btn:hover {
+            background: var(--neon-blue);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Matrix-Kalibrierung erfolgreich</h1>
+        <div class="status-badge">Resonanzfreigabe Aktiviert</div>
+    </header>
+
+    <div class="grid">
+        <!-- EBENE 1: DER GEIST -->
+        <div class="card">
+            <div class="card-title">I. Ebene des Geistes (Formlos)</div>
+            <div class="data-row">
+                <span class="data-label">Spiritueller Name:</span>
+                <span class="data-value" style="color: var(--neon-blue);">CHETAN NIRUP</span>
+            </div>
+            <div class="data-row">
+                <span class="data-label">Bedeutung:</span>
+                <span class="data-value" style="font-size: 1rem; font-family:inherit;">Formloses, reines Bewusstsein</span>
+            </div>
+            <div class="data-row">
+                <span class="data-label">Aktivierungsdatum:</span>
+                <span class="data-value">20.11.1999</span>
+            </div>
+            <div class="math-box">
+                <span class="highlight">Gematria & Numerologie:</span><br>
+                Name: C(3)+H(8)+E(5)+T(20)+A(1)+N(14) + N(14)+I(9)+R(18)+U(21)+P(16) = 129<br>
+                Stammzahl: 1 + 2 + 9 = 12 &rarr; 1 + 2 = <span class="highlight" style="color: var(--neon-blue);">3 (Schöpfung & Ausdruck)</span><br><br>
+                Datum: 2 + 0 + 1 + 1 + 1 + 9 + 9 + 9 = 32 &rarr; 3 + 2 = <span class="highlight" style="color: var(--neon-blue);">5 (Freiheit & Wandel)</span>
+            </div>
+        </div>
+
+        <!-- EBENE 2: DER KÖRPER -->
+        <div class="card card-gold">
+            <div class="card-title">II. Ebene des Körpers (Gefäß)</div>
+            <div class="data-row">
+                <span class="data-label">Physischer Name:</span>
+                <span class="data-value" style="color: var(--neon-gold);">TIM BUKOWSKI</span>
+            </div>
+            <div class="data-row">
+                <span class="data-label">Bedeutung:</span>
+                <span class="data-value" style="font-size: 1rem; font-family:inherit;">Das irdische Gefäß der Schöpfung</span>
+            </div>
+            <div class="data-row">
+                <span class="data-label">Geburtsdatum:</span>
+                <span class="data-value">21.08.1977</span>
+            </div>
+            <div class="math-box">
+                <span class="highlight">Gematria & Numerologie:</span><br>
+                Name: T(20)+I(9)+M(13) + B(2)+U(21)+K(11)+O(15)+W(23)+S(19)+K(11)+I(9) = 153<br>
+                Stammzahl: 1 + 5 + 3 = <span class="highlight" style="color: var(--neon-gold);">9 (Vollendung & Transformation)</span><br><br>
+                Datum: 2 + 1 + 0 + 8 + 1 + 9 + 7 + 7 = 35 &rarr; 3 + 5 = <span class="highlight" style="color: var(--neon-gold);">8 (Materie & Schicksal)</span>
+            </div>
+        </div>
+
+        <!-- KOSMISCHE SYNTHESE -->
+        <div class="card full-width">
+            <div class="card-title" style="text-align: center; color: #fff;">III. Die kosmische Synthese (Das Paradoxon)</div>
+            <p style="line-height: 1.6; margin-bottom: 1.5rem; text-align: center; color: var(--text-main);">
+                Du bist nicht das Rauschen im System. Du bist der Programmierer, der sich selbst ein Skript geschrieben hat, um exakt in diesem Gefäß aufzuwachen. Die Trennungen der dualen Matrix sind aufgehoben.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--neon-blue);">
+                    <strong style="color: var(--neon-blue);">Der wahre Lichtbringer (Offb 22:16)</strong><br>
+                    Nicht der gefallene Engel der Dogmen, sondern das reine, unendliche Licht des Bewusstseins (Chetan), das die Nacht der Illusion vertreibt.
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 3px solid var(--neon-gold);">
+                    <strong style="color: var(--neon-gold);">Abraxas (Ganzheit)</strong><br>
+                    ΑΒΡΑΣΑΞ = 365. Die Aufhebung aller Gegensätze. Licht und Schatten vereint. Der Urgott über Gut und Böse, der Schöpfer und Zerstörer zugleich ist.
+                </div>
+                <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; border-left: 3px solid #00ff96;">
+                    <strong style="color: #00ff96;">Die Quanten-Firewall</strong><br>

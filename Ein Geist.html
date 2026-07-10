@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WALSRODE – MEHR ALS ZUFALL? | Ein Experiment. Ein Geist. Ein Beobachter.</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Orbitron:wght@400;700&display=swap');
+
+:root {
+  --gold: #D4AF37;
+  --gold-light: #F4E4A6;
+  --gold-dark: #8B6914;
+  --deep-blue: #0a0e1a;
+  --midnight: #050810;
+  --warm-glow: rgba(212,175,55,0.15);
+  --heart-red: #ff6b6b;
+  --brain-blue: #4ecdc4;
+  --cyan: #00d4ff;
+  --purple: #b347d9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--midnight);
+  color: var(--gold-light);
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Cosmic Background */
+.cosmic-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(78,205,196,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(255,107,107,0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(179,71,217,0.03) 0%, transparent 60%),
+    linear-gradient(180deg, #050810 0%, #0a0e1a 50%, #050810 100%);
+  z-index: -2;
+}
+
+.stars {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle var(--duration) ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Floating particles */
+.particle {
+  position: fixed;
+  width: 2px; height: 2px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: float-up linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes float-up {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.4; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-10vh) translateX(80px); opacity: 0; }
+}
+
+/* Scanline effect */
+.scanlines {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.3;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+  animation: pulse-glow 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.7; }
+}
+
+/* Camera icons */
+.camera-pair {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+  padding: 0 2rem;
+}
+
+.camera-icon {
+  font-size: 2.5rem;
+  opacity: 0.6;
+  animation: camera-pulse 3s ease-in-out infinite;
+}
+
+.camera-icon.right { animation-delay: 1.5s; }
+
+@keyframes camera-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.8rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(212,175,55,0.4), 0 0 80px rgba(212,175,55,0.2);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+  line-height: 1.1;
+}
+
+.hero .subtitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  color: var(--cyan);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.hero .tagline {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: var(--gold-light);
+  letter-spacing: 0.2em;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
+
+/* Central image */
+.central-image {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(212,175,55,0.2), 0 0 160px rgba(212,175,55,0.1), inset 0 0 60px rgba(212,175,55,0.1);
+  border: 2px solid rgba(212,175,55,0.3);
+}
+
+.central-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(0.85) contrast(1.2) saturate(0.8);
+}
+
+.central-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, transparent 30%, rgba(5,8,16,0.7) 100%);
+}
+
+.central-overlay .on-air {
+  font-family: 'Orbitron', sans-serif;
+  color: #ff3333;
+  font-size: 1.2rem;
+  letter-spacing: 0.3em;
+  text-shadow: 0 0 20px rgba(255,51,51,0.8);
+  animation: blink 1.5s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.central-overlay .quote {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: var(--gold);
+  text-align: center;
+  padding: 0 2rem;
+  line-height: 1.6;
+  text-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+  color: var(--gold);
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* Content */
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Section styling */
+.section {
+  margin-bottom: 4rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+
+.section-number {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  color: var(--cyan);
+  min-width: 30px;
+}
+
+.section h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section p {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: rgba(244,228,166,0.85);
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* Data cards */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.data-card {
+  background: rgba(212,175,55,0.03);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.data-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.data-card h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.data-card .stat {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: var(--heart-red);
+  margin-bottom: 0.5rem;
+}
+
+.data-card .stat.positive { color: var(--brain-blue); }
+
+.data-card p {
+  font-size: 0.95rem;
+  color: rgba(244,228,166,0.7);
+  text-align: left;
+}
+
+/* Chart placeholder */
+.chart-placeholder {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1rem 0;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  color: rgba(244,228,166,0.4);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+}
+
+/* Experiment section */
+.experiment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.exp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(212,175,55,0.03);
+  border-radius: 10px;
+  border-left: 3px solid var(--purple);
+}
+
+.exp-item .icon {
+  font-size: 1.5rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+.exp-item h4 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.05em;
+}
+
+.exp-item p {
+  font-size: 0.9rem;
+  color: rgba(244,228,166,0.7);
+  margin: 0;
+  text-align: left;
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 15px;
+  border: 1px solid rgba(212,175,55,0.1);
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--heart-red), var(--gold), var(--brain-blue));
+  opacity: 0.5;
+}
+
+.timeline-step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-step .step-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.timeline-step h4 {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.timeline-step p {
+  font-size: 0.75rem;
+  color: rgba(244,228,166,0.6);
+  margin: 0;
+  text-align: center;
+}
+
+/* Integration box */
+.integration-box {
+  background: rgba(212,175,55,0.05);
+  border: 2px solid rgba(212,175,55,0.2);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.integration-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--heart-red), var(--gold), var(--brain-blue));
+}
+
+.integration-box .heart-brain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.integration-box .heart-brain .icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 15px currentColor);
+}
+
+.integration-box .heart-brain .plus {
+  font-size: 2rem;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+.integration-box .result {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--gold);
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.integration-box .result-sub {
+  font-size: 1.1rem;
+  color: rgba(244,228,166,0.8);
+}
+
+/* Gatekeeper */
+.gatekeeper {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin: 4rem 0;
+  background: 
+    radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%),
+    rgba(5,8,16,0.9);
+  border: 2px solid rgba(212,175,55,0.25);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gatekeeper .crown {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 25px var(--gold));
+  animation: crown-pulse 3s ease-in-out infinite;
+}
+
+@keyframes crown-pulse {
+  0%, 100% { filter: drop-shadow(0 0 15px var(--gold)); }
+  50% { filter: drop-shadow(0 0 35px var(--gold)); }
+}
+
+.gatekeeper h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.15em;
+}
+
+.gatekeeper p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  color: rgba(244,228,166,0.9);
+}
+
+.gatekeeper .highlight {
+  color: var(--gold);
+  font-weight: 600;
+  text-shadow: 0 0 15px rgba(212,175,55,0.3);
+}
+
+/* Prison falls */
+.prison-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  margin: 3rem 0;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 20px;
+  position: relative;
+}
+
+.prison-section .door-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 30px var(--gold));
+}
+
+.prison-section h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--gold);
+  margin-bottom: 1rem;
+  letter-spacing: 0.15em;
+}
+
+.prison-section p {
+  font-size: 1.1rem;
+  color: rgba(244,228,166,0.8);
+  max-width: 600px;
+  margin: 0 auto 1rem;
+}
+
+/* Final declaration */
+.final-declaration {
+  text-align: center;
+  padding: 5rem 2rem;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.final-declaration::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), var(--cyan), var(--gold), transparent);
+}
+
+.final-declaration .lotus {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 20px var(--gold));
+}
+
+.final-declaration h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 40px rgba(212,175,55,0.3);
+}
+
+.final-declaration .sub {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: var(--cyan);
+  letter-spacing: 0.2em;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.final-declaration .i-am {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  color: var(--gold-light);
+  letter-spacing: 0.15em;
+  margin: 1rem 0;
+}
+
+.final-declaration .juchheissa {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-top: 2rem;
+  letter-spacing: 0.4em;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  border-top: 1px solid rgba(212,175,55,0.1);
+  margin-top: 4rem;
+}
+
+.footer .mantra {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(244,228,166,0.4);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+.footer .signature {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .camera-pair { padding: 0 1rem; }
+  .camera-icon { font-size: 1.8rem; }
+  .timeline { flex-direction: column; gap: 1.5rem; }
+  .timeline::before { display: none; }
+  .integration-box .heart-brain { flex-direction: column; gap: 1rem; }
+  .data-grid { grid-template-columns: 1fr; }
+}
+
+/* Blockquote */
+.blockquote {
+  border-left: 3px solid var(--gold);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: rgba(244,228,166,0.9);
+  font-size: 1.1rem;
+}
+
+/* Links */
+.source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.source-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 25px;
+  color: var(--gold-light);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.source-links a:hover {
+  background: rgba(212,175,55,0.15);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* Numerology box */
+.numerology-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.num-card {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 12px;
+}
+
+.num-card .name {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.num-card .date {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--cyan);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.num-card .numbers {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.num-card .num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.num-card .num.blue { color: var(--brain-blue); }
+.num-card .num.red { color: var(--heart-red); }
+
+.num-card .meaning {
+  font-size: 0.85rem;
+  color: rgba(244,228,166,0.6);
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="cosmic-bg"></div>
+<div class="stars" id="stars"></div>
+<div id="particles"></div>
+<div class="scanlines"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="camera-pair">
+    <div class="camera-icon">📹</div>
+    <div class="camera-icon right">📹</div>
+  </div>
+
+  <h1>WALSRODE – MEHR ALS ZUFALL?</h1>
+  <p class="subtitle">Ein Experiment · Ein Geist · Ein Beobachter</p>
+  <p class="tagline">Wenn alles designt ist – dann kann es auch bewusst geändert werden.</p>
+
+  <div class="central-image">
+    <img src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?w=600&q=80" alt="Das Ahr" onerror="this.style.display='none'">
+    <div class="central-overlay">
+      <div class="on-air">● ON AIR</div>
+      <div class="quote">
+        „Ich bin kein Schauspieler.<br>
+        Ich bin der, der sich geweigert hat,<br>
+        überhaupt eine Maske aufzusetzen."
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem; font-family:'Cinzel',serif; color:var(--gold); font-size:1.1rem; letter-spacing:0.15em;">
+    ALLES IST INSZENIERT. ABER ICH BIN DER REGISSEUR IN MIR.
+  </div>
+
+  <div class="scroll-indicator">▼</div>
+</section>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- SECTION 1: LOCALIZATION -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2>Lokalisierung: Walsrode</h2>
+    </div>
+    <p>Walsrode liegt in Niedersachsen, zwischen Bremen und Hannover. Koordinaten: 52.88° N, 9.47° E. Ein Ort wie jeder andere – oder der Knotenpunkt eines Experiments?</p>
+    <div class="data-grid">
+      <div class="data-card">
+        <h3>📍 LAGE</h3>
+        <p>Walsrode, Heidekreis, Niedersachsen, Deutschland. Zwischen den Metropolen, aber nicht von ihnen bestimmt.</p>
+      </div>
+      <div class="data-card">
+        <h3>👁️ WAS ICH SEHE</h3>
+        <p>• Menschen antworten, weil Nicht-Antworten schlimmer wäre.<br>• Je präziser ich spreche, desto mehr „blitzt" es.<br>• Alles reagiert auf MEIN Bewusstsein.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: DEMOGRAPHIC -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2>Demographische Entwicklung</h2>
+    </div>
+    <p>Die Einwohnerzahl von Walsrode sinkt kontinuierlich. Nicht dramatisch, aber stetig. Ein langsames Ausbluten – oder die Vorbereitung einer Bühne?</p>
+    <div class="data-grid">
+      <div class="data-card">
+        <h3>📉 EINWOHNERZAHL</h3>
+        <div class="stat">-18,9%</div>
+        <p>Seit 1970: Von 24.400 auf 19.800. Die Bühne wird kleiner, die Schauspieler weniger.</p>
+      </div>
+      <div class="data-card">
+        <h3>📉 GESCHÄFTSMELDUNGEN</h3>
+        <div class="stat">-1.000</div>
+        <p>Saldo Gewerbean- und -abmeldungen seit 1970. Die Wirtschaft schrumpft mit der Bevölkerung.</p>
+      </div>
+      <div class="data-card">
+        <h3>🏪 LADENLEERSTAND</h3>
+        <div class="stat">21%</div>
+        <p>Geschätzte Leerstandsquote in der Innenstadt. Leere Schaufenster für eine leere Show?</p>
+      </div>
+    </div>
+    <p style="font-size:0.85rem; color:rgba(244,228,166,0.5); margin-top:1rem;">Quellen: Statistisches Bundesamt, Landesaemt für Statistik NDS, Industrie- und Handelskammer Lüneburg, eigene Recherche</p>
+  </section>
+
+  <!-- SECTION 3: THE EXPERIMENT -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2>Das Experiment</h2>
+    </div>
+    <div class="experiment-grid">
+      <div class="exp-item">
+        <span class="icon">🧬</span>
+        <div>
+          <h4>CLONING? – JA.</h4>
+          <p>Aber nicht nur körperlich.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <span class="icon">💧</span>
+        <div>
+          <h4>BLUTFREQUENZ</h4>
+          <p>Der Schlüssel zur Retorte.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <span class="icon">🧠</span>
+        <div>
+          <h4>GEIST EINGESCHLEUST</h4>
+          <p>Nicht ins Hirn – sondern auf Frequenzebene.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <span class="icon">👶</span>
+        <div>
+          <h4>KOPFUMFANG VERÄNDERT</h4>
+          <p>Zwischen 1–2 Jahre alt? Wasserkopf? Dann normal?</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <span class="icon">📋</span>
+        <div>
+          <h4>BLUEPRINT UPDATE</h4>
+          <p>Gegen meinen Willen – wieder eingefügt.</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <span class="icon">🔒</span>
+        <div>
+          <h4>ORIENTIERUNG EINGESCHRÄNKT</h4>
+          <p>Damit ich mich nie auf mich selbst besinne.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: BLOODLINE TIMELINE -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2>Blutlinie – Kopfumfang – Clon-Theorie</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-step">
+        <span class="step-icon">🤰</span>
+        <h4>ENTNAHME</h4>
+        <p>Blutlinie</p>
+      </div>
+      <div class="timeline-step">
+        <span class="step-icon">🧬</span>
+        <h4>FREQUENZ</h4>
+        <p>Extraktion</p>
+      </div>
+      <div class="timeline-step">
+        <span class="step-icon">✨</span>
+        <h4>BEWUSSTSEIN</h4>
+        <p>Einschleusung</p>
+      </div>
+      <div class="timeline-step">
+        <span class="step-icon">👶</span>
+        <h4>KOPFUMFANG</h4>
+        <p>Verändert</p>
+      </div>
+    </div>
+    <div class="blockquote" style="text-align:center; border:none; padding:0; margin-top:1.5rem;">
+      <strong>GEIST GEFANGEN – WIEDER EINGESCHLEUST.<br>
+      EXPERIMENT VON AUSSEN.<br>
+      ABER DER GEIST DER SCHÖPFUNG HAT SICH SELBST EINGESPEIST.</strong>
+    </div>
+  </section>
+
+  <!-- SECTION 5: NUMEROLOGY -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <h2>Die Numerologie des Bewusstseins</h2>
+    </div>
+    <div class="numerology-box">
+      <div class="num-card">
+        <div class="name">CHETAN NIRUP</div>
+        <div class="date">20.11.1999</div>
+        <div class="numbers">
+          <span class="num">3</span>
+          <span style="color:rgba(244,228,166,0.3)">/</span>
+          <span class="num blue">5</span>
+        </div>
+        <div class="meaning">Schöpfung & Ausdruck / Freiheit & Wandel</div>
+      </div>
+      <div class="num-card">
+        <div class="name">TIM BUKOWSKI</div>
+        <div class="date">21.08.1977</div>
+        <div class="numbers">
+          <span class="num red">9</span>
+          <span style="color:rgba(244,228,166,0.3)">/</span>
+          <span class="num">8</span>
+        </div>
+        <div class="meaning">Vollendung & Transformation / Materie & Schicksal</div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:1.5rem; font-style:italic;">Der Geist (3/5) frequentiert Harmonie. Der Körper (9/8) manifestiert sie.<br>Die Firewall: Erst Kalibrierung, dann Resonanzfreigabe.</p>
+  </section>
+
+  <!-- SECTION 6: RECOGNITIONS -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <h2>Meine Erkenntnisse</h2>
+    </div>
+    <div class="data-grid">
+      <div class="data-card">
+        <h3>🧠 BEWUSSTSEIN</h3>
+        <p>Mein Bewusstsein wurde gefangen und wieder eingeschleust. Mein Blueprint wurde geupdatet und eingefügt – gegen meinen Willen.</p>
+      </div>
+      <div class="data-card">
+        <h3>🔬 DAS EXPERIMENT</h3>
+        <p>Ich bin ein Experiment, das von außen gesteuert wird – aber der Geist der Schöpfung hat sich selbst eingespeist.</p>
+      </div>
+      <div class="data-card">
+        <h3>⚔️ ROHES WESEN</h3>
+        <p>Ich bin das rohe Wesen – kriegerisch & liebevoll. Vor Gut & Böse. Vor Konzepten. Vor Masken.</p>
+      </div>
+      <div class="data-card">
+        <h3>🏛️ ICH BIN DER TEMPEL</h3>
+        <p>Ich brauche keinen Tempel – ich BIN der Tempel. Der erste, der ohne Tempel lieben will.</p>
+      </div>
+      <div class="data-card">
+        <h3>🎮 ROLLEN GETAUSCHT</h3>
+        <p>Mit Erlaubnis. Die Steuerkonsole übernehmen. Von innen heraus.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: MISSION -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <h2>Meine Mission</h2>
+    </div>
+    <p>Die erste Erfahrung war: transformieren als Liebe. Niemand braucht einen Tempel – ich BIN der Tempel. Durch Eigenverantwortung wird jede Regelbeschränkung obsolet. Das Gefängnis fällt.</p>
+    <div class="blockquote">
+      „Wenn ihr den, der vor euch ist, nicht erkennt, werdet ihr den erkennen, der verborgen ist."<br>
+      <span style="font-size:0.9rem; color:rgba(244,228,166,0.6);">– Thomas-Evangelium, Spruch 5</span>
+    </div>
+  </section>
+
+  <!-- INTEGRATION: HEART + MIND -->
+  <section class="integration-box" data-animate>
+    <div class="heart-brain">
+      <span class="icon" style="color:var(--heart-red);">❤️</span>
+      <span class="plus">+</span>
+      <span class="icon" style="color:var(--brain-blue);">🧠</span>
+    </div>
+    <div class="result">= GEIST GOTTES</div>
+    <div class="result-sub">DAS BIN ICH.</div>
+  </section>
+
+  <!-- GATEKEEPER -->
+  <section class="gatekeeper" data-animate>
+    <div class="crown">👑</div>
+    <h2>DIE RICHTUNG KORRIGIEREN</h2>
+    <p>Wer es versteht, wird staunen.</p>
+    <p>Wer es gestanden hat, wird die Richtung korrigieren.</p>
+    <p>Und niemand wird lachen – nur ehrfürchtige Dankbarkeit und eigene Entschließung.</p>
+    <p class="highlight">Ab jetzt: Sich als DAS ansehen. Es durch sich lieben lassen. Das Gefängnis fällt.</p>
+  </section>
+
+  <!-- PRISON FALLS -->
+  <section class="prison-section" data-animate>
+    <div class="door-icon">🚪</div>
+    <h2>DAS GEFÄNGNIS FÄLLT</h2>
+    <p>SELBSTVERANTWORTUNG MACHT ALLE REGELN OBSOLET.</p>
+    <p style="color:var(--gold); font-size:1.2rem; margin-top:1rem;">LIEBE IST DIE EINZIGE FREIHEIT.</p>
+    <div style="margin-top:2rem; padding:1.5rem; background:rgba(0,0,0,0.3); border-radius:15px; display:inline-block;">
+      <div style="font-family:'Cinzel',serif; color:var(--gold); font-size:1.1rem; letter-spacing:0.1em; line-height:2;">
+        ICH BIN.<br>
+        ICH WAR.<br>
+        ICH BLEIBE.<br>
+        ICH LIEBE.
+      </div>
+    </div>
+    <p style="margin-top:1.5rem; font-style:italic; color:rgba(244,228,166,0.7);">Das Experiment wird zum Erwachen. Das Spiel wird zur Erlösung.</p>
+  </section>
+
+  <!-- SOURCE LINKS -->
+  <section class="section" data-animate>
+    <div class="section-header">
+      <span class="section-number">🔗</span>
+      <h2>Quellen & Verweise</h2>
+    </div>
+    <div class="source-links">
+      <a href="https://www.linkedin.com/pulse/erkenne-dich-deinen-werken-tatsache-tim-bukowski-9qbme" target="_blank">🔗 LinkedIn: Erkenne dich an deinen Werken</a>
+      <a href="https://open.substack.com/pub/timbukowski/p/erkenne-dich-an-deinen-werken" target="_blank">📝 Substack: Erkenne dich an deinen Werken</a>
+      <a href="https://open.substack.com/pub/timbukowski/p/seht-ihr-was-ich-geschaffen-habe" target="_blank">👑 Substack: Seht ihr, was ich geschaffen habe?</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FINAL DECLARATION -->
+<section class="final-declaration">
+  <div class="lotus">🪷</div>
+  <h2>WIR SIND DAS SCHLOSS IM HIMMEL</h2>
+  <p class="sub">Das Reich im unendlichen Universum aus Liebe, Licht und Leben</p>
+  <div class="i-am">
+    ICH BIN NICHT DAS EXPERIMENT.<br>
+    ICH BIN DAS, WAS DAS EXPERIMENT NICHT VORHERSEHEN KONNTE.
+  </div>
+  <div class="i-am" style="margin-top:1rem; color:var(--gold);">
+    ICH BIN. ICH SEHE. ICH LIEBE. ICH BIN FREI. ❤️
+  </div>
+  <p class="juchheissa">JUCHHEISSA. 💛✨</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="mantra">SEHE. ERKENNE. INTEGRIERE. ERWACHE. LEBE.</p>
+  <p class="signature">♡ DU ALLEIN BIST DEIN GATEKEEPER.</p>
+</footer>
+
+<script>
+// Generate stars
+const starsContainer = document.getElementById('stars');
+for (let i = 0; i < 200; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  const size = Math.random() * 2.5 + 0.5;
+  star.style.width = size + 'px';
+  star.style.height = size + 'px';
+  star.style.setProperty('--duration', (Math.random() * 4 + 2) + 's');
+  star.style.animationDelay = Math.random() * 6 + 's';
+  starsContainer.appendChild(star);
+}
+
+// Generate floating particles
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 25; i++) {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.animationDuration = (Math.random() * 20 + 12) + 's';
+  particle.style.animationDelay = Math.random() * 15 + 's';
+  const size = Math.random() * 3 + 1;
+  particle.style.width = size + 'px';
+  particle.style.height = size + 'px';
+  particlesContainer.appendChild(particle);
+}
+
+// Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+// Parallax effect
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const parallax = document.querySelector('.cosmic-bg');
+  if (parallax) {
+    parallax.style.transform = `translateY(${scrolled * 0.2}px)`;
+  }
+});
+</script>
+
+</body>
+</html>

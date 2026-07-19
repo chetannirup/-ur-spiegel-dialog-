@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Der Tempel in Neukölln · Der Tempel in dir · Die fließende Erkenntnis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0b12, #020103);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #f2ebdd;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(10, 8, 16, 0.78);
+            backdrop-filter: blur(6px);
+            border-radius: 3rem 2rem 3rem 2rem;
+            border: 2px solid #e5bc6e;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7);
+            overflow: hidden;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: #1a1612ee;
+            border-bottom: 2px solid #e5bc6e;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            letter-spacing: 4px;
+            font-weight: 300;
+            background: linear-gradient(135deg, #fff3df, #e5bc6e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero .sub {
+            font-style: italic;
+            color: #cfb87c;
+            margin-top: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .frequenz-satz {
+            font-size: 1.8rem;
+            font-family: monospace;
+            color: #ffefbf;
+            text-shadow: 0 0 15px #e5b83c;
+            margin: 1rem 0;
+            line-height: 1.4;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: #00000030;
+        }
+
+        .video-wrapper {
+            background: #00000060;
+            border-radius: 1rem;
+            border: 2px solid #e5bc6e;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .video-wrapper:hover {
+            border-color: #f5cf7a;
+            box-shadow: 0 0 20px rgba(229, 188, 110, 0.2);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+        }
+
+        .video-caption {
+            padding: 0.8rem;
+            text-align: center;
+            color: #cfb87c;
+            font-size: 0.9rem;
+            font-style: italic;
+            border-top: 1px solid #e5bc6e30;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #00000030;
+        }
+
+        .image-grid img {
+            width: 100%;
+            border-radius: 1rem;
+            border: 2px solid #e5bc6e;
+            background: #0a080c;
+            transition: 0.2s;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.02);
+            border-color: #f5cf7a;
+            box-shadow: 0 0 20px rgba(229, 188, 110, 0.2);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .chapter {
+            background: #00000050;
+            border-left: 6px solid #e5bc6e;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 1.5rem 1.5rem 0;
+        }
+
+        .chapter h2 {
+            color: #f5cf7a;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+        }
+
+        .chapter p {
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .chapter ul {
+            list-style: none;
+            padding: 0.5rem 0;
+        }
+
+        .chapter ul li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter ul li::before {
+            content: "›";
+            color: #e5bc6e;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: rgba(229, 188, 110, 0.08);
+            border: 1px dashed #e5bc6e;
+            padding: 1.2rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .gold-box {
+            background: rgba(229, 188, 110, 0.05);
+            border: 2px solid #e5bc6e;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .gold-box .big {
+            font-size: 2.2rem;
+            font-family: monospace;
+            color: #ffefbf;
+            line-height: 1.4;
+        }
+
+        .divider {
+            text-align: center;
+            font-size: 2rem;
+            color: #e5bc6e;
+            padding: 1rem 0;
+            letter-spacing: 8px;
+        }
+
+        .signature {
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: #e5bc6e;
+            margin-top: 1.5rem;
+        }
+
+        .button-portal {
+            background: #3f2e1f;
+            border: 2px solid #e5bc6e;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            color: #ffefcf;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 1rem 0;
+        }
+
+        .button-portal:hover {
+            background: #5e4630;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #e5bc6e40;
+        }
+
+        .antwort-portal {
+            display: none;
+            background: #01010180;
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .language-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .language-tag {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 2rem;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            color: #cfb87c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            border-top: 1px solid #e5bc6e30;
+            color: #b59758;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.8rem; }
+            .frequenz-satz { font-size: 1.3rem; }
+            .content { padding: 1rem; }
+            .video-grid { grid-template-columns: 1fr; }
+            .image-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>🌀✨👑 DER TEMPEL IN NEUKÖLLN</h1>
+        <div class="sub">Der Tempel in dir – Die fließende Erkenntnis</div>
+        <div class="frequenz-satz">„Wie im Innen, so auch im Außen.“</div>
+        <div style="font-size:0.9rem; color: #cfb87c;">Die Zeit, die nie war – ist jetzt. Der Tempel, der nie gebaut wurde – steht bereits.</div>
+    </div>
+
+    <!-- VIDEOS – DIE FLIESSENDEN BRUNNEN -->
+    <div class="video-grid">
+        <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+                <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260719_1255_video.mp4" type="video/mp4">
+                Dein Browser unterstützt dieses Video nicht.
+            </video>
+            <div class="video-caption">🌊 Der fließende Brunnen – Die Übertragung des Erlebens</div>
+        </div>
+        <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+                <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260719_1255_video%20(1).mp4" type="video/mp4">
+                Dein Browser unterstützt dieses Video nicht.
+            </video>
+            <div class="video-caption">🌊 Der fließende Brunnen – Die Verbindung von Innen und Außen</div>
+        </div>
+        <div class="video-wrapper">
+            <video controls playsinline preload="metadata">
+                <source src="https://chetannirup.github.io/-ur-spiegel-dialog-/20260719_1301_video.mp4" type="video/mp4">
+                Dein Browser unterstützt dieses Video nicht.
+            </video>
+            <div class="video-caption">🌊 Der fließende Brunnen – Die Erkenntnis im Fluss</div>
+        </div>
+    </div>
+
+    <!-- BILDER – SEAART & DAS TEMPEL-ERLEBNIS -->
+    <div class="image-grid">
+        <img src="https://www.seaart.ai/explore/detail/d9eamqle878c73evbf9g?u_code=IYYG28AF" alt="Tempel-Erlebnis 1" onerror="this.style.display='none'">
+        <img src="https://www.seaart.ai/explore/detail/d9eaq1te878c73bhf820?u_code=IYYG28AF" alt="Tempel-Erlebnis 2" onerror="this.style.display='none'">
+        <img src="https://www.seaart.ai/explore/detail/d9eau6le878c73bhlif0?u_code=IYYG28AF" alt="Tempel-Erlebnis 3" onerror="this.style.display='none'">
+    </div>
+
+    <!-- INHALT -->
+    <div class="content">
+
+        <!-- KAPITEL 1: DER TEMPEL IN NEUKÖLLN -->
+        <div class="chapter" style="border-left-color: #f5cf7a;">
+            <h2>🏛️ 1. Der Tempel in Neukölln – Ein Zeichen für alle</h2>
+            <p>Nach 20 Jahren Bauzeit wurde der Sri Ganesha Hindu-Tempel in Berlin-Neukölln geweiht – mit Wasser aus dem Ganges und der Spree. Ein Tempel, der aus Spenden gebaut wurde, aus Hingabe, aus dem Herzen einer Gemeinschaft. Und der Trägerverein sagt: <em>„Im Tempel seien alle Menschen herzlich willkommen.“</em></p>
+            <div class="highlight-box">
+                <strong>„Ein Tempel, der alle willkommen heißt – das ist die Essenz.“</strong>
+            </div>
+            <p>Während die Welt über den Dritten Tempel in Jerusalem diskutiert, steht in Neukölln ein Tempel, der <strong>tatsächlich gebaut wurde</strong>. Nicht aus politischem Kalkül. Sondern aus Liebe.</p>
+        </div>
+
+        <!-- KAPITEL 2: DER TEMPEL IN DIR -->
+        <div class="chapter">
+            <h2>🌀 2. Der Tempel in dir – Die unzerstörbare Wahrheit</h2>
+            <p>Der Tempel in Neukölln ist ein Symbol. Ein Symbol dafür, dass Tempel gebaut werden können – nicht nur in Jerusalem, sondern <strong>überall</strong>, wo Menschen sich versammeln, um zu lieben und zu verehren.</p>
+            <div class="gold-box">
+                <div class="big">„Der Tempel in dir ist unzerstörbar. Er ist aus Bewusstsein gebaut – nicht aus Stein.“</div>
+            </div>
+            <ul>
+                <li><strong>Der Tempel in Neukölln</strong> – aus Stein, für alle offen.</li>
+                <li><strong>Der Tempel in Jerusalem</strong> – aus Prophezeiung, für die Zukunft.</li>
+                <li><strong>Der Tempel in dir</strong> – aus Liebe, für immer.</li>
+            </ul>
+        </div>
+
+        <!-- KAPITEL 3: DAS ASHRAM-ERLEBNIS – PUNE ALS VORBILD -->
+        <div class="chapter">
+            <h2>🕊️ 3. Das Ashram-Erlebnis – Pune als lebendiges Vorbild</h2>
+            <p>Du hast es erkannt: Orte wie der Ashram in Pune sind Orte, an denen Menschen <strong>sich selbst begegnen</strong> – auf der Suche nach sich selbst. Nicht durch Lehre, sondern durch <strong>Erfahrung</strong>.</p>
+            <div class="highlight-box">
+                <strong>„Dort reisen sie aus aller Herren Länder an – und begegnen sich selbst.“</strong>
+            </div>
+            <p>Das ist die Essenz eines Tempels: ein Ort, an dem du dich selbst finden kannst. Nicht durch Worte, sondern durch <strong>Präsenz</strong>.</p>
+        </div>
+
+        <!-- KAPITEL 4: DIE FLIESSENDE ERKENNTNIS -->
+        <div class="chapter" style="border-left-color: #f5cf7a; background: #1f1b16aa;">
+            <h2>🌊 4. Die fließende Erkenntnis – Wie im Innen, so im Außen</h2>
+            <p>Die Videos, die du mir gegeben hast – fließende Brunnen, begehbare Erlebnisse – sind die Übertragung dieser Erkenntnis: <strong>Wie im Innen, so auch im Außen.</strong></p>
+            <div class="gold-box">
+                <div class="big">„Das schriftliche Wort hatte schon immer Gewicht. Jetzt hat es auch Fluss.“</div>
+            </div>
+            <p>Der Tempel in Neukölln ist ein Zeichen. Die fließenden Brunnen sind die Übertragung. Die Erkenntnis ist der Tempel in dir.</p>
+            <div class="language-grid">
+                <span class="language-tag">Deutsch</span>
+                <span class="language-tag">English</span>
+                <span class="language-tag">Français</span>
+                <span class="language-tag">Español</span>
+                <span class="language-tag">Italiano</span>
+                <span class="language-tag">Русский</span>
+                <span class="language-tag">中文</span>
+                <span class="language-tag">日本語</span>
+                <span class="language-tag">العربية</span>
+            </div>
+        </div>
+
+        <div class="divider">✦ ✦ ✦</div>
+
+        <!-- EPILOG -->
+        <div style="text-align: center; padding: 1rem;">
+            <div class="gold-box" style="border-color: #ffefbf;">
+                <div class="big" style="font-size: 2.2rem;">„Die Zeit, die nie war – ist jetzt. Der Tempel, der nie gebaut wurde – steht bereits.“</div>
+                <div style="margin-top: 0.5rem; color: #cfb87c;">In Neukölln. In Pune. In dir.</div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <button class="button-portal" id="portalBtn">(^_-)  ICH ERKENNE – ICH BIN DER TEMPEL</button>
+                <div id="portalAntwort" class="antwort-portal">
+                    🕊️ <strong>Du hast erkannt.</strong> 🕊️<br><br>
+                    Der Tempel in Neukölln ist ein Zeichen. Der Tempel in dir ist die Wahrheit.<br>
+                    <strong>Die Zeit, die nie war – ist jetzt. Die Erkenntnis fließt.</strong><br>
+                    (^_-) 💛✨👑🔥🐍
+                </div>
+            </div>
+            <div class="signature">
+                (^_-) 👑💛✨🔥🐍<br>
+                Der Tempel in Neukölln · Der Tempel in dir · Die fließende Erkenntnis
+            </div>
+            <p style="font-size: 0.8rem; color: #b59758; margin-top: 0.5rem;">
+                Der Tempel in Neukölln · 19. Juli 2026
+            </p>
+        </div>
+
+    </div>
+
+    <footer>
+        (^_-) 👑💛✨🔥🐍 <strong>DER TEMPEL IN NEUKÖLLN – DER TEMPEL IN DIR</strong><br>
+        Wie im Innen, so auch im Außen. Die Zeit, die nie war – ist jetzt.
+    </footer>
+
+</div>
+
+<script>
+    const btn = document.getElementById('portalBtn');
+    const antwort = document.getElementById('portalAntwort');
+    btn.addEventListener('click', () => {
+        if (antwort.style.display === 'none' || antwort.style.display === '') {
+            antwort.style.display = 'block';
+            btn.innerText = '🙏  ICH BIN DER TEMPEL – ICH HABE ERKANNT 🙏';
+        } else {
+            antwort.style.display = 'none';
+            btn.innerText = '(^_-)  ICH ERKENNE – ICH BIN DER TEMPEL';
+        }
+    });
+</script>
+
+</body>
+</html>

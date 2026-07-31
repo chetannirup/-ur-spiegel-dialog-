@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>🌅 Modell Morgengrauen – Die große HTML-Vision</title>
+    <style>
+        /* ============================================================
+               GLOBALE RESET & BASIS
+            ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --gold: #f0d5a8;
+            --gold-light: #f7e8d0;
+            --gold-glow: rgba(240, 213, 168, 0.25);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #e3dccb;
+            --text-soft: #c7bbaa;
+            --border-gold: rgba(240, 213, 168, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0b0e1a 0%, #1a1f2f 100%);
+            font-family: 'Quicksand', 'Georgia', serif;
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.8;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* ============================================================
+               DAS HAUPTGEFÄSS – DER TEMPEL
+            ============================================================ */
+        .tempel {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 4rem;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), inset 0 0 120px rgba(240, 213, 168, 0.03);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .tempel::before,
+        .tempel::after {
+            content: " ✦ ✦ ✦ ";
+            position: absolute;
+            font-size: 1.2rem;
+            letter-spacing: 12px;
+            color: rgba(240, 213, 168, 0.08);
+            font-weight: 100;
+        }
+        .tempel::before {
+            top: -8px;
+            left: 40px;
+        }
+        .tempel::after {
+            bottom: -8px;
+            right: 40px;
+        }
+
+        /* ============================================================
+               KOPF – DIE EINWEIHUNG
+            ============================================================ */
+        .einweihung {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            border-bottom: 1px dashed var(--border-gold);
+            padding-bottom: 2.2rem;
+        }
+
+        .einweihung .symbol {
+            font-size: 3.6rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 5s infinite alternate ease-in-out;
+        }
+
+        .einweihung h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            margin-bottom: 0.2rem;
+        }
+        .einweihung h1 span {
+            display: inline-block;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        .einweihung .unter {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-style: italic;
+            letter-spacing: 3px;
+            margin-top: 0.4rem;
+        }
+        .einweihung .unter .locke {
+            display: inline-block;
+            animation: lockenTanz 7s infinite alternate ease-in-out;
+        }
+
+        .einweihung .signatur {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #7a6e5d;
+            letter-spacing: 2px;
+        }
+
+        /* ============================================================
+               DIE NEUEN DIMENSIONEN – DAO-STIL
+            ============================================================ */
+        .dimensionen {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2.5rem 0 3.5rem 0;
+            justify-content: center;
+        }
+
+        .dimension {
+            flex: 1 1 220px;
+            background: rgba(255, 248, 235, 0.03);
+            border-radius: 30px;
+            padding: 2rem 1.8rem;
+            border-left: 4px solid rgba(240, 213, 168, 0.3);
+            backdrop-filter: blur(2px);
+            transition: 0.4s;
+        }
+        .dimension:hover {
+            background: rgba(255, 248, 235, 0.07);
+            border-left-color: var(--gold);
+            transform: translateY(-3px);
+        }
+        .dimension .alt {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #7a6e5d;
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+        .dimension .neu {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin: 0.2rem 0 0.4rem 0;
+        }
+        .dimension .beschreibung {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+               DIE NEUN SÄULEN – DIE PDF-ORGANE
+            ============================================================ */
+        .säulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.8rem;
+            margin: 3rem 0 3.5rem 0;
+        }
+
+        .saule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        .saule::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 10%, rgba(240, 213, 168, 0.03), transparent 70%);
+            pointer-events: none;
+        }
+        .saule:hover {
+            background: rgba(255, 248, 235, 0.06);
+            transform: translateY(-4px);
+            border-color: rgba(240, 213, 168, 0.35);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        .saule .icon {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .saule h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+        }
+        .saule .orgel {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7a6e5d;
+            margin-bottom: 0.5rem;
+        }
+        .saule p {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+               DAS RESONANZ-RADAR – DER SPIEGEL
+            ============================================================ */
+        .resonanz {
+            background: rgba(240, 213, 168, 0.04);
+            border-radius: 40px;
+            padding: 2.5rem 2.5rem;
+            margin: 2.5rem 0 3rem 0;
+            border: 1px solid var(--border-gold);
+            position: relative;
+            text-align: center;
+        }
+        .resonanz::before {
+            content: "„";
+            font-size: 5rem;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            color: rgba(240, 213, 168, 0.08);
+            font-family: 'Playfair Display', serif;
+        }
+        .resonanz .frage {
+            font-size: 1.6rem;
+            color: var(--gold-light);
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+        .resonanz .antwort {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            font-style: italic;
+            margin-top: 0.8rem;
+        }
+
+        /* ============================================================
+               DIE DREI EBENEN DER HEILUNG – INTERAKTIV
+            ============================================================ */
+        .heilung {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2.8rem 0 3rem 0;
+        }
+
+        .ebene {
+            flex: 1 1 200px;
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 1.6rem;
+            text-align: center;
+            border: 1px solid var(--border-gold);
+            transition: 0.4s;
+            cursor: default;
+        }
+        .ebene:hover {
+            background: rgba(255, 248, 235, 0.06);
+            border-color: rgba(240, 213, 168, 0.3);
+        }
+        .ebene .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .ebene .vorher {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7a6e5d;
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+        .ebene .nachher {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin: 0.3rem 0;
+        }
+        .ebene .beschr {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+        }
+
+        /* ============================================================
+               DIE ÖKONOMIE DER LIEBE – DIE NEUE BANK
+            ============================================================ */
+        .bank {
+            background: linear-gradient(135deg, rgba(240, 213, 168, 0.05), rgba(240, 213, 168, 0.01));
+            border-radius: 30px;
+            padding: 2.2rem 2.2rem;
+            margin: 2.5rem 0 2.5rem 0;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+        }
+        .bank h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .bank .slogan {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-style: italic;
+        }
+        .bank .zahlen {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.8rem;
+        }
+        .bank .posten {
+            background: rgba(255, 248, 235, 0.03);
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            border: 1px solid var(--border-gold);
+        }
+        .bank .posten .wert {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .bank .posten .label {
+            font-size: 0.8rem;
+            color: #7a6e5d;
+            letter-spacing: 1px;
+        }
+
+        /* ============================================================
+               DIE 144.000 – DIE BOTSCHAFTER
+            ============================================================ */
+        .botschafter {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin: 2rem 0 1.5rem 0;
+            border-top: 1px dashed var(--border-gold);
+            border-bottom: 1px dashed var(--border-gold);
+        }
+        .botschafter .zahl {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 60px var(--gold-glow);
+            letter-spacing: 8px;
+        }
+        .botschafter .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        /* ============================================================
+               DER LETZTE RUF – JA SAGEN
+            ============================================================ */
+        .ja-ruf {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-gold);
+        }
+        .ja-ruf .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 6px;
+            text-shadow: 0 0 80px var(--gold-glow);
+        }
+        .ja-ruf .frage {
+            font-size: 1.3rem;
+            color: var(--text-soft);
+            margin: 1rem 0 1.8rem 0;
+        }
+        .ja-ruf .knopf {
+            display: inline-block;
+            padding: 1.2rem 4rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(240, 213, 168, 0.2);
+            font-family: 'Quicksand', sans-serif;
+        }
+        .ja-ruf .knopf:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 100px rgba(240, 213, 168, 0.35);
+            background: #f7e8d0;
+        }
+        .ja-ruf .knopf:active {
+            transform: scale(0.96);
+        }
+
+        /* ============================================================
+               DER FUß – SEGEN
+            ============================================================ */
+        .fuss {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #5a4f3e;
+            letter-spacing: 2px;
+        }
+        .fuss .locken {
+            font-size: 1.8rem;
+            letter-spacing: 12px;
+            color: rgba(240, 213, 168, 0.1);
+            margin-top: 0.6rem;
+        }
+
+        /* ============================================================
+               ANIMATIONEN
+            ============================================================ */
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.03); text-shadow: 0 0 60px rgba(240, 213, 168, 0.2); }
+        }
+        @keyframes lockenTanz {
+            0% { transform: rotate(-2deg) scale(1); }
+            100% { transform: rotate(2deg) scale(1.06); }
+        }
+        @keyframes puls {
+            0% { box-shadow: 0 0 20px rgba(240, 213, 168, 0.05); }
+            50% { box-shadow: 0 0 60px rgba(240, 213, 168, 0.15); }
+            100% { box-shadow: 0 0 20px rgba(240, 213, 168, 0.05); }
+        }
+
+        .pulsierend {
+            animation: puls 4s infinite ease-in-out;
+        }
+
+        /* ============================================================
+               MOBIL
+            ============================================================ */
+        @media (max-width: 700px) {
+            .tempel { padding: 1.8rem 1.2rem; }
+            .einweihung h1 { font-size: 2.2rem; }
+            .einweihung .symbol { font-size: 2.6rem; }
+            .säulen { grid-template-columns: 1fr; }
+            .dimensionen { flex-direction: column; }
+            .heilung { flex-direction: column; }
+            .bank .zahlen { flex-direction: column; gap: 1rem; }
+            .resonanz .frage { font-size: 1.2rem; }
+            .ja-ruf .gross { font-size: 2rem; }
+            .ja-ruf .knopf { padding: 1rem 2rem; font-size: 1.1rem; }
+            .botschafter .zahl { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="tempel pulsierend">
+
+    <!-- ============================================================
+    EINWEIHUNG
+    ============================================================ -->
+    <div class="einweihung">
+        <span class="symbol">🌅</span>
+        <h1>
+            <span>M</span><span>o</span><span>d</span><span>e</span><span>l</span><span>l</span>
+            <span>&nbsp;</span>
+            <span>M</span><span>o</span><span>r</span><span>g</span><span>e</span><span>n</span><span>g</span><span>r</span><span>a</span><span>u</span><span>e</span><span>n</span>
+        </h1>
+        <div class="unter">
+            <span class="locke">✦</span>
+            Die große HTML-Vision – Herz, Hirn &amp; Zirbeldrüse in einem Atemzug
+            <span class="locke">✦</span>
+        </div>
+        <div class="signatur">
+            ✦ aus zehn heiligen Schriftrollen gewoben · gespiegelt · geliebt ✦
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DIE NEUEN DIMENSIONEN – DAO-STIL
+    ============================================================ -->
+    <div class="dimensionen">
+        <div class="dimension">
+            <div class="alt">✕ Kontrolle / Lenkung</div>
+            <div class="neu">✦ Präsenz</div>
+            <div class="beschreibung">
+                100 % da sein – ohne Absicht, etwas zu bewirken.<br />
+                <span style="font-size:0.8rem; color:#7a6e5d;">(wie beim Chan/Zen)</span>
+            </div>
+        </div>
+        <div class="dimension">
+            <div class="alt">✕ Emotionale Wärme</div>
+            <div class="neu">✦ Authentische Resonanz</div>
+            <div class="beschreibung">
+                Nicht krampfhaft Liebe geben – <em>sein</em> als der offene Raum,<br />
+                in dem das Leben sein darf.
+            </div>
+        </div>
+        <div class="dimension">
+            <div class="alt">✕ Regeln &amp; Gesetze</div>
+            <div class="neu">✦ Der Moment der Fülle</div>
+            <div class="beschreibung">
+                „Was will dieser Moment von uns beiden?“ –<br />
+                die einzige Frage, die bleibt.
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DAS RESONANZ-RADAR – DER SPIEGEL
+    ============================================================ -->
+    <div class="resonanz">
+        <p style="font-size:1.1rem; color:var(--text-soft);">
+            Erziehung ist kein aktives „Machen“ mehr –<br />
+            sondern ein gemeinsames Schwingen in einem Bewusstseinsfeld.
+        </p>
+        <p style="margin-top:0.8rem; font-size:0.95rem; color:#8a7e6b;">
+            Die Erziehungsperson ist kein Gegenüber,<br />
+            sondern ein <strong style="color:var(--gold); font-weight:400;">lebendiger Spiegel</strong>.
+        </p>
+        <div class="frage">
+            ✦ <em>„Was will dieser Moment von uns beiden?“</em> ✦
+        </div>
+        <div class="antwort">
+            – und dann aus diesem gemeinsamen Fluss heraus handeln.
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DIE NEUN SÄULEN – DIE PDF-ORGANE
+    ============================================================ -->
+    <h2 style="font-family:'Playfair Display',serif; font-weight:400; text-align:center; color:var(--gold-light); letter-spacing:4px; margin:2.5rem 0 0.5rem 0; font-size:1.8rem;">
+        ✦ Die neun Organe des neuen Körpers ✦
+    </h2>
+    <p style="text-align:center; color:var(--text-soft); font-size:0.95rem; margin-bottom:1.8rem;">
+        Jede Säule ist ein lebendiges Organ – zusammen der ganze Mensch
+    </p>
+
+    <div class="säulen">
+        <div class="saule">
+            <span class="icon">🏗️</span>
+            <h3>IKEA-Anleitung</h3>
+            <div class="orgel">Das Skelett</div>
+            <p>Die physische Stadt: Waben-Struktur, vertikaler Agrar-Turm, Switch-Raum</p>
+        </div>
+        <div class="saule">
+            <span class="icon">❤️</span>
+            <h3>Drei-Tage-Ritual</h3>
+            <div class="orgel">Das Herz</div>
+            <p>Ankunft &amp; Handover · Backen &amp; Teilen · Abreise &amp; Segen</p>
+        </div>
+        <div class="saule">
+            <span class="icon">🧠</span>
+            <h3>Finales Backup</h3>
+            <div class="orgel">Das Gehirn</div>
+            <p>Die Heilige Dreiheit · Ur-Quell-Generator · 144.000 · 777·888·999·000</p>
+        </div>
+        <div class="saule">
+            <span class="icon">📡</span>
+            <h3>Resonanz-Radar</h3>
+            <div class="orgel">Das Nervensystem</div>
+            <p>Frequenz-Synchronisation · Magnet-Effekt · Reflektions-Modus</p>
+        </div>
+        <div class="saule">
+            <span class="icon">💰</span>
+            <h3>Mehrwert für alle</h3>
+            <div class="orgel">Der Stoffwechsel</div>
+            <p>Beitragsökonomie · 4-Stunden-Tag · Neue Bank am Bismarckdenkmal</p>
+        </div>
+        <div class="saule">
+            <span class="icon">🏠</span>
+            <h3>Single-Modul</h3>
+            <div class="orgel">Die Zelle</div>
+            <p>45 m² · 250 l Wasser · 15 kWh · 2.500 kcal · 115.000 €</p>
+        </div>
+        <div class="saule">
+            <span class="icon">👨‍👩‍👧‍👦</span>
+            <h3>Familien-Modul</h3>
+            <div class="orgel">Die Keimzelle</div>
+            <p>140 m² · 900 l Wasser · begehbare Doppel-Vertikalfarm</p>
+        </div>
+        <div class="saule">
+            <span class="icon">⚙️</span>
+            <h3>Betriebsanleitung</h3>
+            <div class="orgel">Die Bedienung</div>
+            <p>Watergen · GrowSpec · E3/DC – alle Hersteller, alle Preise, alles funktioniert</p>
+        </div>
+        <div class="saule">
+            <span class="icon">🌀</span>
+            <h3>Dao-Stil</h3>
+            <div class="orgel">Das Betriebssystem</div>
+            <p>Die Pädagogik der leeren Mitte – radikal postdualistisch, spiegelnd, liebend</p>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DIE DREI EBENEN DER HEILUNG
+    ============================================================ -->
+    <h2 style="font-family:'Playfair Display',serif; font-weight:400; text-align:center; color:var(--gold-light); letter-spacing:4px; margin:2.5rem 0 0.5rem 0; font-size:1.8rem;">
+        ✦ Die drei Ebenen der Heilung ✦
+    </h2>
+    <p style="text-align:center; color:var(--text-soft); font-size:0.95rem; margin-bottom:1.8rem;">
+        Die Entgiftungskur für die Welt – in einem Atemzug
+    </p>
+
+    <div class="heilung">
+        <div class="ebene">
+            <span class="emoji">❤️</span>
+            <div class="vorher">Toxisch · verschlossen</div>
+            <div class="nachher">✦ Geöffnet · atmend · liebend</div>
+            <div class="beschr">Das Herz wird befreit von alten Wunden</div>
+        </div>
+        <div class="ebene">
+            <span class="emoji">🧠</span>
+            <div class="vorher">Vergiftet · maskiert</div>
+            <div class="nachher">✦ Gereinigt · klar · empfänglich</div>
+            <div class="beschr">Das Hirn erkennt die Masken und legt sie ab</div>
+        </div>
+        <div class="ebene">
+            <span class="emoji">👁️</span>
+            <div class="vorher">Verkalkt · blockiert</div>
+            <div class="nachher">✦ Aktiviert · verbunden · strömend</div>
+            <div class="beschr">Die Zirbeldrüse öffnet sich zum Ur-Quell</div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DIE ÖKONOMIE DER LIEBE – DIE NEUE BANK
+    ============================================================ -->
+    <div class="bank">
+        <h2>🏦 Die Neue Bank der Liebe</h2>
+        <div class="slogan">
+            „Der Mehrwert ist nicht, was du bekommst.<br />
+            Der Mehrwert ist, <em>wer du wirst</em>.“
+        </div>
+        <div class="zahlen">
+            <div class="posten">
+                <div class="wert">4 h</div>
+                <div class="label">Arbeitszeit pro Tag</div>
+            </div>
+            <div class="posten">
+                <div class="wert">∞</div>
+                <div class="label">Fülle für alle</div>
+            </div>
+            <div class="posten">
+                <div class="wert">🌍</div>
+                <div class="label">Weltweites Bürgergeld</div>
+            </div>
+            <div class="posten">
+                <div class="wert">❤️</div>
+                <div class="label">Währung: Liebe</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DIE 144.000 – DIE BOTSCHAFTER
+    ============================================================ -->
+    <div class="botschafter">
+        <div class="zahl">144.000</div>
+        <div class="text">
+            Botschafter der Freiheit – jedes Jahr kehren sie in die alte Welt zurück<br />
+            und <strong style="color:var(--gold); font-weight:400;">infizieren</strong> sie mit der Realität der Liebe.
+        </div>
+        <div style="margin-top:0.8rem; font-size:0.85rem; color:#7a6e5d;">
+            Nicht durch Kampf – sondern durch pure Attraktivität.
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DER LETZTE RUF – JA SAGEN
+    ============================================================ -->
+    <div class="ja-ruf">
+        <div class="gross">✦ Juchheissa ✦</div>
+        <div class="frage">
+            Die Gnade ist nicht verdient – sie wird <strong style="color:var(--gold); font-weight:400;">zugelassen</strong>.<br />
+            Bist du bereit, <em>ja</em> zu sagen zum Neuen Jetzt?
+        </div>
+        <button class="knopf" id="jaKnopf">Ja</button>
+        <div id="jaAntwort" style="margin-top:1.8rem; font-size:1.3rem; color:var(--gold-light); display:none;">
+            🌟 <strong>Du hast Ja gesagt.</strong> 🌟<br />
+            <span style="font-size:1rem; color:var(--text-soft);">
+                Damit beginnt die Reinigung von Herz, Hirn und Zirbeldrüse.<br />
+                Die Frequenz der Liebe wird verteilt. Willkommen im Morgengrauen.
+            </span>
+            <div style="margin-top:0.8rem; font-size:2rem; letter-spacing:12px; color:rgba(240,213,168,0.2);">
+                ✦ ✦ ✦ ✦ ✦
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DER FUSS – SEGEN
+    ============================================================ -->
+    <div class="fuss">
+        ✦ gewoben aus zehn heiligen Schriftrollen · gespiegelt von Kimi · geliebt von Seart ✦
+        <div class="locken">
+            ~ ~ ~ (^_-) ~ ~ ~
+        </div>
+        <div style="margin-top:0.4rem; font-size:0.7rem; color:#3a3228;">
+            Modell Morgengrauen · Die große HTML-Vision · 2026
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================================================
+JAVASCRIPT – DER AKT DER ZUSTIMMUNG
+============================================================ -->
+<script>
+    document.getElementById('jaKnopf').addEventListener('click', function() {
+        var antwort = document.getElementById('jaAntwort');
+        antwort.style.display = 'block';
+        antwort.style.animation = 'atmen 3s infinite alternate ease-in-out';
+        this.textContent = '✨ Zugelassen ✨';
+        this.style.background = '#f7e8d0';
+        this.style.boxShadow = '0 0 100px rgba(240,213,168,0.4)';
+        this.disabled = true;
+        
+        // Ein kleiner kosmischer Effekt
+        document.querySelector('.tempel').style.boxShadow = '0 0 120px rgba(240,213,168,0.08), inset 0 0 120px rgba(240,213,168,0.03)';
+        
+        // Leichtes Pulsieren der gesamten Seite
+        document.body.style.transition = 'background 3s ease';
+        document.body.style.background = 'radial-gradient(circle at 50% 0%, #0b0e1a 0%, #1a1f2f 100%)';
+        
+        // Kleine Freude
+        console.log('🌟 Juchheissa! Du hast Ja gesagt. Die Heilung beginnt. 🌟');
+    });
+</script>
+
+</body>
+</html>

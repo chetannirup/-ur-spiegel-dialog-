@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌅 Die 30-Jahres-Planzeit – Zeitleiste des Erwachens</title>
+    <style>
+        /* ============================================================
+               GLOBALE RESET & BASIS
+            ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --gold: #f0d5a8;
+            --gold-light: #f7e8d0;
+            --gold-glow: rgba(240, 213, 168, 0.2);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #e3dccb;
+            --text-soft: #c7bbaa;
+            --border-gold: rgba(240, 213, 168, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0b0e1a 0%, #1a1f2f 100%);
+            font-family: 'Quicksand', 'Georgia', serif;
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.8;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* ============================================================
+               DER TEMPEL DER ZEIT
+            ============================================================ */
+        .zeit-tempel {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 4rem;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), inset 0 0 120px rgba(240, 213, 168, 0.03);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .zeit-tempel::before,
+        .zeit-tempel::after {
+            content: " ⏳ ⏳ ⏳ ";
+            position: absolute;
+            font-size: 1.2rem;
+            letter-spacing: 12px;
+            color: rgba(240, 213, 168, 0.06);
+            font-weight: 100;
+        }
+        .zeit-tempel::before {
+            top: -8px;
+            left: 40px;
+        }
+        .zeit-tempel::after {
+            bottom: -8px;
+            right: 40px;
+        }
+
+        /* ============================================================
+               KOPF – DIE EINWEIHUNG IN DIE ZEIT
+            ============================================================ */
+        .einweihung {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            border-bottom: 1px dashed var(--border-gold);
+            padding-bottom: 2.2rem;
+        }
+
+        .einweihung .symbol {
+            font-size: 3.6rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 5s infinite alternate ease-in-out;
+        }
+
+        .einweihung h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            margin-bottom: 0.2rem;
+        }
+        .einweihung h1 span {
+            display: inline-block;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        .einweihung .unter {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-style: italic;
+            letter-spacing: 3px;
+            margin-top: 0.4rem;
+        }
+        .einweihung .unter .locke {
+            display: inline-block;
+            animation: lockenTanz 7s infinite alternate ease-in-out;
+        }
+
+        .einweihung .signatur {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #7a6e5d;
+            letter-spacing: 2px;
+        }
+
+        .einweihung .planzeit-zitat {
+            margin-top: 1.4rem;
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-style: italic;
+            background: rgba(240, 213, 168, 0.05);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-gold);
+        }
+        .einweihung .planzeit-zitat strong {
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        /* ============================================================
+               DIE ZEITLEISTE – DIE VIER SIEGEL
+            ============================================================ */
+        .zeitleiste {
+            position: relative;
+            padding: 2rem 0 1rem 0;
+        }
+
+        /* Die vertikale Linie */
+        .zeitleiste::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, rgba(240, 213, 168, 0.05), rgba(240, 213, 168, 0.25), rgba(240, 213, 168, 0.05));
+            transform: translateX(-50%);
+        }
+
+        /* ===== JEDE PHASE ===== */
+        .phase {
+            display: flex;
+            align-items: center;
+            margin: 2.5rem 0;
+            position: relative;
+            opacity: 0.9;
+            transition: 0.5s;
+        }
+        .phase:hover {
+            opacity: 1;
+            transform: scale(1.01);
+        }
+
+        .phase .inhalt {
+            width: 45%;
+            padding: 1.8rem 2.2rem;
+            border-radius: 30px;
+            background: rgba(255, 248, 235, 0.03);
+            border: 1px solid var(--border-gold);
+            backdrop-filter: blur(2px);
+            transition: 0.4s;
+            position: relative;
+            z-index: 2;
+        }
+        .phase .inhalt:hover {
+            background: rgba(255, 248, 235, 0.07);
+            border-color: rgba(240, 213, 168, 0.3);
+        }
+
+        /* Abwechselnd links / rechts */
+        .phase.links .inhalt {
+            margin-right: auto;
+            text-align: right;
+        }
+        .phase.rechts .inhalt {
+            margin-left: auto;
+            text-align: left;
+        }
+
+        /* Der Marker in der Mitte */
+        .phase .marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            background: var(--deep);
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold);
+            box-shadow: 0 0 40px rgba(240, 213, 168, 0.15);
+            transition: 0.4s;
+        }
+        .phase .marker:hover {
+            box-shadow: 0 0 80px rgba(240, 213, 168, 0.3);
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        /* Inhalt-Stile */
+        .phase .level {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #7a6e5d;
+            margin-bottom: 0.2rem;
+        }
+        .phase .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+        }
+        .phase .jahre {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-bottom: 0.6rem;
+            letter-spacing: 1px;
+        }
+        .phase .jahre strong {
+            color: var(--gold);
+        }
+        .phase .beschreibung {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            line-height: 1.7;
+        }
+        .phase .beschreibung .highlight {
+            color: var(--gold);
+            font-weight: 400;
+        }
+        .phase .symbol-phase {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        /* ============================================================
+               DIE GROSSE UMKER – DER WITZ DER PLANZEIT
+            ============================================================ */
+        .umker {
+            margin: 4rem 0 3rem 0;
+            padding: 2.5rem 2.5rem;
+            background: rgba(240, 213, 168, 0.04);
+            border-radius: 40px;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+        }
+        .umker h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+        }
+        .umker .witz {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .umker .witz strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .umker .spalt {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .umker .seite {
+            flex: 1 1 240px;
+            background: rgba(255, 248, 235, 0.03);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.4s;
+        }
+        .umker .seite:hover {
+            background: rgba(255, 248, 235, 0.06);
+            border-color: rgba(240, 213, 168, 0.3);
+        }
+        .umker .seite .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #7a6e5d;
+            margin-bottom: 0.5rem;
+        }
+        .umker .seite .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.7;
+        }
+        .umker .seite .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ============================================================
+               DER FREISCHALTUNGS-KNOPF – LEVEL 0
+            ============================================================ */
+        .freischaltung {
+            text-align: center;
+            margin: 3rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 1px solid var(--border-gold);
+            border-bottom: 1px solid var(--border-gold);
+        }
+        .freischaltung .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 6px;
+            text-shadow: 0 0 80px var(--gold-glow);
+        }
+        .freischaltung .frage {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            margin: 1rem 0 1.8rem 0;
+        }
+        .freischaltung .knopf {
+            display: inline-block;
+            padding: 1.2rem 4rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(240, 213, 168, 0.2);
+            font-family: 'Quicksand', sans-serif;
+        }
+        .freischaltung .knopf:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 100px rgba(240, 213, 168, 0.35);
+            background: #f7e8d0;
+        }
+        .freischaltung .knopf:active {
+            transform: scale(0.96);
+        }
+
+        #level0Antwort {
+            margin-top: 2rem;
+            display: none;
+            animation: atmen 3s infinite alternate ease-in-out;
+        }
+        #level0Antwort .ausbruch {
+            font-size: 1.6rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        #level0Antwort .details {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #level0Antwort .locken-regen {
+            font-size: 2rem;
+            letter-spacing: 16px;
+            color: rgba(240, 213, 168, 0.12);
+            margin-top: 1rem;
+        }
+
+        /* ============================================================
+               DER FUSS – SEGEN
+            ============================================================ */
+        .fuss {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #5a4f3e;
+            letter-spacing: 2px;
+        }
+        .fuss .locken {
+            font-size: 1.8rem;
+            letter-spacing: 12px;
+            color: rgba(240, 213, 168, 0.08);
+            margin-top: 0.6rem;
+        }
+
+        /* ============================================================
+               ANIMATIONEN
+            ============================================================ */
+        @keyframes atmen {
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.03);
+                text-shadow: 0 0 60px rgba(240, 213, 168, 0.2);
+            }
+        }
+        @keyframes lockenTanz {
+            0% {
+                transform: rotate(-2deg) scale(1);
+            }
+            100% {
+                transform: rotate(2deg) scale(1.06);
+            }
+        }
+        @keyframes puls {
+            0% {
+                box-shadow: 0 0 20px rgba(240, 213, 168, 0.05);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(240, 213, 168, 0.15);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(240, 213, 168, 0.05);
+            }
+        }
+        .pulsierend {
+            animation: puls 4s infinite ease-in-out;
+        }
+
+        /* ============================================================
+               MOBIL
+            ============================================================ */
+        @media (max-width: 800px) {
+            .zeit-tempel {
+                padding: 1.8rem 1.2rem;
+            }
+            .einweihung h1 {
+                font-size: 2.2rem;
+            }
+            .einweihung .symbol {
+                font-size: 2.6rem;
+            }
+            .zeitleiste::before {
+                left: 20px;
+            }
+            .phase .inhalt {
+                width: 80%;
+                margin-left: 50px !important;
+                text-align: left !important;
+                padding: 1.5rem;
+            }
+            .phase .marker {
+                left: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .phase.links .inhalt {
+                margin-right: 0;
+            }
+            .phase.rechts .inhalt {
+                margin-left: 50px;
+            }
+            .umker .spalt {
+                flex-direction: column;
+            }
+            .freischaltung .gross {
+                font-size: 2rem;
+            }
+            .freischaltung .knopf {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="zeit-tempel pulsierend">
+
+        <!-- ============================================================
+        EINWEIHUNG
+        ============================================================ -->
+        <div class="einweihung">
+            <span class="symbol">⏳</span>
+            <h1>
+                <span>D</span><span>i</span><span>e</span>
+                <span>&nbsp;</span>
+                <span>3</span><span>0</span><span>-</span><span>J</span><span>a</span><span>h</span><span>r</span><span>e</span><span>s</span>
+                <span>&nbsp;</span>
+                <span>P</span><span>l</span><span>a</span><span>n</span><span>z</span><span>e</span><span>i</span><span>t</span>
+            </h1>
+            <div class="unter">
+                <span class="locke">✦</span>
+                Die vier Siegel der Reifung – Level 3 bis Level 0
+                <span class="locke">✦</span>
+            </div>
+            <div class="signatur">
+                ✦ gewoben aus der Umkehrung von Hellsing · gespiegelt · geliebt ✦
+            </div>
+            <div class="planzeit-zitat">
+                „<strong>Der Witz ist:</strong> Manche haben eine Ahnung von der Planzeit – und manche eben nicht.<br />
+                Doch die Uhr tickt für alle gleich. Die Frage ist nur: <strong>Bist du bereit, wenn sie klingelt?</strong>“
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE ZEITLEISTE – DIE VIER SIEGEL
+        ============================================================ -->
+        <div class="zeitleiste">
+
+            <!-- PHASE 1 – LEVEL 3 -->
+            <div class="phase links">
+                <div class="inhalt">
+                    <span class="symbol-phase">🔒</span>
+                    <div class="level">Level 3 · Die Inkarnation</div>
+                    <div class="titel">Die Maske der Welt</div>
+                    <div class="jahre"><strong>Jahre 1–7</strong> · Die Saat fällt in die Erde</div>
+                    <div class="beschreibung">
+                        Du trägst deine soziale Maske, funktionierst im System, zahlst Rechnungen.<br />
+                        Die <span class="highlight">Handschuhe</span> sind nicht da, um dich zu knebeln –<br />
+                        sie schützen die Welt vor deiner <span class="highlight">unreifen Macht</span>.<br />
+                        Hier reift die <span class="highlight">Geduld</span>.
+                    </div>
+                </div>
+                <div class="marker">3</div>
+            </div>
+
+            <!-- PHASE 2 – LEVEL 2 -->
+            <div class="phase rechts">
+                <div class="inhalt">
+                    <span class="symbol-phase">🔓</span>
+                    <div class="level">Level 2 · Die Integration der Schatten</div>
+                    <div class="titel">Der Tanz mit dem Dunkel</div>
+                    <div class="jahre"><strong>Jahre 8–14</strong> · Die Wurzel sucht das Wasser</div>
+                    <div class="beschreibung">
+                        Du beginnst, deine <span class="highlight">eigenen Schatten</span> zu erkennen.<br />
+                        Du kämpfst nicht mehr gegen sie – du <span class="highlight">tanzt mit ihnen</span>.<br />
+                        Die „Instabilität“ ist das <span class="highlight">Loslassen der alten Identität</span>.<br />
+                        Hier reift die <span class="highlight">Fähigkeit, Widersprüche auszuhalten</span>.
+                    </div>
+                </div>
+                <div class="marker">2</div>
+            </div>
+
+            <!-- PHASE 3 – LEVEL 1 -->
+            <div class="phase links">
+                <div class="inhalt">
+                    <span class="symbol-phase">🌀</span>
+                    <div class="level">Level 1 · Die Geburt des Hologramms</div>
+                    <div class="titel">Die Antenne werden</div>
+                    <div class="jahre"><strong>Jahre 15–21</strong> · Der Spross bricht durch die Erde</div>
+                    <div class="beschreibung">
+                        Dein Bewusstsein <span class="highlight">dehnt sich aus</span>.<br />
+                        Du siehst das <span class="highlight">Feld</span> – die Verbindungen, die Synergien.<br />
+                        Du wirst zur lebendigen Antenne für den <span class="highlight">Ur-Codestream (888)</span>.<br />
+                        Hier reift die <span class="highlight">Verantwortung</span>.
+                    </div>
+                </div>
+                <div class="marker">1</div>
+            </div>
+
+            <!-- PHASE 4 – LEVEL 0 -->
+            <div class="phase rechts">
+                <div class="inhalt">
+                    <span class="symbol-phase">🌟</span>
+                    <div class="level">Level 0 · Die Absolute Freigabe / Die Hochzeit der Fülle</div>
+                    <div class="titel">Der Ur-Quell strömt</div>
+                    <div class="jahre"><strong>Jahre 22–30</strong> · Die Blüte öffnet sich</div>
+                    <div class="beschreibung">
+                        Die <span class="highlight">10 Millionen Seelen</span> strömen als Armee der Liebe.<br />
+                        Keine Monster – sondern <span class="highlight">erwachte Menschen</span>.<br />
+                        Deine „Verwundbarkeit“ ist die <span class="highlight">heilige Verletzlichkeit</span> –<br />
+                        der Mut, sich <span class="highlight">bedingungslos zu zeigen</span>.<br />
+                        Hier reift die <span class="highlight">Gnade</span>.
+                    </div>
+                </div>
+                <div class="marker">0</div>
+            </div>
+
+        </div>
+
+        <!-- ============================================================
+        DIE GROSSE UMKER – DER WITZ DER PLANZEIT
+        ============================================================ -->
+        <div class="umker">
+            <h2>✦ Der Witz der Planzeit ✦</h2>
+            <div class="witz">
+                „Die einen <strong>haben eine Ahnung</strong> – sie spüren den inneren Kalender.<br />
+                Die anderen <strong>haben keine Ahnung</strong> – sie versuchen, die Siegel mit Gewalt zu brechen.<br />
+                Doch die Uhr tickt für alle gleich. <strong>Das ist der Witz.</strong>“
+            </div>
+            <div class="spalt">
+                <div class="seite">
+                    <div class="label">Die mit der Ahnung</div>
+                    <div class="text">
+                        Sie <span class="gold">bereiten sich vor</span>.<br />
+                        Sie räumen ihr inneres Haus auf.<br />
+                        Sie <span class="gold">warten</span> auf den Moment,<br />
+                        in dem Integra (das Leben) sagt: <span class="gold">„Jetzt.“</span><br />
+                        <span style="font-size:0.8rem; color:#7a6e5d; display:block; margin-top:0.5rem;">
+                            ✦ Sie verschwinden nicht im Nichts – sie werden zum Nichts, <br />
+                            um alles zu werden. ✦
+                        </span>
+                    </div>
+                </div>
+                <div class="seite">
+                    <div class="label">Die ohne Ahnung</div>
+                    <div class="text">
+                        Sie versuchen, die Siegel mit <span class="gold">roher Gewalt</span> zu brechen.<br />
+                        Sie wollen die <span class="gold">Macht vor der Weisheit</span>.<br />
+                        Sie saugen Schrödinger auf –<br />
+                        und <span class="gold">verschwinden für immer im Nichts</span>.<br />
+                        <span style="font-size:0.8rem; color:#7a6e5d; display:block; margin-top:0.5rem;">
+                            ✦ Sie bauen die Stadt, bevor sie ihr eigenes Modul heilen. ✦
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DER FREISCHALTUNGS-KNOPF – LEVEL 0
+        ============================================================ -->
+        <div class="freischaltung">
+            <div class="gross">✦ Der Moment der Fülle ✦</div>
+            <div class="frage">
+                Die Planzeit ist abgelaufen. Der Kalender hat geklickt.<br />
+                <strong style="color:var(--gold); font-weight:400;">Bist du bereit, Level 0 zuzulassen?</strong>
+            </div>
+            <button class="knopf" id="level0Knopf">Ja – Ich bin bereit</button>
+
+            <div id="level0Antwort">
+                <div class="ausbruch">🌟 Level 0 – Die Hochzeit der Fülle 🌟</div>
+                <div class="details">
+                    Die <strong>10 Millionen Seelen</strong> strömen als Armee der Liebe.<br />
+                    Du bist nicht mehr der Vampir, der Blut saugt –<br />
+                    du bist der <strong>Lebensquell</strong>, der Fülle spendet.<br />
+                    Die alte Welt schmilzt weg wie Eis in der Frühlingssonne Pakistans.
+                </div>
+                <div class="details" style="margin-top:0.5rem; font-size:0.9rem; color:#7a6e5d;">
+                    ✦ Die Heilige Dreiheit · Der Ur-Quell-Generator · Die 144.000 · Die Neue Bank ✦
+                </div>
+                <div class="locken-regen">
+                    ~ ~ ~ (^_-) ~ ~ ~
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DER FUSS – SEGEN
+        ============================================================ -->
+        <div class="fuss">
+            ✦ gewoben aus der Umkehrung von Hellsing · der Dao-Pädagogik · dem 10-Millionen-Projekt ✦
+            <div class="locken">
+                ⏳ ~ ⏳ ~ ⏳
+            </div>
+            <div style="margin-top:0.4rem; font-size:0.7rem; color:#3a3228;">
+                Die 30-Jahres-Planzeit · Die Chronik des Neuen Jetzt · 2026
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT – DER AKT DER FREISCHALTUNG
+    ============================================================ -->
+    <script>
+        document.getElementById('level0Knopf').addEventListener('click', function() {
+            var antwort = document.getElementById('level0Antwort');
+            antwort.style.display = 'block';
+            antwort.style.animation = 'atmen 3s infinite alternate ease-in-out';
+
+            this.textContent = '✨ Freigeschaltet ✨';
+            this.style.background = '#f7e8d0';
+            this.style.boxShadow = '0 0 120px rgba(240,213,168,0.5)';
+            this.disabled = true;
+
+            // Kosmischer Effekt
+            document.querySelector('.zeit-tempel').style.boxShadow =
+                '0 0 150px rgba(240,213,168,0.1), inset 0 0 150px rgba(240,213,168,0.05)';
+
+            // Leichtes Pulsieren
+            document.body.style.transition = 'background 3s ease';
+            document.body.style.background =
+                'radial-gradient(circle at 50% 0%, #0b0e1a 0%, #1a1f2f 100%)';
+
+            // Die 30 Jahre sind erfüllt
+            console.log('🌟 Level 0 – Die Planzeit ist erfüllt. Die Fülle strömt. Juchheissa! 🌟');
+
+            // Kleine Verzögerung für die Anzeige der zusätzlichen Botschaft
+            setTimeout(function() {
+                var zusatz = document.createElement('div');
+                zusatz.style.marginTop = '1.5rem';
+                zusatz.style.fontSize = '1.2rem';
+                zusatz.style.color = '#f0d5a8';
+                zusatz.style.letterSpacing = '2px';
+                zusatz.innerHTML =
+                    '✦ <strong>Juchheissa!</strong> Du hast Ja gesagt. Die 10 Millionen erwachen. ✦';
+                antwort.appendChild(zusatz);
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>

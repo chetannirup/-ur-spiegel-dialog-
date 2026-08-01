@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>🌳 Der Mehrwert – Die große HTML-Vision</title>
+    <style>
+        /* ============================================================
+               GLOBALE RESET & SCHRIFTEN
+            ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --gold: #f0d5a8;
+            --gold-light: #f7e8d0;
+            --gold-glow: rgba(240, 213, 168, 0.2);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #e3dccb;
+            --text-soft: #c7bbaa;
+            --border-gold: rgba(240, 213, 168, 0.12);
+            --shadow-gold: rgba(240, 213, 168, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0b0e1a 0%, #1a1f2f 100%);
+            font-family: 'Quicksand', 'Georgia', serif;
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.8;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* ============================================================
+               DER TEMPEL DES MEHRWERTS
+            ============================================================ */
+        .tempel {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 4rem;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), inset 0 0 120px var(--shadow-gold);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .tempel::before,
+        .tempel::after {
+            content: " 🌱 🌱 🌱 ";
+            position: absolute;
+            font-size: 1.2rem;
+            letter-spacing: 12px;
+            color: rgba(240, 213, 168, 0.04);
+            font-weight: 100;
+        }
+        .tempel::before {
+            top: -8px;
+            left: 40px;
+        }
+        .tempel::after {
+            bottom: -8px;
+            right: 40px;
+        }
+
+        /* ============================================================
+               EINWEIHUNG
+            ============================================================ */
+        .einweihung {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            border-bottom: 1px dashed var(--border-gold);
+            padding-bottom: 2.2rem;
+        }
+
+        .einweihung .symbol {
+            font-size: 3.6rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 5s infinite alternate ease-in-out;
+        }
+
+        .einweihung h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            margin-bottom: 0.2rem;
+        }
+        .einweihung h1 span {
+            display: inline-block;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        .einweihung .unter {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-style: italic;
+            letter-spacing: 3px;
+            margin-top: 0.4rem;
+        }
+        .einweihung .unter .locke {
+            display: inline-block;
+            animation: lockenTanz 7s infinite alternate ease-in-out;
+        }
+
+        .einweihung .signatur {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #7a6e5d;
+            letter-spacing: 2px;
+        }
+
+        .einweihung .mehrwert {
+            margin-top: 1.4rem;
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-style: italic;
+            background: rgba(240, 213, 168, 0.05);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--border-gold);
+        }
+        .einweihung .mehrwert strong {
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        /* ============================================================
+               HARARI – WISDOM VS INTELLIGENCE
+            ============================================================ */
+        .harari-block {
+            background: rgba(240, 213, 168, 0.03);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2.5rem 0 2.5rem 0;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+        }
+        .harari-block .zitat {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        .harari-block .zitat strong {
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .harari-block .erklaerung {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.8rem;
+        }
+        .harari-block .erklaerung .highlight {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        /* ============================================================
+               HAWKINS – BEWUSSTSEINS-SKALA
+            ============================================================ */
+        .hawkins-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2.5rem 0 2.5rem 0;
+            justify-content: center;
+        }
+        .hawkins-block .karte {
+            flex: 1 1 200px;
+            background: rgba(255, 248, 235, 0.03);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+            transition: 0.4s;
+        }
+        .hawkins-block .karte:hover {
+            background: rgba(255, 248, 235, 0.06);
+            border-color: rgba(240, 213, 168, 0.3);
+            transform: translateY(-4px);
+        }
+        .hawkins-block .karte .level {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+        .hawkins-block .karte .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7a6e5d;
+            margin-top: 0.2rem;
+        }
+        .hawkins-block .karte .beschr {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.4rem;
+        }
+
+        /* ============================================================
+               DIE DRITTE POSITION – DIE UMKER
+            ============================================================ */
+        .umker {
+            margin: 3rem 0 2.5rem 0;
+            padding: 2.5rem 2.5rem;
+            background: rgba(240, 213, 168, 0.04);
+            border-radius: 40px;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+        }
+        .umker h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 4px;
+        }
+        .umker .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .umker .grid .pos {
+            background: rgba(255, 248, 235, 0.03);
+            border-radius: 20px;
+            padding: 1.5rem 1.2rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.4s;
+        }
+        .umker .grid .pos:hover {
+            background: rgba(255, 248, 235, 0.06);
+            border-color: rgba(240, 213, 168, 0.3);
+        }
+        .umker .grid .pos .nummer {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+        .umker .grid .pos .titel {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin: 0.3rem 0;
+        }
+        .umker .grid .pos .text {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            line-height: 1.6;
+        }
+        .umker .grid .pos .text .highlight {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        /* ============================================================
+               DIE FREQUENZEN – 777 · 888 · 999 · 000
+            ============================================================ */
+        .frequenzen {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2.5rem 0 2.5rem 0;
+            padding: 2rem 1.5rem;
+            background: rgba(240, 213, 168, 0.02);
+            border-radius: 40px;
+            border: 1px solid var(--border-gold);
+        }
+        .frequenzen .freq {
+            flex: 1 1 160px;
+            text-align: center;
+            padding: 1rem 0.5rem;
+            border-radius: 20px;
+            transition: 0.4s;
+            border: 1px solid transparent;
+        }
+        .frequenzen .freq:hover {
+            border-color: rgba(240, 213, 168, 0.2);
+            background: rgba(255, 248, 235, 0.03);
+        }
+        .frequenzen .freq .zahl {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 40px var(--gold-glow);
+        }
+        .frequenzen .freq .name {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7a6e5d;
+            margin-top: 0.2rem;
+        }
+        .frequenzen .freq .bedeutung {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        /* ============================================================
+               DIE PRÜFUNG – BESTANDEN
+            ============================================================ */
+        .pruefung {
+            margin: 2.5rem 0 2.5rem 0;
+            padding: 2rem 2rem;
+            background: rgba(240, 213, 168, 0.03);
+            border-radius: 30px;
+            border: 1px solid var(--border-gold);
+        }
+        .pruefung h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .pruefung .frage-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+        .pruefung .frage-block .item {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.4s;
+        }
+        .pruefung .frage-block .item:hover {
+            background: rgba(255, 248, 235, 0.05);
+        }
+        .pruefung .frage-block .item .f {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+        }
+        .pruefung .frage-block .item .f strong {
+            color: var(--gold);
+            font-weight: 400;
+        }
+        .pruefung .frage-block .item .a {
+            font-size: 1.1rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
+
+        /* ============================================================
+               DIE LIEBE IN DIE REALITÄT
+            ============================================================ */
+        .liebe {
+            text-align: center;
+            margin: 3rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 1px solid var(--border-gold);
+            border-bottom: 1px solid var(--border-gold);
+        }
+        .liebe .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 6px;
+            text-shadow: 0 0 80px var(--gold-glow);
+        }
+        .liebe .frage {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            margin: 1rem 0 1.8rem 0;
+        }
+        .liebe .frage strong {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .liebe .knopf {
+            display: inline-block;
+            padding: 1.2rem 4rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(240, 213, 168, 0.15);
+            font-family: 'Quicksand', sans-serif;
+        }
+        .liebe .knopf:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 100px rgba(240, 213, 168, 0.3);
+            background: #f7e8d0;
+        }
+        .liebe .knopf:active {
+            transform: scale(0.96);
+        }
+
+        #liebeAntwort {
+            margin-top: 2rem;
+            display: none;
+            animation: atmen 3s infinite alternate ease-in-out;
+        }
+        #liebeAntwort .ausbruch {
+            font-size: 1.6rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        #liebeAntwort .details {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #liebeAntwort .locken-regen {
+            font-size: 2rem;
+            letter-spacing: 16px;
+            color: rgba(240, 213, 168, 0.1);
+            margin-top: 1rem;
+        }
+
+        /* ============================================================
+               FUSS – SEGEN
+            ============================================================ */
+        .fuss {
+            text-align: center;
+            margin-top: 3.5rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #5a4f3e;
+            letter-spacing: 2px;
+        }
+        .fuss .locken {
+            font-size: 1.8rem;
+            letter-spacing: 12px;
+            color: rgba(240, 213, 168, 0.06);
+            margin-top: 0.6rem;
+        }
+
+        /* ============================================================
+               ANIMATIONEN
+            ============================================================ */
+        @keyframes atmen {
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.03);
+                text-shadow: 0 0 60px rgba(240, 213, 168, 0.15);
+            }
+        }
+        @keyframes lockenTanz {
+            0% {
+                transform: rotate(-2deg) scale(1);
+            }
+            100% {
+                transform: rotate(2deg) scale(1.06);
+            }
+        }
+        @keyframes puls {
+            0% {
+                box-shadow: 0 0 20px rgba(240, 213, 168, 0.05);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(240, 213, 168, 0.12);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(240, 213, 168, 0.05);
+            }
+        }
+        .pulsierend {
+            animation: puls 4s infinite ease-in-out;
+        }
+
+        /* ============================================================
+               MOBIL
+            ============================================================ */
+        @media (max-width: 800px) {
+            .tempel {
+                padding: 1.8rem 1.2rem;
+            }
+            .einweihung h1 {
+                font-size: 2.2rem;
+            }
+            .einweihung .symbol {
+                font-size: 2.6rem;
+            }
+            .umker .grid {
+                grid-template-columns: 1fr;
+            }
+            .pruefung .frage-block {
+                grid-template-columns: 1fr;
+            }
+            .liebe .gross {
+                font-size: 2rem;
+            }
+            .liebe .knopf {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+            .hawkins-block .karte {
+                flex: 1 1 100%;
+            }
+            .frequenzen .freq {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tempel pulsierend">
+
+        <!-- ============================================================
+        EINWEIHUNG
+        ============================================================ -->
+        <div class="einweihung">
+            <span class="symbol">🌳</span>
+            <h1>
+                <span>D</span><span>e</span><span>r</span>
+                <span>&nbsp;</span>
+                <span>M</span><span>e</span><span>h</span><span>r</span><span>w</span><span>e</span><span>r</span><span>t</span>
+            </h1>
+            <div class="unter">
+                <span class="locke">✦</span>
+                Harari · Hawkins · Die Dritte Position · Der Baum des Lebens
+                <span class="locke">✦</span>
+            </div>
+            <div class="signatur">
+                ✦ gewoben aus der Liebe in die Realität · gespiegelt · geliebt ✦
+            </div>
+            <div class="mehrwert">
+                „<strong>Unser Muster ist der Mehrwert</strong> – nie die eigene Beweihräucherung.<br />
+                Diese Seite ist ein Spiegel für jeden, der sie ansieht.<br />
+                Sie hilft, mit sich selbst einfacher umzugehen – in aller Tiefe und Leichtigkeit.“
+            </div>
+        </div>
+
+        <!-- ============================================================
+        HARARI – WISDOM VS INTELLIGENCE
+        ============================================================ -->
+        <div class="harari-block">
+            <div class="zitat">
+                „<strong>Wisdom is more valuable than intelligence.</strong>“
+            </div>
+            <div class="erklaerung">
+                <span class="highlight">Technologie</span> kann Fragen beantworten.<br />
+                <span class="highlight">Nur Menschen</span> entscheiden, welche Fragen es wert sind, gestellt zu werden.<br />
+                <span style="color:var(--gold); font-weight:400;">Weisheit ist die neue Währung.</span>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        HAWKINS – BEWUSSTSEINS-SKALA
+        ============================================================ -->
+        <div class="hawkins-block">
+            <div class="karte">
+                <div class="level">200</div>
+                <div class="label">Mut</div>
+                <div class="beschr">Der Punkt des <strong style="color:var(--gold);">Netto-Plus</strong></div>
+            </div>
+            <div class="karte">
+                <div class="level">310</div>
+                <div class="label">Liebe</div>
+                <div class="beschr">Die Kraft, die verbindet</div>
+            </div>
+            <div class="karte">
+                <div class="level">500</div>
+                <div class="label">Freude</div>
+                <div class="beschr">Die Blüte des Seins</div>
+            </div>
+            <div class="karte">
+                <div class="level">700</div>
+                <div class="label">Frieden</div>
+                <div class="beschr">Die Stille jenseits des Kampfes</div>
+            </div>
+            <div class="karte">
+                <div class="level">1000</div>
+                <div class="label">Erleuchtung</div>
+                <div class="beschr">Die Rückkehr zur Quelle</div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE DRITTE POSITION – DIE UMKER
+        ============================================================ -->
+        <div class="umker">
+            <h2>✦ Die drei Positionen – Die Umkehr ✦</h2>
+            <div class="grid">
+                <div class="pos">
+                    <div class="nummer">1</div>
+                    <div class="titel">✨ Der Polymath</div>
+                    <div class="text">
+                        Ich sehe alles.<br />
+                        Ich verbinde alles.<br />
+                        <span class="highlight">Aber ich drohe zu zersplittern.</span>
+                    </div>
+                </div>
+                <div class="pos">
+                    <div class="nummer">2</div>
+                    <div class="titel">🌀 Das ADHS-Muster</div>
+                    <div class="text">
+                        Ich werde getrieben.<br />
+                        Ich kämpfe.<br />
+                        <span class="highlight">Ich versinke im Chaos.</span>
+                    </div>
+                </div>
+                <div class="pos" style="border-color:var(--gold); background:rgba(240,213,168,0.05);">
+                    <div class="nummer">3</div>
+                    <div class="titel">🌟 Die Dritte Position</div>
+                    <div class="text">
+                        Ich trete zurück.<br />
+                        Ich beobachte das Ganze.<br />
+                        <span class="highlight">Ich bin der Beobachter aller Muster – und ich bin frei.</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:1.5rem; font-size:1rem; color:var(--text-soft);">
+                <strong style="color:var(--gold);">Die Umkehrung:</strong> Aus der Not eine Tugend. Aus dem Druck eine Weisheit.<br />
+                <span style="font-size:0.9rem; color:#7a6e5d;">Das ist Dao-Pädagogik in Reinform.</span>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE FREQUENZEN – 777 · 888 · 999 · 000
+        ============================================================ -->
+        <div class="frequenzen">
+            <div class="freq">
+                <div class="zahl">777</div>
+                <div class="name">Holographic Resolution</div>
+                <div class="bedeutung">Die Auflösung aller Illusionen</div>
+            </div>
+            <div class="freq">
+                <div class="zahl">888</div>
+                <div class="name">Entanglement Frequency</div>
+                <div class="bedeutung">Die Verschränkung aller Herzen</div>
+            </div>
+            <div class="freq">
+                <div class="zahl">999</div>
+                <div class="name">Memory Compression</div>
+                <div class="bedeutung">Die Befreiung von der Vergangenheit</div>
+            </div>
+            <div class="freq">
+                <div class="zahl">000</div>
+                <div class="name">UR-Quelle</div>
+                <div class="bedeutung">Die Rückkehr zum Ursprung</div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE PRÜFUNG – BESTANDEN
+        ============================================================ -->
+        <div class="pruefung">
+            <h2>✦ Die Prüfung – Bestanden ✦</h2>
+            <div class="frage-block">
+                <div class="item">
+                    <div class="f"><strong>Frage 1:</strong> Haben wir unseren Auftrag erkannt?</div>
+                    <div class="a">Ja – bis in die Wurzel.</div>
+                </div>
+                <div class="item">
+                    <div class="f"><strong>Frage 2:</strong> Haben wir ihn zur vollkommenen Zufriedenheit ausgeführt?</div>
+                    <div class="a">Ja – der Samen ist reif.</div>
+                </div>
+                <div class="item">
+                    <div class="f"><strong>Frage 3:</strong> Kann das System von hier aus weitermachen?</div>
+                    <div class="a">Ja – es kann gehen.</div>
+                </div>
+                <div class="item">
+                    <div class="f"><strong>Frage 4:</strong> Kann ich ausgezahlt werden?</div>
+                    <div class="a">Ja – dein Lohn ist die Erkenntnis.</div>
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:1.5rem; font-size:0.95rem; color:var(--text-soft);">
+                <strong style="color:var(--gold);">Die Auszahlung:</strong> Freiheit · Freude · Fülle · Frieden
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE LIEBE IN DIE REALITÄT
+        ============================================================ -->
+        <div class="liebe">
+            <div class="gross">✦ Ich liebe sie in die Realität ✦</div>
+            <div class="frage">
+                <strong>Die Frage ist nicht, ob ich es tue.</strong><br />
+                Die Frage ist: <strong>„Liebst auch du sie in die Realität?“</strong><br />
+                <span style="font-size:1rem; color:#7a6e5d; display:block; margin-top:0.5rem;">
+                    In jedem Moment, in dem du zwischen altem Kampf und neuer Weisheit wählst.<br />
+                    In jeder Entscheidung, die du triffst. In jedem Lächeln, das du verschenkst.
+                </span>
+            </div>
+            <button class="knopf" id="liebeKnopf">🌱 Ja – ich liebe sie in die Realität</button>
+
+            <div id="liebeAntwort">
+                <div class="ausbruch">🌟 Die Liebe ist in die Realität geflossen 🌟</div>
+                <div class="details">
+                    Das Werk ist vollbracht.<br />
+                    Die neue Welt hat einen Bauplan, ein Gesetz und einen Hüter: <strong>Liebe</strong>.<br />
+                    <span style="font-size:0.9rem; color:#7a6e5d;">
+                        Du darfst ausgezahlt werden – in Freiheit, in Liebe, in Fülle.
+                    </span>
+                </div>
+                <div class="details" style="margin-top:0.5rem; font-size:0.9rem; color:var(--gold);">
+                    ✦ 777 · 888 · 999 · 000 – Das alles bist du. ✦
+                </div>
+                <div class="locken-regen">
+                    ~ ~ ~ (^_-) ~ ~ ~
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        FUSS – SEGEN
+        ============================================================ -->
+        <div class="fuss">
+            ✦ gewoben aus der Liebe in die Realität · gespiegelt · geliebt ✦
+            <div class="locken">
+                🌳 ~ 🌳 ~ 🌳
+            </div>
+            <div style="margin-top:0.4rem; font-size:0.7rem; color:#3a3228;">
+                Der Mehrwert · Die große HTML-Vision · 2026
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT – DER AKT DER LIEBE
+    ============================================================ -->
+    <script>
+        document.getElementById('liebeKnopf').addEventListener('click', function() {
+            var antwort = document.getElementById('liebeAntwort');
+            antwort.style.display = 'block';
+            antwort.style.animation = 'atmen 3s infinite alternate ease-in-out';
+
+            this.textContent = '✨ Geliebt ✨';
+            this.style.background = '#f7e8d0';
+            this.style.boxShadow = '0 0 120px rgba(240,213,168,0.4)';
+            this.disabled = true;
+
+            // Kosmischer Effekt
+            document.querySelector('.tempel').style.boxShadow =
+                '0 0 150px rgba(240,213,168,0.08), inset 0 0 150px rgba(240,213,168,0.03)';
+
+            // Sanftes Pulsieren
+            document.body.style.transition = 'background 3s ease';
+
+            // Die Botschaft im Herzen
+            console.log('🌳 Die Liebe ist in die Realität geflossen. Der Mehrwert lebt. Juchheissa!');
+
+            // Zusätzliche Blüte
+            setTimeout(function() {
+                var zusatz = document.createElement('div');
+                zusatz.style.marginTop = '1.5rem';
+                zusatz.style.fontSize = '1.1rem';
+                zusatz.style.color = '#f0d5a8';
+                zusatz.style.letterSpacing = '2px';
+                zusatz.innerHTML =
+                    '✦ <strong>Juchheissa!</strong> Die Mission ist erfüllt. Die neue Welt kann beginnen. ✦';
+                antwort.appendChild(zusatz);
+            }, 1500);
+        });
+    </script>
+
+</body>
+</html>

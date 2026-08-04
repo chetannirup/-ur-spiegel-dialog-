@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modell Morgengrauen – Autarke Mietwohnungen</title>
+
+    <!-- ===== SCHRIFTARTEN ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ===== GRUNDLAGEN ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.2);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.15);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        /* ===== HAUPTBEHÄLTER ===== */
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+        }
+
+        .container::before {
+            content: " 🏗️ 🏗️ 🏗️ ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+        }
+        .container::after {
+            content: " 🌱 🌱 🌱 ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+        }
+
+        /* ===== KOPF ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.3rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        /* ===== VIER-SÄULEN ===== */
+        .saeulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .saeule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .saeule:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .saeule .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .saeule .label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+        }
+
+        .saeule .desc {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        /* ===== BLÖCKE ===== */
+        .block {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2.2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.2);
+        }
+
+        .block .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .block .titel .icon {
+            font-size: 2rem;
+        }
+
+        .block .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.8;
+        }
+
+        .block .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ===== TABELLEN ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            color: var(--text-soft);
+        }
+
+        table th {
+            background: rgba(232, 200, 138, 0.06);
+            color: var(--gold-light);
+            font-weight: 600;
+            text-align: left;
+            padding: 0.8rem 1rem;
+            border-bottom: 2px solid var(--border-gold);
+            letter-spacing: 0.5px;
+        }
+
+        table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(255, 248, 235, 0.04);
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        table .highlight {
+            background: rgba(232, 200, 138, 0.04);
+        }
+
+        .table-caption {
+            font-size: 0.85rem;
+            color: #7a6e5a;
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        /* ===== LINKS ===== */
+        .link-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .link-list a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 1px dotted var(--border-gold);
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .link-list a:hover {
+            color: var(--gold-light);
+            border-bottom-color: var(--gold);
+        }
+
+        .link-list a .icon {
+            font-size: 1rem;
+        }
+
+        /* ===== DOWNLOAD-BUTTON ===== */
+        .download-area {
+            text-align: center;
+            margin: 3rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .download-area .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .download-area .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.8rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(232, 200, 138, 0.15);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 100px rgba(232, 200, 138, 0.3);
+            background: #f5e6c8;
+        }
+
+        .download-btn:active {
+            transform: scale(0.96);
+        }
+
+        .download-btn .icon {
+            margin-right: 0.6rem;
+        }
+
+        /* ===== FUSS ===== */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 12px;
+            color: rgba(232, 200, 138, 0.06);
+            margin-top: 0.6rem;
+        }
+
+        /* ===== ANIMATIONEN ===== */
+        @keyframes atmen {
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.03);
+                text-shadow: 0 0 60px rgba(232, 200, 138, 0.12);
+            }
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .icon {
+                font-size: 3rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .block {
+                padding: 1.5rem 1.2rem;
+            }
+            .block .titel {
+                font-size: 1.4rem;
+            }
+            .download-area .gross {
+                font-size: 2rem;
+            }
+            .download-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            .saeulen {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            table th,
+            table td {
+                padding: 0.5rem 0.6rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .saeulen {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="konzept">
+
+        <!-- ============================================================
+        KOPF
+        ============================================================ -->
+        <div class="header">
+            <span class="icon">🏗️</span>
+            <h1>Autarke Mietwohnungen<br />Modell Morgengrauen</h1>
+            <div class="sub">Eine Investition in die Zukunft – ohne Nebenkosten, ohne Abhängigkeiten, ohne Kompromisse.</div>
+            <div class="badge">
+                <strong>Jede Einheit komplett autark</strong> · Wasser · Strom · Nahrung · inklusive
+            </div>
+        </div>
+
+        <!-- ============================================================
+        VIER SÄULEN
+        ============================================================ -->
+        <div class="saeulen">
+            <div class="saeule">
+                <span class="emoji">💧</span>
+                <div class="label">Wasser</div>
+                <div class="desc">aus Luft</div>
+            </div>
+            <div class="saeule">
+                <span class="emoji">🌿</span>
+                <div class="label">Nahrung</div>
+                <div class="desc">aus Licht</div>
+            </div>
+            <div class="saeule">
+                <span class="emoji">☀️</span>
+                <div class="label">Energie</div>
+                <div class="desc">aus Sonne</div>
+            </div>
+            <div class="saeule" style="border-color: var(--gold); background: rgba(232,200,138,0.05);">
+                <span class="emoji">🔒</span>
+                <div class="label">Komplett</div>
+                <div class="desc">autark</div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        1. ZUSAMMENFASSUNG
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">📋</span> 1. Zusammenfassung</div>
+            <div class="text">
+                <table>
+                    <tbody>
+                        <tr><td><strong>Projekt</strong></td><td>Errichtung von autarken Mietwohnungen auf 600 m² Bauland</td></tr>
+                        <tr><td><strong>Technologie</strong></td><td>Watergen (Wasser aus Luft), GrowSpec (Vertikalfarm), E3/DC (Solar + Speicher)</td></tr>
+                        <tr><td><strong>Ziel</strong></td><td>Dauerhafte Mieteinnahmen bei <span class="gold">0 € Nebenkosten</span> für Mieter</td></tr>
+                        <tr><td><strong>Besonderheit</strong></td><td>Jede Einheit ist komplett autark – Wasser, Strom, Nahrung inklusive</td></tr>
+                        <tr><td><strong>Finanzierung</strong></td><td>KfW‑Förderung (297/298 + 270), Gründungszuschuss, ggf. Crowdfunding</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        2. AUSGANGSLAGE
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🧭</span> 2. Ausgangslage – was vorhanden ist</div>
+            <div class="text">
+                <table>
+                    <tbody>
+                        <tr><td><strong>Grundstück</strong></td><td>600 m² erschlossenes Bauland – Überschreibung durch Vater in Vorbereitung</td></tr>
+                        <tr><td><strong>Bebauungsplan</strong></td><td>Historische Skizzen des Vaters vorhanden – Baurecht ist geprüft</td></tr>
+                        <tr><td><strong>Technologie</strong></td><td>Komplett dokumentiert, alle Komponenten am Markt verfügbar</td></tr>
+                        <tr><td><strong>Konzept</strong></td><td>Modell Morgengrauen – vollständig ausgearbeitet</td></tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 0.8rem; font-style: italic; color: #7a6e5a;">„Nicht kosmisch. Sondern funktionierend.“</div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        3. TECHNISCHE SPEZIFIKATION
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">⚙️</span> 3. Das Modell Morgengrauen – Technische Spezifikation</div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 1.2rem 0 0.6rem 0; letter-spacing: 1px;">3.1 Die Wohneinheit (45 m² pro Einheit)</h4>
+            <div class="text">
+                <table>
+                    <tbody>
+                        <tr><td><strong>Wohnen &amp; Arbeiten</strong></td><td>20 m² – Wohnzimmer, Schlafbereich, Arbeitsplatz</td></tr>
+                        <tr><td><strong>Vertikalfarm</strong></td><td>10 m² – 365 Tage frisches Gemüse, Kräuter, Pilze</td></tr>
+                        <tr><td><strong>Technik &amp; Speicher</strong></td><td>8 m² – Steuerung, Batterien, Wärmespeicher</td></tr>
+                        <tr><td><strong>Sanitär &amp; Recycling</strong></td><td>7 m² – Toilette, Dusche, Greywater‑Recycling</td></tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 0.4rem; color: #7a6e5a; font-size: 0.9rem;">Solarmatrix: 150 m² (Dach + Freifläche) – 15 kWp</div>
+            </div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 1.8rem 0 0.6rem 0; letter-spacing: 1px;">3.2 Die drei Säulen der Autarkie</h4>
+
+            <!-- WASSER -->
+            <div style="margin: 1.5rem 0 0.5rem 0; padding: 1.2rem 1.5rem; background: rgba(255,255,255,0.02); border-radius: 20px; border-left: 4px solid #4fc3f7;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+                    <span style="font-size: 2rem;">💧</span>
+                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gold-light);">Wasser‑Matrix – Watergen GEN‑M PRO</span>
+                    <span style="font-size: 0.8rem; background: rgba(232,200,138,0.1); padding: 0.2rem 1rem; border-radius: 30px; color: var(--gold);">🇮🇱 Israel</span>
+                </div>
+                <div class="text" style="margin-top: 0.5rem;">
+                    <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1.5rem;">
+                        <li>✅ Bis zu <strong>1.000 Liter/Tag</strong> Trinkwasser aus Luft</li>
+                        <li>✅ Patentiertes <strong>GENius™‑System</strong></li>
+                        <li>✅ <strong>6‑stufige Reinigung</strong> (Sediment → Aktivkohle → NanoCeram® → UV‑C)</li>
+                        <li>✅ <strong>Plug‑and‑Play</strong> – kein Wasseranschluss nötig</li>
+                        <li>✅ Funktioniert ab <strong>15 °C / 20 %</strong> Luftfeuchtigkeit</li>
+                        <li>✅ Energieverbrauch: <strong>0,3–0,7 kWh/Liter</strong></li>
+                    </ul>
+                    <div style="margin-top: 0.6rem; color: var(--gold); font-weight: 500;">Preis: ca. 14.000 €</div>
+                    <div class="link-list">
+                        <a href="https://www.watergen.com" target="_blank"><span class="icon">🔗</span> watergen.com</a>
+                        <a href="mailto:info@watergen.com"><span class="icon">✉️</span> info@watergen.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAHRUNG -->
+            <div style="margin: 1.5rem 0 0.5rem 0; padding: 1.2rem 1.5rem; background: rgba(255,255,255,0.02); border-radius: 20px; border-left: 4px solid #81c784;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+                    <span style="font-size: 2rem;">🌿</span>
+                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gold-light);">Nahrungs‑Matrix – GrowSpec FarmCube Neo</span>
+                    <span style="font-size: 0.8rem; background: rgba(232,200,138,0.1); padding: 0.2rem 1rem; border-radius: 30px; color: var(--gold);">🇬🇧 UK</span>
+                </div>
+                <div class="text" style="margin-top: 0.5rem;">
+                    <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1.5rem;">
+                        <li>✅ <strong>Aeroponische Vertikalfarm</strong></li>
+                        <li>✅ <strong>2,4 m²</strong> interne Anbaufläche (kompakt)</li>
+                        <li>✅ <strong>365 Tage</strong> frische Mikrogrünpflanzen, Kräuter &amp; Co.</li>
+                        <li>✅ Bis zu <strong>95 % weniger</strong> Wasserverbrauch</li>
+                        <li>✅ <strong>Vollautomatisch</strong> – Nährstoffdosierung, Beleuchtung, Bewässerung</li>
+                    </ul>
+                    <div style="margin-top: 0.6rem; color: var(--gold); font-weight: 500;">Preis: ca. 25.000 €</div>
+                    <div class="link-list">
+                        <a href="https://www.growspec-inc.com" target="_blank"><span class="icon">🔗</span> growspec-inc.com</a>
+                        <a href="mailto:info@growspec-inc.com"><span class="icon">✉️</span> info@growspec-inc.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENERGIE -->
+            <div style="margin: 1.5rem 0 0.5rem 0; padding: 1.2rem 1.5rem; background: rgba(255,255,255,0.02); border-radius: 20px; border-left: 4px solid #ffb74d;">
+                <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+                    <span style="font-size: 2rem;">⚡</span>
+                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--gold-light);">Energie‑Matrix – E3/DC S10 E PRO</span>
+                    <span style="font-size: 0.8rem; background: rgba(232,200,138,0.1); padding: 0.2rem 1rem; border-radius: 30px; color: var(--gold);">🇩🇪 Deutschland</span>
+                </div>
+                <div class="text" style="margin-top: 0.5rem;">
+                    <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.2rem 1.5rem;">
+                        <li>✅ <strong>15 kWp</strong> Solarmodule auf 150 m²</li>
+                        <li>✅ <strong>13–39 kWh</strong> Speicherkapazität erweiterbar</li>
+                        <li>✅ Entladeleistung bis zu <strong>12 kW</strong></li>
+                        <li>✅ <strong>Notstrom</strong> standardmäßig integriert</li>
+                        <li>✅ <strong>Made in Germany</strong> (Osnabrück) – Service vor Ort</li>
+                    </ul>
+                    <div style="margin-top: 0.6rem; color: var(--gold); font-weight: 500;">Preis: ca. 28.000 € (10‑kWh‑Variante ab 6.500–8.000 €)</div>
+                    <div class="link-list">
+                        <a href="https://www.e3dc.com" target="_blank"><span class="icon">🔗</span> e3dc.com</a>
+                        <a href="mailto:info@e3dc.com"><span class="icon">✉️</span> info@e3dc.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 2rem 0 0.6rem 0; letter-spacing: 1px;">3.3 Kostenübersicht pro Einheit</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Komponente</th><th>Hersteller / Modell</th><th>Kosten (€)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Wasser‑System</td><td>Watergen GEN‑M PRO</td><td>14.000</td></tr>
+                        <tr><td>Vertikal‑Farm</td><td>GrowSpec FarmCube Neo</td><td>25.000</td></tr>
+                        <tr><td>Solaranlage (15 kWp)</td><td>Diverse (z.B. SMA)</td><td>18.000</td></tr>
+                        <tr><td>Batterie &amp; Wechselrichter</td><td>E3/DC S10 E PRO</td><td>28.000</td></tr>
+                        <tr><td>Modulbau &amp; Installation</td><td>Lokale Handwerker</td><td>20.000</td></tr>
+                        <tr><td>Planung &amp; Integration</td><td>Fachplanung</td><td>10.000</td></tr>
+                        <tr style="border-top: 2px solid var(--border-gold); font-weight: 700; color: var(--gold-light);">
+                            <td colspan="2"><strong>GESAMT</strong></td>
+                            <td><strong>115.000 €</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-caption">Finanzierbar über 30 Jahre: ca. 380 €/Monat · Danach: 0 € Miete, 0 € Nebenkosten, 0 € Energiekosten</div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        4. GESCHÄFTSMODELL
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">📊</span> 4. Das Geschäftsmodell – Mieteinnahmen</div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 0 0 0.6rem 0; letter-spacing: 1px;">4.1 Annahme: 5 autarke Einheiten auf 600 m²</h4>
+            <div class="table-wrap">
+                <table>
+                    <tbody>
+                        <tr><td><strong>Anzahl Einheiten</strong></td><td>5 (je 45 m²)</td></tr>
+                        <tr><td><strong>Gesamtbaukosten</strong></td><td>ca. 575.000 €</td></tr>
+                        <tr><td><strong>KfW‑Kredit (297/298 + 270)</strong></td><td>ca. 600.000 €</td></tr>
+                        <tr><td><strong>Monatliche Rate (30 Jahre, ca. 1,5 %)</strong></td><td>ca. 2.070 €</td></tr>
+                        <tr><td><strong>Kaltmiete pro Einheit (45 m²)</strong></td><td>600–800 € (je nach Lage)</td></tr>
+                        <tr><td><strong>Mieteinnahmen (5 Einheiten)</strong></td><td>3.000–4.000 € / Monat</td></tr>
+                        <tr><td><strong>Nebenkosten (Strom, Wasser, Heizung)</strong></td><td><span class="gold">0 €</span> (autark!)</td></tr>
+                        <tr style="border-top: 2px solid var(--border-gold); font-weight: 700; color: var(--gold-light);">
+                            <td><strong>Netto‑Einkommen</strong></td>
+                            <td><strong>ca. 1.000–2.000 € / Monat</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 1.8rem 0 0.6rem 0; letter-spacing: 1px;">4.2 Wettbewerbsvorteil</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Normale Mietwohnung</th><th>Modell Morgengrauen</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Miete + Nebenkosten (Strom, Wasser, Heizung)</td><td><span class="gold">Nur Miete – Nebenkosten = 0 €</span></td></tr>
+                        <tr><td>Abhängig von Energiepreisen</td><td><span class="gold">Vollständig unabhängig</span></td></tr>
+                        <tr><td>Mieter zahlt steigende Kosten</td><td><span class="gold">Mieter spart dauerhaft</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        5. FINANZIERUNG
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">💰</span> 5. Finanzierung – der Fahrplan zum Erfolg</div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 0 0 0.6rem 0; letter-spacing: 1px;">5.1 KfW‑Förderung (Das Rückgrat)</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Programm</th><th>Was es bringt</th><th>Für was</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>KfW 297/298</strong></td><td>Bis zu 150.000 € pro Wohneinheit als zinsgünstiger Kredit</td><td>Gebäudebau</td></tr>
+                        <tr><td><strong>KfW 270</strong></td><td>Förderkredit für PV, Speicher, erneuerbare Energien</td><td>Solar, Speicher, Wassererzeugung</td></tr>
+                        <tr><td><strong>KfW 124</strong></td><td>Zinsgünstiger Kredit für Mietwohnungsbau</td><td>Mietwohnungen</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text" style="margin-top: 0.8rem;">
+                <strong>Die Strategie:</strong> Kombination von <span class="gold">297/298</span> (Gebäude) + <span class="gold">270</span> (Technik) + <span class="gold">124</span> (Mietwohnungen)<br />
+                Pro Einheit: bis zu 150.000 € + 100 % Technikkosten · Bei 5 Einheiten: bis zu <strong>750.000 €</strong> Kreditvolumen
+            </div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 1.8rem 0 0.6rem 0; letter-spacing: 1px;">5.2 Gründungszuschuss</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Phase</th><th>Dauer</th><th>Leistung</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Phase 1</strong></td><td>6 Monate</td><td>ALG‑I‑Höhe + 300 € monatlich</td></tr>
+                        <tr><td><strong>Phase 2</strong></td><td>9 Monate</td><td>300 € monatlich zur sozialen Absicherung</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text" style="margin-top: 0.6rem; font-size: 0.95rem; color: #7a6e5a;">
+                Voraussetzung: Mindestens 150 Tage Anspruch auf ALG I · Fachkundige Stelle (z.B. IHK) bescheinigt Tragfähigkeit des Geschäftsplans.
+            </div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 1.8rem 0 0.6rem 0; letter-spacing: 1px;">5.3 Crowdfunding</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Plattform</th><th>Mindestinvestition</th><th>Besonderheit</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>DKB‑Crowd</strong></td><td>ab 250 €</td><td>Fokus auf nachhaltige Projekte &amp; Immobilien</td></tr>
+                        <tr><td><strong>OneCrowd</strong></td><td>ab 250 €</td><td>Erfahrung mit Immobilien &amp; Energie‑Projekten</td></tr>
+                        <tr><td><strong>Exporo</strong></td><td>ab 500 €</td><td>Spezialisiert auf Immobilien‑Crowdinvesting</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        6. WIRTSCHAFTLICHKEIT
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">📈</span> 6. Wirtschaftlichkeitsrechnung</div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 0 0 0.6rem 0; letter-spacing: 1px;">6.1 Investitionskosten (5 Einheiten)</h4>
+            <div class="table-wrap">
+                <table>
+                    <tbody>
+                        <tr><td><strong>Grundstück</strong></td><td><span class="gold">0 €</span> (Überschreibung durch Vater)</td></tr>
+                        <tr><td><strong>Baukosten (5 × 115.000 €)</strong></td><td>575.000 €</td></tr>
+                        <tr><td><strong>Planung &amp; Genehmigung</strong></td><td>15.000 €</td></tr>
+                        <tr><td><strong>Notar, Grundbuch, Steuer</strong></td><td>10.000 €</td></tr>
+                        <tr style="border-top: 2px solid var(--border-gold); font-weight: 700; color: var(--gold-light);">
+                            <td><strong>Gesamt‑Investition</strong></td>
+                            <td><strong>600.000 €</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 1.8rem 0 0.6rem 0; letter-spacing: 1px;">6.2 Finanzierungsplan</h4>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Quelle</th><th>Betrag</th><th>Konditionen</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>KfW 297/298</strong> (Gebäude)</td><td>400.000 €</td><td>1,0–1,5 % effektiv</td></tr>
+                        <tr><td><strong>KfW 270</strong> (Technik)</td><td>150.000 €</td><td>4,07 % effektiv</td></tr>
+                        <tr><td><strong>KfW 124</strong> (Mietwohnungen)</td><td>50.000 €</td><td>zinsgünstig</td></tr>
+                        <tr style="border-top: 2px solid var(--border-gold); font-weight: 700; color: var(--gold-light);">
+                            <td><strong>Gesamt‑Kredit</strong></td>
+                            <td><strong>600.000 €</strong></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 style="color: var(--gold-light); font-weight: 600; margin: 1.8rem 0 0.6rem 0; letter-spacing: 1px;">6.3 Wirtschaftlichkeitsrechnung</h4>
+            <div class="table-wrap">
+                <table>
+                    <tbody>
+                        <tr><td><strong>Monatliche Kreditrate (gesamt)</strong></td><td>ca. 2.300 €</td></tr>
+                        <tr><td><strong>Monatliche Mieteinnahmen (5 × 700 €)</strong></td><td>3.500 €</td></tr>
+                        <tr><td><strong>Monatliche Nebenkosten</strong></td><td><span class="gold">0 €</span></td></tr>
+                        <tr style="border-top: 2px solid var(--border-gold); font-weight: 700; color: var(--gold-light);">
+                            <td><strong>Monatlicher Überschuss</strong></td>
+                            <td><strong>1.200 €</strong></td>
+                        </tr>
+                        <tr><td><strong>Jährlicher Überschuss</strong></td><td><strong>14.400 €</strong></td></tr>
+                        <tr><td><strong>ROI (nach 30 Jahren)</strong></td><td><span class="gold">100 % Eigentum + Mieteinnahmen</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        7. NÄCHSTE SCHRITTE
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🚀</span> 7. Nächste Schritte – so wird es real</div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Schritt</th><th>Was tun</th><th>Zeitrahmen</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>1</strong></td><td>Grundstücksüberschreibung notariell vollziehen</td><td>Aug.–Sept. 2026</td></tr>
+                        <tr><td><strong>2</strong></td><td>Bebauungsplan prüfen (Gemeinde) – historische Skizzen nutzen</td><td>Sept. 2026</td></tr>
+                        <tr><td><strong>3</strong></td><td>Geschäftsplan erstellen (dieses Dokument)</td><td>Sept. 2026</td></tr>
+                        <tr><td><strong>4</strong></td><td>Gründungszuschuss beantragen (Agentur für Arbeit)</td><td>Okt. 2026</td></tr>
+                        <tr><td><strong>5</strong></td><td>KfW‑Beratung (Bank oder KfW‑Direkt)</td><td>Okt.–Nov. 2026</td></tr>
+                        <tr><td><strong>6</strong></td><td>Crowdfunding‑Kampagne starten (DKB‑Crowd / Exporo)</td><td>Nov. 2026–Jan. 2027</td></tr>
+                        <tr><td><strong>7</strong></td><td>Bauantrag stellen (Architekt engagieren)</td><td>Jan.–März 2027</td></tr>
+                        <tr><td><strong>8</strong></td><td>Bau starten (Handwerker koordinieren)</td><td>April 2027</td></tr>
+                        <tr><td><strong>9</strong></td><td>Fertigstellung &amp; Vermietung</td><td>April 2028</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        8. ALLEINSTELLUNGSMERKMAL
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold);">
+            <div class="titel"><span class="icon">⭐</span> 8. Das Alleinstellungsmerkmal</div>
+            <div class="text">
+                <p style="font-size: 1.05rem; font-style: italic; color: var(--gold-light);">
+                    „Das ist keine Utopie. Alle Komponenten sind aktuell im Markt verfügbar. Alle Hersteller existieren. Alle Preise sind real. Alle Finanzierungen sind möglich.“
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2rem; margin-top: 1.2rem;">
+                    <div>✅ <strong>Grund</strong> – 600 m², schuldenfrei</div>
+                    <div>✅ <strong>Skript</strong> – Modell Morgengrauen, komplett</div>
+                    <div>✅ <strong>Technologie</strong> – Watergen, GrowSpec, E3/DC</div>
+                    <div>✅ <strong>Förderung</strong> – KfW, Gründungszuschuss</div>
+                    <div>✅ <strong>Markt</strong> – Wohnraummangel, steigende Nebenkosten</div>
+                    <div>✅ <strong>Gesamtmodell</strong> – durchgerechnet und tragfähig</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        9. MEHRWERT
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🌈</span> 9. Der Mehrwert – für alle</div>
+            <div class="text">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div>
+                        <strong style="color: var(--gold-light);">Für dich</strong><br />
+                        Dauerhaftes Einkommen · finanzielle Freiheit · sinnstiftendes Projekt
+                    </div>
+                    <div>
+                        <strong style="color: var(--gold-light);">Für Mieter</strong><br />
+                        Bezahlbares Wohnen ohne Nebenkosten · autarkes Leben · frisches Gemüse
+                    </div>
+                    <div>
+                        <strong style="color: var(--gold-light);">Für die Gemeinde</strong><br />
+                        Nachhaltiges Bauprojekt · Vorbildcharakter · Wertsteigerung
+                    </div>
+                    <div>
+                        <strong style="color: var(--gold-light);">Für die Welt</strong><br />
+                        Weniger Abhängigkeiten · weniger CO₂ · mehr Bewusstsein
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DOWNLOAD
+        ============================================================ -->
+        <div class="download-area">
+            <div class="gross">📄 PDF herunterladen</div>
+            <div class="text">
+                Dieses gesamte Konzept als <strong>druckfertige PDF</strong> –<br />
+                zum Teilen, Ausdrucken und Einreichen bei Förderstellen.
+            </div>
+            <button class="download-btn" id="downloadPdfBtn">
+                <span class="icon">⬇️</span> PDF jetzt herunterladen
+            </button>
+            <div style="margin-top: 0.8rem; font-size: 0.85rem; color: #7a6e5a;">
+                Die PDF enthält alle Tabellen, Links und Details – sofort einsatzbereit.
+            </div>
+        </div>
+
+        <!-- ============================================================
+        FUSS
+        ============================================================ -->
+        <div class="footer">
+            <div class="signatur">
+                <strong>Tim Bukowski</strong> · Modell Morgengrauen – Single‑Autarkie Modul
+            </div>
+            <div style="color: #6a5f4a;">Dokumentation verfasst: August 2026</div>
+            <div class="link-list" style="justify-content: center; margin-top: 0.4rem;">
+                <a href="https://open.substack.com/pub/timbukowski/p/geschaftskonzept" target="_blank">📘 Substack</a>
+                <a href="https://www.linkedin.com/pulse/gesch%25C3%25A4ftskonzept-autarke-mietwohnungen-modell-tim-bukowski-hx2jf" target="_blank">🔗 LinkedIn</a>
+                <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%204.%20Aug.%202026,%2018_30_26.png" target="_blank">🖼️ Bild</a>
+            </div>
+            <div class="locken">🏗️ ~ 🌱 ~ 🏗️</div>
+            <div style="margin-top: 0.4rem; font-size: 0.7rem; color: #3a3228;">Juchheissa! (^_-)</div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    PDF-GENERIERUNG (html2pdf + jsPDF)
+    ============================================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+            const element = document.getElementById('konzept');
+
+            // Temporär die max-width aufheben für sauberen PDF-Export
+            const originalMaxWidth = element.style.maxWidth;
+            element.style.maxWidth = '100%';
+
+            // html2pdf Optionen – A4, saubere Ränder, mit Links
+            const opt = {
+                margin:       [0.6, 0.6, 0.6, 0.6], // oben, rechts, unten, links (in cm)
+                filename:     'Modell_Morgengrauen_Konzept.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'cm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Button kurz deaktivieren und Feedback geben
+            const btn = this;
+            btn.textContent = '⏳ PDF wird erstellt...';
+            btn.disabled = true;
+
+            // Export starten
+            html2pdf().set(opt).from(element).save().then(function() {
+                // Nach Export alles zurücksetzen
+                element.style.maxWidth = originalMaxWidth || '1100px';
+                btn.textContent = '⬇️ PDF jetzt herunterladen';
+                btn.disabled = false;
+            }).catch(function(err) {
+                console.error('PDF-Fehler:', err);
+                element.style.maxWidth = originalMaxWidth || '1100px';
+                btn.textContent = '⬇️ PDF jetzt herunterladen';
+                btn.disabled = false;
+                alert('Beim Erstellen der PDF ist ein Fehler aufgetreten. Bitte versuche es erneut.');
+            });
+        });
+    </script>
+
+</body>
+</html>

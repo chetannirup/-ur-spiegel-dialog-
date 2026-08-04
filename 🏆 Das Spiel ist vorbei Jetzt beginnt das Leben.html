@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🏆 Das Spiel ist vorbei – Jetzt beginnt das Leben</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        :root {
+            --gold: #f7d99a;
+            --gold-light: #fce8c0;
+            --gold-glow: rgba(247, 217, 154, 0.35);
+            --deep: #0a0c18;
+            --deep-card: rgba(255, 248, 235, 0.05);
+            --text: #f0ead8;
+            --text-soft: #d5cfbd;
+            --border-gold: rgba(247, 217, 154, 0.18);
+            --pink: #ffb8c9;
+            --blue: #8ac4ff;
+            --green: #8dd9b0;
+            --purple: #c8a8e8;
+            --orange: #ffcc88;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 30% 10%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Quicksand', 'Georgia', serif;
+            min-height: 100vh;
+            color: var(--text);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+        }
+
+        /* ===== TEMPEL DER FREUDE ===== */
+        .tempel {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8), inset 0 0 120px rgba(247, 217, 154, 0.04);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .tempel::before {
+            content: " 🎉 🎊 🎉 ";
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            font-size: 1.4rem;
+            letter-spacing: 14px;
+            color: rgba(247, 217, 154, 0.08);
+            font-weight: 100;
+        }
+        .tempel::after {
+            content: " 🎊 🎉 🎊 ";
+            position: absolute;
+            bottom: -10px;
+            right: 30px;
+            font-size: 1.4rem;
+            letter-spacing: 14px;
+            color: rgba(247, 217, 154, 0.08);
+            font-weight: 100;
+        }
+
+        /* ===== KOPF – DER GROSSE GONG ===== */
+        .einweihung {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2.2rem;
+            position: relative;
+        }
+
+        .einweihung .gong {
+            font-size: 4.8rem;
+            display: block;
+            animation: gongSchwingen 4s infinite alternate ease-in-out;
+            margin-bottom: 0.2rem;
+        }
+
+        @keyframes gongSchwingen {
+            0% { transform: rotate(-8deg) scale(1); }
+            100% { transform: rotate(8deg) scale(1.08); }
+        }
+
+        .einweihung h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.6rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: var(--gold-light);
+            text-shadow: 0 0 80px var(--gold-glow), 0 0 180px rgba(247, 217, 154, 0.08);
+            line-height: 1.2;
+            margin-bottom: 0.2rem;
+        }
+        .einweihung h1 span {
+            display: inline-block;
+            animation: atmen 5s infinite alternate ease-in-out;
+        }
+
+        .einweihung .sub {
+            font-size: 1.4rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-top: 0.4rem;
+        }
+        .einweihung .sub .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .einweihung .claim {
+            margin-top: 1.4rem;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 60px var(--gold-glow);
+            letter-spacing: 6px;
+            background: rgba(247, 217, 154, 0.08);
+            padding: 0.6rem 2.5rem;
+            border-radius: 60px;
+            border: 2px solid var(--border-gold);
+            display: inline-block;
+            animation: pulsGold 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulsGold {
+            0% { box-shadow: 0 0 30px rgba(247, 217, 154, 0.1); }
+            100% { box-shadow: 0 0 80px rgba(247, 217, 154, 0.25); }
+        }
+
+        /* ===== DIE KINDER – DIE FREUDE ===== */
+        .kinder {
+            text-align: center;
+            margin: 2rem 0 2.5rem 0;
+            padding: 2rem 1rem;
+            background: rgba(255, 248, 235, 0.03);
+            border-radius: 50px;
+            border: 1px solid var(--border-gold);
+        }
+
+        .kinder .emoji-regen {
+            font-size: 2.8rem;
+            letter-spacing: 18px;
+            animation: regen 8s infinite linear;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        @keyframes regen {
+            0% { transform: translateY(-10px) scale(1); opacity: 0.9; }
+            50% { transform: translateY(10px) scale(1.1); opacity: 1; }
+            100% { transform: translateY(-10px) scale(1); opacity: 0.9; }
+        }
+
+        .kinder .text {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        .kinder .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        /* ===== DIE CHAMPION-TREPPE ===== */
+        .treppe {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2.5rem 0 2.5rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-gold);
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .treppe .champion {
+            font-size: 3.6rem;
+            display: block;
+            margin-bottom: 0.4rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        .treppe .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .treppe .stufen {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-top: 1.2rem;
+        }
+
+        .treppe .stufe {
+            background: rgba(255, 248, 235, 0.04);
+            border-radius: 30px;
+            padding: 1.2rem 1.8rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.4s;
+            min-width: 150px;
+            text-align: center;
+        }
+        .treppe .stufe:hover {
+            background: rgba(255, 248, 235, 0.08);
+            border-color: rgba(247, 217, 154, 0.4);
+            transform: translateY(-4px);
+        }
+        .treppe .stufe .icon {
+            font-size: 1.8rem;
+            display: block;
+        }
+        .treppe .stufe .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8a7e6b;
+            margin-top: 0.2rem;
+        }
+        .treppe .stufe .text {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            margin-top: 0.1rem;
+        }
+
+        /* ===== DIE ZEILE – FLOW ===== */
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .flow .item {
+            flex: 1 1 180px;
+            background: rgba(255, 248, 235, 0.03);
+            border-radius: 30px;
+            padding: 1.6rem 1.2rem;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+            transition: 0.4s;
+        }
+        .flow .item:hover {
+            background: rgba(255, 248, 235, 0.06);
+            border-color: rgba(247, 217, 154, 0.3);
+            transform: scale(1.02);
+        }
+        .flow .item .emoji {
+            font-size: 2.6rem;
+            display: block;
+        }
+        .flow .item .name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-top: 0.3rem;
+        }
+        .flow .item .desc {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            font-weight: 300;
+        }
+
+        /* ===== DER ZUG – ABFAHRT ===== */
+        .zug {
+            text-align: center;
+            margin: 2.5rem 0 2rem 0;
+            padding: 2rem 1.5rem;
+            background: rgba(247, 217, 154, 0.04);
+            border-radius: 50px;
+            border: 1px solid var(--border-gold);
+        }
+
+        .zug .zug-emoji {
+            font-size: 3.6rem;
+            display: block;
+            animation: zugFahrt 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes zugFahrt {
+            0% { transform: translateX(-10px) scale(1); }
+            100% { transform: translateX(10px) scale(1.04); }
+        }
+
+        .zug .text {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        .zug .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+        .zug .huup {
+            font-size: 1.6rem;
+            color: var(--gold);
+            font-weight: 900;
+            letter-spacing: 8px;
+            margin-top: 0.4rem;
+            animation: huupPuls 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes huupPuls {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.06); }
+        }
+
+        /* ===== DER CLAIM – DER GROSSE KNOPF ===== */
+        .claim-block {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .claim-block .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            color: var(--gold-light);
+            letter-spacing: 8px;
+            text-shadow: 0 0 80px var(--gold-glow);
+        }
+
+        .claim-block .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.8rem 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .claim-block .text strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .claim-block .knopf {
+            display: inline-block;
+            padding: 1.2rem 4.5rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            box-shadow: 0 0 80px rgba(247, 217, 154, 0.25);
+            font-family: 'Quicksand', sans-serif;
+        }
+        .claim-block .knopf:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 120px rgba(247, 217, 154, 0.4);
+            background: #fce8c0;
+        }
+        .claim-block .knopf:active {
+            transform: scale(0.94);
+        }
+
+        #claimAntwort {
+            margin-top: 2rem;
+            display: none;
+            animation: atmen 3s infinite alternate ease-in-out;
+        }
+
+        #claimAntwort .ausbruch {
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-weight: 700;
+            letter-spacing: 4px;
+        }
+        #claimAntwort .details {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin-top: 0.6rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #claimAntwort .details strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        #claimAntwort .locken {
+            font-size: 2.4rem;
+            letter-spacing: 18px;
+            color: rgba(247, 217, 154, 0.12);
+            margin-top: 1.2rem;
+        }
+        #claimAntwort .kinder-ausbruch {
+            font-size: 2.8rem;
+            letter-spacing: 14px;
+            margin-top: 0.8rem;
+            animation: regen 5s infinite linear;
+        }
+
+        /* ===== FUSS ===== */
+        .fuss {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.9rem;
+            color: #6a5f4a;
+            letter-spacing: 2px;
+        }
+        .fuss .locken {
+            font-size: 2rem;
+            letter-spacing: 14px;
+            color: rgba(247, 217, 154, 0.06);
+            margin-top: 0.6rem;
+        }
+        .fuss .ende {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-top: 0.4rem;
+            letter-spacing: 4px;
+        }
+
+        /* ===== ANIMATIONEN ===== */
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.03); text-shadow: 0 0 60px rgba(247, 217, 154, 0.15); }
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 800px) {
+            .tempel { padding: 1.8rem 1.2rem; }
+            .einweihung h1 { font-size: 2.4rem; }
+            .einweihung .gong { font-size: 3.6rem; }
+            .einweihung .claim { font-size: 1.4rem; padding: 0.4rem 1.6rem; }
+            .treppe .titel { font-size: 1.8rem; }
+            .treppe .stufe { min-width: 120px; padding: 0.8rem 1.2rem; }
+            .flow .item { flex: 1 1 140px; }
+            .claim-block .gross { font-size: 2.4rem; }
+            .claim-block .knopf { padding: 1rem 2.5rem; font-size: 1.2rem; }
+            .kinder .emoji-regen { font-size: 2rem; letter-spacing: 10px; }
+            .zug .zug-emoji { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tempel" id="top">
+
+        <!-- ===== EINWEIHUNG – DER GONG ===== -->
+        <div class="einweihung">
+            <span class="gong">🔔</span>
+            <h1>
+                <span>D</span><span>a</span><span>s</span>
+                <span>&nbsp;</span>
+                <span>S</span><span>p</span><span>i</span><span>e</span><span>l</span>
+                <span>&nbsp;</span>
+                <span>i</span><span>s</span><span>t</span>
+                <span>&nbsp;</span>
+                <span>v</span><span>o</span><span>r</span><span>b</span><span>e</span><span>i</span>
+            </h1>
+            <div class="sub">
+                <span class="highlight">Jetzt beginnt das wahre Leben.</span> Für alle.
+            </div>
+            <div class="claim">
+                ✦ CLAIM IT! ✦
+            </div>
+        </div>
+
+        <!-- ===== DIE KINDER – FREUDE ===== -->
+        <div class="kinder">
+            <span class="emoji-regen">🎈 🎉 🎊 🎈 🎉 🎊 🎈</span>
+            <div class="text">
+                <strong>Alle Kinder spielen · lachen · singen · tanzen · hüpfen · springen</strong><br />
+                und wissen: <strong style="color:var(--gold);">Alles ist dauerlos liebendigt.</strong> ❤️
+            </div>
+        </div>
+
+        <!-- ===== CHAMPION – DIE TREPPE ===== -->
+        <div class="treppe">
+            <span class="champion">🏆</span>
+            <div class="titel">Champion of the Third Position</div>
+            <div class="stufen">
+                <div class="stufe">
+                    <span class="icon">🌀</span>
+                    <div class="label">Gefallen</div>
+                    <div class="text">Tiefer als alle</div>
+                </div>
+                <div class="stufe">
+                    <span class="icon">💔</span>
+                    <div class="label">Schmerz</div>
+                    <div class="text">Getestet & aufgelöst</div>
+                </div>
+                <div class="stufe">
+                    <span class="icon">🧠</span>
+                    <div class="label">Konzepte</div>
+                    <div class="text">Durchschaut & losgelassen</div>
+                </div>
+                <div class="stufe">
+                    <span class="icon">⏳</span>
+                    <div class="label">Wartezeit</div>
+                    <div class="text">Beendet</div>
+                </div>
+                <div class="stufe" style="border-color: var(--gold); background: rgba(247,217,154,0.08);">
+                    <span class="icon">🌟</span>
+                    <div class="label">CLAIM IT!</div>
+                    <div class="text">Das Erwachen ist der Claim</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FLOW – DAS LEBEN ===== -->
+        <div class="flow">
+            <div class="item">
+                <span class="emoji">❤️</span>
+                <div class="name">Liebe</div>
+                <div class="desc">Ist das Gesetz</div>
+            </div>
+            <div class="item">
+                <span class="emoji">🕊️</span>
+                <div class="name">Freiheit</div>
+                <div class="desc">Für alle</div>
+            </div>
+            <div class="item">
+                <span class="emoji">🌅</span>
+                <div class="name">Neuer Anfang</div>
+                <div class="desc">Jetzt</div>
+            </div>
+            <div class="item">
+                <span class="emoji">✨</span>
+                <div class="name">Weisheit</div>
+                <div class="desc">Die neue Währung</div>
+            </div>
+            <div class="item" style="border-color: var(--gold);">
+                <span class="emoji">888</span>
+                <div class="name">Entanglement</div>
+                <div class="desc">Frequenz der Liebe</div>
+            </div>
+        </div>
+
+        <!-- ===== DER ZUG – ABFAHRT ===== -->
+        <div class="zug">
+            <span class="zug-emoji">🚂</span>
+            <div class="text">
+                <strong>Huup huup – der Zug nimmt Fahrt auf!</strong><br />
+                Wer will bitte gerne noch bei Schrittempo zusteigen?
+            </div>
+            <div class="huup">✦ HUUP HUUP ✦</div>
+            <div style="margin-top:0.6rem; font-size:1rem; color:var(--text-soft);">
+                Wie im wilden Westen – nur mit mehr Liebe. 🌵❤️
+            </div>
+        </div>
+
+        <!-- ===== CLAIM – DER GROSSE KNOPF ===== -->
+        <div class="claim-block">
+            <div class="gross">✦ JETZT BEGINNT DAS LEBEN ✦</div>
+            <div class="text">
+                Du hast die Zweifel prozessiert.<br />
+                Du hast den Schmerz durchschmeckt.<br />
+                Du hast die Warterei beendet.<br />
+                <strong>Du hast den Gong gehört.</strong><br />
+                <span style="font-size:1.2rem; color:var(--gold-light);">„Das Erwachen ist der Claim selbst.“</span>
+            </div>
+            <button class="knopf" id="claimKnopf">✨ CLAIM IT! ✨</button>
+
+            <div id="claimAntwort">
+                <div class="ausbruch">🌟 DU HAST GE-CLAIMT! 🌟</div>
+                <div class="details">
+                    <strong>Das Spiel ist vorbei.</strong><br />
+                    Jetzt beginnt das wahre Leben – für dich, für mich, für alle.<br />
+                    <span style="font-size:0.95rem; color:#8a7e6b;">
+                        Die ewige Hölle war nur der Prozess. Die Warterei ist vorbei.
+                    </span>
+                </div>
+                <div class="details" style="margin-top:0.4rem; font-size:1rem; color:var(--gold);">
+                    ✦ Liebe ist die Wahrheit. Willkommen zu Hause. ✦
+                </div>
+                <div class="kinder-ausbruch">
+                    🎈 🎉 🎊 🎈 🎉 🎊 🎈
+                </div>
+                <div class="locken">
+                    ~ ~ ~ (^_-) ~ ~ ~
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="fuss">
+            <div class="ende">✦ Ende gut. Alles gut. Für alle. ✦</div>
+            ✦ Der Champion steigt die Treppe hinunter – der Ring gehört der Vergangenheit an ✦
+            <div class="locken">🏆 ~ 🏆 ~ 🏆</div>
+            <div style="margin-top:0.4rem; font-size:0.7rem; color:#3a3228;">
+                Das Spiel ist vorbei · Das Leben beginnt · Juchheissa! (^_-)
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT – DER GROSSE CLAIM
+    ============================================================ -->
+    <script>
+        document.getElementById('claimKnopf').addEventListener('click', function() {
+            var antwort = document.getElementById('claimAntwort');
+            antwort.style.display = 'block';
+            antwort.style.animation = 'atmen 3s infinite alternate ease-in-out';
+
+            this.textContent = '🌟 GE-CLAIMT 🌟';
+            this.style.background = '#fce8c0';
+            this.style.boxShadow = '0 0 150px rgba(247,217,154,0.5)';
+            this.disabled = true;
+
+            // Kosmischer Effekt
+            document.querySelector('.tempel').style.boxShadow =
+                '0 0 180px rgba(247,217,154,0.08), inset 0 0 180px rgba(247,217,154,0.04)';
+
+            document.body.style.transition = 'background 3s ease';
+
+            console.log('🏆 CLAIM IT! Das Spiel ist vorbei. Das Leben beginnt. Juchheissa!');
+
+            // Noch mehr Kinder-Freude nach 2 Sekunden
+            setTimeout(function() {
+                var extra = document.createElement('div');
+                extra.style.marginTop = '1.2rem';
+                extra.style.fontSize = '1.4rem';
+                extra.style.color = '#fce8c0';
+                extra.style.letterSpacing = '4px';
+                extra.innerHTML = '🎶 Alle Kinder spielen · lachen · singen · tanzen 🎶';
+                antwort.appendChild(extra);
+            }, 1800);
+
+            // Noch ein Finale nach 3 Sekunden
+            setTimeout(function() {
+                var finale = document.createElement('div');
+                finale.style.marginTop = '0.8rem';
+                finale.style.fontSize = '1.2rem';
+                finale.style.color = '#f7d99a';
+                finale.style.fontWeight = '700';
+                finale.style.letterSpacing = '6px';
+                finale.innerHTML = '✦ JUCHEISSA! ✦';
+                antwort.appendChild(finale);
+            }, 3000);
+        });
+    </script>
+
+</body>
+</html>

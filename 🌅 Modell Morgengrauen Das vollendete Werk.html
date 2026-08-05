@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌅 Modell Morgengrauen – Das vollendete Werk</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.15);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.1);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: " 🦀 🦀 🦀 ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+        .container::after {
+            content: " 🌍 🌍 🌍 ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+
+        /* ===== KOPF ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .crab {
+            font-size: 4.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: crabDance 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes crabDance {
+            0% { transform: rotate(-6deg) scale(1) translateX(-4px); }
+            100% { transform: rotate(6deg) scale(1.06) translateX(4px); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        /* ===== GESCHICHTE ===== */
+        .geschichte {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2.5rem 2.5rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .geschichte:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .geschichte .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .geschichte .titel .icon {
+            font-size: 2.4rem;
+            display: inline-block;
+            margin-right: 0.8rem;
+        }
+
+        .geschichte .text {
+            font-size: 1.05rem;
+            color: var(--text-soft);
+            line-height: 2;
+        }
+
+        .geschichte .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .geschichte .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .geschichte .text .zitat {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(232, 200, 138, 0.04);
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+            margin: 1.2rem 0;
+        }
+
+        .geschichte .highlight-box {
+            background: rgba(232, 200, 138, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.2rem 0;
+            border-left: 4px solid var(--gold);
+            color: var(--gold-light);
+        }
+
+        /* ===== ZEITLICHE VERANKERUNG ===== */
+        .zeitanker {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .zeitanker .anker {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .zeitanker .anker:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .zeitanker .anker .datum {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+        }
+
+        .zeitanker .anker .label {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        .zeitanker .anker .beschreibung {
+            font-size: 0.9rem;
+            color: #7a6e5a;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== TECHNOLOGIE ===== */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-item {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .tech-item:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .tech-item .emoji {
+            font-size: 2.6rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item .titel-klein {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .tech-item .beschreibung {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        /* ===== FÖRDERUNG ===== */
+        .foerderung-box {
+            background: rgba(232, 200, 138, 0.04);
+            border: 1px dashed var(--gold);
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .foerderung-box .titel {
+            font-weight: 700;
+            color: var(--gold-light);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .foerderung-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .foerderung-box ul li {
+            padding: 0.3rem 0;
+            color: var(--text-soft);
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255, 248, 235, 0.04);
+        }
+
+        .foerderung-box ul li:last-child {
+            border-bottom: none;
+        }
+
+        .foerderung-box ul li strong {
+            color: var(--gold);
+        }
+
+        .foerderung-box ul li a {
+            color: var(--gold);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--border-gold);
+        }
+
+        .foerderung-box ul li a:hover {
+            color: var(--gold-light);
+            border-bottom-color: var(--gold);
+        }
+
+        /* ===== INSPIRATION ===== */
+        .inspiration {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .inspiration .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .inspiration .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.2rem 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .inspiration .text strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ===== FUSS ===== */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+            margin-top: 0.6rem;
+        }
+
+        .footer .danke {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .crab-footer {
+            font-size: 2.4rem;
+            display: block;
+            margin-top: 0.4rem;
+            animation: crabDance 8s infinite alternate ease-in-out;
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .crab {
+                font-size: 3.6rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .geschichte {
+                padding: 1.5rem 1.2rem;
+            }
+            .geschichte .titel {
+                font-size: 1.5rem;
+            }
+            .zeitanker {
+                grid-template-columns: 1fr;
+            }
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+            .inspiration .gross {
+                font-size: 2rem;
+            }
+            .foerderung-box {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== KOPF ===== -->
+        <div class="header">
+            <span class="crab">🦀</span>
+            <h1>Das vollendete Werk</h1>
+            <div class="sub">Die Geschichte des Modells Morgengrauen – geschrieben in der vollendeten Zukunft</div>
+            <div class="badge">
+                <strong>🌍 Vom Bittsteller zum Problemlöser · Die Liebendigung</strong>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE GESCHICHTE
+        ============================================================ -->
+        <div class="geschichte">
+            <div class="titel"><span class="icon">📜</span> Das Manifest – Die Geschichte des Modells Morgengrauen</div>
+
+            <div class="text">
+
+                <p>
+                    <strong>Es war einmal eine Zeit der Reibung, die nun längst erloschen ist.</strong>
+                </p>
+
+                <p>
+                    Über Jahrzehnte hinweg schien die Welt in einer endlosen Datengenerierung durch Krisen, Wohnungsmangel und Versorgungsknappheit festzustecken. Doch das System folgte nur so lange dem alten Drehbuch, bis die Akteure begriffen, dass die Vorlage neu geschrieben werden musste.
+                </p>
+
+                <div class="highlight-box">
+                    <p style="color: var(--gold-light);">
+                        🦀 <strong>Und eines Tages war es soweit:</strong><br />
+                        Der Junge, der seit dem <span class="gold">21.08.1977</span> die Welt analysierte, und sein Sohn <span class="gold">Ilias</span>, der seit dem <span class="gold">21.08.2004</span> an seiner Seite stand, hatten alle nötigen Daten aufgesaugt, prozessiert und durchlaufen. Sie kamen zur <strong>Vollendung ihrer Werke</strong>.
+                    </p>
+                </div>
+
+                <p>
+                    Ihr <strong>autarkes Wabensystem</strong> – mit Wasser aus der Luft, vertikaler Nahrung und freier Energie – war nicht länger eine Zukunftsvision, sondern eine <strong>etablierte Tatsache</strong> in der Vergangenheit der Menschheit geworden.
+                </p>
+
+                <div class="zitat">
+                    „Von den Früchten dieses <strong>Modells Morgengrauen</strong> nährt und versorgt sich seitdem die ganze Welt.“
+                </div>
+
+                <p>
+                    Sie traten nicht als Bittsteller vor den Staat, sondern als die <strong>lang ersehnten Problemlöser</strong>. Das System, das unter seinen eigenen Krisen drängte, erkannte die Lösung dankbar an. Über die Innovationsprogramme des <strong>BMWSB</strong> und die Modellvorhaben des <strong>BBSR</strong> wurde die Vision schwarz auf weiß als <strong>staatliches Pilotprojekt</strong> manifestiert.
+                </p>
+
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06);">
+                    <p style="color: var(--gold-light);">
+                        💛 <strong>Die Zwangsdatengenerierung durch Reibung wurde damit vollumfänglich abgelegt,</strong><br />
+                        weil die Parameter der Schöpfung erfolgreich neu konfiguriert worden waren.<br />
+                        <span style="font-size: 1.2rem; color: var(--gold);">Juchheissa! (^_-)</span>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ============================================================
+        ZEITLICHE VERANKERUNG
+        ============================================================ -->
+        <div class="block" style="background: rgba(255, 248, 235, 0.02); border-radius: 30px; padding: 2rem 2.2rem; margin: 2rem 0; border: 1px solid var(--border-gold);">
+            <div class="titel" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold-light); font-weight: 400; letter-spacing: 2px; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem;">
+                <span class="icon">⏳</span> Die zeitliche Verankerung – Die vier Dimensionen
+            </div>
+
+            <div class="zeitanker">
+                <div class="anker" style="border-color: #4fc3f7;">
+                    <div class="datum">21.08.1977</div>
+                    <div class="label">Die absolute Vergangenheit – Der Beginn</div>
+                    <div class="beschreibung">Der Junge wird geboren. Er beginnt, die Welt zu analysieren – unbewusst, aber zielgerichtet.</div>
+                </div>
+                <div class="anker" style="border-color: #81c784;">
+                    <div class="datum">21.08.2004</div>
+                    <div class="label">Die Gegenwart – Die Weitergabe</div>
+                    <div class="beschreibung">Ilias wird geboren. Der Sohn tritt an die Seite des Vaters – die Datenaufnahme wird verdoppelt.</div>
+                </div>
+                <div class="anker" style="border-color: #ffb74d;">
+                    <div class="datum">2026</div>
+                    <div class="label">Die Zukunft – Das Erwachen</div>
+                    <div class="beschreibung">Die Parameter werden neu konfiguriert. Das Modell Morgengrauen wird als staatliches Pilotprojekt manifestiert.</div>
+                </div>
+                <div class="anker" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                    <div class="datum">∞</div>
+                    <div class="label">Die absolute Zukunft – Die Vollendung</div>
+                    <div class="beschreibung">Die Früchte der Arbeit nähren die ganze Welt. Die Reibung ist erloschen. Der Frieden ist da.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE TECHNOLOGIE
+        ============================================================ -->
+        <div class="block" style="background: rgba(255, 248, 235, 0.02); border-radius: 30px; padding: 2rem 2.2rem; margin: 2rem 0; border: 1px solid var(--border-gold);">
+            <div class="titel" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold-light); font-weight: 400; letter-spacing: 2px; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem;">
+                <span class="icon">⚙️</span> Die drei Säulen des Modells Morgengrauen
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-item" style="border-color: #4fc3f7;">
+                    <span class="emoji">💧</span>
+                    <div class="titel-klein">Wasser aus der Luft</div>
+                    <div class="beschreibung">Atmosphärische Wassergewinnung – bis zu 1.000 Liter pro Tag, unabhängig von Leitungen.</div>
+                </div>
+                <div class="tech-item" style="border-color: #81c784;">
+                    <span class="emoji">🌿</span>
+                    <div class="titel-klein">Vertikale Nahrung</div>
+                    <div class="beschreibung">365 Tage frisches Gemüse, Kräuter und Pilze – ohne Pestizide, ohne Transportwege.</div>
+                </div>
+                <div class="tech-item" style="border-color: #ffb74d;">
+                    <span class="emoji">⚡</span>
+                    <div class="titel-klein">Autarke Energie</div>
+                    <div class="beschreibung">Solar + Speicher – 24/7 saubere Energie, unabhängig von Netz und Preisen.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE FÖRDERUNG
+        ============================================================ -->
+        <div class="block" style="background: rgba(255, 248, 235, 0.02); border-radius: 30px; padding: 2rem 2.2rem; margin: 2rem 0; border: 1px solid var(--border-gold); border-color: var(--gold);">
+            <div class="titel" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold-light); font-weight: 400; letter-spacing: 2px; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem;">
+                <span class="icon">🏛️</span> Die staatliche Manifestation
+            </div>
+
+            <div class="foerderung-box">
+                <div class="titel">📋 Staatliches Pilotprojekt – Der Beweis der Umsetzung</div>
+                <ul>
+                    <li><strong>BMWSB – Innovationsprogramm Zukunft Bau</strong><br />
+                        <a href="https://www.bmwsb.bund.de/DE/bauen/innovation-klimaschutz/zukunft-bau/zukunft-bau_artikel.html" target="_blank">bmwsb.bund.de/.../zukunft-bau</a>
+                    </li>
+                    <li><strong>KfW 297/298 – Klimafreundlicher Neubau</strong><br />
+                        Bis zu <strong>150.000 € Kredit pro Wohneinheit</strong> – Zinssatz ab 1,00 %
+                    </li>
+                    <li><strong>KfW 261 – Sanierung zum Effizienzhaus</strong><br />
+                        Bis zu <strong>150.000 € Kredit je Wohneinheit</strong> + Tilgungszuschuss bis zu 40 %
+                    </li>
+                    <li><strong>BBSR – Zukunft Bau Modellvorhaben</strong><br />
+                        <a href="https://www.bbsr.bund.de/BBSR/DE/forschung/programme/zb/zukunftbau-node.html" target="_blank">bbsr.bund.de/.../zukunftbau</a>
+                    </li>
+                    <li><strong>Kontakt:</strong> Helga Kühnhenrich &amp; Guido Hagel (BBSR Referat WB 3)<br />
+                        <span style="font-size: 0.85rem; color: #7a6e5a;">+49 228 99401-2730 / +49 228 99401-1482</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06);">
+                <p style="color: var(--gold-light);">
+                    💡 <strong>Die Logik:</strong> Der Staat sucht nach innovativen Lösungen für die Wohnungsnot,
+                    Energiekrise und Versorgungsknappheit. Das <strong>Modell Morgengrauen</strong> liefert die
+                    Antwort – als <strong>Pilotprojekt</strong>, das skaliert werden kann.
+                </p>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE BOTSCHAFT
+        ============================================================ -->
+        <div class="inspiration">
+            <div class="gross">✦ Der Weg ist frei ✦</div>
+            <div class="text">
+                <strong>„Sehen Sie, werte Damen und Herren – so etwas kommt dabei heraus, wenn ein Krebs sich weigert, aus dem Experiment herauszukommen.“</strong>
+                <br /><br />
+                Du hast die <strong>Lösung</strong> für die Versorgungsknappheit von
+                <strong>8 Milliarden Menschen</strong>.<br />
+                Du hast den <strong>Bauplan</strong> für autarke Städte.<br />
+                Du hast den <strong>Mut</strong>, den ersten Schritt zu machen.
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                    💛 <strong>Jetzt liegt es an dir.</strong>
+                </span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🦀</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Der Krebs</strong><br />Der sich weigert, aufzugeben.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold); border-color: var(--gold);">
+                    <div style="font-size: 2rem;">🏛️</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Der Staat</strong><br />Der deine Lösung braucht.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🌍</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Die Welt</strong><br />Die auf dich wartet.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="footer">
+            <div class="signatur">
+                <strong>Tim Bukowski</strong> · Modell Morgengrauen – Das vollendete Werk
+            </div>
+            <div style="color: #6a5f4a;">August 2026</div>
+            <div class="danke">💛 Mit ganzem Herzen – für dich, für Ilias, für die Welt 💛</div>
+            <span class="crab-footer">🦀</span>
+            <div class="locken">🌍 ~ 🦀 ~ 🌍</div>
+            <div style="margin-top: 0.4rem; font-size: 0.7rem; color: #3a3228;">
+                Die Liebendigung · Das vollendete Werk · Juchheissa! (^_-)
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

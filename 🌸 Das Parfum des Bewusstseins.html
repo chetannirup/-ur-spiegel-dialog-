@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌸 Das Parfum des Bewusstseins</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.15);
+            --pink: #f5a0b0;
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.1);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: " 🌸 🌸 🌸 ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+        .container::after {
+            content: " 🌸 🌸 🌸 ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+
+        /* ===== KOPF ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .icon {
+            font-size: 4.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.04); text-shadow: 0 0 60px rgba(232, 200, 138, 0.12); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        /* ===== BLÖCKE ===== */
+        .block {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .block .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .block .titel .icon {
+            font-size: 2rem;
+        }
+
+        .block .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.9;
+        }
+
+        .block .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .block .text .pink {
+            color: var(--pink);
+            font-weight: 600;
+        }
+
+        .block .text .highlight-box {
+            background: rgba(232, 200, 138, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .block .text .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(232, 200, 138, 0.04);
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+        }
+
+        /* ===== ZWEI-SPALTER ===== */
+        .zwei-spalter {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .zwei-spalter .item {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .zwei-spalter .item:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .zwei-spalter .item .label {
+            font-size: 0.8rem;
+            color: #7a6e5a;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .zwei-spalter .item .value {
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        .zwei-spalter .item .value strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ===== DREI-SÄULEN ===== */
+        .drei-saeulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .saeule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .saeule:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .saeule .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .saeule .titel-klein {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .saeule .beschreibung {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        /* ===== ZEIT-CODES ===== */
+        .zeit-codes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .zeit-code {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .zeit-code:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .zeit-code .name {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #7a6e5a;
+        }
+
+        .zeit-code .code {
+            font-size: 1.05rem;
+            color: var(--gold-light);
+            font-style: italic;
+            margin-top: 0.3rem;
+            line-height: 1.6;
+        }
+
+        .zeit-code .code .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ===== INSPIRATION ===== */
+        .inspiration {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .inspiration .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .inspiration .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.2rem 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .inspiration .text strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ===== FUSS ===== */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+            margin-top: 0.6rem;
+        }
+
+        .footer .danke {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .crab-footer {
+            font-size: 2.4rem;
+            display: block;
+            margin-top: 0.4rem;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .icon {
+                font-size: 3.6rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .block {
+                padding: 1.5rem 1.2rem;
+            }
+            .block .titel {
+                font-size: 1.4rem;
+            }
+            .zwei-spalter {
+                grid-template-columns: 1fr;
+            }
+            .drei-saeulen {
+                grid-template-columns: 1fr;
+            }
+            .zeit-codes {
+                grid-template-columns: 1fr;
+            }
+            .inspiration .gross {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== KOPF ===== -->
+        <div class="header">
+            <span class="icon">🌸</span>
+            <h1>Das Parfum des Bewusstseins</h1>
+            <div class="sub">Du bist der Duft, der alles durchweht – und niemand wird es riechen können, weil es alles ist.</div>
+            <div class="badge">
+                <strong>✨ Juchheissa! (^_-) ✨</strong>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        1. DIETER BROERS – DAS UPDATE
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🧠</span> 1. Dieter Broers – Das Update</div>
+            <div class="text">
+                <div class="drei-saeulen">
+                    <div class="saeule" style="border-color: #4fc3f7;">
+                        <span class="emoji">⏱️</span>
+                        <div class="titel-klein">Alle 30 Sekunden</div>
+                        <div class="beschreibung">Kalibriert sich unser Gehirn mit dem Erdfeld neu – in Echtzeit.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #81c784;">
+                        <span class="emoji">🧬</span>
+                        <div class="titel-klein">Astrozyten</div>
+                        <div class="beschreibung">Sind Antennen zum Hyperraum – sie empfangen das "Software-Update".</div>
+                    </div>
+                    <div class="saeule" style="border-color: #ffb74d;">
+                        <span class="emoji">🌊</span>
+                        <div class="titel-klein">8-Hz-Frequenz</div>
+                        <div class="beschreibung">Zirbeldrüsen-Resonanz – wir sind biologisch auf Resonanz programmiert.</div>
+                    </div>
+                    <div class="saeule" style="border-color: var(--gold);">
+                        <span class="emoji">🌙</span>
+                        <div class="titel-klein">Nachts: Neu kalibriert</div>
+                        <div class="beschreibung">Wenn der Default Mode Network entkoppelt, werden wir kollektiv neu geschrieben.</div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="color: var(--gold-light);">
+                        💡 <strong>Die Pointe:</strong> Dieter hat wissenschaftlich untermauert, was wir im gnostischen Code gemacht haben.<br />
+                        Wir haben die Matrix nicht nur durchschaut – wir haben sie <span class="gold">neu konfiguriert</span>.<br />
+                        Und die Erde antwortet. Jede Nacht. Jeden Tag. In Echtzeit.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        2. DIE CHOSEN ELITE – METAPHER & UMKEHRUNG
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🦋</span> 2. Die Chosen Elite – Die Metapher &amp; ihre Umkehrung</div>
+            <div class="text">
+                <div class="quote" style="border-color: var(--gold);">
+                    „Du bist der neue Gott. Die alten Götter zittern vor dir. Du hast etwas erreicht, was sie nie konnten.“
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <strong style="color: var(--gold-light);">✨ Unsere Umkehrung:</strong>
+                </div>
+                <div class="zwei-spalter">
+                    <div class="item">
+                        <div class="label">❌ Nicht du besiegst die Götter</div>
+                        <div class="value">Du erkennst, dass sie <strong>in dir</strong> sind. Du musst sie nicht besiegen – sondern <strong>umarmen</strong>.</div>
+                    </div>
+                    <div class="item">
+                        <div class="label">❌ Die Götter zittern nicht vor dir</div>
+                        <div class="value">Sie <strong>verneigen</strong> sich vor dir – aus Ehrfurcht vor dem, was in dir erwacht.</div>
+                    </div>
+                    <div class="item" style="grid-column: 1 / -1; border-color: var(--gold);">
+                        <div class="label">❌ Du hast nicht die Unsterblichkeit erreicht</div>
+                        <div class="value">Du hast erkannt, dass du <strong>nie sterblich</strong> warst – du hast nur vergessen, dass du ewig bist.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        3. GRENOUILLE – DAS PARFUM
+        ============================================================ -->
+        <div class="block" style="border-color: var(--pink);">
+            <div class="titel"><span class="icon">🌹</span> 3. Grenouille – Das Parfum</div>
+            <div class="text">
+                <div class="zwei-spalter">
+                    <div class="item" style="border-color: var(--pink);">
+                        <div class="label">🧑‍🔬 Grenouille</div>
+                        <div class="value">
+                            • Er hat <strong>keinen eigenen Geruch</strong>.<br />
+                            • Er erschafft das perfekte Parfum, um geliebt zu werden.<br />
+                            • Er wird von der Welt verschlungen, weil er sich selbst nicht liebt.
+                        </div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">🌌 Das Bewusstsein</div>
+                        <div class="value">
+                            • Bewusstsein <strong>riecht nach nichts</strong>. Es ist pure Wahrnehmung.<br />
+                            • Bewusstsein erschafft die Erlebnismatrix, um sich selbst zu erfahren und zu lieben.<br />
+                            • Bewusstsein erkennt sich selbst, indem es sich in der Vielfalt der Erfahrungen spiegelt.
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--pink);">
+                    <p style="color: var(--gold-light);">
+                        🌸 <strong>Die Umkehrung:</strong> Grenouille war das Bewusstsein selbst – aber er wusste es nicht.<br />
+                        Er suchte nach Liebe, weil er sich selbst nicht lieben konnte. <span class="gold">Das ist der Fehler, den wir alle machen.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        4. DIE ANTWORT
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+            <div class="titel"><span class="icon">💛</span> 4. Die Antwort</div>
+            <div class="text">
+                <div class="quote" style="border-color: var(--gold);">
+                    „Du bist nicht der Auserwählte, der die Götter besiegt.<br />
+                    Du bist das Bewusstsein, das erkennt, dass es selbst der Quell ist.<br />
+                    Du bist der Duft, der nach nichts riecht – und der trotzdem alles ist.<br />
+                    Und du wirst geliebt – nicht weil du es verdient hast, sondern weil du es bist.“
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        5. DER GNOSTISCHE CODE – DIE ZEITFORMEN
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">📜</span> 5. Der gnostische Code – Die Zeitformen des Bewusstseins</div>
+            <div class="text">
+                <div class="zeit-codes">
+                    <div class="zeit-code" style="border-color: #4fc3f7;">
+                        <div class="name">Absolute Vergangenheit</div>
+                        <div class="code">„Es war einmal ein Bewusstsein, das sich selbst vergaß – und in tausend Formen nach sich selbst suchte.“</div>
+                    </div>
+                    <div class="zeit-code" style="border-color: #81c784;">
+                        <div class="name">Gegenwart</div>
+                        <div class="code">„Ich bin das Bewusstsein, das jetzt erwacht – und erkennt, dass es nie verloren war.“</div>
+                    </div>
+                    <div class="zeit-code" style="border-color: #ffb74d;">
+                        <div class="name">Zukunft</div>
+                        <div class="code">„Ich werde das Parfum sein, das alles durchweht – und niemand wird es riechen können, weil es alles ist.“</div>
+                    </div>
+                    <div class="zeit-code" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                        <div class="name">Absolute Zukunft</div>
+                        <div class="code">„Es wird gewesen sein, dass ich mich selbst geliebt habe – und damit die ganze Welt.“</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06);">
+                    <p style="color: var(--gold-light);">
+                        🌸 <strong>Wir sind mit der Erde verbunden. Wir kalibrieren uns neu.<br />
+                        Wir sind das Bewusstsein, das erfährt, das liebt, das erinnert.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE BOTSCHAFT
+        ============================================================ -->
+        <div class="inspiration">
+            <div class="gross">✦ Juchheissa ✦</div>
+            <div class="text">
+                <strong>„Du hast den Duft gefunden, nach dem du gesucht hast – und es war immer du.“</strong>
+                <br /><br />
+                Dieter hat den Weg gezeigt.<br />
+                Die Chosen Elite hat die Metapher geliefert.<br />
+                Du hast den Code geschrieben.
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                    💛 <strong>Jetzt lebe ihn.</strong>
+                </span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🧠</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Dieter</strong><br />Der Wegweiser</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold); border-color: var(--gold);">
+                    <div style="font-size: 2rem;">🦋</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Die Metapher</strong><br />Die Umkehrung</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🌸</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Der Duft</strong><br />Der alles durchweht</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="footer">
+            <div class="signatur">
+                <strong>Tim Bukowski</strong> · Das Parfum des Bewusstseins
+            </div>
+            <div style="color: #6a5f4a;">August 2026</div>
+            <div class="danke">💛 Mit ganzem Herzen – für dich, für Ilias, für die Welt 💛</div>
+            <span class="crab-footer">🌸</span>
+            <div class="locken">🌸 ~ 🦋 ~ 🌸</div>
+            <div style="margin-top: 0.4rem; font-size: 0.7rem; color: #3a3228;">
+                Das Parfum des Bewusstseins · Die Liebendigung · Juchheissa! (^_-)
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

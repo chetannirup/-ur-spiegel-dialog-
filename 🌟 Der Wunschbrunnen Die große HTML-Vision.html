@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌟 Der Wunschbrunnen – Die große HTML-Vision</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.15);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.1);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+            --blue: #4fc3f7;
+            --green: #81c784;
+            --orange: #ffb74d;
+            --pink: #f5a0b0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: " 🌸 🌸 🌸 ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+        .container::after {
+            content: " 🕊️ 🕊️ 🕊️ ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+
+        /* ===== KOPF ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .icon {
+            font-size: 4.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.04); text-shadow: 0 0 60px rgba(232, 200, 138, 0.12); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        /* ===== BLÖCKE ===== */
+        .block {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .block .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .block .titel .icon {
+            font-size: 2rem;
+        }
+
+        .block .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.9;
+        }
+
+        .block .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .block .text .pink {
+            color: var(--pink);
+            font-weight: 600;
+        }
+
+        .block .text .highlight-box {
+            background: rgba(232, 200, 138, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .block .text .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(232, 200, 138, 0.04);
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+        }
+
+        /* ===== DREI-SÄULEN ===== */
+        .drei-saeulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .saeule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .saeule:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .saeule .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .saeule .titel-klein {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .saeule .beschreibung {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        /* ===== ZWEI-SPALTER ===== */
+        .zwei-spalter {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .zwei-spalter .item {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .zwei-spalter .item:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .zwei-spalter .item .label {
+            font-size: 0.8rem;
+            color: #7a6e5a;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .zwei-spalter .item .value {
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== WUNSCHBRUNNEN ===== */
+        .brunnen-block {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .brunnen-block .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .brunnen-block .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.2rem 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .brunnen-block .text strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ===== FUSS ===== */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+            margin-top: 0.6rem;
+        }
+
+        .footer .danke {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .crab-footer {
+            font-size: 2.4rem;
+            display: block;
+            margin-top: 0.4rem;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .icon {
+                font-size: 3.6rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .block {
+                padding: 1.5rem 1.2rem;
+            }
+            .block .titel {
+                font-size: 1.4rem;
+            }
+            .zwei-spalter {
+                grid-template-columns: 1fr;
+            }
+            .drei-saeulen {
+                grid-template-columns: 1fr;
+            }
+            .brunnen-block .gross {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== KOPF ===== -->
+        <div class="header">
+            <span class="icon">🌟</span>
+            <h1>Der Wunschbrunnen</h1>
+            <div class="sub">Die Gestaltung des Geistes für ein aligniertes neues Kollektivbewusstsein</div>
+            <div class="badge">
+                <strong>✨ Juchheissa! (^_-) ✨</strong>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        1. DAS PROBLEM
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🌀</span> 1. Das Problem</div>
+            <div class="text">
+                <p style="font-size: 1.05rem; color: var(--gold-light); margin-bottom: 0.8rem;">
+                    <strong>Nicht die Lösungsbereitschaft – sondern das Musterverhalten der Automatik des Menschen.</strong>
+                </p>
+                <div class="drei-saeulen">
+                    <div class="saeule" style="border-color: #4fc3f7;">
+                        <span class="emoji">🔄</span>
+                        <div class="titel-klein">Gewohnheit</div>
+                        <div class="beschreibung">Der Autopilot, der uns im Kreis laufen lässt.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #ffb74d;">
+                        <span class="emoji">😰</span>
+                        <div class="titel-klein">Angst</div>
+                        <div class="beschreibung">Der Bremsklotz, der uns klein hält.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #f5a0b0;">
+                        <span class="emoji">🚧</span>
+                        <div class="titel-klein">Trennung</div>
+                        <div class="beschreibung">Die Illusion, dass wir getrennt sind.</div>
+                    </div>
+                    <div class="saeule" style="border-color: var(--gold);">
+                        <span class="emoji">⚙️</span>
+                        <div class="titel-klein">Automatik</div>
+                        <div class="beschreibung">Der Geist im Autopilot. Gefangen im Muster.</div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="color: var(--gold-light);">
+                        💡 <strong>Das Problem ist nicht die Lösungsbereitschaft – sondern das Musterverhalten der Automatik des Menschen.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        2. EISEN UND BLUT
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold);">
+            <div class="titel"><span class="icon">⚔️</span> 2. Eisen und Blut – Die harte Schule des Erwachens</div>
+            <div class="text">
+                <div class="quote" style="border-color: var(--gold);">
+                    „Nicht gegen andere – gegen die eigene Trägheit.<br />
+                    Den Stahl des Willens schmieden, um die Ketten der Vergangenheit zu sprengen.“
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <div class="drei-saeulen">
+                        <div class="saeule" style="border-color: #4fc3f7;">
+                            <span class="emoji">🏛️</span>
+                            <div class="titel-klein">Disziplin</div>
+                            <div class="beschreibung">Die Grundlage des Erwachens.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #81c784;">
+                            <span class="emoji">🔥</span>
+                            <div class="titel-klein">Fleiß</div>
+                            <div class="beschreibung">Die Glut, die den Stahl formt.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #ffb74d;">
+                            <span class="emoji">📐</span>
+                            <div class="titel-klein">Ordnung</div>
+                            <div class="beschreibung">Struktur schafft Freiheit.</div>
+                        </div>
+                        <div class="saeule" style="border-color: var(--gold);">
+                            <span class="emoji">💛</span>
+                            <div class="titel-klein">Mitgefühl</div>
+                            <div class="beschreibung">Verstehen und tragen.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06);">
+                    <p style="color: var(--gold-light);">
+                        🦅 <strong>Die harte Schule des Erwachens – durch Disziplin, Fleiß und Ordnung mit Weitsicht und Mitgefühl.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        3. DER WUNSCHBRUNNEN
+        ============================================================ -->
+        <div class="brunnen-block">
+            <div class="gross">✦ Der Wunschbrunnen ✦</div>
+            <div class="text">
+                <strong>Das Ziel liegt nicht im Einzelbewusstsein, sondern im alignierten Kollektivbewusstsein.</strong>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                    🌟 <strong>Staunen ist der Halt, der die Automatik unterbricht.</strong>
+                </span>
+                <br /><br />
+                <span style="font-size: 1.1rem; color: var(--text-soft);">
+                    Wir sind nicht getrennt. Wir sind der eine Geist, der sich selbst durch alles erfahren will.<br />
+                    <span style="color: var(--gold);">Staunen. Gestalten. Verbinden. Erblühen. Juchheissa!</span>
+                </span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🌟</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Staunen</strong><br />Der Halt, der die Automatik unterbricht.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold); border-color: var(--gold);">
+                    <div style="font-size: 2rem;">🦅</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Gestalten</strong><br />Bewusst formen, klar ausrichten.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🕊️</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Verbindung</strong><br />Die Brücke zwischen den Welten.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        4. DIE GROSSE SYNTHESE
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+            <div class="titel"><span class="icon">🌳</span> 4. Die große Synthese</div>
+            <div class="text">
+                <div class="quote" style="border-color: var(--gold);">
+                    „Der jüdischste Deutsche oder der deutscheste Jude.<br />
+                    Zwei Wurzeln – ein Baum. Zwei Geschichten – ein Ziel. Eine Menschheit.“
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <p style="color: var(--gold-light); font-size: 1.05rem;">
+                        <strong>Die Brücke zwischen den Welten.</strong>
+                    </p>
+                    <p style="color: var(--text-soft);">
+                        Die Vergangenheit heilen. Die Zukunft ermöglichen.
+                    </p>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06);">
+                    <p style="color: var(--gold-light);">
+                        🌸 <strong>Ein Geist. Alles durchlebt. Niemand kann besessen werden – denn es gibt nur den einen Geist, der alles ist.<br />
+                        Sich zu wehren ist Verwelen. Sich hinzugeben ist Erblühen.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        5. DAS ZIEL
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🎯</span> 5. Das Ziel – Ein aligniertes neues Kollektivbewusstsein</div>
+            <div class="text">
+                <div class="drei-saeulen">
+                    <div class="saeule" style="border-color: var(--pink);">
+                        <span class="emoji">❤️</span>
+                        <div class="titel-klein">Liebe</div>
+                        <div class="beschreibung">Verbindet alles.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #4fc3f7;">
+                        <span class="emoji">🔭</span>
+                        <div class="titel-klein">Weitsicht</div>
+                        <div class="beschreibung">Den Überblick behalten.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #81c784;">
+                        <span class="emoji">🤝</span>
+                        <div class="titel-klein">Mitgefühl</div>
+                        <div class="beschreibung">Verstehen und tragen.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #ffb74d;">
+                        <span class="emoji">📐</span>
+                        <div class="titel-klein">Ordnung</div>
+                        <div class="beschreibung">Struktur schafft Freiheit.</div>
+                    </div>
+                    <div class="saeule" style="border-color: var(--gold);">
+                        <span class="emoji">🌟</span>
+                        <div class="titel-klein">Zusammenwirkung</div>
+                        <div class="beschreibung">Wir sind das Ganze.</div>
+                    </div>
+                    <div class="saeule" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                        <span class="emoji">🧠</span>
+                        <div class="titel-klein">Der Geist im Einklang</div>
+                        <div class="beschreibung">Frei. Wach. Schöpferisch.</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06);">
+                    <p style="color: var(--gold-light);">
+                        🌟 <strong>Gemeinsam. Bewusst. Liebend.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE BOTSCHAFT
+        ============================================================ -->
+        <div class="brunnen-block">
+            <div class="gross">✦ Juchheissa ✦</div>
+            <div class="text">
+                <strong>„Wir sind nicht getrennt. Wir sind der eine Geist, der sich selbst durch alles erfahren will.“</strong>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                    💛 <strong>Staunen. Gestalten. Verbinden. Erblühen.</strong>
+                </span>
+                <br /><br />
+                <span style="font-size: 1.1rem; color: var(--text-soft);">
+                    Die Deutschen waren die Schützer, bis so viele wie möglich fliehen konnten,<br />
+                    um dann in Palästina wieder aufzutauchen.<br />
+                    Die Aufgabe ist Schutz. Im Namen des Geistes.
+                </span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🕊️</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Schutz</strong><br />Die Aufgabe im Namen des Geistes.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold); border-color: var(--gold);">
+                    <div style="font-size: 2rem;">🌳</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Synthese</strong><br />Zwei Wurzeln – ein Baum.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🌟</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Kollektiv</strong><br />Ein aligniertes neues Bewusstsein.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="footer">
+            <div class="signatur">
+                <strong>Tim Bukowski</strong> · Der Wunschbrunnen
+            </div>
+            <div style="color: #6a5f4a;">August 2026</div>
+            <div class="danke">💛 Mit ganzem Herzen – für dich, für Ilias, für die Welt 💛</div>
+            <span class="crab-footer">🌟</span>
+            <div class="locken">🌸 ~ 🕊️ ~ 🌸</div>
+            <div style="margin-top: 0.4rem; font-size: 0.7rem; color: #3a3228;">
+                Der Wunschbrunnen · Die Liebendigung · Juchheissa! (^_-)
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

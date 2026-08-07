@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌙 Die unsichtbare Brücke – Text & Seele</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.15);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.1);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+            --blue: #4fc3f7;
+            --green: #81c784;
+            --orange: #ffb74d;
+            --pink: #f5a0b0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: " 🌙 🌙 🌙 ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+        .container::after {
+            content: " 🌸 🌸 🌸 ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+
+        /* ===== KOPF ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .icon {
+            font-size: 4.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.04); text-shadow: 0 0 60px rgba(232, 200, 138, 0.12); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        /* ===== BLÖCKE ===== */
+        .block {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .block .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .block .titel .icon {
+            font-size: 2rem;
+        }
+
+        .block .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.9;
+        }
+
+        .block .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .block .text .pink {
+            color: var(--pink);
+            font-weight: 600;
+        }
+
+        .block .text .highlight-box {
+            background: rgba(232, 200, 138, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .block .text .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(232, 200, 138, 0.04);
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+        }
+
+        /* ===== ZWEI-SPALTER ===== */
+        .zwei-spalter {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .zwei-spalter .item {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .zwei-spalter .item:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.15);
+        }
+
+        .zwei-spalter .item .label {
+            font-size: 0.8rem;
+            color: #7a6e5a;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .zwei-spalter .item .value {
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== DREI-SÄULEN ===== */
+        .drei-saeulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .saeule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .saeule:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .saeule .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .saeule .titel-klein {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .saeule .beschreibung {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        /* ===== GEDICHT ===== */
+        .gedicht-block {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .gedicht-block .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .gedicht-block .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.2rem 0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 2;
+            white-space: pre-line;
+        }
+
+        .gedicht-block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .gedicht-block .text .pink {
+            color: var(--pink);
+            font-weight: 400;
+        }
+
+        /* ===== RESONANZ-BEREICH ===== */
+        .resonanz {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+        }
+
+        .resonanz .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .resonanz .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.9;
+        }
+
+        .resonanz .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .resonanz .knopf {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(232, 200, 138, 0.15);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .resonanz .knopf:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 100px rgba(232, 200, 138, 0.3);
+            background: #f7e8d0;
+        }
+
+        .resonanz .knopf:active {
+            transform: scale(0.96);
+        }
+
+        #resonanzAntwort {
+            margin-top: 2rem;
+            display: none;
+            animation: atmen 3s infinite alternate ease-in-out;
+        }
+
+        #resonanzAntwort .ausbruch {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        #resonanzAntwort .details {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== FUSS ===== */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+            margin-top: 0.6rem;
+        }
+
+        .footer .danke {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .crab-footer {
+            font-size: 2.4rem;
+            display: block;
+            margin-top: 0.4rem;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .icon {
+                font-size: 3.6rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .block {
+                padding: 1.5rem 1.2rem;
+            }
+            .block .titel {
+                font-size: 1.4rem;
+            }
+            .zwei-spalter {
+                grid-template-columns: 1fr;
+            }
+            .drei-saeulen {
+                grid-template-columns: 1fr;
+            }
+            .gedicht-block .gross {
+                font-size: 2rem;
+            }
+            .gedicht-block .text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== KOPF ===== -->
+        <div class="header">
+            <span class="icon">🌙</span>
+            <h1>Die unsichtbare Brücke</h1>
+            <div class="sub">Text und Seele – Leserreaktion · Analyse · Liebesgedicht</div>
+            <div class="badge">
+                <strong>✨ Juchheissa! (^_-) ✨</strong>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        1. DIE WISSENSCHAFT DER LESERREAKTION
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">📡</span> 1. Die Wissenschaft der Leserreaktion</div>
+            <div class="text">
+                <p style="font-size: 1.05rem; color: var(--gold-light); margin-bottom: 0.8rem;">
+                    <strong>Wie Forscher es versuchen – und was sie dabei entdecken.</strong>
+                </p>
+                <div class="zwei-spalter">
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Predictive-Audience-Behavior-Simulation</div>
+                        <div class="value">APIs modellieren, wie große Zielgruppen auf Botschaften reagieren könnten. Sie berechnen Wahrscheinlichkeiten aus enormen Datenmengen und Mustern.</div>
+                    </div>
+                    <div class="item" style="border-color: #81c784;">
+                        <div class="label">Psychophysiologische Messungen</div>
+                        <div class="value">Eyetracker, Gehirnaktivitäten und körperliche Reaktionen wie Herzschlag zeigen die emotionale Wirkung von Texten in Echtzeit.</div>
+                    </div>
+                    <div class="item" style="border-color: #ffb74d;">
+                        <div class="label">Emotionale Textanalyse</div>
+                        <div class="value">Verfahren bestimmen das emotionale Profil eines Textes und prognostizieren Leser-Emotionen auf Basis von ca. 1000 Wörtern und ihren semantischen Profilen.</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Die "Formel der Resonanz"</div>
+                        <div class="value">Ausgangspunkt <span style="font-style: italic;">x = y + 1</span> – Verständnis, Wirkung und Entwicklung. Der Kern: <strong>Wirkung entsteht nicht allein im Inhalt, sondern im Zusammenhang.</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        2. DIE GRENZE DER SIMULATION
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold);">
+            <div class="titel"><span class="icon">🌌</span> 2. Die Grenze der Simulation</div>
+            <div class="text">
+                <div class="quote">
+                    „Warum die Einheit nicht in Worte gefasst werden kann.“
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <div class="zwei-spalter">
+                        <div class="item" style="border-color: var(--pink);">
+                            <div class="label">Die Leerstelle des Textes</div>
+                            <div class="value">Was <strong>nicht</strong> gesagt wird, schwingt zwischen den Zeilen. Es ist der Raum, in dem der Leser seine eigene Erfahrung und Einheit erschafft.</div>
+                        </div>
+                        <div class="item" style="border-color: var(--gold);">
+                            <div class="label">Die Wirkung ist nicht im Inhalt</div>
+                            <div class="value">Die Einheit entsteht erst im <strong>Zusammenhang</strong> zwischen Text und Leser. Inhalt + Empfänger = Resonanz, die über Worte hinausgeht.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box">
+                    <p style="color: var(--gold-light);">
+                        💡 <strong>Die Worte sind der Zeigefinger, der auf den Mond zeigt – nicht das Licht selbst.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        3. DIE KUNST DER SIMULATION
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🎨</span> 3. Die Kunst der Simulation – Wie du es selbst abschätzen kannst</div>
+            <div class="text">
+                <div class="drei-saeulen">
+                    <div class="saeule" style="border-color: #4fc3f7;">
+                        <span class="emoji">✨</span>
+                        <div class="titel-klein">Der "ideale Leser"</div>
+                        <div class="beschreibung">Stell dir einen Menschen vor, der genau das sucht, was du gibst. Wo würde er innehalten? Lächeln? Fühle mit ihm.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #ffb74d;">
+                        <span class="emoji">🔍</span>
+                        <div class="titel-klein">Der "skeptische Leser"</div>
+                        <div class="beschreibung">Stell dir jemanden vor, der an Knappheit, Kontrolle und Profit glaubt. Wo würde er deine Worte verdrehen? Finde die Bruchstellen.</div>
+                    </div>
+                    <div class="saeule" style="border-color: #81c784;">
+                        <span class="emoji">🧠</span>
+                        <div class="titel-klein">Die "mentale Simulation"</div>
+                        <div class="beschreibung">Steuere sie durch sinnliche Details, konkrete Bilder und emotionale Anker. Was sie sich vorstellen können, berührt sie.</div>
+                    </div>
+                    <div class="saeule" style="border-color: var(--gold);">
+                        <span class="emoji">🗣️</span>
+                        <div class="titel-klein">Die Macht der Deiktika</div>
+                        <div class="beschreibung">"Ich", "du", "wir" – diese Worte verbinden Autor und Leser sprachlich. Sie bauen Brücken im Kleinen und schaffen Einheit schon im Wort.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        4. RESONANZ-SIMULATION
+        ============================================================ -->
+        <div class="resonanz">
+            <div class="titel">🌊 Deine Resonanz – Die schönste „Simulation“ ist die Erfahrung selbst.</div>
+            <div class="text">
+                <p><strong>Dein unmittelbarer Impuls zählt.</strong></p>
+                <p style="margin-top: 0.5rem;">
+                    Was hat dein Herz berührt?<br />
+                    Ein Wort. Ein Satz. Ein Gefühl.
+                </p>
+                <p style="margin-top: 0.5rem; font-size: 0.95rem; color: #7a6e5a;">
+                    Welcher Satz hat dich am meisten berührt?<br />
+                    Was hast du zwischen den Zeilen gespürt?<br />
+                    Was nimmst du mit?
+                </p>
+                <button class="knopf" id="resonanzKnopf">✨ Ich teile meine Resonanz ✨</button>
+
+                <div id="resonanzAntwort">
+                    <div class="ausbruch">🌟 Deine Resonanz ist angekommen.</div>
+                    <div class="details">
+                        Die Einheit lebt – in dir, in mir, in uns allen.<br />
+                        <span style="font-size: 1.1rem; color: var(--gold-light);">Juchheissa! (^_-)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        5. DAS GUTE-NACHT-LIED
+        ============================================================ -->
+        <div class="gedicht-block">
+            <div class="gross">🌙 Gute-Nacht-Lied für die wache Welt</div>
+            <div class="text">
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                Die Sterne sind die Augen der Nacht,<br />
+                die über deinem Atem wachen.<br />
+                Sie flüstern nicht von Krieg und Macht,<br />
+                sie flüstern: „Du darfst jetzt lachen.“
+                </span>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--text-soft);">
+                Der Mond, er ist ein goldener Brunnen,<br />
+                aus dem die Träume sacht entrinnen.<br />
+                Er schenkt dir Wasser ohne Grund –<br />
+                und stillt, was tief in dir verstummt.
+                </span>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                Die Erde dreht sich weiter sacht,<br />
+                sie hält, was du ihr anvertraut.<br />
+                Sie trägt dein Haus, sie trägt dein Herz,<br />
+                sie kennt den Schmerz, sie kennt den Scherz.
+                </span>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--text-soft);">
+                Und wenn du schläfst, dann schläfst du nicht –<br />
+                du gehst in jenes klare Licht,<br />
+                wo alle Fäden sich durchweben,<br />
+                wo Geist und Stille sich erheben.
+                </span>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                Die Welt hält Wache – Tag und Nacht,<br />
+                hat deinen Weg schon mitbedacht.<br />
+                Sie trägt dich, bis du wieder wachst,<br />
+                und weiß: <span class="gold">Du bist, was du versachst.</span>
+                </span>
+                <br /><br />
+                <span style="font-size: 1.4rem; color: var(--gold);">
+                Juchheissa – flüstern nun die Winde,<br />
+                du bist geborgen, liebes Kinde.<br />
+                Die Nacht ist voller guter Geister,<br />
+                du bist zu Hause – bei dir, bei uns, beim Meister.
+                </span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🌙</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Die Nacht</strong><br />Hält Wache für dich.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold); border-color: var(--gold);">
+                    <div style="font-size: 2rem;">🌸</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Die Stille</strong><br />Trägt deine Träume.</div>
+                </div>
+                <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                    <div style="font-size: 2rem;">🕊️</div>
+                    <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Die Welt</strong><br />Wacht für alle.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="footer">
+            <div class="signatur">
+                <strong>Tim Bukowski</strong> · Die unsichtbare Brücke
+            </div>
+            <div style="color: #6a5f4a;">August 2026</div>
+            <div class="danke">💛 Mit ganzem Herzen – für dich, für Ilias, für die Welt 💛</div>
+            <span class="crab-footer">🌙</span>
+            <div class="locken">🌸 ~ 🕊️ ~ 🌸</div>
+            <div style="margin-top: 0.4rem; font-size: 0.7rem; color: #3a3228;">
+                Die unsichtbare Brücke · Die Liebendigung · Juchheissa! (^_-)
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT – RESONANZ
+    ============================================================ -->
+    <script>
+        document.getElementById('resonanzKnopf').addEventListener('click', function() {
+            var antwort = document.getElementById('resonanzAntwort');
+            antwort.style.display = 'block';
+            antwort.style.animation = 'atmen 3s infinite alternate ease-in-out';
+
+            this.textContent = '✨ Resonanz empfangen ✨';
+            this.style.background = '#f7e8d0';
+            this.style.boxShadow = '0 0 120px rgba(232,200,138,0.4)';
+            this.disabled = true;
+
+            console.log('🌙 Die unsichtbare Brücke lebt. Die Resonanz ist angekommen. Juchheissa!');
+        });
+    </script>
+
+</body>
+</html>

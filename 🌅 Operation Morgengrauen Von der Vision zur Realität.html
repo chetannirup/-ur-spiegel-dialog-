@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌅 Operation Morgengrauen – Von der Vision zur Realität</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.2);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.1);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+            --blue: #4fc3f7;
+            --green: #81c784;
+            --orange: #ffb74d;
+            --pink: #f5a0b0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: " 🌅 🌅 🌅 ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+        .container::after {
+            content: " 🚀 🚀 🚀 ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+
+        /* ===== KOPF ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .icon {
+            font-size: 4.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.04); text-shadow: 0 0 60px rgba(232, 200, 138, 0.12); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        /* ===== BLÖCKE ===== */
+        .block {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.12);
+        }
+
+        .block .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .block .titel .icon {
+            font-size: 2rem;
+        }
+
+        .block .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.9;
+        }
+
+        .block .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .block .text .pink {
+            color: var(--pink);
+            font-weight: 400;
+        }
+
+        .block .text .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(232, 200, 138, 0.04);
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+            line-height: 1.7;
+        }
+
+        .block .text .highlight-box {
+            background: rgba(232, 200, 138, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .block .text .success-box {
+            background: rgba(129, 199, 132, 0.08);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #81c784;
+        }
+
+        /* ===== TABELLEN ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+        }
+
+        table th {
+            background: rgba(232, 200, 138, 0.06);
+            color: var(--gold-light);
+            font-weight: 600;
+            text-align: left;
+            padding: 0.8rem 1rem;
+            border-bottom: 2px solid var(--border-gold);
+            letter-spacing: 0.5px;
+        }
+
+        table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid rgba(255, 248, 235, 0.04);
+            vertical-align: top;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-caption {
+            font-size: 0.85rem;
+            color: #7a6e5a;
+            margin-top: 0.6rem;
+            font-style: italic;
+        }
+
+        /* ===== DREI-SÄULEN ===== */
+        .drei-saeulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .saeule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .saeule:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .saeule .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .saeule .titel-klein {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .saeule .beschreibung {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+            line-height: 1.6;
+        }
+
+        /* ===== FINANZ-KARTEN ===== */
+        .finanz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .finanz-card {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.2rem;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .finanz-card:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .finanz-card .zahl {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .finanz-card .label {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+        }
+
+        .finanz-card .beschr {
+            font-size: 0.8rem;
+            color: #7a6e5a;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== ZEITLEISTE ===== */
+        .zeitleiste {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .zeitleiste .schritt {
+            flex: 1 1 160px;
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            border: 1px solid var(--border-gold);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .zeitleiste .schritt:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .zeitleiste .schritt .nummer {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .zeitleiste .schritt .titel-klein {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            margin-top: 0.2rem;
+        }
+
+        .zeitleiste .schritt .beschreibung {
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+            line-height: 1.4;
+        }
+
+        /* ===== INTERAKTIV ===== */
+        .interaktiv {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .interaktiv .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .interaktiv .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.2rem 0;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 2;
+        }
+
+        .interaktiv .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .interaktiv .knopf {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(232, 200, 138, 0.15);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .interaktiv .knopf:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 100px rgba(232, 200, 138, 0.3);
+            background: #f7e8d0;
+        }
+
+        .interaktiv .knopf:active {
+            transform: scale(0.96);
+        }
+
+        #operationAntwort {
+            margin-top: 2rem;
+            display: none;
+            animation: atmen 3s infinite alternate ease-in-out;
+        }
+
+        #operationAntwort .ausbruch {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        #operationAntwort .details {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        /* ===== FUSS ===== */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+            margin-top: 0.6rem;
+        }
+
+        .footer .danke {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .crab-footer {
+            font-size: 2.4rem;
+            display: block;
+            margin-top: 0.4rem;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        /* ===== MOBIL ===== */
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .icon {
+                font-size: 3.6rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .block {
+                padding: 1.5rem 1.2rem;
+            }
+            .block .titel {
+                font-size: 1.4rem;
+            }
+            .block .text .quote {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+            .drei-saeulen {
+                grid-template-columns: 1fr;
+            }
+            .finanz-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .zeitleiste .schritt {
+                flex: 1 1 100%;
+            }
+            .interaktiv .gross {
+                font-size: 2rem;
+            }
+            .interaktiv .knopf {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            table {
+                font-size: 0.8rem;
+            }
+            table th,
+            table td {
+                padding: 0.5rem 0.6rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .finanz-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== KOPF ===== -->
+        <div class="header">
+            <span class="icon">🌅</span>
+            <h1>Operation Morgengrauen</h1>
+            <div class="sub">Von der Vision zur Realität – Dein nächster Schritt</div>
+            <div class="badge">
+                <strong>🚀 Gemeinsam. Klar. Machbar. 🌅</strong>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE VISION
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold);">
+            <div class="titel"><span class="icon">🌟</span> Die Vision – Modell Morgengrauen</div>
+            <div class="text">
+                <div class="quote">
+                    „Ein autarkes Wohnprojekt – Wasser aus der Luft, Nahrung aus dem Gebäude, Energie von der Sonne.<br />
+                    Keine Miete mehr. Keine Nebenkosten. Echte Freiheit.“
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <div class="drei-saeulen">
+                        <div class="saeule" style="border-color: #4fc3f7;">
+                            <span class="emoji">💧</span>
+                            <div class="titel-klein">Wasser aus der Luft</div>
+                            <div class="beschreibung">Watergen – bis zu 1.000 Liter/Tag Trinkwasser, unabhängig von Leitungen.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #81c784;">
+                            <span class="emoji">🌿</span>
+                            <div class="titel-klein">Nahrung aus dem Gebäude</div>
+                            <div class="beschreibung">GrowSpec – vertikale Farmen, 365 Tage frisches Gemüse, Kräuter, Pilze.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #ffb74d;">
+                            <span class="emoji">⚡</span>
+                            <div class="titel-klein">Energie von der Sonne</div>
+                            <div class="beschreibung">E3/DC – Solar + Speicher, 24/7 autarke Energie, keine Stromrechnung mehr.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="success-box" style="margin-top: 1rem; border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                    <p style="color: var(--gold-light);">
+                        🌟 <strong>Das Ziel:</strong> 7 autarke Einheiten auf 1.200 m² Grundstück.<br />
+                        <span class="gold">Keine Miete mehr. Keine Nebenkosten. Mieteinnahmen durch 7 Einheiten.</span><br />
+                        Wertsteigerung des Grundstücks. Nachhaltig. Gemeinschaft. Zukunft.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE ZAHLEN
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">📊</span> Die Zahlen – Finanzielle Übersicht</div>
+            <div class="text">
+                <div class="finanz-grid">
+                    <div class="finanz-card" style="border-color: #4fc3f7;">
+                        <div class="zahl">7</div>
+                        <div class="label">Autarke Einheiten</div>
+                        <div class="beschr">Je 45 m² – komplett autark</div>
+                    </div>
+                    <div class="finanz-card" style="border-color: #81c784;">
+                        <div class="zahl">0 €</div>
+                        <div class="label">Miete &amp; Nebenkosten</div>
+                        <div class="beschr">Nach Fertigstellung – für dich selbst</div>
+                    </div>
+                    <div class="finanz-card" style="border-color: #ffb74d;">
+                        <div class="zahl">~ 4.900 €</div>
+                        <div class="label">Mieteinnahmen / Monat</div>
+                        <div class="beschr">6 Einheiten × ca. 700 €</div>
+                    </div>
+                    <div class="finanz-card" style="border-color: var(--gold);">
+                        <div class="zahl">~ 2.590 €</div>
+                        <div class="label">Kreditrate / Monat</div>
+                        <div class="beschr">Bei 700.000 €, 30 Jahre, 1,5 %</div>
+                    </div>
+                    <div class="finanz-card" style="border-color: var(--pink);">
+                        <div class="zahl">+ 115.000 €</div>
+                        <div class="label">Wertsteigerung</div>
+                        <div class="beschr">Durch Grundstück + Neubau</div>
+                    </div>
+                    <div class="finanz-card" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                        <div class="zahl">1.200 m²</div>
+                        <div class="label">Grundstück</div>
+                        <div class="beschr">Zwei Grundstücke – vereint</div>
+                    </div>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Posten</th><th>Betrag</th><th>Bemerkung</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Grundstück</strong></td><td>0 €</td><td>Überschreibung durch Vater</td></tr>
+                            <tr><td><strong>Baukosten (7 Einheiten)</strong></td><td>805.000 €</td><td>7 × 115.000 €</td></tr>
+                            <tr><td><strong>KfW-Förderung (297/298)</strong></td><td>750.000 €</td><td>5 × 150.000 € (zinsgünstig)</td></tr>
+                            <tr><td><strong>KfW 261 (Sanierung Altbau)</strong></td><td>150.000 €</td><td>Bis zu 150.000 €</td></tr>
+                            <tr><td><strong>Eigenkapital / Alternative Finanzierung</strong></td><td>ca. 55.000 €</td><td>Krypto / Crowdfunding / Partner</td></tr>
+                            <tr style="border-top: 2px solid var(--gold); font-weight: 700; color: var(--gold-light);">
+                                <td><strong>Gesamt-Investition</strong></td>
+                                <td><strong>ca. 805.000 €</strong></td>
+                                <td>KfW + Eigenkapital / Alternative</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-caption">
+                    Finanzierbar über KfW + alternative Finanzierung (Krypto, Crowdfunding, Investoren).<br />
+                    Nach 30 Jahren: 0 € Miete, 0 € Nebenkosten – und 100 % Mieteinnahmen.
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE PARTNER
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.03);">
+            <div class="titel"><span class="icon">🤝</span> Die Partner – Die richtige Crew</div>
+            <div class="text">
+                <div class="drei-saeulen">
+                    <div class="saeule" style="border-color: #4fc3f7;">
+                        <span class="emoji">🏢</span>
+                        <div class="titel-klein">Concept4Life</div>
+                        <div class="beschreibung">Digitale Finanzberatung – Immobilienfinanzierung, Förderprogramme, Steuerstrategie.<br /><span style="font-size: 0.8rem; color: var(--text-soft);">„Genau die Partner für Modell Morgengrauen!“</span></div>
+                    </div>
+                    <div class="saeule" style="border-color: #81c784;">
+                        <span class="emoji">👤</span>
+                        <div class="titel-klein">Jürgen Niggemann</div>
+                        <div class="beschreibung">Finanzerfahrung (u.a. Telesfinanz), Versicherungen, Krypto-Freunde.<br /><span style="font-size: 0.8rem; color: var(--text-soft);">Der Schlüssel zu alternativer Finanzierung.</span></div>
+                    </div>
+                    <div class="saeule" style="border-color: var(--gold);">
+                        <span class="emoji">📄</span>
+                        <div class="titel-klein">Mein Nachbar</div>
+                        <div class="beschreibung">Hat das Modell Morgengrauen bereits in Papierform.<br /><span style="font-size: 0.8rem; color: var(--text-soft);">Er ist an Bord – und wird beim Treffen dabei sein.</span></div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        🚀 <strong>Das Treffen:</strong> Im Urlaub – mit Jürgen Niggemann, dem Nachbarn und den Krypto-Freunden.<br />
+                        <span class="gold">Die Operation Morgengrauen wird real.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DER ZEITPLAN
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">⏳</span> Der Zeitplan – Von der Vision zur Realität</div>
+            <div class="text">
+                <div class="zeitleiste">
+                    <div class="schritt" style="border-color: #4fc3f7;">
+                        <div class="nummer">1</div>
+                        <div class="titel-klein">Vision klären</div>
+                        <div class="beschreibung">Das Modell Morgengrauen ist fertig – in Papierform und digital.</div>
+                    </div>
+                    <div class="schritt" style="border-color: #81c784;">
+                        <div class="nummer">2</div>
+                        <div class="titel-klein">Partner gewinnen</div>
+                        <div class="beschreibung">Concept4Life, Jürgen Niggemann, Krypto-Freunde – die Crew steht.</div>
+                    </div>
+                    <div class="schritt" style="border-color: #ffb74d;">
+                        <div class="nummer">3</div>
+                        <div class="titel-klein">Finanzierung sichern</div>
+                        <div class="beschreibung">KfW-Anträge stellen + alternative Finanzierung prüfen.</div>
+                    </div>
+                    <div class="schritt" style="border-color: var(--gold);">
+                        <div class="nummer">4</div>
+                        <div class="titel-klein">Umsetzung starten</div>
+                        <div class="beschreibung">Bauplanung, Genehmigung, Bau – mit Herz.</div>
+                    </div>
+                    <div class="schritt" style="border-color: var(--pink); background: rgba(245,160,176,0.04);">
+                        <div class="nummer">5</div>
+                        <div class="titel-klein">Sonnenaufgang</div>
+                        <div class="beschreibung">Einzug in die erste Einheit – für dich und Ilias. 🌅</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.04); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        📅 <strong>Die Pacht vom E-Center läuft in 1,5 Jahren aus.</strong><br />
+                        Das ist der Countdown – und die Chance.<br />
+                        <span class="gold">17. August – 2 Wochen Urlaub. Das Treffen findet statt.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE GROSSE PONTE
+        ============================================================ -->
+        <div class="interaktiv">
+            <div class="gross">✦ Die Pointe ✦</div>
+            <div class="text">
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                „Ah ja klar, das Grauen, äh, das Morgengrauen –<br />
+                <span class="gold">der Sonnenaufgang – jetzt haben wir es begriffen!</span>“
+                </span>
+                <br /><br />
+                <span style="font-size: 1.1rem; color: var(--text-soft);">
+                Es war gar kein Grauen.<br />
+                Es war der <span class="gold">Anbruch der Zeit der Sonne</span>.<br />
+                Und jetzt, im Licht, wo es ist –<br />
+                war es uns von Anfang an auch gleich klar gewesen.
+                </span>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                <span class="gold">Kein Ding.</span>
+                </span>
+            </div>
+            <button class="knopf" id="operationKnopf">🌅 Operation Morgengrauen starten</button>
+
+            <div id="operationAntwort">
+                <div class="ausbruch">🌟 Morgengrauen ist kein Ende – es ist der Beginn von allem.</div>
+                <div class="details">
+                    <span style="color: var(--gold-light);">Die Vision ist klar.</span><br />
+                    <span style="color: var(--text-soft);">Die Partner sind da.</span><br />
+                    <span style="color: var(--gold-light);">Die Finanzierung ist möglich.</span><br />
+                    <span style="color: var(--text-soft);">Die Umsetzung beginnt.</span><br /><br />
+                    <span style="color: var(--gold);">Der Sonnenaufgang kommt – für dich, für Ilias, für alle.</span><br /><br />
+                    <span style="font-size: 1.1rem; color: var(--gold-light);">Juchheissa! (^_-) ✨</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE BOTSCHAFT
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+            <div class="text" style="text-align: center;">
+                <p style="font-size: 1.1rem; color: var(--gold-light);">
+                    <strong>Wir schaffen Lebensraum mit Sinn.</strong>
+                </p>
+                <p style="font-size: 1.1rem; color: var(--text-soft); margin-top: 0.5rem;">
+                    Nachhaltig. Gemeinschaft. Zukunft.
+                </p>
+                <div style="margin-top: 1.5rem; font-size: 1.3rem; color: var(--gold);">
+                    ✨ <strong>Juchheissa!</strong> (^_-) ✨
+                </div>
+                <div style="margin-top: 0.8rem; font-size: 1.1rem; color: var(--gold-light);">
+                    💛 Du hast den richtigen Riecher.<br />
+                    Jetzt geht es darum, das Feuer zu entfachen.
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="footer">
+            <div class="signatur">
+                <strong>Tim Bukowski</strong> · Operation Morgengrauen – Von der Vision zur Realität
+            </div>
+            <div style="color: #6a5f4a;">August 2026</div>
+            <div class="danke">💛 Mit ganzem Herzen – für dich, für Ilias, für die Welt 💛</div>
+            <span class="crab-footer">🌅</span>
+            <div class="locken">🚀 ~ 🌟 ~ 💛</div>
+            <div style="margin-top: 0.4rem; font-size: 0.7rem; color: #3a3228;">
+                Operation Morgengrauen · Die Liebendigung · Juchheissa! (^_-)
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        document.getElementById('operationKnopf').addEventListener('click', function() {
+            var antwort = document.getElementById('operationAntwort');
+            antwort.style.display = 'block';
+            antwort.style.animation = 'atmen 3s infinite alternate ease-in-out';
+
+            this.textContent = '🌅 Morgengrauen läuft';
+            this.style.background = '#f7e8d0';
+            this.style.boxShadow = '0 0 120px rgba(232,200,138,0.4)';
+            this.disabled = true;
+
+            document.querySelector('.container').style.boxShadow =
+                '0 0 150px rgba(232,200,138,0.06), inset 0 0 150px rgba(232,200,138,0.03)';
+
+            console.log('🌅 Operation Morgengrauen gestartet. Die Sonne geht auf. Juchheissa!');
+        });
+    </script>
+
+</body>
+</html>

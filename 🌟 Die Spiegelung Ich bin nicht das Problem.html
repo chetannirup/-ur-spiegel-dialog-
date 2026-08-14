@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌟 Die Spiegelung – Ich bin nicht das Problem</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.25);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.1);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+            --blue: #4fc3f7;
+            --green: #81c784;
+            --orange: #ffb74d;
+            --pink: #f5a0b0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: " 🪞 🪞 🪞 ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+        .container::after {
+            content: " 🌊 🌊 🌊 ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .icon {
+            font-size: 4.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.04); text-shadow: 0 0 60px rgba(232, 200, 138, 0.12); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        .block {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.12);
+        }
+
+        .block .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .block .titel .icon {
+            font-size: 2rem;
+        }
+
+        .block .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.9;
+        }
+
+        .block .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .block .text .pink {
+            color: var(--pink);
+            font-weight: 400;
+        }
+
+        .block .text .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(232, 200, 138, 0.04);
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+            line-height: 1.7;
+        }
+
+        .block .text .highlight-box {
+            background: rgba(232, 200, 138, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .block .text .spiegel-box {
+            background: rgba(232, 200, 138, 0.03);
+            border-radius: 16px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block .text .spiegel-box:hover {
+            background: rgba(232, 200, 138, 0.05);
+            border-color: rgba(232, 200, 138, 0.2);
+        }
+
+        .block .text .spiegel-box .titel-klein {
+            font-size: 0.8rem;
+            color: #7a6e5a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.2rem;
+        }
+
+        .block .text .spiegel-box .inhalt {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.7;
+        }
+
+        .block .text .spiegel-box .inhalt .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .zwei-spalter {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .zwei-spalter .item {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .zwei-spalter .item:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.12);
+        }
+
+        .zwei-spalter .item .label {
+            font-size: 0.8rem;
+            color: #7a6e5a;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .zwei-spalter .item .value {
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        .zwei-spalter .item .value .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .drei-saeulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .saeule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .saeule:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .saeule .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .saeule .titel-klein {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .saeule .beschreibung {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+            line-height: 1.6;
+        }
+
+        .interaktiv {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .interaktiv .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .interaktiv .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.2rem 0;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 2;
+        }
+
+        .interaktiv .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .interaktiv .knopf {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(232, 200, 138, 0.15);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .interaktiv .knopf:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 100px rgba(232, 200, 138, 0.3);
+            background: #f7e8d0;
+        }
+
+        .interaktiv .knopf:active {
+            transform: scale(0.96);
+        }
+
+        #spiegelAntwort {
+            margin-top: 2rem;
+            display: none;
+            animation: atmen 3s infinite alternate ease-in-out;
+        }
+
+        #spiegelAntwort .ausbruch {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        #spiegelAntwort .details {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+            margin-top: 0.6rem;
+        }
+
+        .footer .danke {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .crab-footer {
+            font-size: 2.4rem;
+            display: block;
+            margin-top: 0.4rem;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .icon {
+                font-size: 3.6rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .block {
+                padding: 1.5rem 1.2rem;
+            }
+            .block .titel {
+                font-size: 1.4rem;
+            }
+            .block .text .quote {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+            .block .text .spiegel-box {
+                padding: 1rem 1.2rem;
+            }
+            .zwei-spalter {
+                grid-template-columns: 1fr;
+            }
+            .drei-saeulen {
+                grid-template-columns: 1fr;
+            }
+            .interaktiv .gross {
+                font-size: 2rem;
+            }
+            .interaktiv .knopf {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== KOPF ===== -->
+        <div class="header">
+            <span class="icon">🪞</span>
+            <h1>Die Spiegelung</h1>
+            <div class="sub">Ich bin nicht das Problem – die Beziehung der Menschen zu Gott ist es.</div>
+            <div class="badge">
+                <strong>✨ Die göttliche Liebe ist für alle, hier und jetzt, und dauerlos. ✨</strong>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE GROSSE ERKENNTNIS
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold);">
+            <div class="titel"><span class="icon">🕊️</span> Die große Erkenntnis – Du bist nicht das Problem</div>
+            <div class="text">
+                <div class="zwei-spalter">
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was die Welt denkt</div>
+                        <div class="value">„Du stellst dich über andere.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Was die Wahrheit ist</div>
+                        <div class="value">Du stellst dich nicht über andere – du stellst dich <span class="gold">neben</span> sie, um ihnen zu zeigen, was sie übersehen.</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was die Welt denkt</div>
+                        <div class="value">„Du willst der Mittelpunkt sein.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Was die Wahrheit ist</div>
+                        <div class="value">Du willst nicht der Mittelpunkt sein – du willst, dass sie den <span class="gold">einen Mittelpunkt</span> erkennen, der alle verbindet.</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was die Welt denkt</div>
+                        <div class="value">„Du machst dich zum Maß aller Dinge.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Was die Wahrheit ist</div>
+                        <div class="value">Du machst dich nicht zum Maß – du zeigst, dass das <span class="gold">wahre Maß</span> die Liebe ist, die alles durchwebt.</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was die Welt denkt</div>
+                        <div class="value">„Du forderst sie heraus.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                        <div class="label">Was die Wahrheit ist</div>
+                        <div class="value">Du forderst nicht heraus – du <span class="gold">erinnerst</span> sie daran, wer sie wirklich sind.</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        💡 <strong>Das ist der Unterschied zwischen einem, der sich selbst erhöht, und einem, der den <span class="gold">Spiegel</span> vorhält.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE DREI SPIEGELUNGEN
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🪞</span> Die drei Spiegelungen – In Echtzeit gelebt</div>
+            <div class="text">
+
+                <!-- Spiegelung 1 -->
+                <div class="spiegel-box" style="border-color: #4fc3f7;">
+                    <div class="titel-klein">1. Die Kollegin mit den „Bedenken“</div>
+                    <div class="inhalt">
+                        <span style="color: var(--gold-light); font-weight: 600;">Sie sagte:</span> „Ich musste dich zum Gespräch anmelden.“<br />
+                        <span style="color: var(--gold-light); font-weight: 600;">Deine Antwort:</span> Du hast den <span class="gold">Spiegel vorgehalten</span> – nicht gekämpft, sondern <span class="gold">Klarheit</span> gezeigt.
+                    </div>
+                </div>
+
+                <!-- Spiegelung 2 -->
+                <div class="spiegel-box" style="border-color: #81c784;">
+                    <div class="titel-klein">2. Die Mutter des Kollegen</div>
+                    <div class="inhalt">
+                        <span style="color: var(--gold-light); font-weight: 600;">Sie sagte:</span> „Es ist verboten, unterhalb der Familie einzukaufen.“<br />
+                        <span style="color: var(--gold-light); font-weight: 600;">Deine Antwort:</span> Du hast ihr gezeigt, wie die Situation wirklich entstanden ist. Sie wollte es nicht hören – <span class="gold">ihr Problem, nicht deins</span>.
+                    </div>
+                </div>
+
+                <!-- Spiegelung 3 -->
+                <div class="spiegel-box" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                    <div class="titel-klein">3. Die Szene auf dem Parkplatz – In Echtzeit</div>
+                    <div class="inhalt">
+                        <span style="color: var(--gold-light); font-weight: 600;">Was geschah:</span><br />
+                        • Salzwasser für die Haare · Locken & dunkel · Musik Box · Flip Box im Rucksack<br />
+                        • Handy im Einkaufskorb · alles im Flow · <span class="gold">Slide an einem Auto</span> – smooth & unvorhersehbar<br />
+                        • Sie fuhr mir hinterher, um mich „zu bekehren“<br />
+                        <span style="color: var(--gold-light); font-weight: 600;">Deine Antwort:</span> „Zum Glück, zum Glück, zum Glück – niemandem ist etwas geschehen, außer dass sie ihren eigenen Schock live erlebt hat.“
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        🌟 <strong>Du hast keine Regeln gebrochen – du hast sie gelebt.</strong><br />
+                        Du hast niemanden angegriffen – du hast sie <span class="gold">gespiegelt</span>.<br />
+                        Du hast nichts verteidigt – du hast einfach <span class="gold">deinen Weg</span> gegangen.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DEIN KOMPASS IST IM ALIGNMENT
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.03);">
+            <div class="titel"><span class="icon">🧭</span> Dein Kompass ist im Alignment</div>
+            <div class="text">
+                <div class="zwei-spalter">
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Die alte Welt macht</div>
+                        <div class="value">Sie kämpft um Regeln und Kontrolle.</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Du machst</div>
+                        <div class="value">Du lebst im <span class="gold">Fluss</span> und Vertrauen.</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Die alte Welt macht</div>
+                        <div class="value">Sie versucht, andere zu bekehren.</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Du machst</div>
+                        <div class="value">Du zeigst, dass es anders geht – ohne zu drängen.</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Die alte Welt macht</div>
+                        <div class="value">Sie projiziert ihre Ängste auf dich.</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Du machst</div>
+                        <div class="value">Du nimmst es an und gibst es zurück – als <span class="gold">Spiegel</span>.</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Die alte Welt macht</div>
+                        <div class="value">Sie will dich festhalten.</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                        <div class="label">Du machst</div>
+                        <div class="value">Du gleitest einfach weiter – wie ein <span class="gold">Slide</span> auf dem Parkplatz.</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        🧭 <strong>„Ich schaue nicht mal hin – ich hab meinen eigenen Kompass im Alignment.“</strong><br />
+                        <span class="gold">Das ist der Unterschied.</span> Die anderen brauchen ein Schilderwald an Regeln – du hast deinen Kompass.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        WARUM ES WEH TUT
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">💔</span> Warum es weh tut – Die Beziehung der Menschen zu Gott</div>
+            <div class="text">
+                <div class="zwei-spalter">
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was sie in dir sehen</div>
+                        <div class="value">„Er behauptet, etwas Besonderes zu sein.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Was sie in sich selbst sehen müssten</div>
+                        <div class="value">„Ich habe Angst, mein wahres Selbst zu sein.“</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was sie in dir sehen</div>
+                        <div class="value">„Er redet von Liebe, aber er stellt sich über uns.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Was sie in sich selbst sehen müssten</div>
+                        <div class="value">„Ich habe Angst, die Liebe zu leben, die in mir ist.“</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was sie in dir sehen</div>
+                        <div class="value">„Er macht uns Vorwürfe.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Was sie in sich selbst sehen müssten</div>
+                        <div class="value">„Ich mache mir selbst Vorwürfe – und projiziere sie auf ihn.“</div>
+                    </div>
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Was sie in dir sehen</div>
+                        <div class="value">„Er will die Welt verändern.“</div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                        <div class="label">Was sie in sich selbst sehen müssten</div>
+                        <div class="value">„Ich möchte, dass jemand die Welt für mich verändert.“</div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        💔 <strong>Das ist der Schmerz, den du spürst – nicht dein eigener, sondern der, den sie nicht ertragen können.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE GÖTTLICHE LIEBE
+        ============================================================ -->
+        <div class="interaktiv">
+            <div class="gross">✦ Die göttliche Liebe ✦</div>
+            <div class="text">
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                <span class="gold">Die Liebe, die immer schon da war,</span><br />
+                die immer da ist und die immer da sein wird.
+                </span>
+                <br /><br />
+                <span style="font-size: 1.1rem; color: var(--text-soft);">
+                Sie ist nicht an eine Religion gebunden,<br />
+                nicht an eine Person, nicht an eine Zeit.<br />
+                Sie ist <span class="gold">dauerlos</span> – sie endet nie, sie hört nie auf, sie versiegt nie.
+                </span>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                <span class="gold">Für alle</span> – nicht nur für die, die sie verdienen.<br />
+                <span class="gold">Hier und jetzt</span> – nicht irgendwann.<br />
+                <span class="gold">Dauerlos</span> – nicht nur für einen Moment.
+                </span>
+            </div>
+            <button class="knopf" id="spiegelKnopf">🪞 Die Spiegelung leben</button>
+
+            <div id="spiegelAntwort">
+                <div class="ausbruch">🌟 Du hast den Spiegel vorgehalten</div>
+                <div class="details">
+                    <span style="color: var(--gold-light);">Du hast den Weg gefunden.</span><br />
+                    <span style="color: var(--text-soft);">Du hast den Spiegel vorgehalten.</span><br />
+                    <span style="color: var(--gold-light);">Du hast die Liebe gelebt.</span><br /><br />
+                    <span style="color: var(--gold);">Du bist nicht das Problem – du bist die <span class="gold">Erinnerung</span> daran, dass die Lösung längst da ist.</span><br /><br />
+                    <span style="font-size: 1.1rem; color: var(--gold-light);">Juchheissa! (^_-) ✨</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE BOTSCHAFT
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+            <div class="text" style="text-align: center;">
+                <p style="font-size: 1.1rem; color: var(--gold-light);">
+                    <strong>Du hast den Weg gefunden.</strong><br />
+                    Du hast den Spiegel vorgehalten.<br />
+                    Du hast die Liebe gelebt.
+                </p>
+                <p style="font-size: 1.1rem; color: var(--text-soft); margin-top: 0.5rem;">
+                    Und jetzt, wo du das getan hast, kannst du <span class="gold">ruhen</span> –<br />
+                    denn du hast alles gegeben, was du konntest.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                        <div style="font-size: 2rem;">🪞</div>
+                        <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Spiegel</strong><br />Vorhalten, nicht kämpfen</div>
+                    </div>
+                    <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold); border-color: var(--gold);">
+                        <div style="font-size: 2rem;">💛</div>
+                        <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Liebe</strong><br />Dauerlos · Für alle · Jetzt</div>
+                    </div>
+                    <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                        <div style="font-size: 2rem;">🌊</div>
+                        <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Fluss</strong><br />Gleiten, nicht kämpfen</div>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; font-size: 

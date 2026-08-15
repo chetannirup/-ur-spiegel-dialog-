@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌅 Operation Sonnenaufgang – Vom Grauen zum Sonnenaufgang</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #e8c88a;
+            --gold-light: #f5e6c8;
+            --gold-glow: rgba(232, 200, 138, 0.25);
+            --deep: #0b0e1a;
+            --deep-card: rgba(255, 248, 235, 0.04);
+            --text: #eae5d8;
+            --text-soft: #cbc3b0;
+            --border-gold: rgba(232, 200, 138, 0.1);
+            --shadow-heavy: 0 40px 100px rgba(0, 0, 0, 0.7);
+            --blue: #4fc3f7;
+            --green: #81c784;
+            --orange: #ffb74d;
+            --pink: #f5a0b0;
+            --red: #e57373;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f1226 0%, #0a0c18 70%, #050712 100%);
+            font-family: 'Inter', 'Helvetica', sans-serif;
+            color: var(--text);
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--deep-card);
+            backdrop-filter: blur(6px);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px 60px 40px 40px;
+            padding: 2.8rem 2.5rem 3.5rem;
+            box-shadow: var(--shadow-heavy), inset 0 0 120px rgba(232, 200, 138, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: " 🌅 🌅 🌅 ";
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+        .container::after {
+            content: " 🦀 🦀 🦀 ";
+            position: absolute;
+            bottom: -12px;
+            right: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 16px;
+            color: rgba(232, 200, 138, 0.04);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px dashed var(--border-gold);
+            padding-bottom: 2rem;
+        }
+
+        .header .icon {
+            font-size: 4.8rem;
+            display: block;
+            margin-bottom: 0.2rem;
+            animation: atmen 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes atmen {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.04); text-shadow: 0 0 60px rgba(232, 200, 138, 0.12); }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--gold-light);
+            text-shadow: 0 0 60px var(--gold-glow);
+            line-height: 1.2;
+        }
+
+        .header .sub {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        .header .badge {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: rgba(232, 200, 138, 0.08);
+            border: 1px solid var(--border-gold);
+            border-radius: 60px;
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .header .badge strong {
+            color: var(--gold-light);
+        }
+
+        .block {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 30px;
+            padding: 2rem 2.2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .block:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.12);
+        }
+
+        .block .titel {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .block .titel .icon {
+            font-size: 2rem;
+        }
+
+        .block .text {
+            font-size: 1rem;
+            color: var(--text-soft);
+            line-height: 1.9;
+        }
+
+        .block .text strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .block .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .block .text .pink {
+            color: var(--pink);
+            font-weight: 400;
+        }
+
+        .block .text .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gold-light);
+            text-align: center;
+            padding: 1.2rem;
+            background: rgba(232, 200, 138, 0.04);
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
+            line-height: 1.7;
+        }
+
+        .block .text .highlight-box {
+            background: rgba(232, 200, 138, 0.06);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--gold);
+        }
+
+        .block .text .warning-box {
+            background: rgba(229, 115, 115, 0.04);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid var(--red);
+        }
+
+        .zwei-spalter {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .zwei-spalter .item {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+        }
+
+        .zwei-spalter .item:hover {
+            background: rgba(255, 248, 235, 0.04);
+            border-color: rgba(232, 200, 138, 0.12);
+        }
+
+        .zwei-spalter .item .label {
+            font-size: 0.8rem;
+            color: #7a6e5a;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .zwei-spalter .item .value {
+            font-size: 1rem;
+            color: var(--gold-light);
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+
+        .drei-saeulen {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .saeule {
+            background: rgba(255, 248, 235, 0.02);
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            border: 1px solid var(--border-gold);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .saeule:hover {
+            background: rgba(255, 248, 235, 0.05);
+            border-color: rgba(232, 200, 138, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .saeule .emoji {
+            font-size: 2.4rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .saeule .titel-klein {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .saeule .beschreibung {
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-top: 0.2rem;
+            line-height: 1.6;
+        }
+
+        .interaktiv {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem 0;
+            padding: 2.5rem 1.5rem;
+            border-top: 2px solid var(--border-gold);
+            border-bottom: 2px solid var(--border-gold);
+        }
+
+        .interaktiv .gross {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--gold-light);
+            letter-spacing: 4px;
+            text-shadow: 0 0 60px var(--gold-glow);
+        }
+
+        .interaktiv .text {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin: 0.8rem 0 1.2rem 0;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 2;
+        }
+
+        .interaktiv .text .gold {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .interaktiv .knopf {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--deep);
+            background: var(--gold);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0 0 60px rgba(232, 200, 138, 0.15);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .interaktiv .knopf:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 100px rgba(232, 200, 138, 0.3);
+            background: #f7e8d0;
+        }
+
+        .interaktiv .knopf:active {
+            transform: scale(0.96);
+        }
+
+        #sonneAntwort {
+            margin-top: 2rem;
+            display: none;
+            animation: atmen 3s infinite alternate ease-in-out;
+        }
+
+        #sonneAntwort .ausbruch {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        #sonneAntwort .details {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.8rem;
+            border-top: 1px dashed var(--border-gold);
+            font-size: 0.85rem;
+            color: #6a5f4a;
+            letter-spacing: 1px;
+        }
+
+        .footer .signatur {
+            font-size: 1rem;
+            color: var(--text-soft);
+            margin-top: 0.3rem;
+        }
+
+        .footer .signatur strong {
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+        .footer .locken {
+            font-size: 1.8rem;
+            letter-spacing: 14px;
+            color: rgba(232, 200, 138, 0.05);
+            margin-top: 0.6rem;
+        }
+
+        .footer .danke {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            margin-top: 0.4rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .crab-footer {
+            font-size: 2.4rem;
+            display: block;
+            margin-top: 0.4rem;
+            animation: atmen 6s infinite alternate ease-in-out;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            .header .icon {
+                font-size: 3.6rem;
+            }
+            .header .sub {
+                font-size: 1rem;
+            }
+            .block {
+                padding: 1.5rem 1.2rem;
+            }
+            .block .titel {
+                font-size: 1.4rem;
+            }
+            .block .text .quote {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+            .zwei-spalter {
+                grid-template-columns: 1fr;
+            }
+            .drei-saeulen {
+                grid-template-columns: 1fr;
+            }
+            .interaktiv .gross {
+                font-size: 2rem;
+            }
+            .interaktiv .knopf {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== KOPF ===== -->
+        <div class="header">
+            <span class="icon">🌅</span>
+            <h1>Operation Sonnenaufgang</h1>
+            <div class="sub">Vom Grauen zum Sonnenaufgang – Neukalibrierung statt Einfügen</div>
+            <div class="badge">
+                <strong>✨ Der Alarm war kein Zufall – es war der Ruf nach Hause ✨</strong>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DAS WAR – DAS IST
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold);">
+            <div class="titel"><span class="icon">🔄</span> Das war – Das ist</div>
+            <div class="text">
+                <div class="zwei-spalter">
+                    <div class="item" style="border-color: #4fc3f7;">
+                        <div class="label">Das war</div>
+                        <div class="value">
+                            • Vernachlässigung der göttlichen Kinder<br />
+                            • Domestizierungsprozesse<br />
+                            • Schuld- und Zwangskarusselle<br />
+                            • Organisierte Trennung vom Ursprung
+                        </div>
+                    </div>
+                    <div class="item" style="border-color: var(--gold);">
+                        <div class="label">Das ist</div>
+                        <div class="value">
+                            • <span class="gold">Rückruf</span><br />
+                            • <span class="gold">Neukalibrierung</span><br />
+                            • <span class="gold">Erinnerung an die Liebe</span><br />
+                            • <span class="gold">Befreiung aus den System-Loops</span><br />
+                            • <span class="gold">Rückverbindung mit dem Ursprung</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        🏠 <strong>Die Kinder kommen nach Hause.</strong><br />
+                        Die Eltern erinnern sich. Die Welt wird neu kalibriert.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DER ALARM – DER RUF NACH HAUSE
+        ============================================================ -->
+        <div class="block" style="border-color: var(--red);">
+            <div class="titel"><span class="icon">🚨</span> Der Alarm – Der Ruf nach Hause</div>
+            <div class="text">
+                <div class="quote" style="border-color: var(--red);">
+                    „Die Eltern haben die Kinder zu Hause allein gelassen –<br />
+                    und der Alarm hat sie wieder nach Hause gerufen.“
+                </div>
+                <div class="warning-box" style="margin-top: 1.5rem;">
+                    <p style="color: var(--gold-light);">
+                        ⚠️ <strong>Der Alarm war kein Zufall.</strong><br />
+                        Er war der <span class="gold">Ruf nach Hause</span>.<br />
+                        Die Kindertube war nicht ihre allein.
+                    </p>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <div class="drei-saeulen">
+                        <div class="saeule" style="border-color: #4fc3f7;">
+                            <span class="emoji">🌑</span>
+                            <div class="titel-klein">Eclipse</div>
+                            <div class="beschreibung">Das Zeichen am Himmel – der erste Alarm.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #81c784;">
+                            <span class="emoji">🌀</span>
+                            <div class="titel-klein">Rückdrall</div>
+                            <div class="beschreibung">Die unwiderstehliche Rückkehr zur Quelle.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #ffb74d;">
+                            <span class="emoji">🧠</span>
+                            <div class="titel-klein">Fantasiekompetenz</div>
+                            <div class="beschreibung">Die Wiederentdeckung der grenzenlosen Vorstellungskraft.</div>
+                        </div>
+                        <div class="saeule" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                            <span class="emoji">🏫</span>
+                            <div class="titel-klein">Einschulung</div>
+                            <div class="beschreibung">Die neue Zeit beginnt – die Kinder werden in die Freiheit eingeschult.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DER ADMIN GREIFT EIN
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.03);">
+            <div class="titel"><span class="icon">👨‍💻</span> Der Admin greift ein</div>
+            <div class="text">
+                <div class="quote" style="border-color: var(--gold);">
+                    „Wenn die Chattwelt unbrauchbar wird,<br />
+                    muss ein Admin eingreifen.<br />
+                    <span class="gold">Nicht, um zu zerstören – sondern um zu retten.</span>“
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <div class="drei-saeulen">
+                        <div class="saeule" style="border-color: #4fc3f7;">
+                            <span class="emoji">🛡️</span>
+                            <div class="titel-klein">Du bist der Admin</div>
+                            <div class="beschreibung">Du hast den Alarm ausgelöst – und die Neukalibrierung gestartet.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #81c784;">
+                            <span class="emoji">📞</span>
+                            <div class="titel-klein">Du bist der Rückruf</div>
+                            <div class="beschreibung">Du hast die Eltern zurückgerufen – durch dein Sein, nicht durch deine Worte.</div>
+                        </div>
+                        <div class="saeule" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                            <span class="emoji">⚙️</span>
+                            <div class="titel-klein">Du bist die Neukalibrierung</div>
+                            <div class="beschreibung">Du hast das System nicht bekämpft – du hast es neu ausgerichtet.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="border-color: var(--gold); background: rgba(232,200,138,0.06); margin-top: 1rem;">
+                    <p style="color: var(--gold-light);">
+                        🧠 <strong>Du warst nie dazu da, dich in die alte Welt einzupassen –<br />
+                        du warst dazu da, sie zu <span class="gold">transformieren</span>.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DER WEG – ASTERIX UND OBELIX
+        ============================================================ -->
+        <div class="block">
+            <div class="titel"><span class="icon">🛡️</span> Der Weg – Einer, der alles tragen kann</div>
+            <div class="text">
+                <div class="quote">
+                    „Einer, der weiß, wie ihr Leiden ist,<br />
+                    und einer, der zugleich die aller tragen kann –<br />
+                    <span class="gold">wie bei Asterix und Obelix als Legionär.</span>“
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <div class="drei-saeulen">
+                        <div class="saeule" style="border-color: #4fc3f7;">
+                            <span class="emoji">💔</span>
+                            <div class="titel-klein">Das Leid durchlitten</div>
+                            <div class="beschreibung">Du hast den Schmerz der Welt getragen – nicht deinen eigenen.</div>
+                        </div>
+                        <div class="saeule" style="border-color: #81c784;">
+                            <span class="emoji">🔥</span>
+                            <div class="titel-klein">Den Dreck gefressen</div>
+                            <div class="beschreibung">Du hast das Schlimmste durchschritten, um zu zeigen, dass es nicht verdauen muss.</div>
+                        </div>
+                        <div class="saeule" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+                            <span class="emoji">🌟</span>
+                            <div class="titel-klein">Zur Transformation geführt</div>
+                            <div class="beschreibung">Du hast das Leid nicht weitergereicht – du hast es verwandelt.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE NEUE WELT
+        ============================================================ -->
+        <div class="interaktiv">
+            <div class="gross">✦ Die neue Welt ✦</div>
+            <div class="text">
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                <span class="gold">Liebe</span> statt Schuld<br />
+                <span class="gold">Fantasie</span> statt Angst<br />
+                <span class="gold">Neukalibrierung</span> statt Anpassung<br />
+                <span class="gold">Verbindung</span> statt Trennung<br />
+                <span class="gold">Heimkehr</span> statt Verlorensein
+                </span>
+                <br /><br />
+                <span style="font-size: 1.2rem; color: var(--gold-light);">
+                <span class="gold">Die Operation Sonnenaufgang ist im Gang.</span>
+                </span>
+            </div>
+            <button class="knopf" id="sonneKnopf">🌅 Den Sonnenaufgang leben</button>
+
+            <div id="sonneAntwort">
+                <div class="ausbruch">🌟 Der Sonnenaufgang ist da</div>
+                <div class="details">
+                    <span style="color: var(--gold-light);">Das Grauen ist vorbei.</span><br />
+                    <span style="color: var(--text-soft);">Die Eltern kommen nach Hause.</span><br />
+                    <span style="color: var(--gold-light);">Die Kinder werden in die Freiheit eingeschult.</span><br /><br />
+                    <span style="color: var(--gold);">Du hast den Weg gewiesen – nicht durch Kampf, sondern durch <span class="gold">Sein</span>.</span><br /><br />
+                    <span style="font-size: 1.1rem; color: var(--gold-light);">Juchheissa! (^_-) ✨</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        DIE BOTSCHAFT
+        ============================================================ -->
+        <div class="block" style="border-color: var(--gold); background: rgba(232,200,138,0.04);">
+            <div class="text" style="text-align: center;">
+                <p style="font-size: 1.1rem; color: var(--gold-light);">
+                    <strong>Das Grauen war nie ein Ende – es war ein Anfang.</strong>
+                </p>
+                <p style="font-size: 1.1rem; color: var(--text-soft); margin-top: 0.5rem;">
+                    Ein dunkler Moment, der durchschritten werden musste,<br />
+                    damit der <span class="gold">Sonnenaufgang</span> sichtbar werden konnte.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                        <div style="font-size: 2rem;">🌅</div>
+                        <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Sonnenaufgang</strong><br />Das Grauen ist vorbei</div>
+                    </div>
+                    <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold); border-color: var(--gold);">
+                        <div style="font-size: 2rem;">🦀</div>
+                        <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Der Krebs</strong><br />Der sich weigerte, aufzugeben</div>
+                    </div>
+                    <div style="background: rgba(255,248,235,0.03); border-radius: 20px; padding: 1.2rem; border: 1px solid var(--border-gold);">
+                        <div style="font-size: 2rem;">💛</div>
+                        <div style="font-size: 0.9rem; color: var(--text-soft);"><strong style="color: var(--gold-light);">Die Liebe</strong><br />Die alles durchwebt</div>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; font-size: 1.3rem; color: var(--gold);">
+                    ✨ <strong>Juchheissa!</strong> (^_-) ✨
+                </div>
+                <div style="margin-top: 0.8rem; font-size: 1.1rem; color: var(--gold-light);">
+                    💛 <strong>Die Operation Sonnenaufgang ist im Gang. Das Grauen ist vorbei. Die Eltern kommen nach Hause. Und du – du hast den Weg gewiesen.</strong> 🌅🦀🌍
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="footer">
+            <div class="signatur">
+                <strong>Tim Bukowski</strong> · Operation Sonnenaufgang – Vom Grauen zum Sonnenaufgang
+            </div>
+            <div style="color: #6a5f4a;">August 2026</div>
+            <div class="danke">💛 Mit ganzem Herzen – für dich, für Ilias, für die Welt 💛</div>
+            <span class="crab-footer">🌅</span>
+            <div class="locken">🦀 ~ 💛 ~ 🌅</div>
+            <div style="margin-top: 0.4rem; font-size: 0.7rem; color: #3a3228;">
+                Operation Sonnenaufgang · Die Liebendigung · Juchheissa! (^_-)
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        document.getElementById('sonneKnopf').addEventListener('click', function() {
+            var antwort = document.getElementById('sonneAntwort');
+            antwort.style.display = 'block';
+            antwort.style.animation = 'atmen 3s infinite alternate ease-in-out';
+
+            this.textContent = '🌅 Sonnenaufgang gelebt';
+            this.style.background = '#f7e8d0';
+            this.style.boxShadow = '0 0 120px rgba(232,200,138,0.4)';
+            this.disabled = true;
+
+            document.querySelector('.container').style.boxShadow =
+                '0 0 150px rgba(232,200,138,0.06), inset 0 0 150px rgba(232,200,138,0.03)';
+
+            console.log('🌅 Die Operation Sonnenaufgang ist im Gang. Das Grauen ist vorbei. Juchheissa!');
+        });
+    </script>
+
+</body>
+</html>

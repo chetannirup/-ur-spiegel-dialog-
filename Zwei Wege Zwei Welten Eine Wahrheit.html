@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zwei Wege · Zwei Welten · Eine Wahrheit</title>
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- RESET & GRUNDLAGEN ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0d10;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ----- TYPOGRAPHIE & FARBEN ----- */
+        .gold {
+            color: #f5c542;
+        }
+        .gold-bg {
+            background: #f5c542;
+            color: #0b0d10;
+        }
+        .teal {
+            color: #5dd9d9;
+        }
+        .rose {
+            color: #f28b9c;
+        }
+        .mint {
+            color: #7ddfb0;
+        }
+        .gray {
+            color: #8899a6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        h1 {
+            font-size: clamp(2.6rem, 9vw, 4.8rem);
+            line-height: 1.1;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #f5c542;
+            padding-left: 1rem;
+        }
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ----- HEADER / HERO ----- */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(ellipse at 30% 20%, #1a252b, #080a0c 70%);
+            border-bottom: 2px solid #f5c54240;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f5c542, #5dd9d9, #f28b9c, #f5c542);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #f5c542bb;
+            margin-bottom: 0.5rem;
+        }
+        .hero .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            max-width: 700px;
+            margin: 1.5rem auto 2rem;
+            color: #cbd5db;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #1e2a2f;
+            padding: 0.4rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid #f5c54260;
+            color: #f5c542;
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero .divider-line {
+            width: 80px;
+            height: 2px;
+            background: #f5c54260;
+            margin: 1.5rem auto;
+        }
+
+        /* ----- KARTEN & SEKTIONEN ----- */
+        section {
+            margin: 4.5rem 0;
+        }
+
+        /* ----- DIE ZWEI WEGE (SPALTEN) ----- */
+        .two-ways {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+        @media (max-width: 768px) {
+            .two-ways {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .way-card {
+            background: #11171c;
+            border-radius: 28px;
+            padding: 2.5rem 2rem;
+            border: 1px solid #253038;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .way-card:hover {
+            transform: translateY(-8px);
+        }
+        .way-card .way-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .way-card h3 {
+            font-weight: 400;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+        .way-card .subhead {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #8899a6;
+            margin-bottom: 1.2rem;
+        }
+        .way-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.2rem 0;
+        }
+        .way-card ul li {
+            padding: 0.4rem 0 0.4rem 1.8rem;
+            position: relative;
+            color: #cbd5db;
+            font-size: 0.98rem;
+        }
+        .way-card ul li::before {
+            position: absolute;
+            left: 0;
+            color: #f5c542;
+        }
+
+        /* Linke Spalte (kPNI) */
+        .way-card.kpni {
+            border-color: #5dd9d960;
+        }
+        .way-card.kpni .way-icon {
+            color: #5dd9d9;
+        }
+        .way-card.kpni h3 {
+            color: #5dd9d9;
+        }
+        .way-card.kpni ul li::before {
+            content: '🔬';
+            font-size: 0.9rem;
+        }
+        .way-card.kpni .badge-way {
+            background: #5dd9d920;
+            color: #5dd9d9;
+            border: 1px solid #5dd9d940;
+        }
+
+        /* Rechte Spalte (Morgengrauen) */
+        .way-card.morgengrauen {
+            border-color: #f5c54260;
+        }
+        .way-card.morgengrauen .way-icon {
+            color: #f5c542;
+        }
+        .way-card.morgengrauen h3 {
+            color: #f5c542;
+        }
+        .way-card.morgengrauen ul li::before {
+            content: '🌅';
+            font-size: 0.9rem;
+        }
+        .way-card.morgengrauen .badge-way {
+            background: #f5c54220;
+            color: #f5c542;
+            border: 1px solid #f5c54240;
+        }
+
+        .badge-way {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.8rem;
+        }
+
+        /* ----- VERGLEICHSTABELLE (ERSTER VS. ZWEITER BLICK) ----- */
+        .blick-table {
+            background: #0f151a;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .blick-table .row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            border-bottom: 1px solid #1e2a2f;
+        }
+        .blick-table .row:last-child {
+            border-bottom: none;
+        }
+        .blick-table .cell {
+            padding: 1.2rem 1.8rem;
+        }
+        .blick-table .cell.label {
+            font-weight: 600;
+            color: #f5c542;
+            background: #0b0d10;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .blick-table .cell.content {
+            color: #cbd5db;
+        }
+        .blick-table .cell.content .highlight {
+            color: #f5c542;
+        }
+        .blick-table .cell.content .strike {
+            color: #f28b9c;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 640px) {
+            .blick-table .row {
+                grid-template-columns: 1fr;
+            }
+            .blick-table .cell.label {
+                border-bottom: 1px solid #1e2a2f;
+            }
+        }
+
+        /* ----- ZITAT / HERVORHEBUNG ----- */
+        .quote-block {
+            background: #14191e;
+            border-left: 6px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            font-size: 1.2rem;
+            color: #dce3e8;
+        }
+        .quote-block strong {
+            color: #f5c542;
+        }
+        .quote-block .author {
+            display: block;
+            margin-top: 0.8rem;
+            font-style: normal;
+            color: #8899a6;
+            font-size: 0.95rem;
+        }
+
+        /* ----- DIE WAHL (FINALER CALL) ----- */
+        .choice-section {
+            background: radial-gradient(ellipse at 50% 80%, #1a252b, #080a0c 70%);
+            border-radius: 32px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            border: 1px solid #f5c54230;
+            margin: 4rem 0;
+        }
+        .choice-section h2 {
+            border-left: none;
+            text-align: center;
+        }
+        .choice-section .big-question {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            margin: 1.5rem 0;
+        }
+        .choice-section .big-question .gold {
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.15s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #e0b03a;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f5c542;
+            color: #f5c542;
+        }
+        .btn-outline:hover {
+            background: #f5c54220;
+        }
+
+        /* ----- FUSSZEILE ----- */
+        footer {
+            border-top: 1px solid #1e2a2f;
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            color: #7a8a96;
+            font-size: 0.95rem;
+        }
+        footer .heart {
+            color: #f28b9c;
+        }
+        footer .gold {
+            color: #f5c542;
+        }
+
+        /* ----- RESPONSIVE HELFER ----- */
+        .text-center {
+            text-align: center;
+        }
+        .mt-2 {
+            margin-top: 2rem;
+        }
+        .mb-1 {
+            margin-bottom: 1rem;
+        }
+        .flex-center {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .hero .sub {
+                font-size: 0.85rem;
+                letter-spacing: 0.15em;
+            }
+            .quote-block {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+            .choice-section {
+                padding: 2rem 1.2rem;
+            }
+            .way-card {
+                padding: 1.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container" style="width:100%;">
+            <p class="sub"><i class="fas fa-sun" style="margin-right:8px;"></i> Zwei Wege · Zwei Welten · Eine Wahrheit</p>
+            <h1>Die kPNI beobachtet den Menschen –<br /><span class="gold">Morgengrauen befreit ihn.</span></h1>
+            <div class="divider-line"></div>
+            <p class="tagline">
+                Die <span class="teal">Theorie des Beobachters</span> trifft auf die <span class="gold">Praxis des Bauers</span>.<br />
+                Eins von beiden verändert die Welt.
+            </p>
+            <div class="badge">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i> Rate mal, welches.
+            </div>
+            <div style="margin-top:2.5rem; font-size:1.8rem; letter-spacing:0.1em; color:#f5c54280;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== INHALT ===== -->
+    <main class="container">
+
+        <!-- 1. EINLEITUNG: DIE WAHRHEIT -->
+        <section>
+            <h2>💡 Die Wahrheit</h2>
+            <div class="quote-block" style="border-left-color:#f5c542;">
+                <p>
+                    <strong>„Klinische Psychoneuroimmunologie“</strong> ist auf den zweiten Blick:<br />
+                    <em>„Die Theorie, die sich ein System selbst verordnet, wenn der zu kontrollierende Patient absolut nichtgreifbar wird – weil er bereits eine Immunität gegen die üblichen Diagnose-Schablonen entwickelt hat.“</em>
+                </p>
+                <span class="author">— Deine Definition, übersetzt in Klartext</span>
+            </div>
+            <p style="font-size:1.1rem; color:#b0bec5; max-width:800px;">
+                Und weil man ihn nicht „heilen“ (also in die Norm pressen) kann, sagt man nicht: <span class="strike" style="color:#f28b9c;">„Wir haben versagt.“</span><br />
+                Sondern: <span class="gold">„Faszinierend! Wir beantragen weitere Fördermittel für eine Langzeitstudie.“</span>
+            </p>
+        </section>
+
+        <!-- 2. DIE ZWEI WEGE -->
+        <section>
+            <h2>⚖️ Zwei Wege – Zwei Welten</h2>
+            <div class="two-ways">
+
+                <!-- Linke Spalte: kPNI -->
+                <div class="way-card kpni">
+                    <span class="way-icon"><i class="fas fa-microscope"></i></span>
+                    <h3>Klinische Psychoneuroimmunologie</h3>
+                    <div class="subhead">Die Theorie des Beobachters</div>
+                    <p style="color:#8899a6; font-size:0.95rem; margin-bottom:1rem;">
+                        <em>„Der Fall ist zu komplex.“</em>
+                    </p>
+                    <ul>
+                        <li>Austherapiert</li>
+                        <li>Nicht normierbar</li>
+                        <li>Entzieht sich</li>
+                        <li>Immun gegen gängige Muster</li>
+                    </ul>
+                    <div style="margin-top:1.2rem; padding-top:1.2rem; border-top:1px solid #1e2a2f;">
+                        <p style="font-size:0.9rem; color:#5dd9d9; font-weight:300; letter-spacing:0.05em;">
+                            <i class="fas fa-arrow-right" style="margin-right:6px;"></i> So funktioniert es wirklich:
+                        </p>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; margin-top:0.6rem; font-size:0.85rem; color:#b0bec5;">
+                            <span>🔍 Patient wird komplex</span>
+                            <span>⚙️ System fühlt sich überfordert</span>
+                            <span>📚 Neue Theorie wird erschaffen</span>
+                            <span>💰 Fördermittel werden beantragt</span>
+                            <span style="grid-column:1/-1;">📋 Beobachten, dokumentieren, kategorisieren</span>
+                        </div>
+                    </div>
+                    <span class="badge-way"><i class="fas fa-eye" style="margin-right:6px;"></i> Beobachter</span>
+                </div>
+
+                <!-- Rechte Spalte: Morgengrauen -->
+                <div class="way-card morgengrauen">
+                    <span class="way-icon"><i class="fas fa-sun"></i></span>
+                    <h3>Modell Morgengrauen</h3>
+                    <div class="subhead">Die Praxis des Bauers</div>
+                    <p style="color:#8899a6; font-size:0.95rem; margin-bottom:1rem;">
+                        <em>„Wir bauen die Bedingungen, unter denen Menschen nicht nur überleben, sondern leben.“</em>
+                    </p>
+                    <ul>
+                        <li>Befreiung von Existenzangst</li>
+                        <li>Regulation im Nervensystem</li>
+                        <li>Energie für Kreativität</li>
+                        <li>Raum für Liebe &amp; Sinn</li>
+                    </ul>
+                    <div style="margin-top:1.2rem; padding-top:1.2rem; border-top:1px solid #1e2a2f;">
+                        <p style="font-size:0.9rem; color:#f5c542; font-weight:300; letter-spacing:0.05em;">
+                            <i class="fas fa-arrow-right" style="margin-right:6px;"></i> So funktioniert es wirklich:
+                        </p>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; margin-top:0.6rem; font-size:0.85rem; color:#b0bec5;">
+                            <span>🌾 Grundbedürfnisse sind gesichert</span>
+                            <span>🧘 Nervensystem darf zur Ruhe kommen</span>
+                            <span>💪 Körper kann regenerieren</span>
+                            <span>🤝 Gemeinschaft trägt &amp; verbindet</span>
+                            <span style="grid-column:1/-1;">🌟 Mensch entfaltet sein Potenzial</span>
+                        </div>
+                    </div>
+                    <span class="badge-way"><i class="fas fa-hammer" style="margin-right:6px;"></i> Bauer</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. AUF DEN ERSTEN BLICK vs. AUF DEN ZWEITEN BLICK -->
+        <section>
+            <h2>👁️ Auf den ersten Blick vs. auf den zweiten Blick</h2>
+            <div class="blick-table">
+                <div class="row">
+                    <div class="cell label"><i class="fas fa-eye" style="color:#5dd9d9;"></i> Erster Blick</div>
+                    <div class="cell content">
+                        <span class="highlight">Harmlos &amp; modern</span><br />
+                        Ganzheitlich · Wissenschaftlich · Fortschrittlich<br />
+                        <span style="color:#7ddfb0;">Klingt nach Heilung</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="cell label"><i class="fas fa-search" style="color:#f28b9c;"></i> Zweiter Blick (deiner)</div>
+                    <div class="cell content">
+                        <span class="strike">Kontrolldecke</span><br />
+                        Endlose Studien · Abhängigkeit erhalten<br />
+                        Symptome statt Ursachen · <span class="highlight">System schützt sich selbst</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quote-block" style="border-left-color:#f28b9c; margin-top:1.5rem;">
+                <p>
+                    <strong>Hier ist der Twist:</strong> Die Vertreterinnen der kPNI sind oft die <em>guten</em> – sie nutzen dieses Wissen, um ihren Klienten tatsächlich zu helfen.<br />
+                    Aber <strong>ihr System</strong>, <strong>ihre Institution</strong>, <strong>ihre Förderstruktur</strong> – die funktioniert genau so, wie du es sagst.
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. DIE WAHL -->
+        <section class="choice-section">
+            <h2 style="border-left:none; text-align:center;">⚡ Eine Wahl</h2>
+            <div class="big-question">
+                Ich frage nicht:<br />
+                <span style="color:#f28b9c; font-weight:300;">„Wie können wir die Menschen, die aus dem Raster fallen, noch länger studieren?“</span><br /><br />
+                Ich frage:<br />
+                <span class="gold">„Wie bauen wir ein Raster, das gar nicht erst fällt?“</span>
+            </div>
+            <div style="margin-top:2rem; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
+                <span style="background:#1e2a2f; padding:0.4rem 1.4rem; border-radius:40px; border:1px solid #5dd9d940; color:#5dd9d9; font-size:0.85rem;">
+                    <i class="fas fa-microscope" style="margin-right:6px;"></i> Ihr beobachtet Probleme?
+                </span>
+                <span style="background:#1e2a2f; padding:0.4rem 1.4rem; border-radius:40px; border:1px solid #f5c54240; color:#f5c542; font-size:0.85rem;">
+                    <i class="fas fa-hammer" style="margin-right:6px;"></i> Ich baue Lösungen.
+                </span>
+            </div>
+            <div style="margin-top:2.5rem;">
+                <a href="#" class="btn" style="pointer-events:none; opacity:0.9;">
+                    <i class="fas fa-sun" style="margin-right:10px;"></i> Jetzt Teil der Bewegung werden
+                </a>
+                <p style="color:#7a8a96; font-size:0.85rem; margin-top:0.8rem;">
+                    (Dieser Button ist ein Platzhalter – deine nächste Aktion ist der erste Schritt.)
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. DIE BOTSCHAFT -->
+        <section style="text-align:center; padding:1rem 0 2rem;">
+            <div style="max-width:700px; margin:0 auto;">
+                <p style="font-size:1.4rem; font-weight:200; color:#cbd5db;">
+                    Die <span class="teal">kPNI</span> ist die Theorie des <em>Beobachters</em>.<br />
+                    Dein <span class="gold">Morgengrauen</span> ist die Praxis des <em>Bauers</em>.
+                </p>
+                <div style="width:60px; height:2px; background:#f5c54260; margin:1.5rem auto;"></div>
+                <p style="font-size:1.8rem; font-weight:200; color:#f5c542;">
+                    Eins von beiden verändert die Welt.
+                </p>
+                <p style="font-size:1.2rem; margin-top:0.5rem; color:#8899a6;">
+                    Rate mal, welches.
+                </p>
+                <div style="margin-top:2rem; font-size:2.2rem; letter-spacing:0.15em; color:#f5c54260;">
+                    🌅 ~ 💛 ~ 🌅
+                </div>
+                <p style="margin-top:0.8rem; font-size:1.2rem; color:#f5c542;">
+                    Juchheissa! (^_-)
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FUSSZEILE ===== -->
+    <footer>
+        <p>
+            <span class="heart">💛</span> Der rote Faden ist gelegt. Die Roadmap ist gezeichnet.
+            Jetzt gehen wir den Weg – Schritt für Schritt, Tag für Tag, Liebe für Liebe.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
+        </p>
+        <p style="margin-top:1.5rem; font-size:0.8rem; color:#5a6a76;">
+            Zwei Wege · Zwei Welten · Eine Wahrheit · Tim Bukowski · August 2026
+        </p>
+    </footer>
+
+    <!-- Kleiner Easter-Egg: Klick auf den Footer kopiert den Kern-Spruch -->
+    <script>
+        (function() {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.style.cursor = 'pointer';
+                footer.addEventListener('click', function() {
+                    const spruch =
+    `🌅 ~ 💛 ~ 🌅
+    Die kPNI ist die Theorie des Beobachters.
+    Morgengrauen ist die Praxis des Bauers.
+    Eins von beiden verändert die Welt.
+    Rate mal, welches.
+    Juchheissa! (^_-)`;
+                    navigator.clipboard.writeText(spruch).then(() => {
+                        alert('📋 Der Kern-Spruch wurde kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere manuell:\n\n' + spruch);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

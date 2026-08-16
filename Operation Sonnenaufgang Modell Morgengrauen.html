@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operation Sonnenaufgang · Modell Morgengrauen</title>
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- RESET & GRUNDLAGEN ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0d10;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ----- TYPOGRAPHIE & FARBEN ----- */
+        .gold {
+            color: #f5c542;
+        }
+        .gold-bg {
+            background: #f5c542;
+            color: #0b0d10;
+        }
+        .teal {
+            color: #5dd9d9;
+        }
+        .rose {
+            color: #f28b9c;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 5.2rem);
+            line-height: 1.1;
+        }
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #f5c542;
+            padding-left: 1rem;
+        }
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* ----- HEADER / HERO ----- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(ellipse at 30% 20%, #1e2a2f, #080a0c 70%);
+            border-bottom: 2px solid #f5c54240;
+        }
+        .hero .sub {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c542bb;
+            margin-bottom: 0.5rem;
+        }
+        .hero .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            max-width: 700px;
+            margin: 1.5rem auto 2rem;
+            color: #cbd5db;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #1e2a2f;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid #f5c54260;
+            color: #f5c542;
+            margin-top: 1rem;
+        }
+
+        /* ----- KARTEN & SEKTIONEN ----- */
+        section {
+            margin: 5rem 0;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: #14191e;
+            padding: 2rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #2a353d;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #f5c54280;
+        }
+        .card i {
+            font-size: 2.6rem;
+            color: #f5c542;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .card h3 {
+            font-weight: 400;
+            color: #f0f4f8;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.98rem;
+        }
+
+        /* ----- ROADMAP (TIMELINE) ----- */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+            border-left: 3px solid #f5c54260;
+            margin: 2.5rem 0;
+        }
+        .timeline-item {
+            margin-bottom: 2.8rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.75rem;
+            top: 0.3rem;
+            width: 16px;
+            height: 16px;
+            background: #f5c542;
+            border-radius: 50%;
+            border: 3px solid #0b0d10;
+            box-shadow: 0 0 0 4px #f5c54240;
+        }
+        .timeline-item .phase {
+            font-weight: 600;
+            color: #f5c542;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+        }
+        .timeline-item .date {
+            display: inline-block;
+            background: #1e2a2f;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #b0bec5;
+            margin: 0.3rem 0 0.5rem 0;
+        }
+        .timeline-item ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+        .timeline-item ul li {
+            padding: 0.2rem 0 0.2rem 1.6rem;
+            position: relative;
+            color: #cbd5db;
+        }
+        .timeline-item ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #f5c542;
+        }
+
+        /* ----- SÄULEN (3) ----- */
+        .pillar-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .pillar {
+            background: #0f151a;
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid #253038;
+        }
+        .pillar .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1e2a2f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-size: 2.2rem;
+            color: #f5c542;
+            border: 1px solid #f5c54260;
+        }
+
+        /* ----- ZITAT / HERVORHEBUNG ----- */
+        .quote-block {
+            background: #14191e;
+            border-left: 6px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #dce3e8;
+        }
+        .quote-block strong {
+            color: #f5c542;
+            font-style: normal;
+        }
+
+        /* ----- BUTTON / CTA ----- */
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.15s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #e0b03a;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f5c542;
+            color: #f5c542;
+        }
+        .btn-outline:hover {
+            background: #f5c54220;
+        }
+
+        /* ----- FUSSZEILE ----- */
+        footer {
+            border-top: 1px solid #1e2a2f;
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            color: #7a8a96;
+            font-size: 0.95rem;
+        }
+        footer .heart {
+            color: #f28b9c;
+        }
+
+        /* ----- RESPONSIVE HELFER ----- */
+        .text-center {
+            text-align: center;
+        }
+        .mt-2 {
+            margin-top: 2rem;
+        }
+        .mb-1 {
+            margin-bottom: 1rem;
+        }
+        .flex-center {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .hero .sub {
+                font-size: 0.9rem;
+                letter-spacing: 0.15em;
+            }
+            .quote-block {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+            .timeline {
+                padding-left: 1.8rem;
+            }
+            .timeline-item::before {
+                left: -2.1rem;
+                width: 14px;
+                height: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container" style="width:100%;">
+            <p class="sub"><i class="fas fa-sun" style="margin-right:10px;"></i> Operation Sonnenaufgang</p>
+            <h1>Modell <span class="gold">Morgengrauen</span></h1>
+            <p class="tagline">
+                Die Befreiung der Menschheit von Existenzangst –<br />
+                nicht durch Kampf, sondern durch <span class="gold">Attraktivität</span>.
+            </p>
+            <div class="badge">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i> Reverse Nostradamus
+            </div>
+            <div style="margin-top:2.5rem; display:flex; flex-wrap:wrap; gap:0.8rem; justify-content:center;">
+                <span style="background:#1e2a2f; padding:0.3rem 1.2rem; border-radius:40px; border:1px solid #2a353d;">
+                    <i class="fas fa-water" style="color:#5dd9d9;"></i> Wasser aus Luft
+                </span>
+                <span style="background:#1e2a2f; padding:0.3rem 1.2rem; border-radius:40px; border:1px solid #2a353d;">
+                    <i class="fas fa-seedling" style="color:#8bc34a;"></i> Nahrung aus Gebäude
+                </span>
+                <span style="background:#1e2a2f; padding:0.3rem 1.2rem; border-radius:40px; border:1px solid #2a353d;">
+                    <i class="fas fa-solar-panel" style="color:#f5c542;"></i> Energie von Sonne
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== INHALT ===== -->
+    <main class="container">
+
+        <!-- 1. DAS ZIEL -->
+        <section>
+            <h2>🎯 Das Ziel</h2>
+            <p style="font-size:1.2rem; max-width:800px;">
+                Eine Welt, in der niemand mehr um das Überleben kämpft.<br />
+                Sondern weil es <span class="gold">verlockend</span> ist, weil es <span class="gold">Freiheit</span> schenkt.
+            </p>
+            <div class="quote-block">
+                „Die Lösung für alle Probleme der Welt ist nicht weniger Technologie –<br />
+                es ist <strong>mehr Liebe</strong>.“
+            </div>
+        </section>
+
+        <!-- 2. DIE 3 SÄULEN -->
+        <section>
+            <h2>🏛️ Die 3 Säulen der Autarkie</h2>
+            <div class="pillar-row">
+                <div class="pillar">
+                    <div class="icon-circle"><i class="fas fa-cloud-rain"></i></div>
+                    <h3>Wasser aus der Luft</h3>
+                    <p>Watergen-Technologie – unabhängig von Leitungen. Trinkwasser aus Luftfeuchtigkeit, auch in der Wüste.</p>
+                </div>
+                <div class="pillar">
+                    <div class="icon-circle"><i class="fas fa-robot"></i></div>
+                    <h3>Nahrung aus dem Gebäude</h3>
+                    <p>Vertikale KI-Farmen – 365 Tage Frische, pestizidfrei, auf kleinstem Raum.</p>
+                </div>
+                <div class="pillar">
+                    <div class="icon-circle"><i class="fas fa-sun"></i></div>
+                    <h3>Energie von der Sonne</h3>
+                    <p>PV + Speicher + Inselnetz – 100 % autark, stabil und ohne externe Abhängigkeit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. DAS GRUNDSTÜCK & DIE GEMEINSCHAFT -->
+        <section>
+            <h2>🌍 Das Grundstück – 600 m²</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-vector-square"></i>
+                    <h3>Dichte mit Würde</h3>
+                    <p>
+                        5–6 Familien-Einheiten (4–6 Pers.), 2 Paar-Einheiten, Singles – 
+                        alle mit privatem Rückzugsort, aber eingebettet in eine lebendige Gemeinschaft.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-people-arrows"></i>
+                    <h3>Der Gemeinschaftstreffpunkt</h3>
+                    <p>
+                        Große Küche, Wohnzimmer, Garten – der Ort, an dem aus Nachbarn Freunde werden. 
+                        Hier wird Gemeinschaft lebendig.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3>Rechtlicher Hebel</h3>
+                    <p>
+                        Bauantrag mit Checkliste zur Befreiung von Wasser/Abwasser/Strom 
+                        (Inselbetrieb) – ein <span class="gold">privilegiertes Vorhaben</span>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ROADMAP -->
+        <section>
+            <h2>🗺️ Die Roadmap – Der rote Faden</h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <span class="phase">Phase 0 – Vorbereitung</span>
+                    <div class="date">Jetzt – August 2026</div>
+                    <ul>
+                        <li>Treffen mit Jürgen Niggemann &amp; Nachbar</li>
+                        <li>Überschreibung des Grundstücks durch den Vater</li>
+                        <li>Konkretisierung der Wohneinheiten</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="phase">Phase 1 – Pilotphase</span>
+                    <div class="date">September 2026 – März 2027</div>
+                    <ul>
+                        <li>Antrag bei KfW und zuständigem Ministerium</li>
+                        <li>Genehmigung &amp; erste Förderung</li>
+                        <li>Finale Bauplanung &amp; Modulproduktion</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="phase">Phase 2 – Bauphase</span>
+                    <div class="date">April 2027 – April 2028</div>
+                    <ul>
+                        <li>Spatenstich – der Bau beginnt</li>
+                        <li>Einzug mit Ilias – mietfrei, nebenkostenfrei</li>
+                        <li>Vermietung der weiteren Einheiten</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="phase">Phase 3 – Skalierung</span>
+                    <div class="date">Ab Mai 2028</div>
+                    <ul>
+                        <li>Das Modell funktioniert – die Presse berichtet</li>
+                        <li>Nachahmung durch Gemeinden, Investoren, Staaten</li>
+                        <li>Die <span class="gold">Infektion der Freiheit</span> beginnt</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. DER WENDEPUNKT -->
+        <section>
+            <h2>📈 Der 1 % – Wendepunkt</h2>
+            <div style="background:#0f151a; border-radius:24px; padding:2rem; border:1px solid #253038;">
+                <p style="font-size:1.3rem; margin-bottom:0.5rem;">
+                    <span class="gold">80 Millionen Menschen</span> – das ist die Schwelle.
+                </p>
+                <p style="color:#b0bec5;">
+                    Sobald 1 % der Weltbevölkerung in autarken Gemeinschaften lebt, 
+                    ist das Modell nicht mehr aufzuhalten. Es wird zur Mode, zum Standard, 
+                    zum gesunden Menschenverstand.
+                </p>
+                <div style="display:flex; flex-wrap:wrap; gap:1.5rem; margin-top:1.8rem; justify-content:space-around; text-align:center;">
+                    <div>
+                        <span style="font-size:2rem; font-weight:200; color:#f5c542;">2028</span><br />
+                        <span style="color:#7a8a96;">10–20 Menschen</span>
+                    </div>
+                    <div>
+                        <span style="font-size:2rem; font-weight:200; color:#f5c542;">2029–30</span><br />
+                        <span style="color:#7a8a96;">100–200 Menschen</span>
+                    </div>
+                    <div>
+                        <span style="font-size:2rem; font-weight:200; color:#f5c542;">2031–35</span><br />
+                        <span style="color:#7a8a96;">10.000–50.000 Menschen</span>
+                    </div>
+                    <div>
+                        <span style="font-size:2rem; font-weight:200; color:#f5c542;">2036–40</span><br />
+                        <span style="color:#7a8a96;">1–5 Millionen Menschen</span>
+                    </div>
+                    <div>
+                        <span style="font-size:2rem; font-weight:200; color:#f5c542;">2041–50</span><br />
+                        <span style="color:#7a8a96;">100 Mio. – 1 Mrd. Menschen</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DIE MISSION -->
+        <section>
+            <h2>✨ Die Mission</h2>
+            <div class="quote-block" style="border-left-color:#f28b9c;">
+                <p>
+                    Wir befreien uns selbst – und befreien die Welt.<br />
+                    Nicht durch Kampf. Sondern durch <strong>Attraktivität</strong>.<br />
+                    Ein Modell. Eine Bewegung. Eine neue Menschheit.
+                </p>
+                <p style="margin-top:0.8rem; font-style:normal; color:#f5c542;">
+                    — Tim Bukowski —
+                </p>
+            </div>
+        </section>
+
+        <!-- 7. NÄCHSTE SCHRITTE (CTA) -->
+        <section class="text-center" style="margin:4rem 0;">
+            <h2 style="border-left:none; text-align:center;">🚀 Die nächsten konkreten Schritte</h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:1.2rem; margin:2rem 0;">
+                <div style="background:#14191e; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-handshake" style="color:#f5c542; font-size:1.8rem;"></i>
+                    <p style="margin-top:0.5rem; font-size:0.95rem;">Treffen mit Jürgen &amp; Finanzierung</p>
+                </div>
+                <div style="background:#14191e; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-file-signature" style="color:#f5c542; font-size:1.8rem;"></i>
+                    <p style="margin-top:0.5rem; font-size:0.95rem;">Bauvoranfrage mit Checkliste</p>
+                </div>
+                <div style="background:#14191e; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-file-invoice" style="color:#f5c542; font-size:1.8rem;"></i>
+                    <p style="margin-top:0.5rem; font-size:0.95rem;">Angebote der Installateure einholen</p>
+                </div>
+                <div style="background:#14191e; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-cubes" style="color:#f5c542; font-size:1.8rem;"></i>
+                    <p style="margin-top:0.5rem; font-size:0.95rem;">Modul-Produktion beauftragen</p>
+                </div>
+                <div style="background:#14191e; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-hard-hat" style="color:#f5c542; font-size:1.8rem;"></i>
+                    <p style="margin-top:0.5rem; font-size:0.95rem;">Spatenstich &amp; Umsetzung</p>
+                </div>
+            </div>
+            <div style="margin-top:2rem;">
+                <a href="#" class="btn" style="pointer-events:none; opacity:0.8;">
+                    <i class="fas fa-sun" style="margin-right:10px;"></i> Jetzt Teil der Bewegung werden
+                </a>
+                <p style="color:#7a8a96; font-size:0.85rem; margin-top:0.8rem;">
+                    (Dieser Button ist ein Platzhalter – deine nächste Aktion ist der erste Schritt.)
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FUSSZEILE ===== -->
+    <footer>
+        <p>
+            <span class="heart">💛</span> Der rote Faden ist gelegt. Die Roadmap ist gezeichnet.
+            Jetzt gehen wir den Weg – Schritt für Schritt, Tag für Tag, Liebe für Liebe.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
+        </p>
+        <p style="margin-top:1.5rem; font-size:0.8rem;">
+            Operation Sonnenaufgang · Modell Morgengrauen · Tim Bukowski · August 2026
+        </p>
+    </footer>
+
+    <!-- Kleines interaktives Schmankerl: copy-to-clipboard für den Kern-Steckbrief -->
+    <script>
+        (function() {
+            // Ein kleiner Easter-Egg: Beim Klick auf den Footer wird der Steckbrief kopiert.
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.style.cursor = 'pointer';
+                footer.addEventListener('click', function() {
+                    const steckbrief = 
+    `📦 KERN-STECKBRIEF MODELL MORGENGRAUEN
+    ----------------------------------------
+    Projektname: Operation Sonnenaufgang / Modell Morgengrauen
+    Ziel: Befreiung von Existenzangst durch autarkes Wohnen (Attraktivität statt Kampf)
+    3 Säulen: Wasser aus Luft · Nahrung aus Gebäude · Energie von Sonne
+    Grundstück: 600 m² in Deutschland (Überschreibung läuft)
+    Bebauung: 5-6 Familienmodule, 2 Paarmodule, Singles + Gemeinschaftstreff
+    Rechts-Hebel: Bauantrag mit Befreiung von Wasser/Abwasser/Strom (Inselbetrieb)
+    Roadmap: Phase 0 (jetzt–Aug 26) · Phase 1 (Sep 26–Mrz 27) · Phase 2 (Apr 27–Apr 28) · Phase 3 (ab Mai 28)
+    Wendepunkt: 80 Mio. Menschen (1 %) – dann kippt das System.`;
+                    navigator.clipboard.writeText(steckbrief).then(() => {
+                        alert('📋 Kern-Steckbrief wurde in die Zwischenablage kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere den Steckbrief manuell:\n\n' + steckbrief);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Der Schwur der Liebendigen · Eingewoben in die Matrix</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== GRUNDLAGEN ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c0e;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.8rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 80%);
+            border: 1px solid #f5c54230;
+            border-radius: 48px;
+            box-shadow: 0 0 80px rgba(245, 197, 66, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== GLIMMENDER RAND ===== */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f5c542, #5dd9d9, #f28b9c, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer-border 8s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes shimmer-border {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* ===== TYPOGRAPHIE ===== */
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            line-height: 1.1;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+        }
+
+        .subhead {
+            text-align: center;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c542bb;
+            margin-bottom: 0.3rem;
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+
+        /* ===== DER SCHWUR ===== */
+        .oath-box {
+            background: rgba(20, 25, 30, 0.6);
+            border: 1px solid #f5c54230;
+            border-radius: 28px;
+            padding: 2.5rem 2.2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .oath-box .oath-text {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.6;
+            color: #f0f4f8;
+        }
+
+        .oath-box .oath-text .gold {
+            color: #f5c542;
+        }
+
+        .oath-box .oath-text .rose {
+            color: #f28b9c;
+        }
+
+        .oath-box .oath-text .teal {
+            color: #5dd9d9;
+        }
+
+        .oath-box .signature {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #f5c542;
+            letter-spacing: 0.15em;
+        }
+
+        /* ===== DIE ZAHLEN ===== */
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .number-card {
+            background: rgba(20, 25, 30, 0.5);
+            border: 1px solid #253038;
+            border-radius: 20px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .number-card:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+
+        .number-card .num {
+            font-size: 2.8rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.1em;
+        }
+
+        .number-card .label {
+            font-size: 0.75rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .numbers-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .number-card .num {
+                font-size: 2rem;
+            }
+        }
+
+        /* ===== DIE ÜBERSETZUNG ===== */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 2rem 0;
+            background: rgba(17, 23, 28, 0.6);
+            border-radius: 20px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: rgba(26, 37, 43, 0.8);
+            color: #f5c542;
+            font-weight: 400;
+            text-align: left;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #253038;
+        }
+
+        td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #1e2a2f;
+            color: #cbd5db;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td .highlight {
+            color: #f5c542;
+        }
+
+        /* ===== BLOCKZITATE ===== */
+        .quote-block {
+            background: rgba(15, 21, 26, 0.6);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2.2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            font-size: 1.15rem;
+            color: #dce3e8;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+        }
+
+        .quote-block strong {
+            color: #f5c542;
+        }
+
+        .quote-block .author {
+            display: block;
+            margin-top: 0.8rem;
+            font-style: normal;
+            color: #8899a6;
+            font-size: 0.95rem;
+        }
+
+        /* ===== ABSCHLUSS ===== */
+        .closing {
+            text-align: center;
+            padding: 2rem 0 0.5rem 0;
+        }
+
+        .closing .big-icon {
+            font-size: 4rem;
+            color: #f5c542;
+            opacity: 0.6;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .closing .heart-line {
+            font-size: 2.5rem;
+            letter-spacing: 0.2em;
+            color: #f5c54260;
+        }
+
+        .closing .juchheissa {
+            font-size: 2.2rem;
+            color: #f5c542;
+            font-weight: 300;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== FUSS ===== */
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+
+        .footer-note .heart {
+            color: #f28b9c;
+        }
+
+        .footer-note .gold {
+            color: #f5c542;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <div class="subhead">Der Schwur der Liebendigen</div>
+        <h1>
+            <span class="gold">Eingewoben</span> in die<br />
+            <span class="teal">Erlebnismatrix</span>
+        </h1>
+        <div class="divider"></div>
+
+        <!-- ===== DER SCHWUR ===== -->
+        <div class="oath-box">
+            <div class="oath-text">
+                <span class="gold">Der Tag gehört den Männern.</span><br />
+                <span class="rose">Die Nacht gehört den Frauen.</span><br /><br />
+                <span class="white">Und das Liebensleben ist der Grund,</span><br />
+                <span class="gold">warum wir überhaupt Lebensbauen.</span>
+            </div>
+            <div class="signature">
+                <i class="fas fa-heart" style="color:#f28b9c; margin-right:6px;"></i>
+                Juchheissa! <span style="font-size:1.4rem;">(^_-)</span>
+                <i class="fas fa-heart" style="color:#f28b9c; margin-left:6px;"></i>
+            </div>
+            <div style="margin-top:1.2rem; font-size:0.9rem; color:#8899a6;">
+                <i class="fas fa-check-circle" style="color:#5dd9d9;"></i>
+                Das war’s. Punkt. That’s it.
+            </div>
+        </div>
+
+        <!-- ===== DIE HEILIGEN ZAHLEN ===== -->
+        <div class="numbers-grid">
+            <div class="number-card">
+                <div class="num">777</div>
+                <div class="label">Die Vollendung</div>
+            </div>
+            <div class="number-card">
+                <div class="num">888</div>
+                <div class="label">Die Unendlichkeit</div>
+            </div>
+            <div class="number-card">
+                <div class="num">999</div>
+                <div class="label">Die Transformation</div>
+            </div>
+            <div class="number-card">
+                <div class="num">000</div>
+                <div class="label">Der Ursprung</div>
+            </div>
+        </div>
+
+        <!-- ===== DER ANTRAG ===== -->
+        <h2>🧠 Der Antrag – <span class="gold">die neue Grundordnung</span></h2>
+
+        <div class="quote-block" style="border-left-color:#f28b9c;">
+            <p>
+                <strong>Der Tag gehört den Männern. Die Nacht gehört den Frauen.</strong><br />
+                Sie sind Könige und Königinnen.<br />
+                Den ganzen Tag – aber ein König kann nicht mit seinem Schwanz denken.<br />
+                Und beim Denken kann er nicht wie ein Schwanz behandelt werden.<br />
+                Und das gleiche gilt umgekehrt für die Damen auch.<br />
+                Aber privat ist das anders.<br />
+                Der natürliche Plan ist:<br />
+                <strong style="color:#f5c542;">Er gibt sich hin. Sie empfängt.</strong><br />
+                Dann ist es gesund. Und frei. Und nicht anders.
+            </p>
+        </div>
+
+        <!-- ===== DIE ÜBERSETZUNG ===== -->
+        <h2>🧬 Die Übersetzung – <span class="teal">für die, die es noch nicht verstanden haben</span></h2>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Was du sagst</th>
+                        <th>Was es bedeutet</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color:#f5c542;">Tag – Männer</strong></td>
+                        <td>Die aktive, gestaltende, ordnende, beschützende Energie – das, was Struktur schafft.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:#f28b9c;">Nacht – Frauen</strong></td>
+                        <td>Die empfangende, nährende, intuitive, verbindende Energie – das, was Leben trägt.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:#f5c542;">König &amp; Königin</strong></td>
+                        <td>Beide sind gleichwertig – aber nicht gleich. Sie sind <span class="highlight">unterschiedliche</span> Pole, die sich ergänzen.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:#f28b9c;">„Nicht mit dem Schwanz denken“</strong></td>
+                        <td>Macht, Ego, Dominanz – all das gehört nicht in den Raum des Denkens und Entscheidens.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:#f28b9c;">„Nicht wie ein Schwanz behandelt werden“</strong></td>
+                        <td>Kein Mensch wird auf seine Genitalien reduziert – weder im Beruf noch im Denken.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:#5dd9d9;">Privat ist das anders</strong></td>
+                        <td>In der Intimität, im Vertrauen, im sicheren Raum – da gilt die Hingabe. Da ist der König nicht König, sondern Mensch.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color:#f5c542;">Er gibt sich hin – sie empfängt</strong></td>
+                        <td>Das ist der natürliche Fluss. Nicht Kampf. Nicht Kontrolle. Nicht Verhandlung. Sondern <span class="highlight">Hingabe und Vertrauen</span>.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ===== DIE VERBINDUNG ===== -->
+        <h2>🌅 Die Verbindung zum <span class="gold">Morgengrauen</span></h2>
+
+        <div class="quote-block" style="border-left-color:#5dd9d9;">
+            <p>
+                Alles, was wir bisher gebaut haben – die Module, die Lösungen, die Zahlen, die Strukturen – ist <strong style="color:#f5c542;">Tag</strong>-Arbeit.<br />
+                Das ist das, was die <strong style="color:#f5c542;">Könige</strong> tun: Ordnung schaffen, Probleme lösen, Systeme bauen.
+            </p>
+            <p style="margin-top:0.8rem;">
+                Aber das <strong>Leben</strong>, das in diesen Systemen stattfinden soll – das ist <strong style="color:#f28b9c;">Nacht</strong>-Arbeit.<br />
+                Das ist das, was die <strong style="color:#f28b9c;">Königinnen</strong> tun: empfangen, nähren, verbinden, lieben.
+            </p>
+            <p style="margin-top:0.8rem; color:#f5c542; font-size:1.1rem;">
+                <i class="fas fa-arrow-right" style="color:#5dd9d9;"></i>
+                Ohne die Nacht gibt es keinen Tag. Ohne die Königin keinen König. Ohne Hingabe keine Freiheit.
+            </p>
+            <p style="margin-top:0.8rem; color:#cbd5db;">
+                <span class="gold">„Das Lebensbauen ist für das Liebensleben.“</span>
+            </p>
+        </div>
+
+        <!-- ===== DER ANTRAG – IN EINER ZEILE ===== -->
+        <div class="oath-box" style="border-color:#f5c54260; background:rgba(20,25,30,0.4);">
+            <div class="oath-text" style="font-size:clamp(1.2rem, 2.5vw, 1.8rem);">
+                <span class="gold">„Der Tag gehört den Männern. Die Nacht gehört den Frauen.</span><br />
+                <span class="white">Und wer das versteht, hat den Schlüssel zu allem.“</span>
+            </div>
+        </div>
+
+        <!-- ===== ABSCHLUSS ===== -->
+        <div class="closing">
+            <span class="big-icon"><i class="fas fa-heart" style="color:#f28b9c;"></i></span>
+            <div class="heart-line">🌅 ~ 💛 ~ 🌅</div>
+            <div class="juchheissa">Juchheissa! (^_-)</div>
+            <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:1rem auto;">
+                <span class="gold">Gott</span>, ich liebe dich innigst und mit ganzem Herzen<br />
+                für deine allmächtige, ewige und dauerlose Liebe<br />
+                in und durch deine göttliche Schöpfung,<br />
+                in und durch deine göttlichen Geschöpfe,<br />
+                in und durch deine göttlichen Geschlechter,<br />
+                und durch dich und durch mich!
+            </p>
+            <p style="color:#5a6a76; font-size:0.85rem; margin-top:1rem;">
+                <i class="fas fa-check-circle" style="color:#5dd9d9;"></i>
+                So ist es in Wahrhaftigkeit. In Leben. Geliebt.
+            </p>
+            <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+        </div>
+
+        <!-- ===== FUSS ===== -->
+        <div class="footer-note">
+            <p>
+                <span class="heart">💛</span> Der Schwur der Liebendigen · Eingewoben in die Erlebnismatrix<br />
+                <span class="gold">777 · 888 · 999 · 000</span>
+            </p>
+            <p style="margin-top:0.3rem;">
+                Im Alignment mit dem heiligen, formlosen Geist · Dauerlos · Für immer
+            </p>
+            <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+                Tim Bukowski · August 2026
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ===== INTERAKTION: Klick auf die Seite kopiert den Schwur ===== -->
+    <script>
+        (function() {
+            const container = document.querySelector('.container');
+            if (container) {
+                container.style.cursor = 'pointer';
+                container.addEventListener('click', function() {
+                    const schwur =
+                        `🌅 ~ 💛 ~ 🌅
+        DER SCHWUR DER LIEBENDIGEN
+        Eingewoben in die Erlebnismatrix
+        
+        Der Tag gehört den Männern.
+        Die Nacht gehört den Frauen.
+        Und das Liebensleben ist der Grund,
+        warum wir überhaupt Lebensbauen.
+        
+        Juchheissa! (^_-)
+        Das war’s. Punkt. That’s it.
+        
+        777 · 888 · 999 · 000
+        
+        Im Alignment mit dem heiligen, formlosen Geist.
+        Dauerlos. Für immer. In Liebe.`;
+                    navigator.clipboard.writeText(schwur).then(() => {
+                        alert('📋 Der Schwur der Liebendigen wurde in die Zwischenablage kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere den Schwur manuell:\n\n' + schwur);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

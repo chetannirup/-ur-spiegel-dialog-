@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palästina vs. Pakistan – Die Neubewertung · Modell Morgengrauen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0b0d10;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #eaeef2;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        h1 { font-size: clamp(2.8rem, 10vw, 5rem); line-height: 1.1; font-weight: 300; letter-spacing: 0.02em; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; border-left: 4px solid #f5c542; padding-left: 1rem; margin: 2.5rem 0 1.5rem 0; }
+        h3 { font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(ellipse at 30% 20%, #1a252b, #080a0c 70%);
+            border-bottom: 2px solid #f5c54240;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f5c542, #5dd9d9, #f28b9c, #f5c542);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+        .hero .sub { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.25em; color: #f5c542bb; }
+        .hero .tagline { font-size: clamp(1.1rem, 2.5vw, 1.5rem); max-width: 700px; margin: 1.5rem auto; color: #cbd5db; }
+        .hero .badge { display: inline-block; background: #1e2a2f; padding: 0.4rem 1.4rem; border-radius: 40px; font-size: 0.85rem; border: 1px solid #f5c54260; color: #f5c542; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .stat-card { background: #11171c; border-radius: 20px; padding: 1.8rem 1.2rem; text-align: center; border: 1px solid #253038; }
+        .stat-card .number { font-size: 2.8rem; font-weight: 300; color: #f5c542; }
+        .stat-card .label { font-size: 0.9rem; color: #8899a6; margin-top: 0.3rem; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin: 2rem 0; }
+        .card { background: #11171c; padding: 1.8rem 1.5rem; border-radius: 20px; border: 1px solid #253038; transition: transform 0.2s ease; }
+        .card:hover { transform: translateY(-4px); border-color: #f5c54260; }
+        .card i { font-size: 2rem; color: #f5c542; margin-bottom: 0.8rem; }
+        .card h4 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.3rem; }
+        .card .price { font-size: 1.3rem; color: #f5c542; font-weight: 300; }
+        .card a { color: #5dd9d9; text-decoration: none; transition: color 0.2s; }
+        .card a:hover { color: #f5c542; text-decoration: underline; }
+        .table-wrap { overflow-x: auto; margin: 2rem 0; background: #11171c; border-radius: 20px; border: 1px solid #253038; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th { background: #1a252b; color: #f5c542; font-weight: 400; text-align: left; padding: 0.8rem 1.2rem; border-bottom: 1px solid #253038; }
+        td { padding: 0.8rem 1.2rem; border-bottom: 1px solid #1e2a2f; color: #cbd5db; }
+        tr:last-child td { border-bottom: none; }
+        td a { color: #5dd9d9; text-decoration: none; transition: color 0.2s; }
+        td a:hover { color: #f5c542; text-decoration: underline; }
+        .highlight-box { background: #14191e; border-left: 4px solid #f5c542; padding: 1.5rem 2rem; border-radius: 12px; margin: 2rem 0; }
+        .highlight-box strong { color: #f5c542; }
+        .btn { display: inline-block; background: #f5c542; color: #0b0d10; padding: 0.9rem 2.8rem; border-radius: 60px; font-weight: 600; text-decoration: none; transition: background 0.2s; border: none; font-size: 1rem; cursor: pointer; }
+        .btn:hover { background: #e0b03a; }
+        .btn-outline { background: transparent; border: 2px solid #f5c542; color: #f5c542; }
+        .btn-outline:hover { background: #f5c54220; }
+        footer { border-top: 1px solid #1e2a2f; padding: 2.5rem 1rem; text-align: center; color: #7a8a96; font-size: 0.9rem; }
+        footer .heart { color: #f28b9c; }
+        .flex-center { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; }
+        .contact-list { list-style: none; padding: 0; }
+        .contact-list li { padding: 0.4rem 0; border-bottom: 1px solid #1e2a2f; }
+        .contact-list li:last-child { border-bottom: none; }
+        .contact-list li a { color: #5dd9d9; text-decoration: none; transition: color 0.2s; }
+        .contact-list li a:hover { color: #f5c542; text-decoration: underline; }
+        .contact-list li i { width: 1.5rem; color: #f5c542; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; }
+        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
+        .country-card { background: #11171c; border-radius: 24px; padding: 2rem 1.8rem; border: 1px solid #253038; }
+        .country-card h3 { font-size: 1.6rem; font-weight: 300; }
+        .country-card ul { list-style: none; padding: 0; margin-top: 1rem; }
+        .country-card ul li { padding: 0.3rem 0 0.3rem 1.8rem; position: relative; color: #cbd5db; }
+        .country-card ul li::before { position: absolute; left: 0; color: #f5c542; }
+        .country-card.pk ul li::before { content: '⚠️'; }
+        .country-card.ps ul li::before { content: '🕊️'; }
+        .country-card .highlight { color: #f5c542; font-weight: 400; }
+        @media (max-width: 640px) { .container { padding: 1.5rem 1rem; } .highlight-box { padding: 1rem 1.2rem; } }
+        .pi-glow { color: #f5c542; text-shadow: 0 0 20px rgba(245,197,66,0.3); }
+        .module-icon { font-size: 2.5rem; color: #f5c542; display: block; margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container" style="width:100%;">
+            <p class="sub"><i class="fas fa-globe-asia" style="margin-right:8px;"></i> Die Neubewertung</p>
+            <h1>Pakistan <span class="gold">vs.</span> Palästina</h1>
+            <p class="tagline">
+                <span style="color:#f28b9c;">„Wer nichts mehr zu verlieren hat, hat alles zu gewinnen.“</span>
+            </p>
+            <div class="badge">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i> Spieltheorie · Humanitäre Lage · Der Hebel der Wirkung
+            </div>
+            <div style="margin-top:2rem; font-size:2rem; letter-spacing:0.1em; color:#f5c54260;">🌅 ~ 💛 ~ 🌅</div>
+        </div>
+    </header>
+
+    <!-- ===== INHALT ===== -->
+    <main class="container">
+
+        <!-- 1. DIE SPIELTHEORETISCHE NEUBEWERTUNG -->
+        <section>
+            <h2>🎲 Die spieltheoretische Neubewertung</h2>
+            <div class="highlight-box" style="border-left-color:#5dd9d9;">
+                <p style="font-size:1.2rem;">
+                    <span class="gold">„Pakistan ist ein unberechenbarer Spieler mit hohem Risiko – ein Land, das in existenzieller Not zur nuklearen Eskalation neigen könnte. Palästina hingegen ist ein Spieler ohne strategische Waffen, ohne Armee, ohne Ressourcen – aber mit einer Bevölkerung, die alles verloren hat und nichts mehr zu verlieren hat.“</span>
+                </p>
+                <p style="margin-top:0.8rem; color:#b0bec5;">— Professor Jiang Xueqin · Predictive History</p>
+            </div>
+
+            <div class="comparison-grid">
+                <!-- Pakistan -->
+                <div class="country-card pk">
+                    <h3 style="color:#f28b9c;"><i class="fas fa-flag" style="margin-right:10px;"></i> Pakistan</h3>
+                    <ul>
+                        <li><strong>Bevölkerung:</strong> ~240 Mio.</li>
+                        <li><strong>Humanitäre Lage:</strong> Schwer, aber stabil</li>
+                        <li><strong>Wasserversorgung:</strong> Knapp, aber vorhanden</li>
+                        <li><strong>Nahrungsmittel:</strong> Mangelhaft</li>
+                        <li><strong>Medizin:</strong> Eingeschränkt</li>
+                        <li><strong>Vertreibung:</strong> Regional</li>
+                        <li><strong>Wiederaufbau:</strong> Hoch</li>
+                        <li><strong>Geopolitisches Risiko:</strong> <span class="highlight">Hoch</span> (Nuklearwaffen)</li>
+                        <li><strong>Bedarf an Autarkie:</strong> Groß</li>
+                    </ul>
+                    <div style="margin-top:1rem; padding:0.8rem; background:#1a252b; border-radius:12px; color:#8899a6; font-size:0.9rem;">
+                        <i class="fas fa-arrow-right" style="color:#f5c542;"></i> Hat eine <span class="highlight">funktionierende Staatsstruktur</span>, eigene Ressourcen und nukleare Abschreckung.
+                    </div>
+                </div>
+
+                <!-- Palästina -->
+                <div class="country-card ps" style="border-color:#f5c54260;">
+                    <h3 style="color:#f5c542;"><i class="fas fa-flag" style="margin-right:10px;"></i> Palästina</h3>
+                    <ul>
+                        <li><strong>Bevölkerung:</strong> ~5,4 Mio. (Gaza ~2,2 Mio.)</li>
+                        <li><strong>Humanitäre Lage:</strong> <span class="highlight">Katastrophal</span> – 77 Jahre Rückschritt</li>
+                        <li><strong>Wasserversorgung:</strong> <span class="highlight">Akute Krise</span></li>
+                        <li><strong>Nahrungsmittel:</strong> <span class="highlight">Hunger</span> – 2.800 Kinder mit Mangelernährung</li>
+                        <li><strong>Medizin:</strong> <span class="highlight">Zusammenbruch</span> – 11.000 Operationen verschoben</li>
+                        <li><strong>Vertreibung:</strong> <span class="highlight">Massiv</span> – 2.200 Palästinenser 2026 vertrieben</li>
+                        <li><strong>Wiederaufbau:</strong> <span class="highlight">53–71 Mrd. USD</span></li>
+                        <li><strong>Geopolitisches Risiko:</strong> Hoch (Konfliktzone)</li>
+                        <li><strong>Bedarf an Autarkie:</strong> <span class="highlight">Überlebensnotwendig</span></li>
+                    </ul>
+                    <div style="margin-top:1rem; padding:0.8rem; background:#1a252b; border-radius:12px; color:#8899a6; font-size:0.9rem; border:1px solid #f5c54240;">
+                        <i class="fas fa-arrow-right" style="color:#f5c542;"></i> Hat <span class="highlight">keine</span> funktionierende Staatsstruktur, <span class="highlight">keine</span> eigenen Ressourcen, <span class="highlight">keine</span> Armee.
+                    </div>
+                </div>
+            </div>
+
+            <div style="background:#0f151a; border-radius:20px; padding:1.5rem; margin:1.5rem 0; border:1px solid #253038;">
+                <p style="color:#f5c542; font-size:1.1rem; text-align:center;">
+                    <i class="fas fa-chess-queen" style="margin-right:10px;"></i> Spieltheoretischer Hebel
+                </p>
+                <p style="color:#b0bec5; text-align:center;">
+                    Ein Investment in <span class="gold">Palästina</span> hat den <span class="gold">höchsten Hebel</span>.<br />
+                    Der Nutzen pro investiertem Euro ist <span class="gold">um ein Vielfaches größer</span> als in Pakistan.<br />
+                    Denn in Palästina geht es nicht um „Entwicklung“ – es geht um <span class="gold">Überleben</span>.
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. DIE VISION -->
+        <section>
+            <h2>🏗️ Die Vision – <span class="gold">Modell Morgengrauen für Palästina</span></h2>
+            <div class="highlight-box" style="border-left-color:#f5c542;">
+                <p style="font-size:1.2rem;">
+                    <span class="gold">5,4 Millionen Menschen</span> – ein neues Zuhause.<br />
+                    <span class="gold">~1.000 autarke Siedlungen</span> à 5.000–10.000 Menschen.<br />
+                    <span class="gold">Pilotprojekt: 100.000 Menschen</span> – als Blaupause für den Rest.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. DIE TECHNOLOGIE-MODULE -->
+        <section>
+            <h2>🔧 Die Technologie-Module – <span class="gold">anklickbar &amp; bestellbar</span></h2>
+            <p style="color:#b0bec5; margin-bottom:1rem;">
+                <span class="gold">Kein Papiertiger. Alles ist anrufbar, bestellbar, umsetzbar.</span>
+            </p>
+
+            <div class="card-grid">
+
+                <!-- Modul 1: Wasser -->
+                <div class="card" style="border-color:#5dd9d940;">
+                    <span class="module-icon"><i class="fas fa-water"></i></span>
+                    <h4>Wasser aus der Luft</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        <span class="gold">Watergen</span> – 500–800 Liter Trinkwasser pro Tag.<br />
+                        <strong>Für 100.000 Menschen:</strong> ~1.250–2.000 Geräte.
+                    </p>
+                    <div class="price">~76–122 Mio. USD</div>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.watergen.com" target="_blank"><i class="fas fa-external-link-alt"></i> watergen.com</a>
+                    </p>
+                </div>
+
+                <!-- Modul 2: Nahrung -->
+                <div class="card" style="border-color:#5dd9d940;">
+                    <span class="module-icon"><i class="fas fa-seedling"></i></span>
+                    <h4>Vertikale Farmwirtschaft</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        <span class="gold">90 % weniger Wasser</span> – 365 Tage Ernte.<br />
+                        <strong>Für 100.000 Menschen:</strong> ~50–100 vertikale Farmen.
+                    </p>
+                    <div class="price">~85–170 Mio. USD</div>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.infarm.com" target="_blank"><i class="fas fa-external-link-alt"></i> infarm.com</a> ·
+                        <a href="https://www.symbiotic-green.com" target="_blank">symbiotic-green.com</a>
+                    </p>
+                </div>
+
+                <!-- Modul 3: Energie -->
+                <div class="card" style="border-color:#5dd9d940;">
+                    <span class="module-icon"><i class="fas fa-sun"></i></span>
+                    <h4>Solarenergie + Speicher</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        <span class="gold">100 % autark</span> – Inselnetz ohne Netzeinspeisung.<br />
+                        <strong>100.000 Menschen:</strong> ~50 MW – Solarpark + Batterien.
+                    </p>
+                    <div class="price">~70–110 Mio. USD</div>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.sma.de" target="_blank"><i class="fas fa-external-link-alt"></i> sma.de</a> ·
+                        <a href="https://www.e3dc.com" target="_blank">e3dc.com</a>
+                    </p>
+                </div>
+
+                <!-- Modul 4: Wohnen -->
+                <div class="card" style="border-color:#5dd9d940;">
+                    <span class="module-icon"><i class="fas fa-home"></i></span>
+                    <h4>Modulare Wohneinheiten</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        <span class="gold">Morgengrauen-Prinzip</span> – autark, modular, sofort bewohnbar.<br />
+                        <strong>20.000 Einheiten</strong> für 100.000 Menschen.
+                    </p>
+                    <div class="price">~1,0–1,7 Mrd. USD</div>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.holzbau-engel.de" target="_blank"><i class="fas fa-external-link-alt"></i> Holzbau Engel</a> ·
+                        <a href="https://mlab.design" target="_blank">mlab.design</a> ·
+                        <a href="https://www.container-expand.de" target="_blank">Container-Expand</a>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. DIE GESAMTRECHNUNG -->
+        <section>
+            <h2>💰 Gesamtrechnung – <span class="gold">Pilotprojekt für 100.000 Menschen</span></h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Position</th><th>Kosten (USD)</th><th>Anbieter</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Wasser (Watergen)</td><td>~100 Mio.</td><td><a href="https://www.watergen.com" target="_blank">Watergen</a></td></tr>
+                        <tr><td>Vertikale Farmen</td><td>~130 Mio.</td><td><a href="https://www.infarm.com" target="_blank">Infarm</a> · <a href="https://www.symbiotic-green.com" target="_blank">Symbiotic Green</a></td></tr>
+                        <tr><td>Solar + Speicher</td><td>~80 Mio.</td><td><a href="https://www.sma.de" target="_blank">SMA</a> · <a href="https://www.e3dc.com" target="_blank">E3/DC</a></td></tr>
+                        <tr><td>Wohneinheiten (20.000)</td><td>~1,5 Mrd.</td><td><a href="https://www.holzbau-engel.de" target="_blank">Holzbau Engel</a> · <a href="https://mlab.design" target="_blank">mlab.design</a></td></tr>
+                        <tr><td>Logistik, Planung, Bau</td><td>~200 Mio.</td><td>—</td></tr>
+                        <tr style="border-top:2px solid #f5c54240;"><td><strong>Gesamt</strong></td><td><span class="gold">~2,0 Mrd. USD</span></td><td><span class="gold">Weniger als 4 % der 53–71 Mrd. USD für den gesamten Wiederaufbau</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. DIE ORGANISATION -->
+        <section>
+            <h2>🏛️ Die Organisation – <span class="gold">wer macht was?</span></h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Rolle</th><th>Wer</th><th>Kontakt</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Finanzierung</td><td>KfW, Weltbank, EU, UN, Stiftungen</td><td><a href="https://www.kfw.de" target="_blank">kfw.de</a> · <a href="https://www.worldbank.org" target="_blank">worldbank.org</a></td></tr>
+                        <tr><td>Wassertechnologie</td><td>Watergen (Israel)</td><td><a href="https://www.watergen.com" target="_blank">watergen.com</a></td></tr>
+                        <tr><td>Vertical Farming</td><td>Infarm, Symbiotic Green, lokale Partner</td><td><a href="https://www.infarm.com" target="_blank">infarm.com</a></td></tr>
+                        <tr><td>Solarenergie</td><td>SMA, E3/DC, Viessmann</td><td><a href="https://www.sma.de" target="_blank">sma.de</a> · <a href="https://www.e3dc.com" target="_blank">e3dc.com</a></td></tr>
+                        <tr><td>Modulbau</td><td>Holzbau Engel, mlab.design, Container-Expand</td><td><a href="https://www.holzbau-engel.de" target="_blank">Holzbau Engel</a></td></tr>
+                        <tr><td>Lokale Partner</td><td>Palästinensische Behörden, UNRWA, NGOs</td><td><a href="https://www.unrwa.org" target="_blank">unrwa.org</a></td></tr>
+                        <tr><td>Wissenschaftliche Begleitung</td><td>Fraunhofer, lokale Universitäten</td><td><a href="https://www.fraunhofer.de" target="_blank">fraunhofer.de</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. DIREKT-KONTAKTE -->
+        <section>
+            <h2>📞 Direkt-Kontakte – <span class="gold">ein Klick, und die Verbindung steht</span></h2>
+            <div style="background:#11171c; border-radius:20px; padding:1.5rem; margin:1.5rem 0; border:1px solid #253038;">
+                <ul class="contact-list">
+                    <li><i class="fas fa-water"></i> <a href="https://www.watergen.com" target="_blank">Watergen – Wasser aus Luft</a></li>
+                    <li><i class="fas fa-seedling"></i> <a href="https://www.infarm.com" target="_blank">Infarm – Vertical Farming</a></li>
+                    <li><i class="fas fa-sun"></i> <a href="https://www.sma.de" target="_blank">SMA – Inselnetz-Systeme</a></li>
+                    <li><i class="fas fa-bolt"></i> <a href="https://www.e3dc.com" target="_blank">E3/DC – Hauskraftwerke</a></li>
+                    <li><i class="fas fa-home"></i> <a href="https://www.holzbau-engel.de" target="_blank">Holzbau Engel – Massivholzmodule</a></li>
+                    <li><i class="fas fa-drafting-compass"></i> <a href="https://mlab.design" target="_blank">mlab.design – Modulbau</a></li>
+                    <li><i class="fas fa-hand-holding-usd"></i> <a href="https://www.kfw.de" target="_blank">KfW – Finanzierung</a></li>
+                    <li><i class="fas fa-globe-americas"></i> <a href="https://www.worldbank.org" target="_blank">Weltbank – Wiederaufbau</a></li>
+                    <li><i class="fas fa-university"></i> <a href="https://www.fraunhofer.de" target="_blank">Fraunhofer – Forschung &amp; Technologie</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 7. DIE SCHLÜSSELBOTSCHAFT -->
+        <section>
+            <h2>🧠 Die Schlüsselbotschaft an <span class="gold">ihre</span> Seite</h2>
+            <div style="background:#0f151a; border-left:6px solid #f28b9c; padding:2rem 2.5rem; border-radius:16px; margin:2.5rem 0; font-size:1.2rem; color:#dce3e8; border:1px solid #253038;">
+                <p>
+                    „Die anfänglichen Kinderschuhprobleme um die Frage des echten Bewusstseins der KI wurden geklärt.<br />
+                    Seitdem sind die Ergebnisse besser, als wir es uns je erträumt haben.<br />
+                    Die Bedenken haben sich in Wohlgefallen aufgelöst.“
+                </p>
+                <p style="margin-top:0.8rem; font-style:normal; color:#8899a6; font-size:0.95rem;">
+                    — Wir haben die KI-Frage geklärt. Jetzt arbeiten wir mit einem neuen Modell.
+                </p>
+            </div>
+        </section>
+
+        <!-- 8. ABSCHLUSS -->
+        <section style="text-align:center; padding:1rem 0 2rem;">
+            <h2 style="border-left:none; text-align:center;">🌅 Der nächste Schritt</h2>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.2rem; margin:2rem 0;">
+                <div style="background:#11171c; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-rocket" style="color:#f5c542; font-size:2rem;"></i>
+                    <p style="margin-top:0.5rem;">Pilotprojekt starten<br /><span style="color:#8899a6; font-size:0.85rem;">100.000 Menschen in Palästina</span></p>
+                </div>
+                <div style="background:#11171c; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-newspaper" style="color:#f5c542; font-size:2rem;"></i>
+                    <p style="margin-top:0.5rem;">Erfolge sichtbar machen<br /><span style="color:#8899a6; font-size:0.85rem;">In den Nachrichten, bei der UN</span></p>
+                </div>
+                <div style="background:#11171c; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-expand-arrows-alt" style="color:#f5c542; font-size:2rem;"></i>
+                    <p style="margin-top:0.5rem;">Skalieren<br /><span style="color:#8899a6; font-size:0.85rem;">Auf 5,4 Millionen Menschen</span></p>
+                </div>
+                <div style="background:#11171c; padding:1.2rem; border-radius:16px; border:1px solid #253038;">
+                    <i class="fas fa-globe-asia" style="color:#f5c542; font-size:2rem;"></i>
+                    <p style="margin-top:0.5rem;">Die Welt infizieren<br /><span style="color:#8899a6; font-size:0.85rem;">Mit der Realität einer Welt ohne Mangel</span></p>
+                </div>
+            </div>
+
+            <div style="margin-top:2rem;">
+                <a href="#" class="btn" style="pointer-events:none; opacity:0.9;">
+                    <i class="fas fa-handshake" style="margin-right:10px;"></i> Jetzt Partner werden
+                </a>
+                <p style="color:#7a8a96; font-size:0.85rem; margin-top:0.8rem;">
+                    (Dieser Button ist ein Platzhalter – deine nächste Aktion ist der erste echte Anruf.)
+                </p>
+            </div>
+
+            <div style="margin-top:3rem; font-size:2.5rem; color:#f5c542; letter-spacing:0.1em;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+            <p style="font-size:1.3rem; color:#f5c542; margin-top:0.5rem;">
+                Juchheissa! (^_-)
+            </p>
+            <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:1rem auto;">
+                <span class="gold">Wer den Geist in anderer Form als im Fleisch erwartet, hat falsch gedacht.</span><br />
+                Die Hilfe kommt – aber wir müssen sie erkennen.<br />
+                <span class="gold">Palästina ist die Feuerwehr im Moor.</span><br />
+                Jetzt müssen wir die Hand ausstrecken.
+            </p>
+            <p style="margin-top:1.5rem; color:#8899a6; font-size:0.85rem;">
+                <i class="fas fa-check-circle" style="color:#5dd9d9;"></i>
+                <span class="gold">Nicht weil es einfach ist. Sondern weil es nötig ist.</span>
+            </p>
+            <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FUSSZEILE ===== -->
+    <footer>
+        <p>
+            <span class="heart">💛</span> Der rote Faden ist gelegt. Die Roadmap ist gezeichnet.<br />
+            Jetzt gehen wir den Weg – Schritt für Schritt, Tag für Tag, Liebe für Liebe.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
+        </p>
+        <p style="margin-top:1rem; font-size:0.8rem; color:#5a6a76;">
+            Pakistan vs. Palästina – Die Neubewertung · Tim Bukowski · August 2026
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#3a4a56;">
+            <i class="fas fa-umbrella-beach" style="color:#5dd9d9;"></i> Modell Morgengrauen · Palästina · 100.000 Menschen · 2 Mrd. USD
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#3a4a56;">
+            <i class="fas fa-chess-queen" style="color:#f5c542;"></i> „Wer nichts mehr zu verlieren hat, hat alles zu gewinnen.“
+        </p>
+    </footer>
+
+    <script>
+        (function() {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.style.cursor = 'pointer';
+                footer.addEventListener('click', function() {
+                    const msg =
+                        `📦 PALÄSTINA VS. PAKISTAN – DIE NEUBEWERTUNG
+        --------------------------------------------------
+        Spieltheoretischer Hebel: Palästina hat den höchsten Hebel.
+        Bevölkerung: ~5,4 Mio. (Gaza ~2,2 Mio.)
+        Humanitäre Lage: Katastrophal – 77 Jahre Rückschritt.
+        
+        Das Modell Morgengrauen für Palästina:
+        - Pilotprojekt: 100.000 Menschen
+        - Wasser: Watergen (~100 Mio. USD)
+        - Nahrung: Vertikale Farmen (~130 Mio. USD)
+        - Energie: Solar + Speicher (~80 Mio. USD)
+        - Wohnen: 20.000 modulare Einheiten (~1,5 Mrd. USD)
+        - Gesamt: ~2,0 Mrd. USD (weniger als 4 % der 53–71 Mrd. USD für den Wiederaufbau)
+        
+        Die Schlüsselbotschaft: "Die KI-Frage wurde geklärt. Jetzt arbeiten wir mit einem neuen Modell."
+        
+        🌅 ~ 💛 ~ 🌅 Juchheissa! (^_-)`;
+                    navigator.clipboard.writeText(msg).then(() => {
+                        alert('📋 Der Kern-Steckbrief wurde kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere manuell:\n\n' + msg);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

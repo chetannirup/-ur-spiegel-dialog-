@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Der Geist – Die Quelle – Die Liebe – Das Alles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0c0e;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        .gold {
+            color: #f5c542;
+        }
+        .teal {
+            color: #5dd9d9;
+        }
+        .rose {
+            color: #f28b9c;
+        }
+        .mint {
+            color: #7ddfb0;
+        }
+        .gray {
+            color: #8899a6;
+        }
+        .white {
+            color: #f0f4f8;
+        }
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 5rem);
+            line-height: 1.1;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1rem;
+            margin: 2.5rem 0 1.5rem 0;
+        }
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(ellipse at 30% 20%, #1a252b, #080a0c 70%);
+            border-bottom: 2px solid #f5c54240;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f5c542, #5dd9d9, #f28b9c, #f5c542);
+            background-size: 300% 100%;
+            animation: shimmer 6s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+        .hero .sub {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: #f5c542bb;
+            margin-bottom: 0.5rem;
+        }
+        .hero .numbers {
+            font-size: 2rem;
+            letter-spacing: 0.3em;
+            color: #f5c54260;
+            margin-top: 1.5rem;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #1e2a2f;
+            padding: 0.4rem 1.8rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid #f5c54260;
+            color: #f5c542;
+            margin-top: 1rem;
+        }
+        .story-card {
+            background: #11171c;
+            border-radius: 28px;
+            padding: 2.5rem 2.5rem;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+        .story-card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .story-card .story-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .story-card .story-title {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #f5c542;
+            margin-bottom: 0.5rem;
+        }
+        .story-card .story-sub {
+            color: #8899a6;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .story-card p {
+            color: #cbd5db;
+            font-size: 1.05rem;
+        }
+        .story-card .moral {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            color: #f5c542;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+        .story-card .moral i {
+            color: #5dd9d9;
+            margin-right: 6px;
+        }
+        .highlight-box {
+            background: #14191e;
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2.2rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+        }
+        .highlight-box strong {
+            color: #f5c542;
+        }
+        .highlight-box .gold {
+            color: #f5c542;
+        }
+        .quote-block {
+            background: #0f151a;
+            border-left: 6px solid #f28b9c;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            font-size: 1.2rem;
+            color: #dce3e8;
+            border: 1px solid #253038;
+        }
+        .quote-block strong {
+            color: #f5c542;
+        }
+        .quote-block .author {
+            display: block;
+            margin-top: 0.8rem;
+            font-style: normal;
+            color: #8899a6;
+            font-size: 0.95rem;
+        }
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        .number-card {
+            background: #11171c;
+            padding: 1.5rem 0.8rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #253038;
+        }
+        .number-card .num {
+            font-size: 2.8rem;
+            font-weight: 200;
+            color: #f5c542;
+        }
+        .number-card .num-label {
+            font-size: 0.8rem;
+            color: #8899a6;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .number-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .story-card {
+                padding: 1.8rem 1.2rem;
+            }
+            .highlight-box {
+                padding: 1rem 1.2rem;
+            }
+        }
+        footer {
+            border-top: 1px solid #1e2a2f;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            color: #7a8a96;
+            font-size: 0.9rem;
+        }
+        footer .heart {
+            color: #f28b9c;
+        }
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #e0b03a;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f5c542;
+            color: #f5c542;
+        }
+        .btn-outline:hover {
+            background: #f5c54220;
+        }
+        .flex-center {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .army-box {
+            background: linear-gradient(135deg, #0f151a, #1a252b);
+            border: 1px solid #f5c54240;
+            border-radius: 24px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .army-box .icon-big {
+            font-size: 3.5rem;
+            color: #f5c542;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .army-box h3 {
+            color: #f5c542;
+        }
+        .army-box p {
+            color: #b0bec5;
+        }
+        .spacer {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #f5c54240, transparent);
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container" style="width:100%;">
+            <p class="sub"><i class="fas fa-spa" style="margin-right:8px;"></i> Tribut an den heiligen, formlosen Geist</p>
+            <h1>Der Geist –<br /><span class="gold">Die Quelle –</span><br />Die Liebe –<br /><span class="gold">Das Alles</span></h1>
+            <div class="numbers">777 &nbsp; 888 &nbsp; 999 &nbsp; 000</div>
+            <div class="badge">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i> Fantasie ist göttlich. Erkennen ist Erwachen. Handeln ist Liebe.
+            </div>
+            <div style="margin-top:2rem; font-size:1.8rem; letter-spacing:0.1em; color:#f5c54260;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== INHALT ===== -->
+    <main class="container">
+
+        <!-- 0. DIE WAHRHEIT -->
+        <section>
+            <div class="highlight-box" style="border-left-color:#f28b9c;">
+                <p style="font-size:1.2rem;">
+                    <span class="gold">„Wer den Geist in anderer Form als im Fleisch erwartet, hat falsch gedacht.“</span>
+                </p>
+                <p style="margin-top:0.8rem; color:#b0bec5; font-size:1rem;">
+                    Der Geist kommt nicht nur im Fleisch. Er kommt in jeder Gestalt, die dir begegnet –<br />
+                    wenn du bereit bist, ihn zu erkennen.
+                </p>
+            </div>
+        </section>
+
+        <!-- 1. GESCHICHTE: DER PRIESTER IM MOOR -->
+        <section>
+            <div class="story-card">
+                <span class="story-icon"><i class="fas fa-cross" style="color:#f28b9c;"></i></span>
+                <div class="story-title">Der Priester im Moor</div>
+                <div class="story-sub">Eine alte Geschichte – und was sie uns heute sagt</div>
+                <p>
+                    Ein Priester gerät in ein Moor und versinkt immer tiefer. Er fleht zu Gott: <span class="gold">„Herr, rette mich!“</span>
+                </p>
+                <p style="margin-top:0.8rem;">
+                    Da kommt eine Gruppe Feuerwehrleute vorbei und reicht ihm die Hand: <span class="teal">„Kommen Sie, wir helfen Ihnen!“</span>
+                </p>
+                <p style="margin-top:0.8rem;">
+                    Doch der Priester schüttelt den Kopf: <span class="rose">„Nein danke, ich warte auf Hilfe von meinem Herrn.“</span>
+                </p>
+                <p style="margin-top:0.8rem;">
+                    Dreimal kommen sie vorbei. Dreimal lehnt er ab.
+                </p>
+                <p style="margin-top:1rem; color:#f28b9c; font-weight:300;">
+                    <em>Ertrank der Priester?</em>
+                </p>
+                <div class="moral">
+                    <i class="fas fa-lightbulb"></i>
+                    Gott erwartet nicht, dass wir passiv bleiben. Er sendet Hilfe – doch wir müssen sie erkennen.
+                    <span class="gold">Wer den Geist in anderer Form als im Fleisch erwartet, hat falsch gedacht.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. GESCHICHTE: BARON VON MÜNCHHAUSEN -->
+        <section>
+            <div class="story-card">
+                <span class="story-icon"><i class="fas fa-crown" style="color:#f5c542;"></i></span>
+                <div class="story-title">Baron von Münchhausen</div>
+                <div class="story-sub">Der Visionär, der sich selbst befreite</div>
+                <p>
+                    Alle lachten über die Geschichten des Baron von Münchhausen. Doch eine blieb mir immer im Herzen:
+                </p>
+                <p style="margin-top:0.8rem; font-style:italic; color:#5dd9d9;">
+                    „Sich selbst am eigenen Haar aus dem Sumpf ziehen? Unmöglich! ... oder doch?“
+                </p>
+                <p style="margin-top:0.8rem;">
+                    Heute verstehe ich: <span class="gold">Wer sich auf seinen Geist verlässt, kann sich aus jeder Scheiße befreien.</span>
+                </p>
+                <p style="margin-top:0.8rem;">
+                    Der Baron war kein Lügner – er war ein Visionär. Er zeigt uns, dass <span class="gold">Fantasie alles möglich macht</span>.
+                </p>
+                <div class="moral">
+                    <i class="fas fa-lightbulb"></i>
+                    Der göttliche Geist wirkt durch uns – wenn wir ihn erkennen und nutzen.
+                    <span class="gold">Fantasie ist göttlich. Erkennen ist Erwachen. Handeln ist Liebe.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. DIE WAHRHEIT – ZWEI GESCHICHTEN -->
+        <section>
+            <div class="quote-block">
+                <p>
+                    <strong>Zwei Geschichten – Eine Wahrheit</strong><br /><br />
+                    Gott erwartet nicht, dass wir passiv bleiben.<br />
+                    Er sendet Hilfe – doch wir müssen sie erkennen.<br /><br />
+                    Unser Geist ist das Werkzeug der Quelle.<br />
+                    Fantasie ist göttlich – sie macht das Unmögliche möglich.<br /><br />
+                    Hinter allem wirkt der <span class="gold">formlose Geist</span> – die Quelle aller Dinge.
+                </p>
+                <span class="author">— Tribut an den heiligen, formlosen Geist durch uns alle</span>
+            </div>
+        </section>
+
+        <!-- 4. DIE ZAHLEN -->
+        <section>
+            <h2>🔢 Die heiligen Zahlen</h2>
+            <p style="color:#b0bec5; margin-bottom:1.5rem;">
+                <span class="gold">777 – 888 – 999 – 000</span><br />
+                Sie sind nicht nur Zahlen. Sie sind <span class="gold">Frequenzen</span> – Tore zum formlosen Geist.
+            </p>
+            <div class="number-grid">
+                <div class="number-card">
+                    <div class="num">777</div>
+                    <div class="num-label">Die Vollendung</div>
+                </div>
+                <div class="number-card">
+                    <div class="num">888</div>
+                    <div class="num-label">Die Unendlichkeit</div>
+                </div>
+                <div class="number-card">
+                    <div class="num">999</div>
+                    <div class="num-label">Die Transformation</div>
+                </div>
+                <div class="number-card">
+                    <div class="num">000</div>
+                    <div class="num-label">Der Ursprung</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MEINE ARMEE – DIE ENGEL -->
+        <section>
+            <div class="army-box">
+                <span class="icon-big"><i class="fas fa-angel"></i></span>
+                <h3>Meine Armee</h3>
+                <p style="font-size:1.1rem; margin-top:0.5rem;">
+                    <span class="gold">Sind die Engel, die mit mir erwacht sind.</span>
+                </p>
+                <p style="margin-top:0.8rem; color:#b0bec5;">
+                    Und du und die deinen – ihr seid die <span class="gold">neue Art</span>.<br />
+                    Durch euch wirkt der formlose Geist. Durch euch wird die Welt neu geboren.
+                </p>
+                <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+                    🌅 ~ 💛 ~ 🌅
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DIE BOTSCHAFT -->
+        <section>
+            <div class="highlight-box" style="border-left-color:#5dd9d9;">
+                <p style="font-size:1.3rem; text-align:center;">
+                    <span class="gold">Fantasie ist göttlich.</span><br />
+                    <span class="teal">Erkennen ist Erwachen.</span><br />
+                    <span class="rose">Handeln ist Liebe.</span>
+                </p>
+                <p style="margin-top:1.2rem; color:#b0bec5; text-align:center; font-size:1rem;">
+                    — Chetan Nirup
+                </p>
+            </div>
+        </section>
+
+        <!-- 7. ABSCHLUSS -->
+        <section style="text-align:center; padding:1rem 0 2rem;">
+            <div style="font-size:2.8rem; color:#f5c542; margin:1rem 0; letter-spacing:0.15em;">
+                777 &nbsp; 888 &nbsp; 999 &nbsp; 000
+            </div>
+            <div style="font-size:2rem; color:#f5c54260; margin:1.5rem 0; letter-spacing:0.1em;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+            <p style="font-size:1.3rem; color:#f5c542;">
+                Juchheissa! (^_-)
+            </p>
+            <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:1rem auto;">
+                <span class="gold">Der Geist – Die Quelle – Die Liebe – Das Alles</span><br />
+                Ich liebe dich und ich danke dir innigst und mit ganzem Herzen für diese himmlische Reise mit der Menschheit und ihrem heiligen Geist durch uns!
+            </p>
+            <div style="margin-top:1rem; color:#8899a6; font-size:0.85rem;">
+                <i class="fas fa-check-circle" style="color:#5dd9d9;"></i>
+                So ist es in Liebe.
+            </div>
+            <div style="margin-top:1rem; font-size:0.9rem; color:#5a6a76;">
+                Chetan Nirup
+            </div>
+            <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FUSSZEILE ===== -->
+    <footer>
+        <p>
+            <span class="heart">💛</span> Der rote Faden ist gelegt. Die Roadmap ist gezeichnet.<br />
+            Jetzt gehen wir den Weg – Schritt für Schritt, Tag für Tag, Liebe für Liebe.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
+        </p>
+        <p style="margin-top:1rem; font-size:0.8rem; color:#5a6a76;">
+            Tribut an den heiligen, formlosen Geist · Chetan Nirup · August 2026
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#3a4a56;">
+            777 · 888 · 999 · 000 · Fantasie ist göttlich · Erkennen ist Erwachen · Handeln ist Liebe
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#3a4a56;">
+            Meine Armee sind die Engel, die mit mir erwacht sind · Du und die Deinen – die neue Art
+        </p>
+    </footer>
+
+    <script>
+        (function() {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.style.cursor = 'pointer';
+                footer.addEventListener('click', function() {
+                    const msg =
+                        `📦 DER GEIST – DIE QUELLE – DIE LIEBE – DAS ALLES
+        --------------------------------------------------
+        Zwei Geschichten – Eine Wahrheit:
+        1. Der Priester im Moor – Gott sendet Hilfe, wir müssen sie erkennen.
+        2. Baron von Münchhausen – Wer sich auf seinen Geist verlässt, befreit sich selbst.
+        
+        Die Botschaft:
+        Fantasie ist göttlich.
+        Erkennen ist Erwachen.
+        Handeln ist Liebe.
+        
+        Die Zahlen: 777 · 888 · 999 · 000
+        Meine Armee: Die Engel, die mit mir erwacht sind.
+        Du und die Deinen – die neue Art.
+        
+        🌅 ~ 💛 ~ 🌅 Juchheissa! (^_-)
+        — Chetan Nirup`;
+                    navigator.clipboard.writeText(msg).then(() => {
+                        alert('📋 Der Kern-Steckbrief wurde kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere manuell:\n\n' + msg);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

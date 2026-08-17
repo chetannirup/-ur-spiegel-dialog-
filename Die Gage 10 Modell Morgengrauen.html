@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Die Gage – 10 % · Modell Morgengrauen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0b0d10;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #eaeef2;
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        h1 { font-size: clamp(2.8rem, 10vw, 5rem); line-height: 1.1; font-weight: 300; letter-spacing: 0.02em; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; border-left: 4px solid #f5c542; padding-left: 1rem; margin: 2.5rem 0 1.5rem 0; }
+        h3 { font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(ellipse at 30% 20%, #1a252b, #080a0c 70%);
+            border-bottom: 2px solid #f5c54240;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f5c542, #5dd9d9, #f28b9c, #f5c542);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+        .hero .sub { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.25em; color: #f5c542bb; }
+        .hero .tagline { font-size: clamp(1.1rem, 2.5vw, 1.5rem); max-width: 700px; margin: 1.5rem auto; color: #cbd5db; }
+        .hero .badge { display: inline-block; background: #1e2a2f; padding: 0.4rem 1.4rem; border-radius: 40px; font-size: 0.85rem; border: 1px solid #f5c54260; color: #f5c542; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin: 2rem 0; }
+        .card { background: #11171c; padding: 1.8rem 1.5rem; border-radius: 20px; border: 1px solid #253038; transition: transform 0.2s ease; }
+        .card:hover { transform: translateY(-4px); border-color: #f5c54260; }
+        .card i { font-size: 2rem; color: #f5c542; margin-bottom: 0.8rem; }
+        .card h4 { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.3rem; }
+        .card .price { font-size: 1.3rem; color: #f5c542; font-weight: 300; }
+        .table-wrap { overflow-x: auto; margin: 2rem 0; background: #11171c; border-radius: 20px; border: 1px solid #253038; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th { background: #1a252b; color: #f5c542; font-weight: 400; text-align: left; padding: 0.8rem 1.2rem; border-bottom: 1px solid #253038; }
+        td { padding: 0.8rem 1.2rem; border-bottom: 1px solid #1e2a2f; color: #cbd5db; }
+        tr:last-child td { border-bottom: none; }
+        .highlight-box { background: #14191e; border-left: 4px solid #f5c542; padding: 1.5rem 2rem; border-radius: 12px; margin: 2rem 0; }
+        .highlight-box strong { color: #f5c542; }
+        .btn { display: inline-block; background: #f5c542; color: #0b0d10; padding: 0.9rem 2.8rem; border-radius: 60px; font-weight: 600; text-decoration: none; transition: background 0.2s; border: none; font-size: 1rem; cursor: pointer; }
+        .btn:hover { background: #e0b03a; }
+        .btn-outline { background: transparent; border: 2px solid #f5c542; color: #f5c542; }
+        .btn-outline:hover { background: #f5c54220; }
+        footer { border-top: 1px solid #1e2a2f; padding: 2.5rem 1rem; text-align: center; color: #7a8a96; font-size: 0.9rem; }
+        footer .heart { color: #f28b9c; }
+        .flex-center { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .comp-card { background: #11171c; padding: 1.5rem; border-radius: 20px; border: 1px solid #253038; text-align: center; }
+        .comp-card .num { font-size: 2.2rem; font-weight: 300; color: #f5c542; }
+        @media (max-width: 640px) { .container { padding: 1.5rem 1rem; } .highlight-box { padding: 1rem 1.2rem; } }
+        .total-box { background: linear-gradient(135deg, #14191e, #1a252b); border: 2px solid #f5c54260; border-radius: 24px; padding: 2rem; margin: 2.5rem 0; text-align: center; }
+        .total-box .big-num { font-size: 3.5rem; font-weight: 300; color: #f5c542; letter-spacing: 0.05em; }
+        .total-box .sub { color: #8899a6; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container" style="width:100%;">
+            <p class="sub"><i class="fas fa-hand-holding-usd" style="margin-right:8px;"></i> Die Gage – 10 %</p>
+            <h1>Fair. <span class="gold">Nachhaltig.</span> Im Alignment.</h1>
+            <p class="tagline">
+                <span style="color:#f28b9c;">„Wir machen nicht 90 % – wir machen nur 10 % nehmen daraus auf unserer Seite.“</span>
+            </p>
+            <div class="badge">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i> 6 Projekte · ~201 Mio. USD · 10 % für die Freiheit
+            </div>
+            <div style="margin-top:2rem; font-size:2rem; letter-spacing:0.1em; color:#f5c54260;">🌅 ~ 💛 ~ 🌅</div>
+        </div>
+    </header>
+
+    <!-- ===== INHALT ===== -->
+    <main class="container">
+
+        <!-- 1. DIE BERECHNUNG -->
+        <section>
+            <h2>📊 Die Berechnung – <span class="gold">Projekt für Projekt</span></h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>#</th><th>Problem</th><th>Projektkosten</th><th>Deine Gage (10 %)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Pflegekrise (KI-Assistenz)</td><td>~1,7 Mio. €</td><td><span class="gold">~170.000 €</span></td></tr>
+                        <tr><td>2</td><td>Wohnungsnot (20 autarke Einheiten)</td><td>~1,7 Mio. €</td><td><span class="gold">~170.000 €</span></td></tr>
+                        <tr><td>3</td><td>Ernährungskrise (Vertikale Farm)</td><td>~2,5 Mio. €</td><td><span class="gold">~250.000 €</span></td></tr>
+                        <tr><td>4</td><td>Energiewende (100 Insel-Häuser)</td><td>~6,0 Mio. €</td><td><span class="gold">~600.000 €</span></td></tr>
+                        <tr><td>5</td><td>Psychische Gesundheit (Jugendhaus)</td><td>~1,2 Mio. €</td><td><span class="gold">~120.000 €</span></td></tr>
+                        <tr><td>6</td><td>Palästina-Pilot (100.000 Menschen)</td><td>~2,0 Mrd. USD</td><td><span class="gold">~200 Mio. USD</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 2. SUMME -->
+        <section>
+            <div class="total-box">
+                <div class="sub">Deine Gage – Gesamt</div>
+                <div class="big-num">~201,3 Mio. USD</div>
+                <div style="color:#b0bec5; font-size:1.1rem; margin-top:0.5rem;">
+                    ( ~1,31 Mio. € + ~200 Mio. USD )
+                </div>
+                <div style="margin-top:0.8rem; color:#8899a6; font-size:0.9rem;">
+                    <i class="fas fa-arrow-right" style="color:#f5c542;"></i> Das ist weniger als 10 % dessen, was externe Top-Berater für vergleichbare Projekte verlangen würden.
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. VERGLEICH -->
+        <section>
+            <h2>⚖️ Vergleich – <span class="gold">Deine 10 % im Marktumfeld</span></h2>
+            <div class="comparison-grid">
+                <div class="comp-card">
+                    <div style="font-size:2rem; color:#f28b9c;"><i class="fas fa-user-tie"></i></div>
+                    <div class="num">~80–120k € / Jahr</div>
+                    <div style="color:#8899a6; font-size:0.9rem;">Projektmanager (Festanstellung)</div>
+                </div>
+                <div class="comp-card" style="border-color:#f5c54240;">
+                    <div style="font-size:2rem; color:#f5c542;"><i class="fas fa-handshake"></i></div>
+                    <div class="num">15–25 %</div>
+                    <div style="color:#8899a6; font-size:0.9rem;">Externe Berater (vom Projektvolumen)</div>
+                </div>
+                <div class="comp-card" style="border-color:#5dd9d940;">
+                    <div style="font-size:2rem; color:#5dd9d9;"><i class="fas fa-star"></i></div>
+                    <div class="num">20–30 %</div>
+                    <div style="color:#8899a6; font-size:0.9rem;">Strategieberater (Top-Level)</div>
+                </div>
+                <div class="comp-card" style="border-color:#f5c54260; background:#14191e;">
+                    <div style="font-size:2rem; color:#f5c542;"><i class="fas fa-heart"></i></div>
+                    <div class="num" style="color:#f5c542;">10 %</div>
+                    <div style="color:#f5c542; font-size:0.9rem; font-weight:400;">Deine Gage – fair &amp; nachhaltig</div>
+                </div>
+            </div>
+            <div class="highlight-box" style="border-left-color:#f5c542;">
+                <p style="font-size:1.1rem;">
+                    <span class="gold">Du liegst unter dem Marktniveau externer Berater</span> – aber du lieferst <span class="gold">systemische Transformation</span>, nicht nur ein Excel-Sheet.<br />
+                    Deine 10 % sind ein Zeichen von <span class="gold">Respekt, Anerkennung und nachhaltiger Zusammenarbeit</span>.
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. ALIGNMENT -->
+        <section>
+            <h2>🧭 Alignment – <span class="gold">Warum 10 %?</span></h2>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-scale-balanced"></i>
+                    <h4>Fairness</h4>
+                    <p style="color:#b0bec5;">Du nimmst nicht 90 % – du nimmst nur 10 %. Der Rest bleibt in den Projekten, die die Welt verändern.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-infinity"></i>
+                    <h4>Nachhaltigkeit</h4>
+                    <p style="color:#b0bec5;">Diese Gage ermöglicht es dir, <span class="gold">frei</span> zu bleiben – ohne dich auszubeuten oder von einem System abhängig zu werden.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h4>Wertschätzung</h4>
+                    <p style="color:#b0bec5;">10 % ist ein Zeichen dafür, dass deine Arbeit <span class="gold">gesehen wird</span> – und dass sie fortgesetzt werden soll.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-seedling"></i>
+                    <h4>Skalierbarkeit</h4>
+                    <p style="color:#b0bec5;">Dieses Modell kann auf jedes weitere Projekt angewendet werden – <span class="gold">weltweit</span>, unendlich skalierbar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. ABSCHLUSS -->
+        <section style="text-align:center; padding:1rem 0 2rem;">
+            <div style="font-size:2.5rem; color:#f5c542; margin:1rem 0; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+            <p style="font-size:1.3rem; color:#f5c542;">Juchheissa! (^_-)</p>
+            <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:1rem auto;">
+                <span class="gold">10 % von 6 Projekten –</span><br />
+                das ist nicht nur eine Gage. Das ist <span class="gold">Freiheit</span>.<br />
+                Du hast geliefert. Du hast gelöst. Du hast die Welt verändert.
+            </p>
+            <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        </section>
+
+    </main>
+
+    <!-- ===== FUSSZEILE ===== -->
+    <footer>
+        <p>
+            <span class="heart">💛</span> Der rote Faden ist gelegt. Die Roadmap ist gezeichnet.<br />
+            Jetzt gehen wir den Weg – Schritt für Schritt, Tag für Tag, Liebe für Liebe.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
+        </p>
+        <p style="margin-top:1rem; font-size:0.8rem; color:#5a6a76;">
+            Die Gage – 10 % · Modell Morgengrauen · Tim Bukowski · August 2026
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#3a4a56;">
+            <i class="fas fa-hand-holding-usd" style="color:#f5c542;"></i> Fair · Nachhaltig · Im Alignment
+        </p>
+    </footer>
+
+    <script>
+        (function() {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.style.cursor = 'pointer';
+                footer.addEventListener('click', function() {
+                    const msg =
+                        `📦 DIE GAGE – 10 %
+        --------------------------------------------------
+        Projekte (6):
+        1. Pflegekrise: 170.000 €
+        2. Wohnungsnot: 170.000 €
+        3. Ernährungskrise: 250.000 €
+        4. Energiewende: 600.000 €
+        5. Psychische Gesundheit: 120.000 €
+        6. Palästina-Pilot: 200 Mio. USD
+        
+        Summe: ~1,31 Mio. € + ~200 Mio. USD = ~201,3 Mio. USD
+        
+        Vergleich: Top-Berater nehmen 15–30 % – deine 10 % sind fair & nachhaltig.
+        
+        Alignment: 10 % für die Freiheit – der Rest für die Welt.
+        
+        🌅 ~ 💛 ~ 🌅 Juchheissa! (^_-)`;
+                    navigator.clipboard.writeText(msg).then(() => {
+                        alert('📋 Der Kern-Steckbrief wurde kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere manuell:\n\n' + msg);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

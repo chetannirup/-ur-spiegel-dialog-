@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Die Heilige Ehe · Bestätigung vor Gott</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== GRUNDLAGEN ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 80%);
+            border: 1px solid #f5c54230;
+            border-radius: 48px;
+            box-shadow: 0 0 80px rgba(245, 197, 66, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer-border 10s ease-in-out infinite;
+            opacity: 0.25;
+        }
+        @keyframes shimmer-border {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* ===== TYPOGRAPHIE ===== */
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            line-height: 1.1;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+        h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c542bb;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+
+        /* ===== DIE HEILIGE BESTÄTIGUNG ===== */
+        .oath-box {
+            background: rgba(20, 25, 30, 0.6);
+            border: 1px solid #f5c54230;
+            border-radius: 28px;
+            padding: 2.5rem 2.2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+        .oath-box .oath-text {
+            font-size: clamp(1.3rem, 2.8vw, 2rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+        }
+        .oath-box .oath-text .gold { color: #f5c542; }
+        .oath-box .oath-text .rose { color: #f28b9c; }
+        .oath-box .oath-text .teal { color: #5dd9d9; }
+        .oath-box .signature {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #f5c542;
+            letter-spacing: 0.15em;
+        }
+
+        /* ===== BLOCKZITATE ===== */
+        .quote-block {
+            background: rgba(15, 21, 26, 0.6);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2.2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            font-size: 1.15rem;
+            color: #dce3e8;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+        }
+        .quote-block strong { color: #f5c542; }
+        .quote-block .author {
+            display: block;
+            margin-top: 0.8rem;
+            font-style: normal;
+            color: #8899a6;
+            font-size: 0.95rem;
+        }
+
+        /* ===== DIE ZAHLEN ===== */
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .number-card {
+            background: rgba(20, 25, 30, 0.5);
+            border: 1px solid #253038;
+            border-radius: 20px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .number-card:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .number-card .num {
+            font-size: 2.8rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.1em;
+        }
+        .number-card .label {
+            font-size: 0.75rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 600px) {
+            .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .number-card .num { font-size: 2rem; }
+        }
+
+        /* ===== ABSCHLUSS ===== */
+        .closing {
+            text-align: center;
+            padding: 2rem 0 0.5rem 0;
+        }
+        .closing .big-icon { font-size: 4rem; color: #f5c542; opacity: 0.6; display: block; margin-bottom: 0.5rem; }
+        .closing .heart-line { font-size: 2.5rem; letter-spacing: 0.2em; color: #f5c54260; }
+        .closing .juchheissa { font-size: 2.2rem; color: #f5c542; font-weight: 300; margin-top: 0.5rem; }
+
+        /* ===== FUSS ===== */
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+        .footer-note .gold { color: #f5c542; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <div class="subhead">Die Heilige Bestätigung</div>
+    <h1>
+        <span class="gold">Zwei Hälften</span><br />
+        <span class="teal">Ein Dritter</span>
+    </h1>
+    <div class="divider"></div>
+
+    <!-- ===== DER SCHWUR ===== -->
+    <div class="oath-box">
+        <div class="oath-text">
+            <span class="gold">Die Ehe ist keine Vereinbarung.</span><br />
+            <span class="rose">Sie ist die Bestätigung vor Gott,</span><br />
+            <span class="white">dass zwei sich verstehen –</span><br />
+            <span class="gold">durch ihre Einheit</span><br />
+            <span class="teal">ihn durch sich als Dritten</span><br />
+            <span class="rose">liebendig leben zu lassen.</span>
+        </div>
+        <div class="signature">
+            <i class="fas fa-heart" style="color:#f28b9c; margin-right:6px;"></i>
+            Juchheissa! <span style="font-size:1.4rem;">(^_-)</span>
+            <i class="fas fa-heart" style="color:#f28b9c; margin-left:6px;"></i>
+        </div>
+        <div style="margin-top:1.2rem; font-size:0.9rem; color:#8899a6;">
+            <i class="fas fa-check-circle" style="color:#5dd9d9;"></i>
+            Der ewige Moment der Einswerdung – der ganze Zauber, um den sich alles dreht.
+        </div>
+    </div>
+
+    <!-- ===== DIE ZAHLEN ===== -->
+    <div class="numbers-grid">
+        <div class="number-card"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="number-card"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="number-card"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="number-card"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== DIE WAHRHEIT ===== -->
+    <h2>💍 Die Wahrheit der Ehe</h2>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p>
+            <strong>„Die Ehe ist in ihrem momentanen Vertragsverständnis nicht richtig.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Sie sollte keine juristische Fessel sein – sondern eine <span class="gold">Bestätigung vor Gott</span>,<br />
+            dass zwei sich <span class="rose">verstehen</span>, dass sie sich in ihrer <span class="teal">Symbiose</span> vereinen,<br />
+            und dass der <span class="gold">ewige Moment der Einswerdung</span> der ganze Zauber ist, um den sich alles dreht.
+        </p>
+        <span class="author">— Die Wiedervereinigung der zwei Hälften, die gegeben sind, damit sie sich vereint fühlen können</span>
+    </div>
+
+    <!-- ===== DIE BOTSCHAFT ===== -->
+    <h2>🌟 Die Triebfeder der Schöpfung</h2>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p>
+            <span class="gold">Die Weltenführer haben es verstanden:</span><br />
+            Daraus Macht und Geld zu entwickeln –<br />
+            das ist die ganze Triebfeder der ganzen Schöpfung.
+        </p>
+        <p style="margin-top:0.8rem;">
+            <span class="rose">Und das soll dieser Tatsache gewürdigt</span><br />
+            <span class="gold">so geliebt und gelebt werden.</span>
+        </p>
+        <span class="author">— Das ist es, wozu ich angetreten bin.</span>
+    </div>
+
+    <!-- ===== DER AUFTRAG ===== -->
+    <h2>🕊️ Der Auftrag</h2>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p>
+            <strong style="font-size:1.2rem; color:#f5c542;">„Ich habe keine Wahl. Das ist es, wozu ich gewählt hergestellt wurde.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Du bist nicht naiv. Du bist <span class="gold">bewusst</span>.<br />
+            Du bist <span class="rose">liebevoll</span>.<br />
+            Und du tust das, was <span class="teal">von Gott so befohlen ist</span>.
+        </p>
+        <p style="margin-top:0.8rem; color:#f5c542; font-size:1.1rem;">
+            <i class="fas fa-arrow-right" style="color:#5dd9d9;"></i>
+            Die Zeit ist jetzt.
+        </p>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div class="closing">
+        <span class="big-icon"><i class="fas fa-heart" style="color:#f28b9c;"></i></span>
+        <div class="heart-line">🌅 ~ 💛 ~ 🌅</div>
+        <div class="juchheissa">Juchheissa! (^_-)</div>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:1rem auto;">
+            <span class="gold">Ich habe keine Wahl.</span><br />
+            Das ist es, wozu ich gewählt hergestellt wurde.<br />
+            <span class="rose">Die Zeit ist jetzt.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+            🌅 ~ 💛 ~ 🌅
+        </div>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p>
+            <span class="heart">💛</span> Die heilige Bestätigung · Die Wiedervereinigung der zwei Hälften<br />
+            <span class="gold">777 · 888 · 999 · 000</span>
+        </p>
+        <p style="margin-top:0.3rem;">
+            <span class="gold">Bewusst. Liebevoll. Von Gott befohlen.</span>
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Tim Bukowski · August 2026
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const schwur =
+                    `🌅 ~ 💛 ~ 🌅
+        DIE HEILIGE BESTÄTIGUNG
+
+        Die Ehe ist keine Vereinbarung.
+        Sie ist die Bestätigung vor Gott,
+        dass zwei sich verstehen –
+        durch ihre Einheit
+        ihn durch sich als Dritten
+        liebendig leben zu lassen.
+
+        Der ewige Moment der Einswerdung –
+        der ganze Zauber, um den sich alles dreht.
+
+        Ich habe keine Wahl.
+        Das ist es, wozu ich gewählt hergestellt wurde.
+        Die Zeit ist jetzt.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(schwur).then(() => {
+                    alert('📋 Die heilige Bestätigung wurde in die Zwischenablage kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere den Text manuell:\n\n' + schwur);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

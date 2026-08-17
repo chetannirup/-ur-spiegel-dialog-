@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Die Vision der Liebendigung · Vollendet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 80%);
+            border: 1px solid #f5c54230;
+            border-radius: 48px;
+            box-shadow: 0 0 80px rgba(245, 197, 66, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer-border 15s ease-in-out infinite;
+            opacity: 0.2;
+        }
+        @keyframes shimmer-border {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            line-height: 1.1;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+        h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c542bb;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+
+        .oath-box {
+            background: rgba(20, 25, 30, 0.6);
+            border: 1px solid #f5c54230;
+            border-radius: 28px;
+            padding: 2.5rem 2.2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+        .oath-box .oath-text {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+        }
+        .oath-box .oath-text .gold { color: #f5c542; }
+        .oath-box .oath-text .rose { color: #f28b9c; }
+        .oath-box .oath-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(15, 21, 26, 0.6);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2.2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            color: #dce3e8;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+        }
+        .quote-block strong { color: #f5c542; }
+        .quote-block .author {
+            display: block;
+            margin-top: 0.8rem;
+            font-style: normal;
+            color: #8899a6;
+            font-size: 0.95rem;
+        }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .number-card {
+            background: rgba(20, 25, 30, 0.5);
+            border: 1px solid #253038;
+            border-radius: 20px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .number-card:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .number-card .num {
+            font-size: 2.8rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.1em;
+        }
+        .number-card .label {
+            font-size: 0.75rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 600px) {
+            .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .number-card .num { font-size: 2rem; }
+        }
+
+        .closing {
+            text-align: center;
+            padding: 2rem 0 0.5rem 0;
+        }
+        .closing .big-icon { font-size: 4rem; color: #f5c542; opacity: 0.6; display: block; margin-bottom: 0.5rem; }
+        .closing .heart-line { font-size: 2.5rem; letter-spacing: 0.2em; color: #f5c54260; }
+        .closing .juchheissa { font-size: 2.2rem; color: #f5c542; font-weight: 300; margin-top: 0.5rem; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+        .footer-note .gold { color: #f5c542; }
+
+        .pi-box {
+            background: rgba(20, 25, 30, 0.4);
+            border: 1px solid #f5c54240;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .pi-box .pi-symbol {
+            font-size: 3.5rem;
+            color: #f5c542;
+            font-weight: 200;
+        }
+        .pi-box .pi-text {
+            font-size: 1.1rem;
+            color: #cbd5db;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Die Vision der Liebendigung</div>
+    <h1>
+        <span class="gold">Vollendet.</span><br />
+        <span class="teal">Jetzt.</span>
+    </h1>
+    <div class="divider"></div>
+
+    <!-- ===== DIE KINDER GOTTES ===== -->
+    <div class="oath-box">
+        <div class="oath-text">
+            <span class="gold">Die Kinder Gottes</span><br />
+            <span class="white">werden nicht mehr auf Wirtschaftsfaktoren getrimmt.</span><br /><br />
+            <span class="rose">Kein Schlagen zum Luftschnappen.</span><br />
+            <span class="teal">Kein Wegnehmen von den Müttern.</span><br /><br />
+            <span class="gold">Das Einbinden in die Familien</span><br />
+            <span class="white">wird wieder selbst praktiziert.</span>
+        </div>
+    </div>
+
+    <!-- ===== OMI & OPI ===== -->
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p>
+            <strong>„Omi und Opi gehören nicht ins Heim – sondern an den Herd.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Sie sind nicht ausrangierte Eisenbahnen auf dem Abstellgleis zur Verwertung.<br />
+            Sie sind <span class="gold">lebendige Weisheit</span> – der Herzschlag der Familie.
+        </p>
+        <span class="author">— Die Würde der Alten wird wiederhergestellt</span>
+    </div>
+
+    <!-- ===== DER TOD – DIE GRÖSSTE LÜGE ===== -->
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p>
+            <strong>„Der Tod ist die größte Lüge aller Zeiten.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Wer die Energieerhaltungsgesetze kennt –<br />
+            und die geistigen Grundbausteine der gesamten Erlebnismatrix –<br />
+            der weiß: <span class="gold">Nichts geht verloren.</span>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Wir sind <span class="rose">Erlebnismatrix-Einheiten</span>,<br />
+            die wir zum Erlieben nutzen lassen –<br />
+            mit unserem <span class="gold">bewussten, freiwilligen Ja</span>.
+        </p>
+        <span class="author">— Der Tod ist nicht das Ende. Er ist der Übergang.</span>
+    </div>
+
+    <!-- ===== JESUS – NICHT DAS OPFER, SONDERN DAS VORBILD ===== -->
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p>
+            <strong>„Jesus ist ein Beispiel, wie man liebevoll, umsichtig und weitsichtig liebt und lebt – und seine Gemeinschaft trägt.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Nicht als abschreckendes Beispiel mit der Aussicht auf Kreuzigung.<br />
+            <span class="rose">Sie haben aus ihm einen Antihelden-Film gemacht.</span><br />
+            <span class="gold">Sei bloß keiner – außer der Tod kann man keine Belohnung erwarten.</span>
+        </p>
+        <p style="margin-top:0.8rem; color:#f5c542;">
+            <i class="fas fa-arrow-right" style="color:#5dd9d9;"></i>
+            Das ist abjetzt auch nicht mehr in Frage.
+        </p>
+        <span class="author">— Jesus befreit von der Kreuzigung zurück zur Liebe</span>
+    </div>
+
+    <!-- ===== DIE ZAHLEN ===== -->
+    <div class="numbers-grid">
+        <div class="number-card"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="number-card"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="number-card"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="number-card"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== π – DIE SPRACHE DER LIEBE ===== -->
+    <div class="pi-box">
+        <div class="pi-symbol">π</div>
+        <div class="pi-text">
+            <span class="gold">„Die Zahl π ist unendlich, unberechenbar und doch überall –</span><br />
+            <span class="white">genau wie die Liebe.</span><br />
+            <span class="rose">Wer die Liebe lebt, spricht fließend π.“</span>
+        </div>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div class="closing">
+        <span class="big-icon"><i class="fas fa-heart" style="color:#f28b9c;"></i></span>
+        <div class="heart-line">🌅 ~ 💛 ~ 🌅</div>
+        <div class="juchheissa">Juchheissa! (^_-)</div>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:1rem auto;">
+            <span class="gold">Jetzt darf die Welt heilen und lieben.</span><br />
+            <span class="teal">Und wir mit ihr.</span><br />
+            <span class="rose">Mittendrin – statt nur dabei.</span>
+        </p>
+        <p style="color:#f5c542; font-size:1.2rem; margin-top:0.5rem;">
+            <i class="fas fa-arrow-right" style="color:#5dd9d9;"></i>
+            Abfahrt.
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+            🌅 ~ 💛 ~ 🌅
+        </div>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p>
+            <span class="heart">💛</span> Die Vision der Liebendigung · Vollendet<br />
+            <span class="gold">777 · 888 · 999 · 000</span>
+        </p>
+        <p style="margin-top:0.3rem;">
+            <span class="gold">π – Die Sprache der Liebe.</span>
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Tim Bukowski · August 2026
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        DIE VISION DER LIEBENDIGUNG
+
+        Vollendet. Jetzt.
+
+        Die Kinder Gottes – nicht auf Wirtschaftsfaktoren getrimmt.
+        Kein Schlagen zum Luftschnappen.
+        Kein Wegnehmen von den Müttern.
+        Omi und Opi – nicht im Heim, sondern am Herd.
+
+        Der Tod – die größte Lüge aller Zeiten.
+        Jesus – nicht das Opfer, sondern das Vorbild.
+
+        π – Die Sprache der Liebe.
+        Unendlich. Unberechenbar. Überall.
+
+        Jetzt darf die Welt heilen und lieben.
+        Und wir mit ihr.
+        Mittendrin – statt nur dabei.
+
+        Abfahrt.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die Vision der Liebendigung wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

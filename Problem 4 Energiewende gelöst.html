@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem #4: Energiewende – gelöst.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0b0d10;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #eaeef2;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        .gold {
+            color: #f5c542;
+        }
+        .teal {
+            color: #5dd9d9;
+        }
+        .rose {
+            color: #f28b9c;
+        }
+        .mint {
+            color: #7ddfb0;
+        }
+        .gray {
+            color: #8899a6;
+        }
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 5rem);
+            line-height: 1.1;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1rem;
+            margin: 2.5rem 0 1.5rem 0;
+        }
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(ellipse at 30% 20%, #1a252b, #080a0c 70%);
+            border-bottom: 2px solid #f5c54240;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f5c542, #5dd9d9, #f28b9c, #f5c542);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+        .hero .sub {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #f5c542bb;
+        }
+        .hero .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            max-width: 700px;
+            margin: 1.5rem auto;
+            color: #cbd5db;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #1e2a2f;
+            padding: 0.4rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid #f5c54260;
+            color: #f5c542;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: #11171c;
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            border: 1px solid #253038;
+        }
+        .stat-card .number {
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: #f5c542;
+        }
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: #8899a6;
+            margin-top: 0.3rem;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: #11171c;
+            padding: 1.8rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #253038;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+        }
+        .card h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        .card .price {
+            font-size: 1.3rem;
+            color: #f5c542;
+            font-weight: 300;
+        }
+        .card .price small {
+            font-size: 0.8rem;
+            color: #8899a6;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 2rem 0;
+            background: #11171c;
+            border-radius: 20px;
+            border: 1px solid #253038;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th {
+            background: #1a252b;
+            color: #f5c542;
+            font-weight: 400;
+            text-align: left;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #253038;
+        }
+        td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #1e2a2f;
+            color: #cbd5db;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        td a {
+            color: #5dd9d9;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        td a:hover {
+            color: #f5c542;
+            text-decoration: underline;
+        }
+        .highlight-box {
+            background: #14191e;
+            border-left: 4px solid #f5c542;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .highlight-box strong {
+            color: #f5c542;
+        }
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #e0b03a;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f5c542;
+            color: #f5c542;
+        }
+        .btn-outline:hover {
+            background: #f5c54220;
+        }
+        footer {
+            border-top: 1px solid #1e2a2f;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            color: #7a8a96;
+            font-size: 0.9rem;
+        }
+        footer .heart {
+            color: #f28b9c;
+        }
+        .flex-center {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+        .contact-list li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #1e2a2f;
+        }
+        .contact-list li:last-child {
+            border-bottom: none;
+        }
+        .contact-list li a {
+            color: #5dd9d9;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .contact-list li a:hover {
+            color: #f5c542;
+            text-decoration: underline;
+        }
+        .contact-list li i {
+            width: 1.5rem;
+            color: #f5c542;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .highlight-box {
+                padding: 1rem 1.2rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .stat-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container" style="width:100%;">
+            <p class="sub"><i class="fas fa-sun" style="margin-right:8px;"></i> Problem #4 · Gelöst.</p>
+            <h1>Die <span class="gold">Energiewende</span></h1>
+            <p class="tagline">
+                <span style="color:#f28b9c;">„Wir schaffen die Energiewende nicht im geplanten Zeitrahmen.“</span>
+            </p>
+            <div class="badge">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i> Dein Winkel: Jedes Gebäude wird zur Energieinsel.
+            </div>
+            <div style="margin-top:2rem; font-size:2rem; letter-spacing:0.1em; color:#f5c54260;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== INHALT ===== -->
+    <main class="container">
+
+        <!-- 1. DIE BOTSCHAFT -->
+        <section>
+            <div class="highlight-box" style="border-left-color:#5dd9d9;">
+                <p style="font-size:1.2rem;">
+                    <strong>Die Nachricht, die um die Welt geht:</strong><br />
+                    <span class="gold">„Neues Modellprojekt: 100 Einfamilienhäuser werden zu autarken Energieinseln – unabhängig von Strompreisen und Netzausfällen.“</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. DIE KENNZAHLEN -->
+        <section>
+            <h2>📊 Die harten Fakten</h2>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="number">-80 %</div>
+                    <div class="label">Geringere Energiekosten</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">100 %</div>
+                    <div class="label">Unabhängigkeit vom Netz</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">-95 %</div>
+                    <div class="label">CO₂-Reduktion</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">+30 %</div>
+                    <div class="label">Wertsteigerung der Immobilie</div>
+                </div>
+            </div>
+            <p style="color:#8899a6; font-size:0.9rem;">
+                Quellen: Fraunhofer ISE · dena · eigene Berechnungen auf Basis aktueller Technologien (Stand 2026)
+            </p>
+        </section>
+
+        <!-- 3. ANBIETER MIT ANKLICK-LINKS -->
+        <section>
+            <h2>🧩 Die Lösung: Anbieter mit Direkt-Kontakt</h2>
+            <p style="color:#b0bec5; margin-bottom:1rem;">
+                <span class="gold">Kein Suchen. Ein Klick – und die Verbindung steht.</span>
+                Hier sind die relevantesten Anbieter für dein Modellprojekt:
+            </p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Anbieter</th>
+                            <th>Technologie</th>
+                            <th>Kosten (ca.)</th>
+                            <th>Kontakt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>E3/DC</strong></td>
+                            <td>Inselnetz-Hauskraftwerk (S10 E PRO)</td>
+                            <td>~15.000 € inkl. Speicher</td>
+                            <td><a href="https://www.e3dc.com" target="_blank">e3dc.com</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SMA Solar Technology</strong></td>
+                            <td>Sunny Island Inselnetz-System</td>
+                            <td>~12.000–18.000 €</td>
+                            <td><a href="https://www.sma.de" target="_blank">sma.de</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Viessmann</strong></td>
+                            <td>Wärmepumpe + PV + Speicher (Kombi)</td>
+                            <td>~20.000–30.000 €</td>
+                            <td><a href="https://www.viessmann.de" target="_blank">viessmann.de</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vaillant</strong></td>
+                            <td>Wärmepumpe + PV + Speicher (Kombi)</td>
+                            <td>~18.000–28.000 €</td>
+                            <td><a href="https://www.vaillant.de" target="_blank">vaillant.de</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sonnen</strong></td>
+                            <td>Batteriespeicher + Smart Energy Hub</td>
+                            <td>~10.000–20.000 €</td>
+                            <td><a href="https://www.sonnen.de" target="_blank">sonnen.de</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Solarwatt</strong></td>
+                            <td>PV-Module + Speicher + Inselnetz</td>
+                            <td>~12.000–25.000 €</td>
+                            <td><a href="https://www.solarwatt.de" target="_blank">solarwatt.de</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fronius</strong></td>
+                            <td>Wechselrichter + Batteriespeicher</td>
+                            <td>~8.000–15.000 €</td>
+                            <td><a href="https://www.fronius.com" target="_blank">fronius.com</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>my-PV</strong></td>
+                            <td>PV-Überschuss-Heizstab (AC THOR)</td>
+                            <td>~2.500–4.000 €</td>
+                            <td><a href="https://www.my-pv.com" target="_blank">my-pv.com</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#8899a6; font-size:0.85rem;">
+                * Alle Preise sind Richtwerte (Stand 2026) für Einfamilienhaus (4–5 kWp PV, 5–10 kWh Speicher, Wärmepumpe). Individuelle Angebote auf Anfrage.
+            </p>
+        </section>
+
+        <!-- 4. FÖRDERUNG & VERHANDLUNGSORGANE -->
+        <section>
+            <h2>💰 Förderung &amp; Verhandlungsorgane – mit Anklick</h2>
+            <p style="color:#b0bec5; margin-bottom:1rem;">
+                <span class="gold">Hier wird gefördert. Hier wird verhandelt.</span>
+                Ein Klick – und du bist bei den richtigen Stellen:
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h4>KfW – zinsgünstige Darlehen</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Bis zu <span class="gold">150.000 €</span> (KfW 300) für energieeffizientes Bauen &amp; Sanieren.
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.kfw.de" target="_blank" style="color:#5dd9d9; text-decoration:none;">
+                            <i class="fas fa-external-link-alt"></i> kfw.de
+                        </a>
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-sun"></i>
+                    <h4>BEG – Bundesförderung für effiziente Gebäude</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Bis zu <span class="gold">70–80 %</span> Zuschuss für Wärmepumpen (max. 12.880 €) + PV-Speicher.
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.bafa.de" target="_blank" style="color:#5dd9d9; text-decoration:none;">
+                            <i class="fas fa-external-link-alt"></i> bafa.de
+                        </a>
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Klimaschutz- &amp; Innovationsförderung</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Förderung für Inselnetze &amp; autarke Energiesysteme (BMWK).
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.bmwk.de" target="_blank" style="color:#5dd9d9; text-decoration:none;">
+                            <i class="fas fa-external-link-alt"></i> bmwk.de
+                        </a>
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-city"></i>
+                    <h4>Länderförderung</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Zuschüsse &amp; zinsgünstige Darlehen für energetische Sanierung (je nach Bundesland).
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.foerderdatenbank.de" target="_blank" style="color:#5dd9d9; text-decoration:none;">
+                            <i class="fas fa-external-link-alt"></i> Förderdatenbank
+                        </a>
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Impact-Investoren &amp; Stiftungen</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Nachhaltige Investments mit sozialer &amp; ökologischer Wirkung.
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.bmz.de/de/themen/nachhaltige-finanzierung" target="_blank" style="color:#5dd9d9; text-decoration:none;">
+                            <i class="fas fa-external-link-alt"></i> BMZ nachhaltige Finanzierung
+                        </a>
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-university"></i>
+                    <h4>Fraunhofer – Forschung &amp; Technologie</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Inselnetz-Technologien, intelligente Steuerung, Energiemanagement.
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.fraunhofer.de" target="_blank" style="color:#5dd9d9; text-decoration:none;">
+                            <i class="fas fa-external-link-alt"></i> fraunhofer.de
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MODELLPROJEKT: 100 ENERIEINSELN -->
+        <section>
+            <h2>🏡 Modellprojekt: 100 Energieinseln</h2>
+            <div class="highlight-box" style="border-left-color:#5dd9d9;">
+                <p style="font-size:1.1rem;">
+                    <strong>100 Einfamilienhäuser · 100 % autark · 0 % Abhängigkeit · 80 % geringere Energiekosten</strong>
+                </p>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Kosten (ca.)</th>
+                            <th>Bemerkung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PV-Dach &amp; Fassade (5–7 kWp)</td>
+                            <td>~15.000 €</td>
+                            <td>Inkl. Montage &amp; Wechselrichter</td>
+                        </tr>
+                        <tr>
+                            <td>Batteriespeicher (10–15 kWh)</td>
+                            <td>~10.000–15.000 €</td>
+                            <td>LiFePO4, inselfähig</td>
+                        </tr>
+                        <tr>
+                            <td>Wärmepumpe + Wärmespeicher</td>
+                            <td>~20.000–25.000 €</td>
+                            <td>Luft-Wasser oder Sole-Wasser</td>
+                        </tr>
+                        <tr>
+                            <td>Inselnetz-Technologie &amp; Smart Hub</td>
+                            <td>~5.000–10.000 €</td>
+                            <td>Steuerung, Vernetzung, Notstrom</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gesamt pro Haus</strong></td>
+                            <td><span class="gold">~60.000 €</span></td>
+                            <td>Vollständige Autarkie</td>
+                        </tr>
+                        <tr>
+                            <td>Förderungen &amp; Zuschüsse</td>
+                            <td>~15.000 €</td>
+                            <td>BEG, KfW, Länder</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eigenanteil pro Haus</strong></td>
+                            <td><span class="gold">~45.000 €</span></td>
+                            <td>Amortisation in 6–8 Jahren</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#8899a6; font-size:0.9rem;">
+                <strong>Bei 100 Häusern:</strong> Gesamtinvestition ~6 Mio. € · Förderung ~1,5 Mio. € · Eigenanteil ~4,5 Mio. €
+            </p>
+        </section>
+
+        <!-- 6. EINNAHMEN-POTENZIALE -->
+        <section>
+            <h2>📈 Einnahmen-Potenziale</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-euro-sign"></i>
+                    <h4>Geringere Energiekosten</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Bis zu <span class="gold">80 %</span> Einsparung gegenüber konventionellem Bezug.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-home"></i>
+                    <h4>Wertsteigerung der Immobilie</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        <span class="gold">+30 %</span> Wertzuwachs durch autarke Energieversorgung.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-plug"></i>
+                    <h4>Netzanbindungs-Ersparnis</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Keine Netzentgelte, keine Messstellenbetriebskosten.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Regionale Energiedienstleistungen</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Überschuss in Nachbarschaftsnetzen teilen – Einnahmen möglich.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. UMSETZUNGSPLAN -->
+        <section>
+            <h2>📋 Umsetzungsplan – schnell &amp; schlank</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-search" style="color:#5dd9d9;"></i>
+                    <h4>Phase 1: Analyse &amp; Planung</h4>
+                    <p style="color:#b0bec5;">Energiebedarf ermitteln, Förderanträge vorbereiten, Anbieter auswählen.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-hard-hat" style="color:#5dd9d9;"></i>
+                    <h4>Phase 2: Installation</h4>
+                    <p style="color:#b0bec5;">PV, Speicher, Wärmepumpe, Inselnetz-Technik – innerhalb von 2–4 Wochen pro Haus.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-flask" style="color:#5dd9d9;"></i>
+                    <h4>Phase 3: Testbetrieb &amp; Optimierung</h4>
+                    <p style="color:#b0bec5;">Einschwingphase, Feinjustierung der Steuerung, Qualitätssicherung.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-rocket" style="color:#5dd9d9;"></i>
+                    <h4>Phase 4: Regelbetrieb &amp; Skalierung</h4>
+                    <p style="color:#b0bec5;">Vollbetrieb, Monitoring, Ausweitung auf weitere Häuser &amp; Quartiere.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. ÖFFENTLICHKEITSWIRKUNG -->
+        <section>
+            <h2>📰 Öffentlichkeitswirkung – Die Nachricht</h2>
+            <div class="highlight-box" style="border-left-color:#f5c542;">
+                <p style="font-size:1.1rem;">
+                    <strong>Neues Modellprojekt in Deutschland:</strong><br />
+                    <span class="gold">„100 Einfamilienhäuser werden zu autarken Energieinseln – unabhängig von Strompreisen und Netzausfällen. Ein Vorbild für die Energiewende von unten.“</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 9. KONTAKT & NÄCHSTER SCHRITT -->
+        <section style="text-align:center; padding:1rem 0 2rem;">
+            <h2 style="border-left:none; text-align:center;">🚀 Bereit für den ersten Schritt?</h2>
+            <p style="color:#b0bec5; max-width:600px; margin:0 auto 1.5rem auto;">
+                <strong>Kontakt:</strong> Diskret &amp; direkt – über Vermittler Ihrer Wahl oder verschlüsselte Kommunikation.<br />
+                <span class="gold">Wir liefern nicht nur Konzepte. Wir liefern Ergebnisse.</span>
+            </p>
+
+            <div style="background:#11171c; border-radius:20px; padding:1.5rem; max-width:500px; margin:1.5rem auto; border:1px solid #253038; text-align:left;">
+                <h4 style="color:#f5c542; text-align:center; margin-bottom:1rem;">
+                    <i class="fas fa-phone"></i> Direkt-Kontakte
+                </h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-bolt"></i> <a href="https://www.e3dc.com" target="_blank">E3/DC – Inselnetz-Hauskraftwerk</a></li>
+                    <li><i class="fas fa-sun"></i> <a href="https://www.sma.de" target="_blank">SMA – Sunny Island</a></li>
+                    <li><i class="fas fa-thermometer-half"></i> <a href="https://www.viessmann.de" target="_blank">Viessmann – Wärmepumpe + PV</a></li>
+                    <li><i class="fas fa-home"></i> <a href="https://www.sonnen.de" target="_blank">Sonnen – Batteriespeicher + Smart Hub</a></li>
+                    <li><i class="fas fa-solar-panel"></i> <a href="https://www.solarwatt.de" target="_blank">Solarwatt – PV + Speicher</a></li>
+                    <li><i class="fas fa-university"></i> <a href="https://www.fraunhofer.de" target="_blank">Fraunhofer – Forschung &amp; Technologie</a></li>
+                </ul>
+            </div>
+
+            <div class="flex-center">
+                <a href="#" class="btn" style="pointer-events:none; opacity:0.9;">
+                    <i class="fas fa-phone" style="margin-right:10px;"></i> Kontakt aufnehmen
+                </a>
+                <a href="#" class="btn btn-outline" style="pointer-events:none; opacity:0.7;">
+                    <i class="fas fa-file-pdf" style="margin-right:10px;"></i> Angebot anfordern
+                </a>
+            </div>
+            <p style="color:#7a8a96; font-size:0.85rem; margin-top:1.5rem;">
+                (Diese Buttons sind Platzhalter – deine nächste Aktion ist der erste echte Anruf.)
+            </p>
+            <div style="margin-top:2.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+            <p style="margin-top:0.5rem; font-size:1.1rem; color:#f5c542;">
+                Juchheissa! (^_-)
+            </p>
+        </section>
+
+    </main>
+
+    <!-- ===== FUSSZEILE ===== -->
+    <footer>
+        <p>
+            <span class="heart">💛</span> Der rote Faden ist gelegt. Die Roadmap ist gezeichnet.<br />
+            Jetzt gehen wir den Weg – Schritt für Schritt, Tag für Tag, Liebe für Liebe.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
+        </p>
+        <p style="margin-top:1rem; font-size:0.8rem; color:#5a6a76;">
+            Problem #4: Die Energiewende · Tim Bukowski · August 2026
+        </p>
+    </footer>
+
+    <script>
+        (function() {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.style.cursor = 'pointer';
+                footer.addEventListener('click', function() {
+                    const msg =
+                        `📦 PROBLEM #4: ENERGIEWENDE – GELÖST.
+        --------------------------------------------------
+        Ziel: 100 Einfamilienhäuser werden zu autarken Energieinseln.
+        Kernlösung: PV (5–7 kWp) + Batteriespeicher (10–15 kWh) + Wärmepumpe + Inselnetz.
+        Anbieter (mit Klick): E3/DC, SMA, Viessmann, Sonnen, Solarwatt, Fronius, my-PV.
+        Förderung: KfW 300 (150.000 €), BEG (70–80 %), Länder, Impact-Investoren.
+        Kosten pro Haus: 60.000 € Investition – 15.000 € Förderung – 45.000 € Eigenanteil.
+        Amortisation: 6–8 Jahre.
+        Umsetzung: 4 Phasen – Analyse, Installation, Testbetrieb, Regelbetrieb.
+        Kontakt: Direkt über die Anbieter-Links in der Tabelle.
+        🌅 ~ 💛 ~ 🌅 Juchheissa! (^_-)`;
+                    navigator.clipboard.writeText(msg).then(() => {
+                        alert('📋 Der Kern-Steckbrief wurde kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere manuell:\n\n' + msg);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

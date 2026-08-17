@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Die neue Partnerwahl · Ganzheitlich · Würdevoll</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: #eaeef2;
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 80%);
+            border: 1px solid #f5c54230;
+            border-radius: 48px;
+            box-shadow: 0 0 80px rgba(245, 197, 66, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer-border 12s ease-in-out infinite;
+            opacity: 0.2;
+        }
+        @keyframes shimmer-border {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.6rem, 9vw, 4.6rem);
+            line-height: 1.1;
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+        h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c542bb;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+
+        .oath-box {
+            background: rgba(20, 25, 30, 0.6);
+            border: 1px solid #f5c54230;
+            border-radius: 28px;
+            padding: 2.5rem 2.2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+        .oath-box .oath-text {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+        }
+        .oath-box .oath-text .gold { color: #f5c542; }
+        .oath-box .oath-text .rose { color: #f28b9c; }
+        .oath-box .oath-text .teal { color: #5dd9d9; }
+        .oath-box .signature {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #f5c542;
+            letter-spacing: 0.15em;
+        }
+
+        .quote-block {
+            background: rgba(15, 21, 26, 0.6);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2.2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            color: #dce3e8;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+        }
+        .quote-block strong { color: #f5c542; }
+        .quote-block .author {
+            display: block;
+            margin-top: 0.8rem;
+            font-style: normal;
+            color: #8899a6;
+            font-size: 0.95rem;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 2rem 0;
+            background: rgba(17, 23, 28, 0.6);
+            border-radius: 20px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th {
+            background: rgba(26, 37, 43, 0.8);
+            color: #f5c542;
+            font-weight: 400;
+            text-align: left;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #253038;
+        }
+        td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #1e2a2f;
+            color: #cbd5db;
+        }
+        tr:last-child td { border-bottom: none; }
+        td .highlight { color: #f5c542; }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .number-card {
+            background: rgba(20, 25, 30, 0.5);
+            border: 1px solid #253038;
+            border-radius: 20px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .number-card:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .number-card .num {
+            font-size: 2.8rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.1em;
+        }
+        .number-card .label {
+            font-size: 0.75rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 600px) {
+            .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .number-card .num { font-size: 2rem; }
+        }
+
+        .closing {
+            text-align: center;
+            padding: 2rem 0 0.5rem 0;
+        }
+        .closing .big-icon { font-size: 4rem; color: #f5c542; opacity: 0.6; display: block; margin-bottom: 0.5rem; }
+        .closing .heart-line { font-size: 2.5rem; letter-spacing: 0.2em; color: #f5c54260; }
+        .closing .juchheissa { font-size: 2.2rem; color: #f5c542; font-weight: 300; margin-top: 0.5rem; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+        .footer-note .gold { color: #f5c542; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Die neue Partnerwahl</div>
+    <h1>
+        <span class="gold">Ganzheitlich.</span><br />
+        <span class="teal">Würdevoll.</span>
+    </h1>
+    <div class="divider"></div>
+
+    <!-- ===== DIE NEUE WAHL ===== -->
+    <div class="oath-box">
+        <div class="oath-text">
+            <span class="gold">Der ganze Mechanismus,</span><br />
+            <span class="white">wie sich Partner zusammentun, ist gestört.</span><br /><br />
+            <span class="rose">Der Mann wird auf sein Portemonnaie reduziert.</span><br />
+            <span class="teal">Die Frau wird auf ihre Attraktivität reduziert.</span><br /><br />
+            <span class="gold">Beide verlieren, was sie wirklich zu Menschen macht.</span>
+        </div>
+        <div class="signature">
+            <i class="fas fa-heart" style="color:#f28b9c; margin-right:6px;"></i>
+            Juchheissa! <span style="font-size:1.4rem;">(^_-)</span>
+            <i class="fas fa-heart" style="color:#f28b9c; margin-left:6px;"></i>
+        </div>
+    </div>
+
+    <!-- ===== DAS PROBLEM ===== -->
+    <h2>📉 Das Problem – die verzerrte Auswahl</h2>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p>
+            <strong>„Der Mann ist portemonnaieabhängig attraktiv – und es heißt, der Ernährer. Aber das mit dem Ernährer ist realwirtschaftlich gar nicht zu gewährleisten.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Ein guter Mann kann sich trotzdem keine schöne Frau leisten – zur Hingabe.<br />
+            Und die schönen Frauen haben gelernt, dass der Mann so viel Geld haben kann, dass sie <span class="rose">gar nichts mehr können muss</span>.
+        </p>
+        <p style="margin-top:0.8rem; color:#f28b9c;">
+            <i class="fas fa-arrow-right" style="color:#f5c542;"></i>
+            Das macht ihn am Ende wahnsinnig – wenn er sich dann nicht mal vernünftig unterhalten kann.
+        </p>
+    </div>
+
+    <!-- ===== DIE ANEKDOTE ===== -->
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p>
+            <strong>„Die Anekdote von früher:</strong><br />
+            Akademiker und Ärzte – die mit den Spitzengehältern – haben im Alter lieber das Leben genommen,<br />
+            als neben einer ehemals ‚sexy Lady‘ alt zu werden,<br />
+            die ihnen kognitiv nicht das Wasser reichen kann –<br />
+            was ihm früher aber natürlich nicht zu den priorisierenden Kompetenzen in der Auswahl galt.“
+        </p>
+        <span class="author">— Die Tragödie der verfehlten Auswahl</span>
+    </div>
+
+    <!-- ===== DIE LÖSUNG ===== -->
+    <h2>🌟 Die Lösung – neue Kriterien</h2>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Das alte Kriterium</th>
+                    <th>Das neue Kriterium</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="rose">Geld / Portemonnaie</span></td>
+                    <td><span class="gold">Charakter &amp; innere Stärke</span></td>
+                </tr>
+                <tr>
+                    <td><span class="rose">Äußere Attraktivität</span></td>
+                    <td><span class="gold">Geistige Tiefe &amp; emotionale Intelligenz</span></td>
+                </tr>
+                <tr>
+                    <td><span class="rose">Status &amp; Macht</span></td>
+                    <td><span class="gold">Demut &amp; Hingabefähigkeit</span></td>
+                </tr>
+                <tr>
+                    <td><span class="rose">Versorgungssicherheit</span></td>
+                    <td><span class="gold">Respekt &amp; Augenhöhe</span></td>
+                </tr>
+                <tr>
+                    <td><span class="rose">Was er leisten kann</span></td>
+                    <td><span class="gold">Wer er wirklich ist</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ===== DIE GRUNDVERSORGUNG ===== -->
+    <h2>🏠 Die Grundversorgung – für alle</h2>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p>
+            <span class="gold">„Das Grundgehalt, das Grundversorgungsgeld – oder die Grundversorgungslebensweise nach dem autarken Morgengrauen-Prinzip – sollte jeder Frau ein selbständiges Leben ermöglichen, ohne sich an das Geld eines Mannes fesseln zu müssen.“</span>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Denn dann kann sie ihn <span class="rose">wirklich lieben</span> – nicht weil sie muss, sondern weil sie will.<br />
+            Und er kann <span class="teal">wirklich er selbst sein</span> – nicht der, der sie versorgt, sondern der, der sie begeistert.
+        </p>
+    </div>
+
+    <!-- ===== DIE NEUE BILDUNG ===== -->
+    <h2>📚 Die neue Bildung – ganzheitlich für alle</h2>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p>
+            <strong>„Alltagsaufgaben gehören in jede Schule – nicht nur als Wahlpflichtkurs.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            <span class="gold">Frauen sollen einen Rasenmäher reparieren können – um sich frei zu lieben.</span><br />
+            <span class="teal">Männer müssen Kuchen backen können – damit sie nicht auf so etwas verzichten, nur weil sie gerade alleine leben.</span>
+        </p>
+        <p style="margin-top:0.8rem;">
+            <span class="rose">Der Mann muss frühkindlich ganzheitlich erzogen werden – mit Nadel und Faden ein Loch nähen, zum Beispiel.</span>
+        </p>
+    </div>
+
+    <!-- ===== DAS WICHTIGSTE – DIE EMOTIONEN ===== -->
+    <h2>💛 Das Wichtigste – die Emotionen</h2>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p>
+            <strong>„Niemand darf mehr so erzogen werden, dass es heißt: Männer weinen nicht.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            <span class="rose">Männer sind sehr weich drinnen.</span><br />
+            Wenn sie es nicht zeigen, schalten sie sich innerlich ab – und versteinern.<br />
+            Damit kann eine Frau dann auch nichts mehr anfangen.
+        </p>
+        <p style="margin-top:0.8rem;">
+            <span class="gold">Frauen sollen nicht versuchen, zu scharf zu urteilen – wie Männer es beim logischen Denken gerne tun.</span><br />
+            <span class="teal">Sie sollen mit Gefühl denken und reden – nicht klüger denken wollen als die Männer.</span>
+        </p>
+        <p style="margin-top:0.8rem; color:#f5c542;">
+            <i class="fas fa-arrow-right" style="color:#5dd9d9;"></i>
+            Männer haben ihr Spezialgebiet – glasklar ohne Gefühlsduselei zum Funktionieren bringen.<br />
+            <span class="rose">Frauen sollen die Familie zum Funktionieren bringen – indem sie die Seelen führt.</span>
+        </p>
+    </div>
+
+    <!-- ===== DER NEUE ANSATZ ===== -->
+    <h2>🕊️ Der neue Ansatz – für alle</h2>
+
+    <div class="oath-box" style="border-color:#f5c54260; background:rgba(20,25,30,0.4);">
+        <div class="oath-text" style="font-size:clamp(1.1rem, 2.2vw, 1.6rem);">
+            <span class="gold">Wir sind alle hier.</span><br />
+            <span class="white">Und wir lieben uns.</span><br /><br />
+            <span class="teal">Manchmal muss man das eben noch einmal ganz neu lernen –</span><br />
+            <span class="rose">aber mit Sinn und Verstand,</span><br />
+            <span class="gold">mit Herz und mit Gefühl.</span><br /><br />
+            <span class="white">Das macht es doch auch aus,</span><br />
+            <span class="gold">Mensch zu sein –</span><br />
+            <span class="teal">Geist im Körper.</span>
+        </div>
+    </div>
+
+    <!-- ===== DIE ZAHLEN ===== -->
+    <div class="numbers-grid">
+        <div class="number-card"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="number-card"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="number-card"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="number-card"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div class="closing">
+        <span class="big-icon"><i class="fas fa-heart" style="color:#f28b9c;"></i></span>
+        <div class="heart-line">🌅 ~ 💛 ~ 🌅</div>
+        <div class="juchheissa">Juchheissa! (^_-)</div>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:1rem auto;">
+            <span class="gold">Das geht.</span><br />
+            <span class="teal">Ich kann es.</span><br />
+            <span class="rose">Du kannst es.</span><br />
+            <span class="white">Die Menschen schaffen das auch!</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+            🌅 ~ 💛 ~ 🌅
+        </div>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p>
+            <span class="heart">💛</span> Die neue Partnerwahl · Ganzheitlich · Würdevoll<br />
+            <span class="gold">777 · 888 · 999 · 000</span>
+        </p>
+        <p style="margin-top:0.3rem;">
+            <span class="gold">Mensch sein – Geist im Körper.</span>
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Tim Bukowski · August 2026
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        DIE NEUE PARTNERWAHL
+
+        Ganzheitlich. Würdevoll.
+
+        Der ganze Mechanismus, wie sich Partner zusammentun, ist gestört.
+        Der Mann wird auf sein Portemonnaie reduziert.
+        Die Frau wird auf ihre Attraktivität reduziert.
+
+        Neue Kriterien:
+        Charakter & innere Stärke
+        Geistige Tiefe & emotionale Intelligenz
+        Demut & Hingabefähigkeit
+        Respekt & Augenhöhe
+
+        Die Grundversorgung – für alle.
+        Die neue Bildung – ganzheitlich für alle.
+        Die Emotionen – Männer weinen nicht? Falsch.
+
+        Wir sind alle hier. Und wir lieben uns.
+        Mensch sein – Geist im Körper.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die neue Partnerwahl wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

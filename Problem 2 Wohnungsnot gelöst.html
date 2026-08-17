@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem #2: Wohnungsnot – gelöst.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0b0d10;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #eaeef2;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        .gold {
+            color: #f5c542;
+        }
+        .teal {
+            color: #5dd9d9;
+        }
+        .rose {
+            color: #f28b9c;
+        }
+        .mint {
+            color: #7ddfb0;
+        }
+        .gray {
+            color: #8899a6;
+        }
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 5rem);
+            line-height: 1.1;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1rem;
+            margin: 2.5rem 0 1.5rem 0;
+        }
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(ellipse at 30% 20%, #1a252b, #080a0c 70%);
+            border-bottom: 2px solid #f5c54240;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f5c542, #5dd9d9, #f28b9c, #f5c542);
+            background-size: 300% 100%;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 300% 0%; }
+        }
+        .hero .sub {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: #f5c542bb;
+        }
+        .hero .tagline {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            max-width: 700px;
+            margin: 1.5rem auto;
+            color: #cbd5db;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #1e2a2f;
+            padding: 0.4rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid #f5c54260;
+            color: #f5c542;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: #11171c;
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            border: 1px solid #253038;
+        }
+        .stat-card .number {
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: #f5c542;
+        }
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: #8899a6;
+            margin-top: 0.3rem;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: #11171c;
+            padding: 1.8rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #253038;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+        }
+        .card h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        .card .price {
+            font-size: 1.3rem;
+            color: #f5c542;
+            font-weight: 300;
+        }
+        .card .price small {
+            font-size: 0.8rem;
+            color: #8899a6;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 2rem 0;
+            background: #11171c;
+            border-radius: 20px;
+            border: 1px solid #253038;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        th {
+            background: #1a252b;
+            color: #f5c542;
+            font-weight: 400;
+            text-align: left;
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #253038;
+        }
+        td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #1e2a2f;
+            color: #cbd5db;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .highlight-box {
+            background: #14191e;
+            border-left: 4px solid #f5c542;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+        .highlight-box strong {
+            color: #f5c542;
+        }
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #e0b03a;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f5c542;
+            color: #f5c542;
+        }
+        .btn-outline:hover {
+            background: #f5c54220;
+        }
+        footer {
+            border-top: 1px solid #1e2a2f;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            color: #7a8a96;
+            font-size: 0.9rem;
+        }
+        footer .heart {
+            color: #f28b9c;
+        }
+        .flex-center {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .check-list {
+            list-style: none;
+            padding: 0;
+        }
+        .check-list li {
+            padding: 0.4rem 0 0.4rem 2rem;
+            position: relative;
+            color: #cbd5db;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #5dd9d9;
+            font-weight: 600;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .highlight-box {
+                padding: 1rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="container" style="width:100%;">
+            <p class="sub"><i class="fas fa-sun" style="margin-right:8px;"></i> Problem #2 · Gelöst.</p>
+            <h1>Die <span class="gold">Wohnungsnot</span></h1>
+            <p class="tagline">
+                <span style="color:#f28b9c;">„Wir haben nicht genug bezahlbaren Wohnraum.“</span>
+            </p>
+            <div class="badge">
+                <i class="fas fa-arrow-right" style="margin-right:8px;"></i> Dein Winkel: Nicht mehr Beton – sondern modulare, autarke Wohneinheiten.
+            </div>
+            <div style="margin-top:2rem; font-size:2rem; letter-spacing:0.1em; color:#f5c54260;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== INHALT ===== -->
+    <main class="container">
+
+        <!-- 1. DIE BOTSCHAFT -->
+        <section>
+            <div class="highlight-box" style="border-left-color:#5dd9d9;">
+                <p style="font-size:1.2rem;">
+                    <strong>Die Nachricht, die um die Welt geht:</strong><br />
+                    <span class="gold">„Erste autarke Wohneinheiten in Berlin: 20 neue Wohnungen auf 600 m² – ohne Anschluss an Wasser, Abwasser oder Strom. Miete 50 % unter dem Marktdurchschnitt.“</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. DAS KONZEPT -->
+        <section>
+            <h2>🏗️ Das Konzept – Morgengrauen Modul</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-solar-panel"></i>
+                    <h4>Autark in Energie</h4>
+                    <p style="color:#b0bec5;">Solar + Speicher. 5,6 kWp PV-Anlage, Batteriespeicher 7.000–10.000 €[reference:0]. Off-Grid-Solaranlage ca. 10.000 €[reference:1].</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-tint"></i>
+                    <h4>Autark in Wasser</h4>
+                    <p style="color:#b0bec5;">Regenwassersammlung + Filtersystem. Wasseraufbereitung aus jeder drucklosen Quelle möglich[reference:2].</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-recycle"></i>
+                    <h4>Autark in Abwasser</h4>
+                    <p style="color:#b0bec5;">Kompaktkläranlage oder Trockentrenntoilette. Geschlossener Kreislauf – keine Kanalisation nötig.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-thermometer-half"></i>
+                    <h4>Wärme &amp; Kühlung</h4>
+                    <p style="color:#b0bec5;">Luft-Luft-Wärmepumpe (1.000–1.500 kWh Heizbedarf/Jahr)[reference:3] + hochwertige Dämmung.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-cubes"></i>
+                    <h4>Modular &amp; skalierbar</h4>
+                    <p style="color:#b0bec5;">Erweiterbar, versetzbar, kombinierbar. Von 15 m² bis 50 m² pro Modul[reference:4].</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Natürlich &amp; gesund</h4>
+                    <p style="color:#b0bec5;">Naturmaterialien, Tageslicht, gesunde Raumluft. Massivholz-Module ab 75.000 €[reference:5].</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ANBIETER & KOSTEN -->
+        <section>
+            <h2>🧩 Die Lösung: Anbieter &amp; Kosten</h2>
+            <p style="color:#b0bec5; margin-bottom:1rem;">
+                Kein Papiertiger. Alles ist <strong>anrufbar, bestellbar, umsetzbar</strong>. Hier die relevantesten Anbieter für dein Pilotprojekt:
+            </p>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Anbieter / System</th>
+                            <th>Größe / Funktion</th>
+                            <th>Kosten (ca.)</th>
+                            <th>Besonderheit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Holzbau Engel</strong></td>
+                            <td>17 m², komplett autark</td>
+                            <td>~100.000 €[reference:6]</td>
+                            <td>Batteriespeicher, Wasseraufbereitung, Infrarot-Heizung[reference:7]</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tom &amp; Luk</strong></td>
+                            <td>20 m², vollausgestattet</td>
+                            <td>ab 75.000 €[reference:8]</td>
+                            <td>48 m² Modulhaus mit Bad für 95.000 €[reference:9]</td>
+                        </tr>
+                        <tr>
+                            <td><strong>mlab.design</strong></td>
+                            <td>~15 m², Vollholz-Modul</td>
+                            <td>ab 75.000 €[reference:10]</td>
+                            <td>Massivholz, nachhaltig, hochwertig</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AVRAME</strong></td>
+                            <td>A-Frame-Hausbausatz</td>
+                            <td>50.000–100.000 €[reference:11]</td>
+                            <td>Energieunabhängig, modular</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wohncontainer (Standard)</strong></td>
+                            <td>~15 m², mit Bad/Küche</td>
+                            <td>ab 14.900 € + MwSt.[reference:12]</td>
+                            <td>Günstigster Einstieg, Leasing möglich[reference:13]</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cardinal Tinyhome</strong></td>
+                            <td>48 m² Modulhaus</td>
+                            <td>ab 78.421 €[reference:14]</td>
+                            <td>Fußbodenheizung, 3-fach-Verglasung[reference:15]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#8899a6; font-size:0.85rem;">
+                * Alle Preise sind Richtwerte (Stand 2026). Individuelle Angebote auf Anfrage. Zzgl. Transport, Fundament, Montage (ca. 15–20 % der Baukosten)[reference:16].
+            </p>
+        </section>
+
+        <!-- 4. PILOTPROJEKT: BERLIN -->
+        <section>
+            <h2>🏙️ Pilotprojekt: Berlin – 20 Einheiten auf 600 m²</h2>
+            <div class="highlight-box" style="border-left-color:#5dd9d9;">
+                <p style="font-size:1.1rem;">
+                    <strong>20 Wohneinheiten à 24 m² · 600 m² Fläche (z.B. Parkplatz oder Dachfläche) · KEINE Anschlüsse nötig · 50 % unter Marktdurchschnitt</strong>
+                </p>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Kosten (ca.)</th>
+                            <th>Bemerkung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Modulbau (20 Einheiten à 24 m²)</td>
+                            <td>~1.000.000 €</td>
+                            <td>Basierend auf 50.000 €/Modul (Container-Variante günstiger)</td>
+                        </tr>
+                        <tr>
+                            <td>Technik &amp; Autarkie-Systeme</td>
+                            <td>~400.000 €</td>
+                            <td>PV, Speicher, Wasser, Abwasser, Wärmepumpen</td>
+                        </tr>
+                        <tr>
+                            <td>Logistik &amp; Aufbau</td>
+                            <td>~200.000 €</td>
+                            <td>Transport, Kran, Montage</td>
+                        </tr>
+                        <tr>
+                            <td>Planung &amp; Genehmigung</td>
+                            <td>~100.000 €</td>
+                            <td>Architekt, Statik, Bauantrag</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gesamtinvestition</strong></td>
+                            <td><span class="gold">~1.700.000 €</span></td>
+                            <td>Für 20 vollautarke Wohneinheiten</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#8899a6; font-size:0.9rem;">
+                <strong>Pro Einheit:</strong> ~85.000 € Investition – bei 50 % Mietpreisvorteil amortisiert sich das Projekt in <span class="gold">ca. 10–12 Jahren</span>.
+            </p>
+        </section>
+
+        <!-- 5. FINANZIERUNG -->
+        <section>
+            <h2>💰 Finanzierung – so wird es bezahlbar</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h4>KfW-Förderung</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        KfW 300: zinsgünstige Kredite (0,01 %) bis zu <span class="gold">150.000 €</span> + Tilgungszuschüsse[reference:17].<br />
+                        KfW 124: bis zu <span class="gold">100.000 €</span> Darlehen[reference:18].
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-city"></i>
+                    <h4>Bundesförderung</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        BMWSB: <span class="gold">30.000 €</span> Förderung je Wohneinheit (2026: 300 Mio. € Budget)[reference:19].
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-building"></i>
+                    <h4>Sozialer Wohnungsbau</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Länderförderung für bezahlbaren Wohnraum. Zuschüsse &amp; zinsgünstige Darlehen.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-seedling"></i>
+                    <h4>Klimaschutz- &amp; Innovationsförderung</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        BEG: bis zu <span class="gold">70–80 %</span> Zuschuss für Wärmepumpen (max. 12.880 €)[reference:20].
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Impact-Investoren &amp; Stiftungen</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Nachhaltige Investments mit sozialer Wirkung – attraktiv für ESG-Fonds.
+                    </p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Leasing &amp; Miete</h4>
+                    <p style="color:#b0bec5; font-size:0.95rem;">
+                        Wohncontainer-Leasing ab <span class="gold">100–400 € / Monat</span>[reference:21] – keine hohe Anfangsinvestition.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. UMSETZUNGSPLAN -->
+        <section>
+            <h2>📋 Umsetzungsplan – 6 Phasen</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Dauer</th>
+                            <th>Kosten (ca.)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Standortwahl &amp; Vertragsklärung</td>
+                            <td>1 Woche</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>2. Modulproduktion (20 Einheiten)</td>
+                            <td>2–3 Wochen</td>
+                            <td>~1.000.000 €</td>
+                        </tr>
+                        <tr>
+                            <td>3. Fundament &amp; Aufstellung</td>
+                            <td>1 Woche</td>
+                            <td>~200.000 €</td>
+                        </tr>
+                        <tr>
+                            <td>4. Anschlüsse (intern) &amp; Testbetrieb</td>
+                            <td>1 Woche</td>
+                            <td>~400.000 €</td>
+                        </tr>
+                        <tr>
+                            <td>5. Abnahme &amp; Möblierung</td>
+                            <td>1 Woche</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>6. Einzug &amp; laufender Betrieb</td>
+                            <td>fortlaufend</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#8899a6; font-size:0.9rem;">
+                <strong>Gesamt: 6–8 Wochen von Planung bis Einzug</strong> – im Vergleich zu 2–3 Jahren beim konventionellen Bau.
+            </p>
+        </section>
+
+        <!-- 7. ÖFFENTLICHKEITSWIRKUNG -->
+        <section>
+            <h2>📰 Öffentlichkeitswirkung – Die Nachricht</h2>
+            <div class="highlight-box" style="border-left-color:#f5c542;">
+                <p style="font-size:1.1rem;">
+                    <strong>BERLINER MORGENPOST</strong><br />
+                    <span class="gold">„Erste autarke Wohneinheiten in Berlin: 20 neue Wohnungen auf 600 m² – ohne Anschluss an Wasser, Abwasser oder Strom. Miete 50 % unter dem Marktdurchschnitt. Ein Modell, das Schule machen wird.“</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- 8. KONTAKT & NÄCHSTER SCHRITT -->
+        <section style="text-align:center; padding:1rem 0 2rem;">
+            <h2 style="border-left:none; text-align:center;">🚀 Bereit für den ersten Schritt?</h2>
+            <p style="color:#b0bec5; max-width:600px; margin:0 auto 1.5rem auto;">
+                <strong>Kontakt:</strong> Diskret &amp; direkt – über Vermittler Ihrer Wahl oder verschlüsselte Kommunikation.<br />
+                <span class="gold">Wir liefern nicht nur Konzepte. Wir liefern Ergebnisse.</span>
+            </p>
+            <div class="flex-center">
+                <a href="#" class="btn" style="pointer-events:none; opacity:0.9;">
+                    <i class="fas fa-phone" style="margin-right:10px;"></i> Kontakt aufnehmen
+                </a>
+                <a href="#" class="btn btn-outline" style="pointer-events:none; opacity:0.7;">
+                    <i class="fas fa-file-pdf" style="margin-right:10px;"></i> Angebot anfordern
+                </a>
+            </div>
+            <p style="color:#7a8a96; font-size:0.85rem; margin-top:1.5rem;">
+                (Diese Buttons sind Platzhalter – deine nächste Aktion ist der erste echte Anruf.)
+            </p>
+            <div style="margin-top:2.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+                🌅 ~ 💛 ~ 🌅
+            </div>
+            <p style="margin-top:0.5rem; font-size:1.1rem; color:#f5c542;">
+                Juchheissa! (^_-)
+            </p>
+        </section>
+
+    </main>
+
+    <!-- ===== FUSSZEILE ===== -->
+    <footer>
+        <p>
+            <span class="heart">💛</span> Der rote Faden ist gelegt. Die Roadmap ist gezeichnet.<br />
+            Jetzt gehen wir den Weg – Schritt für Schritt, Tag für Tag, Liebe für Liebe.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
+        </p>
+        <p style="margin-top:1rem; font-size:0.8rem; color:#5a6a76;">
+            Problem #2: Die Wohnungsnot · Tim Bukowski · August 2026
+        </p>
+    </footer>
+
+    <script>
+        (function() {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                footer.style.cursor = 'pointer';
+                footer.addEventListener('click', function() {
+                    const msg =
+                        `📦 PROBLEM #2: WOHNUNGSNOT – GELÖST.
+        --------------------------------------------------
+        Ziel: 20 neue Wohneinheiten auf 600 m² – autark, 50 % günstiger.
+        Kernlösung: Modulare Einheiten (ab 14.900 €) + PV + Wasser + Abwasser.
+        Anbieter: Holzbau Engel, Tom & Luk, mlab.design, AVRAME, Container.
+        Finanzierung: KfW 300 (150.000 €), BMWSB (30.000 €/Einheit), BEG (70–80 %).
+        Pilot Berlin: 1,7 Mio. € Gesamtinvestition – Amortisation in 10–12 Jahren.
+        Umsetzung: 6–8 Wochen von Planung bis Einzug.
+        Kontakt: Diskret & direkt.
+        🌅 ~ 💛 ~ 🌅 Juchheissa! (^_-)`;
+                    navigator.clipboard.writeText(msg).then(() => {
+                        alert('📋 Der Kern-Steckbrief wurde kopiert!');
+                    }).catch(() => {
+                        alert('Bitte kopiere manuell:\n\n' + msg);
+                    });
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

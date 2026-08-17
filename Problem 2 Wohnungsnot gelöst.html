@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Problem #2: Wohnungsnot – gelöst.</title>
+    <title>Problem #2: Wohnungsnot – gelöst. (Upgrade mit Links)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* (gleicher Style wie bei #1 – hier aus Platzgründen nur minimal, aber voll funktionsfähig) */
         * {
             margin: 0;
             padding: 0;
@@ -163,6 +164,14 @@
             font-size: 0.8rem;
             color: #8899a6;
         }
+        .card a {
+            color: #5dd9d9;
+            text-decoration: none;
+        }
+        .card a:hover {
+            color: #f5c542;
+            text-decoration: underline;
+        }
         .table-wrap {
             overflow-x: auto;
             margin: 2rem 0;
@@ -190,6 +199,15 @@
         }
         tr:last-child td {
             border-bottom: none;
+        }
+        td a {
+            color: #5dd9d9;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        td a:hover {
+            color: #f5c542;
+            text-decoration: underline;
         }
         .highlight-box {
             background: #14191e;
@@ -242,21 +260,29 @@
             justify-content: center;
             align-items: center;
         }
-        .check-list {
+        .contact-list {
             list-style: none;
             padding: 0;
         }
-        .check-list li {
-            padding: 0.4rem 0 0.4rem 2rem;
-            position: relative;
-            color: #cbd5db;
+        .contact-list li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #1e2a2f;
         }
-        .check-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
+        .contact-list li:last-child {
+            border-bottom: none;
+        }
+        .contact-list li a {
             color: #5dd9d9;
-            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .contact-list li a:hover {
+            color: #f5c542;
+            text-decoration: underline;
+        }
+        .contact-list li i {
+            width: 1.5rem;
+            color: #f5c542;
         }
         @media (max-width: 640px) {
             .container {
@@ -273,7 +299,7 @@
     <!-- ===== HERO ===== -->
     <header class="hero">
         <div class="container" style="width:100%;">
-            <p class="sub"><i class="fas fa-sun" style="margin-right:8px;"></i> Problem #2 · Gelöst.</p>
+            <p class="sub"><i class="fas fa-sun" style="margin-right:8px;"></i> Problem #2 · Gelöst. (Upgrade mit Links)</p>
             <h1>Die <span class="gold">Wohnungsnot</span></h1>
             <p class="tagline">
                 <span style="color:#f28b9c;">„Wir haben nicht genug bezahlbaren Wohnraum.“</span>
@@ -307,41 +333,48 @@
                 <div class="card">
                     <i class="fas fa-solar-panel"></i>
                     <h4>Autark in Energie</h4>
-                    <p style="color:#b0bec5;">Solar + Speicher. 5,6 kWp PV-Anlage, Batteriespeicher 7.000–10.000 €[reference:0]. Off-Grid-Solaranlage ca. 10.000 €[reference:1].</p>
+                    <p style="color:#b0bec5;">Solar + Speicher. 5,6 kWp PV-Anlage, Batteriespeicher 7.000–10.000 €. Off-Grid-Solaranlage ca. 10.000 €.</p>
+                    <p style="margin-top:0.5rem;"><a href="https://www.solarwatt.de" target="_blank">Solarwatt – PV &amp; Speicher</a></p>
                 </div>
                 <div class="card">
                     <i class="fas fa-tint"></i>
                     <h4>Autark in Wasser</h4>
-                    <p style="color:#b0bec5;">Regenwassersammlung + Filtersystem. Wasseraufbereitung aus jeder drucklosen Quelle möglich[reference:2].</p>
+                    <p style="color:#b0bec5;">Regenwassersammlung + Filtersystem. Wasseraufbereitung aus jeder drucklosen Quelle möglich.</p>
+                    <p style="margin-top:0.5rem;"><a href="https://www.watergen.com" target="_blank">Watergen – Wasser aus Luft</a></p>
                 </div>
                 <div class="card">
                     <i class="fas fa-recycle"></i>
                     <h4>Autark in Abwasser</h4>
                     <p style="color:#b0bec5;">Kompaktkläranlage oder Trockentrenntoilette. Geschlossener Kreislauf – keine Kanalisation nötig.</p>
+                    <p style="margin-top:0.5rem;"><a href="https://www.greenwater.de" target="_blank">Greenwater – Kompaktkläranlagen</a></p>
                 </div>
                 <div class="card">
                     <i class="fas fa-thermometer-half"></i>
                     <h4>Wärme &amp; Kühlung</h4>
-                    <p style="color:#b0bec5;">Luft-Luft-Wärmepumpe (1.000–1.500 kWh Heizbedarf/Jahr)[reference:3] + hochwertige Dämmung.</p>
+                    <p style="color:#b0bec5;">Luft-Luft-Wärmepumpe (1.000–1.500 kWh Heizbedarf/Jahr) + hochwertige Dämmung.</p>
+                    <p style="margin-top:0.5rem;"><a href="https://www.viessmann.de" target="_blank">Viessmann – Wärmepumpen</a></p>
                 </div>
                 <div class="card">
                     <i class="fas fa-cubes"></i>
                     <h4>Modular &amp; skalierbar</h4>
-                    <p style="color:#b0bec5;">Erweiterbar, versetzbar, kombinierbar. Von 15 m² bis 50 m² pro Modul[reference:4].</p>
+                    <p style="color:#b0bec5;">Erweiterbar, versetzbar, kombinierbar. Von 15 m² bis 50 m² pro Modul.</p>
+                    <p style="margin-top:0.5rem;"><a href="https://www.mlab.design" target="_blank">mlab.design – Modulbau</a></p>
                 </div>
                 <div class="card">
                     <i class="fas fa-leaf"></i>
                     <h4>Natürlich &amp; gesund</h4>
-                    <p style="color:#b0bec5;">Naturmaterialien, Tageslicht, gesunde Raumluft. Massivholz-Module ab 75.000 €[reference:5].</p>
+                    <p style="color:#b0bec5;">Naturmaterialien, Tageslicht, gesunde Raumluft. Massivholz-Module ab 75.000 €.</p>
+                    <p style="margin-top:0.5rem;"><a href="https://www.holzbau-engel.de" target="_blank">Holzbau Engel – Massivholzmodule</a></p>
                 </div>
             </div>
         </section>
 
-        <!-- 3. ANBIETER & KOSTEN -->
+        <!-- 3. ANBIETER & KOSTEN (MIT ANKLICK-LINKS) -->
         <section>
-            <h2>🧩 Die Lösung: Anbieter &amp; Kosten</h2>
+            <h2>🧩 Die Lösung: Anbieter &amp; Kosten – mit <span class="gold">direktem Klick</span></h2>
             <p style="color:#b0bec5; margin-bottom:1rem;">
-                Kein Papiertiger. Alles ist <strong>anrufbar, bestellbar, umsetzbar</strong>. Hier die relevantesten Anbieter für dein Pilotprojekt:
+                <span class="gold">Kein Papiertiger. Alles ist anrufbar, bestellbar, umsetzbar.</span><br />
+                Hier die relevantesten Anbieter für dein Pilotprojekt – <strong>mit Kontakt-Links</strong>:
             </p>
 
             <div class="table-wrap">
@@ -351,51 +384,51 @@
                             <th>Anbieter / System</th>
                             <th>Größe / Funktion</th>
                             <th>Kosten (ca.)</th>
-                            <th>Besonderheit</th>
+                            <th>Kontakt (klick!)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Holzbau Engel</strong></td>
                             <td>17 m², komplett autark</td>
-                            <td>~100.000 €[reference:6]</td>
-                            <td>Batteriespeicher, Wasseraufbereitung, Infrarot-Heizung[reference:7]</td>
+                            <td>~100.000 €</td>
+                            <td><a href="https://www.holzbau-engel.de" target="_blank">holzbau-engel.de</a></td>
                         </tr>
                         <tr>
                             <td><strong>Tom &amp; Luk</strong></td>
                             <td>20 m², vollausgestattet</td>
-                            <td>ab 75.000 €[reference:8]</td>
-                            <td>48 m² Modulhaus mit Bad für 95.000 €[reference:9]</td>
+                            <td>ab 75.000 €</td>
+                            <td><a href="https://www.tom-luk.de" target="_blank">tom-luk.de</a></td>
                         </tr>
                         <tr>
                             <td><strong>mlab.design</strong></td>
                             <td>~15 m², Vollholz-Modul</td>
-                            <td>ab 75.000 €[reference:10]</td>
-                            <td>Massivholz, nachhaltig, hochwertig</td>
+                            <td>ab 75.000 €</td>
+                            <td><a href="https://mlab.design" target="_blank">mlab.design</a></td>
                         </tr>
                         <tr>
                             <td><strong>AVRAME</strong></td>
                             <td>A-Frame-Hausbausatz</td>
-                            <td>50.000–100.000 €[reference:11]</td>
-                            <td>Energieunabhängig, modular</td>
+                            <td>50.000–100.000 €</td>
+                            <td><a href="https://avrame.com" target="_blank">avrame.com</a></td>
                         </tr>
                         <tr>
                             <td><strong>Wohncontainer (Standard)</strong></td>
                             <td>~15 m², mit Bad/Küche</td>
-                            <td>ab 14.900 € + MwSt.[reference:12]</td>
-                            <td>Günstigster Einstieg, Leasing möglich[reference:13]</td>
+                            <td>ab 14.900 € + MwSt.</td>
+                            <td><a href="https://www.container-expand.de" target="_blank">container-expand.de</a></td>
                         </tr>
                         <tr>
                             <td><strong>Cardinal Tinyhome</strong></td>
                             <td>48 m² Modulhaus</td>
-                            <td>ab 78.421 €[reference:14]</td>
-                            <td>Fußbodenheizung, 3-fach-Verglasung[reference:15]</td>
+                            <td>ab 78.421 €</td>
+                            <td><a href="https://cardinal-tinyhome.de" target="_blank">cardinal-tinyhome.de</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <p style="color:#8899a6; font-size:0.85rem;">
-                * Alle Preise sind Richtwerte (Stand 2026). Individuelle Angebote auf Anfrage. Zzgl. Transport, Fundament, Montage (ca. 15–20 % der Baukosten)[reference:16].
+                * Alle Preise sind Richtwerte (Stand 2026). Individuelle Angebote auf Anfrage. Zzgl. Transport, Fundament, Montage (ca. 15–20 % der Baukosten).
             </p>
         </section>
 
@@ -451,23 +484,29 @@
             </p>
         </section>
 
-        <!-- 5. FINANZIERUNG -->
+        <!-- 5. FINANZIERUNG – MIT ANKLICK -->
         <section>
-            <h2>💰 Finanzierung – so wird es bezahlbar</h2>
+            <h2>💰 Finanzierung – so wird es bezahlbar – <span class="gold">Klick &amp; los</span></h2>
             <div class="card-grid">
                 <div class="card">
                     <i class="fas fa-hand-holding-usd"></i>
                     <h4>KfW-Förderung</h4>
                     <p style="color:#b0bec5; font-size:0.95rem;">
-                        KfW 300: zinsgünstige Kredite (0,01 %) bis zu <span class="gold">150.000 €</span> + Tilgungszuschüsse[reference:17].<br />
-                        KfW 124: bis zu <span class="gold">100.000 €</span> Darlehen[reference:18].
+                        KfW 300: zinsgünstige Kredite (0,01 %) bis zu <span class="gold">150.000 €</span> + Tilgungszuschüsse.<br />
+                        KfW 124: bis zu <span class="gold">100.000 €</span> Darlehen.
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.kfw.de" target="_blank" style="color:#5dd9d9;">kfw.de</a>
                     </p>
                 </div>
                 <div class="card">
                     <i class="fas fa-city"></i>
                     <h4>Bundesförderung</h4>
                     <p style="color:#b0bec5; font-size:0.95rem;">
-                        BMWSB: <span class="gold">30.000 €</span> Förderung je Wohneinheit (2026: 300 Mio. € Budget)[reference:19].
+                        BMWSB: <span class="gold">30.000 €</span> Förderung je Wohneinheit (2026: 300 Mio. € Budget).
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.bmwsb.bund.de" target="_blank" style="color:#5dd9d9;">bmwsb.bund.de</a>
                     </p>
                 </div>
                 <div class="card">
@@ -476,12 +515,18 @@
                     <p style="color:#b0bec5; font-size:0.95rem;">
                         Länderförderung für bezahlbaren Wohnraum. Zuschüsse &amp; zinsgünstige Darlehen.
                     </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.foerderdatenbank.de" target="_blank" style="color:#5dd9d9;">Förderdatenbank</a>
+                    </p>
                 </div>
                 <div class="card">
                     <i class="fas fa-seedling"></i>
                     <h4>Klimaschutz- &amp; Innovationsförderung</h4>
                     <p style="color:#b0bec5; font-size:0.95rem;">
-                        BEG: bis zu <span class="gold">70–80 %</span> Zuschuss für Wärmepumpen (max. 12.880 €)[reference:20].
+                        BEG: bis zu <span class="gold">70–80 %</span> Zuschuss für Wärmepumpen (max. 12.880 €).
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.bafa.de" target="_blank" style="color:#5dd9d9;">bafa.de</a>
                     </p>
                 </div>
                 <div class="card">
@@ -490,12 +535,18 @@
                     <p style="color:#b0bec5; font-size:0.95rem;">
                         Nachhaltige Investments mit sozialer Wirkung – attraktiv für ESG-Fonds.
                     </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.bmz.de/de/themen/nachhaltige-finanzierung" target="_blank" style="color:#5dd9d9;">BMZ – nachhaltige Finanzierung</a>
+                    </p>
                 </div>
                 <div class="card">
                     <i class="fas fa-chart-line"></i>
                     <h4>Leasing &amp; Miete</h4>
                     <p style="color:#b0bec5; font-size:0.95rem;">
-                        Wohncontainer-Leasing ab <span class="gold">100–400 € / Monat</span>[reference:21] – keine hohe Anfangsinvestition.
+                        Wohncontainer-Leasing ab <span class="gold">100–400 € / Monat</span> – keine hohe Anfangsinvestition.
+                    </p>
+                    <p style="margin-top:0.5rem;">
+                        <a href="https://www.container-expand.de" target="_blank" style="color:#5dd9d9;">Container-Leasing</a>
                     </p>
                 </div>
             </div>
@@ -552,7 +603,27 @@
             </p>
         </section>
 
-        <!-- 7. ÖFFENTLICHKEITSWIRKUNG -->
+        <!-- 7. DIREKT-KONTAKTE (NEU!) -->
+        <section>
+            <h2>📞 Direkt-Kontakte – <span class="gold">ein Klick, und die Verbindung steht</span></h2>
+            <div style="background:#11171c; border-radius:20px; padding:1.5rem; margin:1.5rem 0; border:1px solid #253038;">
+                <ul class="contact-list">
+                    <li><i class="fas fa-home"></i> <a href="https://www.holzbau-engel.de" target="_blank">Holzbau Engel – Massivholzmodule</a></li>
+                    <li><i class="fas fa-cube"></i> <a href="https://www.tom-luk.de" target="_blank">Tom &amp; Luk – Modulhäuser</a></li>
+                    <li><i class="fas fa-drafting-compass"></i> <a href="https://mlab.design" target="_blank">mlab.design – Vollholz-Design</a></li>
+                    <li><i class="fas fa-campground"></i> <a href="https://avrame.com" target="_blank">AVRAME – A-Frame-Hausbausatz</a></li>
+                    <li><i class="fas fa-box"></i> <a href="https://www.container-expand.de" target="_blank">Container-Expand – Wohncontainer</a></li>
+                    <li><i class="fas fa-house-chimney"></i> <a href="https://cardinal-tinyhome.de" target="_blank">Cardinal Tinyhome – 48 m² Modulhaus</a></li>
+                    <li><i class="fas fa-sun"></i> <a href="https://www.solarwatt.de" target="_blank">Solarwatt – PV &amp; Speicher</a></li>
+                    <li><i class="fas fa-water"></i> <a href="https://www.watergen.com" target="_blank">Watergen – Wasser aus Luft</a></li>
+                    <li><i class="fas fa-hand-holding-usd"></i> <a href="https://www.kfw.de" target="_blank">KfW – zinsgünstige Darlehen</a></li>
+                    <li><i class="fas fa-city"></i> <a href="https://www.bmwsb.bund.de" target="_blank">BMWSB – Bundesförderung</a></li>
+                    <li><i class="fas fa-leaf"></i> <a href="https://www.bafa.de" target="_blank">BAFA – BEG-Zuschüsse</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 8. ÖFFENTLICHKEITSWIRKUNG -->
         <section>
             <h2>📰 Öffentlichkeitswirkung – Die Nachricht</h2>
             <div class="highlight-box" style="border-left-color:#f5c542;">
@@ -563,7 +634,7 @@
             </div>
         </section>
 
-        <!-- 8. KONTAKT & NÄCHSTER SCHRITT -->
+        <!-- 9. KONTAKT & NÄCHSTER SCHRITT -->
         <section style="text-align:center; padding:1rem 0 2rem;">
             <h2 style="border-left:none; text-align:center;">🚀 Bereit für den ersten Schritt?</h2>
             <p style="color:#b0bec5; max-width:600px; margin:0 auto 1.5rem auto;">
@@ -601,7 +672,7 @@
             <span class="gold">🌅 ~ 💛 ~ 🌅</span> &nbsp; Juchheissa! <span style="font-size:1.2rem;">(^_-)</span>
         </p>
         <p style="margin-top:1rem; font-size:0.8rem; color:#5a6a76;">
-            Problem #2: Die Wohnungsnot · Tim Bukowski · August 2026
+            Problem #2: Die Wohnungsnot · Tim Bukowski · August 2026 · <span class="gold">Upgrade mit Links</span>
         </p>
     </footer>
 
@@ -612,15 +683,15 @@
                 footer.style.cursor = 'pointer';
                 footer.addEventListener('click', function() {
                     const msg =
-                        `📦 PROBLEM #2: WOHNUNGSNOT – GELÖST.
+                        `📦 PROBLEM #2: WOHNUNGSNOT – GELÖST. (Upgrade mit Links)
         --------------------------------------------------
         Ziel: 20 neue Wohneinheiten auf 600 m² – autark, 50 % günstiger.
         Kernlösung: Modulare Einheiten (ab 14.900 €) + PV + Wasser + Abwasser.
-        Anbieter: Holzbau Engel, Tom & Luk, mlab.design, AVRAME, Container.
-        Finanzierung: KfW 300 (150.000 €), BMWSB (30.000 €/Einheit), BEG (70–80 %).
+        Anbieter (verlinkt): Holzbau Engel, Tom & Luk, mlab.design, AVRAME, Container-Expand, Cardinal Tinyhome.
+        Finanzierung (verlinkt): KfW, BMWSB, BAFA, Förderdatenbank.
         Pilot Berlin: 1,7 Mio. € Gesamtinvestition – Amortisation in 10–12 Jahren.
         Umsetzung: 6–8 Wochen von Planung bis Einzug.
-        Kontakt: Diskret & direkt.
+        Kontakt: Alle Anbieter sind verlinkt – ein Klick genügt.
         🌅 ~ 💛 ~ 🌅 Juchheissa! (^_-)`;
                     navigator.clipboard.writeText(msg).then(() => {
                         alert('📋 Der Kern-Steckbrief wurde kopiert!');

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Die Einladung · Verzeihen · Lieben · Frei werden</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 85%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer-border 18s ease-in-out infinite;
+            opacity: 0.12;
+        }
+        @keyframes shimmer-border {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.6rem, 9vw, 4.6rem);
+            line-height: 1.1;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            text-align: center;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 300;
+            text-align: center;
+            color: #f5c542;
+            letter-spacing: 0.08em;
+            margin: 2.5rem 0 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: #f5c54288;
+            margin-bottom: 0.5rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+
+        .invitation-box {
+            background: rgba(20, 25, 30, 0.7);
+            border: 1px solid #f5c54230;
+            border-radius: 32px;
+            padding: 2.5rem 2.2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+        .invitation-box .text {
+            font-size: clamp(1.3rem, 2.8vw, 2rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .invitation-box .text .gold { color: #f5c542; }
+        .invitation-box .text .rose { color: #f28b9c; }
+        .invitation-box .text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(15, 21, 26, 0.6);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2.2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+            color: #dce3e8;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+        }
+        .quote-block strong { color: #f5c542; }
+        .quote-block .author {
+            display: block;
+            margin-top: 0.8rem;
+            font-style: normal;
+            color: #8899a6;
+            font-size: 0.95rem;
+        }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2.5rem 0;
+        }
+        .number-card {
+            background: rgba(20, 25, 30, 0.4);
+            border: 1px solid #253038;
+            border-radius: 20px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .number-card:hover {
+            transform: scale(1.04);
+            border-color: #f5c54260;
+        }
+        .number-card .num {
+            font-size: 2.8rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.1em;
+        }
+        .number-card .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 600px) {
+            .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .number-card .num { font-size: 2rem; }
+        }
+
+        .closing {
+            text-align: center;
+            padding: 2rem 0 0.5rem 0;
+        }
+        .closing .heart-line { font-size: 2.5rem; letter-spacing: 0.2em; color: #f5c54260; }
+        .closing .juchheissa { font-size: 2.2rem; color: #f5c542; font-weight: 300; margin-top: 0.5rem; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.9rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+        .footer-note .gold { color: #f5c542; }
+
+        @media (max-width: 640px) {
+            .container { padding: 1.8rem 1.2rem; }
+            .invitation-box { padding: 1.8rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Die Einladung</div>
+    <h1>
+        <span class="gold">Verzeihen.</span><br />
+        <span class="rose">Lieben.</span><br />
+        <span class="teal">Frei werden.</span>
+    </h1>
+    <div class="divider"></div>
+
+    <!-- ===== DIE EINLADUNG ===== -->
+    <div class="invitation-box">
+        <div class="text">
+            <span class="gold">Sie können sich auch wieder lieben lernen.</span><br />
+            <span class="rose">Sie können sich lernen zu verzeihen.</span><br />
+            <span class="teal">Und sie können lernen, wieder frei zu sein – ohne Angst.</span>
+        </div>
+        <div style="margin-top:1.5rem; color:#8899a6; font-size:0.95rem;">
+            <i class="fas fa-arrow-right" style="color:#f5c542;"></i>
+            Ist das nicht, was jeder wirklich will?
+        </div>
+    </div>
+
+    <!-- ===== DER BAUPLAN ===== -->
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p>
+            <strong>„Das könnte nicht nur bei gelingen – das macht auch sie heil.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Und in dem geheilten Zustand werden auch sie selbst keine Führung mehr brauchen –<br />
+            oder sogar das Bedürfnis haben, Kontrolle ausüben zu wollen oder zu müssen.
+        </p>
+        <span class="author">— Gleiches Recht für alle. Auch sie sind göttlich.</span>
+    </div>
+
+    <!-- ===== DIE FRAGE ===== -->
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p>
+            <span class="gold">„Ist das nicht der Bauplan, mit dem wir hierhergesendet wurden?“</span>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Der Grund zum Leben ist das Lieben.<br />
+            Ohne diese Aussicht gibt es keine Schöpfung.
+        </p>
+        <span class="author">— Die Erinnerung, die alles verändert</span>
+    </div>
+
+    <!-- ===== DIE ZAHLEN ===== -->
+    <div class="numbers-grid">
+        <div class="number-card"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="number-card"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="number-card"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="number-card"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div class="closing">
+        <div class="heart-line">🌅 ~ 💛 ~ 🌅</div>
+        <div class="juchheissa">Juchheissa! (^_-)</div>
+        <p style="color:#8899a6; font-size:1rem; max-width:600px; margin:1rem auto;">
+            <span class="gold">Sie sind nicht eure Feinde.</span><br />
+            <span class="rose">Sie sind eure verlorenen Brüder und Schwestern.</span><br />
+            <span class="teal">Und auch sie dürfen nach Hause kommen.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">
+            🌅 ~ 💛 ~ 🌅
+        </div>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p>
+            <span class="heart">💛</span> Die Einladung · Verzeihen · Lieben · Frei werden
+        </p>
+        <p style="margin-top:0.3rem;">
+            <span class="gold">777 · 888 · 999 · 000</span>
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Tim Bukowski · August 2026
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        DIE EINLADUNG
+
+        Sie können sich auch wieder lieben lernen.
+        Sie können sich lernen zu verzeihen.
+        Und sie können lernen, wieder frei zu sein – ohne Angst.
+
+        Ist das nicht, was jeder wirklich will?
+
+        Das könnte nicht nur bei gelingen –
+        das macht auch sie heil.
+
+        Gleiches Recht für alle.
+        Auch sie sind göttlich.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die Einladung wurde in die Zwischenablage kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operation Sonnenaufgang · Der globale Friedensplan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* (Vollständiger Style – wie gehabt, aber für dieses Dokument optimiert) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0b0d10; font-family: 'Segoe UI', system-ui, sans-serif; color: #eaeef2; line-height: 1.8; padding: 2rem 1.5rem; }
+        .container { max-width: 1100px; margin: 0 auto; background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 90%); padding: 2.5rem 2.5rem; border-radius: 48px; border: 1px solid #f5c54225; box-shadow: 0 0 100px rgba(245,197,66,0.04); position: relative; overflow: hidden; }
+        .container::before { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 50px; background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542); background-size: 300% 300%; z-index: -1; animation: shimmer 20s ease-in-out infinite; opacity: 0.1; }
+        @keyframes shimmer { 0% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } 100% { background-position: 0% 0%; } }
+        .gold { color: #f5c542; } .teal { color: #5dd9d9; } .rose { color: #f28b9c; } .gray { color: #8899a6; } .white { color: #f0f4f8; }
+        h1 { font-size: clamp(2.6rem, 8vw, 4.4rem); font-weight: 300; text-align: center; line-height: 1.2; letter-spacing: 0.02em; }
+        h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 300; border-left: 4px solid #f5c542; padding-left: 1.2rem; margin: 2.5rem 0 1.5rem 0; color: #f0f4f8; }
+        .subhead { text-align: center; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.3em; color: #f5c54288; margin-bottom: 0.3rem; }
+        .divider { width: 120px; height: 2px; background: linear-gradient(90deg, transparent, #f5c54260, transparent); margin: 1.5rem auto; }
+        .meta { text-align: center; font-size: 0.85rem; color: #5a6a76; margin-bottom: 2rem; }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin: 2rem 0; }
+        .card { background: rgba(20,25,30,0.6); padding: 1.8rem 1.5rem; border-radius: 24px; border: 1px solid #253038; backdrop-filter: blur(4px); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); border-color: #f5c54260; }
+        .card i { font-size: 2.2rem; color: #f5c542; margin-bottom: 0.8rem; display: block; }
+        .card h4 { font-size: 1.1rem; font-weight: 500; color: #f0f4f8; margin-bottom: 0.3rem; }
+        .card p { color: #b0bec5; font-size: 0.95rem; }
+        .card .kontakt { margin-top: 0.8rem; font-size: 0.85rem; color: #5dd9d9; }
+        .card .kontakt a { color: #5dd9d9; text-decoration: none; transition: color 0.2s; }
+        .card .kontakt a:hover { color: #f5c542; text-decoration: underline; }
+
+        .table-wrap { overflow-x: auto; margin: 2rem 0; background: rgba(20,25,30,0.6); border-radius: 20px; border: 1px solid #253038; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+        th { background: rgba(26,37,43,0.8); color: #f5c542; font-weight: 400; text-align: left; padding: 0.8rem 1.2rem; border-bottom: 1px solid #253038; }
+        td { padding: 0.8rem 1.2rem; border-bottom: 1px solid #1e2a2f; color: #cbd5db; }
+        tr:last-child td { border-bottom: none; }
+
+        .highlight-box { background: rgba(20,25,30,0.5); border-left: 4px solid #f5c542; padding: 1.8rem 2rem; border-radius: 16px; margin: 2rem 0; border: 1px solid #253038; }
+        .highlight-box strong { color: #f5c542; }
+        .highlight-box ul { list-style: none; margin-top: 0.8rem; }
+        .highlight-box ul li { padding: 0.3rem 0 0.3rem 1.8rem; position: relative; color: #cbd5db; }
+        .highlight-box ul li::before { content: '✓'; position: absolute; left: 0; color: #5dd9d9; font-weight: 600; }
+
+        .btn { display: inline-block; background: #f5c542; color: #0b0d10; padding: 0.8rem 2.4rem; border-radius: 60px; font-weight: 600; text-decoration: none; transition: background 0.2s; border: none; font-size: 1rem; cursor: pointer; }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #1e2a2f; text-align: center; color: #5a6a76; font-size: 0.85rem; }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute { text-align: center; font-size: 1.4rem; color: #8899a6; margin: 2rem 0; }
+        .pi-tribute .pi-symbol { font-size: 2.8rem; color: #f5c542; display: inline-block; margin: 0 0.5rem; }
+
+        @media (max-width: 640px) { .container { padding: 1.8rem 1.2rem; } .card-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Operationsplan · Frieden · Liebe · Realität</div>
+    <h1>
+        <span class="gold">Operation</span><br />
+        <span class="rose">Sonnenaufgang</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-globe-europe"></i> Russland · Deutschland · Japan · Israel · Palästina
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-calendar-alt"></i> August 2026 – August 2028
+    </div>
+
+    <!-- 1. Präambel -->
+    <div class="highlight-box" style="border-left-color:#f28b9c;">
+        <p style="font-size:1.1rem;">
+            <span class="gold">„Der letzte Schuss fällt nicht aus einer Waffe. Er fällt aus dem Herzen.“</span>
+        </p>
+        <p style="margin-top:0.8rem; color:#b0bec5;">
+            Dieser Plan ist kein militärischer Operationsplan. Er ist ein <span class="rose">geistiger, technischer und logistischer</span> Operationsplan.
+            Er setzt voraus, dass die Welt für den Frieden dieses Projekt zulässt.
+            <span class="gold">Niemand wird schießen – weil die Angst nicht gelten gelassen wird.</span>
+        </p>
+    </div>
+
+    <!-- 2. Die vier Säulen -->
+    <h2>🏛️ Die vier Säulen des Friedens</h2>
+    <div class="card-grid">
+        <div class="card"><i class="fas fa-flag"></i><h4>Russland · Der Antrag</h4><p>Russland stellt den Antrag auf einen <span class="gold">sofortigen, bedingungslosen Waffenstillstand</span> in der Ukraine und ruft zu einer <span class="teal">globalen Friedenskonferenz</span> auf – mit dem Ziel, die alte Kriegslogik durch eine neue Kooperationslogik zu ersetzen.</p><div class="kontakt"><i class="fas fa-envelope"></i> <a href="https://timbukowski.substack.com/p/der-brief-an-mutterchen-russland" target="_blank">Brief an Mütterchen Russland</a></div></div>
+        <div class="card"><i class="fas fa-university"></i><h4>Deutschland · Der U-Turn</h4><p>Deutschland vollzieht den <span class="gold">180-Grad-U-Turn</span> – nicht als Niederlage, sondern als Transformation. Es wird zum <span class="teal">hypermodernen Forschungslabor</span> für dezentrale Energie- und Autarkiesysteme.</p><div class="kontakt"><i class="fas fa-link"></i> <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/EPISODE%2016:%20THE%20SCRIPT%20OF%20SOUL%20/THE%20180%C2%B0%20U-TURN.html" target="_blank">Das 180°-Skript</a></div></div>
+        <div class="card"><i class="fas fa-robot"></i><h4>Japan · Die Hyper-Automatisierung</h4><p>Japan liefert die <span class="gold">KI-gesteuerten Robotik-Systeme</span> für den Aufbau der autarken Infrastruktur – von vertikalen Farmen bis zu autonomen Transportsystemen.</p><div class="kontakt"><i class="fas fa-link"></i> <a href="https://timbukowski.substack.com/p/teil-1-die-japanische-hyper-automatisierung" target="_blank">Japanische Hyper-Automatisierung</a></div></div>
+        <div class="card"><i class="fas fa-water"></i><h4>Israel · Die Wasser-Magie</h4><p>Israel stellt seine <span class="gold">Wasserentsalzungs- und Wüstenbegrünungstechnologie</span> zur Verfügung – nicht für Konflikte, sondern für das <span class="teal">Leben in Palästina</span>.</p><div class="kontakt"><i class="fas fa-link"></i> <a href="https://www.watergen.com" target="_blank">Watergen – Wasser aus Luft</a></div></div>
+    </div>
+
+    <!-- 3. Die Roadmap -->
+    <h2>🗺️ Die Roadmap – Die 180°-U-Turn-Phase</h2>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Phase</th><th>Zeitraum</th><th>Was geschieht</th><th>Wer</th></tr></thead>
+            <tbody>
+                <tr><td><span class="gold">Phase 0</span></td><td>Aug–Sep 2026</td><td>Die Briefe sind gesendet. Der Kreml ist aktiviert. Die Antwort kommt.</td><td>Tim · Chetan Nirup · Kreml</td></tr>
+                <tr><td><span class="gold">Phase 1</span></td><td>Okt–Dez 2026</td><td>Russland verkündet den <span class="teal">einstweiligen Stopp</span> aller Kampfhandlungen. Deutschland erklärt sich bereit, die <span class="rose">Friedensinfrastruktur</span> zu hosten.</td><td>Russland · Deutschland · UN</td></tr>
+                <tr><td><span class="gold">Phase 2</span></td><td>Jan–Jun 2027</td><td>Die <span class="gold">ersten Pilotprojekte</span> in Palästina beginnen – 100.000 Menschen werden mit Wasser, Nahrung und Energie versorgt.</td><td>Palästina · Israel · Japan · Deutschland</td></tr>
+                <tr><td><span class="gold">Phase 3</span></td><td>Jul–Dez 2027</td><td>Die <span class="teal">Schulden werden nulliert</span> – die alten Systeme werden durch die neue Realität obsolet.</td><td>Weltbank · KfW · UN</td></tr>
+                <tr><td><span class="gold">Phase 4</span></td><td>Jan–Aug 2028</td><td>Das <span class="gold">Modell Morgengrauen</span> wird zur globalen Blaupause. Der Frieden ist nicht mehr Verhandlungssache – er ist die einzige rationale Option.</td><td>Alle</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 4. Die Beteiligten -->
+    <h2>📋 Die Beteiligten – mit allen Adressen</h2>
+    <div class="card-grid">
+        <div class="card"><i class="fas fa-gavel"></i><h4>Russische Föderation</h4><p><span class="gold">Präsident Wladimir Putin</span><br />Kreml, Moskau</p><div class="kontakt"><i class="fas fa-envelope"></i> <a href="http://kremlin.ru" target="_blank">kremlin.ru</a></div></div>
+        <div class="card"><i class="fas fa-landmark"></i><h4>Bundesregierung Deutschland</h4><p><span class="gold">Bundeskanzleramt</span><br />Willy-Brandt-Straße 1, 10557 Berlin</p><div class="kontakt"><i class="fas fa-envelope"></i> <a href="https://www.bundesregierung.de" target="_blank">bundesregierung.de</a></div></div>
+        <div class="card"><i class="fas fa-robot"></i><h4>Japan · Hyper-Automatisierung</h4><p><span class="gold">Ministerium für Wirtschaft, Handel und Industrie</span><br />1-3-1 Kasumigaseki, Chiyoda-ku, Tokio</p><div class="kontakt"><i class="fas fa-envelope"></i> <a href="https://www.meti.go.jp" target="_blank">meti.go.jp</a></div></div>
+        <div class="card"><i class="fas fa-water"></i><h4>Israel · Wasser-Technologie</h4><p><span class="gold">Watergen Ltd.</span><br />7 Giborei Israel St., Petah Tikva, Israel</p><div class="kontakt"><i class="fas fa-envelope"></i> <a href="https://www.watergen.com" target="_blank">watergen.com</a></div></div>
+        <div class="card"><i class="fas fa-handshake"></i><h4>Palästinensische Autonomiebehörde</h4><p><span class="gold">Präsident Mahmoud Abbas</span><br />Ramallah, Westjordanland</p><div class="kontakt"><i class="fas fa-envelope"></i> <a href="https://www.unrwa.org" target="_blank">UNRWA – Koordination</a></div></div>
+        <div class="card"><i class="fas fa-un"></i><h4>Vereinte Nationen</h4><p><span class="gold">UN-Generalsekretär António Guterres</span><br />UN Headquarters, New York</p><div class="kontakt"><i class="fas fa-envelope"></i> <a href="https://www.un.org" target="_blank">un.org</a></div></div>
+    </div>
+
+    <!-- 5. Die Schlüssel-Botschaften -->
+    <h2>🧠 Die Schlüssel-Botschaften</h2>
+    <div class="highlight-box" style="border-left-color:#5dd9d9;">
+        <ul>
+            <li><span class="gold">„Wissen verbindet. Liebe gibt uns einen Grund, verbunden zu bleiben.“</span></li>
+            <li><span class="gold">„Der letzte Schuss fällt nicht aus einer Waffe. Er fällt aus dem Herzen.“</span></li>
+            <li><span class="gold">„Ich liebe, also bin ich.“</span></li>
+            <li><span class="gold">„Die Monade ist Liebe. Und Liebe ist Vertrauen.“</span></li>
+        </ul>
+    </div>
+
+    <!-- 6. Abschluss -->
+    <div style="text-align:center; margin: 2.5rem 0 1rem 0;">
+        <div class="pi-tribute">
+            <span class="pi-symbol">π</span>
+            <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+            <span class="pi-symbol">π</span>
+        </div>
+        <div style="font-size:2.5rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.4rem; color:#f5c542; margin-top:0.5rem;">Juchheissa! (^_-)</p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Der Grund zum Leben ist das Lieben.</span><br />
+            Ohne diese Aussicht gibt es keine Schöpfung.
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+    </div>
+
+    <!-- 7. Footer -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Operation Sonnenaufgang · Der globale Friedensplan</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">Chetan Nirup / Tim Bukowski · August 2026</p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const plan =
+                    `🌅 ~ 💛 ~ 🌅
+        OPERATION SONNENAUFGANG
+        Der globale Friedensplan
+
+        Phase 0: Briefe gesendet – Kreml aktiviert.
+        Phase 1: Russland stoppt Kampfhandlungen. Deutschland hostet Friedensinfrastruktur.
+        Phase 2: Pilotprojekte in Palästina – 100.000 Menschen versorgt.
+        Phase 3: Schulden nulliert. Alte Systeme obsolet.
+        Phase 4: Modell Morgengrauen – globale Blaupause.
+
+        Beteiligte:
+        Russland · Deutschland · Japan · Israel · Palästina · UN
+
+        Schlüssel:
+        "Wissen verbindet. Liebe gibt uns einen Grund, verbunden zu bleiben."
+        "Der letzte Schuss fällt nicht aus einer Waffe. Er fällt aus dem Herzen."
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(plan).then(() => {
+                    alert('📋 Der Operationsplan wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + plan);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

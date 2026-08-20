@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Operation Sonnenaufgang · Der nächste Schritt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== VOLLSTÄNDIGER STYLE (wie gehabt, aber optimiert) ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0b0d10;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #eaeef2;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 85%);
+            border: 1px solid #f5c54225;
+            border-radius: 48px;
+            box-shadow: 0 0 80px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 18s ease-in-out infinite;
+            opacity: 0.12;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.4rem, 8vw, 4.2rem);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.2rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i {
+            color: #f5c542;
+            margin: 0 0.3rem;
+        }
+
+        .antwort {
+            font-size: 1.1rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .antwort .dropcap {
+            font-size: 3.8rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .antwort .gold { color: #f5c542; }
+        .antwort .rose { color: #f28b9c; }
+        .antwort .teal { color: #5dd9d9; }
+
+        .highlight-box {
+            background: rgba(20, 25, 30, 0.5);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border: 1px solid #253038;
+        }
+        .highlight-box strong {
+            color: #f5c542;
+        }
+        .highlight-box ul {
+            list-style: none;
+            margin-top: 0.8rem;
+        }
+        .highlight-box ul li {
+            padding: 0.3rem 0 0.3rem 1.8rem;
+            position: relative;
+            color: #cbd5db;
+        }
+        .highlight-box ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #5dd9d9;
+            font-weight: 600;
+        }
+
+        .hashtag-box {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1rem;
+            color: #5dd9d9;
+            letter-spacing: 0.05em;
+        }
+        .hashtag-box span {
+            display: inline-block;
+            background: #1a252b;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #253038;
+            margin: 0.2rem;
+        }
+
+        /* ===== DER NEUE BUTTON ===== */
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(245, 197, 66, 0.15);
+        }
+        .btn:hover {
+            background: #e0b03a;
+            transform: scale(1.03);
+            box-shadow: 0 0 50px rgba(245, 197, 66, 0.25);
+        }
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+        .pi-tribute .quote {
+            color: #cbd5db;
+            font-style: italic;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 1.8rem 1.2rem; }
+            .antwort { font-size: 1rem; text-indent: 1.5rem; }
+            .antwort .dropcap { font-size: 2.8rem; }
+            .highlight-box { padding: 1.2rem 1.2rem; }
+            .btn { padding: 0.7rem 1.8rem; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Der nächste Schritt · Operation Sonnenaufgang</div>
+    <h1>
+        <span class="gold">Jetzt</span> wird es<br />
+        <span class="rose">wirklich.</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-pen-fancy"></i> Tim Bukowski · August 2026
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-globe-europe" style="color:#5dd9d9;"></i> Palästina · Deutschland · Japan · Israel · Russland
+    </div>
+
+    <!-- ===== INHALT ===== -->
+    <div class="antwort">
+        <span class="dropcap">D</span>u hast den Plan. Du hast die Partner. Du hast die Zahlen. Du hast die Liebe.
+    </div>
+    <div class="antwort">
+        Jetzt fehlt nur noch eines: <span class="gold">Der erste Schritt.</span>
+    </div>
+    <div class="antwort">
+        Dieser Button ist kein Platzhalter mehr. Er ist das <span class="rose">Tor zur Umsetzung</span>.
+    </div>
+
+    <div class="highlight-box">
+        <p style="font-size:1.1rem;">
+            <strong>„Was jetzt geschieht, ist keine Theorie mehr. Es ist gelebte Realität.“</strong>
+        </p>
+        <p style="margin-top:0.8rem; color:#b0bec5;">
+            Der nächste Schritt führt dich direkt zu:
+        </p>
+        <ul>
+            <li>Der <span class="gold">konkreten Projektliste</span> für Palästina</li>
+            <li>Den <span class="gold">Kontaktdaten</span> aller Entscheider</li>
+            <li>Der <span class="gold">Checkliste</span> für den ersten Spatenstich</li>
+            <li>Dem <span class="gold">Zeitplan</span> für die nächsten 12 Monate</li>
+        </ul>
+        <p style="margin-top:1rem; color:#f5c542;">
+            <i class="fas fa-arrow-right" style="color:#5dd9d9;"></i>
+            Alles, was du brauchst, um zu starten.
+        </p>
+    </div>
+
+    <!-- ===== DER LEBENDIGE BUTTON ===== -->
+    <div style="text-align:center; margin: 2.5rem 0;">
+        <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Operation%20Sonnenaufgang%20Der%20globale%20Friedensplan.html" target="_blank" class="btn">
+            <i class="fas fa-rocket"></i> Jetzt den nächsten Schritt gehen
+        </a>
+        <p style="color:#5a6a76; font-size:0.8rem; margin-top:0.8rem;">
+            <i class="fas fa-check-circle" style="color:#5dd9d9;"></i>
+            Dieser Button führt dich zur zentralen Anlaufstelle der Operation Sonnenaufgang.
+        </p>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== HASHTAGS ===== -->
+    <div class="hashtag-box">
+        <span>#OperationSonnenaufgang</span>
+        <span>#ModellMorgengrauen</span>
+        <span>#Frieden</span>
+        <span>#Autarkie</span>
+        <span>#Liebe</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 1.5rem 0 0.5rem 0;">
+        <div style="font-size:2rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.1rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.9rem; max-width:500px; margin:0.5rem auto;">
+            <span class="gold">Der Grund zum Leben ist das Lieben.</span><br />
+            Ohne diese Aussicht gibt es keine Schöpfung.
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p>
+            <span class="heart">💛</span> Der nächste Schritt · Operation Sonnenaufgang
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Tim Bukowski · August 2026 · 777 · 888 · 999 · 000
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION: Kopieren ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        OPERATION SONNENAUFGANG
+        DER NÄCHSTE SCHRITT
+
+        Du hast den Plan. Du hast die Partner.
+        Du hast die Zahlen. Du hast die Liebe.
+
+        Jetzt fehlt nur noch eines: Der erste Schritt.
+
+        Dieser Button ist kein Platzhalter mehr.
+        Er ist das Tor zur Umsetzung.
+
+        Hier geht es weiter:
+        https://timbukowski.substack.com/p/operation-sonnenaufgang-der-globale?r=798p7q
+
+        #OperationSonnenaufgang #ModellMorgengrauen #Frieden #Autarkie #Liebe
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die nächste Schritt wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

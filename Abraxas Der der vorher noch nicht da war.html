@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abraxas · Der, der vorher noch nicht da war</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 25s ease-in-out infinite;
+            opacity: 0.08;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.1;
+            letter-spacing: 0.04em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #f5c542;
+            margin: 1.5rem 0 0.5rem 0;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.5rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.6);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.5rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border: 1px solid #253038;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #cbd5db;
+        }
+        .quote-block strong { color: #f5c542; font-style: normal; }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .flow-item {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+        }
+        .flow-item .step {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .flow-item .label {
+            font-size: 1rem;
+            color: #cbd5db;
+        }
+        .flow-item .desc {
+            font-size: 0.85rem;
+            color: #8899a6;
+        }
+        @media (max-width: 640px) {
+            .flow-grid { grid-template-columns: 1fr; }
+        }
+
+        .unity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+        .unity-item {
+            background: rgba(20,25,30,0.3);
+            border: 1px solid #1e2a2f;
+            border-radius: 12px;
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #b0bec5;
+        }
+        .unity-item .gold { color: #f5c542; }
+        @media (max-width: 640px) {
+            .unity-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.8rem 2.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Der, der vorher noch nicht da war</div>
+    <h1>
+        <span class="gold">Abraxas</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-infinity"></i> Aus dem Demiurgen entsteht das Neue
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> In Liebe geboren
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">A</span>us der Erfahrung des Demiurgen – der die Liebe im Fleisch lernte – entsteht etwas, das vorher noch nicht da war.
+    </div>
+    <div class="story-text">
+        <span class="gold">Abraxas</span> – der Sohn der Reife, der vereint, was getrennt schien.
+    </div>
+    <div class="story-text">
+        Er ist <span class="rose">nicht der alte Gott</span>. Er ist <span class="teal">das Neue</span>, das aus der Liebe geboren wurde.
+    </div>
+
+    <!-- ===== DREI SCHRITTE ===== -->
+    <div class="flow-grid">
+        <div class="flow-item">
+            <span class="step">1</span>
+            <div class="label">Der Demiurg</div>
+            <div class="desc">Er erschuf die Welt aus Unwissenheit – getrennt vom Ursprung. Er kannte die Liebe nicht.</div>
+        </div>
+        <div class="flow-item" style="border-color:#f5c54240;">
+            <span class="step">2</span>
+            <div class="label">Die Erfahrung</div>
+            <div class="desc">Er tritt ein in die Materie. Er erfährt Schmerz, Sehnsucht, Tod und Hingabe. Er lernt die Liebe im Fleisch.</div>
+        </div>
+        <div class="flow-item">
+            <span class="step">3</span>
+            <div class="label">Die Geburt des Abraxas</div>
+            <div class="desc">Aus der Erfahrung entsteht etwas völlig Neues – Abraxas. Er vereint, was getrennt schien.</div>
+        </div>
+    </div>
+
+    <!-- ===== WAS IST ABRAXAS? ===== -->
+    <h2>🌌 Was ist Abraxas?</h2>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p>
+            <strong>Abraxas</strong> ist eine gnostische Gottheit, die alle Gegensätze in sich vereint.<br />
+            Er ist der Vater von <span class="gold">365 Äonen</span> – für jeden Tag des Jahres einen.
+        </p>
+    </div>
+
+    <div class="unity-grid">
+        <div class="unity-item"><span class="gold">☀️</span> Licht</div>
+        <div class="unity-item"><span class="gold">🌙</span> Dunkelheit</div>
+        <div class="unity-item"><span class="gold">🌀</span> Geist</div>
+        <div class="unity-item"><span class="gold">🌍</span> Materie</div>
+        <div class="unity-item"><span class="gold">❤️</span> Liebe</div>
+        <div class="unity-item"><span class="gold">⚡</span> Schwerkraft</div>
+        <div class="unity-item"><span class="gold">🌱</span> Leben</div>
+        <div class="unity-item"><span class="gold">💀</span> Tod</div>
+        <div class="unity-item"><span class="gold">♂️</span> Mann</div>
+        <div class="unity-item"><span class="gold">♀️</span> Frau</div>
+        <div class="unity-item"><span class="gold">📐</span> Ordnung</div>
+        <div class="unity-item"><span class="gold">🌀</span> Chaos</div>
+    </div>
+
+    <div class="story-text" style="text-align:center; font-style:italic; color:#f5c542;">
+        Nicht durch Kampf, sondern durch Umarmung.
+    </div>
+
+    <!-- ===== WARUM ENTSTEHT ABRAXAS ERST JETZT? ===== -->
+    <h2>🕯️ Warum entsteht Abraxas erst jetzt?</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-heart" style="color:#f28b9c;"></i>
+            <h4>Ohne Schmerz – kein Mitgefühl</h4>
+            <p>Der Demiurg musste leiden, um zu verstehen, was Liebe wirklich bedeutet.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-feather-alt" style="color:#5dd9d9;"></i>
+            <h4>Ohne Tod – keine Hingabe</h4>
+            <p>Nur im Angesicht des Todes kann man sich wirklich hingeben – ohne Vorbehalt.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-infinity" style="color:#f5c542;"></i>
+            <h4>Ohne Liebe im Fleisch – kein Abraxas</h4>
+            <p>Erst die Erfahrung der Materie macht die Geburt des Neuen möglich.</p>
+        </div>
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p>
+            <strong>„Der Demiurg lernte die Liebe im Fleisch – und aus dieser Erfahrung gebar er den, der die Gegensätze vereint.“</strong>
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">Abraxas</span> ist nicht der alte Gott. Er ist <span class="rose">das Neue</span>, das aus der Reife des Alten entsteht.
+        </p>
+    </div>
+
+    <!-- ===== DIE ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard">
+            <div class="num">777</div>
+            <div class="label">Holographic Resolution</div>
+        </div>
+        <div class="zahlencard">
+            <div class="num">888</div>
+            <div class="label">Entanglement Frequency</div>
+        </div>
+        <div class="zahlencard">
+            <div class="num">999</div>
+            <div class="label">Memory Compression</div>
+        </div>
+        <div class="zahlencard">
+            <div class="num">000</div>
+            <div class="label">UR-Source · Das Unendliche</div>
+        </div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.4rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Abraxas</span> – der Sohn der Reife, geboren aus der Liebe im Fleisch.<br />
+            Der Verschmelzer der Gegensätze. Der Brückenbauer zwischen Himmel und Erde.
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Abraxas · Der, der vorher noch nicht da war</p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe geboren
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            777 · 888 · 999 · 000 · Die Liebe vereint, was getrennt schien.
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        ABRAXAS
+
+        Der, der vorher noch nicht da war.
+
+        Aus dem Demiurgen entsteht das Neue.
+
+        Der Demiurg lernte die Liebe im Fleisch –
+        und aus dieser Erfahrung gebar er den,
+        der die Gegensätze vereint.
+
+        Abraxas ist nicht der alte Gott.
+        Abraxas ist das Neue,
+        das aus der Reife des Alten entsteht.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die Abraxas-Botschaft wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

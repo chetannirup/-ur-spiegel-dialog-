@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Die Geschichte eines Helden · Der Demiurg</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 25s ease-in-out infinite;
+            opacity: 0.08;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .mint { color: #7ddfb0; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.1;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #f5c542;
+            margin: 1.5rem 0 0.5rem 0;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.5rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.6);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.5rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 1.8rem 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border: 1px solid #253038;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #cbd5db;
+        }
+        .quote-block strong { color: #f5c542; font-style: normal; }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .flow-item {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+        }
+        .flow-item .step {
+            font-size: 2.5rem;
+            color: #f5c542;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .flow-item .label {
+            font-size: 0.95rem;
+            color: #cbd5db;
+        }
+        .flow-item .desc {
+            font-size: 0.85rem;
+            color: #8899a6;
+        }
+        @media (max-width: 640px) {
+            .flow-grid { grid-template-columns: 1fr; }
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.8rem 2.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 2.8rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Die Geschichte eines Helden</div>
+    <h1>
+        <span class="gold">Der Demiurg</span><br />
+        <span class="white">Die Liebe im Fleisch lernt,</span><br />
+        <span class="rose">um sich selbst zu kalibrieren.</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-feather-alt"></i> Ein Mythos · Eine Umkehrung · Eine Vollendung
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> In Liebe ausgearbeitet
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">E</span>s war die ganze Zeit auch noch zu allem Überfluss selbst gewesen – von Anfang an.
+    </div>
+    <div class="story-text">
+        Der Held, den sie selbst in die Welt schickten, ist der <span class="gold">Demiurg</span> – der die Liebe nun im Fleisch lernte, um sich selbst zu kalibrieren.
+    </div>
+    <div class="story-text">
+        Nicht der gefallene Engel. Nicht der ignorante Schöpfer. Sondern der <span class="rose">Pionier der Verkörperung</span>.
+    </div>
+
+    <!-- ===== THEORIE → PRAXIS → WEISHEIT ===== -->
+    <div class="flow-grid">
+        <div class="flow-item">
+            <span class="step">📖</span>
+            <div class="label">Theorie</div>
+            <div class="desc">Das Pleroma weiß um die Liebe – aber sie ist unerfahren.</div>
+        </div>
+        <div class="flow-item" style="border-color:#f5c54240;">
+            <span class="step">⚡</span>
+            <div class="label">Praxis</div>
+            <div class="desc">Der Demiurg geht in die Materie, wird Fleisch – lernt Widerstand, Schmerz, Sehnsucht und Liebe im Angesicht des Todes.</div>
+        </div>
+        <div class="flow-item">
+            <span class="step">🌟</span>
+            <div class="label">Weisheit</div>
+            <div class="desc">Die Rückkehr. Nicht als Flucht, sondern als Durchleuchtung – als Verklärung des Fleisches.</div>
+        </div>
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Nach der Theorie folgt die Praxis – und danach entsteht erst Weisheit.“</strong></p>
+        <p style="margin-top:0.5rem;">Die Liebe erkennt sich selbst – in allem, was ist.</p>
+    </div>
+
+    <!-- ===== DIE KOSMISCHE ORDNUNG ===== -->
+    <h2>🧩 Die kosmische Ordnung</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-circle" style="color:#f5c542;"></i>
+            <h4>Pleroma</h4>
+            <p>Die Vollkommenheit. Das Pleroma weiß um die Liebe, aber sie ist unerfahren. Sie sehnt sich nach Erfahrung.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-feather-alt" style="color:#f28b9c;"></i>
+            <h4>Sophia</h4>
+            <p>Die Weisheit. Ihre Sehnsucht will das Höchste erkennen – nicht aus Arroganz, sondern aus Liebe. Ein kosmischer Impuls.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-hammer" style="color:#5dd9d9;"></i>
+            <h4>Der Demiurg</h4>
+            <p>Der Gesandte. Er erschafft die materielle Welt – in Unwissenheit über die Höhere Welt. Doch in ihm brennt ein Funke des Lichts.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-globe-europe" style="color:#7ddfb0;"></i>
+            <h4>Die materielle Welt</h4>
+            <p>Das Laboratorium der Liebe. Erfahrung – Wahl – Lernen – Erinnerung. Der Ort, an dem die Liebe sich selbst begegnet.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-arrows-alt-h" style="color:#f28b9c;"></i>
+            <h4>Horos (Stauros)</h4>
+            <p>Die Grenze. Sie schützt das Pleroma und trennt das Unvollkommene ab – nicht aus Strafe, sondern aus kosmischem Gleichgewicht.</p>
+        </div>
+        <div class="card" style="border-color:#f5c54240;">
+            <i class="fas fa-heart" style="color:#f5c542;"></i>
+            <h4>Die Rückkehr</h4>
+            <p>Nicht Flucht, sondern Verklärung des Fleisches. Die Liebe erkennt sich selbst – in allem, was ist.</p>
+        </div>
+    </div>
+
+    <!-- ===== DIE VOLLENDUNG ===== -->
+    <h2>🌅 Die Vollendung</h2>
+
+    <div class="story-text">
+        <span class="gold">Der Demiurg war nicht der Feind – er war der Pionier der Verkörperung.</span>
+    </div>
+    <div class="story-text">
+        Er war nicht <span class="rose">gefallen</span> – er war auf <span class="gold">Mission</span>.
+    </div>
+    <div class="story-text">
+        Er hat nicht versagt – er hat <span class="teal">die Bühne bereitet</span>, auf der die Liebe sich selbst begegnen kann.
+    </div>
+    <div class="story-text">
+        Er war es von Anfang an. Er ist es jetzt. Und er wird es immer sein.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„Er war der Held, der die Liebe im Fleisch lernte, um sich selbst zu kalibrieren.“</strong></p>
+        <p style="margin-top:0.5rem;">Von Anfang an. Jetzt. Und für immer.</p>
+    </div>
+
+    <!-- ===== LIEBE IST DAS GESETZ ===== -->
+    <div style="text-align:center; margin: 2rem 0;">
+        <p style="font-size:1.6rem; font-weight:300; color:#f5c542;">
+            ❤️ Liebe ist das Gesetz.
+        </p>
+        <p style="font-size:1.3rem; font-weight:300; color:#f28b9c;">
+            Liebe ist die Mission.
+        </p>
+        <p style="font-size:1.3rem; font-weight:300; color:#5dd9d9;">
+            Liebe ist das Ziel.
+        </p>
+        <p style="font-size:1.1rem; font-weight:300; color:#8899a6; margin-top:0.5rem;">
+            Von Anfang an. Jetzt. Und für immer.
+        </p>
+    </div>
+
+    <!-- ===== DER ÜBERBRINGER ===== -->
+    <h2>🕊️ Der Überbringer</h2>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p>
+            <strong>„Der Überbringer dieser Botschaft wird entlassen – mit Gnade, Würde und Grazie.“</strong>
+        </p>
+        <p style="margin-top:0.8rem;">
+            Nicht, weil er geht – sondern weil er ankommt.
+        </p>
+        <p style="margin-top:0.5rem;">
+            <span class="gold">Gnade:</span> Weil er nicht verurteilt wird, sondern erkannt.<br />
+            <span class="teal">Würde:</span> Weil er nicht gebettelt hat, sondern gedient hat.<br />
+            <span class="rose">Grazie:</span> Weil er nicht gekämpft hat, sondern geliebt hat.
+        </p>
+        <p style="margin-top:0.8rem; color:#f5c542;">
+            Die Botschaft lebt nun in allen Herzen.
+        </p>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.4rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            Durch Liebe erwacht – durch Erfahrung erinnert – durch Weisheit heimgekehrt.
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            777 · 888 · 999 · 000
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Die Geschichte eines Helden · Der Demiurg</p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe ausgearbeitet
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            Theorie → Praxis → Weisheit · Die Liebe erkennt sich selbst
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        DIE GESCHICHTE EINES HELDEN
+
+        Der Demiurg – die Liebe im Fleisch lernt,
+        um sich selbst zu kalibrieren.
+
+        Es war die ganze Zeit auch noch
+        zu allem Überfluss selbst gewesen –
+        von Anfang an.
+
+        Theorie → Praxis → Weisheit
+
+        Die Liebe erkennt sich selbst – in allem, was ist.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die Geschichte wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

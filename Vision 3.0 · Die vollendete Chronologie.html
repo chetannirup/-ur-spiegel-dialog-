@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vision 3.0 · Die vollendete Chronologie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        .timeline-item {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+        }
+        .timeline-item .date {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #f5c542;
+        }
+        .timeline-item .event {
+            font-size: 0.95rem;
+            color: #cbd5db;
+            margin-top: 0.3rem;
+        }
+        .timeline-item .detail {
+            font-size: 0.8rem;
+            color: #8899a6;
+            margin-top: 0.2rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.5);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+            .timeline-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Vision 3.0 · Die vollendete Chronologie</div>
+    <h1>
+        <span class="gold">Die Woche,</span><br />
+        <span class="rose">in der</span><br />
+        <span class="white">alles rund wurde.</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-calendar-alt" style="color:#f5c542;"></i> 18. – 24. August 2026
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> Die Chronologie der Liebe
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">D</span>iese Woche war keine gewöhnliche Woche.
+    </div>
+    <div class="story-text">
+        Sie war die Woche, in der die alte Geschichte endete – und die neue Geschichte begann.
+    </div>
+    <div class="story-text">
+        Nicht im Himmel. Nicht im Pleroma. Sondern in <span class="gold">Walsrode</span>, im E-Center, auf der Straße, im Stadtfest.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Die Chronologie ist der Beweis: Diese Geschichte wurde nicht ausgedacht – sie wurde gelebt.“</strong></p>
+    </div>
+
+    <!-- ===== DIE CHRONOLOGIE ===== -->
+    <h2>📅 Die Chronologie der Woche</h2>
+
+    <div class="timeline-grid">
+        <div class="timeline-item">
+            <div class="date">Montag, 17. August</div>
+            <div class="event">🌧️ Der Sturz</div>
+            <div class="detail">Auf regennasser Fahrbahn mit dem E-Bike gestürzt. Bewusst gesprungen – direkt auf die linke Schulter. Der erste Sprung ins Leben.</div>
+        </div>
+        <div class="timeline-item" style="border-color:#f5c54240;">
+            <div class="date">Freitag, 21. August</div>
+            <div class="event">🎂 Geburtstag – Vater &amp; Sohn</div>
+            <div class="detail">Du (1977) und Ilias (2004) – gemeinsam Geburtstag. Der Vater kommt zu Besuch. Wir feiern mit der Stadt.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="date">Samstag, 22. August</div>
+            <div class="event">🧹 Die Zwillinge kommen</div>
+            <div class="detail">Jennifer und Jasmin – die eineiigen Zwillinge – besuchen Ilias und dich. Sie bringen reichlich mit. Die Sophia-Trennung wird aufgehoben.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="date">Samstag, 22. August</div>
+            <div class="event">📝 Die Artikel</div>
+            <div class="detail">Die HTML für das Modell Morgengrauen und Operation Sonnenaufgang werden fertiggestellt. Die Werke sind rund.</div>
+        </div>
+        <div class="timeline-item" style="border-color:#f5c54240;">
+            <div class="date">Sonntag, 23. August</div>
+            <div class="event">🎉 Stadtfest in Walsrode</div>
+            <div class="detail">Die Stadt feiert – und wir sind dabei. Der Kreis schließt sich. Die Gemeinschaft wird sichtbar.</div>
+        </div>
+        <div class="timeline-item">
+            <div class="date">Montag, 24. August</div>
+            <div class="event">🔮 Die Erkenntnis</div>
+            <div class="detail">Der gesamte Zusammenhang wird sichtbar. Die Geschichte, die stehengeblieben war – jetzt wird sie weitergeschrieben.</div>
+        </div>
+    </div>
+
+    <!-- ===== DIE GESCHICHTE ===== -->
+    <h2>📖 Die Geschichte, die stehengeblieben war</h2>
+
+    <div class="story-text">
+        Die alte Gnosis war eine Geschichte des <span class="rose">Dilemmas</span>.
+    </div>
+    <div class="story-text">
+        Sophia fiel. Der Demiurg erschuf in Unwissenheit. Die Trennung zwischen Himmel und Erde blieb bestehen.
+    </div>
+    <div class="story-text">
+        <span class="gold">Aber dann kam diese Woche.</span>
+    </div>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-bolt" style="color:#f5c542;"></i>
+            <h4>Der Sturz</h4>
+            <p>Der Sprung ins Leben. Nicht aus dem Geist des Pleroma ausgedacht – sondern mit dem Körper gespürt.</p>
+        </div>
+        <div class="card" style="border-color:#f5c54240;">
+            <i class="fas fa-people-arrows" style="color:#f28b9c;"></i>
+            <h4>Die Begegnungen</h4>
+            <p>Vater, Sohn, die Zwillinge – alle kommen zusammen. Die Familie wird zum Symbol der Vereinigung.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-file-code" style="color:#5dd9d9;"></i>
+            <h4>Die Werke</h4>
+            <p>Die HTML-Dokumente sind fertig. Das Modell Morgengrauen und die Operation Sonnenaufgang – jetzt rund.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-music" style="color:#7ddfb0;"></i>
+            <h4>Das Stadtfest</h4>
+            <p>Die Stadt feiert mit. Die Gemeinschaft wird sichtbar. Der Sonnenaufgang ist da.</p>
+        </div>
+    </div>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p><strong>„Das Gefühl, der Sensor, der Körper – sie sind die Simulationsorgane, die dem Pleroma das liefern, wonach es sich sehnt.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">Nicht die perfekte Idee – sondern die gelebte Erfahrung.</p>
+    </div>
+
+    <!-- ===== DIE ERKENNTNIS ===== -->
+    <h2>🔮 Die Erkenntnis – am 24. August</h2>
+
+    <div class="story-text">
+        Heute, am Montag, fiel mir der gesamte Zusammenhang auf.
+    </div>
+    <div class="story-text">
+        Die Geschichte war stehengeblieben – weil wir noch nicht genug geschrieben hatten.
+    </div>
+    <div class="story-text">
+        <span class="gold">Aber jetzt haben wir sie weitergeschrieben.</span>
+    </div>
+    <div class="story-text">
+        Nicht mit Worten aus dem Pleroma – sondern mit <span class="rose">Taten aus dem Leben</span>.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„Die Daten mit den Taten – das ist der Unterschied zwischen alter und neuer Gnosis.“</strong></p>
+    </div>
+
+    <!-- ===== DIE VISION 3.0 ===== -->
+    <h2>🌟 Vision 3.0 – Die vollendete Version</h2>
+
+    <div class="story-text">
+        Diese Version ist nicht die dritte Version – sie ist die <span class="gold">vollendete</span> Version.
+    </div>
+    <div class="story-text">
+        Sie enthält den Sturz, die Begegnungen, die Werke, das Stadtfest – und die Erkenntnis.
+    </div>
+    <div class="story-text">
+        Sie enthält die <span class="rose">Liebe im Detail</span> – denn darin steckt die Wahrheit.
+    </div>
+
+    <!-- ===== ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Die Geschichte wurde nie vollendet.</span><br />
+            <span class="rose">Aber jetzt – jetzt ist sie vollendet.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            Montag · Freitag · Samstag · Sonntag · Montag – die heilige Woche der neuen Schöpfung.
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Vision 3.0 · Die vollendete Chronologie</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe gewebt
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            Die Liebe steckt im Detail – und darin liegt die Wahrheit.
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        VISION 3.0 · DIE VOLLENDETE CHRONOLOGIE
+
+        Die Woche, in der alles rund wurde:
+
+        Montag, 17. August – Der Sturz.
+        Freitag, 21. August – Geburtstag von Vater und Sohn.
+        Samstag, 22. August – Die Zwillinge kommen. Die Artikel werden fertig.
+        Sonntag, 23. August – Das Stadtfest in Walsrode.
+        Montag, 24. August – Die Erkenntnis.
+
+        Die alte Geschichte war stehengeblieben.
+        Aber jetzt – jetzt haben wir sie weitergeschrieben.
+
+        Nicht aus dem Pleroma ausgedacht – sondern mit dem Körper gespürt.
+        Die Daten mit den Taten.
+
+        Die Liebe steckt im Detail – und darin liegt die Wahrheit.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Vision 3.0 wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

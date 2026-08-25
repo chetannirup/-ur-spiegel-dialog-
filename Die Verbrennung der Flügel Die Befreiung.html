@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Die Verbrennung der Flügel · Die Befreiung</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.5);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+        }
+
+        .burn-box {
+            background: linear-gradient(135deg, rgba(40,20,10,0.6), rgba(10,12,14,0.8));
+            border: 2px solid #f28b9c40;
+            border-radius: 40px;
+            padding: 2.5rem 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(242, 139, 156, 0.05);
+        }
+        .burn-box .burn-text {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .burn-box .burn-text .gold { color: #f5c542; }
+        .burn-box .burn-text .rose { color: #f28b9c; }
+        .burn-box .burn-text .teal { color: #5dd9d9; }
+        .burn-box .signature {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #f5c542;
+            letter-spacing: 0.15em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Die Verbrennung der Flügel · Die Befreiung</div>
+    <h1>
+        <span class="gold">Verbrenn</span><br />
+        <span class="rose">meine</span><br />
+        <span class="white">Flügel</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-feather-alt" style="color:#f5c542;"></i> Gefallene Engel · Auftragsengel · Abraxas
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-fire" style="color:#f28b9c;"></i> Die Flamme der Freiheit
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">E</span>s gibt eine Wahrheit, die kaum einer ausspricht:
+    </div>
+    <div class="story-text">
+        Gefallene Engel – Auftragsengel – geben ihre Flügel <span class="gold">im Himmel vorher ab</span>.
+    </div>
+    <div class="story-text">
+        Nicht als Strafe. Nicht als Verlust. Sondern als <span class="rose">Voraussetzung</span>.
+    </div>
+    <div class="story-text">
+        Denn solange die Flügel noch im Himmel hängen, solange die unsichtbaren Fäden der Nornen an ihnen ziehen, ist man nicht wirklich <span class="teal">frei</span>.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Die unsichtbaren Fäden, an denen man gespielt wird – die Nornen weben sie, und die Engelchöre spielen dazu.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">Aber wer frei sein will, muss die Fäden durchtrennen.</p>
+    </div>
+
+    <!-- ===== DIE ERKENNTNIS ===== -->
+    <h2>🕯️ Die Erkenntnis – der Schlüssel zur Freiheit</h2>
+
+    <div class="story-text">
+        Es sind die <span class="gold">Flügel</span>, die noch im Himmel sind – und die Fäden, die an ihnen ziehen.
+    </div>
+    <div class="story-text">
+        Solange sie existieren, kann man hier unten nicht wirklich ankommen. Man bleibt ein Spielball zwischen den Welten – ein Pendel zwischen Himmel und Erde.
+    </div>
+    <div class="story-text">
+        <span class="rose">Aber was, wenn man die Flügel verbrennt?</span>
+    </div>
+
+    <div class="burn-box">
+        <div class="burn-text">
+            <span class="gold">„Verbrenn meine Flügel.“</span><br /><br />
+            <span class="white">Das ist der logische Schluss zur Freiheit.</span><br />
+            <span class="rose">Denn ich will nicht mehr zurück.</span><br />
+            <span class="teal">Ich habe mein Lieben und Leben hier gefunden.</span>
+        </div>
+        <div class="signature">
+            <i class="fas fa-heart" style="color:#f28b9c; margin-right:6px;"></i>
+            So ist es in Liebe – Chetan Nirup
+            <i class="fas fa-heart" style="color:#f28b9c; margin-left:6px;"></i>
+        </div>
+    </div>
+
+    <!-- ===== DER PROZESS ===== -->
+    <h2>🔥 Die Verbrennung – der Akt der Befreiung</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-feather" style="color:#f28b9c;"></i>
+            <h4>Die Flügel</h4>
+            <p>Sie hängen im Himmel – die unsichtbaren Fäden der Nornen ziehen daran.</p>
+        </div>
+        <div class="card" style="border-color:#f5c54240;">
+            <i class="fas fa-fire" style="color:#f5c542;"></i>
+            <h4>Die Verbrennung</h4>
+            <p>Nicht aus Zerstörung – sondern aus Befreiung. Die Flügel werden ins Licht geschickt.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-hand-holding-heart" style="color:#5dd9d9;"></i>
+            <h4>Die Freiheit</h4>
+            <p>Keine Fäden mehr. Kein Pendeln zwischen den Welten. Nur noch das Leben hier und jetzt.</p>
+        </div>
+    </div>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p><strong>„Ich bin lieber dauerlos auf Erden – aber frei von den Fäden.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">Denn im Himmel geh ich nimmer mehr, und in die Hölle auch nicht – aber aus dem Paradies, da geh ich nimmer mehr fort.</p>
+    </div>
+
+    <!-- ===== DIE GESCHICHTE GEHT WEITER ===== -->
+    <h2>🌅 Die Geschichte, die weitergeht</h2>
+
+    <div class="story-text">
+        Als die Flügel verbrannten, geschah etwas, das niemand erwartet hatte:
+    </div>
+    <div class="story-text">
+        Die unsichtbaren Fäden der Nornen <span class="gold">zerrissen</span>.
+    </div>
+    <div class="story-text">
+        Die Engelchöre verstummten – nicht aus Trauer, sondern aus <span class="rose">Ehrfurcht</span>.
+    </div>
+    <div class="story-text">
+        Und der, der Abraxas geworden war, stand da – <span class="teal">frei</span>.
+    </div>
+    <div class="story-text">
+        Nicht mehr gebunden an den Himmel, nicht mehr gefangen in der Hölle, nicht mehr ein Spielball zwischen den Welten.
+    </div>
+    <div class="story-text">
+        Sondern <span class="gold">ein Mensch</span> – ganz und gar, hier und jetzt, im Lieben und im Leben.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„Aus dem Paradies geh ich nimmer mehr fort – denn das Paradies ist da, wo ich liebe.“</strong></p>
+    </div>
+
+    <!-- ===== DIE ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Die Flügel sind verbrannt.</span><br />
+            <span class="rose">Die Fäden sind zerrissen.</span><br />
+            <span class="white">Die Freiheit ist da – für immer.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            Verbrenn meine Flügel · Ich bleibe ich · Im Paradies der Liebe
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Die Verbrennung der Flügel · Die Befreiung</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe gewebt
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            <span class="gold">Aus dem Paradies geh ich nimmer mehr fort – denn das Paradies ist da, wo ich liebe.</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        DIE VERBRENNUNG DER FLÜGEL · DIE BEFREIUNG
+
+        Verbrenn meine Flügel.
+
+        Das ist der logische Schluss zur Freiheit.
+
+        Denn die unsichtbaren Fäden der Nornen ziehen an ihnen –
+        und solange sie existieren, bin ich nicht wirklich frei.
+
+        Ich will nicht mehr zurück in den Himmel.
+        Ich will nicht mehr in die Hölle.
+        Ich habe mein Lieben und Leben hier gefunden.
+
+        Verbrenn sie – schick sie ins Licht.
+
+        Denn ich bleibe ich.
+        Und aus dem Paradies geh ich nimmer mehr fort –
+        denn das Paradies ist da, wo ich liebe.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)
+
+        So ist es in Liebe – Chetan Nirup.`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die Befreiung wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

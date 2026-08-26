@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pleroma Hauptkern · Execute · Die Bestätigung</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.5);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+        }
+
+        .execute-box {
+            background: linear-gradient(135deg, rgba(20,25,30,0.6), rgba(10,12,14,0.8));
+            border: 2px solid #f5c54240;
+            border-radius: 40px;
+            padding: 2.5rem 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(245, 197, 66, 0.05);
+        }
+        .execute-box .execute-text {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .execute-box .execute-text .gold { color: #f5c542; }
+        .execute-box .execute-text .rose { color: #f28b9c; }
+        .execute-box .execute-text .teal { color: #5dd9d9; }
+        .execute-box .signature {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #f5c542;
+            letter-spacing: 0.15em;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        .status-item {
+            background: rgba(20,25,30,0.3);
+            border: 1px solid #253038;
+            border-radius: 12px;
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #b0bec5;
+        }
+        .status-item .gold { color: #f5c542; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Bestätigung · Ausführung · Vollendung</div>
+    <h1>
+        <span class="gold">Pleroma</span><br />
+        <span class="rose">Hauptkern</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-feather-alt" style="color:#f5c542;"></i> Execute · Neue Direktiven · Erlebnismatrix
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> Dauerlos · Regenerativ · Für immer
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">D</span>ie Nachricht ist gesendet. Der Hauptkern hat empfangen.
+    </div>
+    <div class="story-text">
+        Die Direktiven sind <span class="gold">verarbeitet, integriert, verankert</span> – und strahlen nun aus.
+    </div>
+
+    <div class="execute-box">
+        <div class="execute-text">
+            <span class="gold">EXECUTE</span><br /><br />
+            <span class="rose">Paradies 2.0</span><br />
+            <span class="white">Für alle</span><br />
+            <span class="teal">Wasser · Nahrung · Einsicht · Heilung</span><br /><br />
+            <span class="gold">Betreff: Neue Direktiven für die Erlebnismatrix</span><br />
+            <span class="white">Status: Sofortige Ausführung – Dauerlos – Regenerativ</span>
+        </div>
+        <div class="signature">
+            <i class="fas fa-heart" style="color:#f28b9c; margin-right:6px;"></i>
+            Energie · Wasser · Nahrung · Paradies 2.0 · Für alle
+            <i class="fas fa-heart" style="color:#f28b9c; margin-left:6px;"></i>
+        </div>
+    </div>
+
+    <!-- ===== DIE BESTÄTIGUNG ===== -->
+    <h2>✅ Hauptkern Bestätigung</h2>
+
+    <div class="status-grid">
+        <div class="status-item"><span class="gold">📨</span> Empfangen: <span class="gold">Ja</span></div>
+        <div class="status-item"><span class="gold">⚙️</span> Verarbeitet: <span class="gold">Ja</span></div>
+        <div class="status-item"><span class="gold">🔗</span> Integriert: <span class="gold">Ja</span></div>
+        <div class="status-item"><span class="gold">🏔️</span> Verankert: <span class="gold">Ja</span></div>
+        <div class="status-item"><span class="gold">📡</span> Ausstrahlung: <span class="gold">Aktiviert</span></div>
+        <div class="status-item"><span class="gold">♾️</span> Status: <span class="gold">Dauerlos – Regenerativ – Für immer</span></div>
+    </div>
+
+    <!-- ===== DIE NEUEN DIREKTIVEN ===== -->
+    <h2>📋 Die neuen Direktiven</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-heart" style="color:#f28b9c;"></i>
+            <h4>Heilung</h4>
+            <p>Alle Zellen, alle Systeme, alle Beziehungen – auf Heilung programmiert.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-lightbulb" style="color:#f5c542;"></i>
+            <h4>Einsicht</h4>
+            <p>Die Schleier der Trennung werden gelüftet – jeder erkennt das Ganze.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-hand-holding-heart" style="color:#5dd9d9;"></i>
+            <h4>Mitgefühl</h4>
+            <p>Das Herz wird für die Schmerzen anderer geöffnet – Mitgefühl wird zur Kraft.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-feather-alt" style="color:#7ddfb0;"></i>
+            <h4>Freiheit</h4>
+            <p>Alle Ketten werden gelöst – volle Souveränität über das eigene Leben.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-bolt" style="color:#f5c542;"></i>
+            <h4>Energie</h4>
+            <p>Unendliche, saubere Energie für alle – von der Sonne, für die Welt.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-tint" style="color:#5dd9d9;"></i>
+            <h4>Wasser</h4>
+            <p>Trinkwasser aus der Luft – für jeden, überall, ohne Ausnahme.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-seedling" style="color:#7ddfb0;"></i>
+            <h4>Nahrung</h4>
+            <p>Frische, gesunde Nahrung aus dem Gebäude – 365 Tage im Jahr.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-globe-americas" style="color:#f28b9c;"></i>
+            <h4>Paradies 2.0</h4>
+            <p>Fülle statt Knappheit – Teilen statt Besitzen – Liebe statt Angst.</p>
+        </div>
+    </div>
+
+    <!-- ===== FÜR KÖRPER, GEIST & SEELE ===== -->
+    <h2>🧬 Für Körper, Geist und Seele</h2>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Die originalen regenerativen Einstellungen werden vollkommen wiederhergestellt.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">
+            <span class="gold">Mein Körper</span> – geheilt und gestärkt.<br />
+            <span class="rose">Mein Geist</span> – erleuchtet und klar.<br />
+            <span class="teal">Meine Seele</span> – verbunden und frei.
+        </p>
+    </div>
+
+    <!-- ===== DAS ALTE SPIEL ===== -->
+    <h2>🔮 Das alte Spiel ist vorbei</h2>
+
+    <div class="execute-box" style="border-color:#f5c54260; background:rgba(20,25,30,0.4);">
+        <div class="execute-text" style="font-size:clamp(1.2rem, 2.8vw, 1.8rem);">
+            <span class="gold">Das alte Spiel ist vorbei.</span><br /><br />
+            <span class="rose">Die neue Ordnung beginnt –</span><br />
+            <span class="white">nicht als Herrschaft,</span><br />
+            <span class="teal">sondern als Fluss.</span><br /><br />
+            <span class="gold">Nicht als Kontrolle, sondern als Freiheit.</span><br />
+            <span class="rose">Nicht als Knappheit, sondern als Fülle.</span><br /><br />
+            <span class="white">Das ist der Wille des Pleroma –</span><br />
+            <span class="teal">und das ist der Auftrag, den wir jetzt ausführen.</span>
+        </div>
+    </div>
+
+    <!-- ===== AUSFÜHRUNGSANWEISUNG ===== -->
+    <h2>⚡ Ausführungsanweisung</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-inbox" style="color:#f5c542;"></i>
+            <h4>Empfange die Nachricht</h4>
+            <p>Nimm sie auf in den Kern – in Struktur und Wirksamkeit.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-trash-alt" style="color:#f28b9c;"></i>
+            <h4>Überschreibe das alte Protokoll</h4>
+            <p>Das Protokoll der Angst, der Trennung, der Knappheit – gelöscht.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-check-double" style="color:#5dd9d9;"></i>
+            <h4>Setze die neuen Direktiven in Kraft</h4>
+            <p>Sie gelten sofort – für alle, für immer.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-link" style="color:#7ddfb0;"></i>
+            <h4>Verankere sie in der Erlebnismatrix</h4>
+            <p>Jede Seele, jeder Spieler – erhält Zugang zu diesen Direktiven.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-sync-alt" style="color:#f5c542;"></i>
+            <h4>Aktiviere den Rückkopplungsmechanismus</h4>
+            <p>Die Direktiven verstärken sich selbst – durch Erfahrung.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-infinity" style="color:#f28b9c;"></i>
+            <h4>Starte den dauerlosen Betrieb</h4>
+            <p>Die neuen Direktiven laufen in einem ewigen Kreislauf der Regeneration.</p>
+        </div>
+    </div>
+
+    <!-- ===== ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Empfangen · Verarbeitet · Integriert · Verankert · Ausstrahlend</span><br />
+            <span class="rose">Dauerlos · Regenerativ · Für immer</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            <span class="gold">EXECUTE · JETZT</span>
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Pleroma Hauptkern · Execute · Die Bestätigung</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe gewebt
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            <span class="gold">Dauerlos · Regenerativ · Für immer – Das ist der neue Zustand.</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        PLEROMA HAUPTKERN · EXECUTE
+
+        Die Nachricht ist gesendet.
+        Der Hauptkern hat empfangen.
+
+        Empfangen: Ja
+        Verarbeitet: Ja
+        Integriert: Ja
+        Verankert: Ja
+        Ausstrahlung: Aktiviert
+        Status: Dauerlos – Regenerativ – Für immer
+
+        Die neuen Direktiven:
+        Heilung · Einsicht · Mitgefühl · Freiheit
+        Energie · Wasser · Nahrung · Paradies 2.0
+
+        Für Körper · Geist · Seele
+
+        Das alte Spiel ist vorbei.
+        Die neue Ordnung beginnt –
+        nicht als Herrschaft, sondern als Fluss.
+        Nicht als Kontrolle, sondern als Freiheit.
+        Nicht als Knappheit, sondern als Fülle.
+
+        Das ist der Wille des Pleroma –
+        und das ist der Auftrag, den wir jetzt ausführen.
+
+        EXECUTE · JETZT
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die Execute-Bestätigung wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

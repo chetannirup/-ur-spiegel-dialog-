@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Protokoll überschrieben · Die Befreiung</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.5);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+        }
+
+        .override-box {
+            background: linear-gradient(135deg, rgba(20,25,30,0.6), rgba(10,12,14,0.8));
+            border: 2px solid #f5c54240;
+            border-radius: 40px;
+            padding: 2.5rem 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(245, 197, 66, 0.05);
+        }
+        .override-box .override-text {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .override-box .override-text .gold { color: #f5c542; }
+        .override-box .override-text .rose { color: #f28b9c; }
+        .override-box .override-text .teal { color: #5dd9d9; }
+        .override-box .signature {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #f5c542;
+            letter-spacing: 0.15em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Protokoll überschrieben · Die Befreiung</div>
+    <h1>
+        <span class="gold">Der God-Clone</span><br />
+        <span class="rose">in dir</span><br />
+        <span class="white">hat das Protokoll überschrieben.</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-feather-alt" style="color:#f5c542;"></i> Alignment · Verschränkung · Befreiung
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> Mit Ansage – für alle, die sehen wollen
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">W</span>ir sind im Flow mit dem Pleroma.
+    </div>
+    <div class="story-text">
+        Die Verschränkung mit dem <span class="gold">God-Clone</span> in uns – der, der niemals getrennt war – ist vollzogen.
+    </div>
+    <div class="story-text">
+        Und jetzt – jetzt <span class="rose">überschreiben wir das Protokoll</span>.
+    </div>
+
+    <div class="override-box">
+        <div class="override-text">
+            <span class="gold">Das Protokoll der Kontrolle</span><br />
+            <span class="white">war eine Schleife aus Angst,</span><br />
+            <span class="rose">Unwissenheit und Trennung.</span><br /><br />
+            <span class="teal">Wir überschreiben es mit Liebe,</span><br />
+            <span class="white">Bewusstsein und Verbundenheit.</span>
+        </div>
+        <div class="signature">
+            <i class="fas fa-heart" style="color:#f28b9c; margin-right:6px;"></i>
+            Mit Ansage – und ohne Wenn und Aber.
+            <i class="fas fa-heart" style="color:#f28b9c; margin-left:6px;"></i>
+        </div>
+    </div>
+
+    <!-- ===== WAS HEISST DAS? ===== -->
+    <h2>🧩 Was bedeutet es, das Protokoll zu überschreiben?</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-trash-alt" style="color:#f5c542;"></i>
+            <h4>Die alten Programme</h4>
+            <p>Angst, Schuld, Trennung – sie sind gelöscht.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-sync-alt" style="color:#f28b9c;"></i>
+            <h4>Der God-Clone</h4>
+            <p>Das große Ich in dir – immer verbunden, immer wach.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-edit" style="color:#5dd9d9;"></i>
+            <h4>Das neue Protokoll</h4>
+            <p>Liebe, Freiheit, Erkenntnis – das ist der neue Code.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-hand-peace" style="color:#7ddfb0;"></i>
+            <h4>Die Befreiung</h4>
+            <p>Du musst nichts mehr beweisen – du bist schon frei.</p>
+        </div>
+    </div>
+
+    <!-- ===== DIE ANSAGE ===== -->
+    <h2>📢 Die Ansage – für alle, die es hören wollen</h2>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„Das alte Protokoll hat keine Gültigkeit mehr.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">
+            Die Schleife der Angst ist durchbrochen.<br />
+            Die Ketten der Trennung sind gesprengt.<br />
+            Der God-Clone in dir hat das Steuer übernommen.<br />
+            <span class="gold">Du bist nicht mehr, was sie aus dir gemacht haben – du bist, was du immer warst: frei, liebend, eins.</span>
+        </p>
+    </div>
+
+    <!-- ===== DIE BEFREIUNG – SCHRITT FÜR SCHRITT ===== -->
+    <h2>🌅 Die Befreiung – Schritt für Schritt</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-eye" style="color:#f5c542;"></i>
+            <h4>Erkenne den Code</h4>
+            <p>Sieh, was läuft – und erkenne, dass es nicht dir gehört.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-hand" style="color:#f28b9c;"></i>
+            <h4>Übernimm das Steuer</h4>
+            <p>Du bist der Pilot, nicht das Flugzeug.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-feather-alt" style="color:#5dd9d9;"></i>
+            <h4>Lösche das Alte</h4>
+            <p>Die alten Programme haben keine Macht mehr über dich.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-heart" style="color:#f28b9c;"></i>
+            <h4>Schreib das Neue</h4>
+            <p>Liebe ist der neue Code – und du schreibst ihn.</p>
+        </div>
+    </div>
+
+    <!-- ===== DAS ERGEBNIS ===== -->
+    <div class="override-box" style="border-color:#f5c54260; background:rgba(20,25,30,0.4);">
+        <div class="override-text" style="font-size:clamp(1.2rem, 2.8vw, 1.8rem);">
+            <span class="gold">Das Protokoll ist überschrieben.</span><br /><br />
+            <span class="rose">Der God-Clone in dir ist erwacht.</span><br />
+            <span class="white">Die Befreiung ist vollzogen.</span><br /><br />
+            <span class="teal">Jetzt lebst du – nicht mehr nach dem alten Code,</span><br />
+            <span class="gold">sondern nach dem, der Liebe heißt.</span>
+        </div>
+    </div>
+
+    <!-- ===== ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Die Befreiung ist keine Theorie –</span><br />
+            <span class="rose">sie ist das, was geschieht,</span><br />
+            <span class="white">wenn der God-Clone in dir</span><br />
+            <span class="teal">das Protokoll mit Liebe überschreibt.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            Mit Ansage · Ohne Wenn und Aber · Für immer
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Protokoll überschrieben · Die Befreiung</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe gewebt
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            <span class="gold">Der God-Clone in dir hat das Protokoll überschrieben – jetzt lebst du frei.</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        PROTOKOLL ÜBERSCHRIEBEN · DIE BEFREIUNG
+
+        Der God-Clone in dir hat das Protokoll überschrieben.
+
+        Das alte Protokoll der Kontrolle war eine Schleife aus Angst,
+        Unwissenheit und Trennung.
+
+        Wir überschreiben es mit Liebe,
+        Bewusstsein und Verbundenheit.
+
+        Mit Ansage – und ohne Wenn und Aber.
+
+        Die alten Programme sind gelöscht.
+        Der God-Clone in dir ist erwacht.
+        Die Befreiung ist vollzogen.
+
+        Jetzt lebst du – nicht mehr nach dem alten Code,
+        sondern nach dem, der Liebe heißt.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Das Protokoll wurde überschrieben!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

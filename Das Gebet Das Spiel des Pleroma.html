@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Das Gebet · Das Spiel des Pleroma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .prayer-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .prayer-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .prayer-text .gold { color: #f5c542; }
+        .prayer-text .rose { color: #f28b9c; }
+        .prayer-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.4);
+            padding: 1.2rem 0.8rem;
+            border-radius: 16px;
+            border: 1px solid #253038;
+            text-align: center;
+        }
+        .card i {
+            font-size: 2.2rem;
+            color: #f5c542;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #f0f4f8;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .prayer-text { font-size: 1rem; text-indent: 1.5rem; }
+            .prayer-text .dropcap { font-size: 3rem; }
+        }
+
+        .prayer-box {
+            background: rgba(20,25,30,0.3);
+            border: 1px solid #f5c54230;
+            border-radius: 32px;
+            padding: 2.5rem 2.2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .prayer-box .prayer-line {
+            font-size: 1.3rem;
+            color: #f0f4f8;
+            font-weight: 300;
+            line-height: 1.7;
+            font-family: 'Georgia', serif;
+        }
+        .prayer-box .prayer-line .gold { color: #f5c542; }
+        .prayer-box .prayer-line .rose { color: #f28b9c; }
+        .prayer-box .prayer-line .teal { color: #5dd9d9; }
+
+        .six-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .six-item {
+            background: rgba(20,25,30,0.3);
+            border: 1px solid #253038;
+            border-radius: 12px;
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #b0bec5;
+        }
+        .six-item .gold { color: #f5c542; }
+        @media (max-width: 640px) {
+            .six-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Das Gebet · Das Spiel des Pleroma</div>
+    <h1>
+        <span class="gold">Im Grunde</span><br />
+        <span class="rose">kann auch ich</span><br />
+        <span class="white">nur darum bitten.</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-feather-alt" style="color:#f5c542;"></i> Hingabe · Vertrauen · Liebe
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> Tim Bukowski / Chetan Nirup
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="prayer-text">
+        <span class="dropcap">I</span>ch habe keine Macht über das Ganze – ich bin nur ein Spielstein im unendlichen Spiel des Pleroma.
+    </div>
+
+    <div class="prayer-box">
+        <div class="prayer-line">
+            <span class="gold">Ich bitte</span><br />
+            <span class="rose">um Führung,</span><br />
+            <span class="teal">um Erkenntnis,</span><br />
+            <span class="white">um Heilung,</span><br />
+            <span class="gold">um Schutz,</span><br />
+            <span class="rose">um die Kraft, lieben zu können – echt und frei.</span>
+        </div>
+    </div>
+
+    <!-- ===== DAS GEBET ===== -->
+    <div class="prayer-text">
+        <span class="gold">Mein Gebet</span>
+    </div>
+    <div class="prayer-text">
+        Ich lege mein Herz in die Hände des Pleromas und vertraue darauf, dass alles, was geschieht, zum höchsten Guten dient – für alle Wesen, für das Ganze.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Es ist das Spiel des Pleroma.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">Ich kenne nicht alle Regeln. Ich sehe nicht das ganze Brett. Ich verstehe nicht alle Züge.</p>
+    </div>
+
+    <!-- ===== DIE SECHS ===== -->
+    <div class="six-grid">
+        <div class="six-item"><span class="gold">❤️</span> Liebe</div>
+        <div class="six-item"><span class="gold">🧠</span> Weisheit</div>
+        <div class="six-item"><span class="gold">✨</span> Wahrheit</div>
+        <div class="six-item"><span class="gold">🕊️</span> Freiheit</div>
+        <div class="six-item"><span class="gold">🎵</span> Harmonie</div>
+        <div class="six-item"><span class="gold">🌈</span> Fülle</div>
+    </div>
+
+    <!-- ===== DIE DEMUT ===== -->
+    <div class="prayer-text">
+        <span class="gold">Was weiß ich schon?</span>
+    </div>
+    <div class="prayer-text">
+        Vielleicht ist alles, was ich gerade nicht verstehe, Teil eines größeren Planes, den mein Verstand nicht fassen kann.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p><strong>„Aber das scheint mir nur fair!“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">Ich handle nach bestem Wissen und Gewissen, mit Liebe im Herzen. Den Rest übergebe ich dir, große Quelle allen Seins.</p>
+    </div>
+
+    <!-- ===== DIE HINGABE ===== -->
+    <div class="prayer-box" style="border-color:#f5c54260; background:rgba(20,25,30,0.2);">
+        <div class="prayer-line" style="font-size:1.2rem;">
+            <span class="gold">Führe mich, wenn ich nicht mehr weiß.</span><br />
+            <span class="rose">Trage mich, wenn ich nicht mehr kann.</span><br />
+            <span class="teal">Und lass mich ein Teil sein deines schönen Spiels.</span>
+        </div>
+    </div>
+
+    <!-- ===== DER ABSCHLUSS ===== -->
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„So bitte ich – und so ist es gut.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">
+            Für mich. Für dich. Für uns alle.
+        </p>
+        <p style="margin-top:0.8rem; font-size:1.1rem; color:#f5c542;">
+            <span class="gold">Bei der Macht des Pleroma – ich habe die Kraft.</span>
+        </p>
+    </div>
+
+    <!-- ===== ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">So bitte ich – und so ist es gut.</span><br />
+            <span class="rose">Für mich. Für dich. Für uns alle.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            Tim Bukowski / Chetan Nirup · August 2026
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Das Gebet · Das Spiel des Pleroma</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            <span class="gold">Liebe · Weisheit · Wahrheit · Freiheit · Harmonie · Fülle</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        DAS GEBET · DAS SPIEL DES PLEROMA
+
+        Im Grunde kann auch ich nur darum bitten.
+
+        Ich habe keine Macht über das Ganze –
+        ich bin nur ein Spielstein im unendlichen Spiel des Pleroma.
+
+        Ich bitte um Führung, um Erkenntnis,
+        um Heilung, um Schutz,
+        um die Kraft, lieben zu können – echt und frei.
+
+        Ich lege mein Herz in die Hände des Pleromas
+        und vertraue darauf, dass alles, was geschieht,
+        zum höchsten Guten dient.
+
+        Führe mich, wenn ich nicht mehr weiß.
+        Trage mich, wenn ich nicht mehr kann.
+        Und lass mich ein Teil sein deines schönen Spiels.
+
+        So bitte ich – und so ist es gut.
+        Für mich. Für dich. Für uns alle.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Das Gebet wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

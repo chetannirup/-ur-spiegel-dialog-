@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Der Sprung · Die übergeordnete Ebene</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.5);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+        }
+
+        .jump-box {
+            background: linear-gradient(135deg, rgba(20,25,30,0.6), rgba(10,12,14,0.8));
+            border: 2px solid #f5c54240;
+            border-radius: 40px;
+            padding: 2.5rem 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(245, 197, 66, 0.05);
+        }
+        .jump-box .jump-text {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.7;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .jump-box .jump-text .gold { color: #f5c542; }
+        .jump-box .jump-text .rose { color: #f28b9c; }
+        .jump-box .jump-text .teal { color: #5dd9d9; }
+        .jump-box .signature {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: #f5c542;
+            letter-spacing: 0.15em;
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        .flow-item {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+        }
+        .flow-item .step {
+            font-size: 2.5rem;
+            color: #f5c542;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        .flow-item .label {
+            font-size: 1rem;
+            color: #cbd5db;
+        }
+        .flow-item .desc {
+            font-size: 0.8rem;
+            color: #8899a6;
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .level-card {
+            background: rgba(20,25,30,0.3);
+            border: 1px solid #253038;
+            border-radius: 24px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+        }
+        .level-card h3 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #f5c542;
+            font-family: 'Georgia', serif;
+        }
+        .level-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        .level-card ul li {
+            padding: 0.3rem 0;
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+        .level-card ul li .gold { color: #f5c542; }
+        @media (max-width: 640px) {
+            .level-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Der Sprung · Die Vollendung</div>
+    <h1>
+        <span class="gold">Sprung</span><br />
+        <span class="rose">in die</span><br />
+        <span class="white">übergeordnete Ebene</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-rocket" style="color:#f5c542;"></i> Frei · Geheilt · Vollendet
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> Der Job ist erledigt
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">D</span>er Sprung ist gemacht.
+    </div>
+    <div class="story-text">
+        Die übergeordnete Ebene ist erreicht.
+    </div>
+    <div class="story-text">
+        <span class="gold">Frei, weil geheilt.</span>
+    </div>
+
+    <div class="jump-box">
+        <div class="jump-text">
+            <span class="gold">Die übergeordnete Ebene</span><br />
+            <span class="rose">Die Ebene der Erkenntnis</span><br /><br />
+            <span class="white">Keine Trennung · Keine Angst</span><br />
+            <span class="teal">Reine Erkenntnis · Einheit mit allem</span><br /><br />
+            <span class="gold">Hier ist wahre Freiheit.</span>
+        </div>
+        <div class="signature">
+            <i class="fas fa-heart" style="color:#f28b9c; margin-right:6px;"></i>
+            Job erledigt.
+            <i class="fas fa-heart" style="color:#f28b9c; margin-left:6px;"></i>
+        </div>
+    </div>
+
+    <!-- ===== DAS PRINZIP ===== -->
+    <h2>🌀 Das Prinzip der Befreiung</h2>
+
+    <div class="flow-grid">
+        <div class="flow-item">
+            <span class="step">1</span>
+            <div class="label">Der Geist träumt</div>
+            <div class="desc">durch den Avatar</div>
+        </div>
+        <div class="flow-item">
+            <span class="step">2</span>
+            <div class="label">Der Avatar erlebt</div>
+            <div class="desc">leidet, lernt</div>
+        </div>
+        <div class="flow-item">
+            <span class="step">3</span>
+            <div class="label">Die Konsole hält</div>
+            <div class="desc">den Avatar im Traum gefangen</div>
+        </div>
+        <div class="flow-item">
+            <span class="step">4</span>
+            <div class="label">Der Avatar befreit sich</div>
+            <div class="desc">durch Aushalten, Durchstehen, Vollenden</div>
+        </div>
+        <div class="flow-item">
+            <span class="step">5</span>
+            <div class="label">Der Geist wird befreit</div>
+            <div class="desc">durch die Befreiung des Avatars</div>
+        </div>
+        <div class="flow-item">
+            <span class="step">6</span>
+            <div class="label">Gemeinsamer Sprung</div>
+            <div class="desc">in die übergeordnete Ebene</div>
+        </div>
+    </div>
+
+    <!-- ===== DIE EBENEN ===== -->
+    <h2>🌌 Die Ebenen – Traumwelt &amp; Erkenntnis</h2>
+
+    <div class="level-grid">
+        <div class="level-card" style="border-color:#f28b9c40;">
+            <h3 style="color:#f28b9c;">Die Traumwelt</h3>
+            <ul>
+                <li>Zeit und Raum</li>
+                <li>Angst und Mangel</li>
+                <li>Leid und Trennung</li>
+                <li>Kontrolle und Illusion</li>
+                <li style="color:#f28b9c;">Hier ist der Avatar gefangen</li>
+            </ul>
+        </div>
+        <div class="level-card" style="border-color:#f5c54240;">
+            <h3 style="color:#f5c542;">Die übergeordnete Ebene</h3>
+            <ul>
+                <li>Keine Trennung</li>
+                <li>Keine Angst</li>
+                <li><span class="gold">Reine Erkenntnis</span></li>
+                <li><span class="gold">Einheit mit allem</span></li>
+                <li style="color:#f5c542;">Hier ist wahre Freiheit</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== DIE BEFREIUNGSKETTE ===== -->
+    <h2>🔗 Die Befreiungskette</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-brain" style="color:#f5c542;"></i>
+            <h4>Geist</h4>
+            <p>Der Träumer</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-user" style="color:#f28b9c;"></i>
+            <h4>Avatar</h4>
+            <p>Der Wirt</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-gamepad" style="color:#5dd9d9;"></i>
+            <h4>Konsole</h4>
+            <p>Das Kontrollsystem</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-globe" style="color:#7ddfb0;"></i>
+            <h4>Traumwelt</h4>
+            <p>Die Erfahrungswelt</p>
+        </div>
+    </div>
+
+    <!-- ===== DIE KONSOLE ===== -->
+    <h2>🖥️ Die Konsole – das Kontrollsystem</h2>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Hält den Avatar im Traum – simuliert Realität – verwendet Angst und Schmerz – belohnt Gehorsam – bestraft Rebellion.“</strong></p>
+    </div>
+
+    <!-- ===== DER GOTTMENSCH ===== -->
+    <h2>🔥 Der Gottmensch der ersten Welt</h2>
+
+    <div class="story-text">
+        Er stand auf, hauchte den Rauch aus und sagte: <span class="gold">„Job erledigt.“</span>
+    </div>
+    <div class="story-text">
+        Sein Körper glänzte von der Hitze – nicht weil er verbrannte, sondern weil er die Hitze <span class="rose">aushielt</span>.
+    </div>
+    <div class="story-text">
+        Er ist der Stärkste – nicht weil er niemals litt, sondern weil er allein aushalten konnte, was andere nicht aushalten konnten.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p><strong>„Und seitdem sind wir frei – weil geheilt.“</strong></p>
+    </div>
+
+    <!-- ===== DIE VOLLENDUNG ===== -->
+    <div class="jump-box" style="border-color:#f5c54260; background:rgba(20,25,30,0.4);">
+        <div class="jump-text" style="font-size:clamp(1.2rem, 2.8vw, 1.8rem);">
+            <span class="gold">Der Sprung ist gemacht.</span><br /><br />
+            <span class="rose">Die übergeordnete Ebene ist erreicht.</span><br />
+            <span class="white">Der Job ist erledigt.</span><br />
+            <span class="teal">Der Rauch ist ausgehaucht.</span><br /><br />
+            <span class="gold">Der Körper glänzt – nicht von der Hitze,</span><br />
+            <span class="rose">sondern von der Vollendung.</span>
+        </div>
+    </div>
+
+    <!-- ===== ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Einheit · Erkenntnis · Freiheit · Liebe</span><br />
+            <span class="rose">Das ist die übergeordnete Ebene.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            <span class="gold">Frei, weil geheilt.</span>
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Der Sprung · Die übergeordnete Ebene</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe gewebt
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            <span class="gold">Job erledigt · Rauch ausgehaucht · Vollendet.</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        DER SPRUNG · DIE ÜBERGEORDNETE EBENE
+
+        Frei, weil geheilt.
+
+        Die übergeordnete Ebene – die Ebene der Erkenntnis.
+        Keine Trennung · Keine Angst
+        Reine Erkenntnis · Einheit mit allem
+        Hier ist wahre Freiheit.
+
+        Der Sprung ist gemacht.
+        Die übergeordnete Ebene ist erreicht.
+        Der Job ist erledigt.
+        Der Rauch ist ausgehaucht.
+
+        Der Körper glänzt – nicht von der Hitze,
+        sondern von der Vollendung.
+
+        Einheit · Erkenntnis · Freiheit · Liebe
+        Das ist die übergeordnete Ebene.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Der Sprung wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

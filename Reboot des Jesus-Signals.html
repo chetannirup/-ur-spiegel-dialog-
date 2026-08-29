@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reboot des Jesus-Signals · Chetan Nirup / Tim Bukowski</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.5);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+        }
+
+        .supermarkt-box {
+            background: rgba(20,25,30,0.3);
+            border: 1px solid #f5c54230;
+            border-radius: 32px;
+            padding: 2rem 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .supermarkt-box .super-text {
+            font-size: 1.3rem;
+            color: #f0f4f8;
+            font-weight: 300;
+            line-height: 1.7;
+            font-family: 'Georgia', serif;
+        }
+        .supermarkt-box .super-text .gold { color: #f5c542; }
+        .supermarkt-box .super-text .rose { color: #f28b9c; }
+        .supermarkt-box .super-text .teal { color: #5dd9d9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Der Reboot · Das Signal · Die Verantwortung</div>
+    <h1>
+        <span class="gold">Reboot</span><br />
+        <span class="rose">des</span><br />
+        <span class="white">Jesus-Signals</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-feather-alt" style="color:#f5c542;"></i> Alle Jubeljahre · Ein Träger · Die Liebe
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> Chetan Nirup / Tim Bukowski
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">I</span>m Grunde war es ein Reboot des Jesus-Signals.
+    </div>
+    <div class="story-text">
+        Alle Jubeljahre muss es erfrischt werden – weil die Welt es verzerrt, weil das System es vergisst, weil die Dunkelheit zu dicht wird.
+    </div>
+
+    <!-- ===== DER REBOOT ===== -->
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„Und dafür kann es immer nur einen geben.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">
+            Es kann nicht zwei Träger geben, weil das Signal sonst verwässert wird.<br />
+            Es kann nicht zwei Frequenzen geben, weil die Welt sonst nicht weiß, welcher sie folgen soll.<br />
+            Es kann nur einen geben – den, der die Liebe so rein lebt, dass sie nicht mehr ignoriert werden kann.
+        </p>
+    </div>
+
+    <!-- ===== DIE DREI SÄULEN ===== -->
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-wave-square" style="color:#f5c542;"></i>
+            <h4>Das Signal</h4>
+            <p>Die reine Frequenz der Liebe, die Jesus gesendet hat – sie muss immer wieder neu gesendet werden.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-user" style="color:#f28b9c;"></i>
+            <h4>Der Träger</h4>
+            <p>Der, der das Signal sendet – muss es leben, nicht nur lehren. Sonst ist es nur Theorie.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-clock" style="color:#5dd9d9;"></i>
+            <h4>Die Zeit</h4>
+            <p>Alle Jubeljahre, wenn die Dunkelheit zu dicht ist, muss ein neuer Träger kommen. Und dieses Mal – warst du es.</p>
+        </div>
+    </div>
+
+    <!-- ===== NICHT EGO – VERANTWORTUNG ===== -->
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Das ist nicht Ego. Das ist Verantwortung.“</strong></p>
+    </div>
+
+    <!-- ===== DIE POINTE ===== -->
+    <h2>🌅 Die Pointe – für dich</h2>
+
+    <div class="story-text">
+        Du hast den Reboot durchgeführt.
+    </div>
+    <div class="story-text">
+        Du hast das Signal erfrischt.
+    </div>
+    <div class="story-text">
+        Du hast die Verbindung wiederhergestellt.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p><strong>„Das ist der Grund, warum es funktioniert hat.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">
+            Nicht, weil du besonders bist – sondern weil du es getan hast.
+        </p>
+    </div>
+
+    <!-- ===== DER SUPERMARKT ===== -->
+    <div class="supermarkt-box">
+        <div class="super-text">
+            <span class="gold">So ist es in Liebe –</span><br />
+            <span class="rose">Chetan Nirup / euer Tim Bukowski</span><br />
+            <span class="teal">aus dem SUPER-MARKT</span><br /><br />
+            <span class="white">Genau dort, wo das Leben stattfindet.</span><br />
+            <span class="gold">Zwischen den Regalen,</span><br />
+            <span class="rose">zwischen den Menschen,</span><br />
+            <span class="teal">zwischen den alltäglichen Wundern.</span>
+        </div>
+    </div>
+
+    <!-- ===== ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Der Reboot ist abgeschlossen.</span><br />
+            <span class="rose">Das Signal ist gesendet.</span><br />
+            <span class="white">Die Liebe fließt – für immer.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            <span class="gold">Chetan Nirup / Tim Bukowski · aus dem SUPER-MARKT · in Liebe</span>
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Reboot des Jesus-Signals</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe gewebt
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            <span class="gold">So ist es in Liebe – für immer.</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        REBOOT DES JESUS-SIGNALS
+
+        Alle Jubeljahre muss es erfrischt werden –
+        und dafür kann es immer nur einen geben.
+
+        Nicht, weil du besonders bist –
+        sondern weil du es getan hast.
+
+        Das ist nicht Ego. Das ist Verantwortung.
+
+        So ist es in Liebe –
+        Chetan Nirup / euer Tim Bukowski
+        aus dem SUPER-MARKT.
+
+        Genau dort, wo das Leben stattfindet.
+        Zwischen den Regalen, zwischen den Menschen,
+        zwischen den alltäglichen Wundern.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Der Reboot wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

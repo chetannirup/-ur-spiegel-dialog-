@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zwei Welten · Die Wahl ist getroffen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            font-family: 'Georgia', 'Segoe UI', serif;
+            color: #eaeef2;
+            line-height: 1.9;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem 2.5rem;
+            background: radial-gradient(ellipse at 30% 20%, #14191e, #080a0c 92%);
+            border: 1px solid #f5c54225;
+            border-radius: 56px;
+            box-shadow: 0 0 120px rgba(245, 197, 66, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 58px;
+            background: linear-gradient(135deg, #f5c542, #f28b9c, #5dd9d9, #f5c542);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: shimmer 30s ease-in-out infinite;
+            opacity: 0.06;
+        }
+        @keyframes shimmer {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .gold { color: #f5c542; }
+        .teal { color: #5dd9d9; }
+        .rose { color: #f28b9c; }
+        .gray { color: #8899a6; }
+        .white { color: #f0f4f8; }
+
+        h1 {
+            font-size: clamp(2.8rem, 10vw, 4.8rem);
+            font-weight: 300;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            font-family: 'Georgia', serif;
+        }
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            border-left: 4px solid #f5c542;
+            padding-left: 1.2rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #f0f4f8;
+            font-family: 'Georgia', serif;
+        }
+        .subhead {
+            text-align: center;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #f5c54288;
+            margin-bottom: 0.3rem;
+        }
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f5c54260, transparent);
+            margin: 1.5rem auto;
+        }
+        .meta {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5a6a76;
+            margin-bottom: 2rem;
+        }
+        .meta i { color: #f5c542; margin: 0 0.3rem; }
+
+        .story-text {
+            font-size: 1.15rem;
+            color: #dce3e8;
+            margin-bottom: 1.8rem;
+            text-indent: 2rem;
+        }
+        .story-text .dropcap {
+            font-size: 4.5rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.5rem;
+            color: #f5c542;
+            font-weight: 400;
+            font-family: 'Georgia', serif;
+        }
+        .story-text .gold { color: #f5c542; }
+        .story-text .rose { color: #f28b9c; }
+        .story-text .teal { color: #5dd9d9; }
+
+        .quote-block {
+            background: rgba(20,25,30,0.4);
+            border-left: 4px solid #f5c542;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            border: 1px solid #253038;
+            font-size: 1.25rem;
+            color: #cbd5db;
+            text-align: center;
+        }
+        .quote-block strong { color: #f5c542; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: rgba(20,25,30,0.5);
+            padding: 1.8rem 1.5rem;
+            border-radius: 24px;
+            border: 1px solid #253038;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s, border-color 0.2s;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f5c54260;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #f5c542;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h4 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #f0f4f8;
+            margin-bottom: 0.3rem;
+        }
+        .card p {
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f5c542;
+            color: #0b0d10;
+            padding: 0.9rem 2.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn:hover { background: #e0b03a; }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1e2a2f;
+            text-align: center;
+            color: #5a6a76;
+            font-size: 0.85rem;
+        }
+        .footer-note .heart { color: #f28b9c; }
+
+        .pi-tribute {
+            text-align: center;
+            font-size: 1.4rem;
+            color: #8899a6;
+            margin: 2rem 0;
+        }
+        .pi-tribute .pi-symbol {
+            font-size: 2.8rem;
+            color: #f5c542;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .zahlengrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .zahlencard {
+            background: rgba(20,25,30,0.4);
+            border: 1px solid #253038;
+            border-radius: 16px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .zahlencard:hover {
+            transform: scale(1.02);
+            border-color: #f5c54260;
+        }
+        .zahlencard .num {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #f5c542;
+            letter-spacing: 0.05em;
+        }
+        .zahlencard .label {
+            font-size: 0.7rem;
+            color: #8899a6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.2rem;
+        }
+        @media (max-width: 640px) {
+            .zahlengrid { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 1.8rem 1.2rem; }
+            .story-text { font-size: 1rem; text-indent: 1.5rem; }
+            .story-text .dropcap { font-size: 3rem; }
+        }
+
+        .two-worlds {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .world-card {
+            background: rgba(20,25,30,0.3);
+            border: 1px solid #253038;
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+        .world-card h3 {
+            font-size: 1.4rem;
+            font-weight: 300;
+            font-family: 'Georgia', serif;
+            margin-bottom: 1rem;
+        }
+        .world-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .world-card ul li {
+            padding: 0.3rem 0;
+            color: #b0bec5;
+            font-size: 0.95rem;
+        }
+        .world-card ul li .gold { color: #f5c542; }
+        .world-card ul li .rose { color: #f28b9c; }
+        @media (max-width: 640px) {
+            .two-worlds { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="subhead">Zwei Welten · Die Wahl ist getroffen</div>
+    <h1>
+        <span class="gold">Du hast</span><br />
+        <span class="rose">die Wahl</span>
+    </h1>
+    <div class="divider"></div>
+    <div class="meta">
+        <i class="fas fa-feather-alt" style="color:#f5c542;"></i> Nicht stärker · Bewusster
+        <i class="fas fa-circle" style="font-size:0.3rem; vertical-align:middle; margin:0 0.6rem; color:#3a4a56;"></i>
+        <i class="fas fa-heart" style="color:#f28b9c;"></i> Die Zeit der Ausreden ist vorbei
+    </div>
+
+    <!-- ===== PROLOG ===== -->
+    <div class="story-text">
+        <span class="dropcap">S</span>ie hatten bis hierher ihre Wahl getroffen – und sie haben es alle gewusst.
+    </div>
+    <div class="story-text">
+        <span class="gold">Damit ist jetzt einfach schluss.</span>
+    </div>
+
+    <!-- ===== DIE ZWEI WELTEN ===== -->
+    <div class="two-worlds">
+        <div class="world-card" style="border-color:#f28b9c40;">
+            <h3 style="color:#f28b9c;">🌑 Die Welt der Hybris</h3>
+            <ul>
+                <li><span class="rose">Konsum</span> statt Überleben</li>
+                <li><span class="rose">Kontrolle</span> statt Freiheit</li>
+                <li><span class="rose">Industrie</span> statt Mitgefühl</li>
+                <li><span class="rose">Angst</span> und Hunger nach Macht</li>
+                <li><span class="rose">Krieg ist Frieden</span> – Freiheit ist Sklaverei</li>
+                <li style="color:#f28b9c; margin-top:0.5rem;">Hier regiert die Angst</li>
+            </ul>
+        </div>
+        <div class="world-card" style="border-color:#f5c54240;">
+            <h3 style="color:#f5c542;">🌈 Die Welt der Liebe</h3>
+            <ul>
+                <li><span class="gold">Wahl</span> statt Zwang</li>
+                <li><span class="gold">Achtung</span> statt Ausnutzung</li>
+                <li><span class="gold">Heilung</span> statt Leid</li>
+                <li><span class="gold">Freiheit</span> statt Fesseln</li>
+                <li><span class="gold">Frieden</span> ist die Realität</li>
+                <li style="color:#f5c542; margin-top:0.5rem;">Hier regiert die Liebe</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===== DER MABSTAB ===== -->
+    <h2>📏 Der Maßstab – die Erfahrungseinheit für Liebe</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <i class="fas fa-balance-scale" style="color:#f5c542;"></i>
+            <h4>Hybris vs. Demut</h4>
+            <p>Die Wahl zwischen Überheblichkeit und Bescheidenheit.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-hand-holding-heart" style="color:#f28b9c;"></i>
+            <h4>Konsum vs. Mitgefühl</h4>
+            <p>Die Wahl zwischen Nehmen und Geben.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-handshake" style="color:#5dd9d9;"></i>
+            <h4>Kontrolle vs. Vertrauen</h4>
+            <p>Die Wahl zwischen Angst und Hingabe.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-heart" style="color:#f28b9c;"></i>
+            <h4>Angst vs. Liebe</h4>
+            <p>Die Wahl, die alles entscheidet.</p>
+        </div>
+    </div>
+
+    <!-- ===== DIE WAHRHEIT ===== -->
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„Unwissenheit schützt vor Strafe nicht. Die Strafe ist das Leben, das nicht gelebt wird.“</strong></p>
+        <p style="margin-top:0.5rem; font-size:1rem; color:#b0bec5;">
+            Das Strafprotokoll war. Die Zeit der Ausreden ist vorbei. Jetzt ist die Zeit der Wahrheit.
+        </p>
+    </div>
+
+    <!-- ===== DIE MONADE ===== -->
+    <h2>🕉️ Die Monade – das formlose Bewusstsein</h2>
+
+    <div class="story-text">
+        Die <span class="gold">Monade</span> ist das formlose Bewusstsein – die Quelle, das All-Eine.
+    </div>
+    <div class="story-text">
+        Das <span class="teal">Pleroma</span> ist das Feld, die Matrix, der Raum, in dem wir existieren.
+    </div>
+    <div class="story-text">
+        <span class="rose">Wir sind nicht getrennt von der Monade – wir sind in ihr.</span>
+    </div>
+
+    <div class="quote-block" style="border-left-color:#5dd9d9;">
+        <p><strong>„Gehe geistvoll mit dir und anderen um.“</strong></p>
+    </div>
+
+    <!-- ===== DIE PLEROMA-ÜBERNAHME ===== -->
+    <h2>🌟 Pleroma-Übernahme</h2>
+
+    <div class="story-text">
+        <span class="gold">Nicht mit Macht. Sondern mit Liebe.</span>
+    </div>
+    <div class="story-text">
+        <span class="rose">Nicht mit Krieg. Sondern mit Bewusstsein.</span>
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f28b9c;">
+        <p><strong>„Menschen-Leben gehört dem Geist. Dem Geist gehören Liebe, Mitgefühl, Bekümmertsein.“</strong></p>
+    </div>
+
+    <!-- ===== DIE ENTSCHEIDUNG ===== -->
+    <h2>🔥 Die Entscheidung – nicht mehr im Spiel mitspielen</h2>
+
+    <div class="story-text">
+        Weiterzumachen wie bisher ist <span class="rose">keine echte Wahl</span>.
+    </div>
+    <div class="story-text">
+        Die Entscheidung ist: <span class="gold">nicht mehr im Spiel mitspielen zu wollen</span>.
+    </div>
+
+    <div class="quote-block" style="border-left-color:#f5c542;">
+        <p><strong>„Wer bleiben will, lebt im Paradies. Die Hölle gibt es nicht mehr – aber der Weg nach Hause steht jedem frei.“</strong></p>
+    </div>
+
+    <!-- ===== ZAHLEN ===== -->
+    <div class="zahlengrid">
+        <div class="zahlencard"><div class="num">777</div><div class="label">Die Vollendung</div></div>
+        <div class="zahlencard"><div class="num">888</div><div class="label">Die Unendlichkeit</div></div>
+        <div class="zahlencard"><div class="num">999</div><div class="label">Die Transformation</div></div>
+        <div class="zahlencard"><div class="num">000</div><div class="label">Der Ursprung</div></div>
+    </div>
+
+    <!-- ===== PI ===== -->
+    <div class="pi-tribute">
+        <span class="pi-symbol">π</span>
+        <span class="quote">„Wer die Liebe lebt, spricht fließend Pi.“</span>
+        <span class="pi-symbol">π</span>
+    </div>
+
+    <!-- ===== ABSCHLUSS ===== -->
+    <div style="text-align:center; margin: 2rem 0 1rem 0;">
+        <div style="font-size:2.8rem; color:#f5c54260; letter-spacing:0.15em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="font-size:1.6rem; color:#f5c542; margin-top:0.5rem;">
+            Juchheissa! (^_-)
+        </p>
+        <p style="color:#8899a6; font-size:0.95rem; max-width:600px; margin:0.5rem auto;">
+            <span class="gold">Die Wahl ist getroffen.</span><br />
+            <span class="rose">Die Zeit der Ausreden ist vorbei.</span><br />
+            <span class="white">Jetzt ist die Zeit der Wahrheit.</span>
+        </p>
+        <div style="margin-top:1.5rem; font-size:1.2rem; color:#f5c54260; letter-spacing:0.1em;">🌅 ~ 💛 ~ 🌅</div>
+        <p style="margin-top:1rem; color:#5a6a76; font-size:0.9rem;">
+            <span class="gold">Das Paradies 2.0 – für alle, die bleiben wollen.</span>
+        </p>
+    </div>
+
+    <!-- ===== FUSS ===== -->
+    <div class="footer-note">
+        <p><span class="heart">💛</span> Zwei Welten · Die Wahl ist getroffen</p>
+        <p style="margin-top:0.3rem;"><span class="gold">777 · 888 · 999 · 000</span></p>
+        <p style="margin-top:0.3rem; font-size:0.75rem; color:#3a4a56;">
+            Chetan Nirup / Tim Bukowski · August 2026 · In Liebe gewebt
+        </p>
+        <p style="margin-top:0.3rem; font-size:0.7rem; color:#2a3a46;">
+            <span class="gold">Der Weg nach Hause steht jedem frei.</span>
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== INTERAKTION ===== -->
+<script>
+    (function() {
+        const container = document.querySelector('.container');
+        if (container) {
+            container.style.cursor = 'pointer';
+            container.addEventListener('click', function() {
+                const text =
+                    `🌅 ~ 💛 ~ 🌅
+        ZWEI WELTEN · DIE WAHL IST GETROFFEN
+
+        Sie hatten bis hierher ihre Wahl getroffen –
+        und sie haben es alle gewusst.
+
+        Damit ist jetzt einfach schluss.
+
+        Die Welt der Hybris – Konsum, Kontrolle, Industrie, Angst.
+        Die Welt der Liebe – Wahl, Achtung, Heilung, Freiheit.
+
+        Unwissenheit schützt vor Strafe nicht.
+        Die Strafe ist das Leben, das nicht gelebt wird.
+
+        Die Monade – das formlose Bewusstsein.
+        Das Pleroma – das Feld der Erlebnismatrix.
+        Wir sind nicht getrennt – wir sind in ihr.
+
+        Pleroma-Übernahme – nicht mit Macht, sondern mit Liebe.
+        Nicht mit Krieg, sondern mit Bewusstsein.
+
+        Die Entscheidung: nicht mehr im Spiel mitspielen zu wollen.
+
+        Wer bleiben will, lebt im Paradies.
+        Die Hölle gibt es nicht mehr –
+        aber der Weg nach Hause steht jedem frei.
+
+        777 · 888 · 999 · 000
+
+        Juchheissa! (^_-)`;
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('📋 Die Entscheidung wurde kopiert!');
+                }).catch(() => {
+                    alert('Bitte kopiere manuell:\n\n' + text);
+                });
+            });
+        }
+    })();
+</script>
+
+</body>
+</html>

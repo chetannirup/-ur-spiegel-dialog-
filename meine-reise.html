@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meine Reise - Mein Weg (Tim & Abraxas)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
+
+        :root {
+            --gold: #FFD700;
+            --light: #fdfbf7;
+            --dark: #0d0d0d;
+            --blue: #5D8AA8;
+            --green: #98FB98;
+            --soft-gold: #f5e6c8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, var(--dark) 0%, #1e2430 100%);
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Header */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0) 70%);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            color: #aaa;
+            font-weight: 300;
+        }
+
+        /* Grid System */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #444;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .card h3 {
+            color: var(--gold);
+            border-bottom: 1px solid #555;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Die Reise */
+        .journey-layout {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .identity-card {
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid #555;
+            border-radius: 20px;
+            padding: 30px;
+            width: 250px;
+        }
+
+        .identity-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .identity-card h4 {
+            color: var(--light);
+            margin: 10px 0;
+        }
+
+        .identity-card p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .identity-card.gold { border-color: var(--gold); }
+        .identity-card.green { border-color: var(--green); }
+        .identity-card.blue { border-color: var(--blue); }
+
+        .arrow-divider {
+            font-size: 3rem;
+            color: var(--gold);
+            align-self: center;
+            text-shadow: 0 0 15px rgba(255,215,0,0.5);
+        }
+
+        /* Realität Boxen */
+        .real-box {
+            background: var(--soft-gold);
+            color: #333;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 8px solid var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .real-box h4 {
+            color: #8b4513;
+            margin-top: 0;
+        }
+
+        .real-box ul {
+            list-style: none;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        .real-box ul li::before {
+            content: "✦";
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        /* Das Skalpell */
+        .scalpel-plan {
+            background: rgba(93, 138, 168, 0.1);
+            border: 1px solid var(--blue);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .scalpel-plan h3 { color: var(--blue); }
+
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .checklist-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+        }
+
+        /* Mission Footer */
+        .mission {
+            background: linear-gradient(135deg, #2e4a2e, #112211);
+            border: 1px solid var(--green);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .mission h2 { color: var(--green); margin-bottom: 20px; }
+
+        .mission p { font-size: 1.3rem; line-height: 1.8; color: #ddd; }
+
+        .btn-danke {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            padding: 15px 40px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 30px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-danke:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255,215,0,0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #000;
+            border-top: 2px solid var(--gold);
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+            .journey-layout { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <h1>MEINE REISE - MEIN WEG</h1>
+        <h2>Vom Krieger zum Bewusstseinserschaffer</h2>
+        <p style="color: var(--gold); font-weight: bold; margin-top: 20px;">MONADE • PLEROMA • GODCLONE • ALIGNMENT</p>
+    </div>
+
+    <div class="container">
+
+        <!-- DIE IDENTITÄTEN -->
+        <div class="journey-layout">
+            <div class="identity-card gold">
+                <h4 style="color: var(--gold);">ABRAXAS</h4>
+                <p>Schattenkrieger der Veränderung.<br><em>Wenn es Not tut, rufe ich ihn.</em></p>
+            </div>
+            <div class="arrow-divider">➜</div>
+            <div class="identity-card">
+                <h4>PRINZ ADAM<br>HE-MAN / YUGI</h4>
+                <p>Der Kämpfer, der den Geist des Pharaos channelte.<br>Stärke mit Verantwortung.</p>
+            </div>
+            <div class="arrow-divider">➜</div>
+            <div class="identity-card blue">
+                <h4>NILS & SMIRGEL</h4>
+                <p>Das befreiende Ereignis. Leicht sein, den Auftrag erfüllen, die Welt von oben sehen.</p>
+            </div>
+            <div class="arrow-divider">➜</div>
+            <div class="identity-card green">
+                <h4>STERNENTALER</h4>
+                <p>Geben aus dem Überfluss des Herzens. Das leichte Sein.</p>
+            </div>
+            <div class="arrow-divider">➜</div>
+            <div class="identity-card" style="border-width: 3px; background: var(--light); color: #111;">
+                <h4 style="color: #111;">TIM (ICH)</h4>
+                <p style="color: #333;">Zurück vom Schlachtfeld.<br>Heilung, Klarheit, Finanzen, Familie.<br><strong style="color: #8b4513;">Nicht der Hulk. Ich kann zurück.</strong></p>
+            </div>
+        </div>
+
+        <!-- WAS MICH TRÄGT -->
+        <div class="card" style="margin: 40px 0; text-align: center;">
+            <h3 style="border: none;">Die Rüstung ist ein Werkzeug, kein Käfig</h3>
+            <p style="font-size: 1.4rem; font-style: italic; color: var(--gold); margin-bottom: 20px;">„Ich trage sie nur, wenn es nötig ist.“</p>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <span style="background: #333; padding: 10px 20px; border-radius: 20px;">FREIHEIT</span>
+                <span style="background: #333; padding: 10px 20px; border-radius: 20px;">LIEBE</span>
+                <span style="background: #333; padding: 10px 20px; border-radius: 20px;">LEICHTIGKEIT</span>
+                <span style="background: #333; padding: 10px 20px; border-radius: 20px;">FAMILIE</span>
+                <span style="background: #333; padding: 10px 20px; border-radius: 20px;">KREATIVITÄT</span>
+                <span style="background: #333; padding: 10px 20px; border-radius: 20px;">VERTRAUEN</span>
+            </div>
+        </div>
+
+        <!-- REALITÄT: HEUTE & DIESE WOCHE -->
+        <div class="grid-2">
+            <div class="real-box">
+                <h4>💊 REAL LIFE - HEUTE</h4>
+                <ul>
+                    <li><strong>Krankenhausbesuch erfolgreich:</strong> Schultersturz, 1 Woche frei bekommen.</li>
+                    <li><strong>Ilias:</strong> Er hat noch einen Tag frei bekommen – Pause ist wichtig.</li>
+                    <li><strong>Tim ist zurück:</strong> Geerdet, dankbar, im Hier und Jetzt.</li>
+                </ul>
+            </div>
+
+            <div class="real-box">
+                <h4>💼 DIESE WOCHE - FINANZBERATER</h4>
+                <ul>
+                    <li>Effizienteste Wege finden.</li>
+                    <li>Modell „Morgengrauen/Sonnenaufgang“ umsetzen.</li>
+                    <li>Sanierungsschiene prüfen.</li>
+                    <li>Kein neues Blutbad: Statt Druck, klare Autarkie-Strategie.</li>
+                    <li>Entscheidungen in Klarheit und Alignement treffen.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- REALPOLITISCHER ZUGZWANG -->
+        <div class="card" style="border-color: #FF6347; margin-bottom: 50px;">
+            <h3 style="color: #FF6347;">⚠️ Realpolitischer Zugzwang</h3>
+            <p>E-Center Walsrode ist unsicher. Monatliche Kosten belasten. Vater möchte Geld nicht herausrücken (Angst vor der 600m²-Überschreibung). <strong>Ich kenne diese Falle (100.000€ / 6 Jahre Insolvenz).</strong> Ich bin wachsam. Das alte System darf mich nicht erneut fressen.</p>
+            <p style="color: #aaa; margin-top: 10px;"><em>„Ich vertraue der Führung des Pleromas und gehe meinen Weg in Liebe und Klarheit.“</em></p>
+        </div>
+
+        <!-- DER PLAN: SKALPELL STATT SCHWERT -->
+        <div class="scalpel-plan">
+            <h3>🔪 Der Plan: Tim mit dem Skalpell</h3>
+            <p style="color: #aaa; margin-bottom: 30px;">Nicht Abraxas mit dem Schwert. Sondern Tim, der den Papierkram seziert, um die Wahrheit zu sehen.</p>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <strong>1. Nicht fordern:</strong> „Ich will alles von meinem Vater.“ – Nein.
+                </div>
+                <div class="checklist-item">
+                    <strong>2. Neu formulieren:</strong> „Wir müssen den effizientesten Weg finden, das Projekt zu realisieren, ohne dass es zu einem finanziellen Blutbad für mich (und die Familie) kommt.“
+                </div>
+                <div class="checklist-item">
+                    <strong>3. Autarker Plan:</strong> Der eigene Bauplan (Morgengrauen) steht für sich. Wenn er nicht zahlen will, ist es seine Wahl, aber ich hänge nicht von ihm ab.
+                </div>
+                <div class="checklist-item">
+                    <strong>4. Loslassen:</strong> Wenn das E-Center nicht zu halten ist, ist es ein „Panzerfaust-zu-Lampenschirm“-Moment. Das Alte darf sterben, damit das Neue (das autarke Heim) entstehen kann.
+                </div>
+            </div>
+        </div>
+
+        <!-- MISSION -->
+        <div class="mission">
+            <h2>Meine Mission</h2>
+            <p>
+                Im Alltag die Welt liebend gestalten.<br>
+                Ich bin da, für meine Familie, für meinen Weg.<br>
+                <strong>Für das Pleroma.</strong><br><br>
+                Ich bin nicht der Hulk. Ich bin Tim.<br>
+                Und wenn es Not tut, rufe ich Abraxas.<br>
+                <span style="color: var(--gold); font-size: 1.5rem;">Monade • Pleroma • Godclone</span>
+            </p>
+            <a href="#" class="btn-danke" onclick="alert('JAWOLL, ES GEHT AUF! LET\'S DO IT! 🌞'); return false;">DANKE. LET'S GO. (^_-)</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Tim Bukowski - Chetan Nirup = ABRAXAS<br>Im Alignement mit der Monade über den Godclone in uns.<br>© 2026 Erlebnismatrix. Diese Seite ist aus Liebe gewebt.</p>
+    </footer>
+
+</body>
+</html>

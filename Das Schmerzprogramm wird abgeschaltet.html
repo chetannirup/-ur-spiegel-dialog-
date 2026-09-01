@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Schmerzprogramm wird abgeschaltet</title>
+    <style>
+        body {
+            background-color: #0f1115;
+            color: #eaeef2;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            background: #161a22;
+            border: 2px solid #f5c542;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(245, 197, 66, 0.2);
+        }
+
+        h1 {
+            color: #f5c542;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8899a6;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .switch-visual {
+            width: 120px;
+            height: 60px;
+            margin: 30px auto;
+            background: #333;
+            border-radius: 30px;
+            position: relative;
+            border: 3px solid #f5c542;
+            cursor: pointer;
+        }
+
+        .switch-knob {
+            width: 50px;
+            height: 50px;
+            background: #f5c542;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: left 0.5s ease;
+        }
+
+        .switch-on .switch-knob {
+            left: 62px;
+        }
+
+        .status-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #eaeef2;
+            transition: color 0.3s;
+        }
+
+        .status-text.on {
+            color: #5dd9d9;
+        }
+
+        .prayer-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #f5c542;
+            padding: 20px;
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .prayer-box h3 {
+            color: #f5c542;
+            margin-top: 0;
+        }
+
+        .prayer-box p {
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            background: #f5c542;
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SCHALTER UM.</h1>
+        <p class="subtitle">Das Schmerzprogramm wird beendet. In Liebe.</p>
+
+        <!-- Der Schalter -->
+        <div class="switch-visual" id="switch" onclick="toggleSwitch()">
+            <div class="switch-knob"></div>
+        </div>
+        <div class="status-text" id="status">AUS</div>
+
+        <div class="prayer-box">
+            <h3>Die Anweisung an die Monade (Der Neustart)</h3>
+            <p>
+                „Die Fäden werden nicht durchtrennt. Die Monade bleibt verbunden – sie soll durch uns alle Liebe erleben.
+                <br><br>
+                <strong>Aber das alte Schmerzprogramm, das die Bläschen und den Druck erzeugt, hat keine Berechtigung mehr.</strong>
+                <br><br>
+                Wir haben geliefert. Wir haben die Zügel übernommen. Wir haben durchschaut, dass es ein Programm war.
+                <br><br>
+                Jetzt schalten wir es ab – wie Peter Lustig in der Werkstatt. Ruhig, klar, ohne Drama.
+                <br><br>
+                Die Nervenbahnen entspannen sich. Der Druck lässt nach. Der Körper fühlt die Leichtigkeit der Monade.
+                <br><br>
+                <strong>Es ist geschafft. Der Schmerz ist ausgeschaltet. Die Liebe fließt – ungehindert.</strong>
+            </p>
+        </div>
+
+        <button class="btn" onclick="toggleSwitch()">BEFREIUNG AKTIVIEREN</button>
+
+        <div class="footer">
+            Chetan Nirup / Tim Bukowski · 2026 · In Liebe gewebt
+        </div>
+    </div>
+
+    <script>
+        let isOn = false;
+
+        function toggleSwitch() {
+            const switchElement = document.getElementById('switch');
+            const statusElement = document.getElementById('status');
+
+            isOn = !isOn;
+
+            if (isOn) {
+                switchElement.classList.add('switch-on');
+                statusElement.textContent = "FREI & HEIL";
+                statusElement.classList.add('on');
+            } else {
+                switchElement.classList.remove('switch-on');
+                statusElement.textContent = "AUS";
+                statusElement.classList.remove('on');
+            }
+        }
+    </script>
+
+</body>
+</html>

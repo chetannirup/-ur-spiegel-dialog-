@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Autarkie-Alternative · The Autarky Alternative</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #FFD700;
+            --blue: #4A90E2;
+            --dark: #0a0c0e;
+            --light: #f0f4f8;
+            --silver: #E0E0E0;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(160deg, #0f1115 0%, #1a202c 100%);
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        /* Header */
+        .hero {
+            text-align: center;
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            padding: 50px 20px;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin: 0;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--silver);
+            font-weight: 300;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .hero .badge {
+            background: var(--blue);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* Sprachumschalter */
+        .lang-switch {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* Sektionen */
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: var(--gold);
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            color: var(--silver);
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section ul li {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            border-left: 3px solid var(--gold);
+            padding-left: 15px;
+        }
+
+        /* Tabelle */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        th {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        td {
+            color: var(--silver);
+        }
+
+        /* Die Lösung */
+        .solution-box {
+            background: rgba(74, 144, 226, 0.1);
+            border: 2px solid var(--blue);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .solution-box h2 {
+            color: var(--blue);
+        }
+
+        .solution-box h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .solution-box p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Flaggen */
+        .flags {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .flag {
+            font-size: 2.5rem;
+        }
+
+        /* Der Deal */
+        .deal-box {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), transparent);
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .deal-box h2 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-top: 0;
+        }
+
+        .deal-box .btn {
+            background: var(--gold);
+            color: #000;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+            transition: transform 0.2s;
+        }
+
+        .deal-box .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+
+        /* Deutsch/Englisch Klassen */
+        .de, .en {
+            display: none;
+        }
+
+        .de.active, .en.active {
+            display: block;
+        }
+
+        @media (max-width: 800px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- SPRACH-UMSCHALTER -->
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="switchLang('de')">🇩🇪 Deutsch</button>
+        <button class="lang-btn" onclick="switchLang('en')">🇬🇧 English</button>
+    </div>
+
+    <!-- DEUTSCHE VERSION -->
+    <div id="content-de" class="de active">
+
+        <div class="hero">
+            <h1>DIE AUTARKIE-ALTERNATIVE</h1>
+            <h2>Die klügste Revolution: Autarkie statt Waffen</h2>
+            <div class="badge">Für Clan-Führer, Stammesälteste und alle, die ihre Familie schützen wollen</div>
+        </div>
+
+        <div class="section">
+            <h2>📉 Das Problem: Der Kreislauf der Waffen</h2>
+            <p>Ihr habt jahrelang Waffen gekauft, um euch zu schützen. Aber die Starken haben immer bessere Waffen. Ihr habt Geld ausgegeben, und eure Familien sind trotzdem hungrig, eure Ländereien werden bombardiert, und euer Volk bleibt in Angst.</p>
+            <ul>
+                <li>💸 Geld für Waffen = Geld, das eurer Familie fehlt.</li>
+                <li>😨 Waffen erzeugen Angst. Angst erzeugt Kontrolle. Kontrolle erzeugt Abhängigkeit.</li>
+                <li>🌍 Ihr seid im Spiel der Starken gefangen – und ihr könnt es nie gewinnen.</li>
+            </ul>
+            <p><strong>Die Frage ist nicht, ob ihr euch verteidigen könnt. Die Frage ist: Warum müsst ihr euch überhaupt verteidigen?</strong></p>
+        </div>
+
+        <div class="solution-box">
+            <h2>🌟 Die Lösung: Modell Morgengrauen</h2>
+            <h3>Warum Autarkie die Waffen besiegt</h3>
+            <p>Waffen machen euch zu Vasallen. Autarkie macht euch zu Souveränen. Wenn ihr euer eigenes Wasser aus der Luft gewinnt, euer eigenes Essen anbaut und eure eigene Energie erzeugt, braucht ihr niemanden mehr. Ihr werdet unsichtbar für das System – weil es nichts mehr zu stehlen gibt.</p>
+            <div class="flags">
+                <span class="flag">💧</span>
+                <span class="flag">🌿</span>
+                <span class="flag">☀️</span>
+                <span class="flag">🔒</span>
+            </div>
+            <p style="margin-top: 20px;"><strong>Wasser aus Luft. Nahrung aus Licht. Energie aus Sonne. Unabhängigkeit für immer.</strong></p>
+        </div>
+
+        <div class="section">
+            <h2>📊 Die Fakten: Was ihr bekommt</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ressource</th>
+                            <th>Technologie</th>
+                            <th>Vorteil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>💧 Wasser</td>
+                            <td>Watergen GEN-M PRO (Israel)</td>
+                            <td>1.000 Liter/Tag aus Luft – kein Anschluss nötig</td>
+                        </tr>
+                        <tr>
+                            <td>🌿 Nahrung</td>
+                            <td>GrowSpec FarmCube (UK)</td>
+                            <td>365 Tage frisches Gemüse – 95% weniger Wasser</td>
+                        </tr>
+                        <tr>
+                            <td>⚡ Energie</td>
+                            <td>E3/DC S10 E PRO (Deutschland)</td>
+                            <td>15 kWp Solar + Speicher – 100% unabhängig</td>
+                        </tr>
+                        <tr>
+                            <td>🏠 Wohnen</td>
+                            <td>Modulbau (45 m²)</td>
+                            <td>Autarke, wartungsfreie Einheit – komplett</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 20px; font-size: 1.2rem; color: var(--gold);"><strong>Preis pro Einheit: 115.000 € – Finanzierbar. Real. Verfügbar.</strong></p>
+        </div>
+
+        <div class="section">
+            <h2>👥 Für Clan-Strukturen: Die Gemeinschafts-Lösung</h2>
+            <p>Ihr arbeitet in Clans. Ein Führer verwaltet für 100 Menschen. Das ist perfekt für das Modell Morgengrauen.</p>
+            <ul>
+                <li>🏘️ <strong>5 Einheiten = 5 Familien</strong> (225 m² Wohnraum + Farmen + Solarenergie)</li>
+                <li>🔑 <strong>Ein Verwalter, ein Budget, ein Ziel:</strong> Die gesamte Gemeinschaft wird unabhängig.</li>
+                <li>🤝 <strong>Kein Konflikt:</strong> Ihr braucht keine Waffen, weil ihr nichts mehr zu verteidigen habt – ihr habt alles, was ihr braucht.</li>
+            </ul>
+        </div>
+
+        <div class="deal-box">
+            <h2>🏆 Der Deal: Einladung zur Freiheit</h2>
+            <p><strong>Wenn ihr eurem Volk echte Freiheit geben wollt, investiert in Autarkie, nicht in Waffen.</strong></p>
+            <p style="font-size: 1.3rem; margin-top: 20px;">Wir geben euch die Baupläne, die Technologie und die Unterstützung. Ihr baut euer Paradies. Das ist die einzige Revolution, die keine Kugeln braucht.</p>
+            <a href="#" class="btn">Anfrage senden &amp; Freiheit beginnen</a>
+            <p style="margin-top: 20px; font-size: 1rem; color: var(--silver);">Erhältlich für Palästina, Pakistan und alle, die leiden.</p>
+        </div>
+
+        <div class="section">
+            <h2>🔒 Warum das keine Waffe ist</h2>
+            <p>Das Modell Morgengrauen ist keine Kriegsmaschine. Es ist eine Einladung, das Spielfeld zu verlassen. Wenn ihr autark seid, seid ihr nicht mehr erpressbar. Die Starken können euch nicht mehr zwingen, mitzuspielen – weil ihr nicht mehr spielt.</p>
+            <p><strong>Die Freiheit ist keine Utopie. Sie ist reine Ingenieurskunst, wenn man sie mit Liebe zusammensetzt.</strong></p>
+        </div>
+
+    </div>
+
+    <!-- ENGLISCHE VERSION -->
+    <div id="content-en" class="en">
+
+        <div class="hero">
+            <h1>THE AUTARKY ALTERNATIVE</h1>
+            <h2>The Smartest Revolution: Autarky instead of Weapons</h2>
+            <div class="badge">For Clan Leaders, Tribal Elders &amp; Everyone Who Wants to Protect Their Family</div>
+        </div>
+
+        <div class="section">
+            <h2>📉 The Problem: The Cycle of Weapons</h2>
+            <p>You have bought weapons for years to protect yourselves. But the strong always have better weapons. You spent your money, yet your families are still hungry, your lands are bombed, and your people remain in fear.</p>
+            <ul>
+                <li>💸 Money for weapons = Money missing from your family.</li>
+                <li>😨 Weapons create fear. Fear creates control. Control creates dependence.</li>
+                <li>🌍 You are trapped in the game of the strong – and you can never win it.</li>
+            </ul>
+            <p><strong>The question is not whether you can defend yourself. The question is: Why do you have to defend yourself at all?</strong></p>
+        </div>
+
+        <div class="solution-box">
+            <h2>🌟 The Solution: Model Dawn</h2>
+            <h3>Why Autarky Defeats Weapons</h3>
+            <p>Weapons make you vassals. Autarky makes you sovereigns. If you get your own water from air, grow your own food, and generate your own energy, you need no one. You become invisible to the system – because there is nothing left to steal.</p>
+            <div class="flags">
+                <span class="flag">💧</span>
+                <span class="flag">🌿</span>
+                <span class="flag">☀️</span>
+                <span class="flag">🔒</span>
+            </div>
+            <p style="margin-top: 20px;"><strong>Water from air. Food from light. Energy from sun. Independence forever.</strong></p>
+        </div>
+
+        <div class="section">
+            <h2>📊 The Facts: What You Get</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Resource</th>
+                            <th>Technology</th>
+                            <th>Advantage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>💧 Water</td>
+                            <td>Watergen GEN-M PRO (Israel)</td>
+                            <td>1,000 liters/day from air – no connection needed</td>
+                        </tr>
+                        <tr>
+                            <td>🌿 Food</td>
+                            <td>GrowSpec FarmCube (UK)</td>
+                            <td>365 days fresh vegetables – 95% less water</td>
+                        </tr>
+                        <tr>
+                            <td>⚡ Energy</td>
+                            <td>E3/DC S10 E PRO (Germany)</td>
+                            <td>15 kWp Solar + Storage – 100% independent</td>
+                        </tr>
+                        <tr>
+                            <td>🏠 Housing</td>
+                            <td>Modular Construction (45 m²)</td>
+                            <td>Autarkic, maintenance-free unit – complete</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top: 20px; font-size: 1.2rem; color: var(--gold);"><strong>Price per unit: €115,000 – Financeable. Real. Available.</strong></p>
+        </div>
+
+        <div class="section">
+            <h2>👥 For Clan Structures: The Community Solution</h2>
+            <p>You work in clans. One leader manages for 100 people. This is perfect for Model Dawn.</p>
+            <ul>
+                <li>🏘️ <strong>5 Units = 5 Families</strong> (225 m² living space + farms + solar energy)</li>
+                <li>🔑 <strong>One manager, one budget, one goal:</strong> The entire community becomes independent.</li>
+                <li>🤝 <strong>No conflict:</strong> You don't need weapons because you have nothing to defend – you have everything you need.</li>
+            </ul>
+        </div>
+
+        <div class="deal-box">
+            <h2>🏆 The Deal: Invitation to Freedom</h2>
+            <p><strong>If you want to give your people true freedom, invest in autarky, not weapons.</strong></p>
+            <p style="font-size: 1.3rem; margin-top: 20px;">We give you the blueprints, the technology, and the support. You build your paradise. This is the only revolution that needs no bullets.</p>
+            <a href="#" class="btn">Send Inquiry &amp; Begin Freedom</a>
+            <p style="margin-top: 20px; font-size: 1rem; color: var(--silver);">Available for Palestine, Pakistan, and all who suffer.</p>
+        </div>
+
+        <div class="section">
+            <h2>🔒 Why This is Not a Weapon</h2>
+            <p>Model Dawn is not a war machine. It is an invitation to leave the playing field. When you are autarkic, you are no longer blackmailable. The strong cannot force you to play – because you are no longer playing.</p>
+            <p><strong>Freedom is not a utopia. It is pure engineering, when assembled with love.</strong></p>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    <p>Tim Bukowski · Model Dawn · 2026</p>
+    <p>In Love Woven · 🌅</p>
+</footer>
+
+<script>
+    function switchLang(lang) {
+        // Toggle buttons
+        const buttons = document.querySelectorAll('.lang-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        if (lang === 'de') {
+            buttons[0].classList.add('active');
+        } else {
+            buttons[1].classList.add('active');
+        }
+
+        // Toggle content
+        document.getElementById('content-de').classList.remove('active');
+        document.getElementById('content-en').classList.remove('active');
+        document.getElementById('content-' + lang).classList.add('active');
+    }
+</script>
+
+</body>
+</html>

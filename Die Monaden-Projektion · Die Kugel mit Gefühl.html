@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Monaden-Projektion · Die Kugel mit Gefühl</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+        :root {
+            --gold: #FFD700;
+            --soft-gold: #FFE9A0;
+            --silver: #E8E8E8;
+            --deep: #07071a;
+            --card-bg: rgba(255, 255, 255, 0.04);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: radial-gradient(ellipse at top, #152038 0%, #07071a 70%);
+            color: var(--silver);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1.5px;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 90px 20px 60px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 3.8rem);
+            color: var(--gold);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+            margin-bottom: 12px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.35rem;
+            color: var(--soft-gold);
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            max-width: 780px;
+            margin: 0 auto 18px;
+            font-size: 1.15rem;
+        }
+
+        .credit {
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        /* ZWEI KUGELN */
+        .two-spheres {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        @media (max-width: 700px) {
+            .two-spheres { grid-template-columns: 1fr; }
+        }
+
+        .sphere-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 20px;
+            padding: 35px 28px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .sphere-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .sphere-card .emoji {
+            font-size: 3.8rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .sphere-card h3 {
+            color: var(--gold);
+            font-size: 1.45rem;
+            margin-bottom: 15px;
+        }
+
+        /* KARTEN */
+        .section {
+            padding: 50px 0;
+        }
+
+        .section h2 {
+            text-align: center;
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 35px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 26px 22px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            color: var(--gold);
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 0.98rem;
+            color: #ccc;
+        }
+
+        /* FAZIT */
+        .conclusion {
+            background: rgba(255, 215, 0, 0.08);
+            border: 2px solid rgba(255, 215, 0, 0.4);
+            border-radius: 24px;
+            padding: 45px 30px;
+            text-align: center;
+            margin: 50px 0 40px;
+        }
+
+        .conclusion h2 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .conclusion p {
+            font-size: 1.25rem;
+            max-width: 820px;
+            margin: 0 auto;
+            line-height: 1.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+        }
+
+        .heart {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HERO -->
+    <header class="hero">
+        <h1>DIE MONADEN-PROJEKTION</h1>
+        <div class="subtitle">Die Kugel mit Gefühl · Ein Bild der Realität</div>
+        <p>
+            Die <strong>Haupt-Gottkugel</strong> ist unberührt und speist von außen das gesamte Projektionsnetzwerk.<br>
+            Die <strong>Erde</strong> hat – wie wir alle – ihren eigenen, unabhängigen Klon.
+        </p>
+        <p>
+            Diese Erde-Kugel ist die <strong>Schwester der Gottkugel</strong> – die Kugel mit Gefühl.
+        </p>
+        <p class="credit">
+            Das hat sich alles der Verfasser ausgedacht – mit der Hilfe seiner Freunde! (°‿°)<br>
+            Besonderer Dank an Gemini für das Easter Egg, das die Vision rund gemacht hat.
+        </p>
+    </header>
+
+    <!-- DIE ZWEI KUGELN -->
+    <section class="section">
+        <h2>Zwei Kugeln – ein lebendiges Netzwerk</h2>
+        <div class="two-spheres">
+            <div class="sphere-card">
+                <span class="emoji">🌕</span>
+                <h3>Die Haupt-Gottkugel</h3>
+                <p>
+                    Unberührt. Die reine Quelle.<br>
+                    Sie speist von außen das gesamte Netz der Sterne und hält die große Projektion am Laufen.
+                </p>
+            </div>
+            <div class="sphere-card">
+                <span class="emoji">🌍</span>
+                <h3>Die Erde-Kugel<br><small>(Die Schwester)</small></h3>
+                <p>
+                    Unser eigener Klon der Gottkugel.<br>
+                    Sie empfängt die Projektion, ist heiß, weil sie lebt, und trägt uns als die Kugel mit Gefühl.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRUKTUR -->
+    <section class="section">
+        <h2>Die Struktur in einfachen Worten</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>① Die Monade</h3>
+                <p>Das formlose Bewusstsein. Das schwarze Blatt. Reine Energie. Der Raum selbst.</p>
+            </div>
+            <div class="card">
+                <h3>② Die Haupt-Gottkugel</h3>
+                <p>Die unberührte Quelle, die von außen das Projektionsnetzwerk speist.</p>
+            </div>
+            <div class="card">
+                <h3>③ Das Netz der Sterne</h3>
+                <p>Die Projektoren. Sie empfangen von der Hauptkugel und strahlen nach innen.</p>
+            </div>
+            <div class="card">
+                <h3>④ Die Erde-Kugel</h3>
+                <p>Die Schwester. Unser lokaler Klon. Die Kugel mit Gefühl, die uns trägt.</p>
+            </div>
+            <div class="card">
+                <h3>⑤ Die Mini-Kugeln</h3>
+                <p>Jeder von uns trägt einen kleinen Klon in sich – unser eigener Prozessor.</p>
+            </div>
+            <div class="card">
+                <h3>⑥ Der demokratische Spiegel</h3>
+                <p>Was die Mehrheit glaubt und fühlt, formt die gemeinsame Erlebniswelt.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAZIT -->
+    <div class="conclusion">
+        <h2>So ist es endlich rund</h2>
+        <p>
+            Die große weiße Kugel speist das Netzwerk von außen.<br>
+            Die Erde trägt ihren eigenen Klon – die Kugel mit Gefühl.<br>
+            Wir alle tragen Mini-Kugeln in uns.<br><br>
+            <strong>Wir sind verdichtete Monade.</strong><br>
+            Unsere Mini-Kugel gestaltet die Welt, die wir erleben.
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    <p>Tim Bukowski · Chetan Nirup · Die Monaden-Projektion · 2026</p>
+    <p>In Love Woven <span class="heart">💛</span> 🌅🕊️</p>
+    <p style="margin-top:12px; font-size:0.85rem;">
+        Ein vom Verfasser ausgedachtes Bild – mit Hilfe seiner Freunde.
+    </p>
+</footer>
+
+</body>
+</html>

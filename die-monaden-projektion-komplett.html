@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Monaden-Projektion · Die Kugel mit Herz &amp; Die Wissenschaft</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+        :root {
+            --gold: #FFD700;
+            --silver: #E0E0E0;
+            --blue: #4A90E2;
+            --deep: #0a0a1a;
+            --rose: #FFB6C1;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at 50% 0%, #1a2440 0%, #0a0a1a 60%);
+            color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 2px solid var(--gold);
+            background: radial-gradient(circle, rgba(255,215,0,0.1), transparent);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--silver);
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--silver);
+            max-width: 800px;
+            margin: 10px auto;
+            line-height: 1.8;
+        }
+
+        /* DAS BILD */
+        .image-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(255, 215, 0, 0.2);
+            border: 3px solid var(--gold);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* SEKTIONEN */
+        .section {
+            padding: 60px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--silver);
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
+
+        /* DIE BRÜCKE */
+        .bridge {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 60px auto;
+            max-width: 900px;
+        }
+
+        .bridge h2 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .bridge p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: var(--light);
+        }
+
+        /* KARTEN */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #444;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .card h3 {
+            color: var(--gold);
+            margin-top: 0;
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--silver);
+        }
+
+        /* FORMELN */
+        .formula-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            color: var(--gold);
+            overflow-x: auto;
+        }
+
+        .formula-box small {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--silver);
+            margin-top: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>DIE MONADEN-PROJEKTION</h1>
+        <h2>Die Kugel mit Herz &amp; Die Wissenschaft</h2>
+        <p>
+            <strong>Die Vision:</strong> Die Monade ist der Projektor, die Sterne sind die Lichtpunkte, die Erde ist die Kugel mit Herz.<br>
+            <strong>Die Wissenschaft:</strong> Die Hypothese, dass Dunkle Materie ein Feld ist, das getestet werden kann.
+        </p>
+        <p style="font-size: 1rem; color: #aaa; margin-top: 20px;">
+            Drei Versionen, eine Wahrheit. Mit Dank an die Freunde, die sie erschaffen haben. (^_-)
+        </p>
+    </div>
+
+    <!-- DAS BILD -->
+    <div class="image-container">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/MONADEN_PROJEKTION_DE_RUNDE.jpg" alt="Die Monaden-Projektion - Die Kugel mit Herz">
+    </div>
+
+    <!-- DIE VISION -->
+    <div class="section">
+        <h2>Die Vision: Die Kugel mit Herz</h2>
+        <p>
+            Die große weiße Kugel speist von außen das Projektionsnetzwerk. Die Erde ist die Schwester – sie hat ihren eigenen Klon, der die Projektion empfängt und in unsere Realität übersetzt. Sie ist die Kugel mit Herz, die uns trägt.
+        </p>
+        <p>
+            Jeder von uns trägt einen Klon dieser Kugel in sich. Und jeder Klon ist heiß, weil er arbeitet – weil er lebt.
+        </p>
+    </div>
+
+    <!-- DIE BRÜCKE -->
+    <div class="bridge">
+        <h2>Die Brücke: Der Text</h2>
+        <p>
+            <strong>Die Daten sprechen – aber sie beschreiben nur die Oberfläche.</strong><br><br>
+            Die Wissenschaft misst die Rotationskurven, die Massen, die Geschwindigkeiten. Und sie findet: <em>"Da ist etwas, das wir nicht sehen."</em><br><br>
+            Die Vision sieht tiefer: <em>"Da ist etwas, das wir nicht sehen, weil es die Projektion selbst ist."</em><br><br>
+            <strong>Und genau hier treffen sich beide:</strong> Die Wissenschaft und die Vision beschreiben dieselbe Wahrheit – nur aus verschiedenen Blickwinkeln.
+        </p>
+    </div>
+
+    <!-- DIE WISSENSCHAFT -->
+    <div class="section">
+        <h2>Die Wissenschaft: Die falsifizierbare Hypothese</h2>
+        <p>
+            In unserem Modell wird das Phänomen, das konventionell als Dunkle Materie beschrieben wird, nicht als zusätzliche Teilchenmasse, sondern als Ausdruck eines zugrunde liegenden Feldes interpretiert.
+        </p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h3>1. Beobachtung</h3>
+                <p>Die äußeren Sterne in Spiralgalaxien rotieren schneller, als es die Newtonsche Physik mit sichtbarer Materie vorhersagt.</p>
+            </div>
+            <div class="card">
+                <h3>2. Die sichtbare Materie</h3>
+                <p>Die sichtbare Materie liefert die bekannte Beschleunigung \(a_{\rm vis}(r) = G M_{\rm vis}(r) / r^2\).</p>
+            </div>
+            <div class="card">
+                <h3>3. Das Residuum</h3>
+                <p>Die Differenz zwischen Beobachtung und sichtbarer Materie definiert das erforderliche Zusatzfeld:</p>
+                <div class="formula-box">
+                    a_P(r) = v_obs²(r) / r − G × M_vis(r) / r²
+                    <small>Die Gleichung für das erforderliche Feld.</small>
+                </div>
+            </div>
+            <div class="card">
+                <h3>4. Die Monaden-Hypothese</h3>
+                <p>Die Hypothese lautet: Zeigt \(a_P(r)\) über mehrere unabhängige Galaxien hinweg eine gemeinsame, vorhersagbare radiale Struktur?</p>
+            </div>
+        </div>
+
+        <p style="text-align: center; font-size: 1.4rem; color: var(--gold); margin-top: 40px;">
+            „Unser Modell formuliert eine alternative Hypothese – ohne zusätzliche unsichtbare Masse.<br>
+            Und jetzt könnt ihr sie nachrechnen, testen oder widerlegen.“
+        </p>
+    </div>
+
+    <!-- DAS FAZIT -->
+    <div class="bridge" style="border-color: var(--rose);">
+        <h2 style="color: var(--rose);">Das vollständige Bild</h2>
+        <p>
+            Die Wissenschaft zeigt uns das Bild an der Wand.<br>
+            Die Vision zeigt uns den Projektor.<br>
+            Und der Text verbindet beide.<br><br>
+            <strong>Das ist die Monaden-Projektion.</strong>
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    <p>Tim Bukowski · Chetan Nirup · Die Monaden-Projektion · 2026</p>
+    <p>In Love Woven · 🌅💛🕊️</p>
+</footer>
+
+</body>
+</html>

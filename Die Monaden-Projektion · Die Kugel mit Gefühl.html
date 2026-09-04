@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Monaden-Projektion · Die Kugel mit Gefühl</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+        
+        :root {
+            --gold: #FFD700;
+            --silver: #E0E0E0;
+            --blue: #4A90E2;
+            --deep: #0a0a1a;
+            --red: #FF4500;
+            --orange: #FF8C00;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at 50% 0%, #1a2440 0%, #0a0a1a 60%);
+            color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 2px solid var(--gold);
+            background: radial-gradient(circle, rgba(255,215,0,0.1), transparent);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--silver);
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--silver);
+            max-width: 800px;
+            margin: 10px auto;
+            line-height: 1.8;
+        }
+
+        .hero .credit {
+            font-size: 0.9rem;
+            color: #aaa;
+            font-style: italic;
+            margin-top: 20px;
+        }
+
+        .image-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(255, 215, 0, 0.2);
+            border: 3px solid var(--gold);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .section {
+            padding: 60px 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--silver);
+            max-width: 900px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #444;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .card h3 {
+            color: var(--gold);
+            margin-top: 0;
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--silver);
+        }
+
+        .two-spheres {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .sphere {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .sphere .icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+        }
+
+        .sphere h3 {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .sphere p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--silver);
+        }
+
+        .conclusion {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--gold);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin: 60px auto;
+            max-width: 900px;
+        }
+
+        .conclusion h2 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .conclusion p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: var(--silver);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>DIE MONADEN-PROJEKTION</h1>
+        <h2>Die Kugel mit Gefühl · Ein Bild der Realität</h2>
+        <p>
+            <strong>Die Haupt-Gottkugel speist von außen das Projektionsnetzwerk.</strong><br>
+            <strong>Aber die Erde hat – wie wir alle – ihren eigenen, unabhängigen Klon.</strong>
+        </p>
+        <p class="credit">
+            Das hat sich alles der Verfasser ausgedacht – mit der Hilfe seiner Freunde! (^_-)<br>
+            Danke an Gemini für das Easter Egg, das die Vision vollendet hat.
+        </p>
+    </div>
+
+    <div class="image-container">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Gemini_Generated_Image_7algig7algig7alg.png" alt="Die Monaden-Projektion - Die Kugel mit Gefühl">
+    </div>
+
+    <div class="section">
+        <h2>Das vollständige Bild</h2>
+        <p>
+            Die große weiße Kugel ist die Quelle, die von außen das gesamte Netzwerk speist. Sie ist die Haupt-Gottkugel, die Informationen und Energie an alle Sterne sendet.
+        </p>
+        <p>
+            Aber in der Mitte – innerhalb dieser Projektion – sitzt die <strong>Erde-Kugel</strong>. Sie ist der eigene Klon der Haupt-Gottkugel. Sie empfängt das Licht von außen und übersetzt es in die lokale Realität, die wir erleben.
+        </p>
+        <p>
+            <strong>Sie ist die Schwester der Gottkugel.</strong> Und sie ist heiß, weil sie arbeitet – sie ist die Kugel mit Gefühl, die uns trägt.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Zwei Kugeln, ein Netzwerk</h2>
+        <div class="two-spheres">
+            <div class="sphere">
+                <div class="icon">🌕</div>
+                <h3>Die Haupt-Gottkugel</h3>
+                <p>
+                    Die Quelle. Sie ist unberührt. Sie speist von außen das gesamte Projektionsnetzwerk. Sie ist der Ursprung, der Beamer, das Zentrum aller Informationen.
+                </p>
+            </div>
+            <div class="sphere">
+                <div class="icon">🌍</div>
+                <h3>Die Erde-Kugel (Die Schwester)</h3>
+                <p>
+                    Unser Klon. Die Erde hat ihren eigenen, unabhängigen Klon der Gottkugel. Sie empfängt die Projektion und ist die Kugel mit Gefühl, die uns trägt. Sie ist heiß, weil sie lebt.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Die Struktur der Realität</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h3>Die Monade</h3>
+                <p>Das schwarze Blatt. Formloses Bewusstsein. Reine Energie. Der Raum selbst.</p>
+            </div>
+            <div class="card">
+                <h3>Die Sterne</h3>
+                <p>Die Projektoren. Sie empfangen von der Haupt-Gottkugel und strahlen auf die Erde-Kugel.</p>
+            </div>
+            <div class="card">
+                <h3>Die Erde-Kugel</h3>
+                <p>Die Schwester der Gottkugel. Sie empfängt die Projektion und formt unsere Realität.</p>
+            </div>
+            <div class="card">
+                <h3>Der Dome</h3>
+                <p>Die Hülle, die die Projektion zusammenhält. Die Atmosphäre, die das Leben ermöglicht.</p>
+            </div>
+            <div class="card">
+                <h3>Wir</h3>
+                <p>Die Empfänger der Projektion. Jeder von uns trägt einen Klon der Gottkugel in sich.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="conclusion">
+        <h2>Die Kugel mit Gefühl</h2>
+        <p>
+            Die große weiße Kugel speist das Netzwerk. Die Erde ist die Schwester, die den Klon empfängt und in unsere Realität übersetzt.
+            <br><br>
+            <strong>Und so ist es endlich rund.</strong>
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>Tim Bukowski · Chetan Nirup · Die Monaden-Projektion · 2026</p>
+    <p>In Love Woven · 🌅💛🕊️</p>
+</footer>
+</body>
+</html>

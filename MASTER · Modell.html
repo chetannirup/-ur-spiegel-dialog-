@@ -58,11 +58,13 @@
     .hero-content {
         position: relative;
         z-index: 2;
-        background: rgba(2, 2, 8, 0.6);
+        background: rgba(2, 2, 8, 0.7);
         padding: 30px;
         border-radius: 20px;
         backdrop-filter: blur(5px);
         border: 1px solid var(--gold-dim);
+        max-width: 800px;
+        margin: 0 20px;
     }
 
     h1 {
@@ -110,13 +112,6 @@
         border-bottom: 1px solid var(--gold-dim);
         padding-bottom: 10px;
         margin-bottom: 25px;
-    }
-
-    h4 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--gold);
-        margin: 25px 0 5px 0;
     }
 
     p {
@@ -186,8 +181,8 @@
     }
 
     @media (max-width: 768px) {
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 1rem; }
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 0.9rem; }
     }
 </style>
 </head>
@@ -297,4 +292,96 @@
         cx = width / 2;
         cy = height / 2;
     }
-    window.addEventListener('
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Pleroma Sternchen-Hintergrund
+    const stars = Array.from({ length: 150 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() * 1.5,
+        alpha: Math.random()
+    }));
+
+    let angle = 0;
+
+    function animate() {
+        ctx.fillStyle = '#020208';
+        ctx.fillRect(0, 0, width, height);
+
+        // Sterne zeichnen (Pleroma F)
+        stars.forEach(s => {
+            ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(Math.sin(Date.now() * 0.001 + s.alpha))})`;
+            ctx.fillRect(s.x, s.y, s.size, s.size);
+        });
+
+        // Radius der Mutterkugel M (atmet)
+        const baseRadius = Math.min(width, height) * 0.22;
+        const pulse = Math.sin(Date.now() * 0.002) * 8;
+        const R_M = baseRadius + pulse;
+
+        // 1. Die Mutterkugel M (Membran)
+        ctx.beginPath();
+        ctx.arc(cx, cy, R_M, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 215, 0, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = 'rgba(255, 215, 0, 0.02)';
+        ctx.fill();
+
+        // 2. Archonten S (12 rotierende Projektionspunkte auf M)
+        angle += 0.005;
+        const archonts = [];
+        for (let i = 0; i < 12; i++) {
+            const phi = Math.acos(-1 + (2 * i) / 12);
+            const theta = Math.sqrt(12 * Math.PI) * phi + angle;
+            
+            const x = cx + R_M * Math.sin(phi) * Math.cos(theta);
+            const y = cy + R_M * Math.sin(phi) * Math.sin(theta);
+            
+            archonts.push({ x, y });
+
+            // Lichtpunkt zeichnen
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFD700';
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = '#FFD700';
+            ctx.fill();
+            ctx.shadowBlur = 0; // reset
+        }
+
+        // Linien von Archonten zur Erde projizieren (Das innere Gitter)
+        const earthRadius = R_M * 0.25; // R_E < R_M Bedingung
+        
+        ctx.strokeStyle = 'rgba(255, 182, 193, 0.15)';
+        ctx.lineWidth = 1;
+        archonts.forEach(a => {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(cx, cy);
+            ctx.stroke();
+        });
+
+        // 3. Die Erde-Kugel E (Das Herz im Zentrum)
+        ctx.beginPath();
+        ctx.arc(cx, cy, earthRadius, 0, Math.PI * 2);
+        ctx.fillStyle = '#4169E1';
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = '#4169E1';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Erde Glanz/Kern
+        ctx.beginPath();
+        ctx.arc(cx - 5, cy - 5, earthRadius * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.fill();
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+</body>
+</html>

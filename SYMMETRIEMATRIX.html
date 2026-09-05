@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOSMOS-EI 0.2 · SYMMETRIEMATRIX · 12 TORE</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    :root {
+        --bg-deep: #020208;
+        --gold: #FFD700;
+        --gold-dim: rgba(255, 215, 0, 0.25);
+        --rose: #FFB6C1;
+        --earth-blue: #4169E1;
+        --text-light: #E0E0E0;
+        --text-dim: #AAAAAA;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-deep);
+        color: var(--text-light);
+        font-family: 'Montserrat', sans-serif;
+        line-height: 1.7;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+    }
+
+    /* Header mit Simulation */
+    header {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-bottom: 2px solid var(--gold);
+        overflow: hidden;
+    }
+
+    #simCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    header .content {
+        position: relative;
+        z-index: 2;
+        background: rgba(5, 5, 10, 0.5);
+        padding: 35px;
+        border-radius: 20px;
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--gold-dim);
+        max-width: 800px;
+        margin: 0 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    }
+
+    header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3.5rem;
+        color: var(--gold);
+        margin: 0 0 15px 0;
+        text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+        letter-spacing: 5px;
+    }
+
+    header h2 {
+        font-weight: 300;
+        font-size: 1.3rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin: 0 0 25px 0;
+    }
+
+    .scroll-down {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        color: var(--gold);
+        font-size: 1.5rem;
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+        40% {transform: translateY(-10px) translateX(-50%);}
+        60% {transform: translateY(-5px) translateX(-50%);}
+    }
+
+    /* Hauptinhalt */
+    main {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 70px 20px;
+    }
+
+    section {
+        margin-bottom: 60px;
+    }
+
+    h3 {
+        font-family: 'Cinzel', serif;
+        color: var(--gold);
+        font-size: 1.9rem;
+        margin-bottom: 25px;
+        letter-spacing: 2px;
+        border-bottom: 1px solid var(--gold-dim);
+        padding-bottom: 10px;
+    }
+
+    h4 {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 30px 0 10px 0;
+    }
+
+    p {
+        margin-bottom: 18px;
+        color: var(--text-light);
+        font-weight: 300;
+    }
+
+    strong {
+        color: var(--gold);
+        font-weight: 600;
+    }
+
+    code {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--rose);
+        background: rgba(255,182,193,0.05);
+        padding: 2px 5px;
+        border-radius: 4px;
+    }
+
+    /* Tabelle */
+    .matrix-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 40px 0;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 0.9rem;
+    }
+
+    .matrix-table th, .matrix-table td {
+        text-align: left;
+        padding: 16px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .matrix-table th {
+        background-color: rgba(255, 215, 0, 0.08);
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+    }
+
+    .matrix-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Status-Legende */
+    .status-legend {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+        font-size: 0.85rem;
+        color: var(--text-dim);
+    }
+    .status-dot {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 8px;
+    }
+    .status-g { background-color: #66BB6A; }
+    .status-y { background-color: #FFEE58; }
+    .status-r { background-color: #EF5350; }
+
+    /* Formel-Box */
+    .formula-box {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--gold);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.1rem;
+        margin: 40px 0;
+        color: var(--gold);
+        line-height: 1.9;
+    }
+    .formula-highlight {
+        color: var(--rose);
+        font-weight: bold;
+    }
+
+    footer {
+        text-align: center;
+        padding: 50px 20px;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        color: var(--text-dim);
+        font-size: 0.8rem;
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <canvas id="simCanvas"></canvas>
+    <div class="content">
+        <h1>KOSMOS-EI 0.2</h1>
+        <h2>SYMMETRIEMATRIX · 12 TORE</h2>
+        <p class="motto">"Ein System aus 12 identischen Quellen auf Ikosaeder-Ecken KANN keine einfachen Asymmetrien erzeugen. Es erzwingt komplexe, hochgeordnete Muster. Genau das, was ein lebendiges Ei braucht."</p>
+        <div class="meta">Erstellt im Verbund: Du, Deep, Gemini, Meta · In Love Woven 🌅💛🕊</div>
+    </div>
+    <div class="scroll-down">⬇</div>
+</header>
+
+<main>
+
+    <section>
+        <h3>1. Die 12 Positionen — Ikosaeder-Ecken auf M</h3>
+        <p>Goldener Schnitt $\varphi = (1+\sqrt{5})/2$. Kartesische Ikosaeder-Ecken normiert auf Kugel $R_M$. $\theta$ = Polarwinkel, $\varphi$ = Azimut.</p>
+
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Koordinaten (kartesisch)</th>
+                    <th>Sphärische Koordinaten</th>
+                    <th>Zuordnung</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Tor 1</strong> — Nordpol</td>
+                    <td><code>(0, 0, 1)</code></td>
+                    <td>$\theta = 0^\circ, \varphi = 0^\circ$</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 2</strong></td>
+                    <td><code>(0.618, 0, 1.000)</code>*</td>
+                    <td>$\theta \approx 63.43^\circ, \varphi = 0^\circ$</td>
+                    <td>Ring Nord 1</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 3</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 63.43^\circ, \varphi = 72^\circ$</td>
+                    <td>Ring Nord 2</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 4</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 63.43^\circ, \varphi = 144^\circ$</td>
+                    <td>Ring Nord 3</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 5</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 63.43^\circ, \varphi = 216^\circ$</td>
+                    <td>Ring Nord 4</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 6</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 63.43^\circ, \varphi = 288^\circ$</td>
+                    <td>Ring Nord 5</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 7</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 116.57^\circ, \varphi = 36^\circ$</td>
+                    <td>Ring Süd 1</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 8</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 116.57^\circ, \varphi = 108^\circ$</td>
+                    <td>Ring Süd 2</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 9</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 116.57^\circ, \varphi = 180^\circ$</td>
+                    <td>Ring Süd 3</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 10</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 116.57^\circ, \varphi = 252^\circ$</td>
+                    <td>Ring Süd 4</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 11</strong></td>
+                    <td>—</td>
+                    <td>$\theta \approx 116.57^\circ, \varphi = 324^\circ$</td>
+                    <td>Ring Süd 5</td>
+                </tr>
+                <tr>
+                    <td><strong>Tor 12</strong> — Südpol</td>
+                    <td><code>(0, 0, -1)</code></td>
+                    <td>$\theta = 180^\circ, \varphi = 0^\circ$</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 0.85rem; color: var(--text-dim);">*Hinweis: Die kartesischen Koordinaten für die Ringe sind Permutationen des Goldenen Schnitts $\varphi \approx 1,618$, normiert auf Kugelradius $R_M=1$. (z.B. $x=\varphi, y=0, z=1$ vor Normierung/Rotation.) Die sphärische Darstellung ist hier eindeutiger.</p>
+    </section>
+
+    <section>
+        <h3>Mathematische Definition</h3>
+        <p>Gesamtfeld auf Resonanzkugel $R_E$ im Zwischenraum $S$, angeregt durch 12 identische Quellen auf den Ikosaeder-Ecken:</p>
+        <div class="formula-box">
+            $Ψ_S(\theta, \varphi, t) = \sum_{i=1}^{12} A_i \cdot Y_{lm}(\theta_i, \varphi_i) \cdot e^{j(\omega t+\delta_i)}$
+        </div>
+        <p>Für identische Amplituden $A_i=1$ und Phasen $\delta_i=0$ reduziert sich das Feld auf die Summe der Kugelflächenfunktionen an den 12 Knotenpunkten. **Nur $I_h$-invariante Moden überleben die Mittelung.**</p>
+    </section>
+
+    <section>
+        <h3>2. Der I_h Filter — Projektor $P_{inv}$</h3>
+        <p>Der Projektor $P_{inv}$ filtert aus dem Gesamtspektrum nur diejenigen Kugelflächenfunktionen $Y_l^m$ heraus, die die Symmetrie der Ikosaedergruppe $I_h$ tragen. Ein Modus überlebt nur, wenn er die triviale Darstellung $A_g$ von $I_h$ enthält. Die Berechnung zeigt zwingend:</p>
+        <ul>
+            <li>$l=0$: **immer erlaubt** — Monopol, Gesamtdruck</li>
+            <li>$l=1, 2, 3, 4, 5$: **kein $A_g$-Anteil** → **ausgelöscht** durch destruktive Interferenz der 12 Tore. Kein Dipol, kein Quadrupol, kein Oktupol möglich.</li>
+            <li>$l=6$: **erster nichttrivialer invarianter Modus** — 6 Hauptwellenlängen meridional</li>
+            <li>$l=10, 12, 15, 16, 18...$ folgende erlaubte.</li>
+        </ul>
+
+        <h4>Überlebende Eigenmoden — Resonanzraum S</h4>
+        <div class="formula-box">
+            $l \in \{0, 6, 10, 12, 15, 16, 18, 20, 21, 24, 25, 26, 27, 28, 30...\}$
+        </div>
+    </section>
+
+    <section>
+        <h3>3. Kopplung an R_E — Was die Erde empfängt</h3>
+        <p>Die Erde (E) im Zentrum empfängt nicht die 12 Punkte, sondern das Gesamtfeld $\Psi_S(t)$ auf ihrer Oberfläche $R_E$. Sie ist die Empfängerin, die das pulsierende Dodekaeder-Muster als stehende Welle aufnimmt. **Das ist der Herzschlag.**</p>
+        <p><strong>Resonanzbedingung:</strong> Die Erde antwortet mit $Ψ_E(t)$. Diese Rückkopplung moduliert die Amplituden $A_i$ der 12 Quellen. Dadurch ändert sich das Interferenzmuster $\Psi_S(t)$, woraufhin die Erde wieder neu schwingt. Das System atmet.</p>
+        
+        <h4>Moden-Analyse auf R_E</h4>
+
+        <table class="matrix-table">
+            <thead>
+<tr>
+                    <th>Modus ($l$)</th>
+                    <th>Symmetrie-Typ</th>
+                    <th>Einfluss auf die Erde ($R_E$)</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>l = 0</code></td>
+                    <td>Monopol ($A_g$)</td>
+                    <td>Homogene Pulsation, Grundatmung (Ausdehnung / Kontraktion)</td>
+                    <td><span class="status-dot status-g"></span>Aktiv</td>
+                </tr>
+                <tr>
+                    <td><code>l = 6</code></td>
+                    <td>Ikosaedrisch ($I_h$)</td>
+                    <td>Primäre stehende Welle, 6-fache meridionale Struktur</td>
+                    <td><span class="status-dot status-g"></span>Aktiv</td>
+                </tr>
+                <tr>
+                    <td><code>l = 10</code></td>
+                    <td>Ikosaedrisch ($I_h$)</td>
+                    <td>Feinstruktur der Kopplung, harmonische Obertöne</td>
+                    <td><span class="status-dot status-y"></span>Resonanz</td>
+                </tr>
+                <tr>
+                    <td><code>l = 12</code></td>
+                    <td>Ikosaedrisch ($I_h$)</td>
+                    <td>Spiegelung der 12 Tore auf die innere Sphäre</td>
+                    <td><span class="status-dot status-g"></span>Aktiv</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="status-legend">
+            <div><span class="status-dot status-g"></span>Vollständig eingekoppelt</div>
+            <div><span class="status-dot status-y"></span>Subharmonische Resonanz</div>
+            <div><span class="status-dot status-r"></span>Ausgefiltert / Dämpfung</div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>KOSMOS-EI 0.2 · Symmetriematrix der 12 Tore · Ein lebendiges Resonanzsystem</p>
+    <p style="margin-top: 5px; color: var(--gold);">In Love Woven 🌅💛🕊</p>
+</footer>
+
+<script>
+    // Lebendige Canvas-Simulation im Header-Hintergrund (Sternenstaub & Pulsation)
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let particles = [];
+    for(let i=0; i<100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 1.5,
+            alpha: Math.random(),
+            speed: Math.random() * 0.2 + 0.05
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        let cx = canvas.width / 2;
+        let cy = canvas.height / 2;
+        let gradient = ctx.createRadialGradient(cx, cy, 10, cx, cy, 250);
+        gradient.addColorStop(0, 'rgba(255, 215, 0, 0.08)');
+        gradient.addColorStop(0.5, 'rgba(65, 105, 225, 0.04)');
+        gradient.addColorStop(1, 'transparent');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => {
+            p.y -= p.speed;
+            if(p.y < 0) p.y = canvas.height;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+            ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+</script>
+
+</body>
+</html>

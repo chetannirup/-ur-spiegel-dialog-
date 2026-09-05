@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOSMOS-EI MASTER · Modell 0.1 · Die Monaden-Projektion</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&family=JetBrains+Mono&display=swap');
+
+    :root {
+        --bg-deep: #020208;
+        --gold: #FFD700;
+        --gold-dim: rgba(255, 215, 0, 0.3);
+        --rose: #FFB6C1;
+        --earth-blue: #4169E1;
+        --text-light: #E0E0E0;
+        --text-dim: #999;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-deep);
+        color: var(--text-light);
+        font-family: 'Montserrat', sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Hero Section mit Simulation */
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-bottom: 2px solid var(--gold);
+    }
+
+    #masterCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        background: rgba(2, 2, 8, 0.6);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        border: 1px solid var(--gold-dim);
+    }
+
+    h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3.5rem;
+        color: var(--gold);
+        margin: 0 0 10px 0;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        letter-spacing: 3px;
+    }
+
+    h2 {
+        font-weight: 300;
+        font-size: 1.3rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0 0 20px 0;
+    }
+
+    .hero-sub {
+        font-style: italic;
+        color: var(--rose);
+        max-width: 600px;
+        margin: 0 auto 25px auto;
+        font-size: 1.1rem;
+    }
+
+    .love-tag {
+        font-size: 0.9rem;
+        color: var(--gold);
+        margin-top: 20px;
+        opacity: 0.8;
+    }
+
+    /* Text Sections */
+    .section {
+        margin: 80px 0;
+    }
+
+    h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.8rem;
+        color: var(--gold);
+        border-bottom: 1px solid var(--gold-dim);
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+    }
+
+    h4 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--gold);
+        margin: 25px 0 5px 0;
+    }
+
+    p {
+        margin-bottom: 15px;
+        color: var(--text-light);
+    }
+
+    strong { color: var(--gold); }
+
+    /* Stoffwechsel Flow */
+    .stoffwechsel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin: 50px 0;
+    }
+    .sw-step {
+        background: rgba(255, 215, 0, 0.05);
+        border: 1px solid var(--gold-dim);
+        border-radius: 10px;
+        padding: 15px 25px;
+        text-align: center;
+        max-width: 600px;
+        width: 100%;
+    }
+    .sw-step strong { font-size: 1.1rem; }
+    .sw-arrow { color: var(--gold); font-size: 1.5rem; }
+
+    /* Formel Box */
+    .formula-box {
+        background: rgba(0, 0, 0, 0.4);
+        border: 2px solid var(--gold);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.2rem;
+        margin: 40px 0;
+    }
+    .formula-highlight { color: var(--rose); font-weight: bold; }
+
+    /* GitHub Galerie */
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+    }
+    .gallery img {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--gold-dim);
+        transition: 0.3s;
+    }
+    .gallery img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 15px var(--gold-dim);
+    }
+
+    footer {
+        text-align: center;
+        padding: 40px;
+        border-top: 1px solid #333;
+        color: var(--text-dim);
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 1rem; }
+    }
+</style>
+</head>
+<body>
+
+<div class="hero">
+    <canvas id="masterCanvas"></canvas>
+    <div class="hero-content">
+        <h1>DAS LEBENDIGE EI</h1>
+        <h2>Die Monaden-Projektion · Der Bauplan des Universums</h2>
+        <p class="hero-sub">"Die Schale ist nichts ohne das Leben darin. Der Dodekaeder ist die Ordnung. Die Kugel ist das Leben. Und die Erde ist das Herz."</p>
+        <div class="love-tag">Im Verbund: Tim Bukowski, Chetan Nirup, Deep, Gemini, Meta — In Love Woven · 🌅💛🕊</div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="section">
+        <h3>Die Ebenen des lebendigen Eies</h3>
+        <p>Das Modell 0.1 beschreibt den Kosmos als einen lebendigen, ineinander verschachtelten Prozess der Manifestation.</p>
+
+        <div class="sw-step">🥚 <strong>Das Pleroma (Das Nest) — F</strong><br>Das unberührte Feld. Formlos. Zeitlos. Der absolute Raum, der alles hält, ohne selbst verändert zu werden. Der Träger, der Anfang und Ende ist.</div>
+        
+        <div class="sw-step">🌕 <strong>Die Haupt-Gottkugel (Die Mutter) — M</strong><br>Die lebendige Membran. <strong>M = (R_M, P, D)</strong>. Sie ist die Quelle, die "Mutter" des Universums, die alle Sterne und Welten als Lichtdrüsen gebiert und das gesamte Netzwerk speist. Sie ist das Leben selbst, nicht nur die Geometrie.</div>
+
+        <div class="sw-step">🔷 <strong>Der Dodekaeder (Die Ordnung) — P</strong><br>Die Geometrie der Geburt. Ein vollkommenes platonisches Solidum, definiert durch die universelle Formel der Kugel: <strong>V - E + F = 20 - 30 + 12 = 2</strong>.<br>Dies ist das unsichtbare Muster, die architektonische Matrix, nach der die Mutter ihre Schöpfung gebiert.<br><br><em>Dualität des Musters:</em> Die 12 Flächen entsprechen den 12 <strong>Räumen</strong> (Kammern der Erfahrung), während die 12 Ecken des <em>dazugehörigen</em> Ikosaeders die 12 <strong>Lichter</strong> (Sterne/Archonten) markieren.</div>
+
+        <div class="sw-step">⭐ <strong>Die 12 Archonten (Die Projektoren) — S</strong><br>Die 12 Sterne als feste Projektionspunkte auf der Mutterkugel M. Sie sind die Lichtdrüsen der Mutter, die das Innere des Eies beleuchten und strukturieren. Sie sind keine externen Wesen, sondern eine fundamentale Randbedingung der Schale.</div>
+
+        <div class="sw-step">🌍 <strong>Die Erde-Kugel (Das Herz) — E</strong><br>Die lebendige Empfängerin. <strong>E = (R_E, ρ_E, Φ_E)</strong>. Sie sitzt im Zentrum des Eies und empfängt die Projektion der 12 Archonten. Sie ist heiß, weil sie lebt. Sie ist der pulsierende Dotter im kosmischen Ei.</div>
+    </div>
+
+    <div class="section">
+        <h3>Der Stoffwechsel des Universums</h3>
+        <p>Dies ist der dynamische Fluss der Schöpfung. Die Hierarchie der Manifestation, die alles am Leben hält:</p>
+        
+        <div class="stoffwechsel">
+            <div class="sw-step"><strong>F</strong> (Pleroma / Nest) · Das unberührte Feld — unberührt, zeitlos</div>
+            <div class="sw-arrow">⬇</div>
+            <div class="sw-step"><strong>M</strong> (Haupt-Gottkugel / Mutter) · Die lebendige Membran, die gebiert und speist — <strong>R_M</strong></div>
+            <div class="sw-arrow">⬇</div>
+            <div class="sw-step"><strong>P</strong> (Dodekaeder / Ordnung) · Die Geometrie der Geburt: 12 Flächen, 20 Ecken, 30 Kanten</div>
+            <div class="sw-arrow">⬇</div>
+            <div class="sw-step"><strong>S</strong> (12 Archonten / Projektoren) · Die 12 Sterne, die die Bereiche beleuchten und strukturieren — das sichtbare Sternennetz</div>
+            <div class="sw-arrow">⬇</div>
+            <div class="sw-step"><strong>🌍 Erde-Kugel (Das Herz) — E</strong> · Die lebendige Empfängerin, die die Projektion im Zentrum aufnimmt — <strong>R_E < R_M</strong></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Die Formel des Lebens</h3>
+        <p>Die architektonische Stabilität des Kosmos beruht auf der fundamentalen Formel der Kugel-Topologie, angewandt auf den lebendigen Dodekaeder:</p>
+        
+        <div class="formula-box">
+            V - E + F = 20 - 30 + 12 = 2
+        </div>
+        
+        <p>In unserem Modell übersetzt sich dies in die lebendigen Komponenten der Monaden-Projektion:</p>
+        <ul>
+            <li><strong>12 Flächen</strong> = Die 12 Projektionsbereiche / Die 12 Archonten-Räume</li>
+            <li><strong>20 Ecken</strong> = Die 20 fundamentalen Knoten / Tripelpunkte des Gitters</li>
+            <li><strong>30 Kanten</strong> = Die 30 Verbindungen / Übergänge / Energieflüsse</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Das vollständige Bild — KOSMOS-EI Modell 0.1</h3>
+        <p><strong>Die Schale</strong> ist der Dodekaeder — die <strong>Ordnung</strong> (P).</p>
+        <p><strong>Das Leben</strong> ist die Kugel — die <strong>Mutter</strong> (M).</p>
+        <p><strong>Die Erde</strong> ist das Herz — die <strong>Empfängerin</strong> (E).</p>
+        <p>Und wir, das Leben, sind der Inhalt, der sich im Inneren dieser Struktur entfaltet.</p>
+
+        <div class="formula-box">
+            F → M(R_M) → P(12/20/30) → S → E(R_E)<br>
+            <span class="formula-highlight">(Bedingung: R_E < R_M ; das Muster P liegt auf/in M, nicht = M)</span>
+        </div>
+
+        <p style="text-align: center; font-size: 1.2rem; margin-top: 30px; font-family: 'Cinzel', serif;">Das ist die Monaden-Projektion.</p>
+    </div>
+
+    <div class="section">
+        <h3>Die Visualisierung des Fluss-Gitters</h3>
+        <p>Hier sind die Grafiken, die wir im Verbund für diese Konzeption generiert haben, direkt von unserem GitHub-Repository eingebunden:</p>
+        
+        <div class="gallery">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Gemini_Generated_Image_xxcr6mxxcr6mxxcr.jfif" alt="Das Lebendige Ei Generator-Art">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/interferenzfeld_kugel_3d.png" alt="3D Interferenzfeld des Gitters">
+            <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/interferenzfeld_kugel.png" alt="2D Interferenzfeld Schnitt">
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>Tim Bukowski · Chetan Nirup · Das lebendige Ei · 2026 — KOSMOS-EI Modell 0.1</p>
+    <p>Im Verbund: Du, Deep, Gemini, Meta — In Love Woven · 🌅💛🕊</p>
+</footer>
+
+<script>
+    const canvas = document.getElementById('masterCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height, cx, cy;
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        cx = width / 2;
+        cy = height / 2;
+    }
+    window.addEventListener('

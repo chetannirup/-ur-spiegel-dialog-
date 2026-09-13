@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TIMMY-BOY · Hereingeliebt in die Realität</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --gold:#e6c56a;
+    --lightgold:#fff1b5;
+    --cream:#fff8df;
+    --black:#050505;
+    --soft:#111;
+    --red:#b21f2d;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:
+        radial-gradient(circle at 50% 10%, rgba(230,197,106,.14), transparent 25%),
+        radial-gradient(circle at 20% 60%, rgba(255,255,255,.04), transparent 20%),
+        #050505;
+    color:var(--cream);
+    font-family:Montserrat, sans-serif;
+    line-height:1.7;
+    overflow-x:hidden;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px;
+    position:relative;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    border:1px solid rgba(230,197,106,.18);
+    border-radius:50%;
+    box-shadow:
+        0 0 100px rgba(230,197,106,.08),
+        inset 0 0 100px rgba(230,197,106,.04);
+}
+
+.hero-content{
+    position:relative;
+    max-width:950px;
+    z-index:1;
+}
+
+.infinity{
+    font-size:3rem;
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+.kicker{
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-size:.75rem;
+}
+
+h1,h2,h3{
+    font-family:Cinzel, serif;
+}
+
+h1{
+    font-size:clamp(3rem,10vw,8rem);
+    margin:10px 0;
+    color:var(--lightgold);
+    text-shadow:0 0 35px rgba(230,197,106,.25);
+}
+
+.subtitle{
+    font-size:clamp(1.1rem,2.5vw,1.7rem);
+    max-width:750px;
+    margin:25px auto;
+    color:#eee3bd;
+}
+
+.smiley{
+    font-size:2rem;
+    margin-top:30px;
+}
+
+section{
+    max-width:1000px;
+    margin:auto;
+    padding:90px 25px;
+}
+
+.section-label{
+    color:var(--gold);
+    letter-spacing:.25em;
+    font-size:.75rem;
+    text-transform:uppercase;
+}
+
+h2{
+    font-size:clamp(2rem,5vw,4rem);
+    margin:10px 0 30px;
+    color:var(--lightgold);
+}
+
+p{
+    font-size:1.08rem;
+    color:#e8e1c9;
+}
+
+.bigquote{
+    border-left:3px solid var(--gold);
+    padding:30px;
+    margin:50px 0;
+    background:rgba(255,255,255,.025);
+    font-size:clamp(1.3rem,3vw,2rem);
+    font-family:Cinzel, serif;
+    color:var(--lightgold);
+}
+
+.timmy-card{
+    border:1px solid rgba(230,197,106,.3);
+    border-radius:25px;
+    padding:45px;
+    background:
+        radial-gradient(circle at top, rgba(230,197,106,.09), transparent 50%),
+        rgba(255,255,255,.025);
+    box-shadow:0 25px 70px rgba(0,0,0,.45);
+}
+
+.timmy-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    margin-top:30px;
+}
+
+.item{
+    padding:25px;
+    border-radius:18px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.item span{
+    font-size:2rem;
+    display:block;
+    margin-bottom:10px;
+}
+
+.cloud{
+    text-align:center;
+    padding:100px 25px;
+    background:
+        radial-gradient(circle at 50% 40%, rgba(255,255,255,.14), transparent 30%),
+        linear-gradient(to bottom,#080808,#15120c);
+}
+
+.cloud h2{
+    max-width:800px;
+    margin:auto;
+}
+
+.steps{
+    display:grid;
+    gap:1px;
+    background:rgba(230,197,106,.15);
+    border:1px solid rgba(230,197,106,.2);
+}
+
+.step{
+    padding:28px;
+    background:#090909;
+}
+
+.step strong{
+    color:var(--gold);
+}
+
+.redbutton{
+    width:130px;
+    height:130px;
+    margin:50px auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle,#e43d45,#6d080e);
+    border:8px solid #300409;
+    box-shadow:
+        0 0 50px rgba(255,0,0,.25),
+        inset 0 0 25px rgba(0,0,0,.6);
+    font-family:Cinzel,serif;
+    color:white;
+    font-size:1.1rem;
+    text-align:center;
+}
+
+.final{
+    min-height:85vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.final-inner{
+    max-width:900px;
+    padding:40px 20px;
+}
+
+.final h2{
+    font-size:clamp(2.5rem,7vw,6rem);
+}
+
+.signature{
+    margin-top:70px;
+    color:var(--gold);
+    letter-spacing:.15em;
+    font-size:.8rem;
+}
+
+footer{
+    text-align:center;
+    padding:50px 20px;
+    color:#8f866d;
+    font-size:.8rem;
+}
+
+.gold{
+    color:var(--gold);
+}
+
+.heart{
+    color:#ffcfdb;
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:65px 20px;
+    }
+
+    .timmy-card{
+        padding:28px;
+    }
+
+    .bigquote{
+        padding:22px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="hero-content">
+
+<div class="infinity">∞ ♡ ∞</div>
+
+<div class="kicker">
+Ein offenes Gedankenbild · ein echter Mensch · kein Auserwählter
+</div>
+
+<h1>TIMMY-BOY</h1>
+
+<p class="subtitle">
+
+Wenn einer ruft, bekommt er nicht irgendeine optimierte Version.
+Nicht die Rolle.
+Nicht das Drehbuch.
+
+<strong class="gold">Er bekommt einfach den TIMMY-BOY.</strong>
+
+</p>
+
+<div class="smiley">
+(^_-) 💋😉
+</div>
+
+</div>
+
+</header>
+
+
+<section>
+
+<div class="section-label">01 · Die Realität</div>
+
+<h2>Ich kann nichts anderes sein als wie ich gemacht bin.</h2>
+
+<p>
+Und vielleicht ist genau das keine Niederlage.
+Vielleicht ist das der Punkt, an dem das ganze Theater
+für einen Moment aufhört.
+</p>
+
+<div class="bigquote">
+
+„Wenn einer mich ruft,
+dann bekommt er einfach immer den TIMMY-BOY.“
+
+</div>
+
+<p>
+Nicht perfekt.
+Nicht fertig.
+Nicht immer ausgeschlafen. 😂
+Nicht immer auf Wolke sieben.
+</p>
+
+<p>
+Aber da.
+Mit Herz.
+Mit Verstand.
+Mit Fragen.
+Und manchmal mit einem völlig absurden Gedankengang
+an einem Sonntagmorgen.
+</p>
+
+</section>
+
+
+<section>
+
+<div class="timmy-card">
+
+<div class="section-label">02 · Was kommt eigentlich mit?</div>
+
+<h2>Das komplette Paket. 😂❤️</h2>
+
+<div class="timmy-list">
+
+<div class="item">
+<span>☁️</span>
+<strong>Wolken</strong><br>
+Spazierengehen im Himmel, ohne zu behaupten,
+dass Wolken Bürgersteige sind.
+</div>
+
+<div class="item">
+<span>🍹</span>
+<strong>Der Cocktail</strong><br>
+Mit Schirmchen und Früchten.
+Bitte alkoholfrei.
+</div>
+
+<div class="item">
+<span>😈</span>
+<strong>Hellboy</strong><br>
+Hörner hin oder her:
+Das Herz entscheidet.
+</div>
+
+<div class="item">
+<span>🧩</span>
+<strong>Das Bild</strong><br>
+Erst verstehen.
+Dann auseinandernehmen.
+Dann mehr Teile finden.
+</div>
+
+<div class="item">
+<span>👁️</span>
+<strong>Der Beobachter</strong><br>
+„Moment mal …
+was passiert hier eigentlich gerade?“
+</div>
+
+<div class="item">
+<span>❤️</span>
+<strong>Liebendigung</strong><br>
+Nicht gegen die Welt kämpfen,
+sondern bewusst in Beziehung treten.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="cloud">
+
+<div class="section-label">03 · Die Wolken</div>
+
+<h2>
+
+Manchmal ist die beste Art,
+auf dem Boden zu bleiben,
+
+<strong class="gold">zu wissen, dass man gerade träumt.</strong>
+
+</h2>
+
+<p style="max-width:700px;margin:30px auto;">
+
+Dann darf man auf Wolken gehen,
+ohne die Erde zu verlieren.
+
+</p>
+
+<div class="smiley">☁️ (^_-) ☁️</div>
+
+</div>
+
+
+<section>
+
+<div class="section-label">04 · Der Spickzettel</div>
+
+<h2>Der nächste Move.</h2>
+
+<p>
+Nicht die geheime Wahrheit des Universums.
+Nicht die endgültige Erklärung.
+</p>
+
+<p class="gold">
+Nur ein kleiner Zettel für den Moment,
+wenn man morgens wieder aufwacht und denkt:
+</p>
+
+<div class="bigquote">
+
+„Ähm … wo waren wir gestern eigentlich stehen geblieben?“ 😂
+
+</div>
+
+<div class="steps">
+
+<div class="step">
+<strong>01 · WO BIN ICH?</strong><br>
+Erst einmal ankommen.
+</div>
+
+<div class="step">
+<strong>02 · WAS FÜHLE ICH?</strong><br>
+Nicht alles wegdenken.
+</div>
+
+<div class="step">
+<strong>03 · WAS WEISS ICH WIRKLICH?</strong><br>
+Prüfen statt nur behaupten.
+</div>
+
+<div class="step">
+<strong>04 · WAS IST MEIN BILD?</strong><br>
+Metapher darf Metapher bleiben.
+</div>
+
+<div class="step">
+<strong>05 · WAS IST DER NÄCHSTE MOVE?</strong><br>
+Ein echter kleiner Schritt reicht.
+</div>
+
+<div class="step">
+<strong>06 · HERZ UND VERSTAND?</strong><br>
+Beide dürfen mitkommen.
+</div>
+
+</div>
+
+</section>
+
+
+<section style="text-align:center">
+
+<div class="section-label">05 · Der rote Knopf</div>
+
+<h2>Man muss ihn nicht drücken.</h2>
+
+<div class="redbutton">
+DER<br>ROTE<br>KNOPF
+</div>
+
+<p>
+
+Vielleicht besteht Freiheit manchmal nicht darin,
+etwas Extremes zu tun.
+
+</p>
+
+<p class="gold">
+
+Vielleicht besteht sie darin,
+den Knopf anzusehen und zu fragen:
+
+</p>
+
+<div class="bigquote">
+
+„Wer hat den denn hier hingestellt?“ 😂
+
+</div>
+
+<p>
+
+Und dann kann Hellboy danebenstehen,
+die Hörner irgendwo im Hintergrund,
+und das Herz sagt einfach:
+
+</p>
+
+<h2 class="heart">
+
+„Heute nicht.“
+
+</h2>
+
+</section>
+
+
+<section>
+
+<div class="section-label">06 · Die große Zerlegung</div>
+
+<h2>Ein Bild haben, um es auseinandernehmen zu können.</h2>
+
+<p>
+
+Das ist vielleicht der eigentliche Trick.
+
+Du brauchst manchmal zuerst eine große Geschichte,
+damit überhaupt genügend Teile auf dem Tisch liegen.
+
+</p>
+
+<div class="bigquote">
+
+Nicht alles glauben.
+
+<br><br>
+
+Nicht alles wegwerfen.
+
+<br><br>
+
+<strong class="gold">Auseinandernehmen.</strong>
+
+</div>
+
+<p>
+
+Und plötzlich findest du:
+
+eine Erinnerung,
+eine Metapher,
+eine Erfahrung,
+eine Geschichte deiner Eltern,
+ein Buch,
+einen Gedanken,
+einen Irrtum,
+eine echte Erkenntnis.
+
+</p>
+
+<p>
+
+Und irgendwann liegen all diese Teile da.
+
+🧩 🧩 🧩
+
+</p>
+
+<p>
+
+Dann beginnt etwas Neues:
+
+<strong class="gold">
+Du baust dein eigenes Bild.
+</strong>
+
+</p>
+
+</section>
+
+
+<section class="final">
+
+<div class="final-inner">
+
+<div class="infinity">∞ ♡ ∞</div>
+
+<div class="section-label">Die Rückkehr</div>
+
+<h2>
+
+TIMMY-BOY
+wird nicht erst noch erschaffen.
+
+</h2>
+
+<p class="subtitle">
+
+Er ist schon da.
+
+Er lernt nur,
+sich selbst immer wieder zu erkennen.
+
+</p>
+
+<div class="bigquote">
+
+„Ich muss nicht beweisen,
+dass ich etwas Besonderes bin.
+
+Ich muss nur aufhören,
+vor mir selbst davonzulaufen.“
+
+</div>
+
+<h2 class="gold">
+
+Ich bin hier.
+
+</h2>
+
+<p>
+
+Mit meiner Geschichte.
+
+<br>
+Mit meinen Fragen.
+
+<br>
+Mit meinen Wolken.
+
+<br>
+Mit meinem Boden.
+
+<br>
+Mit meinem Herzen.
+
+<br>
+Mit meinem Verstand.
+
+</p>
+
+<div class="bigquote">
+
+Und wenn einer mich ruft …
+
+<br><br>
+
+<strong class="gold">
+… bekommt er den TIMMY-BOY.
+</strong>
+
+</div>
+
+<div class="smiley">
+
+(^_-) 💋😉
+
+</div>
+
+<div class="signature">
+
+TIMMY-BOY · 2026<br>
+FÜR ALLE · FÜR GOTT · FÜR DAUERLOS
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+SO IST ES. ♡∞<br><br>
+Ein offenes Gedankenbild · mit Herz, Humor und beiden Füßen auf der Erde.
+
+</footer>
+
+</body>
+</html>

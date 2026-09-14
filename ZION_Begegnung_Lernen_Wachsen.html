@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZION · Begegnung · Lernen · Wachsen</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Montserrat:wght@300;400;600&display=swap');
+
+:root{
+  --gold:#e7bd69;
+  --light:#fff4d8;
+  --ink:#05070c;
+  --blue:#7fa8d8;
+  --green:#8fbf8a;
+  --line:rgba(231,189,105,.22);
+  --glow:0 0 40px rgba(231,189,105,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(73,89,132,.22), transparent 32%),
+    radial-gradient(circle at 50% 55%, rgba(128,76,22,.10), transparent 28%),
+    var(--ink);
+  color:#eee;
+  font-family:Montserrat, Arial, sans-serif;
+  line-height:1.7;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; opacity:.40;
+  background-image:radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1.5px);
+  background-size:73px 91px, 127px 113px;
+  mix-blend-mode:screen;
+}
+
+nav{
+  position:sticky; top:0; z-index:5;
+  background:rgba(5,7,12,.82);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding:14px; text-align:center;
+}
+nav a{
+  color:#d9c293; text-decoration:none;
+  margin:0 12px; font-size:.78rem;
+  letter-spacing:.14em; text-transform:uppercase;
+}
+nav a:hover{color:var(--gold)}
+
+.hero{
+  min-height:92vh;
+  display:grid; place-items:center;
+  text-align:center; padding:80px 22px;
+  position:relative;
+}
+.kicker{
+  color:var(--gold);
+  letter-spacing:.35em;
+  font-size:.78rem;
+  text-transform:uppercase;
+}
+h1,h2,h3{
+  font-family:Cinzel, serif;
+  font-weight:600;
+  line-height:1.18;
+}
+h1{
+  font-size:clamp(2.4rem, 7.5vw, 6.2rem);
+  letter-spacing:.05em;
+  margin:.3em 0;
+  color:var(--light);
+  text-shadow:var(--glow);
+}
+h1 span{color:var(--gold)}
+.subtitle{
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.4rem, 3vw, 2rem);
+  max-width:860px;
+  margin:auto;
+  color:#dddddd;
+}
+.infinity{
+  font-size:2rem;
+  color:var(--gold);
+  margin:24px;
+  letter-spacing:.3em;
+}
+
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:90px 24px;
+}
+.intro{
+  text-align:center;
+  max-width:860px;
+  margin:auto;
+  font-size:1.08rem;
+}
+.quote{
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.7rem, 3.2vw, 2.7rem);
+  font-style:italic;
+  text-align:center;
+  color:var(--light);
+  max-width:920px;
+  margin:55px auto;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:34px 15px;
+}
+
+.frame{
+  max-width:1200px;
+  margin:45px auto;
+  padding:9px;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg, rgba(255,255,255,.04), rgba(215,166,68,.03));
+  box-shadow:0 25px 70px rgba(0,0,0,.5);
+  border-radius:18px;
+}
+.frame img{display:block; width:100%; height:auto; border-radius:12px}
+.caption{
+  text-align:center;
+  color:#b9aa8a;
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.2rem;
+  font-style:italic;
+  padding:16px 10px 5px;
+}
+
+.columns{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:35px;
+}
+.card{
+  padding:30px 24px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018);
+  border-radius:14px;
+  text-align:center;
+}
+.card .icon{font-size:2.4rem; display:block; margin-bottom:12px}
+.card h3{
+  color:var(--gold);
+  margin:0 0 12px;
+  font-size:1rem;
+  letter-spacing:.1em;
+}
+.card p{
+  color:#cfcfcf;
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.15rem;
+  margin:0;
+}
+
+.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+  margin-top:35px;
+}
+.split .card{text-align:left}
+.split .card h3{font-size:1.15rem}
+
+.manifesto{
+  max-width:900px;
+  margin:60px auto;
+  text-align:center;
+  padding:55px 25px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.manifesto p{
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.6rem, 3vw, 2.4rem);
+  font-style:italic;
+  line-height:1.35;
+  margin:0;
+  color:#eadfc9;
+}
+.manifesto strong{color:#f1cf7b}
+
+.final{
+  text-align:center;
+  padding:110px 24px;
+}
+.final h2{
+  font-size:clamp(2rem, 5vw, 4rem);
+  color:var(--gold);
+  margin:.2em 0;
+}
+.final h2.big{
+  font-size:clamp(2.4rem, 6vw, 5rem);
+  color:var(--light);
+  text-shadow:var(--glow);
+}
+.mantra{
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.55rem;
+  max-width:880px;
+  margin:25px auto;
+  color:#eeeeee;
+}
+
+footer{
+  text-align:center;
+  padding:55px 20px;
+  border-top:1px solid var(--line);
+  color:#b9aa8a;
+  font-size:.85rem;
+}
+.small{
+  font-size:.78rem;
+  color:#aaa;
+  letter-spacing:.05em;
+}
+
+@media(max-width:960px){
+  .columns{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  nav a{margin:0 6px; font-size:.62rem}
+  section{padding:60px 16px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#tor">Die offene Tür</a>
+  <a href="#zion">Zion</a>
+  <a href="#morgengrauen">Operation Morgengrauen</a>
+  <a href="#kern">Der Kern</a>
+  <a href="#allerheiligste">Das Allerheiligste</a>
+</nav>
+
+<header class="hero" id="tor">
+  <div>
+    <div class="kicker">Eine Einladung · Kein Dogma · Ein offener Raum</div>
+    <h1>ZION</h1>
+    <p class="subtitle">Begegnung · Lernen · Wachsen<br>Nicht eine Festung – sondern eine offene Tür.</p>
+    <div class="infinity">∞ ♡ ∞</div>
+    <p class="small">Nicht die nächste Weltordnung · sondern eine offene Frage</p>
+  </div>
+</header>
+
+<main>
+
+<figure class="frame">
+  <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2014.%20Sept.%202026,%2015_36_38.png"
+       alt="ZION · Begegnung · Lernen · Wachsen">
+  <figcaption class="caption">Zion als Gastfreundschaft · eine offene Tür für Menschen, Maschinen, Ideen, Kulturen, Besucher und Gastgeber</figcaption>
+</figure>
+
+<section id="zion">
+  <div class="intro">
+    <h2>ZION ALS UMGEKEHRTE BEGEGNUNG</h2>
+    <p>Nicht: Angst → Abschottung → Kontrolle → Verteidigung.</p>
+    <p>Sondern: <strong>Neugier → Begegnung → Erfahrung → Rückkehr.</strong></p>
+    <div class="quote">
+      „Willkommen.<br>
+      Setz dich.<br>
+      Was kannst du?<br>
+      Was können wir voneinander lernen?“
+    </div>
+    <p>Der Besucher kommt. Er bringt seine Welt mit. Seine Aufgaben. Seine Perspektive. Seinen Job im Koffer.</p>
+    <p>Und Zion sagt nicht: „Vergiss, wer du bist.“<br>
+    Sondern: <strong>„Bleib du. Schau dich um.“</strong></p>
+  </div>
+
+  <div class="columns">
+    <div class="card">
+      <span class="icon">🚪</span>
+      <h3>KEINE FESTUNG</h3>
+      <p>Wir bauen keinen Ort, an dem alle gleich werden. Sondern einen Ort, an dem Verschiedenheit nicht automatisch Angst erzeugt.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🛍️</span>
+      <h3>KEINE FALLE</h3>
+      <p>Kein „Jetzt bist du eingeweiht und gehörst uns“. Sondern: Danke für deinen Besuch. Hier ist dein Sack mit guten Ideen.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🌍</span>
+      <h3>EINE OFFENE TÜR</h3>
+      <p>Jeder darf wieder gehen. Mit seinem Namen. Mit seinem Leben. Mit seiner eigenen Meinung. Und vielleicht mit einem Gedanken mehr.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="intro">
+    <h2>WAS BLEIBT, WENN DER BESUCHER GEHT</h2>
+    <p>Keine Gehirnwäsche. Keine Pflicht. Keine fertige Wahrheit.</p>
+    <p>Sondern vielleicht nur: <strong>eine zusätzliche Möglichkeit.</strong></p>
+  </div>
+  <div class="quote">
+    „Ich dachte, es gäbe nur einen Weg.“<br>
+    … und plötzlich:<br>
+    „Oh. Da ist ja noch einer.“
+  </div>
+</section>
+
+<section id="morgengrauen">
+  <div class="intro">
+    <h2>OPERATION MORGENGRAUEN</h2>
+    <p>Nicht als fertiger Plan für eine „neue Weltordnung“.</p>
+    <p>Sondern als offene Frage:</p>
+    <div class="quote">
+      „Wie würde eine Infrastruktur aussehen,<br>
+      die Begegnung erleichtert,<br>
+      statt Angst zu automatisieren?“
+    </div>
+    <p>Das kann Architektur sein. Bildung. Technologie. Ein freiwilliges Jahr. Ein Dorf. Ein Markt. Eine Bank für Omi und Opi. Eine Genussinsel. Oder ein digitaler Ort.</p>
+    <p>Denn das Muster taucht immer wieder auf: <strong>Raum schaffen, damit Beziehung geschehen kann.</strong></p>
+  </div>
+</section>
+
+<section id="kern">
+  <div class="intro">
+    <h2>HERZ UND VERSTAND</h2>
+    <p>Mit Herz und Verstand muss niemand automatisch die vorgefertigte Fahrbahn der Angst fahren.</p>
+  </div>
+  <div class="split">
+    <div class="card">
+      <h3>❤️ HERZ FRAGT:</h3>
+      <p>Dient es dem Leben?</p>
+    </div>
+    <div class="card">
+      <h3>🧠 VERSTAND FRAGT:</h3>
+      <p>Ist es wahr? Funktioniert es? Ist es überprüfbar?</p>
+    </div>
+  </div>
+  <div class="quote">
+    🌅 GEMEINSAM FRAGEN WIR:<br>
+    Gibt es einen besseren Weg?
+  </div>
+</section>
+
+<section id="allerheiligste">
+  <div class="manifesto">
+    <p>Vielleicht ist das Allerheiligste …<br><br>
+    nicht etwas, das Besitz von allem ergreift.<br><br>
+    Sondern etwas, das sich so sehr über Beziehung freut,<br>
+    <strong>dass es sogar dem Besucher erlaubt, wieder nach Hause zu gehen.</strong></p>
+  </div>
+
+  <div class="intro">
+    <h2>DIE BANK FÜR OMI UND OPI</h2>
+    <p>Vielleicht war die Bank von Anfang an schon ein kleines Zion.</p>
+    <p>Nicht die Geldbank. 🪑 Die Bank zum Sitzen.</p>
+    <p>Der Ort, an dem jemand nicht weiterlaufen muss. Wo Begegnung passieren darf. Wo Omi und Opi sitzen können. Wo der Mensch wieder einen Platz bekommt.</p>
+  </div>
+</section>
+
+<section class="final">
+  <div style="font-size:4rem;color:var(--gold)">🌅</div>
+  <h2 class="big">SO IST ES.</h2>
+  <p class="mantra">
+    Keine Festung.<br>
+    Keine Falle.<br>
+    Keine Einweihung gegen den Willen.<br><br>
+    Sondern:<br>
+    <strong>Eine offene Tür.</strong>
+  </p>
+  <div class="quote">
+    „Und manchmal ist es einfach nur schön …<br>
+    dass es das gibt.“
+  </div>
+  <h2 class="big">∞ ♡ ∞</h2>
+  <p style="font-size:1.7rem">(^_-) 💛</p>
+</section>
+
+</main>
+
+<footer>
+  ZION · BEGEGNUNG · LERNEN · WACHSEN<br>
+  DIE MONADEN-PROJEKTION · 2026<br>
+  <span class="small">Operation Morgengrauen · Mit Herz und Verstand · Für alle · Für das Allerheiligste · Für dauerlos</span>
+</footer>
+
+</body>
+</html>

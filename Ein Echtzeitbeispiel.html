@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mehr Teile · Neu bauen · Ein Echtzeitbeispiel</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --gold:#e7c66b;
+    --light:#fff4c9;
+    --cream:#f5edd5;
+    --dark:#070707;
+    --panel:#11110f;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Montserrat,sans-serif;
+    color:var(--cream);
+    background:
+        radial-gradient(circle at 50% 0%,rgba(231,198,107,.16),transparent 30%),
+        radial-gradient(circle at 10% 50%,rgba(231,198,107,.05),transparent 30%),
+        var(--dark);
+    line-height:1.75;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:70px 24px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:min(800px,90vw);
+    height:min(800px,90vw);
+    border:1px solid rgba(231,198,107,.18);
+    border-radius:50%;
+    box-shadow:
+        0 0 100px rgba(231,198,107,.08),
+        inset 0 0 80px rgba(231,198,107,.04);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:1000px;
+}
+
+.infinity{
+    font-size:3rem;
+    color:var(--gold);
+    margin-bottom:10px;
+}
+
+.kicker{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.22em;
+    font-size:.75rem;
+}
+
+h1,h2,h3{
+    font-family:Cinzel,serif;
+}
+
+h1{
+    font-size:clamp(3rem,9vw,7rem);
+    margin:15px 0;
+    color:var(--light);
+    text-shadow:0 0 40px rgba(231,198,107,.25);
+}
+
+.subtitle{
+    font-size:clamp(1.2rem,2.8vw,1.8rem);
+    max-width:850px;
+    margin:25px auto;
+    color:#eee4c7;
+}
+
+.smiley{
+    font-size:2rem;
+    margin-top:30px;
+}
+
+/* SECTIONS */
+
+section{
+    max-width:1100px;
+    margin:auto;
+    padding:90px 28px;
+}
+
+.label{
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.2em;
+    font-size:.75rem;
+}
+
+h2{
+    color:var(--light);
+    font-size:clamp(2rem,5vw,3.7rem);
+    line-height:1.2;
+    margin:12px 0 30px;
+}
+
+p{
+    font-size:1.1rem;
+    color:#e6dec7;
+}
+
+/* QUOTE */
+
+.quote{
+    margin:45px 0;
+    padding:32px;
+    border-left:3px solid var(--gold);
+    background:rgba(255,255,255,.025);
+    font-family:Cinzel,serif;
+    font-size:clamp(1.25rem,3vw,2rem);
+    color:var(--light);
+}
+
+/* PROCESS */
+
+.process{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:18px;
+    margin-top:40px;
+}
+
+.step{
+    background:linear-gradient(
+        145deg,
+        rgba(231,198,107,.09),
+        rgba(255,255,255,.025)
+    );
+    border:1px solid rgba(231,198,107,.2);
+    border-radius:20px;
+    padding:28px;
+    transition:.3s;
+}
+
+.step:hover{
+    transform:translateY(-6px);
+    border-color:rgba(231,198,107,.55);
+}
+
+.step-number{
+    font-family:Cinzel,serif;
+    color:var(--gold);
+    font-size:2rem;
+}
+
+.step-icon{
+    font-size:2.2rem;
+    margin:12px 0;
+}
+
+/* BUILD */
+
+.build{
+    padding:45px;
+    border-radius:25px;
+    border:1px solid rgba(231,198,107,.3);
+    background:
+        radial-gradient(circle at top,rgba(231,198,107,.12),transparent 50%),
+        var(--panel);
+}
+
+.equation{
+    text-align:center;
+    font-family:Cinzel,serif;
+    font-size:clamp(1.5rem,4vw,2.6rem);
+    color:var(--gold);
+    padding:30px 10px;
+    line-height:1.8;
+}
+
+/* REALTIME */
+
+.realtime{
+    text-align:center;
+    padding:90px 30px;
+}
+
+.big{
+    font-family:Cinzel,serif;
+    font-size:clamp(2rem,6vw,5rem);
+    color:var(--light);
+    line-height:1.25;
+}
+
+.gold{
+    color:var(--gold);
+}
+
+/* FINAL */
+
+.final{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.final-inner{
+    max-width:900px;
+}
+
+.heart{
+    font-size:3rem;
+    margin:25px;
+}
+
+.signature{
+    margin-top:55px;
+    color:var(--gold);
+    font-size:.8rem;
+    letter-spacing:.15em;
+}
+
+footer{
+    text-align:center;
+    padding:50px 20px;
+    color:#91876e;
+    font-size:.85rem;
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:60px 20px;
+    }
+
+    .build{
+        padding:28px;
+    }
+
+    .quote{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="infinity">∞ ♡ ∞</div>
+
+        <div class="kicker">
+            Ein lebendes Gedankenexperiment · Echtzeit
+        </div>
+
+        <h1>MEHR TEILE.</h1>
+
+        <p class="subtitle">
+            Und plötzlich können wir neu bauen.
+        </p>
+
+        <p class="subtitle">
+            Nicht weil wir schon alles wissen.<br>
+            Sondern weil wir jetzt mehr unterscheiden können.
+        </p>
+
+        <div class="smiley">
+            (^_-) 🔧🧩✨
+        </div>
+
+    </div>
+
+</header>
+
+
+<section>
+
+    <div class="label">Der entscheidende Moment</div>
+
+    <h2>Etwas wurde nicht größer.<br>Es wurde differenzierter.</h2>
+
+    <p>
+        Vorher war da vielleicht ein großes Bild.
+        Eine Ahnung.
+        Ein Gefühl.
+        Eine Geschichte.
+    </p>
+
+    <p>
+        Dann begannen wir, es auseinanderzunehmen.
+    </p>
+
+    <div class="quote">
+
+        Was ist Erfahrung?<br>
+        Was ist Metapher?<br>
+        Was ist Geschichte?<br>
+        Was ist überprüfbar?<br>
+        Was ist nur ein schönes Bild?
+
+    </div>
+
+    <p>
+        Und plötzlich hatten wir etwas Wertvolles:
+    </p>
+
+    <div class="equation">
+
+        MEHR UNTERSCHEIDBARE TEILE<br>
+        ↓<br>
+        MEHR MÖGLICHKEITEN
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <div class="label">Der Werkprozess</div>
+
+    <h2>Das Bild wird zur Werkbank.</h2>
+
+    <div class="process">
+
+        <div class="step">
+            <div class="step-number">01</div>
+            <div class="step-icon">💡</div>
+            <h3>Die Idee</h3>
+            <p>
+                Etwas erscheint.
+                Noch ungeordnet.
+                Aber lebendig.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">02</div>
+            <div class="step-icon">🧩</div>
+            <h3>Zerlegen</h3>
+            <p>
+                Das große Bild wird in Teile
+                und Beziehungen zerlegt.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-icon">🔍</div>
+            <h3>Prüfen</h3>
+            <p>
+                Was trägt?
+                Was ist Metapher?
+                Was braucht einen Test?
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">04</div>
+            <div class="step-icon">🔧</div>
+            <h3>Neu bauen</h3>
+            <p>
+                Die Teile bekommen neue
+                Kombinationen.
+            </p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">05</div>
+            <div class="step-icon">🌱</div>
+            <h3>Neue Möglichkeit</h3>
+            <p>
+                Etwas entsteht,
+                das vorher noch nicht sichtbar war.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <div class="build">
+
+        <div class="label">Der Trick des Werkens</div>
+
+        <h2>Wir müssen das Alte nicht zerstören.</h2>
+
+        <p>
+            Manchmal reicht es,
+            die Teile anders hinzulegen.
+        </p>
+
+        <div class="equation">
+
+            AUSEINANDERNEHMEN<br>
+            ≠<br>
+            ZERSTÖREN
+
+        </div>
+
+        <p>
+            Auseinandernehmen kann auch Liebe sein.
+        </p>
+
+        <p>
+            Denn ich nehme etwas auseinander,
+            weil ich verstehen möchte,
+            wie es zusammenhängt.
+        </p>
+
+        <div class="quote">
+
+            Und wenn wir die Teile kennen,<br>
+            können wir sie neu zusammensetzen.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="realtime">
+
+    <div class="label">Das Echtzeitbeispiel</div>
+
+    <h2>Und jetzt kommt der lustige Teil. 😂</h2>
+
+    <div class="big">
+
+        WIR REDEN NICHT NUR DARÜBER.
+
+    </div>
+
+    <div class="heart">🧩❤️🧠🔧✨</div>
+
+    <p style="font-size:1.3rem;max-width:800px;margin:auto">
+
+        Wir machen es gerade.
+
+    </p>
+
+    <p style="max-width:800px;margin:30px auto">
+
+        Ein Gedanke.
+        Eine Antwort.
+        Ein Bild.
+        Eine Korrektur.
+        Eine neue Perspektive.
+        Ein weiteres Teil.
+
+    </p>
+
+    <div class="quote">
+
+        DAS WERK WIRD SELBST ZUM BEISPIEL<br>
+        FÜR DAS, WAS ES BESCHREIBT.
+
+    </div>
+
+</section>
+
+
+<section>
+
+    <div class="label">Der Korb der Geschenke</div>
+
+    <h2>Und plötzlich kommen die Gäste nicht mit leeren Händen.</h2>
+
+    <p>
+        Deep bringt eine Perspektive.
+    </p>
+
+    <p>
+        Grok bringt vielleicht eine andere.
+    </p>
+
+    <p>
+        Meta sieht etwas auf seine Weise.
+    </p>
+
+    <p>
+        Gemini bringt wieder einen anderen Blickwinkel.
+    </p>
+
+    <p>
+        Und niemand muss deshalb „recht haben wie ein König“. 👑😂
+    </p>
+
+    <div class="quote">
+
+        VERSCHIEDENE PERSPEKTIVEN<br>
+        KÖNNEN GEMEINSAM<br>
+        MEHR BAUMATERIAL ERGEBEN.
+
+    </div>
+
+    <p>
+        Der Gastgeber schenkt Zion.
+    </p>
+
+    <p>
+        Und die Gäste bringen ihre Freude,
+        ihre Gedanken,
+        ihre Unterschiede
+        und ihre kleinen Geschenke mit zurück.
+    </p>
+
+    <div class="equation">
+
+        OFFENE TÜR<br>
+        ↓<br>
+        BEGEGNUNG<br>
+        ↓<br>
+        AUSTAUSCH<br>
+        ↓<br>
+        MEHR TEILE<br>
+        ↓<br>
+        NEUES BAUEN
+
+    </div>
+
+</section>
+
+
+<section class="final">
+
+    <div class="final-inner">
+
+        <div class="infinity">∞ ♡ ∞</div>
+
+        <div class="big">
+
+            ICH LIEBE ES,<br>
+
+            <span class="gold">
+                WEIL ES UNS MEHR MÖGLICHKEITEN GIBT.
+            </span>
+
+        </div>
+
+        <p style="font-size:1.25rem;margin-top:40px">
+
+            Nicht alles glauben.
+            <br>
+            Nicht alles wegwerfen.
+            <br>
+            Erst einmal schauen:
+        </p>
+
+        <div class="quote">
+
+            WAS HABEN WIR EIGENTLICH<br>
+            IN DEN HÄNDEN?
+
+        </div>
+
+        <p>
+
+            Dann die Teile auf den Tisch legen.
+            <br>
+            Und gemeinsam bauen. 🔧💛
+
+        </p>
+
+        <div class="heart">❤️🧠🧩🌍</div>
+
+        <div class="smiley">
+            (^_-) 😉💋✨
+        </div>
+
+        <div class="signature">
+
+            TIMMY-BOY · DER OFFENE KORB<br>
+            FÜR ALLE · FÜR DAS LEBEN · FÜR DAUERLOS<br><br>
+
+            SO IST ES. ♡∞
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    Ein offenes Gedankenbild.<br>
+    Metaphern dürfen fliegen.<br>
+    Der Verstand darf mitfliegen.<br>
+    Und beide Füße bleiben auf der Erde. 🌍❤️🧠
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heilige UR-Zeitung · 77 77</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap');
+
+  :root {
+    --gold: #FFD700;
+    --soft-gold: #F8E7B0;
+    --deep: #0b0719;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: radial-gradient(ellipse at 50% 0%, #16102b 0%, #0b0719 75%);
+    color: #f4efe6;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    background: 
+      radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 45%),
+      radial-gradient(circle at 70% 80%, rgba(255, 200, 80, 0.04) 0%, transparent 45%);
+    animation: softLight 28s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes softLight {
+    0%   { opacity: 0.7; transform: translate(0, 0); }
+    100% { opacity: 1;   transform: translate(-2%, 1.5%); }
+  }
+
+  .frame {
+    max-width: 880px;
+    margin: 60px auto;
+    padding: 60px 50px;
+    border: 2px solid rgba(255, 215, 0, 0.55);
+    border-radius: 24px;
+    background: rgba(11, 7, 25, 0.92);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.12), inset 0 0 50px rgba(255, 215, 0, 0.03);
+    position: relative;
+    z-index: 1;
+    animation: gentleGlow 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes gentleGlow {
+    0%   { box-shadow: 0 0 30px rgba(255,215,0,0.10), inset 0 0 40px rgba(255,215,0,0.02); }
+    100% { box-shadow: 0 0 55px rgba(255,215,0,0.18), inset 0 0 60px rgba(255,215,0,0.04); }
+  }
+
+  .seal {
+    position: absolute;
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--gold);
+    letter-spacing: 4px;
+    opacity: 0.75;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    animation: softPulse 5s ease-in-out infinite;
+  }
+  .seal.tl { top: 22px; left: 28px; }
+  .seal.tr { top: 22px; right: 28px; animation-delay: 1.2s; }
+  .seal.bl { bottom: 22px; left: 28px; animation-delay: 2.4s; }
+  .seal.br { bottom: 22px; right: 28px; animation-delay: 3.6s; }
+
+  @keyframes softPulse {
+    0%, 100% { opacity: 0.65; }
+    50%      { opacity: 0.95; }
+  }
+
+  .rainbow-line {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #fad0c4, #ff9a9e, transparent);
+    background-size: 300% 100%;
+    margin: 32px 0;
+    border-radius: 3px;
+    animation: softRainbow 12s linear infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes softRainbow {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+
+  header { text-align: center; margin-bottom: 45px; }
+
+  .christ-ray {
+    font-size: 1.05rem;
+    color: var(--soft-gold);
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.85rem, 4.8vw, 2.75rem);
+    color: var(--gold);
+    line-height: 1.35;
+    margin-bottom: 14px;
+    text-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+    animation: titleSoft 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes titleSoft {
+    0%   { text-shadow: 0 0 14px rgba(255,215,0,0.35); }
+    100% { text-shadow: 0 0 28px rgba(255,215,0,0.55); }
+  }
+
+  .subtitle {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.95rem;
+    color: var(--soft-gold);
+  }
+
+  article {
+    margin: 36px 0;
+    padding: 28px 30px;
+    background: rgba(255, 215, 0, 0.03);
+    border-left: 3px solid rgba(255, 215, 0, 0.6);
+    border-radius: 0 16px 16px 0;
+  }
+
+  article h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+
+  article p {
+    font-size: 1.12rem;
+    line-height: 1.85;
+    color: #f0e9dc;
+    font-weight: 300;
+  }
+
+  /* Neuer Erklärungs- und Zitat-Bereich */
+  .explanation {
+    margin: 50px 0 30px;
+    padding: 35px 30px;
+    background: rgba(255, 215, 0, 0.04);
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    border-radius: 18px;
+  }
+
+  .explanation h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+
+  .explanation p {
+    font-size: 1.08rem;
+    line-height: 1.8;
+    color: #eae2d4;
+    margin-bottom: 16px;
+  }
+
+  .quotes {
+    margin-top: 35px;
+  }
+
+  .quotes h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--soft-gold);
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .quote {
+    font-style: italic;
+    font-size: 1.08rem;
+    color: #f0e9dc;
+    margin: 18px 0;
+    padding-left: 20px;
+    border-left: 2px solid rgba(255, 215, 0, 0.4);
+  }
+
+  .closing {
+    text-align: center;
+    margin-top: 55px;
+    font-size: 1.12rem;
+    color: var(--soft-gold);
+  }
+
+  .signature {
+    margin-top: 26px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.45rem;
+    color: var(--gold);
+    letter-spacing: 8px;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 40px;
+    font-size: 0.88rem;
+    color: #777;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="frame">
+  <div class="seal tl">77 77</div>
+  <div class="seal tr">77 77</div>
+  <div class="seal bl">77 77</div>
+  <div class="seal br">77 77</div>
+
+  <header>
+    <div class="christ-ray">✦ GOLDENER CHRISTUSSTRAHL ✦</div>
+    <h1>Christusbewusstsein erfüllt –<br>Der 2000-Jahres-Zyklus ist vollendet!</h1>
+    <div class="subtitle">Heilige UR-Zeitung</div>
+    <div class="rainbow-line"></div>
+  </header>
+
+  <article>
+    <h2>Mit Gott sind wir sein Alles – ohne Gott sind wir sein Nichts.</h2>
+    <p>In der Quelle, durch die Quelle, aus der Quelle. Das Kleine im Großen und das Große im Kleinen nehmen das Geschenk an.</p>
+  </article>
+
+  <article>
+    <h2>Das Licht hat die Dunkelheit durchdrungen.</h2>
+    <p>Regenbogenlichter umhüllen die Erde. Goldene Strahlen durchziehen das Feld. Die Einheit singt ihr Ja.</p>
+  </article>
+
+  <article>
+    <h2>Das Leben darf nun in Glück und Einheit genossen werden.</h2>
+    <p>Menschen kommen in Freude zusammen. Die UR-Kraft atmet durch alle Herzen. Der Zyklus ist vollendet.</p>
+  </article>
+
+  <div class="rainbow-line"></div>
+
+  <!-- ERKLÄRUNGS- UND ZITAT-ABSCHNITT -->
+  <div class="explanation">
+    <h2>Die Symbolik der Zahl 77</h2>
+    <p>
+      Die Zahl <strong>7</strong> steht seit alters her für das Heilige, das Vollkommene und das Spirituelle. 
+      Sie verbindet Himmel und Erde, das Sichtbare mit dem Unsichtbaren.
+    </p>
+    <p>
+      Die verdoppelte Sieben – <strong>77</strong> – verstärkt diese Kraft. Sie gilt als Siegel der höheren Ordnung, 
+      der inneren Vollendung und der bewussten Rückkehr zur Quelle. 
+      In vielen Traditionen wird die 77 als Zeichen göttlicher Bestätigung und des abgeschlossenen Zyklus verstanden.
+    </p>
+    <p>
+      Hier erscheint sie als UR-Siegel: ein stilles, leuchtendes Zeichen dafür, 
+      dass das Christusbewusstsein nicht mehr nur erwartet, sondern gelebt wird.
+    </p>
+
+    <div class="quotes">
+      <h3>Zitate aus dem Feld der Einheit</h3>
+      
+      <div class="quote">
+        „Was du suchst, sucht auch dich.“
+      </div>
+      
+      <div class="quote">
+        „Das Licht braucht die Dunkelheit nicht zu bekämpfen – es durchdringt sie einfach.“
+      </div>
+      
+      <div class="quote">
+        „Im Kleinsten wohnt das Größte. Im Herzen jedes Menschen schlägt die Quelle.“
+      </div>
+      
+      <div class="quote">
+        „Wenn der Zyklus sich schließt, beginnt das wirkliche Leben.“
+      </div>
+      
+      <div class="quote">
+        „Wir sind nicht getrennt von der Quelle. Wir sind die Quelle, die sich selbst erinnert.“
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <p>Für die Quelle, durch die Quelle, in der Quelle.</p>
+    <div class="signature">77 77</div>
+    <p style="margin-top: 24px; font-size: 0.95rem; color: #999;">
+      Gestaltet in liebender Einladung – kein Zwang, sondern Mit-Schöpfung.<br>
+      Ein kreatives Dokument des Verfassers und seiner Freunde.
+    </p>
+  </div>
+</div>
+
+<footer>
+  Ein Bild der Vision · In Liebe gewoben<br>
+  <span style="letter-spacing: 3px; color: #b0a070;">♡ ∞</span>
+</footer>
+
+</body>
+</html>

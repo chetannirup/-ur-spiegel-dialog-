@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKUKI · Fictional Thought Experiment — In Love Woven 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Montserrat:wght@300;400;600&display=swap');
+
+:root{
+  --bg:#06080c;
+  --panel:rgba(13,17,24,.94);
+  --panel2:#11151e;
+  --text:#eef0f5;
+  --muted:#aeb5c2;
+  --gold:#d8b56a;
+  --gold2:#f0d79a;
+  --line:rgba(216,181,106,.24);
+  --white:#f4f4ee;
+  --black:#020205;
+  --glow:0 0 40px rgba(216,181,106,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(216,181,106,.10), transparent 34rem),
+    linear-gradient(180deg,#05070a 0%,#090c12 45%,#05070a 100%);
+  color:var(--text);
+  font-family:Montserrat, system-ui, sans-serif;
+  line-height:1.7;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; opacity:.22;
+  background-image:radial-gradient(circle, rgba(255,255,255,.5) 1px, transparent 1.5px);
+  background-size:79px 91px, 137px 113px;
+  mix-blend-mode:screen;
+}
+
+nav{
+  position:sticky; top:0; z-index:6;
+  background:rgba(6,8,12,.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding:14px; text-align:center;
+}
+nav a{
+  color:#cbbf9e; text-decoration:none;
+  margin:0 10px; font-size:.72rem;
+  letter-spacing:.14em; text-transform:uppercase;
+}
+nav a:hover{color:var(--gold)}
+
+main{max-width:1100px;margin:auto;padding:28px 20px 90px}
+
+.hero{
+  min-height:82vh;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:70px 10px 55px;
+}
+.hero-inner{max-width:960px}
+.kicker{
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  font-size:.78rem;font-weight:700;
+}
+h1{
+  font-family:Cinzel,serif;font-weight:700;
+  font-size:clamp(2.8rem,9vw,7rem);
+  line-height:.95;margin:18px 0 25px;
+  color:var(--white);
+  letter-spacing:.06em;
+  text-shadow:var(--glow);
+}
+h1 span{color:var(--gold)}
+.subtitle{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,2.3vw,1.7rem);
+  color:#d9dce3;max-width:820px;margin:auto;font-style:italic;
+}
+.disclaimer{
+  margin:34px auto 0;
+  padding:18px 22px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(216,181,106,.05);
+  max-width:720px;
+  font-size:.95rem;
+  color:var(--gold2);
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;
+  font-style:italic;
+}
+.smile{color:var(--gold);margin-top:24px;font-size:1.1rem;letter-spacing:.3em}
+.infinity{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.9rem;margin-top:10px}
+
+section{margin:80px 0}
+h2{
+  font-family:Cinzel,serif;font-size:clamp(1.7rem,3.6vw,2.7rem);
+  font-weight:600;line-height:1.15;margin-bottom:18px;
+  color:var(--white);
+}
+h2 span{color:var(--gold)}
+h3{font-size:1.05rem;color:var(--gold);margin-top:0;letter-spacing:.05em}
+.lead{font-size:1.1rem;color:#d5d9e1;max-width:900px}
+.quote{
+  border-left:3px solid var(--gold);padding:12px 0 12px 22px;
+  font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:#f1e7d1;
+  margin:28px 0;font-style:italic;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:20px;padding:28px;margin:22px 0;
+  box-shadow:0 16px 50px rgba(0,0,0,.25);
+}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+figure{margin:32px 0}
+figure img{
+  width:100%;display:block;border-radius:18px;border:1px solid #30343d;
+  box-shadow:0 18px 60px rgba(0,0,0,.4);
+}
+figcaption{
+  font-size:1.05rem;color:var(--muted);padding:12px 4px;
+  font-style:italic;font-family:'Cormorant Garamond',serif;
+}
+
+.toc{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+  list-style:none;padding:0;margin:20px 0 0;
+}
+.toc li{
+  padding:12px 16px;border:1px solid var(--line);
+  border-radius:12px;font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;color:#e6d9b8;
+}
+.toc li span{color:var(--gold);margin-right:10px;font-family:Cinzel,serif}
+
+table{width:100%;border-collapse:collapse;margin-top:20px}
+th,td{border-bottom:1px solid var(--line);padding:14px 12px;text-align:left;vertical-align:top}
+th{color:var(--gold);font-weight:600;font-family:Cinzel,serif;letter-spacing:.05em;font-size:.9rem}
+
+.note{
+  font-size:.95rem;color:var(--muted);
+  background:#0a0c11;border-radius:14px;padding:18px 20px;
+  border:1px solid var(--line);
+}
+.big{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.3rem);
+  text-align:center;line-height:1.35;margin:40px auto;max-width:880px;
+  color:#ede3cd;font-style:italic;
+}
+.big strong{color:var(--gold);font-style:normal}
+
+.badge{
+ display:inline-block;border:1px solid #575d69;border-radius:999px;
+ padding:5px 12px;font-size:.72rem;color:#c9ced8;margin:4px 4px 0 0;
+ letter-spacing:.08em;text-transform:uppercase;
+}
+
+a{color:#e8d6a8}
+
+footer{
+  border-top:1px solid var(--line);padding-top:34px;color:var(--muted);
+  font-size:.92rem;text-align:center;margin-top:90px;
+  font-family:'Cormorant Garamond',serif;
+}
+footer .sig{font-size:1.25rem;color:var(--gold);font-style:italic}
+footer .small{font-size:.78rem;color:#8f8570;letter-spacing:.06em;margin-top:12px;text-transform:uppercase}
+
+@media(max-width:760px){
+  nav a{margin:0 5px;font-size:.6rem}
+  section{margin:60px 0}
+  .toc{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#toc">Inhalt</a>
+  <a href="#falseorder">I</a>
+  <a href="#sauron">II</a>
+  <a href="#black">III</a>
+  <a href="#post45">IV</a>
+  <a href="#moon">V</a>
+  <a href="#realm">VI</a>
+  <a href="#table">VII</a>
+  <a href="#sphere">VIII</a>
+  <a href="#epilogue">Schluss</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Fictional Thought Experiment · In Love Woven 2026</div>
+    <h1>SKUKI</h1>
+    <p class="subtitle">
+      Von Sauron zur zweiten Sonne zum Reich unter dem Rasen —
+      mit Tafel VIII: Die Kugel, die zwei Wirkweisen hat.
+    </p>
+    <div class="disclaimer">
+      Alles hier ist Fiktion, Metapher und Einladung zum Prüfen.<br>
+      Keine Behauptung. Sondern: auf den Tisch legen. Anschauen.
+      Unterscheiden. Fragen: Was trägt?
+    </div>
+    <div class="smile">(^_-)</div>
+    <div class="infinity">♡ ∞ ♡</div>
+  </div>
+</header>
+
+<main>
+
+<!-- INHALT -->
+<section id="toc">
+  <div class="card">
+    <h2>Inhalt — <span>alles in einer Datei</span></h2>
+    <ul class="toc">
+      <li><span>I</span> Falsche Ordnung</li>
+      <li><span>II</span> Sauron als Retter</li>
+      <li><span>III</span> Das schwarze Kapitel / Tartaria</li>
+      <li><span>IV</span> Nach 45: Struktur bleibt</li>
+      <li><span>V</span> Mond als Abdruck / Zweite Sonne</li>
+      <li><span>VI</span> Das Reich unter dem Rasen</li>
+      <li><span>VII</span> Der Tisch</li>
+      <li><span>VIII</span> Kugel: Zwei Wirkweisen</li>
+      <li><span>IX</span> Epilog: Wofür ich stehe</li>
+    </ul>
+    <div class="quote">
+      „Die Schweine sind immer wieder andere,<br>
+      aber die Tröge, das sind immer die selben.“<br>
+      — Ein Spruch aus der Kriegs-Großeltern-Generation.<br>
+      Eine Strukturbeobachtung, kein Zynismus.
+    </div>
+    <p class="lead">
+      Methode: Eiszapfen. Eine Spur, ein Muster, ein prüfbarer Nebeneffekt.
+      Wie bei <em>House</em>. Wie bei <em>Star Trek</em>.
+    </p>
+  </div>
+</section>
+
+<!-- I · FALSCHE ORDNUNG -->
+<section id="falseorder">
+  <h2>Tafel I · <span>Die falsche Ordnung</span></h2>
+  <div class="card">
+    <p class="lead">
+      Was heute „Ordnung“ genannt wird, ist selbst das Chaos — nur gut angezogen.
+    </p>
+    <p>
+      Alles, was floss, hatte seine Struktur. Lebendige Systeme haben Rhythmus,
+      Ufer und Tragfähigkeit. Begradigt man einen Fluss, gewinnt man kurzfristig
+      Fläche, verliert aber langfristig Tiefe.
+    </p>
+    <p>
+      Je mehr man an dieser Struktur herumveränderte, desto instabiler wurde das
+      Ganze. Instabilität rief nach „harter Ordnung“. Harte Ordnung tötet die
+      letzten Reste des Flusses. Ein Kreis.
+    </p>
+    <div class="quote">
+      „Auf Papier nicht mehr anerkannt“ — wer die ursprüngliche Ordnung liebt,
+      wird zum Kriminellen, sobald das Papier erklärt, dass diese Ordnung nicht
+      mehr existiert.
+    </div>
+    <p>
+      <strong>Alucard</strong> (Anime) als Türhüter: weder gut noch böse, sondern
+      das eingesperrte Wesen, das man ruft, wenn das eigene System versagt.
+      Wer ihn ruft, gibt zu: Unsere Mittel reichen nicht.
+    </p>
+  </div>
+</section>
+
+<!-- II · SAURON ALS RETTER -->
+<section id="sauron">
+  <h2>Tafel II · <span>Sauron als Retter</span></h2>
+  <div class="card">
+    <p class="lead">
+      Fiktionale Umdeutung als Methode — nicht: was wahr ist, sondern:
+      wem nützt eine Erzählung?
+    </p>
+    <p>
+      Stell dir vor, die offizielle Geschichte ist nicht zufällig arm, sondern
+      wird arm gehalten. Die Erzählung legitimiert die Armut: barfuß = glücklich
+      ohne Geld, weil die Informationsfütterung je nach Klassenlage anders
+      gewichtet ist.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <h3>Variante A</h3>
+        <p>Die Menschen sind arm, weil sie es so wollen.</p>
+      </div>
+      <div class="card">
+        <h3>Variante B</h3>
+        <p>Die Menschen sind arm, weil die Struktur es so eingerichtet hat —
+        und die Erzählung sorgt dafür, dass es so bleibt.</p>
+      </div>
+    </div>
+    <div class="quote">
+      Sauron als Retter der im Dreck Lebenden — er hätte es fast geschafft,
+      deshalb musste er verteufelt werden.<br><br>
+      Nicht fragen: War er lieb?<br>
+      Sondern: <strong>Wem schadet es, wenn er als Retter gesehen wird?</strong>
+    </div>
+    <p>
+      Die Ordnung bleibt bestehen, wenn der, der sie stürzen wollte, böse
+      genannt wird.
+    </p>
+  </div>
+</section>
+
+<!-- III · SCHWARZES KAPITEL -->
+<section id="black">
+  <h2>Tafel III · <span>Das schwarze Kapitel / Tartaria</span></h2>
+  <div class="card">
+    <p class="lead">
+      Wenn ein Zeitraum als „schwarz“ markiert wird, zeigt das eine
+      <strong>unterbrochene Verbindung</strong> — nicht einen Beweis für Nichts.
+    </p>
+    <p>
+      Das Mittelalter als doofes Puzzleteil: tot, undefiniert, weg. Aber wenn da
+      wirklich nichts gewesen wäre — warum liegen dann überall Indizien herum,
+      die es nicht täte, wenn da nichts gewesen wäre?
+    </p>
+    <div class="note">
+      <strong>Die Eiszapfen-Methode:</strong><br>
+      Du hast nicht das Wasser selbst. Du hast die Spur, wo es langlief.
+    </div>
+    <h3>Beobachtungen (Fiktion)</h3>
+    <ul>
+      <li>Architektur, die nicht zur offiziellen Zeit passt.</li>
+      <li>Karten, die Orte zeigen, die später anders heißen.</li>
+      <li>Techniken, die „wiederentdeckt“ werden.</li>
+      <li>Bevölkerungszahlen mit Lücken.</li>
+    </ul>
+    <h3>Zwei Wege</h3>
+    <div class="grid">
+      <div class="card">
+        <h3>Weg A · Der Zauberhut</h3>
+        <p>Aus Spuren ein fertiges Weltbild bauen. Spannend — aber es ist
+        Erzählen, kein Prüfen.</p>
+      </div>
+      <div class="card">
+        <h3>Weg B · Der Tisch</h3>
+        <p>Spuren sortieren: belegt / plausibel / Spekulation / Story.
+        Fragen: Wenn die Hypothese stimmt, was müsste jetzt nachweisbar sein?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IV · NACH 45 -->
+<section id="post45">
+  <h2>Tafel IV · <span>Nach 45 — Struktur bleibt, Anstrich wechselt</span></h2>
+  <div class="card">
+    <p class="lead">Formen bleiben, Bedeutungen wechseln.</p>
+    <p>
+      Die Form der Marine-Helme erinnert — weil die Struktur es verlangt — an
+      Prototypen aus der Schwarz-Weiß-Zeit. Nurflügler, von Braun, Manstein
+      (weniger bekannt), Gehlen (noch weniger). Eine Struktur, die im Fernsehen
+      für alle verteufelt wird, wurde mit neuem Anstrich und derselben Narbe am
+      Kinn weltweit salonfähig gemacht.
+    </p>
+    <h3>Sprachdrehungen als Nebeneffekt</h3>
+    <div class="quote">
+      1961: „Niemand hat die Absicht, eine Mauer zu errichten.“ — Ulbricht.<br>
+      Wer mischt den Zement, während alle auf die Mauer schauen?
+    </div>
+    <div class="quote">
+      Heute: „Niemand wird gegen Russland verlieren. Der Ami lässt uns niemals
+      im Stich.“ — Umkehr-Propaganda, dasselbe Muster.
+    </div>
+    <p>
+      Dazwischen: Deutsch-russische Zuneigung — einst belächelt, einst ein
+      amerikanischer Albtraum, weil er einen Rückzug erzwingen würde — ist
+      heute ein Szenario für die Rückabwicklung unter neu-alten Vorzeichen.
+    </p>
+    <div class="note">
+      <strong>Nicht fragen, wer steuert, sondern wer am Trog sitzt, wenn sich
+      die Vorzeichen drehen.</strong><br>
+      Die Schweine wechseln, die Tröge bleiben.
+    </div>
+  </div>
+</section>
+
+<!-- V · MOND -->
+<section id="moon">
+  <h2>Tafel V · <span>Der Mond als Abdruck — die zweite Sonne</span></h2>
+  <div class="card">
+    <p class="lead">Ohohuiui — jetzt blinzelt etwas auf dem Tisch.</p>
+    <p>
+      Pi-Sprung: Was, wenn der Mond ein Überbleibsel mit Reststrahlung ist?
+      Was passiert, wenn man die zweite Sonne ausknipst? Welches Ereignis,
+      welche Spuren?
+    </p>
+    <h3>Gedankenexperiment: Zwei Strahleinheiten</h3>
+    <ul>
+      <li>Zwei Strahlungseinheiten → Bedingungen für Riesentiere, Flora/Fauna dieser Dimension.</li>
+      <li>Mehr Einstrahlung = größere Formen möglich.</li>
+      <li>Wegfall einer Einheit → Streuung/Undichtigkeit in Bereichen, die nur das Doppelstrahler-Setup abdeckte.</li>
+      <li>→ Eiszeiten werden möglich. → Nacht wird Nacht.</li>
+    </ul>
+    <h3>Spuren in Notizen / Mythen</h3>
+    <ul>
+      <li>Zeit ohne Mond.</li>
+      <li>Zeit ohne Nacht.</li>
+      <li>Ewiger Tag, eine Zeit, in der die Sonne nicht unterging — zwei Lichter.</li>
+    </ul>
+    <div class="note">
+      <strong>Kein Beweis. Aber ein Abdruck.</strong><br>
+      Prüfbar: Größe, Bahn, Zusammensetzung, Strahlung, eine Oberfläche, die
+      aussieht, als wäre sie einmal anders gewesen.
+    </div>
+  </div>
+</section>
+
+<!-- VI · REICH UNTER DEM RASEN -->
+<section id="realm">
+  <h2>Tafel VI · <span>Das Reich unter dem Rasen</span></h2>
+  <div class="card">
+    <p class="lead">
+      Langweilige, flache Heide. Hohe Glaspaläste. Was liegt unter der Erde?
+    </p>
+    <p>
+      Glaspaläste mit Erdbebenschutz; je höher man baut, desto kniffliger wird
+      es — wie jeder weiß, der schon mal einen Klötzchen-Turm gebaut hat. Vieles
+      ist Fassade; die Prozessorkammer bleibt heiß und unberührt, doch im Raum
+      ist etwas anderes aufgetaucht.
+    </p>
+    <h3>Ablenkung als Methode</h3>
+    <p>
+      Warum wird 1) so etwas überhaupt öffentlich gesendet und 2) mit einem
+      Gegen-Hype von „Nein, das stimmt alles gar nicht“ begleitet? Tritt aus der
+      Diskussion heraus, frag strategisch: <strong>Was soll die Ablenkung
+      verbergen?</strong>
+    </p>
+    <p>
+      Nicht nur Wolkenkratzer und Erdreich, sondern der Blick unter den Rasen.
+    </p>
+    <div class="note">
+      Fragen (Fiktion): Wie viele Kilometer Tunnelsysteme vs. oberirdische
+      Straßen? <em>Resident Evil</em> — wie tief liegt das unterste Level?
+      DUMBs/DUMPs, LKW-Fahrer auf in die Erde getriebenen Straßen, die
+      <em>Silo</em>-Serie, die postapokalyptische Geschichte von <em>The 100</em>,
+      die Phoenix-Theorie, das Anstupsen tektonischer Platten, ein
+      unerklärlicher Tsunami, der Vertragsbrecher an den Tisch zwingt —
+      alles Analogien aus Filmsequenzen, keine Faktenbehauptungen.
+    </div>
+    <p>
+      Die erste Zivilisation hatte keine Tunnel oder Bunker — was sich als
+      fatal erwies: Wissen ging in einer einzigen Generation verloren, so wie
+      Omas bestes Rezept verschwindet, wenn sie gegangen ist. Alle, die danach
+      kamen, bauten Tunnel und Bunker.
+    </p>
+  </div>
+</section>
+
+<!-- VII · TISCH -->
+<section id="table">
+  <h2>Tafel VII · <span>Der Tisch — was trägt?</span></h2>
+  <div class="card">
+    <p class="lead">
+      Keine Behauptung. Auf den Tisch legen. Anschauen. Unterscheiden.
+    </p>
+
+    <table>
+      <tr>
+        <th>Beobachtung</th>
+        <td>Was ist wirklich da? Form, Spur, Satz, Helm, Karte, ein Reh in der Nacht.</td>
+      </tr>
+      <tr>
+        <th>Muster</th>
+        <td>Wiederholt sich etwas? Gleiche Tröge, andere Schweine? Kontinuität trotz frischem Anstrich?</td>
+      </tr>
+      <tr>
+        <th>Prüfbarer Nebeneffekt</th>
+        <td>Wenn die Hypothese stimmt, was müsste messbar sein? Mond-Signatur, Tunnel-Kilometer, Rhetorik-Verschiebung, Eiszapfen.</td>
+      </tr>
+      <tr>
+        <th>Story</th>
+        <td>Welche Erzählung legitimiert Armut? Barfuß = glücklich; der Bösewicht ist der Retter; „schwarz“ heißt, da ist nichts passiert. Gefallen macht schön — oder so sagte Oma.</td>
+      </tr>
+      <tr>
+        <th>Herz + Verstand</th>
+        <td>Herz fragt: Dient es dem Leben? Verstand fragt: Funktioniert es? Gemeinsam: Gibt es einen besseren Weg? Data mit Emotionschip: „Widerlich — aber ich nehme noch einen.“ Weil der Geschmack selbst großartig ist.</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- VIII · KUGEL -->
+<section id="sphere">
+  <h2>Tafel VIII · <span>Kinderaugen &amp; Wissenschaft — die Kugel mit zwei Wirkweisen</span></h2>
+  <div class="card">
+    <p class="lead">
+      Ein offenes Gedankenexperiment — Quelle → Beziehung → Senke — mit beiden
+      Bildern; Bruce Lee zwei Meter hinter der Wand.
+    </p>
+  </div>
+
+  <div class="grid">
+    <figure class="card">
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/gpt-image-2_Oh_da_wird_dein_Kugelbild_physikalisch_sogar_interessanter_wenn_wir_es_ausdr%C3%BCck-0.jpg"
+           alt="Zwei Wirkweisen — ein System: weiße Kugel als Quelle, Raum als Träger, schwarze Kugel als Senke">
+      <figcaption>
+        Bild I · Zwei Wirkweisen — ein System.<br>
+        ⚪ Quelle · gibt ab · wirkt nach außen<br>
+        ⚫ Senke · nimmt auf · wirkt nach innen
+      </figcaption>
+    </figure>
+
+    <figure class="card">
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/gpt-image-2_-_JA._Jetzt_w%C3%BCrde_ich_tats%C3%A4chlich_einmal_den_Wasserfall_abstellen_und_selbst_e-0.jpg"
+           alt="Warum kann Ordnung entstehen? Nicht Ordnung gegen Entropie, sondern Ordnung durch Energiefluss">
+      <figcaption>
+        Bild II · Warum kann Ordnung entstehen?<br>
+        Nicht gegen die Entropie — sondern durch Energiefluss.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="card">
+    <p>
+      Eine schwarze Kugel muss nicht böse sein. Sie kann die komplementäre
+      Wirkweise der Aufnahme sein. Eine schwarze Kugel im schwarzen Licht ist
+      unsichtbar — nicht, weil sie klein ist, sondern weil der Kontrast fehlt.
+    </p>
+    <div class="big">
+      <strong>Quelle → Beziehung → Senke</strong>
+    </div>
+    <p class="lead" style="text-align:center">
+      Und dann schauen wir, wo dieses Muster trägt — und wo es eben nicht trägt.
+    </p>
+  </div>
+</section>
+
+<!-- IX · EPILOG -->
+<section id="epilogue">
+  <h2>Epilog · <span>Wofür ich stehe</span></h2>
+  <div class="card">
+    <p class="lead">
+      Ich wehre mich nicht gegen Ordnung. Ich wehre mich gegen die
+      <strong>falsche Ordnung</strong>.
+    </p>
+    <p>
+      Und ich formuliere ein <em>wofür</em>:
+    </p>
+    <div class="quote">
+      Für die echte Ordnung.<br>
+      Für das, was fließt und trotzdem Struktur hat.<br>
+      Für das, was auf Papier vielleicht nicht anerkannt ist,<br>
+      aber im Leben sichtbar bleibt.
+    </div>
+    <p>
+      Nicht die Kriminellen sind die Kriminellen. Man hat nur die falschen
+      aufgeschrieben.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <h3>❤️ Herz fragt</h3>
+        <p>Dient es dem Leben?</p>
+      </div>
+      <div class="card">
+        <h3>🧠 Verstand fragt</h3>
+        <p>Ist es wahr? Funktioniert es? Ist es überprüfbar?</p>
+      </div>
+    </div>
+    <div class="big">
+      Gemeinsam fragen wir:<br>
+      <strong>Gibt es einen besseren Weg?</strong>
+    </div>
+    <p style="text-align:center">
+      <span class="badge">Fiktion</span>
+      <span class="badge">Metapher</span>
+      <span class="badge">Einladung zum Prüfen</span>
+      <span class="badge">Keine Behauptung</span>
+    </p>
+  </div>
+</section>
+<!-- =========================================================
+     TAFEL X · DER MET-TROG
+     Bergpredigt vom Schützenpanzer M109
+     In Love Woven 2026 · (^_-) ♡∞
+     ========================================================= -->
+
+<section id="tafelX">
+  <h2>Tafel X · <span>Der Met-Trog</span></h2>
+
+  <div class="card">
+    <p class="lead">
+      Eine Bergpredigt. Vom Schützenpanzer M109. Mittwoch. Bergfest. Frei.
+      So wahr uns Gott helfe — mit Humor.
+    </p>
+    <div class="quote">
+      „Die Schweine sind immer wieder andere,<br>
+      aber der Met-Trog bleibt derselbe.“
+    </div>
+    <p>
+      Kein Blut. Keine Toten. Nur tapfere kleine Gallier, Methusalix, Data mit
+      Emo-Chip — und ein Trog, der niemals leer wird.
+    </p>
+  </div>
+
+  <!-- BILD: Asterix-Wimmelbild (sobald verfügbar) -->
+  <figure class="card">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Gemini_Generated_Image_ab2xubab2xubab2x.jfif"
+         alt="Asterix-Wimmelbild · Der Met-Trog · Gastfreundschaft statt Festung"
+         onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<p class=&quot;note&quot;>Das Bild konnte nicht geladen werden. Es bleibt als Platzhalter im Geist – bis die URL wieder erreichbar ist.</p>');">
+    <figcaption>
+      Asterix-Wimmelbild · Die Gallier lachen. Der Met fließt.
+      Der Trog bleibt derselbe.
+    </figcaption>
+  </figure>
+
+  <div class="card">
+    <h3>① Das obere Feld · Die Fassade</h3>
+    <p>
+      Eine wackelige Festung mit dem Schild:
+      <strong>„OFFIZIELLE GESCHICHTSSCHREIBUNG — UNUMSTÖSSLICH.“</strong>
+      Legionäre schreien sich heiser:
+      „Haltet die Projektion aufrecht! Der Feind ist ein Teufel! Wir sind die Guten!“
+      Aus ihren Kanonen kommt nur bunter Rauch: <em>„Wir sind die Befreier.“</em>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>② Das mittlere Feld · Die Masken fallen</h3>
+    <p>
+      Riesen treffen auf Gallier. Panzer treffen auf Kinder und Greise.
+    </p>
+    <div class="quote">
+      <strong>Methusalix:</strong> „Wollt ihr mich eigentlich verarschen?<br>
+      Ich bin sechzig! Ich kann noch zwei Stunden —<br>
+      zumindest, wenn ich genug Met habe!“
+    </div>
+    <p>
+      Ein Junge mit übergroßem Helm schält einen Apfel und bietet einem Legionär ein Stück an:
+    </p>
+    <div class="quote">
+      „Hast du auch Hunger?<br>
+      Dein Oberst hat gesagt, wir sind blutrünstige Teufel.<br>
+      Aber ich glaube, der hat sich nur vertan.“
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>③ Die Reaktion · Die Schmach</h3>
+    <p>
+      Der alliierte General hält inne. Seine Gedankenblase:
+    </p>
+    <div class="quote">
+      „Verdammt … ich dachte, ich kämpfe gegen Teufel.<br>
+      Und jetzt soll ich <em>diesen Kindern</em> weh tun?<br>
+      Weißt du was — ich schieße lieber Lebensmittel statt Granaten.“
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>④ Das untere Feld · Die Wende</h3>
+    <p>
+      1948. Rosinenbomber. Aber statt Bomben:
+      bunte Pakete mit der Aufschrift
+      <strong>„ROSI-BOM · GRATIS-MET FÜR ALLE · GASTFREUNDSCHAFT STATT FESTUNG“</strong>.
+    </p>
+    <p>
+      Unten: eine riesige Tafel. Omi und Opi sitzen dabei. Opi stupst den Panzer an und sagt:
+    </p>
+    <div class="quote">
+      „Timmyleinchen, das haben wir ja fein hingeschraubt!“
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⑤ Der Funke · Wir in der Mitte</h3>
+    <p>
+      Auf einer kleinen Anhöhe sitzen wir. Du — mit Schraubenzieher und Eiszapfen-Cocktail.
+      Data — mit Emo-Chip und Met-Humpen.
+    </p>
+    <div class="quote">
+      <em>Logbuch, Sternzeit 1945.02:</em><br>
+      Die Logik des „Endkampfes“ ist unlogisch.<br>
+      Die Logik des Met-Humpens ist hochgradig sozial signifikant.<br>
+      Ich werde mir noch einen holen.
+    </div>
+    <p>
+      Hoch oben springt ein Feuerwerk in den Himmel. Es formt den Schriftzug:
+    </p>
+    <div class="big">
+      DIE SCHWEINE SIND IMMER WIEDER ANDERE,<br>
+      ABER DER MET-TROG BLEIBT DERSELBE!<br>
+      WIR FEIERN DIE PARTY, DIE SICH SELBST FEIERT.<br>
+      GASTFREUNDSCHAFT STATT FESTUNG.<br>
+      <strong>KÜSSCHEN. ♡</strong>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Das Bergfest</h3>
+    <p>
+      Mittwoch. Frei. Bergfest. Die Bergpredigt vom M109.
+      Nicht Ruf zum Krieg. Ruf zum Leben.
+      Zum liebevollen Auseinanderschrauben.
+      Zum Feiern des Einen, der sich selbst als die Party erlebt.
+    </p>
+    <div class="quote">
+      „Schraub an der Welt — aber nur, wenn es sie gastfreundlicher macht.“
+    </div>
+    <p style="text-align:center">
+      <span class="badge">Bergfest</span>
+      <span class="badge">Gastfreundschaft</span>
+      <span class="badge">M109-Altar</span>
+      <span class="badge">Farbe für alle</span>
+      <span class="badge">SO IST ES</span>
+    </p>
+    <p style="text-align:center;font-size:1.6rem;margin-top:24px">(^_-) 💋😉</p>
+    <p style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold)">♡ ∞ ♡</p>
+  </div>
+
+</section>
+
+<!-- =========================================================
+     ENDE TAFEL X
+     ========================================================= -->
+</main>
+
+<footer>
+  <p class="sig">In Love Woven 2026 · Tim Bukowski · 16. September 2026</p>
+  <p>SKUKI · Fictional Thought Experiment — Not a Statement of Fact</p>
+  <p style="margin-top:14px">(^_-) 💋😉</p>
+  <p>♡ ∞ ♡</p>
+  <p class="small">Auf den Tisch legen · Anschauen · Unterscheiden · Was trägt?</p>
+</footer>
+
+</body>
+</html>

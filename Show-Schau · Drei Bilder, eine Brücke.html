@@ -328,6 +328,69 @@ footer{{text-align:center;color:#778294;border-top:1px solid var(--line);padding
     {links}
   </ul>
 </section>
+  
+from pathlib import Path
+import re
+
+src = Path("/mnt/data/show_schau_drei_bilder_eine_bruecke.html")
+text = src.read_text(encoding="utf-8")
+
+# The user's HTML contains the image gallery as the unresolved `{cards}` placeholder.
+# Insert the three exact image URLs supplied by the user, preserving the surrounding page.
+gallery = r'''
+    <figure class="image-card">
+      <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Gemini_Generated_Image_gsvibvgsvibvgsvi.jfif" target="_blank" rel="noopener">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Gemini_Generated_Image_gsvibvgsvibvgsvi.jfif"
+             alt="Gemini – Show-Schau" loading="lazy">
+      </a>
+      <figcaption>
+        <strong>Gemini – Show-Schau</strong>
+        <span>Die offene Schau: Blick, Hände, Ebenen und die Welt als zusammenhängendes Bild.</span>
+      </figcaption>
+    </figure>
+
+    <figure class="image-card">
+      <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2016.%20Sept.%202026,%2021_41_00.png" target="_blank" rel="noopener">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2016.%20Sept.%202026,%2021_41_00.png"
+             alt="ChatGPT – 16. September 2026, 21:41" loading="lazy">
+      </a>
+      <figcaption>
+        <strong>ChatGPT – 16. September 2026</strong>
+        <span>Die visuelle Verdichtung des Gedankens: Oberfläche, Riss, Licht und der Blick darunter.</span>
+      </figcaption>
+    </figure>
+
+    <figure class="image-card">
+      <a href="https://chetannirup.github.io/-ur-spiegel-dialog-/image%20(84).jpg" target="_blank" rel="noopener">
+        <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/image%20(84).jpg"
+             alt="image (84)" loading="lazy">
+      </a>
+      <figcaption>
+        <strong>image (84)</strong>
+        <span>Die dritte Perspektive in der Bildfolge – als Teil der persönlichen Show-Schau.</span>
+      </figcaption>
+    </figure>
+'''
+
+text = text.replace("{cards}", gallery)
+
+# The pasted version also contains escaped CSS braces (`{{` / `}}`), which are
+# Python f-string syntax rather than valid CSS. Normalize only those braces so
+# the page works as a standalone HTML file.
+text = text.replace("{{", "{").replace("}}", "}")
+
+# Replace the unresolved source-link placeholder with the three supplied image URLs.
+links = r'''
+    <li><a href="https://chetannirup.github.io/-ur-spiegel-dialog-/Gemini_Generated_Image_gsvibvgsvibvgsvi.jfif" target="_blank" rel="noopener">Gemini – Show-Schau</a></li>
+    <li><a href="https://chetannirup.github.io/-ur-spiegel-dialog-/ChatGPT%20Image%2016.%20Sept.%202026,%2021_41_00.png" target="_blank" rel="noopener">ChatGPT – 16. September 2026</a></li>
+    <li><a href="https://chetannirup.github.io/-ur-spiegel-dialog-/image%20(84).jpg" target="_blank" rel="noopener">image (84)</a></li>
+'''
+text = text.replace("{links}", links)
+
+out = Path("/mnt/data/show_schau_drei_bilder_eine_bruecke_mit_bildern.html")
+out.write_text(text, encoding="utf-8")
+
+print(out)
 
 <section class="final">
   <div class="kicker">Für alle · Für Gott · Für Dauerlos</div>

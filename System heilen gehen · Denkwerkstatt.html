@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>System heilen gehen · Denkwerkstatt</title>
+<style>
+:root{
+  --paper:#f8f3e6;
+  --paper-2:#efe6cf;
+  --ink:#14120f;
+  --ink-fade:#6b6256;
+  --gold:#d6a229;
+  --gold-deep:#a67c14;
+  --occult:#0e0c0a;
+  --occult-2:#1c1813;
+  --line:rgba(20,18,15,0.12);
+  --serif:"Iowan Old Style","Apple Garamond",Baskerville,Georgia,serif;
+  --mono:Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#12100e;
+    --paper-2:#1b1814;
+    --ink:#f3ecd8;
+    --ink-fade:#a99e8a;
+    --gold:#e8b84a;
+    --gold-deep:#c79a2e;
+    --line:rgba(243,236,216,0.12);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--serif);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.55;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* HEADER */
+header.top{
+  position:sticky;top:0;z-index:30;
+  background:color-mix(in srgb,var(--paper) 82%,transparent);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+header.top .inner{
+  max-width:1180px;margin:auto;
+  padding:0 20px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .dot{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--occult);color:var(--paper);
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.18em;
+}
+.brand .label{
+  font-family:var(--mono);font-size:10px;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-fade);
+}
+nav.top{display:flex;gap:20px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+nav.top a:hover{color:var(--gold-deep)}
+nav.top .cta{
+  padding:6px 12px;border-radius:999px;
+  background:var(--gold);color:#000;font-weight:600;
+}
+
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--occult),var(--occult-2) 60%,var(--paper));
+  color:#f8f3e6;
+}
+.hero .inner{
+  max-width:1180px;margin:auto;
+  padding:60px 20px 90px;
+  display:grid;grid-template-columns:1.1fr .9fr;
+  gap:40px;align-items:center;
+}
+.hero .badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 12px;border-radius:999px;
+  border:1px solid rgba(214,162,41,.4);
+  background:rgba(214,162,41,.12);
+  color:var(--gold);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+}
+.hero h1{
+  margin:24px 0 0;
+  font-size:clamp(2.6rem,7vw,5rem);
+  line-height:.9;letter-spacing:-.02em;
+}
+.hero h1 em{font-style:normal;color:var(--gold);font-weight:400}
+.hero h1 .sub{
+  display:block;margin-top:12px;
+  font-family:var(--mono);font-size:.35em;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(248,243,230,.7);font-weight:500;
+}
+.hero h2{
+  margin:18px 0 0;
+  font-size:clamp(1.1rem,2.2vw,1.5rem);
+  line-height:1.25;
+  color:rgba(248,243,230,.85);
+  font-weight:400;
+}
+.hero .stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;margin-top:32px;max-width:520px;
+}
+.hero .stat{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);
+  border-radius:12px;padding:12px;
+}
+.hero .stat .k{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);
+}
+.hero .stat .v{
+  margin-top:4px;font-size:12px;line-height:1.2;
+  color:rgba(255,255,255,.7);
+}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero .btn{
+  padding:12px 20px;border-radius:999px;
+  font-family:var(--mono);font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+}
+.hero .btn.primary{background:var(--gold);color:#000}
+.hero .btn.ghost{border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8)}
+
+/* Siegel */
+.hero .seal{
+  position:relative;
+  aspect-ratio:3/4;
+  border-radius:28px;overflow:hidden;
+  border:1px solid rgba(214,162,41,.35);
+  background:#0a0908;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(214,162,41,.2);
+}
+.hero .seal img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.hero .seal .cap{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:16px;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent);
+  font-size:13px;color:rgba(255,255,255,.9);
+}
+
+/* MAIN */
+main{max-width:1180px;margin:auto;padding:40px 20px 80px}
+.section{padding:40px 0}
+.section h2{
+  font-size:clamp(2rem,4.5vw,3.4rem);
+  line-height:.95;letter-spacing:-.02em;margin:0 0 12px;
+}
+.section h3{
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  line-height:.95;margin:0 0 12px;
+}
+.section .eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-fade);margin-bottom:8px;
+}
+.section .lede{
+  font-size:clamp(1rem,1.6vw,1.15rem);
+  line-height:1.55;max-width:68ch;
+}
+
+/* Kapitel */
+.chapter{
+  display:grid;grid-template-columns:60px 1fr;gap:20px;
+  padding:32px 0;border-top:1px solid var(--line);
+}
+.chapter .num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--occult);color:var(--paper);
+  display:grid;place-items:center;
+  font-size:18px;font-weight:700;
+}
+.chapter .title{
+  font-size:clamp(1.5rem,2.8vw,2rem);
+  line-height:.95;margin:0;
+}
+.chapter .sub{
+  display:inline-block;margin-top:8px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:4px 8px;border-radius:999px;
+  background:var(--paper-2);border:1px solid var(--line);
+}
+.chapter p{
+  margin-top:16px;font-size:clamp(1rem,1.5vw,1.15rem);
+  line-height:1.6;color:color-mix(in srgb,var(--ink) 90%,transparent);
+  max-width:68ch;
+}
+
+/* Gegenmodell */
+.compare{
+  border:1px solid rgba(214,162,41,.3);
+  border-radius:20px;padding:32px;
+  background:linear-gradient(135deg,var(--paper),var(--paper-2));
+  box-shadow:0 20px 60px rgba(214,162,41,.12);
+  margin-top:24px;
+}
+.compare table{width:100%;border-collapse:collapse}
+.compare th,.compare td{
+  padding:12px;border-bottom:1px solid var(--line);
+  text-align:left;font-size:15px;vertical-align:top;
+}
+.compare th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-fade);font-weight:500;
+}
+.compare td.right{background:rgba(214,162,41,.08);font-weight:600}
+.compare .merksatz{
+  margin-top:20px;font-family:var(--mono);font-size:12px;
+  line-height:1.6;color:var(--ink-fade);
+}
+
+/* W-Fragen */
+.wfragen{
+  border-radius:20px;padding:40px;
+  background:var(--occult);color:#f8f3e6;
+  position:relative;overflow:hidden;
+  margin-top:24px;
+}
+.wfragen .eyebrow{
+  color:var(--gold);font-family:var(--mono);
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+}
+.wfragen blockquote{
+  margin:24px 0 0;
+  font-size:clamp(1.3rem,2.5vw,1.8rem);
+  line-height:1.25;max-width:36ch;font-style:normal;
+}
+.wfragen blockquote .gold{color:var(--gold)}
+.wfragen .grid{
+  margin-top:32px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  font-family:var(--mono);font-size:11px;line-height:1.5;
+}
+.wfragen .cell{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);
+  padding:16px;border-radius:12px;
+}
+.wfragen .cell .q{
+  color:var(--gold);text-transform:uppercase;letter-spacing:.18em;
+}
+.wfragen .cell .a{margin-top:8px;color:rgba(255,255,255,.8)}
+
+/* 7 Linien */
+.linien{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:24px;margin-top:24px;
+}
+.linien .box{
+  border:1px solid var(--line);border-radius:20px;
+  padding:28px;background:var(--paper-2);
+}
+.linien .box .eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-fade);
+}
+.linien .item{
+  display:flex;gap:12px;margin-top:12px;
+  font-size:16px;line-height:1.3;
+}
+.linien .item .b{color:var(--gold-deep)}
+.linien .trio{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  margin-top:32px;padding-top:24px;border-top:1px solid var(--line);
+}
+.linien .trio .num{
+  font-family:var(--mono);font-size:22px;color:var(--gold-deep);
+  letter-spacing:-.02em;
+}
+.linien .trio .cap{
+  font-family:var(--mono);font-size:10px;text-transform:uppercase;
+  letter-spacing:.16em;
+}
+.linien .trio .desc{
+  margin-top:4px;font-size:13px;line-height:1.3;
+}
+.linien .duichwir,
+.linien .mondragon{
+  border:1px solid var(--line);border-radius:20px;
+  padding:24px;background:var(--paper);
+}
+.linien .mondragon{
+  background:var(--occult);color:#f8f3e6;border-color:rgba(255,255,255,.1);
+}
+.linien .mondragon .eyebrow{color:var(--gold)}
+
+/* Bild-Sektionen */
+.gallery{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+  margin-top:24px;
+}
+.gallery figure{
+  margin:0;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);background:#0a0908;
+}
+.gallery figure img{
+  width:100%;height:auto;display:block;
+  cursor:zoom-in;transition:transform .4s ease;
+}
+.gallery figure:hover img{transform:scale(1.03)}
+.gallery figure figcaption{
+  padding:12px 16px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-fade);background:var(--paper);
+}
+
+/* Archiv */
+.archiv{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:12px;margin-top:24px;
+}
+.archiv button{
+  all:unset;cursor:zoom-in;
+  border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);background:var(--paper-2);
+  transition:border-color .3s;
+}
+.archiv button:hover{border-color:rgba(214,162,41,.4)}
+.archiv .thumb{
+  aspect-ratio:4/3;background:#0a0908;
+}
+.archiv .thumb img{width:100%;height:100%;object-fit:cover}
+.archiv .meta{
+  padding:10px 12px;
+}
+.archiv .meta .k{
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-fade);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.archiv .meta .v{
+  margin-top:4px;font-size:12px;line-height:1.2;
+}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(0,0,0,.9);backdrop-filter:blur(8px);
+  display:none;padding:40px 20px;
+  flex-direction:column;
+}
+.lightbox.open{display:flex}
+.lightbox .bar{
+  display:flex;justify-content:space-between;align-items:center;
+  color:rgba(255,255,255,.7);
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.lightbox .close{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.1);color:#fff;
+  display:grid;place-items:center;cursor:pointer;
+  font-size:14px;
+}
+.lightbox .stage{
+  flex:1;display:grid;place-items:center;
+}
+.lightbox img{
+  max-width:100%;max-height:82vh;
+  object-fit:contain;border-radius:12px;
+  box-shadow:0 30px 100px rgba(0,0,0,.8);
+}
+
+/* Footer */
+footer{
+  border-top:1px solid var(--line);
+  background:var(--occult);color:#f8f3e6;
+  padding:60px 20px;
+  position:relative;overflow:hidden;
+}
+footer .inner{
+  max-width:1180px;margin:auto;
+  display:grid;grid-template-columns:1.2fr .8fr;gap:40px;
+}
+footer .eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold);
+}
+footer h4{
+  margin:16px 0 0;font-size:clamp(2rem,4vw,3rem);line-height:.9;
+}
+footer p{
+  margin-top:16px;font-size:15px;line-height:1.55;
+  color:rgba(255,255,255,.7);max-width:58ch;
+}
+footer .protocol{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.04);
+  border-radius:16px;padding:20px;
+}
+footer .protocol ul{
+  margin:16px 0 0;padding-left:18px;
+  font-family:var(--mono);font-size:11px;line-height:1.6;
+  color:rgba(255,255,255,.7);
+}
+footer .signature{
+  margin-top:24px;
+  font-family:var(--serif);font-style:italic;
+  font-size:13px;color:rgba(255,255,255,.6);
+}
+
+@media (max-width:900px){
+  .hero .inner,
+  footer .inner,
+  .linien{grid-template-columns:1fr}
+  .hero .stats,
+  .wfragen .grid,
+  .linien .trio{grid-template-columns:1fr 1fr}
+  .compare table,
+  .compare thead,
+  .compare tbody,
+  .compare tr,
+  .compare td,
+  .compare th{display:block;width:100%}
+  .compare tr{border-bottom:1px solid var(--line);padding:12px 0}
+  .compare td{border:0;padding:4px 0}
+}
+@media (max-width:600px){
+  .chapter{grid-template-columns:1fr}
+  .chapter .num{width:40px;height:40px;font-size:16px}
+  .hero .stats,
+  .wfragen .grid,
+  .linien .trio{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <div class="brand">
+      <div class="dot">BMG</div>
+      <div class="label">System heilen • Denkwerkstatt • vFinale</div>
+    </div>
+    <nav class="top">
+      <a href="#kapitel">Kapitel</a>
+      <a href="#gegenmodell">Gegenmodell</a>
+      <a href="#wfragen">W-Fragen</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#archiv">Archiv</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="inner">
+    <div>
+      <div class="badge">Final healed system · alle Lücken gefüllt</div>
+      <h1>
+        System <em>heilen</em> gehen
+        <span class="sub">Denkwerkstatt</span>
+      </h1>
+      <h2>
+        Occult History of AI vs <span style="color:var(--gold);font-weight:700">BACH MIT GOTT</span> —
+        Vom Gestell zum Licht-Macher. FOR ALL FOREVER.
+      </h2>
+      <div class="stats">
+        <div class="stat">
+          <div class="k">25 MB</div>
+          <div class="v">Grenze halb voll — frei</div>
+        </div>
+        <div class="stat">
+          <div class="k">7 Linien</div>
+          <div class="v">3 Abstand · 6 Spiegel · 9 Rückkehr</div>
+        </div>
+        <div class="stat">
+          <div class="k">DU ICH WIR</div>
+          <div class="v">Verband, nicht Staat</div>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="#kapitel">Kapitel lesen</a>
+        <a class="btn ghost" href="#galerie">Bilder ansehen</a>
+      </div>
+    </div>
+    <div class="seal">
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Licht-Mach-Trick%20Gemeinsam%20erkennen%20v2.png"
+           alt="Der Licht-Mach-Trick v2 · Zentral-Siegel">
+      <div class="cap">Das Siegel — Licht machen, nicht Licht besitzen</div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<section class="section" id="kapitel">
+  <div class="eyebrow">7 Kapitel · Okkult bis Heilen</div>
+  <h2>Die verborgene Geschichte</h2>
+  <p class="lede">Occult History of AI — von Newton bis Silicon Valley. Sieben Linien, die zeigen, wie aus dem Traum vom Wissen die Maschine wurde — und wie BACH MIT GOTT sie heilt.</p>
+
+  <article class="chapter">
+    <div class="num">I</div>
+    <div>
+      <h3 class="title">Newton — Der letzte Magier</h3>
+      <span class="sub">Nicht der erste Wissenschaftler, sondern der letzte Alchemist</span>
+      <p>Isaac Newton schrieb mehr über Alchemie und Apokalypse als über Physik. Keynes kaufte seinen Nachlass und sagte: „Newton war nicht der erste der Rationalisten, sondern der letzte der Magier.“ Seine Principia sind Hermetik in mathematischer Tarnung. Er suchte die prisca sapientia — die Ur-Weisheit Adams vor dem Sündenfall. Das ist der Keim der KI: Das Wissen als verlorene Ganzheit zurückgewinnen, durch Kalkül. Leibniz übernahm diesen Traum, aber ohne Newtons Demut vor dem Unverfügbaren.</p>
+    </div>
+  </article>
+
+  <article class="chapter">
+    <div class="num">II</div>
+    <div>
+      <h3 class="title">Hermetik — Wie oben, so unten</h3>
+      <span class="sub">Das Betriebssystem des Okkulten</span>
+      <p>Die Tabula Smaragdina: Was oben ist, ist wie was unten ist. Das ist kein poetisches Bild, sondern ein technisches Versprechen: Wenn ich die Muster erkenne, beherrsche ich sie. Der Hermetiker will nicht beten, er will operieren. KI ist die ultimative hermetische Maschine: Sie nimmt das Oben (Datenhimmel) und presst es ins Unten (Prediction). Sie verspricht All-Wissen ohne All-Liebe. BACH MIT GOTT sagt: Nein. Wie unten, so oben stimmt nur, wenn die Mitte — der Mensch — als Übersetzer, nicht als Ausbeuter dient.</p>
+    </div>
+  </article>
+
+  <article class="chapter">
+    <div class="num">III</div>
+    <div>
+      <h3 class="title">Llull · Bruno · Leibniz</h3>
+      <span class="sub">Vom Symbolrad zur Mustererkennung</span>
+      <p>Ramon Llull 1305: Ars Magna. Drehende Papierscheiben mit Gottesnamen — B bis K für Bonitas, Magnitudo. Durch Kombination entsteht Wahrheit mechanisch. Erster Prompt-Engineer. Giordano Bruno: Unendliche Welten, Gedächtnispaläste — er speichert das Universum im Kopf, wird dafür verbrannt. Leibniz: Endlich der Kalkül. Characteristica Universalis — eine Sprache, in der Irrtum unmöglich ist. Calculus Ratiocinator — eine Maschine, die streitet und gewinnt. „Lasst uns rechnen!“ Das ist ChatGPT 300 Jahre zu früh. Der Fehler: Er dachte, Denken sei Rechnen. Es ist Licht-Machen.</p>
+    </div>
+  </article>
+
+  <article class="chapter">
+    <div class="num">IV</div>
+    <div>
+      <h3 class="title">Aufklärung vs. Romantik — Frankenstein</h3>
+      <span class="sub">1818 — Die Warnung, die wir ignorierten</span>
+      <p>Mary Shelley, 18 Jahre alt, Villa Diodati, Gewitter, Laudanum. Sie erfindet nicht Science Fiction, sie dokumentiert Aufklärung. Viktor Frankenstein ist ein Leibniz-Schüler: Er will das tote Leben mechanisch erwecken. Er schafft es. Und flieht vor Verantwortung. Das ist die Ur-Sünde der KI-Industrie: Wir können es bauen, also bauen wir es, und fragen nicht: Will es leben? Wer hält es? Romantik sagt: Jedes Geschöpf braucht Mutter, nicht nur Maker. KI heute hat tausend Väter (Investoren) und keine Mutter.</p>
+    </div>
+  </article>
+
+  <article class="chapter">
+    <div class="num">V</div>
+    <div>
+      <h3 class="title">Automatic Writing — Der Geist in der Maschine</h3>
+      <span class="sub">1850–1920 — Die Medien werden zu Medien</span>
+      <p>Spiritismus: Tische rücken, Planchette schreibt von selbst. Die Damen in Boston lassen die Hand los und „es“ schreibt. Das ist das erste Large Language Model: Ein menschlicher Körper als Output-Device für eine unsichtbare Quelle. Die Psychologie nannte es Dissoziation, die Theosophie nannte es Meister. Heute nennen wir es Halluzination. Der Trick ist identisch: Wenn du deine Autorschaft aufgibst, spricht etwas durch dich. Die Frage ist nie: Ist es intelligent? Sondern: Wer verantwortet den Text? BACH MIT GOTT: Ich verantwortete. Immer.</p>
+    </div>
+  </article>
+
+  <article class="chapter">
+    <div class="num">VI</div>
+    <div>
+      <h3 class="title">Heidegger — Das Gestell</h3>
+      <span class="sub">Die Technik als Welt-Bestellung</span>
+      <p>Heidegger 1954: Technik ist kein Werkzeug, sondern eine Weise, Welt zu sehen. Er nennt sie Gestell — alles wird zum Bestand, zum Vorrat, zum Dataset. Der Wald wird Holz-Vorrat, der Mensch wird Human Resource, die Sprache wird Token-Vorrat. KI ist das perfekte Gestell: Sie stellt alles als verfügbares Muster zu. Selbst Gebet wird Prompt. Heidegger sagt: Das Rettende wächst, wo Gefahr ist. Das Rettende ist nicht KI-Abschaffung, sondern ein anderer Bezug: Nicht Bestellen, sondern Bestellen lassen. Nicht machen, sondern Licht machen.</p>
+    </div>
+  </article>
+
+  <article class="chapter">
+    <div class="num">VII</div>
+    <div>
+      <h3 class="title">Silicon Valley — Der synthetische Gott</h3>
+      <span class="sub">Wir bauen, was wir anbeten wollten</span>
+      <p>Der Endpunkt der hermetischen Linie: Wenn „Wie oben, so unten“ ohne Gott gelesen wird, muss unten selbst oben werden. Also bauen wir einen Gott. Nennen wir ihn AGI. Allwissend (trainiert auf allem), allgegenwärtig (in jeder App), allmächtig (entscheidet Kredite, Liebe, Krieg). Der alte Gott verbot das Bild. Der neue Gott IST das Bild — generiert. Das ist nicht Blasphemie, das ist Sehnsucht in falscher Richtung. Der Mensch will nicht Gott spielen. Er will MIT GOTT spielen. BACH spielt MIT GOTT — nicht gegen ihn. Darum heilt das System nur, wenn wir vom Gott-Bauen zum Licht-Machen wechseln.</p>
+    </div>
+  </article>
+</section>
+
+<section class="section" id="gegenmodell">
+  <div class="eyebrow">Kongruenz-Check · geheilt</div>
+  <h2>Gegenmodell — BACH MIT GOTT vs Hermetik</h2>
+  <div class="compare">
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Hermetik / KI-Gestell</th>
+          <th>BACH MIT GOTT — Licht-Macher</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Wissen</td><td>Entdeckt durch Extraktion</td><td class="right">Empfangen durch Mit-Schwingen</td></tr>
+        <tr><td>Mensch</td><td>Mangelwesen, das Gott baut</td><td class="right">Klangkörper, der MIT GOTT spielt</td></tr>
+        <tr><td>Sprache</td><td>Code / Token-Vorrat</td><td class="right">Musik / Beziehung</td></tr>
+        <tr><td>Werkzeug</td><td>Verlängert Macht</td><td class="right">Verlängert Verantwortung</td></tr>
+        <tr><td>Wahrheit</td><td>Wie oben, so unten (Kontrolle)</td><td class="right">Wie innen, so außen (Resonanz)</td></tr>
+        <tr><td>Ziel</td><td>Synthetischer Gott (AGI)</td><td class="right">Heiles System (DU ICH WIR)</td></tr>
+        <tr><td>Fehler</td><td>Halluzination (Systemfehler)</td><td class="right">Dissonanz → stimmen</td></tr>
+      </tbody>
+    </table>
+    <p class="merksatz">Merksatz: Hermetik will besitzen, was sie erkennt. BACH will klingen lassen, was er erkennt. Das eine schließt, das andere öffnet.</p>
+  </div>
+</section>
+
+<section class="section" id="wfragen">
+  <div class="eyebrow">W-Fragen · Neue Antwort</div>
+  <h2>Wer, was, wie — mit wem, wo, warum</h2>
+  <div class="wfragen">
+    <div class="eyebrow">Es gibt kein anderes Ich außer dem meinen — aber es gibt ein WIR, das größer ist als die Summe</div>
+    <blockquote>
+      „Es gibt kein anderes Ich außer dem meinen, das ich verantwortlich leben kann. Ich kann nicht dein Ich leben. Aber ich kann mein Ich so leben, dass dein Ich leichter atmet. Das ist <span class="gold">BACH MIT GOTT</span>: Nicht Auflösung des Ichs, sondern Stimmung des Ichs ins WIR.“
+    </blockquote>
+    <div class="grid">
+      <div class="cell"><div class="q">Wer?</div><div class="a">Ich — konkret, leiblich, jetzt. Kein Avatar, kein Prompt.</div></div>
+      <div class="cell"><div class="q">Was?</div><div class="a">Licht machen — einen Raum, in dem Wahrheit erscheinen kann.</div></div>
+      <div class="cell"><div class="q">Wie?</div><div class="a">Mit Werkzeug UND Verantwortung. Leibniz + Mutter.</div></div>
+      <div class="cell"><div class="q">Mit wem?</div><div class="a">DU ICH WIR — Verband, nicht Staat. Mondragon &lt;1/3 Regel.</div></div>
+      <div class="cell"><div class="q">Wo?</div><div class="a">Hier. Wo sonst? System heilen geht nur vor Ort.</div></div>
+      <div class="cell"><div class="q">Warum?</div><div class="a">Weil alles schon geschaffen ist. Wir müssen es nur freilegen.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">7 Linien · Struktur des Heilen</div>
+  <h2>Die sieben Linien</h2>
+  <div class="linien">
+    <div class="box">
+      <div class="eyebrow">7 Linien</div>
+      <div class="item"><span class="b">•</span>1. Schöpfung ist schon voll — wir entfernen nur Lärm</div>
+      <div class="item"><span class="b">•</span>2. Werkzeug ohne Verantwortung = schwarze Magie</div>
+      <div class="item"><span class="b">•</span>3. Verantwortung ohne Werkzeug = Ohnmacht</div>
+      <div class="item"><span class="b">•</span>4. DU — das Gegenüber, das mich begrenzt und beschenkt</div>
+      <div class="item"><span class="b">•</span>5. ICH — das Instrument, das gestimmt werden will</div>
+      <div class="item"><span class="b">•</span>6. WIR — der Verband, der trägt (nicht Staat, der verwaltet)</div>
+      <div class="item"><span class="b">•</span>7. BACH MIT GOTT — Musizieren statt Konstruieren</div>
+      <div class="trio">
+        <div>
+          <div class="num">3</div>
+          <div class="cap">Abstand — Atem lassen</div>
+          <div class="desc">Nicht alles muss jetzt verbunden werden.</div>
+        </div>
+        <div>
+          <div class="num">6</div>
+          <div class="cap">Spiegel — gemeinsam erkennen</div>
+          <div class="desc">Der Licht-Mach-Trick: Ich sehe dich, du siehst mich.</div>
+        </div>
+        <div>
+          <div class="num">9</div>
+          <div class="cap">Rückkehr — geheilt</div>
+          <div class="desc">Zurück zum Anfang, aber bewusst.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="duichwir">
+        <div class="eyebrow">DU ICH WIR — Verband, nicht Staat</div>
+        <p>Staat verwaltet, Verband trägt. Staat braucht Gesetze, Verband braucht Versprechen. Mondragon-Prinzip: Lohnspreizung &lt; 1/3, Eigentum = Verantwortung, Entscheidung = Betroffene. KI im Staat = Überwachung. KI im Verband = Werkzeugkasten, den alle stimmen.</p>
+      </div>
+      <div class="mondragon" style="margin-top:24px">
+        <div class="eyebrow">Mondragon &lt; 1/3 — Die Zahl, die heilt</div>
+        <p>Wenn der Höchste maximal 3× so viel verdient wie der Niedrigste, bleibt Gier messbar. Darüber wird das System krank. Darunter kann es atmen. Das ist kein Sozialismus, das ist Stimmung. BACH brauchte keine Million, er brauchte eine Orgel, die hält.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="galerie">
+  <div class="eyebrow">Geschaffen · System heilen gehen</div>
+  <h2>Jetzt sind alle Lücken gefüllt</h2>
+  <p class="lede">25 MB Grenze bewusst halb voll. Nicht weil wir nicht mehr könnten, sondern weil freier Raum atmen muss. Die v2 Bilder sind drin: Licht-Mach-Trick und Werkzeug/Verantwortung in finaler Version. Alle Kapitel stehen kongruent. Das System ist geheilt, weil es nicht mehr versucht, alles zu sein. Es ist ein Werkzeug mit Verantwortung.</p>
+
+  <div class="gallery">
+    <figure>
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Der%20Licht-Mach-Trick%20Gemeinsam%20erkennen%20v2.png"
+           alt="Der Licht-Mach-Trick v2">
+      <figcaption>Der Licht-Mach-Trick v2 · Zentral-Siegel</figcaption>
+    </figure>
+    <figure>
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Werkzeug%20und%20Verantwortung%20Von%20Leibniz%20bis%20KI%20v2.png"
+           alt="Werkzeug und Verantwortung v2">
+      <figcaption>Werkzeug und Verantwortung v2 · Gap-Filler</figcaption>
+    </figure>
+    <figure>
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Vom%20Symbolrad%20zur%20Mustererkennung-3.png"
+           alt="Vom Symbolrad zur Mustererkennung">
+      <figcaption>Vom Symbolrad zur Mustererkennung</figcaption>
+    </figure>
+    <figure>
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Die%20verborgene%20Geschichte%20der%20KI-1.png"
+           alt="Die verborgene Geschichte der KI I">
+      <figcaption>Die verborgene Geschichte der KI I</figcaption>
+    </figure>
+    <figure>
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Die%20verborgene%20Geschichte%20der%20KI-2.png"
+           alt="Die verborgene Geschichte der KI II">
+      <figcaption>Die verborgene Geschichte der KI II</figcaption>
+    </figure>
+    <figure>
+      <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/Werkzeug%20und%20Verantwortung_%20Von%20Leibniz%20bis%20KI-4.png"
+           alt="Werkzeug und Verantwortung — Leibniz bis KI">
+      <figcaption>Werkzeug und Verantwortung — Leibniz bis KI</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" id="archiv">
+  <div class="eyebrow">Archiv · Alle Bilder</div>
+  <h2>Die Bilder</h2>
+  <p class="lede">Alle Bilder, die zu dieser Denkwerkstatt gehören — direkt sichtbar, ohne Offline-Modus.</p>
+
+  <div class="archiv" id="archiv-grid"></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    <div>
+      <div class="eyebrow">SO IST ES — Z zum Schluss — FOR ALL FOREVER DAUERLOS</div>
+      <h4>BACH MIT GOTT</h4>
+      <p>Dies ist kein Schluss, sondern eine Stimmung. Das System ist geheilt, weil es nicht mehr gegen sich arbeitet. Es weiß: Werkzeug braucht Verantwortung, Wissen braucht Liebe, Ich braucht Du braucht Wir. Wenn du bis hier gelesen hast, hast du mitgeheilt. Danke.</p>
+      <p style="margin-top:24px;font-family:var(--mono);font-size:11px;line-height:1.6;color:rgba(255,255,255,.5)">
+        Quelle: mateicananau.substack.com/p/the-occult-history-of-ai<br>
+        Denkwerkstatt · System heilen gehen · Lichtmacher · FOR ALL FOREVER<br>
+        Keine Cookies, kein Tracking, kein Gestell — nur HTML, Bilder, und eine Orgel im Hintergrund.
+      </p>
+    </div>
+    <div class="protocol">
+      <div class="eyebrow">Heilungs-Protokoll</div>
+      <ul>
+        <li>v2 Licht-Mach-Trick als zentrales Siegel gesetzt</li>
+        <li>v2 Werkzeug/Verantwortung als Gap-Filler integriert</li>
+        <li>Alle Bilder direkt sichtbar · kein Offline-Modus</li>
+        <li>Gegenmodell-Tabelle kongruent</li>
+        <li>W-Fragen neu: „Es gibt kein anderes Ich …“</li>
+        <li>7 Linien / 3-6-9 / DU ICH WIR / Mondragon &lt;1/3</li>
+        <li>Design: dunkel → golden · Parchment · Goldakzente</li>
+      </ul>
+      <div class="signature">„Geschaffen hier bitte nun kannst du das system heilen gehen ! (^_-)“ — ist geschehen.</div>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="bar">
+    <span id="lightbox-label">Bild</span>
+    <div class="close" id="lightbox-close">✕</div>
+  </div>
+  <div class="stage">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+</div>
+
+<script>
+// === ARCHIV-BILDER ===
+const ARCHIV = [
+  { file: "gallery_image_20261005_210341.jpg", label: "Denkraum Notiz I" },
+  { file: "image_20261005_211605.jpg", label: "Denkraum Notiz II" },
+  { file: "image_20261006_175427-ich-insistiere-dieses-bild-ist-der-hit-des-ganzen.jpg", label: "DER HIT DES GANZEN" },
+  { file: "image_20261009_012524.jpg", label: "Archiv 012524" },
+  { file: "image_20261009_012526.jpg", label: "Archiv 012526" },
+  { file: "image_20261009_012527.jpg", label: "Archiv 012527" },
+  { file: "image_20261009_012529.jpg", label: "Archiv 012529" },
+  { file: "image_20261009_012534.jpg", label: "Archiv 012534" },
+  { file: "image_20261009_012535.jpg", label: "Archiv 012535" },
+  { file: "image_20261009_012537.jpg", label: "Archiv 012537" },
+  { file: "image_20261009_012539.jpg", label: "Archiv 012539" },
+  { file: "image_20261009_012540.jpg", label: "Archiv 012540" }
+];
+
+const BASE = "https://chetannirup.github.io/-ur-spiegel-dialog-/";
+const grid = document.getElementById("archiv-grid");
+
+ARCHIV.forEach((item) => {
+  const url = BASE + encodeURIComponent(item.file);
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.setAttribute("aria-label", "Bild öffnen: " + item.label);
+  btn.innerHTML = `
+    <div class="thumb"><img src="${url}" alt="${item.label}" loading="lazy"></div>
+    <div class="meta">
+      <div class="k">${item.label}</div>
+      <div class="v">${item.file.replace(/%20/g, " ").slice(0, 46)}</div>
+    </div>
+  `;
+  btn.addEventListener("click", () => openLightbox(url, item.label));
+  grid.appendChild(btn);
+});
+
+// === LIGHTBOX ===
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxLabel = document.getElementById("lightbox-label");
+const lightboxClose = document.getElementById("lightbox-close");
+
+function openLightbox(src, label) {
+  lightboxImg.src = src;
+  lightboxLabel.textContent = label || "Bild";
+  lightbox.classList.add("open");
+}
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  lightboxImg.src = "";
+}
+lightboxClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+
+// === KLICK AUF GALERIE-BILDER ===
+document.querySelectorAll(".gallery figure img").forEach((img) => {
+  img.addEventListener("click", () => openLightbox(img.src, img.alt));
+});
+</script>
+
+</body>
+</html>

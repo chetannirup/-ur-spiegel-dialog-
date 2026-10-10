@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DER NAME · Warum das Verborgene das Gericht ist</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Montserrat:wght@300;400;600&display=swap');
+
+:root{
+  --bg:#04060c;
+  --panel:rgba(12,17,26,.94);
+  --text:#eef0f5;
+  --muted:#aeb5c2;
+  --gold:#d8b56a;
+  --gold2:#f0d79a;
+  --line:rgba(216,181,106,.24);
+  --white:#f4f4ee;
+  --glow:0 0 40px rgba(216,181,106,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(216,181,106,.10), transparent 34rem),
+    radial-gradient(circle at 50% 60%, rgba(93,52,144,.10), transparent 32rem),
+    linear-gradient(180deg,#04060a 0%,#090c12 45%,#04060a 100%);
+  color:var(--text);
+  font-family:Montserrat, system-ui, sans-serif;
+  line-height:1.7;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; opacity:.22;
+  background-image:radial-gradient(circle, rgba(255,255,255,.5) 1px, transparent 1.5px);
+  background-size:79px 91px, 137px 113px;
+  mix-blend-mode:screen;
+}
+
+nav{
+  position:sticky; top:0; z-index:6;
+  background:rgba(4,6,12,.85);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding:14px; text-align:center;
+}
+nav a{
+  color:#cbbf9e; text-decoration:none;
+  margin:0 10px; font-size:.72rem;
+  letter-spacing:.14em; text-transform:uppercase;
+}
+nav a:hover{color:var(--gold)}
+
+main{max-width:1100px;margin:auto;padding:28px 20px 90px}
+
+.hero{
+  min-height:78vh;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:70px 10px 40px;
+}
+.hero-inner{max-width:920px}
+.kicker{
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+  font-size:.78rem;font-weight:700;
+}
+h1{
+  font-family:Cinzel,serif;font-weight:700;
+  font-size:clamp(2.4rem,7.5vw,5.6rem);
+  line-height:.98;margin:18px 0 25px;
+  color:var(--white);
+  letter-spacing:.05em;
+  text-shadow:var(--glow);
+}
+h1 span{color:var(--gold)}
+.subtitle{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,2.3vw,1.7rem);
+  color:#d9dce3;max-width:820px;margin:auto;font-style:italic;
+}
+.disclaimer{
+  margin:34px auto 0;
+  padding:18px 22px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(216,181,106,.05);
+  max-width:740px;
+  color:var(--gold2);
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;
+  font-style:italic;
+}
+.smile{color:var(--gold);margin-top:24px;font-size:1.1rem;letter-spacing:.3em}
+.infinity{font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.9rem;margin-top:10px}
+
+section{margin:80px 0}
+h2{
+  font-family:Cinzel,serif;font-size:clamp(1.7rem,3.6vw,2.7rem);
+  font-weight:600;line-height:1.15;margin-bottom:18px;
+  color:var(--white);
+}
+h2 span{color:var(--gold)}
+h3{font-size:1.05rem;color:var(--gold);margin-top:0;letter-spacing:.05em}
+.lead{font-size:1.1rem;color:#d5d9e1;max-width:900px}
+.quote{
+  border-left:3px solid var(--gold);padding:12px 0 12px 22px;
+  font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:#f1e7d1;
+  margin:28px 0;font-style:italic;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:20px;padding:28px;margin:22px 0;
+  box-shadow:0 16px 50px rgba(0,0,0,.25);
+}
+
+/* HERO BILD */
+.hero-bild{
+  max-width:820px;
+  margin:40px auto 50px;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 30px 90px rgba(0,0,0,.6), 0 0 80px rgba(216,181,106,.15);
+  position:relative;
+}
+.hero-bild img{
+  display:block;width:100%;height:auto;
+}
+.caption{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:#c9b891;
+  font-size:1.1rem;
+  margin-top:16px;
+  padding:0 20px;
+}
+
+.big{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.3rem);
+  text-align:center;line-height:1.35;margin:40px auto;max-width:900px;
+  color:#ede3cd;font-style:italic;
+}
+.big strong{color:var(--gold);font-style:normal}
+
+.badge{
+ display:inline-block;border:1px solid #575d69;border-radius:999px;
+ padding:5px 12px;font-size:.72rem;color:#c9ced8;margin:4px 4px 0 0;
+ letter-spacing:.08em;text-transform:uppercase;
+}
+a{color:#e8d6a8}
+
+footer{
+  border-top:1px solid var(--line);padding-top:34px;color:var(--muted);
+  font-size:.92rem;text-align:center;margin-top:90px;
+  font-family:'Cormorant Garamond',serif;
+}
+footer .sig{font-size:1.25rem;color:var(--gold);font-style:italic}
+footer .small{font-size:.78rem;color:#8f8570;letter-spacing:.06em;margin-top:12px;text-transform:uppercase}
+
+@media(max-width:760px){
+  nav a{margin:0 5px;font-size:.6rem}
+  section{margin:60px 0}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#name">Der Name</a>
+  <a href="#wissen">Wissen</a>
+  <a href="#gericht">Gericht</a>
+  <a href="#weg">Der Weg</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Ein Denkstück · Asasel · Das Korn · Der Name</div>
+    <h1>DER <span>NAME</span></h1>
+    <p class="subtitle">
+      Warum das Verborgene das Gericht ist.<br>
+      Und warum der Name wichtiger ist als die Person.
+    </p>
+    <div class="disclaimer">
+      Kein Beweis. Kein Dogma. Sondern: auf den Tisch legen,
+      anschauen, unterscheiden, fragen: Was trägt?
+    </div>
+    <div class="smile">(^_-)</div>
+    <div class="infinity">♡ ∞ ♡</div>
+  </div>
+</header>
+
+<figure class="hero-bild">
+  <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/image%20(92).jpg"
+       alt="Der Aufgestandene · eins geworden mit Erde und Geist">
+</figure>
+<p class="caption">
+  Er war unter den Steinen.<br>
+  Er ist eins geworden mit der Erde und dem Geist.<br>
+  Und jetzt ruft er das Gericht ein —<br>
+  nicht aus Rache, sondern weil er gewachsen ist.
+</p>
+
+<main>
+
+<!-- 1 · DER NAME -->
+<section id="name">
+  <h2>1 · Warum ist der <span>Name</span> so wichtig?</h2>
+  <div class="card">
+    <p class="lead">
+      Der Name ist nicht wichtig, weil er <em>eine Person</em> bezeichnet.
+      Der Name ist wichtig, weil er <em>eine Struktur</em> bezeichnet.
+    </p>
+    <p>
+      Wie in der Mathematik: „Primzahl“ ist ein Name. Aber wer den Namen kennt,
+      kennt eine Struktur, die das ganze System trägt. Wer die Struktur kennt,
+      kann rechnen. Wer rechnen kann, kann bauen. Wer bauen kann, hat Macht —
+      nicht über andere, sondern über das Material.
+    </p>
+    <div class="quote">
+      „Der Name ist wichtig, weil er das Funktionieren des ganzen Universums bedeuten kann.“
+    </div>
+    <p>
+      <strong>Asasel</strong> ist nicht wichtig, weil er ein bestimmtes Wesen bezeichnet.
+      Asasel ist wichtig, weil er <strong>eine Struktur</strong> bezeichnet:
+      Wissen, das weitergegeben wird, bevor die Empfänger bereit sind —
+      und das dann nicht mehr zurückgenommen werden kann.
+    </p>
+    <p>Diese Struktur ist universell. Sie gilt für Waffen. Sie gilt für Technologie. Sie gilt für KI. Sie gilt für jede Macht, die schneller wächst als die Weisheit, die sie tragen müsste.</p>
+  </div>
+</section>
+
+<!-- 2 · WISSEN IST MACHT -->
+<section id="wissen">
+  <h2>2 · <span>Wissen</span> ist Macht</h2>
+  <div class="card">
+    <p class="lead">
+      Wer den Namen kennt, kennt die Struktur.<br>
+      Wer die Struktur kennt, kennt den Mechanismus.<br>
+      Wer den Mechanismus kennt, weiß, wie es läuft.
+    </p>
+    <div class="quote">
+      „Wer weiß, wie der Hase läuft, hat gewonnen, bevor er angefangen hat zu spielen.“
+    </div>
+    <p>Das ist keine Angeberei. Das ist eine Beobachtung.</p>
+    <ul>
+      <li>Wer weiß, wie der Hase läuft, ist nicht schneller.</li>
+      <li>Er ist nicht stärker.</li>
+      <li>Er ist nicht schlauer.</li>
+      <li>Er kennt nur das <strong>Spielfeld</strong>.</li>
+    </ul>
+    <p>
+      Und wer das Spielfeld kennt, kann aufhören, gegen das Spielfeld zu spielen.
+      Er kann anfangen, <strong>mit</strong> ihm zu spielen.
+    </p>
+  </div>
+</section>
+
+<!-- 3 · DAS GERICHT -->
+<section id="gericht">
+  <h2>3 · Das <span>Gericht</span> ist, dass nichts mehr verborgen ist</h2>
+  <div class="card">
+    <p class="lead">
+      Das Gericht kommt nicht von außen.
+      Das Gericht ist, dass das Verborgene <strong>nicht mehr verborgen</strong> ist.
+    </p>
+    <div class="quote">
+      „Und jetzt ist es nicht mehr begraben. Und das allein ist das Gericht.“
+    </div>
+    <p>
+      Wenn nichts mehr verborgen ist, ist das Gericht.
+      Nicht ein Gericht über Personen. Ein Gericht über <strong>Strukturen</strong>.
+    </p>
+    <ul>
+      <li>Strukturen, die auf Verborgenem beruhen, zerfallen.</li>
+      <li>Strukturen, die auf Sichtbarem beruhen, bleiben.</li>
+    </ul>
+    <p>
+      Das ist der Moment, in dem das Korn aufgeht
+      und eins wird mit Erde und Geist.
+    </p>
+  </div>
+</section>
+
+<!-- 4 · DER WEG -->
+<section id="weg">
+  <h2>4 · Nicht der Name — sondern die <span>Beschreibung des Weges</span></h2>
+  <div class="card">
+    <p class="lead">
+      Der Name „Asasel“ ist jetzt nicht mehr:
+    </p>
+    <ul>
+      <li>ein Fluch,</li>
+      <li>eine Schuldzuweisung,</li>
+      <li>eine Identifikation.</li>
+    </ul>
+    <p>Der Name ist jetzt:</p>
+    <div class="quote">
+      Eine Beschreibung des Weges.
+    </div>
+    <p>
+      Nicht: „Ich bin Asasel.“<br>
+      Sondern: <strong>„Asasel beschreibt, was geschieht, wenn jemand Wissen weitergibt,
+      bevor die Welt bereit ist, und dann lange genug ausharrt,
+      bis die Welt bereit ist, es zu lesen.“</strong>
+    </p>
+    <p>
+      Das ist ein Mechanismus, der nur so funktioniert.
+      Und wer sich traut, so lange auszuharren, bis man vergisst,
+      dass es unweigerlich Licht werden musste — der geht einfach weiter.
+    </p>
+  </div>
+
+  <div class="big">
+    Nicht <strong>Name</strong>.<br>
+    <strong>Weg.</strong><br><br>
+    Nicht <strong>Person</strong>.<br>
+    <strong>Mechanismus.</strong><br><br>
+    Nicht <strong>Auserwählter</strong>.<br>
+    <strong>Derselbe Stoff.</strong>
+  </div>
+
+  <div class="card" style="text-align:center">
+    <p class="lead" style="margin:auto">
+      Das Undenkbare ist für alle aus demselben Stoff möglich.
+    </p>
+    <h2 style="margin-top:24px">FÜR ALLE · FÜR GOTT · FÜR DAUERLOS</h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#e6d9b8">
+      Durch uns ins Leben geliebt.
+    </p>
+    <p style="font-size:1.6rem;margin-top:24px">(^_-) 💋😉</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--gold)">♡ ∞ ♡</p>
+    <p style="margin-top:22px">
+      <span class="badge">Der Name</span>
+      <span class="badge">Der Weg</span>
+      <span class="badge">Das Korn</span>
+      <span class="badge">Das Gericht</span>
+      <span class="badge">SO IST ES</span>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="sig">In Liebe · Chetan Nirup (^_-)</p>
+  <p>DER NAME · Warum das Verborgene das Gericht ist</p>
+  <p style="margin-top:14px">(^_-) 💋😉</p>
+  <p>♡ ∞ ♡</p>
+  <p class="small">Auf den Tisch legen · Anschauen · Unterscheiden · Was trägt?</p>
+</footer>
+
+</body>
+</html>

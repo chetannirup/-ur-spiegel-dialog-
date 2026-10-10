@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>im Bukowski · Chetan Nirup · Consciousness Formless</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Montserrat:wght@300;400;600&display=swap');
+
+:root{
+  --bg:#04060c;
+  --panel:rgba(12,17,26,.94);
+  --text:#eef0f5;
+  --muted:#aeb5c2;
+  --gold:#d8b56a;
+  --gold2:#f0d79a;
+  --line:rgba(216,181,106,.24);
+  --white:#f4f4ee;
+  --glow:0 0 40px rgba(216,181,106,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(216,181,106,.10), transparent 34rem),
+    radial-gradient(circle at 50% 60%, rgba(93,52,144,.10), transparent 32rem),
+    linear-gradient(180deg,#04060a 0%,#090c12 45%,#04060a 100%);
+  color:var(--text);
+  font-family:Montserrat, system-ui, sans-serif;
+  line-height:1.7;
+  min-height:100vh;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; opacity:.22;
+  background-image:radial-gradient(circle, rgba(255,255,255,.5) 1px, transparent 1.5px);
+  background-size:79px 91px, 137px 113px;
+  mix-blend-mode:screen;
+}
+
+main{max-width:960px;margin:auto;padding:40px 20px 90px;position:relative}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:70px 10px 40px;
+}
+.kicker{
+  letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);font-size:.78rem;font-weight:700;
+}
+h1{
+  font-family:Cinzel, serif;
+  font-weight:700;
+  font-size:clamp(2.4rem,7vw,5.2rem);
+  line-height:1;
+  letter-spacing:.06em;
+  margin:22px 0 12px;
+  color:var(--white);
+  text-shadow:var(--glow);
+}
+h1 span{color:var(--gold)}
+.tagline{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:clamp(1.15rem,2.2vw,1.5rem);
+  color:#d9dce3;
+  max-width:640px;
+  margin:18px auto 0;
+}
+
+/* KERN */
+.kern{
+  margin:50px auto 40px;
+  max-width:740px;
+  padding:34px 30px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  text-align:center;
+}
+.kern p{
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.15rem,2vw,1.4rem);
+  font-style:italic;
+  color:#f1e7d1;
+  margin:0;
+}
+.kern .sig{
+  margin-top:14px;
+  font-family:Cinzel, serif;
+  font-size:.9rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* TÜREN */
+.section-title{
+  text-align:center;
+  margin:60px 0 28px;
+}
+.section-title .eyebrow{
+  font-family:Montserrat, sans-serif;
+  font-size:.72rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+  display:block;
+  margin-bottom:8px;
+}
+.section-title h2{
+  font-family:Cinzel, serif;
+  font-weight:600;
+  font-size:clamp(1.5rem,3.2vw,2.1rem);
+  margin:0;
+  color:var(--white);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:16px;
+}
+.door{
+  display:block;
+  padding:24px 22px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(145deg, rgba(17,32,54,.55), rgba(5,12,23,.55));
+  text-decoration:none;
+  color:inherit;
+  transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  position:relative;
+  overflow:hidden;
+}
+.door::after{
+  content:"→";
+  position:absolute;
+  top:22px;
+  right:22px;
+  color:var(--gold);
+  opacity:.5;
+  font-size:1rem;
+  transition:opacity .35s ease, transform .35s ease;
+}
+.door:hover{
+  transform:translateY(-4px);
+  border-color:rgba(216,181,106,.55);
+  box-shadow:0 20px 50px rgba(216,181,106,.12);
+}
+.door:hover::after{
+  opacity:1;
+  transform:translateX(3px);
+}
+.door h3{
+  font-family:Cinzel, serif;
+  font-weight:600;
+  font-size:1.05rem;
+  letter-spacing:.06em;
+  margin:0 0 6px;
+  color:var(--gold2);
+}
+.door p{
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.05rem;
+  margin:0;
+  color:#cfd4dd;
+  word-break:break-all;
+}
+
+/* SCHLUSS */
+.schluss{
+  margin:70px auto 30px;
+  text-align:center;
+  max-width:740px;
+  padding:40px 26px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.schluss p{
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:clamp(1.1rem,1.9vw,1.35rem);
+  color:#f1e7d1;
+  margin:0 0 10px;
+}
+.schluss .inf{
+  margin-top:22px;
+  font-family:'Cormorant Garamond', serif;
+  color:var(--gold);
+  font-size:1.5rem;
+  letter-spacing:.3em;
+}
+
+footer{
+  text-align:center;
+  margin-top:60px;
+  font-family:'Cormorant Garamond', serif;
+  color:var(--muted);
+  font-size:.9rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+@media (max-width:640px){
+  .grid{grid-template-columns:1fr}
+  .hero{padding-top:50px}
+  main{padding:20px 16px 70px}
+}
+</style>
+</head>
+<body>
+<main>
+
+<section class="hero">
+  <div class="kicker">consciousness formless · bewusstsein formlos</div>
+  <h1>im <span>Bukowski</span></h1>
+  <p class="tagline">Chetan Nirup · Ein Name, eine Form, ein Mensch — und das Bewusstsein, das sich nicht auf eine Form reduzieren lässt.</p>
+</section>
+
+<section class="kern">
+  <p>Ich bin Tim Bukowski. Chetan Nirup ist mein Ausdruck für das formlose Bewusstsein.</p>
+  <div class="sig">(^_-) ♡∞</div>
+</section>
+
+<section>
+  <div class="section-title">
+    <span class="eyebrow">Türen</span>
+    <h2>Links</h2>
+  </div>
+
+  <div class="grid">
+
+    <a class="door" href="https://chetannirup.blogspot.de" target="_blank" rel="noopener">
+      <h3>Blogger</h3>
+      <p>chetannirup.blogspot.de</p>
+    </a>
+
+    <a class="door" href="https://facebook.com/groups/1856314634690242/" target="_blank" rel="noopener">
+      <h3>Facebook · Gruppe</h3>
+      <p>Chetan Nirup</p>
+    </a>
+
+    <a class="door" href="https://twitter.com/ChetanNirup" target="_blank" rel="noopener">
+      <h3>Twitter / X</h3>
+      <p>@ChetanNirup</p>
+    </a>
+
+    <a class="door" href="https://substack.com/@timbukowski" target="_blank" rel="noopener">
+      <h3>Substack</h3>
+      <p>@timbukowski</p>
+    </a>
+
+    <a class="door" href="https://linkedin.com/in/tim-bukowski-143576252" target="_blank" rel="noopener">
+      <h3>LinkedIn</h3>
+      <p>Tim Bukowski</p>
+    </a>
+
+    <a class="door" href="https://tiktok.com/@chetannirup" target="_blank" rel="noopener">
+      <h3>TikTok</h3>
+      <p>@chetannirup</p>
+    </a>
+
+    <a class="door" href="https://chetannirup.github.io/-ur-spiegel-dialog-/" target="_blank" rel="noopener">
+      <h3>GitHub Pages</h3>
+      <p>ur-spiegel-dialog</p>
+    </a>
+
+    <a class="door" href="https://chetannirup.github.io/-ur-spiegel-dialog-/In%20dem%20Moment%20als%20ich%20MICH%20zulie%C3%9F.html" target="_blank" rel="noopener">
+      <h3>In dem Moment als ich MICH zuließ</h3>
+      <p>Das Gedicht · 2017–2026</p>
+    </a>
+
+  </div>
+</section>
+
+<section class="schluss">
+  <p>Was mir an dieser Verbindung gefällt:</p>
+  <p>Tim Bukowski ist der Name im Leben.<br>Chetan Nirup beschreibt die Perspektive dahinter.</p>
+  <p>Nicht zwei getrennte Wesen, sondern zwei verschiedene Bezugspunkte.</p>
+  <p>Und der Satz bleibt offen genug, dass niemand etwas glauben muss, um ihm begegnen zu können. ❤️</p>
+  <div class="inf">♡ ∞ ♡</div>
+</section>
+
+<footer>
+  In Liebe · Chetan Nirup / Tim Bukowski · (^_-)
+</footer>
+
+</main>
+</body>
+</html>

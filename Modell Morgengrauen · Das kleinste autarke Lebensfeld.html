@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08121b">
+<meta name="description" content="Modell Morgengrauen – eine High-End-Vision für ein integriertes, möglichst wasser- und energieautonomes Lebensfeld mit Solarenergie, Wassergewinnung aus Luft und Indoor-Vertical-Farming.">
+<title>Modell Morgengrauen · Das kleinste autarke Lebensfeld</title>
+<style>
+:root{
+  --night:#071019; --deep:#0b1b26; --panel:#102633; --panel2:#142e3b;
+  --gold:#f0d28b; --gold2:#c9a65b; --ice:#b9e9ee; --mint:#9ed7bd;
+  --text:#edf4f2; --muted:#aabdc1; --line:rgba(240,210,139,.25);
+  --shadow:0 18px 60px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:
+ radial-gradient(ellipse at 12% 0%,rgba(48,113,127,.22),transparent 38%),
+ radial-gradient(ellipse at 90% 18%,rgba(177,137,67,.12),transparent 34%),
+ var(--night);color:var(--text);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+}
+a{color:var(--ice);text-underline-offset:3px}
+a:hover{color:var(--gold)}
+.wrap{width:min(1120px,calc(100% - 34px));margin:auto}
+header{padding:26px 0 14px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:14px;color:var(--muted);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase}
+.mark{color:var(--gold);font-weight:700}
+nav{display:flex;flex-wrap:wrap;gap:12px}
+nav a{text-decoration:none;font-size:.82rem;color:var(--muted)}
+.hero{padding:68px 0 52px;position:relative;overflow:hidden}
+.kicker{color:var(--mint);text-transform:uppercase;letter-spacing:.2em;font-size:.78rem;font-weight:700}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;line-height:1.12}
+h1{font-size:clamp(2.6rem,7vw,5.8rem);letter-spacing:-.045em;margin:.22em 0 .25em;max-width:950px}
+h1 span{color:var(--gold)}
+.lead{font-size:clamp(1.05rem,2.1vw,1.3rem);color:#d3e0df;max-width:760px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 13px;color:var(--gold);font-size:.83rem;background:rgba(10,27,36,.62)}
+.hero-art{margin:30px 0 0;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(120deg,#0d2833,#0a1822 60%,#1a292b);box-shadow:var(--shadow)}
+.hero-art svg{display:block;width:100%;height:auto;max-height:390px}
+.hero-caption{padding:12px 18px;color:var(--muted);font-size:.84rem;border-top:1px solid var(--line)}
+.section{padding:58px 0;border-top:1px solid rgba(185,233,238,.12)}
+.section-head{max-width:760px;margin-bottom:26px}
+.eyebrow{color:var(--gold);font-size:.78rem;letter-spacing:.17em;text-transform:uppercase;font-weight:700}
+h2{font-size:clamp(2rem,4vw,3.2rem);margin:.3em 0 .45em}
+h3{font-size:1.55rem;margin:.15em 0 .6em;color:var(--gold)}
+p{margin:.5em 0 1em}
+.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{grid-column:span 6;background:linear-gradient(145deg,rgba(20,46,59,.95),rgba(10,27,38,.95));border:1px solid rgba(185,233,238,.15);border-radius:20px;padding:23px;box-shadow:var(--shadow)}
+.card.wide{grid-column:span 12}
+.card.third{grid-column:span 4}
+.card p:last-child{margin-bottom:0}
+.icon{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;border:1px solid var(--line);color:var(--gold);font-size:1.4rem;margin-bottom:16px}
+.statrow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}
+.stat{padding:17px;border:1px solid var(--line);border-radius:16px;background:rgba(10,27,36,.72)}
+.stat strong{display:block;font:1.7rem Georgia,serif;color:var(--gold);line-height:1.2}
+.stat span{display:block;font-size:.82rem;color:var(--muted);margin-top:6px}
+.diagram{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch;margin:22px 0}
+.step{position:relative;border:1px solid rgba(158,215,189,.32);border-radius:15px;padding:16px 13px;background:rgba(13,39,47,.72);min-height:130px}
+.step b{display:block;color:var(--mint);font-size:.9rem;margin-bottom:6px}
+.step:not(:last-child):after{content:"→";position:absolute;right:-13px;top:45%;z-index:2;color:var(--gold);font-size:1.25rem}
+.note{border-left:3px solid var(--gold2);padding:13px 17px;background:rgba(240,210,139,.07);border-radius:0 12px 12px 0;color:#dce6e3}
+.caution{border:1px solid rgba(255,185,120,.35);background:rgba(128,68,28,.12);padding:18px;border-radius:16px;color:#f1dfcb}
+.caution strong{color:#ffd19c}
+.list{padding-left:1.2rem}
+.list li{padding:.2em 0;color:#dce6e3}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tablewrap{overflow-x:auto;border:1px solid rgba(185,233,238,.16);border-radius:16px}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid rgba(185,233,238,.12);vertical-align:top}
+th{color:var(--gold);font-weight:650;background:rgba(240,210,139,.06)}
+tr:last-child td{border-bottom:0}
+.quote{font:clamp(1.45rem,3vw,2.3rem)/1.35 Georgia,serif;color:var(--gold);max-width:900px}
+.quote small{display:block;font: .95rem/1.6 system-ui,sans-serif;color:var(--muted);margin-top:16px}
+footer{padding:38px 0 50px;border-top:1px solid rgba(185,233,238,.12);color:var(--muted);font-size:.88rem}
+.heart{color:#f0a6b8}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{display:inline-block;border:1px solid var(--line);padding:10px 15px;border-radius:999px;text-decoration:none;color:var(--gold);background:rgba(240,210,139,.05);font-size:.9rem}
+.btn:hover{background:rgba(240,210,139,.12)}
+@media(max-width:760px){
+ .topline{align-items:flex-start;flex-direction:column}
+ .hero{padding:46px 0 34px}
+ .card,.card.third{grid-column:span 12}
+ .statrow{grid-template-columns:repeat(2,1fr)}
+ .diagram{grid-template-columns:1fr}
+ .step{min-height:auto}
+ .step:not(:last-child):after{content:"↓";right:16px;top:auto;bottom:-18px}
+ .split{grid-template-columns:1fr}
+ .section{padding:42px 0}
+}
+@media print{
+ body{background:white;color:#111}
+ .hero-art,.card,.stat,.step{box-shadow:none;break-inside:avoid}
+ .card{background:#f5f8f7;color:#111}
+ .muted,.hero-caption,footer{color:#444}
+ nav,.actions{display:none}
+}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="topline">
+    <div><span class="mark">MODELL MORGENGRAUEN</span> · OPERATION SONNENAUFGANG</div>
+    <nav aria-label="Seitennavigation">
+      <a href="#vision">Vision</a><a href="#wasser">Wasser</a><a href="#energie">Energie</a><a href="#farm">Vertical Farm</a><a href="#autarkie">Realitätscheck</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero wrap" id="vision">
+  <div class="kicker">High-End-Konzept · Building Integrated Model</div>
+  <h1>Das kleinste <span>autarke Lebensfeld.</span></h1>
+  <p class="lead">Ein Gebäude, das Wassergewinnung, Solarenergie, Aufbereitung, essbare Pflanzen und Wohnen als zusammenhängendes System denkt. Nicht als Techniktempel – sondern als Infrastruktur, die Menschen mehr Freiheit im Alltag geben soll.</p>
+  <div class="hero-meta">
+    <span class="pill">Wasser aus Luft + Regen</span><span class="pill">Solarstrom + Speicher</span>
+    <span class="pill">Indoor Vertical Farming</span><span class="pill">Wiederverwendung statt Wegwerfen</span>
+  </div>
+
+  <div class="hero-art" role="img" aria-label="Schematische Illustration eines autarken Hauses mit Solardach, Wassergewinnung, Wasserspeicher und vertikalem Garten">
+  <svg viewBox="0 0 1100 390" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#143e4a"/><stop offset=".58" stop-color="#102633"/><stop offset="1" stop-color="#09131d"/></linearGradient>
+      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6e1a2"/><stop offset="1" stop-color="#b88b42"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9de0dc" stop-opacity=".65"/><stop offset="1" stop-color="#286477" stop-opacity=".24"/></linearGradient>
+    </defs>
+    <rect width="1100" height="390" fill="url(#sky)"/>
+    <g fill="#c5e7e7" opacity=".45">
+      <circle cx="70" cy="54" r="1.5"/><circle cx="150" cy="95" r="1.2"/><circle cx="250" cy="42" r="1.5"/><circle cx="390" cy="72" r="1.1"/><circle cx="520" cy="32" r="1.4"/><circle cx="720" cy="56" r="1.3"/><circle cx="920" cy="46" r="1.5"/><circle cx="1010" cy="105" r="1.1"/>
+    </g>
+    <circle cx="880" cy="80" r="34" fill="url(#gold)" opacity=".92"/><circle cx="880" cy="80" r="52" fill="#f0d28b" opacity=".08"/>
+    <path d="M0 286 Q190 242 340 281 T650 276 T1100 260 V390 H0Z" fill="#102f35"/>
+    <path d="M210 190 L510 80 L820 190" fill="none" stroke="url(#gold)" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M265 185 L510 98 L766 185 Z" fill="#153c50" stroke="#79b8c4" stroke-width="2"/>
+    <g transform="translate(345 137) skewX(-25)">
+      <rect width="310" height="54" rx="3" fill="#183d59" stroke="#80c3d0" stroke-width="2"/>
+      <path d="M0 18 H310 M0 36 H310 M62 0 V54 M124 0 V54 M186 0 V54 M248 0 V54" stroke="#75b4c6" stroke-width="1.3" opacity=".8"/>
+      <path d="M0 2 H310" stroke="#e7f5ee" stroke-width="2" opacity=".6"/>
+    </g>
+    <rect x="290" y="190" width="440" height="136" fill="#173541" stroke="#c9a65b" stroke-width="2"/>
+    <rect x="310" y="208" width="128" height="100" fill="url(#glass)" stroke="#76b9c4" stroke-width="1.5"/>
+    <rect x="455" y="208" width="124" height="100" fill="#102733" stroke="#76b9c4" stroke-width="1.5"/>
+    <rect x="596" y="208" width="113" height="100" fill="url(#glass)" stroke="#76b9c4" stroke-width="1.5"/>
+    <path d="M320 293 Q338 250 355 283 T392 267 T427 290" fill="none" stroke="#8ecda8" stroke-width="5"/>
+    <path d="M606 294 Q620 252 639 280 T674 266 T704 292" fill="none" stroke="#8ecda8" stroke-width="5"/>
+    <g transform="translate(475 220)">
+      <rect x="0" y="0" width="85" height="78" rx="7" fill="#0a1c24" stroke="#e0c274" stroke-width="1.5"/>
+      <g fill="#76c79a">
+        <circle cx="20" cy="18" r="8"/><circle cx="42" cy="18" r="8"/><circle cx="64" cy="18" r="8"/>
+        <circle cx="20" cy="40" r="8"/><circle cx="42" cy="40" r="8"/><circle cx="64" cy="40" r="8"/>
+        <circle cx="20" cy="62" r="8"/><circle cx="42" cy="62" r="8"/><circle cx="64" cy="62" r="8"/>
+      </g>
+      <path d="M20 23 V30 M42 23 V30 M64 23 V30 M20 45 V52 M42 45 V52 M64 45 V52" stroke="#d8f2de" stroke-width="1.2"/>
+    </g>
+    <g transform="translate(785 205)">
+      <rect x="0" y="0" width="102" height="112" rx="12" fill="#122b38" stroke="#79b9c5" stroke-width="2"/>
+      <path d="M12 31 H90 M12 52 H90 M12 73 H90" stroke="#4b8796" stroke-width="1"/>
+      <path d="M22 16 C14 27 16 33 22 34 C28 33 30 27 22 16Z" fill="#9de6e4"/>
+      <text x="51" y="96" text-anchor="middle" font-size="12" fill="#dcefed">WASSER</text>
+      <path d="M50 112 V136 H-10 V153" fill="none" stroke="#8ad5df" stroke-width="3" stroke-dasharray="5 4"/>
+    </g>
+    <g transform="translate(70 210)">
+      <rect x="0" y="0" width="110" height="100" rx="10" fill="#122b38" stroke="#c9a65b" stroke-width="2"/>
+      <path d="M15 28 H95 M15 47 H95 M15 66 H95" stroke="#4b8796" stroke-width="1"/>
+      <path d="M22 14 H88 L77 4 H33Z" fill="#183d59" stroke="#80c3d0" stroke-width="1.5"/>
+      <text x="55" y="88" text-anchor="middle" font-size="12" fill="#f0d28b">ENERGIE</text>
+    </g>
+    <path d="M180 260 H275 M730 255 H775" stroke="#f0d28b" stroke-width="2" stroke-dasharray="5 5" fill="none"/>
+    <path d="M265 254 l10 6 -10 6 M765 249 l10 6 -10 6" fill="none" stroke="#f0d28b" stroke-width="2"/>
+    <text x="550" y="365" text-anchor="middle" fill="#d2e4e1" font-size="13" letter-spacing="3">ENERGIE · WASSER · NAHRUNG · WOHNEN</text>
+  </svg>
+  <div class="hero-caption">Konzeptillustration – kein genehmigungsfähiger Bauplan und keine bestätigte technische Auslegung.</div>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section-head">
+    <div class="eyebrow">01 · Die Leitidee</div>
+    <h2>Alles greift ineinander.</h2>
+    <p class="muted">Die High-End-Perspektive fragt nicht nur, was sich kaufen lässt. Sie fragt, wie Komfort, Versorgungssicherheit und möglichst geringe Abhängigkeit in einem einzigen Gebäude zusammenarbeiten können.</p>
+  </div>
+  <div class="grid">
+    <article class="card third"><div class="icon">☀</div><h3>Energie</h3><p>Photovoltaik, intelligentes Lastmanagement, Batteriespeicher und effiziente Verbraucher. Strom wird zuerst dort eingesetzt, wo er den größten Nutzen stiftet.</p></article>
+    <article class="card third"><div class="icon">♧</div><h3>Wasser</h3><p>Luftwasser als ergänzende Quelle, Regenwasser als saisonaler Puffer, getrennte Trink- und Betriebswasserpfade sowie fachgerecht geplante Abwasserbehandlung.</p></article>
+    <article class="card third"><div class="icon">❧</div><h3>Nahrung</h3><p>Eine integrierte Vertical Farm liefert frische Blattgemüse und Kräuter. Sensorik und Kreislaufführung helfen beim sparsamen Umgang mit Wasser und Nährstoffen.</p></article>
+  </div>
+  <div class="note" style="margin-top:18px">Der Anspruch lautet: <strong>möglichst autark und wartbar</strong> – nicht, Autarkie allein durch ein Etikett zu behaupten. Jede Quelle, jeder Kreislauf und jede saisonale Grenze wird messbar gemacht.</div>
+</section>
+
+<section class="section wrap" id="wasser">
+  <div class="section-head">
+    <div class="eyebrow">02 · Watergen + Wasseraufbereitung</div>
+    <h2>Wasser aus Luft – mit Regen als Rückhalt.</h2>
+    <p class="muted">Ein Atmospheric Water Generator (AWG) kühlt feuchte Außenluft unter den Taupunkt, sammelt Kondensat und führt es durch eine passend ausgelegte Aufbereitung. Das Konzept verbindet diesen Pfad mit Regenwasserspeicherung und sorgfältig getrennten Wasserqualitäten.</p>
+  </div>
+  <div class="statrow">
+    <div class="stat"><strong>20 L/Tag</strong><span>Konzept-Zielwert für Luftwasser, nicht garantiert</span></div>
+    <div class="stat"><strong>0,6 kWh/L</strong><span>Arbeitsannahme zur Energiebilanz</span></div>
+    <div class="stat"><strong>3.000 L</strong><span>Regenzisterne als vorgeschlagener Puffer</span></div>
+    <div class="stat"><strong>20–40 L/Tag</strong><span>mögliche Zielspanne unter geeigneten Bedingungen, zu prüfen</span></div>
+  </div>
+  <div class="diagram" aria-label="Wasserpfad">
+    <div class="step"><b>1 · Außenluft</b>Feuchte Luft, Ansaugung und Staub-/Pollenfilter</div>
+    <div class="step"><b>2 · Kondensation</b>Kühlung unter den Taupunkt; Rohkondensat wird gesammelt</div>
+    <div class="step"><b>3 · Aufbereitung</b>Vorfilter, bedarfsgerechte Membranfiltration, Aktivkohle und UV nach Wasseranalyse</div>
+    <div class="step"><b>4 · Speicherung</b>Lebensmittelechter, hygienisch ausgelegter Tank mit Überwachung</div>
+    <div class="step"><b>5 · Nutzung</b>Trink-/Küchenwasser und getrennte Betriebswasserpfade nach Freigabe</div>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="icon">◉</div><h3>Reverse Osmosis – richtig eingeordnet</h3>
+      <p>Umkehrosmose (RO) kann gelöste Salze und zahlreiche Stoffe aus geeignetem Zulaufwasser reduzieren. Sie <strong>erzeugt kein Wasser</strong>: Sie braucht einen Zulauf und produziert Konzentrat, das sicher behandelt werden muss. Bei Luftkondensat ist RO nicht automatisch nötig; die konkrete Behandlung muss aus Laboranalyse, Materialkontakt und hygienischer Bewertung folgen.</p>
+    </article>
+    <article class="card">
+      <div class="icon">↻</div><h3>Wiederverwenden, nicht vermischen</h3>
+      <p>Grauwasser aus Dusche und Waschbecken kann – nach geeigneter Behandlung und Genehmigung – für bestimmte Nicht-Trinkwasserzwecke wiederverwendet werden. Schwarzwasser, Regenwasser, Luftkondensat und Trinkwasser brauchen klar getrennte Leitungen, Rückfluss-Schutz und ein dokumentiertes Hygienekonzept.</p>
+    </article>
+    <article class="card wide">
+      <h3>Der geschlossene Kreislauf – als Zielbild</h3>
+      <p><strong>Atmosphäre → Kondensation → Wasserprüfung/Aufbereitung → Nutzung → getrennte Abwasserströme → Behandlung → geeignete Wiederverwendung.</strong> Ein Gebäude ist damit nicht automatisch ein vollständig geschlossener Wasserkreislauf: Verdunstung, Pflanzenverbrauch, Schlamm, Konzentrat, Reinigungswasser und Wartungsverluste müssen bilanziert werden. Die Regenzisterne ergänzt das System, macht es aber nicht allein zu „100 % geschlossen“.</p>
+    </article>
+  </div>
+  <div class="caution" style="margin-top:18px"><strong>Wichtige Energiebilanz:</strong> Bei 0,6 kWh pro Liter würden 20 Liter Luftwasser etwa 12 kWh Strom pro Tag benötigen – noch ohne weitere Gebäudelasten. Die tatsächliche Effizienz und Ausbeute hängen stark von Temperatur, relativer Feuchte und Gerät ab. Für Deutschland muss insbesondere der Winterbetrieb mit realen Wetterdaten und Herstellerkennlinien gerechnet werden.</div>
+</section>
+
+<section class="section wrap" id="energie">
+  <div class="section-head">
+    <div class="eyebrow">03 · Solar + Speicher + Inselbetrieb</div>
+    <h2>Die Sonne trägt das System – soweit die Bilanz reicht.</h2>
+    <p class="muted">Photovoltaik und Speicher versorgen zuerst die kritischen Lasten. Der AWG-Kompressor, die Farmbeleuchtung und die Klimatisierung sind energieintensiv; deshalb werden sie nicht einfach als unbegrenzte Verbraucher behandelt.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="icon">▤</div><h3>High-End-Auslegung als Startpunkt</h3>
+      <ul class="list">
+        <li>Photovoltaik: etwa 3,5 kWp als erste Rechenvariante</li>
+        <li>Batterie: etwa 10 kWh nutzbar als erste Rechenvariante</li>
+        <li>Inselnetz mit Priorisierung, Notabschaltung und Netz-/Generatoroption je nach Standort</li>
+        <li>Wärmepumpe, Lüftung mit Wärmerückgewinnung und effiziente Geräte</li>
+        <li>Energiemonitoring je Verbrauchergruppe und saisonaler Speicherstrategie</li>
+      </ul>
+    </article>
+    <article class="card">
+      <div class="icon">⌁</div><h3>Was vor dem Bau nachzuweisen ist</h3>
+      <ul class="list">
+        <li>Monatliche PV-Erzeugung am konkreten Standort – nicht nur Jahresmittel</li>
+        <li>Winterlasten von AWG, Farmlicht, Pumpen, Lüftung und Heizung</li>
+        <li>Mehrere Tage mit wenig Sonne und gegebenenfalls hoher Wasserlast</li>
+        <li>Speicherverluste, Wechselrichterleistung und Anlaufströme</li>
+        <li>Fallback für Wartung, Frost, Störungen und Ersatzteile</li>
+      </ul>
+    </article>
+  </div>
+  <div class="note" style="margin-top:18px">3,5 kWp PV und 10 kWh Speicher sind hier <strong>eine zu prüfende Rechenvariante</strong>, keine bestätigte Garantie für Trinkwasser, Kochen, Dusche, Heizung und Vertical Farm im deutschen Winter. Die richtige Dimensionierung folgt erst aus einem stündlichen Lastprofil und einer standortbezogenen Ertragssimulation.</div>
+</section>
+
+<section class="section wrap" id="farm">
+  <div class="section-head">
+    <div class="eyebrow">04 · Building-integrated Vertical Farming</div>
+    <h2>Ein Garten im Gebäude.</h2>
+    <p class="muted">Ein 4 × 5 m großer Farmraum wird Teil des Wohn- und Versorgungskonzepts: sichtbares Grün, frische Ernte und ein kontrollierter Anbaukreislauf. Die Erntezahl von 500 kg pro Jahr ist ein Entwurfsziel, das mit Kulturwahl, Lichtleistung, Pflanzdichte und realen Betriebsdaten validiert werden muss.</p>
+  </div>
+  <div class="statrow">
+    <div class="stat"><strong>20 m²</strong><span>vorgesehener Grundriss: 4 × 5 m</span></div>
+    <div class="stat"><strong>500 kg/Jahr</strong><span>Ernte-Ziel für die Konzeptphase</span></div>
+    <div class="stat"><strong>3 Türme</strong><span>mehrstöckige hydroponische Türme</span></div>
+    <div class="stat"><strong>200 L</strong><span>vorgesehenes Nährstoffreservoir</span></div>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <h3>Geplante Ausstattung</h3>
+      <ul class="list">
+        <li>3 Multi-Story-Hydroponik-Türme; entworfene Gesamthöhe ca. 6 m</li>
+        <li>48 Pflanzsäulen bzw. Anbaupositionen – genaue Definition im Detailplan festlegen</li>
+        <li>Salat, Grünkohl, Basilikum und weitere Kräuter</li>
+        <li>Umlaufende Nährlösung, Pumpe, Filter und 200-L-Reservoir</li>
+        <li>Temperatur-, Feuchte-, pH- und EC-Sensorik mit Alarmen</li>
+        <li>Vollspektrum-LEDs, Luftführung, Entfeuchtung und Wärmemanagement</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h3>Biophiles Wohnen</h3>
+      <ul class="list">
+        <li>Grüne Wand mit Moos/Farn als Gestaltungselement</li>
+        <li>Spritzwasser- und Feuchteschutz für angrenzende Wohnbereiche</li>
+        <li>Akustisch und thermisch getrennte Technikzone</li>
+        <li>Wartungszugänge für Pumpen, Sensoren, Filter und Leuchten</li>
+        <li>Automatische Leckageerkennung und sichere Überläufe</li>
+      </ul>
+      <p class="muted">Die dekorative Pflanzenwand ist nicht als Ersatz für eine geprüfte Lüftungs- oder Luftreinigungsanlage zu verstehen.</p>
+    </article>
+    <article class="card wide">
+      <h3>Wasser sparen – Strombedarf sichtbar machen</h3>
+      <p>Die rezirkulierende Hydroponik kann den Wasserverbrauch gegenüber vielen konventionellen Anbauweisen deutlich senken. Die im Entwurf genannten „ca. 90 % weniger Wasser“ sind ein Vergleichswert, der erst durch eine festgelegte Referenzmethode und Messung belegt werden kann. Licht, Klimatisierung und Entfeuchtung können dagegen erhebliche Stromlasten verursachen.</p>
+      <p>Für die Auslegung werden daher mindestens diese Werte protokolliert: <strong>kg Ernte pro Woche · kWh pro kg · Liter Frischwasser pro kg · Nährstoffverbrauch · Ausschussquote · Arbeitsstunden pro Monat.</strong></p>
+    </article>
+  </div>
+</section>
+
+<section class="section wrap" id="autarkie">
+  <div class="section-head">
+    <div class="eyebrow">05 · High-End bedeutet auch: ehrlich rechnen</div>
+    <h2>Luxus ohne unsichtbare Abhängigkeiten.</h2>
+    <p class="muted">Das Ziel ist nicht, Abhängigkeiten zu verleugnen, sondern sie bewusst zu gestalten: Technik darf Arbeit erleichtern, soll aber nicht durch proprietäre Ersatzteile, Cloud-Zwang oder fehlende Wartbarkeit eine neue Abhängigkeit erzeugen.</p>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Bereich</th><th>High-End-Zielbild</th><th>Nachweis / offene Frage</th></tr></thead>
+      <tbody>
+        <tr><td>Wasser</td><td>AWG + Regenzisterne + Aufbereitung + getrennte Wiederverwendung</td><td>Winterertrag, Trinkwasserqualität, Abwasserrecht, Hygieneplan</td></tr>
+        <tr><td>Energie</td><td>PV, Batterie, Inselnetz und intelligentes Lastmanagement</td><td>Stündliche Bilanz, mehrtägige Dunkelflaute, Heizlast</td></tr>
+        <tr><td>Nahrung</td><td>Innenliegende Vertical Farm mit Sensorik und Umlaufwasser</td><td>500 kg/Jahr, kWh/kg, tatsächliche Erntefläche und Beleuchtungsplan</td></tr>
+        <tr><td>Wartung</td><td>Fernüberwachung, modulare Komponenten, Ersatzteilreserve</td><td>Manuelle Notbedienung, offene Schnittstellen, Reparaturkosten</td></tr>
+        <tr><td>Abwasser</td><td>Getrennte Ströme und fachgerechte Behandlung</td><td>Genehmigung, Reststoffe, Entsorgungsweg, Rückfalloption</td></tr>
+        <tr><td>Soziale Freiheit</td><td>Weniger Zwangsarbeit durch bessere Versorgung</td><td>Wer besitzt die Technik? Wer profitiert von der eingesparten Arbeit?</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="split" style="margin-top:18px">
+    <article class="card">
+      <h3>Maximalvariante</h3>
+      <p>Höchster Komfort, umfassende Automatisierung, kontrollierte Anbauumgebung, Luftwasseranlage und große Speicher. Sie kann Versorgung stabilisieren – sofern Energiebedarf, Wartung und Ersatzteile zuverlässig abgesichert sind.</p>
+    </article>
+    <article class="card">
+      <h3>Resilienzvariante</h3>
+      <p>Gleiche Würde und Grundversorgung, aber geringere Lasten: Regenwasser zuerst, sehr effiziente Geräte, saisonal angepasste Ernte, einfache Reparatur und ein klarer Notbetrieb. Nicht glamouröser – möglicherweise robuster.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section-head">
+    <div class="eyebrow">06 · Die menschliche Frage</div>
+    <h2>Wenn Technik Arbeit abnimmt – wem gehört die Freiheit?</h2>
+  </div>
+  <p class="quote">„Unabhängigkeit wird erst dann zu gemeinsamer Freiheit, wenn die gewonnene Zeit und Versorgungssicherheit nicht nur wenigen gehören.“<small>Modell Morgengrauen · Leitgedanke für eine menschenwürdige Autonomie</small></p>
+  <div class="grid" style="margin-top:24px">
+    <article class="card third"><h3>Eigentum teilen</h3><p>Genossenschaftliche oder gemeinschaftliche Modelle können Zugang zu Technik und Erträgen öffnen.</p></article>
+    <article class="card third"><h3>Grundversorgung sichern</h3><p>Wohnen, Wasser, Energie und Nahrung sollen nicht zu neuen Hebeln der Abhängigkeit werden.</p></article>
+    <article class="card third"><h3>Arbeit neu verteilen</h3><p>Wenn Automatisierung Arbeit reduziert, braucht es faire Teilhabe an Produktivitätsgewinnen – nicht nur effizientere Geräte.</p></article>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="section-head">
+    <div class="eyebrow">07 · Umsetzung in Etappen</div>
+    <h2>Vom schönen Bild zum belastbaren Demonstrator.</h2>
+  </div>
+  <div class="grid">
+    <article class="card third"><h3>Phase A · Bilanz</h3><p>Standortdaten, Raumprogramm, Wasserbedarf, Stromlasten und Ernteziele festlegen. Messbare Anforderungen statt Werbeversprechen.</p></article>
+    <article class="card third"><h3>Phase B · Pilot</h3><p>Module einzeln testen: PV und Speicher, Wasserquelle und Aufbereitung, Vertical Farm, getrennte Abwasserpfade. Verbrauch und Ertrag protokollieren.</p></article>
+    <article class="card third"><h3>Phase C · Integration</h3><p>Erst nach den Messungen Systeme verbinden, Fachplanung und Genehmigungen einholen, Wartung und Notbetrieb erproben.</p></article>
+    <article class="card wide">
+      <h3>Vor einer realen Umsetzung</h3>
+      <ul class="list">
+        <li>Architektur- und Tragwerksplanung, Brandschutz, Feuchte- und Schallschutz</li>
+        <li>Elektroplanung für Inselnetz, Batteriesicherheit, Schutz- und Notabschaltung</li>
+        <li>Trinkwasserhygiene und Prüfung aller Materialien, Filter und Speicher</li>
+        <li>Abwasser-/Wasserrecht, örtliche Satzungen und Genehmigungen in Deutschland</li>
+        <li>Herstellerdaten und unabhängige Messungen zu Effizienz, Kapazität und Lebensdauer</li>
+      </ul>
+    </article>
+  </div>
+  <div class="actions">
+    <a class="btn" href="#vision">↑ Zurück zum Anfang</a>
+    <a class="btn" href="javascript:window.print()">Drucken / als PDF speichern</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><span class="mark">MODELL MORGENGRAUEN</span> · Operation Sonnenaufgang</p>
+    <p>Konzeptfassung · Tim Bukowski / Chetan Nirup · Oktober 2026</p>
+    <p>Diese Seite ist eine Vision und ein Planungsrahmen, keine technische Ausführungsplanung, Wirtschaftlichkeitsgarantie oder Genehmigung. Alle genannten Größen sind Entwurfswerte, sofern nicht ausdrücklich als gemessene oder bestätigte Herstellerdaten gekennzeichnet. Für Trinkwasser, Abwasser, Elektroanlage, Tragwerk und Bauantrag sind Fachplanung, Messungen und örtliche Genehmigungen erforderlich.</p>
+    <p class="heart">Mit Energie-Küsschen, Zwinker-Smiley und einem offenen Kreislauf im Kopf. ♥ ∞</p>
+  </div>
+</footer>
+</body>
+</html>

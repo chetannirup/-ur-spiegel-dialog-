@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071326">
+<meta name="description" content="Eine offene Begrüßungsfeier für das Leben als Schule der Liebe — ein Anfang, kein Ende.">
+<title>Willkommen in der Wiege — Eine Begrüßungsfeier</title>
+<style>
+:root {
+  --night: #06101f;
+  --deep: #0a1b31;
+  --blue: #173451;
+  --gold: #f2d28a;
+  --cream: #fff4d8;
+  --muted: #d4d9df;
+  --line: rgba(242,210,138,.32);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at 50% 0%, #173451 0, #0a192d 35rem, var(--night) 80rem);
+  color: #f7f1e5;
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.75;
+}
+a { color: var(--gold); }
+.wrap { width: min(1120px, calc(100% - 2rem)); margin: auto; }
+.topline { height: 5px; background: linear-gradient(90deg, #926a2d, var(--gold), #fff2c7, #a76b43); }
+.hero {
+  min-height: 88vh;
+  display: grid;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+.hero:before, .hero:after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(242,210,138,.15);
+  border-radius: 50%;
+  width: 38rem;
+  height: 38rem;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+}
+.hero:after { width: 49rem; height: 49rem; border-style: dashed; opacity: .5; }
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font: .75rem/1.8 Arial, sans-serif;
+  color: var(--gold);
+}
+h1, h2, h3, p { margin-top: 0; }
+h1 {
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+  font-weight: normal;
+  color: var(--cream);
+  margin: .6rem auto 1.5rem;
+  max-width: 1000px;
+  text-shadow: 0 0 35px rgba(242,210,138,.14);
+}
+.subtitle {
+  font-size: clamp(1.1rem, 2.6vw, 1.8rem);
+  color: var(--gold);
+  max-width: 780px;
+  margin: 0 auto 2rem;
+}
+.hero p.lead {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  max-width: 760px;
+  margin: 0 auto;
+  color: #e9e2d6;
+}
+.sigil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gold);
+  margin: 2.2rem auto;
+  font-size: 1.5rem;
+}
+.sigil:before, .sigil:after {
+  content: "";
+  height: 1px;
+  width: min(15vw, 130px);
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.sigil:after { transform: scaleX(-1); }
+.scroll {
+  display: inline-block;
+  margin-top: 2.4rem;
+  font: .75rem Arial, sans-serif;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+}
+.scroll span { display: block; font-size: 1.4rem; color: var(--gold); margin-top: .4rem; }
+.image-frame {
+  margin: 0 auto 5rem;
+  padding: .6rem;
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,.25);
+  box-shadow: 0 24px 80px rgba(0,0,0,.35);
+  border-radius: 10px;
+}
+.image-frame img { display: block; width: 100%; height: auto; border-radius: 5px; }
+.image-caption {
+  text-align: center;
+  font: .78rem/1.6 Arial, sans-serif;
+  color: #bfc9d4;
+  padding: .8rem .5rem .25rem;
+}
+.section { padding: 4.7rem 0; border-top: 1px solid var(--line); }
+.section-kicker {
+  font: .75rem Arial, sans-serif;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.section h2 {
+  font-size: clamp(2rem, 4.4vw, 3.8rem);
+  line-height: 1.08;
+  font-weight: normal;
+  color: var(--cream);
+  max-width: 850px;
+  margin-bottom: 1.7rem;
+}
+.section h3 { font-size: 1.35rem; color: var(--gold); font-weight: normal; margin-bottom: .6rem; }
+.prose { max-width: 790px; font-size: 1.08rem; }
+.prose p { margin-bottom: 1.2rem; }
+.pullquote {
+  margin: 2.5rem 0;
+  padding: 1.3rem 1.6rem;
+  border-left: 2px solid var(--gold);
+  background: linear-gradient(90deg, rgba(242,210,138,.09), transparent);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.4;
+  color: var(--cream);
+}
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.card {
+  padding: 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(23,52,81,.56), rgba(6,16,31,.55));
+}
+.card p { margin-bottom: 0; color: #e0e4e8; }
+.number { font: .8rem Arial, sans-serif; letter-spacing: .15em; color: var(--gold); margin-bottom: .6rem; }
+.soft { color: var(--muted); }
+.promise {
+  margin: 2.4rem 0;
+  padding: 1.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: center;
+  background: radial-gradient(ellipse at center, rgba(242,210,138,.1), transparent 70%);
+}
+.promise p { font-size: 1.15rem; margin: .4rem; }
+.promise strong { color: var(--gold); font-weight: normal; }
+.closing {
+  text-align: center;
+  padding: 6rem 0 5rem;
+  background: linear-gradient(180deg, transparent, rgba(18,43,67,.6));
+}
+.closing h2 {
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: normal;
+  line-height: 1.1;
+  color: var(--cream);
+}
+.closing .last { font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--gold); }
+footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 0 2rem;
+  text-align: center;
+  font: .78rem/1.8 Arial, sans-serif;
+  color: #aeb9c5;
+}
+.footline { color: var(--gold); letter-spacing: .13em; text-transform: uppercase; }
+.backtop {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: .5rem 1rem;
+  color: var(--gold);
+}
+@media (max-width: 700px) {
+  .hero { min-height: auto; padding: 5rem 0 3rem; }
+  .hero:before { width: 22rem; height: 22rem; }
+  .hero:after { width: 28rem; height: 28rem; }
+  .grid { grid-template-columns: 1fr; }
+  .section { padding: 3.4rem 0; }
+  .prose { font-size: 1rem; }
+  .card { padding: 1.15rem; }
+  .image-frame { margin-bottom: 3rem; }
+  .wrap { width: min(100% - 1.25rem, 1120px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+
+<body id="top">
+<div class="topline"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Eine offene Begrüßungsfeier für das Leben</div>
+    <h1>Willkommen in<br>der Wiege</h1>
+    <p class="subtitle">Die Schule des Lebens · Die Brutstätte der Möglichkeiten</p>
+    <div class="sigil" aria-hidden="true">✧ ◯ ✧</div>
+    <p class="lead">Vielleicht ist der Sinn des Lebens nicht etwas, das wir ein für alle Mal besitzen. Vielleicht zeigt er sich dort, wo wir das Leben, das uns anvertraut ist, liebevoller behandeln.</p>
+    <a class="scroll" href="#eroeffnung">Weiter in die Feier <span>↓</span></a>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <figure class="image-frame">
+    <img src="https://chetannirup.github.io/-ur-spiegel-dialog-/gpt-image-2.5-sunburst_Eine_weitl%C3%A4ufige_golden_und_blau_leuchtende_Bildwelt_Menschen_Meer_Sterne_eine_-0%20(1).jpg"
+         alt="Eine weitläufige, golden und blau leuchtende Bildwelt: Menschen, Meer, Sterne, eine offene Wiege als Symbol für Leben, Lernen und Liebe.">
+    <figcaption class="image-caption">Ein Bild als Einladung – kein Beweis, kein Dogma und kein fertiger Weltplan.</figcaption>
+  </figure>
+
+  <section class="section" id="eroeffnung">
+    <div class="section-kicker">I · Die Eröffnung</div>
+    <h2>Dieser Augenblick gehört niemandem allein. Er steht uns allen offen.</h2>
+    <div class="prose">
+      <p>Liebe Menschen dieser Erde. Liebe Frauen und Männer, liebe Kinder und Ältere, liebe Arbeitende und Ruhende, Suchende und Zweifelnde – willkommen.</p>
+      <p>Willkommen nicht in einem neuen Staat. Nicht in einer neuen Religion. Nicht in einer neuen Rangordnung, die nur die alten Namen gegen neue austauscht.</p>
+      <p>Willkommen im Leben selbst.</p>
+      <p>Wir nennen diesen Ort heute die <em>Wiege der Götter</em>, die Schule des Werdens, die Brutstätte dessen, was noch wachsen kann. Nicht, weil wir damit bewiesen hätten, dass wir über anderen Menschen stehen. Sondern weil wir uns eine Frage erlauben wollen, die groß genug ist, um uns alle einzuschließen:</p>
+      <div class="pullquote">Was wäre, wenn das Leben nicht nur etwas wäre, das wir überstehen müssen, sondern etwas, in dem wir lernen können, einander und der Welt immer liebevoller zu begegnen?</div>
+      <p>Wir eröffnen keine Prüfung, die jemand bestehen muss. Wir öffnen einen Raum, in dem Menschen wieder lernen dürfen, ohne sich gegenseitig ihre Menschlichkeit abzusprechen.</p>
+      <p><strong>Nicht zeigen. Nicht überzeugen. Öffnen.</strong></p>
+      <p>Wer heute nur zuhören möchte, darf zuhören. Wer zweifelt, darf zweifeln. Wer noch nicht weiß, was dieser Tag bedeutet, muss es nicht sofort wissen. Das Leben verlangt nicht, dass wir alle im selben Augenblick dasselbe verstehen.</p>
+    </div>
+  </section>
+
+  <section class="section" id="begrüssung">
+    <div class="section-kicker">II · Die Begrüßung</div>
+    <h2>Niemand ist nur die Rolle, die er gerade trägt.</h2>
+    <div class="prose">
+      <p>Vielleicht haben wir uns lange durch die Namen gesehen, die unsere Gesellschaft uns gibt: Frau, Mann, Kind; Arbeiterin, Arbeitgeber; Soldat, Polizistin; Richter, Angeklagte; Gefangener, Aufseherin; reich, arm; gläubig, ungläubig; betrogen, betrügend; befehlend, gehorchend.</p>
+      <p>Diese Wörter sind nicht bedeutungslos. Sie beschreiben Aufgaben, Lebenslagen, Machtverhältnisse und manchmal wirkliche Verantwortung. Aber sie sind nicht die ganze Wahrheit über einen Menschen.</p>
+      <p>Ein Mensch kann eine Tat begangen haben und trotzdem mehr sein als seine Tat. Das befreit ihn nicht von Verantwortung. Ein Mensch kann verletzt worden sein und trotzdem mehr sein als seine Verletzung. Das macht das Unrecht nicht ungeschehen.</p>
+      <div class="pullquote">Vergebung ist keine Vertuschung. Würde ist keine Straflosigkeit. Liebe ist keine Erlaubnis, anderen zu schaden.</div>
+      <p>Eine reife Gemeinschaft schützt Kinder, hört Betroffene an, gewährt Beschuldigten faire Verfahren und begrenzt staatliche Macht. Regeln können Menschen schützen; gerade deshalb müssen sie nachvollziehbar, überprüfbar und verhältnismäßig sein. Dringlichkeit darf kein Freibrief werden. Gehorsam darf das Gewissen nicht ersetzen.</p>
+      <p>Wir müssen unsere Unterschiede nicht leugnen, um unsere gemeinsame Würde zu erkennen. Wir dürfen Grenzen setzen, ohne zu entmenschlichen. Wir dürfen Frieden suchen, ohne die Wahrheit zu verschweigen.</p>
+    </div>
+  </section>
+
+  <section class="section" id="begnadigung">
+    <div class="section-kicker">III · Ein Wort der Begnadigung</div>
+    <h2>Wir erklären keinen Menschen für endgültig fertig.</h2>
+    <div class="prose">
+      <p>Begnadigung soll heute keine königliche Verfügung und keine Aufhebung aller Urteile bedeuten. Sie ist eine menschliche Geste: Wir lassen die Tür zur Veränderung offen.</p>
+      <p>Möge den Kindern Raum bleiben, zu lernen. Mögen Eltern Fehler eingestehen können. Mögen Arbeitende fair behandelt werden. Mögen Menschen in Machtpositionen sich korrigieren lassen. Mögen Menschen, die Unrecht erfahren haben, Schutz, Gehör und Gerechtigkeit finden. Mögen Menschen, die anderen geschadet haben, Verantwortung übernehmen und – soweit möglich – Wiedergutmachung leisten.</p>
+      <p>Mögen die Erschöpften ausruhen, die Beschämten wieder sprechen und die Einsamen nicht unsichtbar bleiben. Mögen Glaubende und Nichtglaubende einander Freiheit lassen.</p>
+      <p>Wir begnadigen einander nicht von der Verantwortung. Wir begnadigen einander von der Vorstellung, dass der schlimmste Irrtum oder die tiefste Niederlage das letzte Wort über einen Menschen haben muss.</p>
+    </div>
+  </section>
+
+  <section class="section" id="vier-fäden">
+    <div class="section-kicker">IV · Vier Fäden</div>
+    <h2>Alte Geschichten. Neue Fragen. Ein offener Blick.</h2>
+    <p class="prose soft">Die Überlieferungen aus verschiedenen Kulturen stammen aus unterschiedlichen Zeiten und sprechen in verschiedenen Sprachen. Wir müssen sie nicht zu einer einzigen bewiesenen Weltgeschichte machen, um ihre Fragen ernst zu nehmen.</p>
+    <div class="grid">
+      <article class="card">
+        <div class="number">FADEN 01</div>
+        <h3>Das Ungeformte</h3>
+        <p>Was wissen wir noch nicht? Welche Möglichkeiten haben wir nicht einmal denken gelernt? Das Ungeformte kann ein Bild für Offenheit sein – nicht der Anspruch auf eine bewiesene kosmische Substanz.</p>
+      </article>
+      <article class="card">
+        <div class="number">FADEN 02</div>
+        <h3>Das Licht</h3>
+        <p>Wir können erkennen, benennen, untersuchen und unsere Irrtümer korrigieren. Licht bedeutet nicht, dass wir alles sehen. Wahrhaftiges Erkennen macht uns bereit, genauer hinzusehen.</p>
+      </article>
+      <article class="card">
+        <div class="number">FADEN 03</div>
+        <h3>Das Bewusstsein</h3>
+        <p>Wir können unsere Gewohnheiten prüfen und anders handeln. Wir können bemerken, wenn Angst uns beherrscht, wenn eine Gruppe einen Sündenbock sucht oder eine Regel vor allem Macht bewahrt.</p>
+      </article>
+      <article class="card">
+        <div class="number">FADEN 04</div>
+        <h3>Der Rückblick</h3>
+        <p>Wir können auf das Gewesene schauen, ohne darin gefangen zu bleiben. Wir würdigen, was uns trägt, benennen Fehler und verändern, was Menschen schadet. Die Geschichten werden Begleiter, nicht Ketten.</p>
+      </article>
+    </div>
+    <div class="promise">
+      <p>Vielleicht ist die Wiege der Götter kein Titel,</p>
+      <p><strong>sondern eine Einladung, unsere schöpferischen Fähigkeiten verantwortungsvoll zu entwickeln.</strong></p>
+    </div>
+  </section>
+
+  <section class="section" id="anfang">
+    <div class="section-kicker">V · Der Anfang in der Wirklichkeit</div>
+    <h2>Große Worte brauchen kleine, wirkliche Schritte.</h2>
+    <p class="prose">Dieser Tag muss nicht die ganze Welt verändern. Er kann uns helfen, die nächste gute Handlung zu erkennen. Die Räder des Alltags drehen sich morgen weiter – deshalb gehört der Anfang genau dorthin.</p>
+    <div class="grid">
+      <article class="card"><div class="number">ZU HAUSE</div><h3>Zuhören, erklären, sich entschuldigen</h3><p>Wir hören Kindern zu, erklären Regeln, gestehen Fehler ein und geben Verantwortung, ohne Kindern die Last der Erwachsenen aufzubürden.</p></article>
+      <article class="card"><div class="number">IN DER SCHULE</div><h3>Fragen schützen</h3><p>Wir lehren, Quellen zu prüfen, respektvoll zu streiten und Mobbing zu unterbrechen. Ein Fehler darf Anlass zum Lernen sein statt zum lebenslangen Etikett.</p></article>
+      <article class="card"><div class="number">BEI DER ARBEIT</div><h3>Menschen sind mehr als Leistung</h3><p>Wir achten auf Gesundheit, faire Bedingungen, Anerkennung und Erholung. Wir reparieren, was sich erhalten lässt, reduzieren Verschwendung und beteiligen Menschen an Verbesserungen.</p></article>
+      <article class="card"><div class="number">IN POLITIK UND RECHT</div><h3>Macht muss sich rechtfertigen</h3><p>Wir verlangen gleiche Rechte, nachvollziehbare Entscheidungen, wirksame Kontrolle und sichere Wege, Missstände zu melden. Schutz und Freiheit gehören zusammen.</p></article>
+      <article class="card"><div class="number">IN WIRTSCHAFT UND UMWELT</div><h3>Fülle gut gestalten</h3><p>Wir fördern Reparatur, Wiederverwendung, erneuerbare Energie, bezahlbaren Wohnraum und gute Bildung. Erfolg heißt nicht nur, mehr zu erzeugen, sondern auch zu bewahren.</p></article>
+      <article class="card"><div class="number">IN DER DIGITALEN WELT</div><h3>Werkzeuge, die Menschen befähigen</h3><p>Wir kennzeichnen Unsicherheit, erfinden keine Belege, schützen Daten und prüfen, wem Technik nützt und wer ihre Risiken trägt. Werkzeuge nehmen uns Verantwortung nicht ab.</p></article>
+      <article class="card"><div class="number">ZWISCHEN MENSCHEN</div><h3>Widersprechen, ohne zu erniedrigen</h3><p>Wir fragen nach, bevor wir verurteilen. Wir hören zu, ohne alles ungeprüft zu übernehmen. Wir holen Hilfe, wenn wir sie brauchen, und schauen nicht automatisch weg.</p></article>
+      <article class="card"><div class="number">IM EIGENEN LEBEN</div><h3>Eine kleine Handlung zählt</h3><p>Wir können uns entschuldigen, jemandem eine Pause ermöglichen, einem übersehenen Menschen zuhören oder einen ungerechten Ablauf verändern. So tritt eine Idee in die Welt.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="verantwortung">
+    <div class="section-kicker">VI · Die Verantwortung</div>
+    <h2>Eine große Tür ist noch kein fertiger Weg.</h2>
+    <div class="prose">
+      <p>Wir sollten uns nichts vormachen: Eine Feier beendet nicht die Geschichte der Menschheit. Menschen müssen morgen arbeiten, Kinder versorgen, Kranke behandeln, Konflikte lösen und Rechnungen bezahlen.</p>
+      <p>Und dennoch kann ein Tag bedeutsam sein – nicht weil jede Ordnung augenblicklich zerbricht, sondern weil sich eine Frage in uns verschiebt.</p>
+      <p>Wir müssen die Vergangenheit weder pauschal verdammen noch heiligsprechen. Menschen haben unter ungleichen Bedingungen entschieden; manche haben geschützt, manche geschwiegen, manche anderen geschadet. Eine reife Erinnerung hält diese Unterschiede aus.</p>
+      <div class="pullquote">Wir müssen die Bedingungen verbessern, unter denen Menschen heute entscheiden.</div>
+      <p>Wer in Angst lebt, braucht Sicherheit. Wer abhängig ist, braucht echte Alternativen. Wer Macht ausübt, braucht Kontrolle. Wer verletzt wurde, braucht Schutz und Gehör. Wer einen Fehler gemacht hat, braucht einen Weg, Verantwortung zu übernehmen und sich zu verändern.</p>
+      <p>Die Wiege ist keine Flucht aus der Welt. Sie ist eine andere Art, in ihr zu stehen. Sie verlangt nicht, dass wir das Rad des Lebens anhalten. Sie lädt uns ein, es besser zu pflegen.</p>
+    </div>
+  </section>
+
+  <section class="section" id="versprechen">
+    <div class="section-kicker">VII · Was wir einander zusprechen</div>
+    <h2>Keine Vollkommenheit versprechen. Den Anfang miteinander wagen.</h2>
+    <div class="prose">
+      <p>Wir versprechen nicht, nie wieder zu irren. Wir wollen Fehler nicht absichtlich verbergen.</p>
+      <p>Wir versprechen nicht, dass es keine Konflikte mehr geben wird. Wir wollen lernen, Konflikte auszutragen, ohne einander die Menschlichkeit abzusprechen.</p>
+      <p>Wir versprechen nicht, dass jeder Traum wahr wird. Wir wollen dafür sorgen, dass mehr Menschen die Möglichkeit erhalten, ihre Fähigkeiten zu entdecken.</p>
+      <p>Wir behaupten nicht, alle Antworten zu kennen. Wir schützen die Neugier, mit der wir sie suchen.</p>
+      <p>Und wir behaupten nicht, dass Liebe jede Grenze überflüssig macht. Wir gestalten Grenzen so, dass sie Leben schützen und nicht bloß Macht verewigen.</p>
+      <div class="promise">
+        <p>Mehr Mitgefühl. Mehr Erkenntnis. Gerechtere Verhältnisse.</p>
+        <p>Mutigere Fragen. Bessere Werkzeuge.</p>
+        <p><strong>Ein Leben, das weniger Menschen verschleißt und mehr Menschen aufblühen lässt.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" id="abschied">
+    <div class="eyebrow">VIII · Der Abschied</div>
+    <div class="wrap">
+      <h2>Ein Anfang – kein Ende.</h2>
+      <p class="prose" style="margin:1.5rem auto">Vielleicht werden manche heute lange schweigen. Andere werden begeistert sein, andere skeptisch. Morgen werden wir vielleicht feststellen, dass wir noch immer dieselben Gewohnheiten haben. Das ist kein Grund, den Anfang für bedeutungslos zu erklären.</p>
+      <p class="prose" style="margin:0 auto 2rem">Wenn wir heute eine Tür geöffnet haben, müssen wir morgen nicht das ganze Haus fertig gebaut haben. Wir können damit beginnen, den Eingang frei zu halten.</p>
+      <p class="last">Das Leben will nicht nur überlebt,<br>sondern geliebt werden.</p>
+      <div class="sigil" aria-hidden="true">✧ ♡ ✧</div>
+      <p>Wir gehen auseinander, um das Begonnene in unsere jeweiligen Leben mitzunehmen.</p>
+      <p>Die einen nach Hause. Die anderen zur Arbeit. Die einen in die Stille. Die anderen in den Lärm der Welt.</p>
+      <p>Und morgen dreht sich das Rad weiter.</p>
+      <p class="last">Möge es uns nicht nur schneller tragen.<br>Möge es uns helfen, bewusster miteinander zu leben.</p>
+      <p style="margin-top:2rem;color:var(--gold);font-size:1.2rem">Für alle. Für das Leben. Für die Liebe.</p>
+      <a class="backtop" href="#top">Zurück zum Anfang ↑</a>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footline">Die Wiege · Die Schule des Lebens · Die Liebe in Handlung</div>
+    <p>Eine offene Einladung, keine Glaubensprüfung und kein fertiger Weltplan.</p>
+    <p>Das Leben geht weiter. Und wir gehen mit. ♡</p>
+  </div>
+</footer>
+</body>
+</html>

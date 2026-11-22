@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101c2b">
+<title>Das Gewebe des Erlebens · Ein begehbarer Raum</title>
+<style>
+:root{--night:#101c2b;--deep:#172a39;--sea:#284b5b;--gold:#e5c27d;--gold2:#f6e7c2;--rose:#c98e9c;--mist:#d8e2df;--ink:#17232b}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-snap-type:y proximity}body{margin:0;background:var(--night);color:var(--gold2);font-family:Georgia,"Times New Roman",serif;line-height:1.65}
+a{color:var(--gold)}button{font:inherit}.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold));width:0;z-index:10}
+nav{position:fixed;z-index:9;right:18px;top:50%;transform:translateY(-50%);display:grid;gap:10px}
+nav a{width:11px;height:11px;border:1px solid var(--gold);border-radius:50%;background:#101c2b99;display:block;position:relative}
+nav a span{position:absolute;right:20px;top:-8px;white-space:nowrap;background:#101c2bee;padding:3px 9px;border-radius:20px;font:12px Arial;opacity:0;pointer-events:none;transition:.2s}
+nav a:hover span,nav a:focus span{opacity:1}
+section{min-height:100svh;padding:clamp(70px,10vh,120px) clamp(22px,8vw,130px);display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;position:relative;overflow:hidden}
+.kicker{letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font:12px Arial,sans-serif}
+h1,h2,h3{font-weight:400;line-height:1.12;margin:.35em 0 .5em}
+h1{font-size:clamp(42px,8vw,104px);max-width:1000px}h2{font-size:clamp(34px,5vw,66px)}h3{font-size:clamp(22px,3vw,32px)}
+p{max-width:780px;font-size:clamp(17px,1.7vw,21px)}
+.lead{font-size:clamp(20px,2.4vw,29px);color:#f7e8c3;max-width:900px}
+.center{text-align:center;align-items:center}.center p{margin-left:auto;margin-right:auto}
+.hero{background:radial-gradient(ellipse at 50% 30%,#496779 0%,#203c4c 35%,#101c2b 78%)}
+.hero:after{content:"";position:absolute;inset:auto -10% -35% -10%;height:50%;background:radial-gradient(ellipse,#d9b66f22,transparent 65%);pointer-events:none}
+.hero .seal{width:min(72vw,540px);aspect-ratio:1;border:1px solid #e5c27d88;border-radius:50%;display:grid;place-items:center;margin:30px auto 10px;box-shadow:0 0 80px #e5c27d22}
+.seal-inner{width:76%;aspect-ratio:1;border-radius:50%;border:1px solid #e5c27d55;display:grid;place-items:center;background:radial-gradient(circle,#f7e8c322,transparent 65%)}
+.seal svg{width:78%;height:auto}
+.rule{width:90px;height:1px;background:var(--gold);margin:28px 0}
+.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px;max-width:1100px;margin-top:28px}
+.tile{border:1px solid #e5c27d55;background:#ffffff08;border-radius:22px;padding:24px;backdrop-filter:blur(4px)}
+.tile small{color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font:11px Arial}
+.tile p{font-size:17px}
+.feminine{background:radial-gradient(ellipse at 80% 35%,#704958 0%,#342d3c 35%,#111e2a 78%)}
+.feminine .moon{font-size:clamp(100px,20vw,240px);line-height:1;color:#f0d5bd;text-shadow:0 0 65px #e6a8b5aa}
+.quote{font-size:clamp(25px,4vw,46px);max-width:900px;color:var(--gold2);line-height:1.35}
+.lake{background:linear-gradient(#1b3444,#274d5d 50%,#101c2b)}
+.lake-art{width:min(100%,1000px);height:160px;margin:30px auto 0;position:relative;border-top:1px solid #f1d99c88;border-bottom:1px solid #f1d99c44;border-radius:50%;background:linear-gradient(180deg,#b4c9c322,#172d3d00);overflow:hidden}
+.lake-art:before,.lake-art:after{content:"";position:absolute;left:10%;right:10%;height:1px;background:#f1d99c88;top:45%}
+.lake-art:after{top:58%;left:25%;right:25%;opacity:.45}
+.pill{display:inline-block;border:1px solid #e5c27d77;border-radius:999px;padding:7px 14px;margin:5px;color:var(--gold2);font:13px Arial}
+.note{border-left:2px solid var(--rose);padding:8px 0 8px 20px;color:#e7d8d3;max-width:760px}
+footer{padding:60px 20px;text-align:center;background:#0b141d;color:var(--gold)}
+.controls{position:fixed;left:18px;bottom:18px;z-index:10;display:flex;gap:8px}
+.controls button{background:#101c2bdd;color:var(--gold2);border:1px solid #e5c27d88;border-radius:999px;padding:9px 14px;cursor:pointer}
+.controls button:hover{background:#314b59}
+@media(max-width:650px){nav{right:10px;gap:8px}nav a{width:8px;height:8px}section{padding:72px 24px}.controls{left:10px;bottom:10px}.controls button{font-size:12px;padding:7px 10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<nav aria-label="Weg durch den Raum">
+<a href="#ankommen"><span>Ankommen</span></a><a href="#quelle"><span>Die weibliche Quelle</span></a><a href="#sprache"><span>Sprache und Zugehörigkeit</span></a><a href="#wanderung"><span>Wanderung und Erinnerung</span></a><a href="#vielfalt"><span>Vielfalt und Entwicklung</span></a><a href="#spiegel"><span>Der stille See</span></a><a href="#schluss"><span>Weitertragen</span></a>
+</nav>
+<div class="controls"><button id="prev" type="button" aria-label="Vorheriger Raum">← Zurück</button><button id="next" type="button">Weiter →</button></div>
+
+<section class="hero center" id="ankommen">
+<div class="kicker">Ein begehbarer Gedankenraum · Sonntag</div>
+<div class="seal"><div class="seal-inner">
+<svg viewBox="0 0 300 300" role="img" aria-label="Goldener Mond über einem stillen See">
+<circle cx="150" cy="112" r="57" fill="#f4dfad" opacity=".95"/>
+<circle cx="150" cy="112" r="83" fill="none" stroke="#e5c27d" stroke-width="1.5"/>
+<path d="M25 194 Q150 178 275 194 M48 215 Q150 205 252 215 M83 235 Q150 229 217 235" fill="none" stroke="#e5c27d" stroke-width="2" opacity=".8"/>
+<path d="M150 197 V265 M118 222 Q150 230 182 222" fill="none" stroke="#f6e7c2" opacity=".6"/>
+</svg>
+</div></div>
+<h1>Das Gewebe<br>des Erlebens</h1>
+<p class="lead">Ein Raum für Sprache, Erinnerung, weibliche Würde, Herkunft und die offene Frage, was uns miteinander verbindet.</p>
+<div class="rule"></div>
+<p>Erspüren · Erfühlen · Erlieben</p>
+</section>
+
+<section class="feminine center" id="quelle">
+<div class="kicker">Raum I · Die weibliche Quelle</div>
+<div class="moon" aria-hidden="true">☾</div>
+<h2>Die Omi, die erinnert.<br>Die Königin, die trägt.</h2>
+<p class="lead">Vielleicht beginnt diese Reise nicht mit einem König, einem Feldherrn oder einem Propheten. Vielleicht beginnt sie mit einer Frau in einer Küche – mit einer Hand, einer Stimme, einem Blick, der einem Kind sagt: Du darfst sein.</p>
+<div class="columns">
+<article class="tile"><small>Die Großmutter</small><h3>Wärme und Alltag</h3><p>Eine Kriegsomi kann Erinnerung, Fürsorge und Überlebenswissen verkörpern. Nicht als Heiligenbild, sondern als wirkliche Frau mit eigener Geschichte.</p></article>
+<article class="tile"><small>Der Großvater</small><h3>Das Ungesagte</h3><p>Schweigen kann vieles bedeuten: Schutz, Erschöpfung, Schmerz, Gewohnheit. Wir müssen es nicht mit einer einzigen Erklärung füllen, um es ernst zu nehmen.</p></article>
+<article class="tile"><small>Der weibliche Aspekt</small><h3>Keine Nebenrolle</h3><p>Das Weibliche steht hier nicht für Schwäche oder Dekoration, sondern für schöpferische Kraft, Beziehung, Körperwissen, Fürsorge und eigenständige Würde.</p></article>
+</div>
+</section>
+
+<section id="sprache">
+<div class="kicker">Raum II · Sprache und Zugehörigkeit</div>
+<h2>Sprache ist ein Boden,<br>auf dem Denken Wurzeln schlägt.</h2>
+<p class="lead">Eine Sprache öffnet Möglichkeiten: Sie gibt Begriffe, Unterscheidungen, Bilder und Werkzeuge, mit denen Menschen ihre Erfahrungen ordnen und miteinander teilen.</p>
+<div class="columns">
+<article class="tile"><small>Muttersprache</small><h3>Ein erster Klangraum</h3><p>Die zuerst gelernte Sprache prägt oft besonders stark, wie wir Nähe, Humor, Scham, Trost und Erinnerungen ausdrücken. Mehrsprachigkeit kann weitere Denk- und Ausdruckswege eröffnen.</p></article>
+<article class="tile"><small>Zugehörigkeit</small><h3>Mehr als Abstammung</h3><p>Deutschsein ist keine biologische Eigenschaft und keine Hautfarbe. Sprache, Alltag, Verantwortung, Beziehungen und gemeinsame Institutionen können Zugehörigkeit gestalten – ohne dass Herkunft oder Aussehen darüber entscheiden.</p></article>
+<article class="tile"><small>Präzision</small><h3>Wörter machen Unterschiede sichtbar</h3><p>Wer neue Wörter lernt, gewinnt neue Möglichkeiten zu unterscheiden. Das macht niemanden von Natur aus klüger oder wertvoller; es erweitert den Werkzeugkasten des Denkens.</p></article>
+</div>
+<p class="note">Eine Sprache vererbt keine Schuld. Und sie gehört keinem „Blut“. Sie wird gelernt, geteilt, verändert und weitergegeben.</p>
+</section>
+
+<section id="wanderung" class="lake">
+<div class="kicker">Raum III · Wanderung und Erinnerung</div>
+<h2>Die Welt war nie still.<br>Menschen waren unterwegs.</h2>
+<p class="lead">Sprachen wandern mit Menschen. Sie treffen auf andere Sprachen, verändern sich, leihen Wörter, verlieren Laute und gewinnen neue Formen.</p>
+<div class="columns">
+<article class="tile"><small>Platt und Englisch</small><h3>Verwandtschaft, keine einfache Abstammung</h3><p>Plattdeutsch und Englisch gehören beide zum westgermanischen Sprachraum. Englisch ist aber nicht einfach ausgewandertes Platt; seine Geschichte umfasst mehrere germanische Dialekte, Kontakte und tiefgreifende Veränderungen.</p></article>
+<article class="tile"><small>Wüsten und Landschaften</small><h3>Die Sahara war nicht immer Wüste</h3><p>Während der Afrikanischen Feuchtzeit gab es in Teilen der heutigen Sahara Seen, Flüsse, Graslandschaften und reiche Tierwelten. Das ist durch Klimaarchive und archäologische Funde belegt. Daraus folgt nicht automatisch eine bestimmte biblische Landkarte.</p></article>
+<article class="tile"><small>Erzählung und Beleg</small><h3>Erinnerung braucht Prüfung</h3><p>Mythen, heilige Texte, Ortsnamen und archäologische Befunde können einander Fragen stellen. Sie sind aber unterschiedliche Quellenarten und dürfen nicht ohne Prüfung gleichgesetzt werden.</p></article>
+</div>
+<div class="lake-art" aria-label="Abstrakter stiller See"></div>
+</section>
+
+<section id="vielfalt">
+<div class="kicker">Raum IV · Vielfalt und Entwicklung</div>
+<h2>Jede Generation trägt weiter.<br>Keine ist eine Kopie.</h2>
+<p class="lead">Menschen sehen unterschiedlich aus, weil menschliche Populationen eine lange, verzweigte Geschichte haben: Variation, Migration, Anpassung, Zufall und Vermischung gehören dazu.</p>
+<div class="columns">
+<article class="tile"><small>Biologische Vielfalt</small><h3>Variation statt Rangordnung</h3><p>Hautfarbe und andere sichtbare Merkmale hängen unter anderem mit genetischer Variation und evolutionärer Anpassung zusammen. Sie sagen nichts Verlässliches über Intelligenz, Sprachfähigkeit, Moral oder den Wert eines Menschen aus.</p></article>
+<article class="tile"><small>Kulturelle Weitergabe</small><h3>Erfahrung wird geteilt</h3><p>Wissen wird durch Sprache, Erziehung, Geschichten, Werkzeuge und Institutionen weitergegeben. Jede Generation kann darauf aufbauen und zugleich Irrtümer korrigieren.</p></article>
+<article class="tile"><small>Die nächste Grundversion</small><h3>Kein perfekter Endstand</h3><p>Die Metapher eines Updates passt zur kulturellen Weitergabe – aber Menschen sind keine Softwareversionen. Entwicklung ist offen, widersprüchlich und niemals ein Wettbewerb um einen „besseren“ Ursprung.</p></article>
+</div>
+<p class="note">Nicht „neuer“ oder „ursprünglicher“ macht einen Menschen wertvoll. Entscheidend ist, wie wir miteinander leben und handeln.</p>
+</section>
+
+<section class="center" id="spiegel">
+<div class="kicker">Raum V · Der stille See</div>
+<h2>Ein Spiegelbild braucht<br>keinen Befehl. Es braucht Ruhe.</h2>
+<p class="quote">Wenn der See stürmt, zerbricht das Bild in Wellen. Wenn er still wird, zeigt sich, was da ist – nicht weil wir es erzwingen, sondern weil wir genauer hinsehen können.</p>
+<div class="lake-art" style="height:220px"></div>
+<p>Die Stille ist kein Beweis für eine Deutung. Sie ist ein guter Ort, um eine Deutung zu prüfen.</p>
+<div><span class="pill">Wahrnehmen</span><span class="pill">Unterscheiden</span><span class="pill">Mitfühlen</span><span class="pill">Überprüfen</span><span class="pill">Handeln</span></div>
+</section>
+
+<section id="schluss" class="center">
+<div class="kicker">Raum VI · Weitertragen</div>
+<h2>Die Königinnenwürde<br>liegt nicht über anderen.</h2>
+<p class="lead">Sie zeigt sich darin, dass wir Leben nicht kleinmachen: weder das eigene noch das fremde. Dass wir Kraft mit Verantwortung verbinden und Verschiedenheit nicht mit Rang verwechseln.</p>
+<div class="rule"></div>
+<h3>Erspüren · Erfühlen · Erlieben</h3>
+<p>Für Menschen, Tiere und das Leben.</p>
+<p class="quote">Nicht beherrschen. Nicht erzwingen. Gemeinsam erkennen.</p>
+<p class="kicker">FÜR ALLE · FÜR GOTT · FÜR DAUERLOS</p>
+</section>
+<footer>Ein offener Gedankenraum · Keine Abstammungslehre, kein Dogma, kein Endpunkt.</footer>
+<script>
+const sections=[...document.querySelectorAll("section")];
+const progress=document.getElementById("progress");
+function current(){let best=0,dist=Infinity;sections.forEach((s,i)=>{const d=Math.abs(s.getBoundingClientRect().top);if(d<dist){dist=d;best=i}});return best}
+function go(i){sections[Math.max(0,Math.min(sections.length-1,i))].scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}
+document.getElementById("prev").addEventListener("click",()=>go(current()-1));
+document.getElementById("next").addEventListener("click",()=>go(current()+1));
+addEventListener("scroll",()=>{const max=document.documentElement.scrollHeight-innerHeight;progress.style.width=(max>0?scrollY/max*100:0)+"%"},{passive:true});
+document.addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();go(current()+1)}if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();go(current()-1)}});
+</script>
+</body></html>
